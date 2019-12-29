@@ -26,17 +26,16 @@ func calday(input: String) -> Int{
     }
     if month > 12 {
         show("输入的月份\(month)不存在呢！")
-        return 0
-    }
-    if day > days[month] {
+    }else if day > days[month] {
         show("在\(month)中不存在\(day)日")
-        return 0
+    } else{
+        for i in 0 ... month - 1 {
+            daycount += days[i]
+        }
+        daycount += day
+        return daycount
     }
-    for i in 0 ... month - 1 {
-        daycount += days[i]
-    }
-    daycount += day
-    return daycount
+    return 0
 }
 
 show(calday(input: "1209"))
