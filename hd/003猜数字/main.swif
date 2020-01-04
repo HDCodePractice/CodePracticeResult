@@ -1,5 +1,5 @@
 let randomNumber = Int.random(in: 0...999)
-var inputNumber: Int = 500
+var inputNumber: Int = askForNumber()
 var inputCount = 1
 
 while inputNumber != randomNumber {
