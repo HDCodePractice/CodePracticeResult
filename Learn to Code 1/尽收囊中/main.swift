@@ -1,0 +1,15 @@
+func solveOneSide() {
+    moveForward()
+    collectGem()
+    moveForward()
+    toggleSwitch()
+    moveForward()
+}
+solveOneSide()
+turnLeft()
+solveOneSide()
+moveForward()
+turnLeft()
+solveOneSide()
+turnLeft()
+solveOneSide()
