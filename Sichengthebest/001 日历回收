@@ -1,5 +1,4 @@
 //  let date = ask("Date")
-let date = ask("Date")
 let dateInt = Int(date) ?? 0
 var answer = 0
 var days = 0
