@@ -1,7 +1,9 @@
 moveForward()
-moveForward()
 turnLeft()
 moveForward()
-collectGem()
 moveForward()
 toggleSwitch()
+for i in 1 ... 3 {
+    moveForward()
+}
+collectGem()
