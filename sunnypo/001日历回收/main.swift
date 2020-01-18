@@ -12,6 +12,8 @@ if dateNumber - (dateNumber / 10000 * 10000) < 100 || month > 12{
     if year % 4 == 0 && month > 2 {
         if year % 100 != 0 && month > 2 {
             finalResult += 1
+        }else if year % 400 == 0 && month > 2{
+            finalResult += 1
         }
     }
     for i in 1 ... month {
