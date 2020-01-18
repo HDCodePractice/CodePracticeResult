@@ -9,9 +9,7 @@ for i in 1 ... 4 {
                 nmber.append(i*100+j*10+k)
                 count += 1
                 show(String(count) + ": " + String(i) + String(j) + String(k))
-            }
-            
+            }   
         }
-        
     }
-   
+}
