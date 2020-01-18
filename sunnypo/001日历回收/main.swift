@@ -10,7 +10,7 @@ if dateNumber - (dateNumber / 10000 * 10000) < 100 || month > 12{
     show("Please enter a correct date.")
 } else {
     if year % 4 == 0 && month > 2 {
-        if year % 100 !== 0 && month > 2 {
+        if year % 100 != 0 && month > 2 {
             finalResult += 1
         }
     }
