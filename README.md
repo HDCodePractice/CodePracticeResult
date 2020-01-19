@@ -6,7 +6,7 @@ Swift代码练习参考，在这里，请每位同学将自己的练习结果放
 
 如果对练习题有兴趣，可以使用iPad中的Swift Playgrounds通过 https://developer.apple.com/ul/sp0?url=https://hdcola.github.io/feed.json 来订阅我们的练习册。
 
-### 0000 随机座位
+### 000 随机座位
 
 有四个数字：1、2、3、4，能组成多少个互不相同且无重复数字的三位数？各是多少？
 
@@ -14,7 +14,7 @@ Swift代码练习参考，在这里，请每位同学将自己的练习结果放
 
 判断、循环、数字处理练习
 
-### 0001 日历回收
+### 001 日历回收
 
 输入某年某月某日，判断这一天是这一年的第几天？
 
@@ -22,7 +22,7 @@ Swift代码练习参考，在这里，请每位同学将自己的练习结果放
 
 判断、循环、数字和字符串处理练习
 
-### 0002 填支票本
+### 002 填支票本
 
 在北美生活需要手写支票，将一个数字转换成为英文大写。需要支持到百万和小数点后两位。
 
@@ -62,7 +62,7 @@ Quebec省个人所得税率：43,790$以下为15%；43,790-87,575$为20%；87,57
 
 请先输入一个年收入的数字，分别计算出联帮所有税、魁省所得税和要交的税收总额。
 
-判断、循环、数字处理练习，试试数组吧
+判断、循环、数字处理练习，试试数组吧。
 
 参考： https://www.canada.ca/en/revenue-agency/services/tax/individuals/frequently-asked-questions-individuals/canadian-income-tax-rates-individuals-current-previous-years.html
 
