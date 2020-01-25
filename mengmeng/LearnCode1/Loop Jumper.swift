@@ -1,0 +1,20 @@
+for i in 1 ... 2 {
+    moveForward()
+    turnLeft()
+    moveForward()
+    moveForward()
+    collectGem()
+    turnRight()
+    moveForward()
+    turnLeft()
+    moveForward()
+    moveForward()
+    collectGem()
+    turnRight()
+    moveForward()
+    
+}
+turnLeft()
+moveForward()
+moveForward()
+collectGem()
