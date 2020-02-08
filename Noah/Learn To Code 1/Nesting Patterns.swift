@@ -14,4 +14,4 @@ solveStair()
 solveStair()
 solveStair()
 solveStair()
-\
+
