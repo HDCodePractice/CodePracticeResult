@@ -1,0 +1,20 @@
+func toggle() {
+    moveForward()
+    toggleSwitch()
+    moveForward()
+    collectGem()
+}
+turnLeft()
+moveForward()
+toggle()
+moveForward()
+turnRight()
+toggle()
+moveForward()
+turnRight()
+moveForward()
+toggle()
+moveForward()
+turnRight()
+toggle()
+
