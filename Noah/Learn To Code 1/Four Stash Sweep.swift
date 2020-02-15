@@ -1,0 +1,25 @@
+func sweep() {
+    turnLeft()
+    moveForward()
+    collectGem()
+    turnRight()
+    turnRight()
+    moveForward()
+}
+for i in 1 ... 3 {
+    moveForward()
+    collectGem()
+    sweep()
+    sweep()
+    turnLeft()
+    moveForward()
+    collectGem()
+    moveForward()
+}
+moveForward()
+collectGem()
+sweep()
+sweep()
+turnLeft()
+moveForward()
+collectGem()
