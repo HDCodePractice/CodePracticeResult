@@ -1,15 +1,15 @@
 func collectOrToggle() {
-    if isOnClosedSwitch {
-        toggleSwitch()        
-    }
-        else if isOnGem {
-        collectGem()
-    }
     moveForward()
+    if isOnClosedSwitch {
+        toggleSwitch()
+    }  else if isOnGem {
+        collectGem()  
+    }
 }
 func solveRow() {
-    for i in 1 ... 5 {
-        collectOrToggle()       
+    for i in 1 ... 4 {
+        collectOrToggle()
+        
     }
 }
 solveRow()
