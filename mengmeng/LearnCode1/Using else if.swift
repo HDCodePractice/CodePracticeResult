@@ -1,10 +1,8 @@
-moveForward()
-collectGem()
-moveForward()
-if isOnClosedSwitch {
-    toggleSwitch()    
-} else if isOnOpenSwitch {
-    moveForward()    
-} else if isOnGem {
-    collectGem()    
-}
+for i in 1 ... 2 {
+    moveForward()
+    if isOnClosedSwitch {
+        toogleSwitch()
+    } else if isOnGem {
+        collectGem()
+    }
+}  
