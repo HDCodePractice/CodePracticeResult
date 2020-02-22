@@ -1,12 +1,23 @@
-func threeForFun() {
-    moveForward()
-    moveForward()
+func moveOrToggleOrCollect() {
     moveForward()
     if isOnClosedSwitch {
         toggleSwitch()        
     }
-    turnRight()   
+    if isOnGem {
+        collectGem()        
+    }    
 }
-while !isBlocked {
-    threeForFun()   
+func chiYiHang() {
+    while !isBlocked {
+        moveOrToggleOrCollect()        
+    }
 }
+chiYiHang()
+turnRight()
+moveForward()
+turnRight()
+chiYiHang()
+turnLeft()
+moveForward()
+turnLeft()
+chiYiHang()
