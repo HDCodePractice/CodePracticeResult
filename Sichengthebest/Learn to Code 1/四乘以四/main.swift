@@ -1,9 +1,9 @@
-for i in 1 ... 4 {
-    while !isBlocked {
-        moveForward()
-    }
+while !isBlocked {
+    moveForward()
     if isOnClosedSwitch {
         toggleSwitch()
+        turnRight()
+    } else if isOnOpenSwitch {
+        turnRight()
     }
-    turnRight()
 }
