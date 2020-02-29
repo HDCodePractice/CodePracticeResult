@@ -1,33 +1,20 @@
-func moveThenToogle() {
-    moveForward()
-    moveForward()
-    toggleSwitch()
-    moveForward()
-    moveForward()
-    toggleSwitch()    
+func navigateAroundWall() {
+    if isBlockedRight {
+        moveForward()
+    }  else {
+        turnRight()
+        moveForward()
+    }
 }
-func goBack() {
-    turnRight()
-    turnRight()
-    moveForward()
-    moveForward()
-    moveForward()
-    moveForward()   
+    
+while !isOnClosedSwitch {
+    navigateAroundWall()
+    if isOnGem {
+        collectGem()
+        turnRight()
+        turnRight()
+        
+    }
 }
-func marchToggle() {
-    moveForward()
-    moveForward()
-    toggleSwitch()
-    turnRight()
-    turnRight()
-    moveForward()
-    moveForward()   
-}
-turnLeft()
-moveThenToogle()
-goBack()
-moveThenToogle()
-goBack()
-turnLeft()
-marchToggle()
-marchToggle()
+
+toggleSwitch()
