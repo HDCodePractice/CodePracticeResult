@@ -43,4 +43,4 @@ greenPortal.isActive = true
 moveForward()
 greenPortal.isActive = false
 yayfinale()
-toggleSwitch(
+toggleSwitch()
