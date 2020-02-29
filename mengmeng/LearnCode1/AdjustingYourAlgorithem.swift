@@ -1,23 +1,17 @@
 func navigateAroundWall() {
-    if isBlockedRight {
+    if isBlockedRight && !isBlocked {
         moveForward()
-    }  else {
+    } else if isBlockedRight && isBlocked {
+        turnLeft()
+    } else {
         turnRight()
         moveForward()
     }
-}
-    
-while !isOnClosedSwitch {
-    navigateAroundWall()
     if isOnGem {
         collectGem()
-        turnLeft()
-        turnLeft()
     }
-    if isBlocked && isBlockedRight {
-        turnLeft()
-        moveForward()
-    }
-    
+}
+while !isOnClosedSwitch {
+    navigateAroundWall()
 }
 toggleSwitch()
