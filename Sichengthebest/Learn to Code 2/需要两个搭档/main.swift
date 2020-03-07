@@ -1,6 +1,6 @@
 let expert = Expert()
 let character = Character()
-}
+
 func ninetyDegreeTurn() {
     while !expert.isBlocked {
         expert.moveForward()
