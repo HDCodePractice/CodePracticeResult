@@ -57,6 +57,7 @@ for i in 7 ... 10 {
     }
     
 }
+
 func letsHaveSomeFun() {
     if theSexyOne.isOnClosedSwitch {
         theSexyOne.toggleSwitch()
@@ -71,6 +72,10 @@ func letsHaveSomeFun() {
         theSexyOne.collectGem()
     }
 }
+
+
+// Insert code here:
+
 theSexyOne.move(distance: 6)
 theSexyOne.turnRight()
 theSexyOne.move(distance: 3)
