@@ -9,12 +9,5 @@ while answer != number {
     }
     numberOfTries += 1
     show(answer)
-    if answer < number {
-        show("The number you are trying to guess is superior to your guess. Please try again. This is your \(numberOfTries)th try.")
-    }
-    if answer > number {
-        show("The number you are trying to guess is inferior to your guess. Please try again. This is your \(numberOfTries)th try.")
-    }
 }
-
 show("Good job! You have found out the number in \(numberOfTries) tries!")
