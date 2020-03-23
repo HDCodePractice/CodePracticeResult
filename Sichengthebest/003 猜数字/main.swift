@@ -7,10 +7,10 @@ while answer != number {
     let answerAsk = askForNumber()
     answer = answerAsk
     if answer < number {
-        show("The number you are trying to guess is superior to your guess. Please try again. This is your \(numberOfTries)th try.")
+        show("The number you are trying to guess is superior to your guess. Please try again. You have used \(numberOfTries) tries.")
     }
     if answer > number {
-        show("The number you are trying to guess is inferior to your guess. Please try again. This is your \(numberOfTries)th try.")
+        show("The number you are trying to guess is inferior to your guess. Please try again. You have used \(numberOfTries) tries.")
     }
 }
 show("Good job! You have found out the number in \(numberOfTries) tries!")
