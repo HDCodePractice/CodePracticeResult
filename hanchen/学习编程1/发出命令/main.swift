@@ -1,0 +1,5 @@
+moveForward()
+moveForward()
+moveForward()
+collectGem()
+
