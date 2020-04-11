@@ -9,7 +9,7 @@ let rst = tst-st
 // Video space for one minute
 let vl = 150
 // Remaining Video Space
-let cst = st/vl 
+let cst = rst/vl 
 
 let tst2 = tst/1000
 let st2 = st/1000
