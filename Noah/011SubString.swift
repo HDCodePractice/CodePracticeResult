@@ -7,11 +7,13 @@ let a = """
 
 var b = ""
 var c = 0
-for d in 0 ... 3 {
-    b += "\n"
+for d in 0 ... 2 {
     b += Array(a)[22 - (c + 4) ... 22 - c]
     b += "\n"
     c += 6
 }
+b += Array(a)[22 - (c + 4) ... 22 - c]
+c += 6
+
 show(b)
 
