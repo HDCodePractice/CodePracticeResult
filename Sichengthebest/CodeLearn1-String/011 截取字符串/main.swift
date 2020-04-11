@@ -6,9 +6,11 @@ let death = """
 """
 var final = ""
 var value = 0
-for i in 0...3 {
-    final += Array(death)[22-(value+4)...22-(value)];
+for i in 0...2 {
+    final += Array(death)[22-(value+4)...22-(value)]
     final += "\n"
     value += 6
 }
+final += Array(death)[22-(value+4)...22-(value)]
+value += 6
 show(final)
