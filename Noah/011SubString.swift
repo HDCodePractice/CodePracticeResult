@@ -9,7 +9,7 @@ var b = ""
 var c = 0
 for d in 0 ... 3 {
     b += Array(a)[22 - (c + 4) ... 22 - c]
-    if c != 18 {
+    if d < 3 {
         b += "\n"
     }
     c += 6
