@@ -4,7 +4,7 @@ turnLeft()
 moveForward()
 collectGem()
 moveForward()
-moveForward()
+
 turnLeft()
 moveForward()
 moveForward()
