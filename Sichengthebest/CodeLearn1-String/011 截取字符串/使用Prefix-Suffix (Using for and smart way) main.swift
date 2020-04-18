@@ -1,5 +1,4 @@
 var s = """
-
 更上一层楼
 欲穷千里目
 黄河入海流
@@ -14,5 +13,10 @@ for i in 1...4 {
         semi = String(s.suffix(i * 5))
     }
     final += String(semi.prefix(6))
+    if i == 3 {
+        final += "\n"
+    }
+    
 }
+final = String(final.prefix(23))
 show(final)
