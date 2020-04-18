@@ -5,7 +5,7 @@ let theFreakingPoem = """
 白日依山尽
 """
 var values = [11,5,5,5,5,11]
-var myNameIsPoem = ["","","","","",""]
+var myNameIsPoem = ["","","",""]
 for x in 0...4 {
     for y in 1...values[x]/values[x] {
         if x == 0 {
