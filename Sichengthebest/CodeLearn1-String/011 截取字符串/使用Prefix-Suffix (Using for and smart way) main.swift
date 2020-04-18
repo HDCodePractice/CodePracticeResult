@@ -16,7 +16,8 @@ for i in 1...4 {
     if i == 3 {
         final += "\n"
     }
-    
+    if i == 4 {
+        final = String(final.prefix(i*6-1))
+    }
 }
-final = String(final.prefix(23))
 show(final)
