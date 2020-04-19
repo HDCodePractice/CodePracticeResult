@@ -17,7 +17,7 @@ moveForward()
 moveForward()
 turnRight()
 moveForward()
-toggleSwitch
+toggleSwitch()
 
 
   
