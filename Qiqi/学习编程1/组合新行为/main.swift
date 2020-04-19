@@ -1,13 +1,15 @@
 
+func turRight(){
+    turnLeft()
+    turnLeft()
+    turnLeft()
+}
 moveForward()
     moveForward()
     moveForward()
-    turnLeft()
-    turnLeft()
-    turnLeft()
+turRight()
     moveForward()
     moveForward()
     moveForward()
     collectGem()
     
-
