@@ -1,7 +1,8 @@
-func turnRight(){turnLeft()
+func turnRight(){
+    turnLeft（）
     turnLeft()
     turnLeft()
-    }
+}
 moveForward()
 turnRight()
 moveForward()
