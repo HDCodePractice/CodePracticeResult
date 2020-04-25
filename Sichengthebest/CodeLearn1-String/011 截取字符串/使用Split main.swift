@@ -6,11 +6,12 @@ var s = """
 """
 var final = ""
 let a = s.split(separator: "\n")
-for i in 0 ... a.count-1 {
-    if i == a.count-1 {
-        final.append(String(a[a.count-1-i]))
+let b = a.count-1
+for i in 0 ... b {
+    if i == b {
+        final.append(String(a[b-i]))
     } else {
-        final.append(String(a[a.count-1-i])+"\n")
+        final.append(String(a[b-i])+"\n")
     }
 }
 show(final)
