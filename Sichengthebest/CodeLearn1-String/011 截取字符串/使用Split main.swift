@@ -7,10 +7,10 @@ var s = """
 var final = ""
 let a = s.split(separator: "\n")
 for i in 0 ... a.count-1 {
-    if i == 3 {
-        final.append(String(a[3-i]))
+    if i == a.count-1 {
+        final.append(String(a[a.count-1-i]))
     } else {
-        final.append(String(a[3-i])+"\n")
+        final.append(String(a[a.count-1-i])+"\n")
     }
 }
 show(final)
