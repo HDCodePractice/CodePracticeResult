@@ -1,0 +1,32 @@
+   func  Co() {moveForward()
+               collectGem()
+               moveForward()
+               collectGem()
+             }
+    
+    
+    
+    
+    
+    
+collectGem()   
+Co()
+turnRight()
+moveForward()
+collectGem()
+turnRight()
+Co()
+turnLeft()
+moveForward()
+collectGem()
+turnLeft()
+Co()
+
+
+
+
+
+
+
+
+
