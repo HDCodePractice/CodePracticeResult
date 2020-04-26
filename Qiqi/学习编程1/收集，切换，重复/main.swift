@@ -6,10 +6,11 @@ func getGS() {
     moveForward()  
 }
 getGS()
-turnRight()
+turnLeft()
 getGS()
-turnRight()
+moveForward()
+turnLeft()
 getGS()
-turnRight()
+turnLeft()
 getGS()
 
