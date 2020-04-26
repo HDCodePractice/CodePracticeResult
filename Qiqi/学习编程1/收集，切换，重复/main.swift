@@ -3,11 +3,13 @@ func getGS() {
     collectGem()
     moveForward()
     toggleSwitch()
-    moveforwerd()
-    turnRight()  
-   
+    moveforwerd()  
 }
 getGS()
+turnRight()
 getGS()
+turnRight()
 getGS()
+turnRight()
 getGS()
+
