@@ -1,30 +1,17 @@
-func /*#-editable-code funcName*/ getG1 /*#-end-editable-code*/() {
-    //#-editable-code
-    
+func getGS() {
+moveForward()
     collectGem()
-    //#-end-editable-code
+    moveForward()
+    collectGem()
+    turnRight()
 }
-//#-editable-code
-getG1()
-moveForward()
-getG1()
-moveForward()
-getG1()
-turnRight()
-moveForward()
-getG1()
-moveForward()
-getG1()
-turnRight()
-moveForward()
-getG1()
-moveForward()
-getG1()
-turnRight()
-moveForward()
-getG1()
-turnRight()
-moveForward()
-getG1()
 
-//#-end-editable-code
+collectGem()
+getGS
+getGS
+getGS
+moveForward()
+collectGem()
+turnRight()
+moveForward()
+collectGem()
