@@ -1,29 +1,13 @@
-func /*#-editable-code yourFuncName*/getGS/*#-end-editable-code*/() {
-    //#-editable-code Add commands to your function
+func getGS() {
+    moveforwerd()
     collectGem()
     moveForward()
     toggleSwitch()
-    
-    //#-end-editable-code   
+    moveforwerd()
+    turnRight()  
+   
 }
-//#-editable-code
-moveForward()
 getGS()
-moveForward()
-turnLeft()
-moveForward()
 getGS()
-moveForward()
-moveForward()
-turnLeft()
-moveForward()
 getGS()
-moveForward()
-turnLeft()
-moveForward()
 getGS()
-//#-end-editable-code
-//#-hidden-code
-playgroundEpilogue()
-//#-end-hidden-code
-
