@@ -1,4 +1,4 @@
-    func     ct ()   collectGem() {
+    func     ct ()  { collectGem() 
                      moveForward()
                     toggleSwitch()
                }
