@@ -1,8 +1,8 @@
-   func { Co() moveForward()
-              collectGem()
-              moveForward()
-              collectGem()
-           }
+   func  Co() {moveForward()
+               collectGem()
+               moveForward()
+               collectGem()
+             }
     
     
     
