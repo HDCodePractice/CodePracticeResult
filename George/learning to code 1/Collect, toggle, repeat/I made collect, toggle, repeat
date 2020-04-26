@@ -1,4 +1,8 @@
-moveForward()
+    collectGem()
+    moveForward()
+    toggleSwitch()
+    
+moveForward()   
 Ct()
 moveForward()
 turnLeft()
