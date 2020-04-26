@@ -1,0 +1,15 @@
+func 系列动做(){
+moveForward()
+collectGem()
+moveForward()
+toggleSwitch() 
+moveForward()
+    }
+系列动作()
+turnLeft()
+系列动作()
+moveForward()
+turnLeft()
+系列动作()
+turnLeft()
+系列动作()
