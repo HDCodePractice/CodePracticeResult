@@ -7,9 +7,9 @@ moveForward()
 }
 
 collectGem()
-getGS
-getGS
-getGS
+getGS()
+getGS()
+getGS()
 moveForward()
 collectGem()
 turnRight()
