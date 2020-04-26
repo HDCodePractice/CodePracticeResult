@@ -1,9 +1,9 @@
 func getGS() {
-    moveforwerd()
+    moveForward()
     collectGem()
     moveForward()
     toggleSwitch()
-    moveforwerd()  
+    moveForward()  
 }
 getGS()
 turnRight()
