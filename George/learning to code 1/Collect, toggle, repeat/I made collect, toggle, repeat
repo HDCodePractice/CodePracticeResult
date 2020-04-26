@@ -1,6 +1,6 @@
-   funk      collectGem() {
-            moveForward()
-        }   toggleSwitch() 
+    funk     ct ()   collectGem() {
+                     moveForward()
+           }          toggleSwitch()
     
 moveForward()   
 Ct()
