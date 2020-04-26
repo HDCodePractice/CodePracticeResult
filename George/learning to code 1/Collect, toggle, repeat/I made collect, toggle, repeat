@@ -1,7 +1,7 @@
-    funk     ct ()   collectGem() {
+    func     ct ()   collectGem() {
                      moveForward()
-           }          toggleSwitch()
-    
+                    toggleSwitch()
+               }
 moveForward()   
 Ct()
 moveForward()
