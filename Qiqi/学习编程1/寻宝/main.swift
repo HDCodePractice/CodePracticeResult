@@ -1,18 +1,12 @@
 func solveShort() {
-    moveForward()
-    moveForward()
-    toggleSwitch()
+    getMT()
     turnAround()
     moveForward()
     moveForward()
 }
 func solveLong() {
-    moveForward()
-    moveForward()
-    toggleSwitch()
-    moveForward()
-    moveForward()
-    toggleSwitch()
+    getMT()
+    getMT()
     turnAround()
     moveForward()
     moveForward()
@@ -24,9 +18,13 @@ func turnAround() {
     turnLeft()
     turnLeft()
 }
+func getMT() {
+    moveForward()
+    moveForward()
+    toggleSwitch()
+}
 solveShort()
 solveShort()
 turnRight()
 solveLong()
 solveLong()
-
