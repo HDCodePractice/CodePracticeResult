@@ -1,28 +1,32 @@
-func moveThenToggle() {
+func solveShort() {
     moveForward()
     moveForward()
     toggleSwitch()
     turnAround()
     moveForward()
     moveForward()
-    
 }
+func solveLong() {
+    moveForward()
+    moveForward()
+    toggleSwitch()
+    moveForward()
+    moveForward()
+    toggleSwitch()
+    turnAround()
+    moveForward()
+    moveForward()
+    moveForward()
+    moveForward()
+}
+
 func turnAround() {
     turnLeft()
     turnLeft()
-    
 }
-moveThenToggle()
-moveThenToggle()
-turnLeft()
-moveThenToggle()
-moveThenToggle()
-moveForward()
-moveForward()
-moveThenToggle()
-moveForward()
-moveForward()
-moveForward()
-moveForward()
-moveForward()
-moveThenToggle()
+solveShort()
+solveShort()
+turnRight()
+solveLong()
+solveLong()
+
