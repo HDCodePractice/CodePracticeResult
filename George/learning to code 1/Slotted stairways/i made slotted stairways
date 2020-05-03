@@ -6,18 +6,27 @@
    Moveforeward()
  }
   func SolveRow(){ 
+    
+    solveRow()
+    turnLeft()
+    moveForward()
+    turnRight()
+    solveRow()
+    turnRight()
+    moveForward()
+    turnLeft()
+    solveRow()
+    solveRow()
+    turnLeft()
+    moveForward()
+    moveForward()
+    turnLeft()
+    solveRow()
+  } 
+
+    
+    
+ 
+ 
   
-    SolveRow()           
-    turnLeft()                        
-    moveForward()   
-    SolveRow()     
-    moveForward()   
-    SolveRow()
-    SolveRow()
-    turnLeft()
-    moveForward()
-    moveForward()
-    turnLeft()
-    SolveRow()
-   }
-   Solverow()
+   
