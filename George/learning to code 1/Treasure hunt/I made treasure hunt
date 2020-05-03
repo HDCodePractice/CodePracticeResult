@@ -1,8 +1,12 @@
-                   func Tap(){
-Tap()                  Moveforeward
-turnLeft()             Moveforeward
-turnLeft()             Toggleswicth
-moveForward()         } 
+ func Tap(){                  
+ Moveforeward()
+ Moveforeward()
+ Toggleswicth()
+}
+Tap()                             
+turnLeft()             
+turnLeft()  
+moveForward()          
 moveForward()
 Tap()
 turnLeft()
