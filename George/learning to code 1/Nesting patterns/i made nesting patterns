@@ -1,0 +1,18 @@
+    moveForward()  func Turn around(){ 
+    collectGem()        Turnleft()
+    turnAround()        Turnleft()
+    moveForward()     }
+     moveForward()    
+    collectGem()     
+    turnAround()
+    moveForward()
+    turnRight()
+    moveForward()
+    collectGem()
+    turnAround()
+    moveForward()
+    moveForward()
+    collectGem()
+  
+  
+    
