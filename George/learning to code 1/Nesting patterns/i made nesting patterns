@@ -1,4 +1,5 @@
-    moveForward()  func Turn around(){ 
+  func Solvestair()
+    moveForward()    func Turn around(){ 
     collectGem()        Turnleft()
     turnAround()        Turnleft()
     moveForward()     }
@@ -13,6 +14,6 @@
     moveForward()
     moveForward()
     collectGem()
-  
-  
+ 
+  Solvestair()
     
