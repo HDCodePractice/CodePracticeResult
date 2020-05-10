@@ -2,27 +2,23 @@ func turnAround() {
     turnLeft()
     turnLeft()
 }
+func sevenS() {
+    moveForward()
+    moveForward()
+    moveForward()
+    moveForward()
+    moveForward()
+    moveForward()
+    moveForward()
+}
 for i in 1 ... 3 {
     moveForward()
     moveForward()
     turnRight()
-    moveForward()
-    moveForward()
-    moveForward()
-    moveForward()
-    moveForward()
-    moveForward()
-    moveForward()
+    sevenS()
     toggleSwitch()
     turnAround()
-    moveForward()
-    moveForward()
-    moveForward()
-    moveForward()
-    moveForward()
-    moveForward()
-    moveForward()
-    moveForward()
+    sevenS()
     turnRight()
     
 }
