@@ -1,12 +1,11 @@
-   func  collectgemturnaround{
+func  collectgemturnaround{
    Moveforeward()
    Moveforeward()
    Collectgem()
    Turnleft()
    Moveforeward()
  }
-  func SolveRow(){ 
-    
+func SolveRow(){
     solveRow()
     turnLeft()
     moveForward()
