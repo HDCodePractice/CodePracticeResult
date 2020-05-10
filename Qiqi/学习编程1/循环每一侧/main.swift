@@ -6,5 +6,5 @@ moveForward()
 moveForward()
 turnRight()
 }
-moveforward()
+moveForward()
 collectGem()
