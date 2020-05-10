@@ -1,7 +1,7 @@
-for i in 1 ... /5/*#-end-editable-code*/ {
+for i in 1 ... /5 {
     moveForward()
     moveForward()
     collectGem()
     moveForward()
-    i
+    
 }    
