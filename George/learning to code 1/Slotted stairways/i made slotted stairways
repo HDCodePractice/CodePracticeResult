@@ -1,9 +1,11 @@
 func  collectGemTurnAround{
-   moveForeward()
-   moveForeward()
-   collectGem()
-   turnLeft()
-   moveForeward()
+    moveForward()
+    moveForward()
+    collectGem()
+    turnLeft()
+    turnLeft()
+    moveForward()
+    moveForward()
  }
 func solveRow(){
     collectGemTurnAround()
