@@ -1,9 +1,9 @@
-func  collectgemturnaround{
-   moveforeward()
-   moveforeward()
-   collectgem()
-   turnleft()
-   moveforeward()
+func  collectGemTurnAround{
+   moveForeward()
+   moveForeward()
+   collectGem()
+   turnLeft()
+   moveForeward()
  }
 func solveRow(){
     collectGemTurnAround()
