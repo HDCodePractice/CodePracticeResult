@@ -3,5 +3,4 @@ for i in 1 ... /5 {
     moveForward()
     collectGem()
     moveForward()
-    
 }    
