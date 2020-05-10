@@ -6,23 +6,23 @@ func  collectgemturnaround{
    Moveforeward()
  }
 func SolveRow(){
-    solveRow()
+    collectGemTurnAround()
+    collectGemTurnAround()
+    turnRight()
+    moveForward()
+    turnRight()
+    collectGemTurnAround()
+    turnRight()
+    moveForward()
+    turnLeft()
+    collectGemTurnAround()
+    collectGemTurnAround()
     turnLeft()
     moveForward()
     turnRight()
-    solveRow()
-    turnRight()
-    moveForward()
-    turnLeft()
-    solveRow()
-    solveRow()
-    turnLeft()
-    moveForward()
-    moveForward()
-    turnLeft()
-    solveRow()
-  } 
-
+    collectGemTurnAround()
+} 
+solveRow()
     
     
  
