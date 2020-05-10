@@ -2,10 +2,10 @@ func turnaround(){
    Turnleft() 
    Turnleft()
 }
-func Solvestair(){                                           
+func solvestair(){                                           
      moveForward()                           
      collectGem()                           
-     turnaround()
+     turnAround()
      moveForward()                           
      moveForward()                           
      collectGem()                                      
@@ -19,5 +19,5 @@ func Solvestair(){
      moveForward()
      collectGem()
  }
-  Solvestair()
+  solvestair()
     
