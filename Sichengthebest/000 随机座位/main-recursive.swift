@@ -8,3 +8,28 @@ func getBit(bit: Int) -> Int {
     return a
 }
 show(getBit(bit: 3))
+
+func sumN(m: Int, n: Int) -> Int {
+    var l = 0
+    for i in m ... n {
+        l += i
+    }
+    return l
+}
+show(sumN(m: 1, n: 100))
+
+func sumNN(m: Int, n: Int) -> Int {
+    var l = 0
+    var coefficient = 0
+    while coefficient < n {
+        coefficient += 1
+        l += coefficient
+    }
+    return l
+}
+show(sumNN(m: 1, n: 100))
+
+func sumNNN(m: Int, n: Int) -> Int {
+    return (m+n)*n/2
+}
+show(sumNNN(m: 1, n: 100))
