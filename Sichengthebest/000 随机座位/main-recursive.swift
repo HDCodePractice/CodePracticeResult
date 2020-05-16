@@ -30,6 +30,10 @@ func sumNN(m: Int, n: Int) -> Int {
 show(sumNN(m: 1, n: 100))
 
 func sumNNN(m: Int, n: Int) -> Int {
-    return (m+n)*n/2
+    if m < n {
+        return m + sumNNN(m: m + 1, n: n)
+    } else {
+        return n
+    }
 }
 show(sumNNN(m: 1, n: 100))
