@@ -12,12 +12,14 @@ func getT() {
     moveForward()
     moveForward()
     collectGem()
-    moveForward()
 }
 func turnAround() {
     turnLeft()
     turnLeft()
 }
-for i in 1 ... 4 {
+for i in 1 ... 3 {
     getT()
+    moveForward()
 }
+getT()
+
