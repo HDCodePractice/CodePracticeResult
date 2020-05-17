@@ -3,19 +3,18 @@ func sevenM() {
         moveForward()
     }
 }
-for i in 1 ... 2 {
+func moveToggle() {
     moveForward()
     moveForward()
     turnRight()
     sevenM()
     toggleSwitch()
+}
+for i in 1 ... 2 {
+    moveToggle()
     turnLeft()
     turnLeft()
     sevenM()
     turnRight()
 }
-moveForward()
-moveForward()
-turnRight()
-sevenM()
-toggleSwitch()
+moveToggle()
