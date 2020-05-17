@@ -1,15 +1,21 @@
-for i in 1 ... 3 {
+func sevenM() {
+    for g in 1 ... 7{
+        moveForward()
+    }
+}
+for i in 1 ... 2 {
     moveForward()
     moveForward()
     turnRight()
-    for j in 1 ... 7 {
-        moveForward()
-    }
+    sevenM()
     toggleSwitch()
     turnLeft()
     turnLeft()
-    for k in 1 ... 7 {
-        moveForward()
-    }
+    sevenM()
     turnRight()
 }
+moveForward()
+moveForward()
+turnRight()
+sevenM()
+toggleSwitch()
