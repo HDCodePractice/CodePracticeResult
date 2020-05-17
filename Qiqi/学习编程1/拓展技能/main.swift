@@ -1,24 +1,16 @@
-func turnAround() {
-    turnLeft()
-    turnLeft()
-}
-func sevenS() {
-    moveForward()
-    moveForward()
-    moveForward()
-    moveForward()
-    moveForward()
-    moveForward()
-    moveForward()
-}
 for i in 1 ... 3 {
     moveForward()
     moveForward()
     turnRight()
-    sevenS()
+    for j in 1 ... 7 {
+        moveForward()
+    }
     toggleSwitch()
-    turnAround()
-    sevenS()
+    turnLeft()
+    turnLeft()
+    for k in 1 ... 7 {
+        moveForward()
+    }
     turnRight()
     
 }
