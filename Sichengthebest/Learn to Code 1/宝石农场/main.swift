@@ -1,24 +1,33 @@
-func back2start() {
+func solveOneSixthGem() {
+    moveForward()
+    collectGem()
+    moveForward()
+    collectGem()
+    turnLeft()
+    turnLeft()
+}
+func solveOneSixthSwitch() {
+    moveForward()
+    toggleSwitch()
+    moveForward()
+    toggleSwitch()
     turnLeft()
     turnLeft()
     moveForward()
     moveForward()
 }
-func solveRow() {
-    turnLeft()
+func transition() {
     moveForward()
-    toggleSwitch()
     moveForward()
-    toggleSwitch()
-    back2start()
-    moveForward()
-    collectGem()
-    moveForward()
-    collectGem()
-    back2start()
     turnRight()
-    moveForward()   
+    moveForward()
+    turnLeft()
 }
-for i in 1 ... 3 {
-    solveRow()
+turnLeft()
+for i in 1 ... 2 {
+    solveOneSixthSwitch()
+    solveOneSixthGem()
+    transition()
 }
+solveOneSixthSwitch()
+solveOneSixthGem()
