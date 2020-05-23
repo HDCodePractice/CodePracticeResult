@@ -15,7 +15,7 @@ func getNumber(n: Int,bit: Int) {
         
         if bit == numbersCount{
             // 判断s里是不是有重复的数字 
-            if Array(s).count == Set(Array(s)).count {
+            if Array(s).count == Set(s).count {
                 count += 1
 //                  show("第\(count)个是:\(s)")
             }
