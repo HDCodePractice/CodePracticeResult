@@ -4,7 +4,7 @@ func Parker() {
     collectGem()
     moveForward()
     collectGem()
-   }
+}
 Parker()
 turnRight()
 moveForward()
