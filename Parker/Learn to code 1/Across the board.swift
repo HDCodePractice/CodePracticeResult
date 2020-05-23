@@ -1,0 +1,16 @@
+func Parker() {
+    collectGem()
+    moveForward()
+    collectGem()
+    moveForward()
+    collectGem()
+   }
+Parker()
+turnRight()
+moveForward()
+turnRight()
+Parker()
+turnLeft()
+moveForward()
+turnLeft()
+Parker()
