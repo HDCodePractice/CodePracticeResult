@@ -1,0 +1,15 @@
+func Parker() {
+    moveForward()
+    collectGem()
+    moveForward()
+    toggleSwitch()
+    moveForward()
+}
+Parker()
+turnLeft()
+Parker()
+moveForward()
+turnLeft()
+Parker()
+turnLeft()
+Parker()
