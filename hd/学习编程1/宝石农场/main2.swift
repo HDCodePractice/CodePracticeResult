@@ -10,14 +10,12 @@ func getGem() {
     moveForward()
     collectGem()
 }
-
 func turnBack() {
     turnLeft()
     turnLeft()
     moveForward()
     moveForward()
 }
-
 turnLeft()
 for i in 1 ... 2 {
     getSwitch()
