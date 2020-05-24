@@ -15,4 +15,4 @@ collectDoubbleGem()
 turnRight()
 moveForward()
 turnRight()
-collectDoubbleGem(
+collectDoubbleGem(）
