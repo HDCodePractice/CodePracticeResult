@@ -1,3 +1,9 @@
+func MCMC() {
+    moveForward()
+    collectGem()
+    moveForward()
+    collectGem()
+}
 func turnBack() {
     turnLeft()
     turnLeft()
@@ -21,14 +27,8 @@ turnBack()
 moveForward()
 for j in 1 ... 2 {
     turnLeft()
-    moveForward()
-    collectGem()
-    moveForward()
-    collectGem()
+    MCMC()
     TMMTM()
 }
 turnLeft()
-moveForward()
-collectGem()
-moveForward()
-collectGem()
+MCMC()
