@@ -1,21 +1,34 @@
-for i in 1 ... 3 {
-    turnRight()
-    moveForward()
-    collectGem()
-    moveForward()
-    collectGem()
-    turnRight()
-    turnRight()
-    moveForward()
-    moveForward()
-    moveForward()
-    toggleSwitch()
-    moveForward()
-    toggleSwitch()
+func turnBack() {
     turnLeft()
     turnLeft()
+}
+func TMMTM() {
+    turnBack()
     moveForward()
     moveForward()
     turnLeft()
     moveForward()
 }
+for i in 1 ... 3 {
+    turnLeft()
+    moveForward()
+    toggleSwitch()
+    moveForward()
+    toggleSwitch()
+    TMMTM()
+}
+turnBack()
+moveForward()
+for j in 1 ... 2 {
+    turnLeft()
+    moveForward()
+    collectGem()
+    moveForward()
+    collectGem()
+    TMMTM()
+}
+turnLeft()
+moveForward()
+collectGem()
+moveForward()
+collectGem()
