@@ -1,31 +1,26 @@
-func MCTMCT() {
-    moveForward()
-    collectGem()
-    toggleSwitch()
-    moveForward()
-    collectGem()
-    toggleSwitch()
-}
 func TurnBack() {
     turnLeft()
     turnLeft()
     moveForward()
     moveForward()
 }
-func solveLeftSide() {
+func solveRightSide() {
+    turnRight()
+    moveForward()
+    collectGem()
+    moveForward()
+    collectGem()
+}
+for i in 1 ... 3 {
     turnLeft()
-    MCTMCT()
+    moveForward()
+    toggleSwitch()
+    moveForward()
+    toggleSwitch()
     TurnBack()
     turnLeft()
     moveForward()
 }
-func solveRightSide() {
-    turnRight()
-    MCTMCT()
-}
-for i in 1 ... 3 {
-    solveLeftSide()
-}
 TurnBack()
 moveForward()
 turnLeft()
@@ -39,3 +34,4 @@ TurnBack()
 turnRight()
 moveForward()
 solveRightSide()
+
