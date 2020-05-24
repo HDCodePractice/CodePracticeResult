@@ -1,0 +1,35 @@
+func solveLeftSide() {
+    turnLeft()
+    moveForward()
+    toggleSwitch()
+    moveForward()
+    toggleSwitch()
+    turnLeft()
+    turnLeft()
+    moveForward()
+    moveForward()
+    turnLeft()
+    moveForward()
+}
+func solveRightSide() {
+    turnRight()
+    moveForward()
+    collectGem()
+    moveForward()
+    collectGem()
+}
+for i in 1 ... 3 {
+    solveLeftSide()
+}
+turnLeft()
+turnLeft()
+moveForward()
+moveForward()
+moveForward()
+turnLeft()
+turnLeft()
+solveRightSide()
+TurnBack()
+solveRightSide()
+TurnBack()
+solveRightSide()
