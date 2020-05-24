@@ -1,37 +1,32 @@
-func SolveRightCombo() {
-    solveRightSide()
-    TurnBack()
-    turnRight()
-    moveForward()
-}
-func TurnBack() {
-    turnLeft()
-    turnLeft()
-    moveForward()
-    moveForward()
-}
-func solveRightSide() {
-    turnRight()
+func solveBlock() {
     moveForward()
     collectGem()
+    toggleSwitch()
     moveForward()
     collectGem()
+    toggleSwitch()
 }
-for i in 1 ... 3 {
+func goBack() {
+    turnLeft()
     turnLeft()
     moveForward()
-    toggleSwitch()
-    moveForward()
-    toggleSwitch()
-    TurnBack()
-    turnLeft()
     moveForward()
 }
-TurnBack()
-moveForward()
 turnLeft()
-turnLeft()
-SolveRightCombo()
-SolveRightCombo()
-solveRightSide()
-
+for i in 1 ... 2 {
+    solveBlock()
+    goBack()
+    turnLeft()
+    moveForward()
+    turnLeft()
+}
+solveBlock()
+goBack()
+for i in 1 ... 2 {
+    solveBlock()
+    goBack()
+    turnLeft()
+    moveForward()
+    turnLeft()
+}
+solveBlock()
