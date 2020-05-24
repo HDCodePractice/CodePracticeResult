@@ -1,3 +1,9 @@
+func SolveRightCombo() {
+    solveRightSide()
+    TurnBack()
+    turnRight()
+    moveForward()
+}
 func TurnBack() {
     turnLeft()
     turnLeft()
@@ -25,13 +31,7 @@ TurnBack()
 moveForward()
 turnLeft()
 turnLeft()
-solveRightSide()
-TurnBack()
-turnRight()
-moveForward()
-solveRightSide()
-TurnBack()
-turnRight()
-moveForward()
+SolveRightCombo()
+SolveRightCombo()
 solveRightSide()
 
