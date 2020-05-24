@@ -1,24 +1,23 @@
-func turnAround() {
-      turnLeft()
-    turnLeft()
+func solveSquare() {
+    moveForward()
+    collectGem()
+    toggleSwitch()
 }
-
 for i in 1 ... 3 {
     turnLeft()
-    moveForward()
-    toggleSwitch()
-    moveForward()
-    toggleSwitch()
-    turnAround()
-    moveForward()
+    solveSquare()
+    solveSquare()
+    turnLeft()
+    turnLeft()
     moveForward()
     moveForward()
-    collectGem()
-    moveForward()
-    collectGem()
-    turnAround()
+    solveSquare()
+    solveSquare()
+    turnLeft()
+    turnLeft()
     moveForward()
     moveForward()
     turnRight()
     moveForward()
 }
+
