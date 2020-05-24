@@ -1,8 +1,10 @@
 func MCMC() {
     moveForward()
     collectGem()
+    toggleSwitch()
     moveForward()
     collectGem()
+    toggleSwitch()
 }
 func turnBack() {
     turnLeft()
@@ -17,10 +19,7 @@ func TMMTM() {
 }
 for i in 1 ... 3 {
     turnLeft()
-    moveForward()
-    toggleSwitch()
-    moveForward()
-    toggleSwitch()
+    MCMC()
     TMMTM()
 }
 turnBack()
