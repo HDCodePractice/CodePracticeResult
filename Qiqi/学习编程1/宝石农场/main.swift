@@ -1,26 +1,21 @@
-func getGS() {
-    turnLeft()
-    moveForward()
-    toggleSwitch()
-    moveForward()
-    toggleSwitch()
-    turnAround()
-    moveForward()
-    moveForward()
-    moveForward()
-    collectGem()
-    moveForward()
-    collectGem()
-    turnAround()
-    moveForward()
-    moveForward()
+for i in 1 ... 3 {
     turnRight()
     moveForward()
-}
-func turnAround() {
+    collectGem()
+    moveForward()
+    collectGem()
+    turnRight()
+    turnRight()
+    moveForward()
+    moveForward()
+    moveForward()
+    toggleSwitch()
+    moveForward()
+    toggleSwitch()
     turnLeft()
     turnLeft()
-}
-for i in 1 ... 3 {
-    getGS()
+    moveForward()
+    moveForward()
+    turnLeft()
+    moveForward()
 }
