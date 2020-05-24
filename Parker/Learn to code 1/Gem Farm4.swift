@@ -1,3 +1,11 @@
+func MCTMCT() {
+    moveForward()
+    collectGem()
+    toggleSwitch()
+    moveForward()
+    collectGem()
+    toggleSwitch()
+}
 func TurnBack() {
     turnLeft()
     turnLeft()
@@ -6,20 +14,14 @@ func TurnBack() {
 }
 func solveLeftSide() {
     turnLeft()
-    moveForward()
-    toggleSwitch()
-    moveForward()
-    toggleSwitch()
+    MCTMCT()
     TurnBack()
     turnLeft()
     moveForward()
 }
 func solveRightSide() {
     turnRight()
-    moveForward()
-    collectGem()
-    moveForward()
-    collectGem()
+    MCTMCT()
 }
 for i in 1 ... 3 {
     solveLeftSide()
