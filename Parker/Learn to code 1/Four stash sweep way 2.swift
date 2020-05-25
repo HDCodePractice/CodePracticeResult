@@ -3,8 +3,6 @@ func move2() {
     collectGem()
     moveForward()
 }
-
-
 for i in 1 ... 4 {
     move2()    
     collectGem()
