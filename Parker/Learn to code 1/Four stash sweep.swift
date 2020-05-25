@@ -1,23 +1,18 @@
-func turnAround() {
-    turnLeft()
-    turnLeft()
-}
-
-
-func moveGetGem() {
+for i in 1 ... 4 {
     moveForward()
     collectGem()
-}
-
-for i in 1 ... 4 {
-    moveGetGem()
-    moveGetGem()
-    turnAround()
+    moveForward()
+    collectGem()
+    turnLeft()
+    turnLeft()
     moveForward()
     turnRight()
-    moveGetGem()
-    turnAround()    
     moveForward()
-    moveGetGem()
+    collectGem()
+    turnRight()
+    turnRight()
+    moveForward()
+    moveForward()
+    collectGem()
     moveForward()
 }
