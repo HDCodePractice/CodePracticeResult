@@ -1,5 +1,5 @@
 while !isBlocked {
-    while !isONGem {
+    while !isOnGem {
        moveForward()
 }
 collectGem()
