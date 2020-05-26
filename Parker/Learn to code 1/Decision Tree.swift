@@ -1,38 +1,38 @@
-func solveRightSide() {
-    turnRight()
+func move3() {
     moveForward()
     moveForward()
     moveForward()
-    turnLeft()
-    moveForward()
-    collectGem()
-    turnLeft()
-    turnLeft()
-    moveForward()
-    turnRight()
-    moveForward()
-    moveForward()
-    moveForward()
-    turnRight()
 }
-
 func solveLeftSide() {
     turnLeft()
     moveForward()
     collectGem()
     turnLeft()
-    turnLeft()
-    moveForward()
+    turnLeftMove()
     turnLeft()
 }
 for i in 1 ... 5 {
     moveForward()
     if isOnClosedSwitch {
         toggleSwitch()
-        solveLeftSide()
+        turnLeft()
+        moveForward()
+        collectGem()
+        turnLeft()
+        turnLeftMove()
+        turnLeft()
     }
     else if isOnGem {
         collectGem()
-        solveRightSide()
+        turnRight()
+        move3()
+        turnLeftMove()
+        collectGem()
+        turnLeft()
+        turnLeftMove()
+        turnRight()
+        move3()
+        turnRight()
+    }
 }
-}
+
