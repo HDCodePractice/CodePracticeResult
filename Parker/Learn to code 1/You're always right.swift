@@ -1,12 +1,12 @@
 while !isBlocked {
-while !isBlocked{
-moveForward()
-if isOnClosedSwitch {
-toggleSwitch()
-}
-}
-turnRight
-if isOnGem {
-collectGem()
-}
+    while !isBlocked{
+        moveForward()
+        if isOnClosedSwitch {
+            toggleSwitch()
+        }
+    }
+    turnRight()
+    if isOnGem {
+        collectGem()
+    }
 }
