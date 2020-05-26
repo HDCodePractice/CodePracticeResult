@@ -10,6 +10,14 @@ class Animals {
     
 }
 
+extension Animals:Equatable{
+    static func == (lhs: Animals, rhs: Animals) -> Bool {
+        return lhs.name == rhs.name && 
+            lhs.hp == rhs.hp && 
+            lhs.power == rhs.power
+    }
+}
+
 class Human : Animals{
     init(_ name : String){
         super.init()
@@ -36,3 +44,10 @@ for i in dogs {
     show("\(i.name) hp:\(i.hp) power:\(i.power)")
 }
 
+
+let rHuman = humans.randomElement()!
+let rDog = dogs.randomElement()!
+
+if let i = humans.firstIndex(of: rHuman) {
+    humans.remove(at: i)
+}
