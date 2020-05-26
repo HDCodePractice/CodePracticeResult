@@ -19,3 +19,7 @@ for i in 1 ... 8 {
         collectGem()
        }
     }
+
+
+SOLUTION WHERE BYTE DOES NOT GO BACK AFTER HE GETS THE LAST GEM:
+  
