@@ -10,6 +10,7 @@ class Animals {
     
 }
 
+// 让Animals支持==的比较
 extension Animals:Equatable{
     static func == (lhs: Animals, rhs: Animals) -> Bool {
         return lhs.name == rhs.name && 
