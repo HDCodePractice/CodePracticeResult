@@ -1,3 +1,7 @@
+func turnLeftMove() {
+    turnLeft()
+    moveForward()
+}
 func move3() {
     moveForward()
     moveForward()
