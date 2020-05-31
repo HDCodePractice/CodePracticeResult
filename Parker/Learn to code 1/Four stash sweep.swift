@@ -1,25 +1,25 @@
-func `func`() {
-    moveForward()
+func soManyFunctions() {
+    turnLeft()
+    moveGet()
+}
+func moveGet() {
     moveForward()
     collectGem()
-    turnLeft()
-    turnLeft()
-    moveForward()
-    turnRight()
-    moveForward()
-    turnLeft()
-    turnLeft()
 }
-for i in 1 ... 3{
-    `func`()
-    for i in 1 ... 3 {
-        collectGem()
-        moveForward()
-    }
+func reapeater() {
+    moveGet()
+    soManyFunctions()
+    turnLeft()
+    soManyFunctions()
+    soManyFunctions()
+    turnLeft()
+    soManyFunctions()
+    soManyFunctions()
 }
-`func`()
-for i in 1 ... 2 {
-    collectGem()
+for i in 1 ... 3 {
+    reapeater()
     moveForward()
 }
-collectGem()
+reapeater()
+
+
