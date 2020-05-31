@@ -9,8 +9,9 @@ for i in 1 ... 4 {
     moveForward()
     turnLeft()
     turnLeft()
-    for i in 1 ... 3 {
+    for i in 1 ... 2 {
         collectGem()
         moveForward()
     }
 }
+collectGem()
