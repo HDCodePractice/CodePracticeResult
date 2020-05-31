@@ -1,4 +1,4 @@
-for i in 1 ... 4 {
+func `func`() {
     moveForward()
     moveForward()
     collectGem()
@@ -9,9 +9,17 @@ for i in 1 ... 4 {
     moveForward()
     turnLeft()
     turnLeft()
-    for i in 1 ... 2 {
+}
+for i in 1 ... 3{
+    `func`()
+    for i in 1 ... 3 {
         collectGem()
         moveForward()
     }
+}
+`func`()
+for i in 1 ... 2 {
+    collectGem()
+    moveForward()
 }
 collectGem()
