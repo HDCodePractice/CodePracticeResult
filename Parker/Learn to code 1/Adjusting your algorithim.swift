@@ -11,12 +11,12 @@ func navigateAroundWall() {
 while !isOnOpenSwitch {
     while !isOnGem && !isOnClosedSwitch {
     navigateAroundWall()
-}
+    }
 if isOnGem {
     collectGem()
 } else {
     toggleSwitch()
-}
+    }
 turnLeft()
 turnLeft()
 }
