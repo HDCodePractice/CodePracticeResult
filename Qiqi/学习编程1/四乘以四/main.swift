@@ -1,12 +1,12 @@
-for i in 1 ... 12 {
-    if isOnClosedSwitch {
-        toggleSwitch()
-    }
-    if isOnOpenSwitch || isOnClosedSwitch {
-        turnRight()
-    }
-    if isBlocked {
-        turnRight()
-    }
+func firstOne() {
     moveForward()
+    moveForward()
+    moveForward()
+    if isOnClosedSwitch {
+        toggleSwitch()      
+    }
+    turnRight()    
+}
+while !isBlocked {
+    firstOne()    
 }
