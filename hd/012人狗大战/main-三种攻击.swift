@@ -16,9 +16,10 @@ class Animals {
 class Human : Animals{
     override init(_ name: String) {
         super.init(name)
-        self.attacks.append(Attack("打",self.power))
-        self.attacks.append(Attack("踹", self.power + 8 ))
-        self.attacks.append(Attack("棍", self.power + 16 ))
+        self.attacks.append(Attack("打", self.power ) )
+        self.attacks.append(Attack("踹", self.power + 8 ) )
+        self.attacks.append(Attack("棍", self.power + 16) )
+        self.attacks.append(Attack("爱", self.power - 20) )
     }
 }
 
@@ -28,6 +29,7 @@ class Dog : Animals {
         self.attacks.append(Attack("咬",self.power))
         self.attacks.append(Attack("扑", self.power + 8 ))
         self.attacks.append(Attack("撞", self.power + 16 ))
+        self.attacks.append(Attack("舔", self.power - 30 ))
     }
 }
 
@@ -65,7 +67,7 @@ while !(humans.isEmpty || dogs.isEmpty) {
     show ("\(rHuman.name)(hp:\(rHuman.hp) power:\(rHuman.power)) VS \(rDog.name)(hp:\(rDog.hp) power:\(rDog.power))开战！")
     
     let at = rDog.attacks.randomElement()!
-    show("\(rDog.name)发起了丧心病狂的\(at.name)一击！让\(rHuman.name)少了\(at.power)hp")
+    show("\(rDog.name)发起了丧心病狂的 \(at.name) 一击！让\(rHuman.name)变了\(at.power * -1 )hp")
     rHuman.hp = rHuman.hp - at.power
     if rHuman.hp <= 0 {
         show("\(rHuman.name)被\(rDog.name)一招致死！")
@@ -74,7 +76,7 @@ while !(humans.isEmpty || dogs.isEmpty) {
         }
     }else{
         let at = rHuman.attacks.randomElement()!
-        show("\(rHuman.name)发起了丧心病狂的\(at.name)一击！让\(rDog.name)少了\(at.power)hp")
+        show("\(rHuman.name)发起了丧心病狂的 \(at.name) 一击！让\(rDog.name)变了\(at.power * -1 )hp")
         rDog.hp = rDog.hp - rHuman.power
         if rDog.hp <= 0 {
             show("\(rDog.name)被\(rHuman.name)一招致死！")
