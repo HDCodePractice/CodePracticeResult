@@ -1,16 +1,10 @@
 func collectOrToggle() {
-    //#-editable-code
     if isOnClosedSwitch {
         toggleSwitch()
-        
     }else if isOnGem{
         collectGem()
-        
     }
-    
-    //#-end-editable-code
 }
-//#-editable-code
 moveForward()
 moveForward()
 collectOrToggle()
@@ -36,5 +30,3 @@ collectOrToggle()
 moveForward()
 moveForward()
 collectOrToggle()
-
-//#-end-editable-code
