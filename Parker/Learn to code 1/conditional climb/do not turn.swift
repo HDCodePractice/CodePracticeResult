@@ -1,9 +1,8 @@
-for i in 1 ... 15 {
+for i in 1 ... 12{
     if isOnGem {
         collectGem()
         turnLeft()
-    } else {
-        moveForward()
     }
+        moveForward()
 }
 collectGem()
