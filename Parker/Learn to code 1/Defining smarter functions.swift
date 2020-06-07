@@ -3,8 +3,7 @@ func collectOrToggle() {
         moveForward()
         if isOnClosedSwitch {
             toggleSwitch()
-        }
-        else if isOnGem {
+        } else if isOnGem {
             collectGem()
         }
     }
