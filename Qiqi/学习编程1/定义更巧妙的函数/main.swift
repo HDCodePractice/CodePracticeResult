@@ -18,4 +18,4 @@ collectOrToggle()
 turnRight()
 moveForward()
 turnRight()
-collectOrToggle
+collectOrToggle()
