@@ -11,4 +11,5 @@ turnLeft()
 for i in 1 ... 4 {
     checkTile()
     turnLeft()
+    checkTile()
 }
