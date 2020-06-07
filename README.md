@@ -158,3 +158,8 @@ Quebec省个人所得税率：43,790$以下为15%；43,790-87,575$为20%；87,57
  ### 013 计算器UI
  
  使用SwiftUI写一个你自己喜欢计算器APP的界面，写出必要的注释让将来的自己和他人容易理解，使用SubView将代码结构良好的分割，使用enum和实现了Hashable的方法来设置界面上不同的显示方法。
+ 
+ ### 014 寻找神数
+ 
+ 哪三个数，没有一个是零，不管是加法还是乘法，结果都一样？
+ What three numbers, none of which is zero, give the same result whether they’re added or multiplied?
