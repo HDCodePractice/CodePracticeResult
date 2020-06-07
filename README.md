@@ -163,3 +163,4 @@ Quebec省个人所得税率：43,790$以下为15%；43,790-87,575$为20%；87,57
  
  哪三个数，没有一个是零，不管是加法还是乘法，结果都一样？
  What three numbers, none of which is zero, give the same result whether they’re added or multiplied?
+ 贡献者:@Yi
