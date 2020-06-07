@@ -9,7 +9,6 @@ func collectOrToggle() {
         }
     }
 }
-
 collectOrToggle()
 turnLeft()
 moveForward()
