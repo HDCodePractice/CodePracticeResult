@@ -1,17 +1,15 @@
-for i in 1 ... 8 {
+func checkTile(){
     moveForward()
-    if isBlocked {
-        turnLeft()
-    }
-    if isOnGem {
+    if isOnGem{
         collectGem()
-    }
-    if isOnClosedSwitch {
+    } else if isOnClosedSwitch{
         toggleSwitch()
     }
-    }
-if isOnClosedSwitch {
-    toggleSwitch()
-}else if isOnGem {
-    collectGem()
+}
+moveForward()
+turnLeft()
+for i in 1 ... 4 {
+    checkTile()
+    turnLeft()
+    checkTile()
 }
