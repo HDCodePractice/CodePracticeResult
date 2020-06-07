@@ -6,5 +6,4 @@ for i in 1 ... 2 {
     else if isOnGem {
         collectGem()
     }
-    
 }
