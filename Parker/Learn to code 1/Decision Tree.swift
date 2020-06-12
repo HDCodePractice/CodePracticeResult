@@ -2,8 +2,6 @@ func turnLeftMove() {
     turnLeft()
     moveForward()
 }
-
-
 func move3() {
     moveForward()
     moveForward()
@@ -41,5 +39,3 @@ for i in 1 ... 5 {
         turnRight()
     }
 }
-
-
