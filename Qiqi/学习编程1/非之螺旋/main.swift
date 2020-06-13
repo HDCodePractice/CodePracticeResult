@@ -1,9 +1,7 @@
 for i in 1 ... 13 {
-    if !isBlocked {
-        moveForward()
-    }else {
-        turnLeft()
-        moveForward()
+    moveForward()
+    if isBlocked {
+       turnLeft()
     }
 }
 toggleSwitch()
