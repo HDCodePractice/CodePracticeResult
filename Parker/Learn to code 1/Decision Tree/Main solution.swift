@@ -1,21 +1,9 @@
-func solveRightSide() {
+func turnMove3() {
     turnRight()
     moveForward()
     moveForward()
     moveForward()
-    turnLeft()
-    moveForward()
-    collectGem()
-    turnLeft()
-    turnLeft()
-    moveForward()
-    turnRight()
-    moveForward()
-    moveForward()
-    moveForward()
-    turnRight()
 }
-
 func solveLeftSide() {
     turnLeft()
     moveForward()
@@ -33,6 +21,14 @@ for i in 1 ... 5 {
     }
     else if isOnGem {
         collectGem()
-        solveRightSide()
-}
+        turnMove3()
+        turnLeft()
+        moveForward()
+        collectGem()
+        turnLeft()
+        turnLeft()
+        moveForward()
+        turnMove3()
+        turnRight()
+    }
 }
