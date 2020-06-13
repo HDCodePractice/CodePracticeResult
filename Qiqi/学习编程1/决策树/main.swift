@@ -1,37 +1,31 @@
-func solveG() {
+func solveRight() {
     collectGem()
-    turnRight()
-    moveForward()
-    moveForward()
-    moveForward()
-    turnLeft()
-    moveForward()
-    collectGem()
-    turnLeft()
-    turnLeft()
-    moveForward()
-    turnRight()
-    moveForward()
-    moveForward()
-    moveForward()
+    getTM()
+    solveLeft()
+    getTM()
     turnRight()
 }
-func solveS() {
-    toggleSwitch()
+func getTM() {
+    turnRight()
+    moveForward()
+    moveForward()
+    moveForward()
+}
+func solveLeft() {
     turnLeft()
     moveForward()
     collectGem()
     turnLeft()
     turnLeft()
     moveForward()
-    turnLeft()
 }
 for i in 1 ... 5 {
     moveForward()
     if isOnGem {
-        solveG()
-    }else if isOnClosedSwitch{
-        solveS()
+        solveRight()
+    }else if isOnClosedSwitch {
+        toggleSwitch()
+        solveLeft()
+        turnLeft()
     }
-    
 }
