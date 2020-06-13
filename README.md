@@ -166,3 +166,16 @@ Quebec省个人所得税率：43,790$以下为15%；43,790-87,575$为20%；87,57
  What three numbers, none of which is zero, give the same result whether they’re added or multiplied?
  
  贡献者:@Yi
+ 
+ ### 015 三角形
+
+打印出如下图案（三角形）
+
+设置一个变量n为要打印的行数，打印出下面这样的
+
+```
+   *
+  ***
+ *****
+*******
+```
