@@ -1,6 +1,6 @@
 for i in 1 ... 7 {
     moveForward()
-    if isOnGem && isBlockedLeft {
+    if isBlockedLeft && isOnGem {
         collectGem()
         turnRight()
         moveForward()
@@ -11,8 +11,7 @@ for i in 1 ... 7 {
         moveForward()
         moveForward()
         turnRight()
-    }
-    if isOnGem {
+    } else if isOnGem {
         collectGem()
     }
 }
