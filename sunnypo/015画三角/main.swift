@@ -1,5 +1,6 @@
 var number = askForNumber("how tall would you like to make your triangle?")
 func printing() {
+    var d = ""
     for i in 1 ... number{
         var c = ""
         if number != i{
@@ -8,9 +9,10 @@ func printing() {
             }
         }
         for j in 1 ... i*2-1{
-            c += "*"
+            c += "."
         }
-        show(c)
+        d += "\(c)\n"
     }
+    show(d)
 }
 printing()
