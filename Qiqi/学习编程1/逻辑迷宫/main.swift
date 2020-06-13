@@ -6,20 +6,16 @@ for i in 1 ... 8 {
         turnRight()
         moveForward()
         moveForward()
-    }
-    if isOnClosedSwitch {
+        collectGem()
+        turnLeft()
+        turnLeft()
+        moveForward()
+        moveForward()
+        turnRight()
+    } else if isOnClosedSwitch {
         toggleSwitch()
         turnLeft()
-    }
-    if isOnGem && isBlockedLeft && isBlocked {
-        collectGem()
-        turnRight()
-        turnRight()
-        moveForward()
-        moveForward()
-        turnRight()
-    }
-    if isOnGem {
+    } else if isOnGem {
         collectGem()
     }
 }
