@@ -1,6 +1,6 @@
 func printTriangle(n: Int) {
+    var string = ""
     for i in 1...n {
-        var string = ""
         let spaceNumber = n-i
         for j in 0...spaceNumber {
             string.append(" ")
@@ -8,8 +8,10 @@ func printTriangle(n: Int) {
         for j in 1...2*i-1 {
             string.append(".")
         }
-        show(string)
+        if i != n {
+            string.append("\n")
+        }
     }
+    show(string)
 }
-
 printTriangle(n: 6)
