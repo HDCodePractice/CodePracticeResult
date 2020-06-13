@@ -1,10 +1,3 @@
-func solveRight() {
-    collectGem()
-    getTM()
-    solveLeft()
-    getTM()
-    turnRight()
-}
 func getTM() {
     turnRight()
     moveForward()
@@ -22,7 +15,11 @@ func solveLeft() {
 for i in 1 ... 5 {
     moveForward()
     if isOnGem {
-        solveRight()
+        collectGem()
+        getTM()
+        solveLeft()
+        getTM()
+        turnRight()
     }else if isOnClosedSwitch {
         toggleSwitch()
         solveLeft()
