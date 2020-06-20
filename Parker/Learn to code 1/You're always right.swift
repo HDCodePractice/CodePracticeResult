@@ -1,4 +1,4 @@
-while !isBlocked {
+while !isOnGem {
     while !isBlocked{
         moveForward()
         if isOnClosedSwitch {
@@ -6,5 +6,5 @@ while !isBlocked {
         }
     }
     turnRight()
-        collectGem()
 }
+collectGem()
