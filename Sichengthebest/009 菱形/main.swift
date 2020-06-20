@@ -1,8 +1,7 @@
 func printDiamond(n: Int) {
     var string = ""
     for i in 1...n {
-        let spaceNumber = n-i
-        for j in 0...spaceNumber {
+        for j in 0...n-i {
             string.append(" ")
         }
         for j in 1...2*i-1 {
