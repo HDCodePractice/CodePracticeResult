@@ -1,25 +1,20 @@
-func getGS() {
-    if isOnClosedSwitch {
-        toggleSwitch()
-    }
-    if isOnGem {
-        collectGem()
-    }
+func solveOneLine(){
     moveForward()
-}
-
-func finish() {
     while !isBlocked {
-        getGS()
+        if isOnClosedSwitch {
+            toggleSwitch()
+        } else if isOnGem {
+            collectGem()
+        }
+        moveForward()
     }
 }
-
-finish()
+solveOneLine()
 turnRight()
 moveForward()
 turnRight()
-finish()
+solveOneLine()
 turnLeft()
 moveForward()
 turnLeft()
-finish()
+solveOneLine()
