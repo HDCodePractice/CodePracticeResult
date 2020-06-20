@@ -1,17 +1,12 @@
-func navigateAroundWall() {
-    if isBlockedRight {
-        moveForward()
-    }  else {
-        turnRight()
-        moveForward()
-    }
-}
 while !isOnClosedSwitch {
-    navigateAroundWall()
+    moveForward()
+    if !isBlockedRight {
+        turnRight()
+    }  
     if isOnGem {
         collectGem()
         turnLeft()
         turnLeft()
     }
-}
+} 
 toggleSwitch()
