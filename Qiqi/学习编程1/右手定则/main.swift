@@ -1,12 +1,13 @@
-while !isBlocked {
-    moveForward()
-    while isBlocked {
-        turnRight()
-    }
+func checkTheSwitch() {
     if isOnClosedSwitch {
         toggleSwitch()
     }
-    if isOnGem {
-        collectGem()
-    }
 }
+while !isOnGem {
+    while !isBlocked {
+        moveForward()
+        checkTheSwitch()
+    }
+    turnRight()
+}
+collectGem()
