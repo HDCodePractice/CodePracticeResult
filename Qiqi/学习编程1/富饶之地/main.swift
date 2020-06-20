@@ -1,5 +1,4 @@
 func solveOneLine(){
-    moveForward()
     while !isBlocked {
         if isOnClosedSwitch {
             toggleSwitch()
