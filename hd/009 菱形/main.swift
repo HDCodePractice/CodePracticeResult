@@ -1,23 +1,24 @@
-func appendLind(start: Int,n:Int , s: String) -> String{
+func appendLind(n:Int , s: String) -> String{
     var str = ""
-    for i in start ... n {
+    for i in 0 ... n {
         str += s
     }
     return str
 }
 
-func printing(number : Int) {
+func printing(number : Int)-> String {
     var d = ""
     for i in 1 ... number{
-        d += appendLind(start:0,n: number - i, s: " ")
-        d += appendLind(start:1,n: i*2-1, s: ".")
+        d += appendLind(n: number - i, s: " ")
+        d += appendLind(n: i*2-2, s: ".")
         d += "\n"
     }
     for i in 1 ... number - 1{
-        d += appendLind(start:0,n: i, s: " ")
-        d += appendLind(start:1,n: (number-i)*2-1, s: ".")
+        d += appendLind(n: i, s: " ")
+        d += appendLind(n: (number-i)*2-2, s: ".")
         d += "\n"
     }
-    show(String(d.prefix(d.count - 1)))
+    return String(d.prefix(d.count - 1))
 }
-printing(number : 98)
+
+show(printing(number : 2))
