@@ -1,5 +1,3 @@
-var number = askForNumber("how tall would you like to make your triangle?")
-
 func appendLind(n:Int , s: String) -> String{
     var str = ""
     for i in 1 ... n {
@@ -26,4 +24,4 @@ func printing(number : Int) {
     }
     show(String(d.prefix(d.count - 1)))
 }
-printing(number : number)
+printing(number : 55)
