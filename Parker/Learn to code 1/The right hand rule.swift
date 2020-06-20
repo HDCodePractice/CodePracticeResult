@@ -1,10 +1,8 @@
 while !isOnClosedSwitch {
-     if isBlockedRight {
-        moveForward()
-    }  else {
+    if !isBlockedRight {
         turnRight()
-        moveForward()
-    }
+    }  
+    moveForward()
     if isOnGem {
         collectGem()
         turnLeft()
