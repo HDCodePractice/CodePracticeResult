@@ -1,4 +1,4 @@
-func oneSide() {
+for i in 1 ... 4 {
     moveForward()
     collectGem()
     turnLeft()
@@ -7,7 +7,4 @@ func oneSide() {
     turnLeft()
     moveForward()
     turnRight()
-}
-for i in 1 ... 4 {
-    oneSide()
 }
