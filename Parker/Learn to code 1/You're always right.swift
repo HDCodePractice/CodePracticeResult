@@ -6,7 +6,5 @@ while !isBlocked {
         }
     }
     turnRight()
-    if isOnGem {
         collectGem()
-    }
 }
