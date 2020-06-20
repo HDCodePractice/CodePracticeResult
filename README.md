@@ -179,3 +179,9 @@ Quebec省个人所得税率：43,790$以下为15%；43,790-87,575$为20%；87,57
  *****
 *******
 ```
+
+### 016 寻找素数
+
+判断n到m之间有多少个素数，并输出所有素数。
+
+Determine how many prime numbers there are between n and m, and output all prime numbers.
