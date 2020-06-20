@@ -203,3 +203,14 @@ Print out all the "daffodil numbers". A "daffodil number" is a three-digit numbe
 
 (3)如果n不能被k整除，则用k+1作为k的值,重复执行第一步。
 
+### 019 排队加法
+
+求s=a+aa+aaa+aaaa+aa...a的值，其中a是一个数字。例如2+22+222+2222+22222(此时共有5个数相加)，几个数相加由键盘控制。
+
+示例：
+a = 4
+n = 4
+4 + 44 + 444 + 4444
+计算结果为： 4936
+
+
