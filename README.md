@@ -240,6 +240,8 @@ Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 ```
 
+代码(Code)
+
 ```swift
 func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
     return []
