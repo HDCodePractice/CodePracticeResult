@@ -240,7 +240,7 @@ Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 ```
 
-代码(Code)
+代码模板
 
 ```swift
 func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
@@ -281,6 +281,18 @@ for i in twoSum([3,3], 6) {
 ```
 输入: 120
 输出: 21
+```
+
+代码模板
+
+```
+func reverse(_ x: Int) -> Int {
+
+}
+
+show(123)
+show(-123)
+show(98900)
 ```
 
 来源：https://leetcode-cn.com/problems/reverse-integer
