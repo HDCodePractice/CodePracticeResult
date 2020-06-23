@@ -290,9 +290,9 @@ func reverse(_ x: Int) -> Int {
 
 }
 
-show(123)
-show(-123)
-show(98900)
+show(reverse(123))
+show(reverse(-123))
+show(reverse(98900))
 ```
 
 来源：https://leetcode-cn.com/problems/reverse-integer
