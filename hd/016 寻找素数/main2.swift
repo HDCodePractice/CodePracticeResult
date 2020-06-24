@@ -1,9 +1,5 @@
 func findPrime(n: Int,m: Int) -> [Int] {
     var primes : [Int] = []
-    if n > m {
-        return []
-    }
-    
     for i in n ... m {
         if i > 2 {
             for j in 2 ... i - 1 {
@@ -17,10 +13,8 @@ func findPrime(n: Int,m: Int) -> [Int] {
             primes.append(i)
         }
     }
-    
     return primes
 }
-
 
 for i in findPrime(n: 1, m: 100){
     show(i)
