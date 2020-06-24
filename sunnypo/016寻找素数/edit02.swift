@@ -1,6 +1,5 @@
 var m = 0
 var n = 100
-var numbers : [Int] = []
 func find(_ na : Int, _ ma : Int)-> [Int]{
     var final : [Int] = []
     for i in na ... ma {
