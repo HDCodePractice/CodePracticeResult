@@ -1,9 +1,9 @@
-var m = askForNumber("Smaller Number")
-var n = askForNumber("Bigger Number")
+var m = 0
+var n = 100
 var numbers : [Int] = []
-var final : [Int] = []
-func find() {
-    for i in numbers{
+func find(_ na : Int, _ ma : Int)-> [Int]{
+    var final : [Int] = []
+    for i in na ... ma {
         if i > 2 {
             for j in 2 ... i - 1{
                 if i % j == 0{
@@ -16,13 +16,6 @@ func find() {
             final.append(i)
         }
     }
+    return final
 }
-if m > n {
-    show("Please enter the Smaller number first.")
-}else{
-    for i in m ... n{
-        numbers.append(i)
-    }
-    find()
-}
-show("\(final)")
+show("\(find(m,n))")
