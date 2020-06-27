@@ -1,5 +1,5 @@
 var gemCounter = 0
-while gemCounter < 100 {
+while gemCounter < 7 {
     if isOnGem {
         collectGem()
         gemCounter = gemCounter + 1
