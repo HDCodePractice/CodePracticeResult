@@ -11,5 +11,4 @@ func daf() -> [Int] {
     return d
 }
 
-let dafo = daf()
-show("\(dafo)")
+show("\(daf())")
