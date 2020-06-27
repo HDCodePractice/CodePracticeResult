@@ -10,5 +10,4 @@ func daffodilNumb() -> [Int] {
     }
     return daffodils
 }
-let daffodills = daffodilNumb()
-show("\(daffodills)")
+show("\(daffodilNumb())")
