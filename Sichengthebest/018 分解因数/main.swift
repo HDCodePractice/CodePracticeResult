@@ -8,7 +8,7 @@ func decomposing (n : Int)-> [Int] {
             m = m / prime
             prime = 1
         }
-        i += 1
+        prime += 1
     }
     return primes
 }
