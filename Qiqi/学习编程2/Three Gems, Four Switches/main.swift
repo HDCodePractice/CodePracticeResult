@@ -1,28 +1,19 @@
+
 var gemCounter = 0
 var switchCounter = 0
-func checkForTheRightWay() {
-    if isBlocked && isBlockedLeft {
-        turnRight()
-    } else if isBlocked && isBlockedRight {
-        turnLeft()
-    } else {
+while gemCounter < 3 || switchCounter < 4 {
+    if !isBlocked {
         moveForward()
+        if isOnGem && gemCounter < 3{
+            collectGem()
+            gemCounter = gemCounter + 1
+        } else if isOnClosedSwitch && switchCounter < 4 {
+            toggleSwitch()
+            switchCounter += 1
+        }
+    } else if !isBlockedRight {
+        turnRight()
+    } else if !isBlockedLeft {
+        turnLeft()
     }
-}
-while gemCounter < 3 {
-    checkForTheRightWay()
-    if isOnGem {
-        collectGem()
-        gemCounter += 1
-    }
-}
-while !isOnClosedSwitch {
-    checkForTheRightWay()
-} 
-while switchCounter < 4 {
-    checkForTheRightWay()
-    if isOnClosedSwitch {
-        toggleSwitch()
-        switchCounter += 1
-    }    
 }
