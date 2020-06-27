@@ -1,21 +1,11 @@
-func whichWayToTurn() {
-    if isBlockedRight && !isBlocked {
-        moveForward()
-        
-    } else if isBlockedRight && isBlocked {
-        turnLeft()
-        
-    } else {
-        turnRight()
-        moveForward()   
-    }
-    
-    if isOnClosedSwitch {
-        toggleSwitch()
-    }    
-}
-
 while !isOnGem {
-    whichWayToTurn()
+    moveForward()
+    if isOnClosedSwitch && isBlocked{
+        toggleSwitch()
+        turnLeft()
+    } else if isOnClosedSwitch {
+        toggleSwitch()
+        turnRight()
+    }
 }
 collectGem()
