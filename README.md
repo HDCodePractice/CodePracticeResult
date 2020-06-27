@@ -193,7 +193,7 @@ Determine how many prime numbers there are between n and m, and output all prime
 Print out all the "daffodil numbers". A "daffodil number" is a three-digit number whose cubic sum is equal to the number itself The number 153 is a "daffodil number" because 153 = 1 cubic + 5 cubic + 3 cubic. For example, 153 is a "daffodil number" because 153 = cubic 1 + cubic 5 + cubic 3.
 
 ### 018 分解质因数
-将一个正整数分解质因数。例如：输入90,打印出90=2*3*3*5。
+将一个正整数分解质因数。例如：输入90,打印出 `90=2*3*3*5`。
 
 对n进行分解质因数，应先找到一个最小的质数k，然后按下述步骤完成：
 
