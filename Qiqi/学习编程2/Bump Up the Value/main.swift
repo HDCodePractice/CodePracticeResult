@@ -1,5 +1,6 @@
 var gemCounter = 0
-while !isBlocked {
+var numberOfGem = 5
+while gemCounter != numberOfGem {
     moveForward()
     collectGem()
     gemCounter = gemCounter + 1
