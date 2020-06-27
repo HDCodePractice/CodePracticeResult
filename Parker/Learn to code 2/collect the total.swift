@@ -10,8 +10,7 @@ while gemCounter < totalGems {
         turnRight()
     } else if !isBlockedLeft {
         turnLeft()
-    }
-    else if isBlocked {
+    } else if isBlocked {
         turnLeft()
         turnLeft()
     }
