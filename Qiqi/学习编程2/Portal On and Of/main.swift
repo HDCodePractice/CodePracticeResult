@@ -1,18 +1,20 @@
 purplePortal.isActive = false
-var gemCounter = 0
-
-while gemCounter < 7 {
+for i in 1 ... 6 {
     moveForward()
-    if isBlocked {
-        turnLeft()
-        turnLeft()
-        purplePortal.isActive = true
-    }
-    if isOnGem {
-        collectGem()
-        gemCounter = gemCounter + 1
-    } else if isOnClosedSwitch {
-        toggleSwitch()
-        purplePortal.isActive = false
-     }
- }
+    collectGem()
+}
+turnLeft()
+turnLeft()
+purplePortal.isActive = true
+for j in 1 ... 5 {
+    moveForward()
+}
+moveForward()
+toggleSwitch()
+turnLeft()
+turnLeft()
+purplePortal.isActive = false
+for k in 1 ... 5 {
+    moveForward()
+    collectGem()
+}
