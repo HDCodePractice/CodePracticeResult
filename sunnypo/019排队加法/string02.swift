@@ -1,4 +1,4 @@
-func cal(_ time:Int,_ numb:Int)->Int{
+func cal(_ numb:Int,_ time:Int)->Int{
     var num = ""
     var number : [Int] = []
     for i in 1...time{
@@ -11,4 +11,4 @@ func cal(_ time:Int,_ numb:Int)->Int{
     }
     return final*numb
 }
-show(cal(4,4))
+show(cal(4,5))
