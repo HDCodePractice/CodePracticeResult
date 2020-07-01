@@ -1,4 +1,4 @@
-func cal(_ numb:Int，_ time:Int) -> Int{
+func cal(_ numb:Int,_ time:Int) -> Int{
     var num = 0
     var numbers : [Int] = []
     for i in 1...time{ //位数
