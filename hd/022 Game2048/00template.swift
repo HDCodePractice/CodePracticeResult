@@ -31,16 +31,19 @@ class Game2048 {
     }
     
     func up() {
+        show("按下了上")
     }
     
     func left() {
-        
+        show("按下了左")
     }
     
     func down() {
+        show("按下了下")
     }
     
     func right() {
+        show("按下了右")
     }
     
 }
