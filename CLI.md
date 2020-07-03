@@ -5,7 +5,7 @@
 
 * 在Mac下打开终端  `Ctrl+空格` 输入 `terminal.app` 就可以打开终端
 
-* 在Finder里，左边的 `Applications` 中的 `Utiles` 中有 `Terminal.app` 
+* 在Finder里，左边的 `Applications` 中的 `Utilities` 中有 `Terminal.app` 
 
 ### pwd
 
