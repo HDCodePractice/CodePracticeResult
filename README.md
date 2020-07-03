@@ -296,3 +296,10 @@ show(reverse(98900))
 ```
 
 来源：https://leetcode-cn.com/problems/reverse-integer
+
+
+022 Game2048/00生成随机的2
+
+参考： https://en.wikipedia.org/wiki/2048_(video_game)  ，使用 https://github.com/HDCodePractice/SwiftPracticeResult/blob/master/hd/022%20Game2048/00template.swift 为模板，为Game2048加入上下左右在边上为0的格子里随机产生一个2，不为0则再次随机到全部靠边格子里都有不为0的数字为止。
+
+
