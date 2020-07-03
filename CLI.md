@@ -7,6 +7,8 @@
 
 * 在Finder里，左边的 `Applications` 中的 `Utilities` 中有 `Terminal.app` 
 
+每个命令行前都会有一段固定的内容，叫提示(prompt)。闪烁的光标就是你可以输入的内容了。
+
 ### pwd
 
 显示当前所在的文件夹（目录）
