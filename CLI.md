@@ -28,3 +28,9 @@ ls --help
 man cmd
 
 显示出`cmd`的手册帮助。按`q`退出显示帮助。
+
+### mkdir
+
+mkdir <dirname>
+  
+建立一个指定名子的目录。
