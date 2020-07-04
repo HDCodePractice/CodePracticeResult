@@ -300,8 +300,9 @@ show(reverse(98900))
 
 ### 022 Game2048/00 生成随机的2
 
-参考： https://en.wikipedia.org/wiki/2048_(video_game)  ，使用 
-https://github.com/HDCodePractice/SwiftPracticeResult/blob/master/hd/022%20Game2048/00template.swift 
+参考： https://en.wikipedia.org/wiki/2048_(video_game) 
+
+使用  https://github.com/HDCodePractice/SwiftPracticeResult/blob/master/hd/022%20Game2048/00template.swift 
 
 为模板，为Game2048加入按了`w上s下a左d右`后在内容为0的格子中随机挑选一个格子产生一个2或4，直到所有的格子都被填满。
 
@@ -326,3 +327,5 @@ https://github.com/HDCodePractice/SwiftPracticeResult/blob/master/hd/022%20Game2
 |0|0|0|0|
 |0|0|0|0|
 ```
+
+请使用 https://github.com/HDCodePractice/SwiftPracticeResult/blob/master/hd/022%20Game2048/01template.swift 为模板
