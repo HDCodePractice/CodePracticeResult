@@ -298,7 +298,7 @@ show(reverse(98900))
 来源：https://leetcode-cn.com/problems/reverse-integer
 
 
-022 Game2048/00 生成随机的2
+### 022 Game2048/00 生成随机的2
 
 参考： https://en.wikipedia.org/wiki/2048_(video_game)  ，使用 
 https://github.com/HDCodePractice/SwiftPracticeResult/blob/master/hd/022%20Game2048/00template.swift 
@@ -307,22 +307,22 @@ https://github.com/HDCodePractice/SwiftPracticeResult/blob/master/hd/022%20Game2
 
 这是 @sunnypo 贡献的题目
 
-022 Game2048/01 滑动
+### 022 Game2048/01 滑动
 
 我们为`w上s下a左d右`加入滑动的结果，也就是按了相应的按键以后向指定的方向把有相同数字的内容进行相加，并合并到对应的单元格里去。输入`w`将数字向上合并，例如
 
 ```
+|0|2|4|2|
 |0|2|0|2|
-|0|2|0|2|
-|0|2|0|2|
-|0|2|0|2|
+|0|2|4|2|
+|2|2|0|0|
 ```
 
 变为
 
 ```
-|0|4|0|4|
-|0|4|0|4|
+|2|4|8|4|
+|0|4|0|2|
 |0|0|0|0|
 |0|0|0|0|
 ```
