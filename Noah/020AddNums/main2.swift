@@ -2,7 +2,7 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
     var a : [Int] = []
     for j in 0 ... nums.count - 1 {
         for k in 0 ... nums.count - 1{
-            if nums[j] + nums[k] == target && j != k && k > j {
+            if nums[j] + nums[k] == target && k > j {
                 a.append(j)
                 a.append(k)
             }
@@ -10,7 +10,6 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
     }
     return a
 }
-
 for i in twoSum([1,3,5,7,9], 10) {
     show(i)
 }
