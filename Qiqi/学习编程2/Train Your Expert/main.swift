@@ -1,3 +1,4 @@
+let expert = Expert()
 var gemCounter = 0
 func collectAndTurn() {
     while !expert.isBlocked {
