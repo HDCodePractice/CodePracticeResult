@@ -3,11 +3,9 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
     for j in 0 ... nums.count - 1 {
         for k in 0 ... nums.count - 1{
             if nums[j] + nums[k] == target {
-                if j != k {
-                    if k > j {
-                        a.append(j)
-                        a.append(k)
-                    }
+                if j != k && k > j {
+                    a.append(j)
+                    a.append(k)
                 }
             }
         }
