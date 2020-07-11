@@ -1,75 +1,47 @@
 let expert = Expert()
 let character = Character()
 var gemCounter = 0
-func beforeLife() {
-    while gemCounter != 3 {
-        if character.isOnGem {
-            character.collectGem()
-            gemCounter += 1
-        }
-        if character.isBlocked {
-            if character.isBlocked && character.isBlockedRight && character.isBlockedLeft {
-                character.turnLeft()
-                character.turnLeft()
-            } else if !character.isBlockedLeft {
-                character.turnLeft()
-            } else {
-                character.turnRight()
-            }
-        }
-        character.moveForward()
-    }
-}
-func turnLock(up: Bool, numberOfTimes: Int){
-    for i in 1 ... numberOfTimes {
-        if up {
-            expert.turnLockUp()
+expert.turnLock(up: true, numberOfTimes: 4)
+character.move(distance: 2)
+character.turnRight()
+character.collectGem()
+gemCounter += 1
+character.move(distance: 1)
+expert.turnLock(up: false, numberOfTimes: 3)
+expert.turnRight()
+expert.turnLock(up: true, numberOfTimes: 1)
+expert.turnRight()
+expert.turnLock(up: true, numberOfTimes: 1)
+expert.turnRight()
+expert.turnLock(up: true, numberOfTimes: 1)
+while gemCounter != 5 {
+    if !character.isBlockedLeft {
+        character.turnLeft()
+    } else if character.isBlocked {
+        if character.isBlockedRight {
+            character.turnLeft()
+            character.turnLeft()
         } else {
-            expert.turnLockDown()
-        }
-    }
-}
-func turnLockUpAndNavigate() {
-    character.turnRight()
-    character.turnRight()
-    expert.turnLeft()
-    turnLock(up: false, numberOfTimes: 3)
-    character.move(distance: 7)
-    expert.turnLeft()
-    turnLock(up: false, numberOfTimes: 3)
-    character.turnRight()
-    character.moveForward()
-    character.turnRight()
-    character.moveForward()
-    while gemCounter != 6 {
-        if character.isOnGem {
-            character.collectGem()
-            gemCounter += 1
-        }
-        if character.isBlocked {
-            character.turnRight()
-            character.turnRight()
-        }
-        character.moveForward()
-        if !character.isBlockedRight && !character.isBlockedLeft {
             character.turnRight()
         }
     }
+    character.moveForward()
+    if character.isOnGem {
+        character.collectGem()
+        gemCounter += 1
+    }
 }
-turnLock(up: true, numberOfTimes: 4)
-expert.turnLeft()
-turnLock(up: true, numberOfTimes: 4)
-expert.turnLeft()
-turnLock(up: true, numberOfTimes: 1)
-expert.turnLeft()
-turnLock(up: true, numberOfTimes: 1)
-beforeLife()
-turnLockUpAndNavigate()
+character.turnLeft()
+character.turnLeft()
+character.move(distance: 1)
 character.turnRight()
-character.turnRight()
+expert.turnLock(up: true, numberOfTimes: 3)
 character.moveForward()
+character.collectGem()
 character.turnLeft()
-character.move(distance: 2)
-character.turnLeft()
-character.move(distance: 2)
+expert.turnLeft()
+expert.turnLock(up: true, numberOfTimes: 3)
+expert.turnLeft()
+expert.turnLock(up: true, numberOfTimes: 3)
+character.move(distance: 4)
 character.collectGem()
