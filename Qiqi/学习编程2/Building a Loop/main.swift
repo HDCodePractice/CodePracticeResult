@@ -1,3 +1,4 @@
+let totalGems = randomNumberOfGems
 world.place(Block(), atColumn: 6, row: 3)
 world.place(Block(), atColumn: 6, row: 0)
 world.place(Block(), atColumn: 1, row: 0)
