@@ -300,6 +300,8 @@ show(reverse(98900))
 
 ### 022 Game2048/00 一行格子
 
+参考： https://en.wikipedia.org/wiki/2048_(video_game) 
+
 生成一行长度length的格子，每格里都为0（空格），使用gen24在随机的空格里放入一个2或4（随机）。写入gen24和initRow的内容。
 
 ```
@@ -323,8 +325,6 @@ for i in 1 ... length {
 
 
 ### 022 Game2048/01 生成随机的2
-
-参考： https://en.wikipedia.org/wiki/2048_(video_game) 
 
 使用  https://github.com/HDCodePractice/SwiftPracticeResult/blob/master/hd/022%20Game2048/00template.swift 
 
