@@ -298,7 +298,31 @@ show(reverse(98900))
 来源：https://leetcode-cn.com/problems/reverse-integer
 
 
-### 022 Game2048/00 生成随机的2
+### 022 Game2048/00 一行格子
+
+生成一行长度length的格子，每格里都为0（空格），使用gen24在随机的空格里放入一个2或4（随机）。
+
+```
+func gen24(_ row:[Int]) -> [Int] {
+    return [2,2,2,4]
+}
+
+func initRow(_ length : Int) -> [Int] {
+    return [0,0,0,0]
+}
+
+
+let length = 8
+var row : [Int] = initRow( length )
+show("\(row)")
+for i in 1 ... length {
+    row = gen24(row)
+    show("\(row)")
+}
+```
+
+
+### 022 Game2048/01 生成随机的2
 
 参考： https://en.wikipedia.org/wiki/2048_(video_game) 
 
@@ -308,7 +332,7 @@ show(reverse(98900))
 
 这是 @sunnypo 贡献的题目
 
-### 022 Game2048/01 滑动
+### 022 Game2048/02 滑动
 
 我们为`w上s下a左d右`加入滑动的结果，也就是按了相应的按键以后向指定的方向把有相同数字的内容进行相加，并合并到对应的单元格里去。输入`w`将数字向上合并，例如
 
