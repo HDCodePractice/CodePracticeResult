@@ -4,8 +4,4 @@ let s = """
 黄河入海流
 白日依山尽
 """
-
-show("\(Array(s)[18 ... 22])")
-show("\(Array(s)[12 ... 16])")
-show("\(Array(s)[6 ... 10])")
-show("\(Array(s)[0 ... 4])")
+show(" \(String(Array(s)[18 ... 22]))\n \(String(Array(s)[12 ... 16]))\n \(String(Array(s)[6 ... 10]))\n \(String(Array(s)[0 ... 4]))")
