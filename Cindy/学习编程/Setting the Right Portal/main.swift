@@ -1,7 +1,7 @@
 bluePortal.isActive = false
 pinkPortal.isActive = false
 var gemCounter = 0
-while !isBlocked && gemCounter < 4{
+while gemCounter < 4{
     moveForward()
     if isBlocked{
         turnLeft()
