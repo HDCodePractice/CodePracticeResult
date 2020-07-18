@@ -4,6 +4,7 @@ let s = """
 入海流黄河
 依山尽白日
 """
+
 var final: [String] = []
 var finale = ""
 let a = s.split(separator: "\n")
@@ -11,7 +12,6 @@ let b = a.count-1
 for i in 0 ... b {
     final.append(String(a[b-i]))
 }
-show("\(final)")
 for i in 0...final.count-1 {
     if i < final.count-1 {
         finale.append(String(final[i].suffix(2)))
