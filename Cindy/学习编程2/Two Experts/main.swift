@@ -1,8 +1,13 @@
 let expert = Expert()
-let character = Character()
-world.place(expert, facing: north, atColumn: 0, row:0)
-character.collectGem()
-for i in 1 ... 6 {
+for i in 0 ... 7{
     world.place(expert,atColumn: i, row: 4)
-    expert.collectGem()
+    if expert.isOnGem {
+        expert.collectGem()
+    }
+}
+for i in 0 ... 6 {
+    world.place(expert, atColumn: i, row: 0)
+    if expert.isOnGem {
+        expert.collectGem()
+    }
 }
