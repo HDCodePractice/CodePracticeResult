@@ -1,7 +1,7 @@
 func trans(_ number: Int) -> String{
-    var tran0to100 = [
+    var tran0to99 = [
         ["Zero","One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty"],
-        ["","-One", "-Two", "-Three", "-Four", "-Five", "-Six", "-Seven", "-Eight", "-Nine", "-Ten", "-Eleven", "-Twelve", "-Thirteen", "-Fourteen", "-Fifteen", "-Sixteen", "-Seventeen", "-Eighteen", "-Nineteen", "-Twenty"],
+        ["","-One", "-Two", "-Three", "-Four", "-Five", "-Six", "-Seven", "-Eight", "-Nine"],
         ["Twenty"],
         ["Thirty"],
         ["Forty"],
@@ -12,9 +12,9 @@ func trans(_ number: Int) -> String{
         ["Ninety"]]
     
     if number < 20{
-        return "\(tran0to100[0][number]) Dollars"
+        return "\(tran0to99[0][number]) Dollars"
     }else{
-        return "\(tran0to100[Int(number / 10) ][0])\(tran0to100[1][number % 10]) Dollars"
+        return "\(tran0to99[Int(number / 10) ][0])\(tran0to99[1][number % 10]) Dollars"
     }
 }
 
