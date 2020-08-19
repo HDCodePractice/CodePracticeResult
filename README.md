@@ -34,7 +34,7 @@ Swift代码练习参考，在这里，请每位同学将自己的练习结果放
 
 > 当有小数点时，小数点写为 and ，小数点后的会写为 xxx Cents
 
-> 举例： 175.25美元 one hundred seventy five dollars and twenty-five cents
+> 举例： 175.25美元 one hundred seventy-five dollars and twenty-five cents
 
 判断、循环、函数、数字和字符串处理练习。也许可以试试递归
 
