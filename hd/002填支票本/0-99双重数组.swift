@@ -12,7 +12,7 @@ func trans(_ number: Int) -> String{
         ["Ninety"]]
     
     if number < 20{
-        return "\(tran0to100[0][number % 10]) Dollars"
+        return "\(tran0to100[0][number]) Dollars"
     }else{
         return "\(tran0to100[Int(number / 10) ][0])\(tran0to100[1][number % 10]) Dollars"
     }
