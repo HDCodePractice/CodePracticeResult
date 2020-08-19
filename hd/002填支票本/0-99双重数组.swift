@@ -1,6 +1,6 @@
 func trans(_ number: Int) -> String{
     var tran0to100 = [
-        ["","One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty"],
+        ["Zero","One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty"],
         ["","-One", "-Two", "-Three", "-Four", "-Five", "-Six", "-Seven", "-Eight", "-Nine", "-Ten", "-Eleven", "-Twelve", "-Thirteen", "-Fourteen", "-Fifteen", "-Sixteen", "-Seventeen", "-Eighteen", "-Nineteen", "-Twenty"],
         ["Twenty"],
         ["Thirty"],
