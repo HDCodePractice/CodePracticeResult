@@ -1,0 +1,68 @@
+func trans(_ number: Int) -> String{
+    var wordNumber = ""
+    //If it is 0:
+    if number == 0 {
+        wordNumber = "Zero"
+    }//If it is 1:
+    else if number == 1 {
+        wordNumber = "One"
+    }//If it is 2:
+    else if number == 2 {
+        wordNumber = "Two"
+    }//If it is 3
+    else if number == 3 {
+        wordNumber = "Three"
+    }//If it is 4
+    else if number == 4 {
+        wordNumber = "Four"
+    }//If it is 5
+    else if number == 5 {
+        wordNumber = "Five"
+    }//If it is 6
+    else if number == 6 {
+        wordNumber = "Six"
+    }//If it is 7
+    else if number == 7 {
+        wordNumber = "Seven"
+    }//If it is 8
+    else if number == 8 {
+        wordNumber = "Eight"
+    }//If it is 9
+    else if number == 9 {
+        wordNumber = "Nine"
+    }//If it is 10
+    else if number == 10 {
+        wordNumber = "Ten"
+    }//If it is 11
+    else if number == 11 {
+        wordNumber = "Eleven"
+    }//If it is 12:
+    else if number == 12 {
+        wordNumber = "Twelve"
+    }//If it is 13
+    else if number == 13 {
+        wordNumber = "Thirteen"
+    }//If it is 14
+    else if number == 14 {
+        wordNumber = "Fourteen"
+    }//If it is 15
+    else if number == 15 {
+        wordNumber = "Fifteen"
+    }//If it is 16
+    else if number == 16 {
+        wordNumber = "Sixteen"
+    }//If it is 17
+    else if number == 17 {
+        wordNumber = "Seventeen"
+    }//If it is 18
+    else if number == 18 {
+        wordNumber = "Eighteen"
+    }//If it is 19
+    else if number == 19 {
+        wordNumber = "Nineteen"
+    }
+    return wordNumber
+}
+for i in 0 ... 19 {
+    show("\(i) : \(trans(i))")
+}
