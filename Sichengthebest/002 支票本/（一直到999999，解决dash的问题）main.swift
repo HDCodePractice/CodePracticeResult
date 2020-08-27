@@ -71,7 +71,7 @@ func translator(_ number: Int) -> String {
             }
             english.append("\(nbs0To19[unitDigit])")
         }
-    } else if number > 1000000 && number < 1 {
+    } else if number > 1000000 || number < 1 {
         english = "You have passed the calculator's maximum capacity. Please insert another sum of money."
     }
     if number == 1 {
