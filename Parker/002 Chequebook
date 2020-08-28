@@ -1,0 +1,7 @@
+var Numbers: [String] = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"]
+
+func numberToWordForm(_ number: Int) -> String {
+    return Numbers[(number - 1)] 
+}
+
+show (numberToWordForm(6))
