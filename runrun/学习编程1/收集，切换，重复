@@ -1,0 +1,21 @@
+func groupdiamentetmachine() {
+    moveForward()
+    collectGem()
+    moveForward()
+    toggleSwitch()
+    
+    }
+    
+   groupdiamentetmachine()
+moveForward()
+turnLeft()
+groupdiamentetmachine()
+moveForward()
+moveForward()
+turnLeft()
+groupdiamentetmachine()
+moveForward()
+turnLeft()
+groupdiamentetmachine()
+ 
+    
