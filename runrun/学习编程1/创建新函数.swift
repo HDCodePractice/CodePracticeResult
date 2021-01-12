@@ -1,8 +1,8 @@
-func turnRight
-turnLeft()
-turnLeft()
-turnLeft()
-    
+func turnRight(){
+    turnLeft()
+    turnLeft()
+    turnLeft()
+}
     
 moveForward()
 turnLeft()
@@ -16,17 +16,3 @@ moveForward()
 turnLeft()
 moveForward()
 toggleSwitch()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
