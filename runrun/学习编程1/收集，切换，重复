@@ -3,10 +3,9 @@ func groupdiamentetmachine() {
     collectGem()
     moveForward()
     toggleSwitch()
-    
     }
     
-   groupdiamentetmachine()
+groupdiamentetmachine()
 moveForward()
 turnLeft()
 groupdiamentetmachine()
