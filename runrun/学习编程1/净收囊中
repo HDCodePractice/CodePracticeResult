@@ -1,5 +1,5 @@
-   func  diament()} 
-   moveForward()
+   func  diament(){
+    moveForward()
     collectGem()
     moveForward()
     collectGem()
