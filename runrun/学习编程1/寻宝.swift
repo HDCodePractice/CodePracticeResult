@@ -21,8 +21,8 @@ func goandtoggle() {
     turnRight()
     moveForward()
     moveForward()
-    
-  }
+    }
+
   turnRight()
 goandtoggle()
 goandtoggle()
