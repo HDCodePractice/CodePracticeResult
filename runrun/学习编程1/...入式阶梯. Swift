@@ -1,0 +1,32 @@
+func collectGemTurnAround() {
+    moveForward()
+    moveForward()
+    collectGem()
+    turnLeft()
+    turnLeft()
+    moveForward()
+    moveForward()
+    }
+    
+ func solveRow() {
+ collectGemTurnAround()
+ }
+ 
+turnRight()
+moveForward()
+turnRight()
+collectGemTurnAround()
+collectGemTurnAround()
+turnLeft()
+moveForward()
+turnLeft()
+collectGemTurnAround()
+collectGemTurnAround()
+turnLeft()
+moveForward()
+moveForward()
+turnRight()
+collectGemTurnAround()
+collectGemTurnAround()
+ 
+    
