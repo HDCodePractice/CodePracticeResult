@@ -1,31 +1,31 @@
-func goandtoggle() {
+func go() {
     moveForward()
     moveForward()
     toggleSwitch()
-    moveForward()
-    moveForward()
-    toggleSwitch()
+} 
+func again() {
     turnRight()
     turnRight()
     moveForward()
     moveForward()
     moveForward()
     moveForward()
-    }
-    
-    func gojustonceandtoggle(){
-    moveForward()
-    moveForward()
-    toggleSwitch()
-    turnRight()
-    turnRight()
-    moveForward()
-    moveForward()
-    }
-
-  turnRight()
-goandtoggle()
-goandtoggle()
+}
+turnLeft()
+go()
+go()
+again()
+go()
+go()
+again()
 turnRight()
-gojustonceandtoggle()
-gojustonceandtoggle()
+go()
+again()
+toggleSwitch()
+
+
+
+    
+    
+
+
