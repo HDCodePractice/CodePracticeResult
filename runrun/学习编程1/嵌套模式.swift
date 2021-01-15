@@ -1,6 +1,6 @@
 func turnAround() {
-turnLeft()
-turnLeft()
+    turnLeft()
+    turnLeft()
 }
 
 func solvStair() {
@@ -9,7 +9,7 @@ func solvStair() {
     turnRight()
     turnRight()
     moveForward()
-  } 
+} 
    
 solveStair()
 turnRight()
