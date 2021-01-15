@@ -18,5 +18,3 @@ solveStair()
 turnLeft()
 solveStair()
 turnLeft()
-
-
