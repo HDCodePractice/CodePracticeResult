@@ -1,12 +1,12 @@
-   func  diament(){
-    moveForward()
-    collectGem()
-    moveForward()
-    collectGem()
-    turnRight()
-   } 
+func  diament(){
+   moveForward()
+   collectGem()
+   moveForward()
+   collectGem()
+   turnRight()
+} 
     
- diament()
+diament()
 diament()
 diament()
 diament()
