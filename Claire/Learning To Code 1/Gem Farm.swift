@@ -1,11 +1,11 @@
-func pattern() {
+for i in 1 ... 3 {
     turnRight()
     moveForward()
     collectGem()
     moveForward()
     collectGem()
-    turnLeft()
-    turnLeft()
+    turnRight()
+    turnRight()
     moveForward()
     moveForward()
     moveForward()
@@ -18,7 +18,4 @@ func pattern() {
     moveForward()
     turnLeft()
     moveForward()
-}
-for i in 1 ... 3 {
-    pattern()
 }
