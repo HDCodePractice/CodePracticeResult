@@ -6,3 +6,4 @@ if isOnGem {
  }else if isOnClosedSwitch {
   ToggleSwitch()
 }
+}
