@@ -1,8 +1,9 @@
 func collectOrToggle() {
-if isOnClosedSwitch {
-   toggleSwitch()
-}else if isOnGem {
- collectGem()
+   if isOnClosedSwitch {
+      toggleSwitch()
+   }else if isOnGem {
+    collectGem()
+   }
 }
 
 func go() {
