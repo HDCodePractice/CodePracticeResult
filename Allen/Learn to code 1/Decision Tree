@@ -1,0 +1,34 @@
+func threemove() {
+    turnRight()
+    moveForward()
+    moveForward()
+    moveForward()
+}
+func step() {
+    turnLeft()
+    moveForward()
+    collectGem()
+    turnLeft()
+    turnLeft()
+    moveForward()
+}
+func left() {
+    step()
+    turnLeft()
+}
+func right() {
+    threemove()
+    step()
+    threemove()
+    turnRight()
+}
+for i in 1 ... 5 {
+    moveForward()
+    if isOnGem {
+        right()
+        collectGem()
+    }else if isOnClosedSwitch {
+        left()
+        toggleSwitch()
+    }
+}
