@@ -9,7 +9,6 @@ while gemCounter != 4 {
     } else if gemCounter == 3 {
         bluePortal.isActive = false
     }
-    moveForward()
     if isOnGem {
         collectGem()
         gemCounter += 1
