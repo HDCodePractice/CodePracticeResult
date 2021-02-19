@@ -14,9 +14,7 @@ while movecounter < 16 {
         turnLeft()
         turnLeft()
     }
-    if isOnGem {
-        collectGem()
-    }
+    collectGem()
     moveForward()
     movecounter += 1 
 }
