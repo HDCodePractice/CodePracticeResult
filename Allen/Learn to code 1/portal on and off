@@ -1,26 +1,17 @@
+purplePortal.isActive = false
 var gem = 0
-var sw = 0
-while sw != 1 || gem != 7 {
-    if isOnGem {
-        collectGem()
-        gem += 1
-    }else if isOnClosedSwitch {
-        toggleSwitch()
-        sw += 1
-    }else if gem < 4 {
-        purplePortal.isActive = false
-    }else {
+while !isBlocked && gem < 1 {
+    moveForward()
+    if isBlocked {
+        turnLeft()
+        turnLeft()
         purplePortal.isActive = true
     }
-    if sw == 1 {
-        purplePortal.isActive = false
-    }
-    if isBlocked && isBlockedRight {
-        turnLeft()
-    }else if isBlockedRight {
-        moveForward()
-    }else {
-        turnRight()
-        moveForward()
-    }
+    if isOnClosedSwitch {
+        toggleSwitch()
+        gem += 1 
+    }else if isOnGem {
+        collectGem()
+        purplePortal.isActive = false 
+    } 
 }
