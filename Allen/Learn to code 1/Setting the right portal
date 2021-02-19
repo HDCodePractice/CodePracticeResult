@@ -1,5 +1,5 @@
 var movecounter = 0
-while movecounter < 16 {
+while movecounter < 15 {
     if movecounter == 4 || movecounter == 10 {
         bluePortal.isActive = true
     }else if movecounter == 0 || movecounter == 5 || movecounter == 12 {
