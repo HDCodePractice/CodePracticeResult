@@ -1,0 +1,20 @@
+var movecounter = 0
+while movecounter < 16 {
+    if movecounter == 4 || movecounter == 10 {
+        bluePortal.isActive = true
+    }else if movecounter == 0 || movecounter == 5 || movecounter == 12 {
+        bluePortal.isActive = false
+    }
+    if movecounter == 0 {
+        pinkPortal.isActive = false
+    }else if movecounter == 13 {
+        pinkPortal.isActive = true
+    }
+    if isBlocked {
+        turnLeft()
+        turnLeft()
+    }
+    collectGem()
+    moveForward()
+    movecounter += 1 
+}
