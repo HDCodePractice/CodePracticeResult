@@ -1,0 +1,28 @@
+greenPortal.isActive = false
+orangePortal.isActive = false
+var gemCount = 0
+var switchCount = 0
+
+while (gemCount < 6 || switchCount < 6 ){
+    if gemCount  == 6 {
+        greenPortal.isActive = true
+    }
+    if switchCount > 2 && gemCount == 6 {
+        greenPortal.isActive = false
+    }
+    if isOnGem{
+        collectGem()
+        gemCount += 1
+    }else if isOnClosedSwitch{
+        toggleSwitch()
+        switchCount += 1
+    }
+    if isBlockedRight && isBlocked{
+        turnLeft()
+    }  else if isBlockedRight {
+        moveForward()
+    }else  {
+        turnRight()
+        moveForward()
+    }
+}
