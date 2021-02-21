@@ -1,6 +1,6 @@
 let number = Int.random(in: 0 ... 99)
 var inputNumber = askForNumber("来试试？")
-var inputcounter = 0
+var inputcounter = 1
 while number != inputNumber {
  if number < inputNumber {
         show("Too Big")
