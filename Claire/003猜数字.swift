@@ -1,5 +1,5 @@
 var rNumber = Int.random(in: 0 ... 99)
-var input = askForNumber("选一个三位数？")
+var input = askForNumber("选一个两位数？")
 var time = 1
 while rNumber != input {
     if rNumber < input {
