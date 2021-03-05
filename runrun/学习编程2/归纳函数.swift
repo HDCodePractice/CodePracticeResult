@@ -1,42 +1,41 @@
 let expert = Expert()
 let character = Character
-func turnLock(up: <#T##Bool#>, numberOfTimes: <#T##Int#>){
- expert.turnLockUp()
-    expert.turnLeft()
-    expert.turnLeft()
-    expert.turnLockUp()   
+func turnLock(up: Bool, numberOfTimes: Int){
+   for i in 1 ... numberOfTimes {
+        if up==true {
+            expert.turnLockUp()
+        }else{
+            expert.turnLockDown()
+        }
+    }
  }
- for i in 1 ... 3 {
-    turnLock(up: true, numberOfTimes: 1)
-}
-move()
-character.moveForward()
-character.collectGem()
-func go() {
-    expert.turnLockDown()
+func expertTurnAround() {
     expert.turnLeft()
     expert.turnLeft()
-    expert.turnLockDown()
 }
-func move() {
-    character.moveForward()
-    character.moveForward()
+func characterTurnAround() {
+    character.turnLeft()
+    character.turnLeft()
 }
 
-character.turnLeft()
-character.turnLeft()
-move()
+turnLock(up: true, numberOfTimes: 3)
+expertTurnAround()
+turnLock(up: true, numberOfTimes: 3)
+character.move(distance: 3)
+character.collectGem()
+characterTurnAround()
+character.moveForward()
+turnLock(up: false, numberOfTimes: 2)
+expertTurnAround()
+turnLock(up: false, numberOfTimes: 2)
 character.turnLeft()
 character.moveForward()
-character.turnRight()
-go()
-go()
-go()
+character.turnLeft()
 character.moveForward()
 character.collectGem()
-character.turnLeft()
-character.turnLeft()
-move()
-turnLock(up: true, numberOfTimes: 1)
+characterTurnAround()
+expertTurnAround()
+character.move(distance: 2)
+expert.turnLockDown()
 character.moveForward()
 character.collectGem()
