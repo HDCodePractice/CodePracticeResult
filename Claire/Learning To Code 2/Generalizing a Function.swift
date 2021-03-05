@@ -1,17 +1,14 @@
 let expert = Expert()
 let character = Character()
-
-func turnLock(up: Bool, numberOfTimes: Int) {
-    if up == true {
-        for i in 1 ... numberOfTimes {
+func turnLock(up: Bool, numberOfTimes: Int){
+   for i in 1 ... numberOfTimes {
+        if up==true {
             expert.turnLockUp()
-        }
-     } else if up == false {
-        for i in 1 ... numberOfTimes {
+        }else{
             expert.turnLockDown()
         }
     }
-}
+ }
 func expertTurnAround() {
     expert.turnLeft()
     expert.turnLeft()
@@ -19,8 +16,8 @@ func expertTurnAround() {
 func characterTurnAround() {
     character.turnLeft()
     character.turnLeft()
-    }
 }
+
 turnLock(up: true, numberOfTimes: 3)
 expertTurnAround()
 turnLock(up: true, numberOfTimes: 3)
