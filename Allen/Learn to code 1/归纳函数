@@ -1,0 +1,39 @@
+let expert = Expert()
+let character = Character()
+func turnLock(up:Bool,numberOfTimes:Int){
+for i in 1 ... numberOfTimes {
+        if up == true {
+            expert.turnLockUp()
+        }else if up == false {
+            expert.turnLockDown()
+        }
+    }
+}
+func te() {
+    expert.turnLeft()
+    expert.turnLeft()
+}
+func tc() {
+    character.turnLeft()
+    character.turnLeft()
+}
+turnLock(up: true, numberOfTimes: 3)
+te()
+turnLock(up: true, numberOfTimes: 3)
+character.move(distance: 3)
+character.collectGem()
+tc()
+character.move(distance: 1)
+character.turnLeft()
+character.moveForward()
+character.turnLeft()
+turnLock(up: false, numberOfTimes: 3)
+te()
+turnLock(up: false, numberOfTimes: 2)
+character.moveForward()
+tc()
+character.collectGem()
+character.moveForward()
+turnLock(up: false, numberOfTimes: 1)
+character.move(distance: 2)
+character.collectGem()
