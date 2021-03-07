@@ -20,8 +20,6 @@ while m<10||m<40{
     m+=1
     character.collectGem()
     if m==11 {
-        character.turnRight()
-        character.move(distance: 2)
         for i in 1 ... 4 {
             expert.turnLock(up: false, numberOfTimes: 3)
             expert.turnRight()
