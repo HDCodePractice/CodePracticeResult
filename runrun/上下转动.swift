@@ -5,7 +5,7 @@ for i in 1 ... 4 {
     expert.turnLock(up: true, numberOfTimes: 4)
     expert.turnRight()
 }
-while m<10||m<40{
+while m<40{
     if !character.isBlockedRight{
         character.turnRight()
     }else if character.isBlocked {
@@ -15,14 +15,13 @@ while m<10||m<40{
         }else {
             character.turnLeft()
         }
-    }
-    character.moveForward()
-    m+=1
-    character.collectGem()
-    if m==11 {
+    }else if m==11 {
         for i in 1 ... 4 {
             expert.turnLock(up: false, numberOfTimes: 3)
             expert.turnRight()
         }
     }
+    character.moveForward()
+    m+=1
+    character.collectGem()
 }
