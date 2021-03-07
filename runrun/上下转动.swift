@@ -1,27 +1,11 @@
 let expert = Expert()
 let characte = Character()
-var gemCount = 0
+var m = 0
 for i in 1 ... 4 {
     expert.turnLock(up: true, numberOfTimes: 4)
     expert.turnRight()
 }
-while gemCount<3{
-    if !character.isBlockedRight {
-        character.turnRight()
-    }
-    character.moveForward()
-    if character.isOnGem {
-        character.collectGem()
-        gemCount+=1
-    }
-}
-character.turnRight()
-character.move(distance: 2)
-for i in 1 ... 4 {
-    expert.turnLock(up: false, numberOfTimes: 3)
-    expert.turnRight()
-}
-while gemCount<7 {
+while m<10||m<40{
     if !character.isBlockedRight{
         character.turnRight()
     }else if character.isBlocked {
@@ -33,8 +17,14 @@ while gemCount<7 {
         }
     }
     character.moveForward()
-    if character.isOnGem {
-        character.collectGem()
-        gemCount+=1
+    m+=1
+    character.collectGem()
+    if m==11 {
+        character.turnRight()
+        character.move(distance: 2)
+        for i in 1 ... 4 {
+            expert.turnLock(up: false, numberOfTimes: 3)
+            expert.turnRight()
+        }
     }
 }
