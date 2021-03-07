@@ -1,5 +1,5 @@
 let expert=Expert()
- let character=Character()
+let character=Character()
 func go() {
     character.turnRight()
     character.move(distance: 2)
