@@ -1,6 +1,7 @@
 let expert = Expert()
+var gemCounter = 0
 world.place(expert, atColumn: 2, row: 6)
-func collectAndLock() {
+func turnAround() {
     expert.turnRight()
     expert.moveForward()
     expert.collectGem()
@@ -9,9 +10,6 @@ func collectAndLock() {
     expert.moveForward()
     expert.turnLockUp()
     expert.turnRight()
-}
-func turnAround() {
-    collectAndLock()
     expert.move(distance: 5)
 }
 turnAround()
