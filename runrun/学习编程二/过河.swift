@@ -1,20 +1,15 @@
 let expert = Expert()
-var gemCounter = 0
-world.place(expert, facing: .south, atColumn: 1, row: 8)
-while gemCounter<9 {
-    if expert.isOnGem {
+world.place(expert, atColumn: 1, row: 8)
+func moveDist(dist: Int ) {
+    for i in 1 ... dist {
         expert.collectGem()
-        gemCounter+=1
+        expert.moveForward()
     }
-    if expert.isBlocked {
-        if gemCounter<5 {
-            expert.turnLockDown()
-            expert.turnLeft()
-        }else{
-            expert.turnLockUp()
-            expert.turnRight()
-        }
-        
-    }
-    expert.moveForward()
 }
+moveDist(dist: 3)
+expert.turnLockDown()
+expert.turnLeft()
+moveDist(dist: 4)
+expert.turnLockUp()
+expert.turnRight()
+moveDist(dist: 5)
