@@ -1,18 +1,17 @@
 let expert = Expert()
-func check() {
-    while !expert.isBlocked {
+world.place(expert, atColumn: 1, row: 8)
+func moveMoreDistance(dist: Int) {
+    for i in 1 ... dist {
         if expert.isOnGem {
             expert.collectGem()
-        } else {
-            expert.moveForward()
         }
+        expert.moveForward()
     }
 }
-world.place(expert, atColumn: 1, row: 8)
-check()
+moveMoreDistance(dist: 3)
 expert.turnLockDown()
 expert.turnLeft()
-check()
+moveMoreDistance(dist: 4)
 expert.turnLockUp()
 expert.turnRight()
-check()
+moveMoreDistance(dist: 5)
