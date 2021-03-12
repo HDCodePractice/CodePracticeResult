@@ -1,16 +1,14 @@
 let expert = Expert()
 world.place(expert, atColumn: 2, row: 6)
-func zhowei() {
-    expert.turnLeft()
-    expert.turnLeft()
-}
 func zhoweisho() {
     expert.turnLeft()
     expert.turnLockUp()
-    zhowei()
+    expert.turnLeft()
+    expert.turnLeft()
     expert.moveForward()
     expert.collectGem()
-    zhowei()
+    expert.turnLeft()
+    expert.turnLeft()
     expert.moveForward()
     expert.turnRight()
 }
