@@ -1,5 +1,4 @@
 let expert = Expert()
-var gemCounter = 0
 world.place(expert, atColumn: 2, row: 6)
 func turnAround() {
     expert.turnRight()
