@@ -1,0 +1,8 @@
+let clair = Character()
+for i in 0 ... 4 {
+    for j in 0 ... 6 {
+        world.place(clair, atColumn:i, row: j)
+        clair.collectGem()
+        clair.toggleSwitch()
+    }
+}
