@@ -1,7 +1,21 @@
-let hd = Character()
-for i in 0 ... 6 {
-    for j in 0 ... 8 {
-        world.place(hd, atColumn:i, row: j)
-        hd.toggleSwitch()
-    }
-}
+let expert=Expert()
+world.place(expert, atColumn: 0, row: 6)
+expert.toggleSwitch()
+world.place(expert, atColumn: 0, row: 5)
+expert.toggleSwitch()
+world.place(expert, atColumn: 0, row: 4)
+expert.toggleSwitch()
+world.place(expert, atColumn: 6, row: 4)
+expert.toggleSwitch()
+world.place(expert, atColumn: 6, row: 5)
+expert.toggleSwitch()
+world.place(expert, atColumn: 6, row: 4)
+expert.toggleSwitch()
+world.place(expert, atColumn: 6, row: 6)
+expert.toggleSwitch()
+world.place(expert, atColumn: 4, row: 8)
+expert.toggleSwitch()
+world.place(expert, atColumn: 3, row: 8)
+expert.toggleSwitch()
+world.place(expert, atColumn: 2, row: 8)
+expert.toggleSwitch()
