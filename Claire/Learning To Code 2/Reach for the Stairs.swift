@@ -11,9 +11,9 @@ func moveAround() {
         turnLeft()
     } else if !isBlockedRight {
         turnRight()
-        moveAround()
+        moveForward()
     } else {
-        moveAround()
+        moveForward()
     }
 }
 var switchCounter = 0
