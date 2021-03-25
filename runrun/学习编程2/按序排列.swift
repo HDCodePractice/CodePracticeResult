@@ -4,14 +4,11 @@ portal(color: pink),
 Character(name: .hopper),
 Gem()
 ]
-var blockLocations = [
-    Coordinate(column: 0, row: 0),
-    Coordinate(column: 3, row: 3),
-    Coordinate(column: 3, row: 0),
-    Coordinate(column: 0, row: 3)
-]
-for coordinate in blockLocations {
-    for i in 1 ... 5 {
-        world.place(Block(), at: coordinate)
-    }
+characters.remove(at: 1)
+characters.remove(at: 2)
+characters.insert(Expert(), at: 1)
+var rowPlacement = 0
+for character in characters {
+    world.place(character, at: Coordinate(column: 1, row: rowPlacement))
+    rowPlacement += 1
 }
