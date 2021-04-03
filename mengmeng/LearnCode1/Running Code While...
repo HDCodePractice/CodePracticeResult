@@ -1,4 +1,0 @@
-while isOnClosedSwitch{
-    toggleSwitch()
-    moveForward()
-}
