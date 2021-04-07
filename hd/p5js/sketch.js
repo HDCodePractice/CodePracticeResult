@@ -14,4 +14,6 @@ function draw() {
   circle(240,160,30);
   circle(200,230,10);
   line(190,230,140,220);
+  noFill();
+  arc(300, 300, 80, 80, 0, PI + QUARTER_PI, OPEN);
 }
