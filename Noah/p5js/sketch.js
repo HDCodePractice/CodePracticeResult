@@ -1,9 +1,12 @@
 var img;
+var img2;
 
 function setup() {
   createCanvas(1280, 690);
   img = createImg('https://cdn.wallpapersafari.com/62/78/TrLPm7.jpg');
   img.hide();
+  img2 = createImg('https://lh3.googleusercontent.com/proxy/HxIUwF19uwxSDXVy4DVy5DRx5piL_IK0iEJmPSztkqm4y3MIqc0t_IWHlAkTqrIkiJnRYHQs_QCgHaicTSwbTqSWUi5mzk-Qoo6fByegnP5jbibHmgVBPU8YVNDbPRWSiJV5lTGL5Ju0c1yWL4pAanVTLrQE3zg');
+  img2.hide();
 }
 
 function draw() {
@@ -13,6 +16,7 @@ function draw() {
   rect(100,600,850,300)
   // ---------------------
   fill(28,161,251)
+  // stroke()
   triangle(400, 200, 615, 200, 515, 50);
   fill(169,173,176)
   rect(430,200,150,500)
@@ -21,7 +25,11 @@ function draw() {
   fill(5,5,5)
   circle(507,300,100)
   fill(241,238,237)
-  text(hour() + ':' + minute(),490,300)
+  if (minute() < 10) {
+    text(hour() + ':0' + minute(),490,300)
+  } else {
+    text(hour() + ':' + minute(),490,300)
+  }
   // ---------------------
   fill(168,86,20)
   ellipse(255, 660, 100, 200);
@@ -58,9 +66,6 @@ function draw() {
   rect(910,550,75,140)
   fill(5,5,5)
   rect(930,580,35,50,5)
-} 
-
-
-
-  
-
+  // ---------------------
+  image(img2,430,550,120,160)
+}
