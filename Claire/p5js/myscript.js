@@ -8,12 +8,12 @@ function setup() {
         circle(50*i,50,30);
       }
     for (let j = 1; j < 6; j++) {
-        circle(50*j,250,30)
+        circle(50*j,250,30);
     }
     for (let i = 50; i < 250; i+=50) {
-        circle(50,i,30)
+        circle(50,i,30);
     }
     for (let i = 100; i < 250; i+=50) {
-        circle(250,i,30)
+        circle(250,i,30);
     }
   }  
