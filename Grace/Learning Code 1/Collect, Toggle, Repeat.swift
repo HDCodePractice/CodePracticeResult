@@ -1,0 +1,15 @@
+func pattern() {
+moveForward()
+collectGem()
+moveForward()
+toggleSwitch()
+moveForward()
+}
+pattern()
+turnLeft()
+pattern()
+moveForward()
+turnLeft()
+pattern()
+turnLeft()
+pattern()
