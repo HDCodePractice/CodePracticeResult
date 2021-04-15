@@ -16,7 +16,7 @@ function setup() {
     for(let i = 1; i < 6; i++){
         circle(50*i,250,30);
     }
-    
+   
   }
 
   
