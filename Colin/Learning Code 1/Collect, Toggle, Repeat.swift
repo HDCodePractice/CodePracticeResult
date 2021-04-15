@@ -1,4 +1,4 @@
-func gmeSwitch() {
+func gemSwitch() {
   collectGem()
   moveForward()
   toggleSwitch()
