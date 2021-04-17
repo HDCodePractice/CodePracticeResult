@@ -43,7 +43,7 @@ function setup() {
     circle(85,40,10)
     fill(255,255,255)
     arc(75,85,20,20,PI,QUARTER_PI,CHORD)
-        
+    
     }
         
 
