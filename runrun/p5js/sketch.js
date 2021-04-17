@@ -1,18 +1,24 @@
 function setup() {
   createCanvas(windowHeight-100,windowHeight-100);
+  frameRate(10);
 }
+
 function draw() {
   background(220);
+
+  let clownX = random(0,width);
+  let clownY =  random(0,height);
+  let clownSize = random(0,width) ;
   fill(247,215,191); 
-  circle(width/2,height/2,width);
+  circle(clownX,clownY,clownSize);
   fill(32,64,132)
-  ellipse(width*1/4,height*1/4,width/5);
-  ellipse(width*3/4,height*1/4,width/5);
-  fill(255,0,0)
-  circle(width*2/4,height*2/4,width/3);
-  fill(233,157,180)
-  circle(width*0.5/4,height*2/4,width/6)
-  circle(width*3.5/4,height*2/4,width/6)
+  ellipse(clownX-clownSize/4,clownY-clownSize/4,clownSize/5);
+  ellipse(clownX+clownSize/4,clownY-clownSize/4,clownSize/5);
+  fill(255,0,0);
+  circle(clownX,clownY,clownSize/3);
+  fill(233,157,180);
+  circle(clownX-clownSize/3,clownY,clownSize/5);
+  circle(clownX+clownSize/3,clownY,clownSize/5);
 }
 function windowResized() {
   setup();
