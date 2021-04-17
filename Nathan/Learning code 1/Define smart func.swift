@@ -1,5 +1,5 @@
 func collectOrToggle() {
-  for i in 1 ... 2 {c
+  for i in 1 ... 2 {
         moveForward()
         moveForward()
         if isOnGem {
