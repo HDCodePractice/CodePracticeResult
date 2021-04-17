@@ -1,3 +1,7 @@
+var width;
+var height;
+var img;
+
 function setup() {
     // 正常操作的时候 width = windowWidth 和 height = windowHeight
     // 可以把 width 和 height 的值改成不同大小的屏幕测试
