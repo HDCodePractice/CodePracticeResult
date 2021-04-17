@@ -1,4 +1,4 @@
-for i in 1 ... 4 {
+for i in 1 ... 3 {
     moveForward()
     collectGem()
     moveForward()
@@ -6,3 +6,5 @@ for i in 1 ... 4 {
     moveForward()
     turnRight()
 }
+moveForward()
+collectGem()
