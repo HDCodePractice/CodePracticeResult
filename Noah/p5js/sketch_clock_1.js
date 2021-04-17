@@ -1,8 +1,16 @@
+var width;
+var height;
 var img;
 var img2;
 
 function setup() {
-  createCanvas(1280, 690);
+  // 正常操作的时候 width = windowWidth 和 height = windowHeight
+  // 可以把 width 和 height 的值改成不同大小的屏幕测试
+
+  width = windowWidth
+  height = windowHeight
+    
+  createCanvas(width, height);
   img = createImg('https://cdn.wallpapersafari.com/62/78/TrLPm7.jpg');
   img.hide();
   img2 = createImg('https://lh3.googleusercontent.com/proxy/HxIUwF19uwxSDXVy4DVy5DRx5piL_IK0iEJmPSztkqm4y3MIqc0t_IWHlAkTqrIkiJnRYHQs_QCgHaicTSwbTqSWUi5mzk-Qoo6fByegnP5jbibHmgVBPU8YVNDbPRWSiJV5lTGL5Ju0c1yWL4pAanVTLrQE3zg');
@@ -11,24 +19,24 @@ function setup() {
 
 function draw() {
   background(90,193,253);
-  image(img,0,0,width,height)
+  image(img,0,0)
   fill(169,173,176)
   rect(100,600,850,300)
   // ---------------------
   fill(28,161,251)
   // stroke()
-  triangle(400, 200, 615, 200, 515, 50);
+  triangle(width/2-100, 200, width/2+100, 200, width/2, 50);
   fill(169,173,176)
-  rect(430,200,150,500)
+  rect(width/2-75,200,150,500)
   fill(168,86,20)
-  circle(507,300,110)
+  circle(width/2,300,110)
   fill(5,5,5)
-  circle(507,300,100)
+  circle(width/2,300,100)
   fill(241,238,237)
   if (minute() < 10) {
-    text(hour() + ':0' + minute(),490,300)
+    text(hour() + ':0' + minute(),width/2-5,300)
   } else {
-    text(hour() + ':' + minute(),490,300)
+    text(hour() + ':' + minute(),width/2-5,300)
   }
   // ---------------------
   fill(168,86,20)

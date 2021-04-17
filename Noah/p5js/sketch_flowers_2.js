@@ -1,8 +1,5 @@
-
-
 var width;
 var height;
-
 var img;
 
 function setup() {
@@ -25,38 +22,20 @@ function draw() {
     image(img,0,0,width,height)
     
     Petals: {
-        
+        fill(135,40,158)
+
         // 左上角的花瓣
-        fill(243,13,26)
         ellipse(width/4,1*(height/4),width/2,height/2)
     
-        // 左边的花瓣
-        fill(248,86,30)
-        ellipse(width/4,height/2,width/2,height/4)
-        
         // 左下角的花瓣
-        fill(253,200,46)
         ellipse(width/4,3*(height/4),width/2,height/2)
-    
-        // 下面的花瓣
-        fill(103,205,37)
-        ellipse(width/2,3*(height/4),width/4,height/2)
 
         // 右下角的花瓣
-        fill(91,194,226)
         ellipse(3*(width/4),3*(height/4),width/2,height/2)
     
-        // 右边的花瓣
-        fill(35,68,157)
-        ellipse(3*(width/4),height/2,width/2,height/4)
-
         // 右上角的花瓣
-        fill(135,40,158)
         ellipse(3*(width/4),height/4,width/2,height/2)
         
-        // 上面的花瓣
-        fill(244,88,174)
-        ellipse(width/2,height/4,width/4,height/2) 
     }
     
     Stamen: {
