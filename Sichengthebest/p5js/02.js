@@ -11,7 +11,7 @@ function setup() {
 
     height = windowHeight
     width = windowWidth
-    createCanvas(height,width);
+    createCanvas(width,height);
 
     // 图片背景
     img = createImg('https://images.unsplash.com/photo-1490750967868-88aa4486c946?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')
