@@ -1,7 +1,4 @@
 function setup() {
-    // 正常操作的时候 width = windowWidth 和 height = windowHeight
-    // 可以把 width 和 height 的值改成不同大小的屏幕测试
-    
     r = random(1,255)
     g = random(1,255)
     b = random(1,255)
