@@ -5,3 +5,4 @@ for i in ... 12 {
     } else if isOnClosedSwitch {
         toggleSwitch()
     }
+}
