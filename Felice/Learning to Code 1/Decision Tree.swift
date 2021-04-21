@@ -1,39 +1,29 @@
-func first() {
-    turnRight()
-    for i in 1 ... 3 {
-        moveForward()
-    }
-    turnLeft()
-    moveForward()
-    collectGem()
-    turnRight()
+func turnMove() {
     turnRight()
     moveForward()
-    turnRight()
-    for i in 1 ... 3 {
-        moveForward()
-    }
-    turnRight()
+    moveForward()
+    moveForward()
 }
-
-func second() {
-    turnLeft()
+func pattern() {
     moveForward()
     collectGem()
-    turnRight()
-    turnRight()
-    moveForward()
     turnLeft()
-} 
-
+    turnLeft()
+    moveForward()
+}
 for i in 1 ... 6 {
+    moveForward()
     if isOnGem {
         collectGem()
-        first()
-    }
-    if isOnClosedSwitch {
+        turnMove()
+        turnLeft()
+        pattern()
+        turnMove()
+        turnRight()
+    } else if isOnClosedSwitch {
         toggleSwitch()
-        second()
+        turnLeft()
+        pattern()
+        turnLeft()
     }
-    moveForward()
 }
