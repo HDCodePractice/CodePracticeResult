@@ -1,10 +1,14 @@
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(windowWidth-100, windowHeight-100);
 }
 
 function draw() {
   background(220);
-  circle(width/3.333,height/4,width/4);
+    var pandaX=200;
+    var pandaY=200;
+    var pandaSize=200;
+    var pandaDistance = pandaSize/2
+  circle(pandaX-pandaDistance,height/4,width/4);
   // left ear (black)
   fill(30,30,30);
   // fill black
@@ -29,7 +33,7 @@ function draw() {
   // left tiny eye (black)
   fill(30,30,30);
   // fill black
-  circle(width/2,height/2,width/2);
+  circle(pandaX,pandaY,pandaSize);
   // face (white)
   fill(250,250,250);
   // fill white
