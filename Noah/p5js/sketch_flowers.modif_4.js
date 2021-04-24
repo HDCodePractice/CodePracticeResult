@@ -18,7 +18,6 @@ function setup() {
 }
 
 function draw() {
-    
     let flowerX = random(0,width);
     let flowerY = random(0,height);
     // let flowerRadius = random(25,150);
@@ -31,7 +30,7 @@ function draw() {
     
     // 显示图片
     image(img,0,0,width,height);
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < 10; i++) {
         Petals: {
             fill(135,40,158)
 
