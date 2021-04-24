@@ -16,8 +16,7 @@ function setup() {
     // circle(width/4,height*3/4,width/2);
     // fill(255,255,0);
     // circle(width/2,height/2,width/2);  
-  
-    fill(255,0,0);
+      fill(255,0,0);
     circle(flowerX-flowerDistance,flowerY-flowerDistance,flowerSize);
     circle(flowerX-flowerDistance,flowerY+flowerDistance,flowerSize);
     circle(flowerX+flowerDistance,flowerY+flowerDistance,flowerSize);
