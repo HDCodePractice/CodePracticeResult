@@ -1,6 +1,7 @@
 function setup() {
     createCanvas(windowHeight-100,windowHeight-100);
-    frameRate(1)
+    
+    
 }
   
   function draw() {   
@@ -9,6 +10,7 @@ function setup() {
    let beeSize = random(25,100)
    let beeDist = beeSize/2
    let beeColor =  random(0,255)
+   background(220)
    fill(0,0,0)
     triangle(beeX + beeSize,beeY + beeDist/2,beeX + beeSize + beeDist,beeY + beeDist,beeX + beeDist,beeY + beeDist)
     fill(255,255,0)
