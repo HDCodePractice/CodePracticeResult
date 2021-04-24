@@ -1,19 +1,23 @@
 function setup() {
-    createCanvas(400, 400);
+    createCanvas(400,400);
   }
   
   function draw() {
     background(220);
-    for (let i = 1; i < 6; i++) {
-        circle(50*i,50,30);
-      }
-    for (let j = 1; j < 6; j++) {
-        circle(50*j,250,30);
-    }
-    for (let i = 50; i < 250; i+=50) {
-        circle(50,i,30);
-    }
-    for (let i = 100; i < 250; i+=50) {
-        circle(250,i,30);
-    }
+    var pandaX=random(0,width);
+    var pandaY=random(0,height);
+    var pandaSize=random(5,200);
+    circle(pandaX,pandaY,pandaSize);
+    fill(30,30,30)
+    circle(pandaX-pandaSize*2/5,pandaY-pandaSize/2,pandaSize/2);
+    fill(30,30,30)
+    circle(pandaX+pandaSize*2/5,pandaY-pandaSize/2,pandaSize/2);
+    fill(30,30,30)
+    circle(pandaX,pandaY+pandaSize*1/10,pandaSize/8);
+    fill(30,30,30)
+    circle(pandaX-pandaSize/5,pandaY-pandaSize/8,pandaSize/4);
+    fill(255,255,255)
+    circle(pandaX-pandaSize/5,pandaY-pandaSize/8,pandaSize/8);
+    circle(pandaX+pandaSize/5,pandaY-pandaSize/8,pandaSize/4);
+    circle(pandaX+pandaSize/5,pandaY-pandaSize/8,pandaSize/8);
   }  
