@@ -1,31 +1,39 @@
 function setup() {
-  createCanvas(windowHeight-100,windowHeight-100);
-  
+  createCanvas(windowWidth,windowHeight-60);
+  frameRate(1);
 }
 
-function draw() {   
-  let beeX = random(0,width)
-  let beeY = random(0,height)
-  let beeSize = random(25,100)
-  let beeDist = beeSize/2;
-  let beeColor =  random(0,255)
+function draw() {
   background(220);
-  fill(0,0,0);
-  triangle(beeX + beeSize,beeY + beeDist/2,beeX + beeSize + beeDist,beeY + beeDist,beeX + beeDist,beeY + beeDist)
-  fill(255,255,0)
-  ellipse(beeX + beeDist + beeDist/2,beeY + beeDist*7/8,beeSize+beeDist/4,beeSize - beeDist*2/3)
-  circle(beeX + beeDist/2,beeY + beeDist/2,beeSize - beeDist/4)
-  fill(0,0,0)
-  line(beeX + beeDist*3/2,beeY + beeDist*1/5,beeX + beeDist + beeDist/2,beeY + beeDist + beeDist/2)
-  line(beeX + beeDist*2 + beeDist/4,beeY + beeDist/3,beeX + beeDist*2 + beeDist/4,beeY + beeDist + beeDist/3)
-  circle(beeX + beeDist/5,beeY + beeDist/5,beeSize - beeDist*2/1.23)
-  circle(beeX + beeDist/1.2,beeY + beeDist/5,beeSize - beeDist*2/1.23)
-  line(beeX + beeDist/1.1,beeY - beeDist/4,beeX + beeDist/1.1,beeY - beeDist/2)
-  line(beeX + beeDist/5,beeY - beeDist/4,beeX + beeDist/5,beeY - beeDist/2)
-  circle(beeX + beeDist/5,beeY - beeDist/1.5,beeSize - beeDist - beeDist/1.5);
-  circle(beeX + beeDist/1.1,beeY -  beeDist/1.5,beeSize - beeDist - beeDist/1.5);
-  fill(255,255,255);
-  arc(beeX + beeDist/2,beeY + beeDist/1.1,beeSize - beeDist - beeDist/4,beeSize - beeDist - beeDist/4,PI,QUARTER_PI,CHORD);
+  let flowerX = random(0,width);
+  let flowerY = random(0,height);
+  // let flowerRadius = random(25,150);
+  let flowerWidth = random(25,150);
+  let flowerHeight = random(25,150);
+  let flowerXDistance = flowerWidth/2;
+  let flowerYDistance = flowerHeight/2;
+
+  for (let i = 0; i < 10; i++) {
+    fill(135,40,158)
+    // // 左上角的花瓣
+    ellipse(flowerX-flowerXDistance,flowerY-flowerYDistance,flowerWidth,flowerHeight)
+    // // 左下角的花瓣
+    ellipse(flowerX-flowerXDistance,flowerY+flowerYDistance,flowerWidth,flowerHeight)
+    // // 右下角的花瓣
+    ellipse(flowerX+flowerXDistance,flowerY+flowerYDistance,flowerWidth,flowerHeight)
+    // // 右上角的花瓣
+    ellipse(flowerX+flowerXDistance,flowerY-flowerYDistance,flowerWidth,flowerHeight)
+    // 花蕊
+    fill(253,242,99)
+    ellipse(flowerX,flowerY,flowerWidth,flowerHeight);
+      
+    flowerX = random(0,width);
+    flowerY = random(0,height);
+    flowerWidth = random(25,150);
+    flowerHeight = random(25,150);
+    flowerXDistance = flowerWidth/2;
+    flowerYDistance = flowerHeight/2;
+  }  
 }
 
 function windowResized() {
