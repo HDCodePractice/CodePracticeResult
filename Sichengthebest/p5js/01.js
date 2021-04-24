@@ -5,7 +5,7 @@ function setup() {
 
 function draw() {
   background(220);
-  for (let houseX = 5; houseX <= width/2; houseX += random(10,50)) {
+  for (let houseX = 1; houseX <= width/2; houseX += 100) {
     let houseY = random(height/8,height/1.5);
     let houseHeight = random(height/8,height/6);
     let houseWidth = random(width/4,width/2);
