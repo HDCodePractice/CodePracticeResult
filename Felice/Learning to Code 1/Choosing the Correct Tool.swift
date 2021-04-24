@@ -6,5 +6,5 @@ func collectingGem() {
     turnRight()
 }
 while !isBlocked {
-    collectGem()
+    collectingGem()
 }
