@@ -3,3 +3,4 @@ while !isBlocked {
         toggleSwitch()
     }
     moveForward()
+}
