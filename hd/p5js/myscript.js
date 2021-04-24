@@ -1,15 +1,20 @@
+let circleY = 25;
+let circleX = 250;
+let speed = 5;
+
 function setup() {
     createCanvas(500, 500);
 }
   
 function draw() {
     background(220);
-    for (let i = 50; i < 500; i+=50){
-        circle(i,i,30); 
-        circle(500-i,i,30);
-        for (let j = 50; j < 500; j+=200){
-            circle(i,j,30); 
-            circle(j,i,30);        
-        }
+    circle(circleX,circleY,50); 
+    if (circleY > height - 30) {
+        speed = -5;
     }
+    if(circleY < 30){
+        speed = 5;
+    }
+    circleY += speed;
+    circleX += speed;
 }
