@@ -1,4 +1,4 @@
-for i in 1 ... 7 {
+for i in 1 ... 6 {
     moveForward()
     if isOnGem && isOnClosedSwitch {
         toggleSwitch()
@@ -12,10 +12,9 @@ for i in 1 ... 7 {
         moveForward()
         moveForward()
         turnRight()
-    } else if isOnOpenSwitch {
         moveForward()
-    } 
-    if isBlocked && isOnClosedSwitch {
+    }
+    if isOnClosedSwitch {
         toggleSwitch()
         turnLeft()
     } else if !isBlockedLeft {
