@@ -1,4 +1,4 @@
-func turnAndCollectGem() {
+func collectingGem() {
     moveForward()
     turnLeft()
     moveForward()
@@ -6,5 +6,5 @@ func turnAndCollectGem() {
     turnRight()
 }
 while !isBlocked {
-    turnAndCollectGem()
+    collectGem()
 }
