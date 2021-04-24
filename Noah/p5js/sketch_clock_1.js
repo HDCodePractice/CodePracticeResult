@@ -8,7 +8,7 @@ function setup() {
   // 可以把 width 和 height 的值改成不同大小的屏幕测试
 
   width = windowWidth
-  height = windowHeight
+  height = windowHeight - 50
     
   createCanvas(width, height);
   img = createImg('https://cdn.wallpapersafari.com/62/78/TrLPm7.jpg');
@@ -25,18 +25,18 @@ function draw() {
   // ---------------------
   fill(28,161,251)
   // stroke()
-  triangle(width/2-100, 200, width/2+100, 200, width/2, 50);
+  triangle(400, 200, 615, 200, 515, 50);
   fill(169,173,176)
-  rect(width/2-75,200,150,500)
+  rect(430,200,150,500)
   fill(168,86,20)
-  circle(width/2,300,110)
+  circle(507,300,110)
   fill(5,5,5)
-  circle(width/2,300,100)
+  circle(507,300,100)
   fill(241,238,237)
   if (minute() < 10) {
-    text(hour() + ':0' + minute(),width/2-5,300)
+    text(hour() + ':0' + minute(),490,300)
   } else {
-    text(hour() + ':' + minute(),width/2-5,300)
+    text(hour() + ':' + minute(),490,300)
   }
   // ---------------------
   fill(168,86,20)
