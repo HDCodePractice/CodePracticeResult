@@ -23,7 +23,7 @@ function draw() {
     
     image(img,0,0,windowWidth,windowHeight-50);
 
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < 10; i++) {
         fill(168,86,20)
         circle(flowerX,flowerY,flowerSize);
         fill(5,5,5);
