@@ -1,4 +1,4 @@
-func pattern() {
+func collectGemMove() {
     moveForward()
     while isOnGem {
         collectGem()
@@ -7,6 +7,6 @@ func pattern() {
     }
 }
 for i in 1 ... 4 {
-    pattern()
+    collectGemMove()
     turnRight()
 }
