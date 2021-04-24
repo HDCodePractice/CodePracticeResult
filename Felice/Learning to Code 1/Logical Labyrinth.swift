@@ -1,21 +1,21 @@
 for i in 1 ... 8 {
     moveForward()
-    if !isBlockedLeft {
+    if isOnGem && isOnClosedSwitch {
+        toggleSwitch()
+        collectGem()
+        turnRight()
+        moveForward()
+        moveForward()
+        collectGem()
+        turnLeft()
+        turnLeft()
+        moveForward()
+        moveForward()
+        turnRight()
+    } else if isOnClosedSwitch {
         toggleSwitch()
         turnLeft()
-    } else if isOnClosedSwitch && isOnGem {
-        toggleSwitch()
-        collectGem()
-        turnRight()
-        moveForward()
-        moveForward()
-        collectGem()
-        turnRight()
-        turnRight()
-        moveForward()
-        moveForward()
-        turnRight()        
     } else if isOnGem {
-        collectGem()       
-    } 
+        collectGem()
+    }
 }
