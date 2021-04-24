@@ -1,6 +1,6 @@
-for i in 1...13 {
+while !isBlocked {
     moveForward()
-    if isOnClosedSwitch {
+    if isOnClosedSwitch{
         toggleSwitch()
     }
 }
