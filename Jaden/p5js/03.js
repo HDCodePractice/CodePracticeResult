@@ -1,8 +1,8 @@
 function setup() {
     createCanvas(windowHeight-100,windowHeight-100);
+    frameRate(1);
     
-    
-}
+  }
   
   function draw() {   
    let beeX = random(0,width)
@@ -11,7 +11,8 @@ function setup() {
    let beeDist = beeSize/2
    let beeColor =  random(0,255)
    background(220)
-   fill(0,0,0)
+   for (let i = 0; i < 10; i++) {
+    fill(0,0,0)
     triangle(beeX + beeSize,beeY + beeDist/2,beeX + beeSize + beeDist,beeY + beeDist,beeX + beeDist,beeY + beeDist)
     fill(255,255,0)
     ellipse(beeX + beeDist + beeDist/2,beeY + beeDist*7/8,beeSize+beeDist/4,beeSize - beeDist*2/3)
@@ -27,8 +28,14 @@ function setup() {
     circle(beeX + beeDist/1.1,beeY -  beeDist/1.5,beeSize - beeDist - beeDist/1.5)
     fill(255,255,255)
     arc(beeX + beeDist/2,beeY + beeDist/1.1,beeSize - beeDist - beeDist/4,beeSize - beeDist - beeDist/4,PI,QUARTER_PI,CHORD)
-
+    beeX = random(0,width)
+    beeY = random(0,height)
+    beeSize = random(25,100)
+    beeDist = beeSize/2
+    beeColor =  random(0,255)
+   }
+   
   }
   function windowResized() {
     setup();
-}
+  }

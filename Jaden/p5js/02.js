@@ -13,7 +13,7 @@ function setup() {
     let flowerXDistance = flowerWidth/2;
     let flowerYDistance = flowerHeight/2;
   
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 100; i++) {
       fill(135,40,158)
       // // 左上角的花瓣
       ellipse(flowerX-flowerXDistance,flowerY-flowerYDistance,flowerWidth,flowerHeight)
