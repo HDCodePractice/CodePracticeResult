@@ -5,19 +5,25 @@ function setup() {
 
 function draw() {
   background(220);
-  for (let houseX = 1; houseX <= width/2; houseX += 100) {
-    let houseY = random(height/8,height/1.5);
-    let houseHeight = random(height/8,height/6);
-    let houseWidth = random(width/4,width/2);
-    fill(93,93,93);
-    // House
-    rect(houseX,houseY,houseWidth,houseHeight);
-    triangle(houseX,houseY,houseX+houseWidth,houseY,houseX+houseWidth/2,houseY-houseHeight)
-    fill(101,67,33)
-    // Door
-    rect(houseX+(houseWidth-40)/2,houseY+houseHeight/4.5,40,houseHeight/9*7)
-  }
-  let houseX = random(0,width/2);
+  let houseHeight = 170;
+  let houseY = windowHeight-235;
+  let houseWidth = 700;
+  let houseX = (windowWidth-houseWidth)/2
+  fill(93,93,93);
+  // House
+  rect(houseX,houseY,houseWidth,houseHeight);
+  triangle(houseX,houseY,houseX+houseWidth,houseY,houseX+houseWidth/2,houseY-houseHeight)
+  fill(101,67,33)
+  // Door
+  rect(houseX+(houseWidth-70)/2,houseY+houseHeight/4.5,70,houseHeight/9*7)
+  // Sun/Moon
+  fill(255,255,0)
+  k = windowHeight-60
+  speed = 1
+  x = 400
+  y = k/x
+  circle(x,y,50)
+  x += speed
 }
 
 function windowResized() {
