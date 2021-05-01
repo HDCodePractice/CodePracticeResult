@@ -1,36 +1,32 @@
-let circleY = 250;
-let circleX = 25;
-let speedX = 5;
-let speedY = 5;
+let circleY = 25;
+let circleX = 250;
+let speedY = 15;
+ let speedX = 15;
 
 function setup() {
     createCanvas(500, 500);
-    
+    background(220);
 }
+  
 function draw() {
     background(220);
-    if (circleX > width-26){
-        speedX = -5;
-    }else if (circleX < 26){
-        speedX = 5;
-    }
+    circle(circleX,circleY,50); 
+    if (circleY > height-30) {
+        speedX = -15;
+        speedY = -15;
+    }else if (circleX > width-30) {
+        speedX = 15;
+        speedY = -15;
+ 
+    }else if (circleX < 30){
+        speedX = -15;
+        speedY = 15;
 
-    if (speedX > 0){
-        if (circleX <width/2){
-            speedY = -1;
-        }else{
-            speedY = 1;
-        }    
-    }else{
-        if (circleX <width/2){
-            speedY = 1;
-        }else{
-            speedY = -1;
-        }
-    
-    }
-    circleX += speedX;
-    circleY += speedY;
-    circle(circleX, circleY,50);
-    
+    }else if (circleY < 30) {
+        speedX = 15
+        speedY = 15;
+    } 
+
+    circleY += speedX;
+    circleX += speedY;
 }
