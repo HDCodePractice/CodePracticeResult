@@ -1,20 +1,18 @@
-
-function setup() {
-  createCanvas(windowWidth, windowSize);
-  frameRate(1);
+function setup() {                           
+  createCanvas(windowWidth, windowHeight);
 }
 
 function draw() {
-  let flowerX = random(0, width);
-  let flowerY = random(0, height);
-  let flowerSize = random(25, 150);
-  let flowerDistance = flowerSize / 2;
-  background(0, 200, 0);
-  fill(255, 128, 0);
-  circle(flowerX - flowerDistance, flowerY - flowerDistance, flowerSize);
-  circle(flowerX + flowerDistance, flowerY - flowerDistance, flowerSize);
-  circle(flowerX - flowerDistance, flowerY + flowerDistance, flowerSize);
-  circle(flowerX + flowerDistance, flowerY + flowerDistance, flowerSize);
-  fill(255, 0, 0);
-  circle(flowerX, flowerY, flowerSize);
+  background(0, 143, 24);
+  fill(255, 166, 0);
+  ellipse(width/3,height/2,width/4,height/4);
+  ellipse((width/3)+(width/4),height/2,width/4,height/4);
+  ellipse(width/3,(height/2)+(height/4),width/4,height/4);
+  ellipse((width/3)+(width/4),(height/2)+(height/4),width/4,height/4);
+  fill(255,0,0);
+  ellipse((width/3)+(width/8),(height/2)+(height/8),width/4,height/4); 
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
