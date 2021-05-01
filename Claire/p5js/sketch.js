@@ -5,22 +5,21 @@ function setup() {
 function draw() {
   background(220);
     circle(circleX,circleY,50); 
-    if (circleY > height - 30) {
-        speed = -5;
-    }
-    if(circleY < 30) {
-      speed = 5;
-    }
-    if(circleX > width - 30) {
-      circleY += speed;
-      circleX -= speed;
-      speed = -5;
-    }
-    if(circleX < 30) {
-      speed = 5;
-    }
-    circleY += speed;
-    circleX += speed;
+    if (circleY > height-30) {
+        speedX = -15;
+        speedY = -15;
+    }else if (circleX > width-30) {
+        speedX = 15;
+        speedY = -15;
+    }else if (circleX < 30){
+        speedX = -15;
+        speedY = 15;
+    }else if (circleY < 30) {
+        speedX = 15
+        speedY = 15;
+    } 
+    circleY += speedX;
+    circleX += speedY;
   background(220);
   circle(200,200,200);
   fill(30,30,30)
