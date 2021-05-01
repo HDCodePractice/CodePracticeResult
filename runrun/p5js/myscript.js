@@ -1,14 +1,36 @@
-function draw() {
-    background(220);
-    for (let i = 50; i < 500; i+=50){
-        circle(i,i,30); 
-        circle(500-i,i,30);
-        for (let j = 50; j < 500; j+=200){
-            circle(i,j,30); 
-            circle(j,i,30);        
-        }
-    }
-}
+let circleY = 250;
+let circleX = 25;
+let speedX = 5;
+let speedY = 5;
+
 function setup() {
     createCanvas(500, 500);
+    
+}
+function draw() {
+    background(220);
+    if (circleX > width-26){
+        speedX = -5;
+    }else if (circleX < 26){
+        speedX = 5;
+    }
+
+    if (speedX > 0){
+        if (circleX <width/2){
+            speedY = -1;
+        }else{
+            speedY = 1;
+        }    
+    }else{
+        if (circleX <width/2){
+            speedY = 1;
+        }else{
+            speedY = -1;
+        }
+    
+    }
+    circleX += speedX;
+    circleY += speedY;
+    circle(circleX, circleY,50);
+    
 }
