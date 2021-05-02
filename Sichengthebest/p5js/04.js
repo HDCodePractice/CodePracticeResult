@@ -1,6 +1,6 @@
 let circleX = -15;
 let circleY = 250;
-let speed = 4;
+let speed = 5;
 let speedY = speed/3;
 let speedX = speed;
 let size = 1000
