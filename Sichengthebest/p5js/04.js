@@ -3,12 +3,12 @@ let circleY = 250;
 let speed = 5;
 let speedY = speed/3;
 let speedX = speed;
-let size = 1000
+let size = 1000;
 var day;
 
 function setup() {
     createCanvas(size, size);
-    day = true
+    day = true;
 }
   
 function draw() {
@@ -17,7 +17,7 @@ function draw() {
     } else {
         background('Grey')
     }
-    sunmoon(circleX,circleY,day)
+    sunmoon(circleX,circleY,day);
     let houseHeight = 170;
     let houseY = windowHeight-220;
     let houseWidth = width/4;
@@ -60,14 +60,14 @@ function sunmoon(circleX,circleY,day) {
 
 function house(houseHeight,houseY,houseX,houseWidth,day) {
     if (day) {
-        fill(100,100,100)
+        fill(100,100,100);
     } else {
-        fill(10,100,100)
+        fill(10,100,100);
     }
     // House
     rect(houseX,houseY,houseWidth,houseHeight);
-    triangle(houseX,houseY,houseX+houseWidth,houseY,houseX+houseWidth/2,houseY-houseHeight)
-    fill(101,67,33)
+    triangle(houseX,houseY,houseX+houseWidth,houseY,houseX+houseWidth/2,houseY-houseHeight);
+    fill(101,67,33);
     // Door
-    rect(houseX+(houseWidth-70)/2,houseY+houseHeight/4.5,70,houseHeight/9*7)
+    rect(houseX+(houseWidth-70)/2,houseY+houseHeight/4.5,70,houseHeight/9*7);
 }

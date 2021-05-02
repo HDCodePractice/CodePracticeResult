@@ -3,7 +3,7 @@ let circleY = 200;
 let speed = 5;
 let speedY = speed/3;
 let speedX = speed;
-let size = 500
+let size = 500;
 var day;
 
 function setup() {
@@ -15,9 +15,9 @@ function draw() {
     if (day) {   
         background('Cyan');
     } else {
-        background('Grey')
+        background('Grey');
     }
-    sunmoon(circleX,circleY,day)
+    sunmoon(circleX,circleY,day);
     let flowerX = width/2;
     let flowerY = height-height/5;
     let flowerWidth = width/5;
@@ -63,19 +63,19 @@ function sunmoon(circleX,circleY,day) {
 
 function flower(flowerX,flowerHeight,flowerWidth,flowerY,day) {
     if (day) {
-        fill(135,40,158)
+        fill(135,40,158);
     } else {
-        fill(144,5,6)
+        fill(144,5,6);
     }
     // // 左上角的花瓣
-    ellipse(flowerX-flowerHeight/2,flowerY-flowerWidth/2,flowerWidth,flowerHeight)
+    ellipse(flowerX-flowerHeight/2,flowerY-flowerWidth/2,flowerWidth,flowerHeight);
     // // 左下角的花瓣
-    ellipse(flowerX-flowerHeight/2,flowerY+flowerWidth/2,flowerWidth,flowerHeight)
+    ellipse(flowerX-flowerHeight/2,flowerY+flowerWidth/2,flowerWidth,flowerHeight);
     // // 右下角的花瓣
-    ellipse(flowerX+flowerHeight/2,flowerY+flowerWidth/2,flowerWidth,flowerHeight)
+    ellipse(flowerX+flowerHeight/2,flowerY+flowerWidth/2,flowerWidth,flowerHeight);
     // // 右上角的花瓣
-    ellipse(flowerX+flowerHeight/2,flowerY-flowerWidth/2,flowerWidth,flowerHeight)
+    ellipse(flowerX+flowerHeight/2,flowerY-flowerWidth/2,flowerWidth,flowerHeight);
     // 花蕊
-    fill(253,242,99)
+    fill(253,242,99);
     ellipse(flowerX,flowerY,flowerWidth,flowerHeight);
 }
