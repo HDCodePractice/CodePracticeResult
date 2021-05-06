@@ -1,30 +1,105 @@
-let circleY = 25;
-let circleX = 250;
-let speedX = 5;
-let speedY = 5;
+let size = 500;
+let circleX = 0
+let circleY = 100
 let speed = 5;
+let speedY = speed/3;
+let speedX = speed;
+let isNight = false;
+
 function setup() {
-    createCanvas(500, 500);
-    
+    createCanvas(size, size);
 }
   
 function draw() {
-    background(220);
-    circle(circleX,circleY,50);
-    if (circleY < 250 && circleY >= 25 && circleX >= 250 && circleX < 475) {
-        circleY += speed;
-        circleX += speed;
-
-    } else if (circleX <= 475 && circleX > 250 && circleY >= 250 && circleY < 475) {
-        circleY += speed;
-        circleX -= speed;
-    } else if (circleX <= 250 && circleX > 25 && circleY <= 475 && circleY > 250) {
-        circleY -= speed;
-        circleX -= speed;
-    } else if (circleX >= 25 && circleX < 250 && circleY <= 250 && circleY > 25) {
-        circleY -= speed;
-        circleX += speed;
+    background(220); 
+    speedX = speed
+    speedY = speed/3
+    if (circleX > width) {
+        circleX = 0
+        circleY =100
+        if (isNight){
+            isNight = false;
+        }else{
+            isNight = true;
+        }
+    }else if (circleX < 25){
+        speedX = speed;
+    }else if (circleX < width/2){
+        circleY -= speedY;
+    }else{
+        circleY += speedY;
     }
+    circleX += speedX;
+    if (isNight){
+        drawFlower(width/2,height-height/5,width/5,width/5,10,10,10,250,250,250)
+        drawFlower(width/10,height -height/10,width/10,width/10,10,10,10,250,250,250)
+        drawFlower(width-width/10,height-height/10,width/10,width/10,10,10,10,250,250,250)
+        sunMoon(circleX,circleY,'rgb(250,250,250)')
+     
+    }else{
+        drawFlower(width/2,height-height/5,width/5,width/5,50,80,250,241,203,2)
+        drawFlower(width/10,height -height/10,width/10,width/10,50,80,250,241,203,2)
+        drawFlower(width-width/10,height-height/10,width/10,width/10,50,80,250,241,203,2)
+        sunMoon(circleX,circleY,'rgb(241,203,2)')
+
+        
+
+    }
+}
+function sunMoon(x,y,color){
+    fill(color)
+    circle(x,y,50)
+    
+
+  
+}
+
+
+
+function drawFlower(flowerX,flowerY,flowerWidth,flowerHeight,firstColor,secondColor,thirdColor,color1,color2,color3){
+    let flowerXDistance = flowerWidth/2;
+    let flowerYDistance = flowerHeight/2;
+    fill(firstColor,secondColor,thirdColor)
+    ellipse(flowerX-flowerXDistance,flowerY-flowerYDistance,flowerWidth,flowerHeight)
+    // // 左下角的花瓣
+    ellipse(flowerX-flowerXDistance,flowerY+flowerYDistance,flowerWidth,flowerHeight)
+    // // 右下角的花瓣
+    ellipse(flowerX+flowerXDistance,flowerY+flowerYDistance,flowerWidth,flowerHeight)
+    // // 右上角的花瓣
+    ellipse(flowerX+flowerXDistance,flowerY-flowerYDistance,flowerWidth,flowerHeight)
+    // 花蕊
+    fill(color1,color2,color3)
+    ellipse(flowerX,flowerY,flowerWidth,flowerHeight);
+}  
+
+// function nightControl(){
+//     if (isNight){
+//         fill(250,250,250);
+//         drawFlower(width/2,height-height/5,width/5,width/5,10,10,10,250,250,250)
+//         drawFlower(width/10,height -height/10,width/10,width/10,10,10,10,250,250,250)
+//         drawFlower(width-width/10,height-height/10,width/10,width/10,10,10,10,250,250,250)
+//     }else{
+//         fill(241,203,2);
+//         drawFlower(width/2,height-height/5,width/5,width/5,50,80,250,241,203,2)
+//         drawFlower(width/10,height -height/10,width/10,width/10,50,80,250,241,203,2)
+//         drawFlower(width-width/10,height-height/10,width/10,width/10,50,80,250,241,203,2)
+//     }
+
+// circle(circleX,circleY,50);
+    // if (circleY < 250 && circleY >= 25 && circleX >= 250 && circleX < 475) {
+    //     circleY += speed;
+    //     circleX += speed;
+
+    // } else if (circleX <= 475 && circleX > 250 && circleY >= 250 && circleY < 475) {
+    //     circleY += speed;
+    //     circleX -= speed;
+    // } else if (circleX <= 250 && circleX > 25 && circleY <= 475 && circleY > 250) {
+    //     circleY -= speed;
+    //     circleX -= speed;
+    // } else if (circleX >= 25 && circleX < 250 && circleY <= 250 && circleY > 25) {
+    //     circleY -= speed;
+    //     circleX += speed;
+    // }
     
     // if (circleX > width-26){
     //     speedX = -5;
@@ -50,7 +125,7 @@ function draw() {
     // circleX += speedX;
     // circleY += speedY;
     // circle(circleX, circleY,50);
-}
+
 //     let x = 20;
 //     for (let i = 1; i < 8; i++) {
 //         circle(x,y,10)

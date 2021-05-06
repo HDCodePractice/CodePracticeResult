@@ -1,44 +1,136 @@
+let size = 500;
+let circleX = 0;
+let circleY = 100;
+let speed = 5;
+let speedY = speed/3;
+let speedX = speed;
+let isNight = false;
+
 function setup() {
-    createCanvas(windowWidth,windowHeight-60);
-    frameRate(1);
-  }
+    createCanvas(size, size);
+}
   
-  function draw() {
-    background(220);
-    let flowerX = random(0,width);
-    let flowerY = random(0,height);
-    // let flowerRadius = random(25,150);
-    let flowerWidth = random(25,150);
-    let flowerHeight = random(25,150);
+function draw() {
+    background(220); 
+    // // main(0,100,5)
+    // if (circleX > width) {
+    //     circleX = 0;
+    //     circleY = 100;
+    //     if (isNight){
+    //         isNight = false;
+    //     }else{
+    //         isNight = true;
+    //     }
+    // }else if (circleX < 25){
+    //     speedX = speed;
+    // }
+    // if (circleX < width/2){
+    //     circleY -= speedY;
+    // }else{
+    //     circleY += speedY;
+    // }
+    // circleX += speedX;
+    // circle(circleX,circleY,50);
+    drawFlower(width/2,height-height/5,width/5,width/5,50,80,250,241,203,2)
+    drawFlower(75,425,width/10,width/10,50,80,250,241,203,2)
+    drawFlower(425,425,width/10,width/10,50,80,250,241,203,2)
+    // nightControl()
+
+}
+// function main(circleX,circleY,speed){
+//     speedX = speed
+//     speedY = speed/3
+//     if (circleX > width) {
+//         // circleX = 0;
+//         // circleY = 100;
+//         if (isNight){
+//             isNight = false;
+//         }else{
+//             isNight = true;
+//         }
+//     }else if (circleX < 25){
+//         speedX = speed;
+//     }
+//     if (circleX < width/2){
+//         circleY -= speedY;
+//     }else{
+//         circleY += speedY;
+//     }
+//     circleX += speedX;
+//     circle(circleX,circleY,50);
+// }
+
+
+function nightControl(){
+    if (isNight){
+        fill(250,250,250);
+        drawFlower(width/2,height-height/5,width/5,width/5,10,10,10,250,250,250)
+        drawFlower(100,400,width/5,width/5,10,10,10,250,250,250)
+        drawFlower(400,400,width/5,width/5,10,10,10,250,250,250)
+    }else{
+        fill(241,203,2);
+        drawFlower(width/2,height-height/5,width/5,width/5,50,80,250,241,203,2)
+        drawFlower(100,400,width/5,width/5,50,80,250,241,203,2)
+        drawFlower(400,400,width/5,width/5,50,80,250,241,203,2)
+    }
+
+}
+function drawFlower(flowerX,flowerY,flowerWidth,flowerHeight,firstColor,secondColor,thirdColor,color1,color2,color3){
     let flowerXDistance = flowerWidth/2;
     let flowerYDistance = flowerHeight/2;
+    fill(firstColor,secondColor,thirdColor)
+    ellipse(flowerX-flowerXDistance,flowerY-flowerYDistance,flowerWidth,flowerHeight)
+    // // 左下角的花瓣
+    ellipse(flowerX-flowerXDistance,flowerY+flowerYDistance,flowerWidth,flowerHeight)
+    // // 右下角的花瓣
+    ellipse(flowerX+flowerXDistance,flowerY+flowerYDistance,flowerWidth,flowerHeight)
+    // // 右上角的花瓣
+    ellipse(flowerX+flowerXDistance,flowerY-flowerYDistance,flowerWidth,flowerHeight)
+    // 花蕊
+    fill(color1,color2,color3)
+    ellipse(flowerX,flowerY,flowerWidth,flowerHeight);
+}  
+// function setup() {
+//     createCanvas(windowWidth,windowHeight-60);
+//     frameRate(1);
+//   }
   
-    for (let i = 0; i < 100; i++) {
-      fill(135,40,158)
-      // // 左上角的花瓣
-      ellipse(flowerX-flowerXDistance,flowerY-flowerYDistance,flowerWidth,flowerHeight)
-      // // 左下角的花瓣
-      ellipse(flowerX-flowerXDistance,flowerY+flowerYDistance,flowerWidth,flowerHeight)
-      // // 右下角的花瓣
-      ellipse(flowerX+flowerXDistance,flowerY+flowerYDistance,flowerWidth,flowerHeight)
-      // // 右上角的花瓣
-      ellipse(flowerX+flowerXDistance,flowerY-flowerYDistance,flowerWidth,flowerHeight)
-      // 花蕊
-      fill(253,242,99)
-      ellipse(flowerX,flowerY,flowerWidth,flowerHeight);
+//   function draw() {
+//     background(220);
+//     let flowerX = random(0,width);
+//     let flowerY = random(0,height);
+//     // let flowerRadius = random(25,150);
+//     let flowerWidth = random(25,150);
+//     let flowerHeight = random(25,150);
+//     let flowerXDistance = flowerWidth/2;
+//     let flowerYDistance = flowerHeight/2;
+  
+//     for (let i = 0; i < 100; i++) {
+//       fill(135,40,158)
+//       // // 左上角的花瓣
+//       ellipse(flowerX-flowerXDistance,flowerY-flowerYDistance,flowerWidth,flowerHeight)
+//       // // 左下角的花瓣
+//       ellipse(flowerX-flowerXDistance,flowerY+flowerYDistance,flowerWidth,flowerHeight)
+//       // // 右下角的花瓣
+//       ellipse(flowerX+flowerXDistance,flowerY+flowerYDistance,flowerWidth,flowerHeight)
+//       // // 右上角的花瓣
+//       ellipse(flowerX+flowerXDistance,flowerY-flowerYDistance,flowerWidth,flowerHeight)
+//       // 花蕊
+//       fill(253,242,99)
+//       ellipse(flowerX,flowerY,flowerWidth,flowerHeight);
         
-      flowerX = random(0,width);
-      flowerY = random(0,height);
-      flowerWidth = random(25,150);
-      flowerHeight = random(25,150);
-      flowerXDistance = flowerWidth/2;
-      flowerYDistance = flowerHeight/2;
-    }  
-  }
+//       flowerX = random(0,width);
+//       flowerY = random(0,height);
+//       flowerWidth = random(25,150);
+//       flowerHeight = random(25,150);
+//       flowerXDistance = flowerWidth/2;
+//       flowerYDistance = flowerHeight/2;
+//     }  
+//   }
   
-  function windowResized() {
-    setup();
-  }
+//   function windowResized() {
+//     setup();
+//   }
 // function setup() {
 //     createCanvas(windowHeight-100,windowHeight-100);
 //     frameRate(0.5)
