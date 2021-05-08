@@ -1,23 +1,35 @@
+let circleY = 25;
+let circleX = 300;
+let speed = 40
+let speedY = speed;
+let speedX = speed;
+
 function setup() {
-    createCanvas(400,400);
-  }
-  
-  function draw() {
+    createCanvas(circleX*2, circleX*2);
     background(220);
-    var pandaX=random(0,width);
-    var pandaY=random(0,height);
-    var pandaSize=random(5,200);
-    circle(pandaX,pandaY,pandaSize);
-    fill(30,30,30)
-    circle(pandaX-pandaSize*2/5,pandaY-pandaSize/2,pandaSize/2);
-    fill(30,30,30)
-    circle(pandaX+pandaSize*2/5,pandaY-pandaSize/2,pandaSize/2);
-    fill(30,30,30)
-    circle(pandaX,pandaY+pandaSize*1/10,pandaSize/8);
-    fill(30,30,30)
-    circle(pandaX-pandaSize/5,pandaY-pandaSize/8,pandaSize/4);
-    fill(255,255,255)
-    circle(pandaX-pandaSize/5,pandaY-pandaSize/8,pandaSize/8);
-    circle(pandaX+pandaSize/5,pandaY-pandaSize/8,pandaSize/4);
-    circle(pandaX+pandaSize/5,pandaY-pandaSize/8,pandaSize/8);
-  }  
+}
+function draw() {
+    background(220);
+    circle(circleX,circleY,50); 
+    if (circleX > width-25) {
+        speedX = 1*speed;
+    }else if(circleX<25){
+        speedX=-1*speed;
+    }
+    if(speedX>0){
+        //right
+        if(circleX<width/2){
+            circleY-=speedY;
+        }else{
+            circleY+=speedY
+        }
+    }else{
+        //left
+        if(circleX<width/2){
+            circleY+=speedY
+        }else{
+            circleY-=speedY
+        }
+    }
+    circleX+=speedX
+}
