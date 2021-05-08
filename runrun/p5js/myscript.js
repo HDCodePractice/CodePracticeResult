@@ -35,9 +35,6 @@ function myflower(x,y,size,color1,color2){
     fill(color1)
     ellipse(flowerX,flowerY,flowerWidth,flowerHeight); 
 }
-
-
-  
 function draw() {
     background(220); 
     if (circleX > width) {
@@ -68,9 +65,5 @@ function draw() {
         myflower(width/5,height-height/10,width/10,'rgb(253,240,100)','rgb(0,50,158)');
         myflower(width*4/5,height-height/10,width/10,'rgb(253,240,5)','rgb(0,50,158)');
         mysun(circleX,circleY,'rgb(241,203,2)')
-    }
-  
- 
-   
-    
+    }  
 }
