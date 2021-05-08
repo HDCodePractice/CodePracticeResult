@@ -1,31 +1,70 @@
+let size = 300;
+let circleX = 0;
+let circleY = 100;
+let speed = 5;
+let speedY = speed/3;
+let speedX = speed;
+let isNight = false;
+
+
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(windowWidth-100, windowHeight-100);
+  background(220);
 }
 
-function draw() {
-  background(220);
-  circle(245,175,15);
-  // right tiny eye (black)
-  circle(120,100,100);
-  // left ear (black)
-  circle(275,100,100);
-  // right ear (black)
-  circle(200,230,25);
-  // nose (black)
-  circle(150,175,50);
-  // left big eye (black)
-  circle(150,175,15);
-  // left tiny eye (black)
-  circle(245,175,50);
-  // right big eye (black)
-  fill(30,30,30);
-  // fill black
-  circle(200,200,200);
-  // face (white)
-  circle(150,175,25);
-  // left small eye (white)
-  circle(245,175,25);
-  // right small eye (white)
-  fill(250,250,250);
-  // fill white
+function sunMoon(x,y,sunColor) {
+  fill(sunColor);
+  circle(x,y,50);
+}
+
+function panda(x,y,size,black,white) {
+  var pandaX=x;
+  var pandaY=y;
+  var pandaSize=size;
+  var pandaDistance=pandaSize/2;
+  circle(pandaX,pandaY,pandaSize);
+  fill(black)
+  circle(pandaX-pandaSize*2/5,pandaY-pandaSize/2,pandaSize/2);
+  fill(black)
+  circle(pandaX+pandaSize*2/5,pandaY-pandaSize/2,pandaSize/2);
+  fill(black)
+  circle(pandaX,pandaY+pandaSize*1/10,pandaSize/8);
+  fill(black)
+  circle(pandaX-pandaSize/5,pandaY-pandaSize/8,pandaSize/4);
+  fill(white)
+  circle(pandaX-pandaSize/5,pandaY-pandaSize/8,pandaSize/8);
+  circle(pandaX+pandaSize/5,pandaY-pandaSize/8,pandaSize/4);
+  circle(pandaX+pandaSize/5,pandaY-pandaSize/8,pandaSize/8);
+}
+
+function draw(){
+  background(220); 
+    if (circleX > width) {
+        circleX = 0;
+        circleY = 100;
+        if (isNight){
+            isNight = false;
+        }else{
+            isNight = true;
+        }
+    }else if (circleX < 25){
+        speedX = speed;
+    }
+    if (circleX < width/2){
+        circleY -= speedY;
+    }else{
+        circleY += speedY;
+    }
+    circleX += speedX;
+    if(isNight){
+        panda(width/2,height-width/5,width/5,'rgb(250,250,250','rgb(0,0,0)');
+        panda(width/5,height-width/10,width/10,'rgb(250,250,250','rgb(0,0,0)');
+        panda(width/1.25,height-width/10,width/10,'rgb(250,250,250','rgb(0,0,0)');
+        sunMoon(circleX,circleY,'rgb(250,250,250)');
+    }else{
+        panda(width/2,height-width/5,width/5,'rgb(250,250,250','rgb(206,59,52)');
+        panda(width/5,height-width/10,width/10,'rgb(250,250,250','rgb(206,59,52)');
+        panda(width/1.25,height-width/10,width/10,'rgb(250,250,250','rgb(206,59,52)');
+        sunMoon(circleX,circleY,'rgb(252,241,123)');
+    }
 }

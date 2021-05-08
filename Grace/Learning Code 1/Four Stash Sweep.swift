@@ -1,0 +1,23 @@
+func Gracé() {
+    moveForward()
+    collectGem()
+    moveForward()
+    collectGem()
+    turnLeft()
+    turnLeft()
+    moveForward()
+    turnRight()
+    moveForward()
+    collectGem()
+    turnLeft()
+    turnLeft()
+    moveForward()
+    moveForward()
+    collectGem()
+    moveForward()
+}
+
+Gracé()
+Gracé()
+Gracé()
+Gracé()

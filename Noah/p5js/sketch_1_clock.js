@@ -1,8 +1,16 @@
+var width;
+var height;
 var img;
 var img2;
 
 function setup() {
-  createCanvas(1280, 690);
+  // 正常操作的时候 width = windowWidth 和 height = windowHeight
+  // 可以把 width 和 height 的值改成不同大小的屏幕测试
+
+  width = windowWidth
+  height = windowHeight - 50
+    
+  createCanvas(width, height);
   img = createImg('https://cdn.wallpapersafari.com/62/78/TrLPm7.jpg');
   img.hide();
   img2 = createImg('https://lh3.googleusercontent.com/proxy/HxIUwF19uwxSDXVy4DVy5DRx5piL_IK0iEJmPSztkqm4y3MIqc0t_IWHlAkTqrIkiJnRYHQs_QCgHaicTSwbTqSWUi5mzk-Qoo6fByegnP5jbibHmgVBPU8YVNDbPRWSiJV5lTGL5Ju0c1yWL4pAanVTLrQE3zg');
@@ -11,7 +19,7 @@ function setup() {
 
 function draw() {
   background(90,193,253);
-  image(img,0,0,width,height)
+  image(img,0,0)
   fill(169,173,176)
   rect(100,600,850,300)
   // ---------------------

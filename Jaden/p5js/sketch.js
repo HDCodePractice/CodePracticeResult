@@ -1,15 +1,19 @@
 function setup() {
   createCanvas(600, 600);
+  frameRate(1)
 }
 
 function draw() {
-  background(320);
+  background(220);
+  let rocketX = 200
+  let rocketY = 200
+  let rocketSize = 200
   fill(255,255,255)
-  rect(200,100,150,250);
+  rect(rocketX,rocketY-rocketSize/2,rocketX-rocketSize/4,rocketX+rocketSize/4);
   fill(255,0,0);
-  triangle(200,100,275,0,350,100);
+  triangle(rocketX,rocketX-rocketSize/2,275,0,350,100);
   fill(0,255,255);
-  circle(275,150,60);
+  circle(rocketX+3*rocketSize/8,rocketY-rocketSize/4,rocketSize);
   circle(275,230,60);
   circle(275,310,60);
   fill(0,0,255);
