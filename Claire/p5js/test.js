@@ -10,63 +10,22 @@ function setup() {
     createCanvas(size, size);
 }
 
-function panda(x,y,size,black,white) {
-    var pandaX=x;
-    var pandaY=y;
-    var pandaSize=size;
-    var pandaDistance=pandaSize/2;
-    circle(pandaX-pandaDistance,pandaY-pandaDistance/pandaY,pandaSize);
-    // left ear (black)
-    fill(black);
-    // // fill black
-    circle(pandaX-pandaDistance+pandaX,pandaY+pandaDistance/pandaDistance,pandaSize);
-    // rigeht ear (black)
-    fill(black);
-    // fill black
-    fill(black);
-    // fill black
-    circle(pandaX+pandaDistance-125,pandaY+pandaDistance,pandaSize);
-    // face (white)
-    fill(white);
-    // fill white
-    circle(pandaX-pandaDistance,pandaY+pandaDistance,width/pandaSize);
-    // left small eye (white)
-    fill(white);
-    // fill white
-    circle(pandaX+pandaDistance/20,pandaY+pandaDistance,width/16);
-    // right small eye (white)
-    fill(white);
-    // fill white
-  }
-
-function sunMoon(x,y,color1){
-    fill(color1);
-    circle(x,y,50)
-}
-
 function draw() {
-    background(220); 
-    if (circleX > width) {
-        circleX = 0;
-        circleY = 100;
-        if (isNight){
-            isNight = false;
-        }else{
-            isNight = true;
-        }
-    }else if (circleX < 25){
-        speedX = speed;
-    }
-    if (circleX < width/2){
-        circleY -= speedY;
-    }else{
-        circleY += speedY;
-    }
-    circleX += speedX;
-    if(isNight){
-        sunMoon(circleX,circleY,'rgb(250,250,250)');
-    }else{
-        sunMoon(circleX,circleY,'rgb(252,241,123)')
-    }
-    panda(100,100,100,'rgb(100,100,100)','rgb(100,100,100)')
+    var pandaX=x;
+  var pandaY=y;
+  var pandaSize=size;
+  var pandaDistance=pandaSize/2;
+  circle(pandaX,pandaY,pandaSize);
+  fill(0,0,0)
+  circle(pandaX-pandaSize*2/5,pandaY-pandaSize/2,pandaSize/2);
+  fill(0,0,0)
+  circle(pandaX+pandaSize*2/5,pandaY-pandaSize/2,pandaSize/2);
+  fill(0,0,0)
+  circle(pandaX,pandaY+pandaSize*1/10,pandaSize/8);
+  fill(0,0,0)
+  circle(pandaX-pandaSize/5,pandaY-pandaSize/8,pandaSize/4);
+  fill(250,250,250)
+  circle(pandaX-pandaSize/5,pandaY-pandaSize/8,pandaSize/8);
+  circle(pandaX+pandaSize/5,pandaY-pandaSize/8,pandaSize/4);
+  circle(pandaX+pandaSize/5,pandaY-pandaSize/8,pandaSize/8);
 }

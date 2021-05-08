@@ -8,7 +8,7 @@ let isNight = false;
 
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(windowWidth-100, windowHeight-100);
   background(220);
 }
 
@@ -23,18 +23,18 @@ function panda(x,y,size,black,white) {
   var pandaSize=size;
   var pandaDistance=pandaSize/2;
   circle(pandaX,pandaY,pandaSize);
-    fill(black)
-    circle(pandaX-pandaSize*2/5,pandaY-pandaSize/2,pandaSize/2);
-    fill(black)
-    circle(pandaX+pandaSize*2/5,pandaY-pandaSize/2,pandaSize/2);
-    fill(black)
-    circle(pandaX,pandaY+pandaSize*1/10,pandaSize/8);
-    fill(black)
-    circle(pandaX-pandaSize/5,pandaY-pandaSize/8,pandaSize/4);
-    fill(white)
-    circle(pandaX-pandaSize/5,pandaY-pandaSize/8,pandaSize/8);
-    circle(pandaX+pandaSize/5,pandaY-pandaSize/8,pandaSize/4);
-    circle(pandaX+pandaSize/5,pandaY-pandaSize/8,pandaSize/8);
+  fill(black)
+  circle(pandaX-pandaSize*2/5,pandaY-pandaSize/2,pandaSize/2);
+  fill(black)
+  circle(pandaX+pandaSize*2/5,pandaY-pandaSize/2,pandaSize/2);
+  fill(black)
+  circle(pandaX,pandaY+pandaSize*1/10,pandaSize/8);
+  fill(black)
+  circle(pandaX-pandaSize/5,pandaY-pandaSize/8,pandaSize/4);
+  fill(white)
+  circle(pandaX-pandaSize/5,pandaY-pandaSize/8,pandaSize/8);
+  circle(pandaX+pandaSize/5,pandaY-pandaSize/8,pandaSize/4);
+  circle(pandaX+pandaSize/5,pandaY-pandaSize/8,pandaSize/8);
 }
 
 function draw(){
@@ -59,12 +59,12 @@ function draw(){
     if(isNight){
         panda(width/2,height-width/5,width/5,'rgb(250,250,250','rgb(0,0,0)');
         panda(width/5,height-width/10,width/10,'rgb(250,250,250','rgb(0,0,0)');
-        panda(width/5,height-width/10,width/10,'rgb(250,250,250','rgb(0,0,0)');
+        panda(width/1.25,height-width/10,width/10,'rgb(250,250,250','rgb(0,0,0)');
         sunMoon(circleX,circleY,'rgb(250,250,250)');
     }else{
         panda(width/2,height-width/5,width/5,'rgb(250,250,250','rgb(206,59,52)');
         panda(width/5,height-width/10,width/10,'rgb(250,250,250','rgb(206,59,52)');
-        panda(width/5,height-width/10,width/10,'rgb(250,250,250','rgb(206,59,52)');
-        sunMoon(circleX,circleY,'rgb(250,250,250)');
+        panda(width/1.25,height-width/10,width/10,'rgb(250,250,250','rgb(206,59,52)');
+        sunMoon(circleX,circleY,'rgb(252,241,123)');
     }
 }
