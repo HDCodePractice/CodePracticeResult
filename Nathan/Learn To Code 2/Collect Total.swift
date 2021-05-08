@@ -17,3 +17,5 @@ while gemCounter != randomNumberOfGems {
             turnRight()
         }
     }
+    moveForward()
+}
