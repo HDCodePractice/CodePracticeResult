@@ -1,7 +1,7 @@
 let circleX = 250;
 let circleY = 25;
-let speedX = 11
-let speedY = 11
+let speedX = 11;
+let speedY = 11;
 
 function setup() {
     createCanvas(500,500);
