@@ -1,65 +1,23 @@
-let size = 500;
-let circleX = 0
-let circleY = 100
-let speed = 5;
-let speedY = speed/3;
-let speedX = speed;
-let isNight = false;
-
 function setup() {
-    createCanvas(size, size);
+    createCanvas(windowWidth,windowHeight-60);
+    background(220);
+  }
+function mycircle(x,y,size,color) {
+      fill(color)
+      circle(x,y,size)
+  }
+function aquacircle(x,y){
+    mycircle(x,y,20,"rgb(0,255,255)")
 }
-  
-function draw() {
-    background(220); 
-    speedX = speed
-    speedY = speed/3
-    if (circleX > width) {
-        circleX = 0
-        circleY =100
-        if (isNight){
-            isNight = false;
-        }else{
-            isNight = true;
-        }
-    }else if (circleX < 25){
-        speedX = speed;
-    }else if (circleX < width/2){
-        circleY -= speedY;
-    }else{
-        circleY += speedY;
-    }
-    circleX += speedX;
-    if (isNight){
-        drawFlower(width/2,height-height/5,width/5,width/5,10,10,10,250,250,250)
-        drawFlower(width/10,height -height/10,width/10,width/10,10,10,10,250,250,250)
-        drawFlower(width-width/10,height-height/10,width/10,width/10,10,10,10,250,250,250)
-        sunMoon(circleX,circleY,'rgb(250,250,250)')
-     
-    }else{
-        drawFlower(width/2,height-height/5,width/5,width/5,50,80,250,241,203,2)
-        drawFlower(width/10,height -height/10,width/10,width/10,50,80,250,241,203,2)
-        drawFlower(width-width/10,height-height/10,width/10,width/10,50,80,250,241,203,2)
-        sunMoon(circleX,circleY,'rgb(241,203,2)')
-
-        
-
-    }
-}
-function sunMoon(x,y,color){
-    fill(color)
-    circle(x,y,50)
-    
-
-  
-}
-
-
-
-function drawFlower(flowerX,flowerY,flowerWidth,flowerHeight,firstColor,secondColor,thirdColor,color1,color2,color3){
+function myflower(x,y,size,color1,color2){
+    let flowerX = x;
+    let flowerY = y;
+    let flowerWidth = size;
+    let flowerHeight = size;
     let flowerXDistance = flowerWidth/2;
     let flowerYDistance = flowerHeight/2;
-    fill(firstColor,secondColor,thirdColor)
+    fill(color2)
+    // // 左上角的花瓣
     ellipse(flowerX-flowerXDistance,flowerY-flowerYDistance,flowerWidth,flowerHeight)
     // // 左下角的花瓣
     ellipse(flowerX-flowerXDistance,flowerY+flowerYDistance,flowerWidth,flowerHeight)
@@ -68,9 +26,105 @@ function drawFlower(flowerX,flowerY,flowerWidth,flowerHeight,firstColor,secondCo
     // // 右上角的花瓣
     ellipse(flowerX+flowerXDistance,flowerY-flowerYDistance,flowerWidth,flowerHeight)
     // 花蕊
-    fill(color1,color2,color3)
+    fill(color1)
     ellipse(flowerX,flowerY,flowerWidth,flowerHeight);
-}  
+  }
+function doubleClicked(){
+    myflower(mouseX,mouseY,50,'rgb(255,255,0)','rgb(0,0,255)')
+}
+function draw() {
+ 
+    
+  }
+  function yellowcircle(x,y){
+      mycircle(x,y,5,"rgb(255,255,0)")
+  }
+  function mouseMoved(){
+      yellowcircle(mouseX,mouseY)
+  }
+  function mousePressed(){
+        aquacircle(mouseX,mouseY)
+
+  }
+  function redcircle(x,y){
+      mycircle(x,y,30,"rgb(255,0,0)")
+  }
+function windowResized() {
+    setup();
+  }
+// let size = 500;
+// let circleX = 0
+// let circleY = 100
+// let speed = 5;
+// let speedY = speed/3;
+// let speedX = speed;
+// let isNight = false;
+
+// function setup() {
+//     createCanvas(size, size);
+// }
+  
+// function draw() {
+//     background(220); 
+//     speedX = speed
+//     speedY = speed/3
+//     if (circleX > width) {
+//         circleX = 0
+//         circleY =100
+//         if (isNight){
+//             isNight = false;
+//         }else{
+//             isNight = true;
+//         }
+//     }else if (circleX < 25){
+//         speedX = speed;
+//     }else if (circleX < width/2){
+//         circleY -= speedY;
+//     }else{
+//         circleY += speedY;
+//     }
+//     circleX += speedX;
+//     if (isNight){
+//         drawFlower(width/2,height-height/5,width/5,width/5,10,10,10,250,250,250)
+//         drawFlower(width/10,height -height/10,width/10,width/10,10,10,10,250,250,250)
+//         drawFlower(width-width/10,height-height/10,width/10,width/10,10,10,10,250,250,250)
+//         sunMoon(circleX,circleY,'rgb(250,250,250)')
+     
+//     }else{
+//         drawFlower(width/2,height-height/5,width/5,width/5,50,80,250,241,203,2)
+//         drawFlower(width/10,height -height/10,width/10,width/10,50,80,250,241,203,2)
+//         drawFlower(width-width/10,height-height/10,width/10,width/10,50,80,250,241,203,2)
+//         sunMoon(circleX,circleY,'rgb(241,203,2)')
+
+        
+
+//     }
+// }
+// function sunMoon(x,y,color){
+//     fill(color)
+//     circle(x,y,50)
+    
+
+  
+// }
+
+
+
+// function drawFlower(flowerX,flowerY,flowerWidth,flowerHeight,firstColor,secondColor,thirdColor,color1,color2,color3){
+//     let flowerXDistance = flowerWidth/2;
+//     let flowerYDistance = flowerHeight/2;
+//     fill(firstColor,secondColor,thirdColor)
+//     ellipse(flowerX-flowerXDistance,flowerY-flowerYDistance,flowerWidth,flowerHeight)
+//     // // 左下角的花瓣
+//     ellipse(flowerX-flowerXDistance,flowerY+flowerYDistance,flowerWidth,flowerHeight)
+//     // // 右下角的花瓣
+//     ellipse(flowerX+flowerXDistance,flowerY+flowerYDistance,flowerWidth,flowerHeight)
+//     // // 右上角的花瓣
+//     ellipse(flowerX+flowerXDistance,flowerY-flowerYDistance,flowerWidth,flowerHeight)
+//     // 花蕊
+//     fill(color1,color2,color3)
+//     ellipse(flowerX,flowerY,flowerWidth,flowerHeight);
+// }  
 
 // function nightControl(){
 //     if (isNight){
