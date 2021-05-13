@@ -34,6 +34,7 @@ function mypanda(x,y,size,color1,color2){
     var pandaY=y;
     var pandaSize=size;
     var pandaDistance=pandaSize/2;
+    fill(color1)
     circle(pandaX,pandaY,pandaSize);
     fill(color2);
     circle(pandaX-pandaSize*2/5,pandaY-pandaSize/2,pandaSize/2);
@@ -105,51 +106,86 @@ function mybee(beeX,beeY,beeSize,color1,color2,color3){
     circle(beeX + beeDist/1.1,beeY -  beeDist/1.5,beeSize - beeDist - beeDist/1.5);
     fill(color3);
     arc(beeX + beeDist/2,beeY + beeDist/1.1,beeSize - beeDist - beeDist/4,beeSize - beeDist - beeDist/4,PI,QUARTER_PI,CHORD);
-
 }
-function draw() {
 
-mypanda(width/5,height/8.5,50,'rgb(255,255,255)','rgb(0,0,0)');
+function draw() {
+    mypanda(width/5,height/8.5,50,'rgb(255,255,255)','rgb(0,0,0)');
     myflower(width/17,height/9.3,30,'rgb(255,0,0)','rgb(251,212,1)');
     myclown(width/3,height/9,55,'rgb(242,216,194)','rgb(32,64,132)','rgb(255,0,0)','rgb(233,157,180)');
     myhappy(width/2.1,height/9,55,'rgb(251,212,1)','rgb(0,0,0)');
     mybee(width/1.7,height/11,50,'rgb(251,212,1)','rgb(0,0,0)','rgb(255,255,255)');
+    rect(pandaX1,pandaY1,100,100)
 }
 
 var selection = '';
 
 function mouseClicked() {
-    if (mouseX==width/5,mouseY==height/8.5){
-        selection+='panda';
+    if (mouseX>width/6.7&&mouseX<width/4&&mouseY>height/17.6&&mouseY<height/6.5){
+        selection='panda';
+        fill(255,0,0)
+        circle(width/5,height/25,10)
+        fill(255,255,255)
+        circle(width/17,height/25,10)
+        circle(width/1.6,height/25,10)
+        circle(width/2.1,height/25,10)
+        circle(width/3,height/25,10)
     }
-    if (mouseX==width/17,mouseY==height/9.3){
-        selection+='flower';
+    if (mouseX>width/90&&mouseX<width/9.5&&mouseY>height/17&&mouseY<height/6.5){
+        selection='flower';
+        fill(255,0,0)
+        circle(width/17,height/25,10)
+        fill(255,255,255)
+        circle(width/5,height/25,10)
+        circle(width/1.6,height/25,10)
+        circle(width/2.1,height/25,10)
+        circle(width/3,height/25,10)
     }
-    if (mouseX==width/1.7,mouseY==height/11){
-        selection+='bee';
+    if (mouseX>width/1.77&&mouseX<width/1.38&&mouseY>height/17.1&&mouseY<height/6.6){
+        selection='bee';
+        fill(255,0,0)
+        circle(width/1.6,height/25,10)
+        fill(255,255,255)
+        circle(width/5,height/25,10)
+        circle(width/17,height/25,10)
+        circle(width/2.1,height/25,10)
+        circle(width/3,height/25,10)
     } 
-    if (mouseX==width/2.1,mouseY==height/9){
-        selection+='happy';
+    if (mouseX>width/2.3&&mouseX<width/1.93&&mouseY>height/14&&mouseY<height/6.5){
+        selection='happy';
+        fill(255,0,0)
+        circle(width/2.1,height/25,10)
+        fill(255,255,255)
+        circle(width/5,height/25,10)
+        circle(width/1.6,height/25,10)
+        circle(width/17,height/25,10)
+        circle(width/3,height/25,10)
     }
-    if (mouseX==width/3,mouseY==height/9.55){
-        selection+='clown';
+    if (mouseX>width/3.5&&mouseX<width/2.7&&mouseY>height/14&&mouseY<height/6.5){
+        selection='clown';
+        fill(255,0,0)
+        circle(width/3,height/25,10)
+        fill(255,255,255)
+        circle(width/5,height/25,10)
+        circle(width/1.6,height/25,10)
+        circle(width/2.1,height/25,10)
+        circle(width/17,height/25,10)
     }
 }
 
 function doubleClicked() {
-    if(selection='panda'){
+    if(selection=='panda'){
         mypanda(mouseX,mouseY,50,'rgb(255,255,255)','rgb(0,0,0)');
     }
-    if(selection='flower'){
+    if(selection=='flower'){
         myflower(mouseX,mouseY,30,'rgb(255,0,0)','rgb(251,212,1)');
     }
-    if(selection='clown'){
+    if(selection=='clown'){
         myclown(mouseX,mouseY,55,'rgb(242,216,194)','rgb(32,64,132)','rgb(255,0,0)','rgb(233,157,180)');
     } 
-    if(selection='bee'){
+    if(selection=='bee'){
         mybee(mouseX,mouseY,50,'rgb(251,212,1)','rgb(0,0,0)','rgb(255,255,255)');
     }
-    if(selection='happy'){
+    if(selection=='happy'){
         myhappy(mouseX,mouseY,55,'rgb(251,212,1)','rgb(0,0,0)');
     }
 }
