@@ -101,31 +101,39 @@ function doubleClicked(){
 
 function showcurrentstamp(){
     if (currentstamp == "clown"){
-        fill(255,0,0)
-        circle(150,300,60)
-        fill(220)
-        circle(450,300,60)
-        circle(750,300,60)
+        noStroke();
+        fill(255,0,0);
+        circle(150,300,60);
+        fill(220);
+        circle(450,300,60);
+        circle(750,300,60);
+        strokeWeight(1);
     } else if (currentstamp == "panda"){
-        fill(255,0,0)
-        circle(450,300,60)
-        fill(220)
-        circle(150,300,60)
-        circle(750,300,60)
+        noStroke();
+        fill(255,0,0);
+        circle(450,300,60);
+        fill(220);
+        circle(150,300,60);
+        circle(750,300,60);
+        strokeWeight(1);
     } else if (currentstamp == "bee"){
-        fill(255,0,0)
-        circle(750,300,60)
-        fill(220)
-        circle(450,300,60)
-        circle(150,300,60)
+        noStroke();
+        fill(255,0,0);
+        circle(750,300,60);
+        fill(220);
+        circle(450,300,60);
+        circle(150,300,60);
+        strokeWeight(1);
     }
 }
 
 function draw() {
-    myclown(150,150,150,"rgb(255,0,0)","rgb(0,0,255)")
-    panda(450,150,150,"rgb(0,0,0)","rgb(250,250,250)")
-    drawBee(750,150,150,"255","255","0")
-    showcurrentstamp()
+    strokeWeight(1);
+    myclown(150,150,150,"rgb(255,0,0)","rgb(0,0,255)");
+    panda(450,150,150,"rgb(0,0,0)","rgb(250,250,250)");
+    drawBee(750,150,150,"255","255","0");
+    showcurrentstamp();
+    strokeWeight(1);
 }
 
 function windowResized() {
