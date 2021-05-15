@@ -1,9 +1,8 @@
 var currentstamp = "";
 
 function setup() {
-    createCanvas(windowWidth,windowHeight);
-    bg = loadImage('garden.jpeg');
-    background(bg);
+    createCanvas(1000,1000);
+    background(220);
   }
   
 function myclown(x,y,size,color1,color2){
@@ -29,6 +28,7 @@ function panda(x,y,size,black,white) {
     var pandaY=y;
     var pandaSize=size;
     var pandaDistance=pandaSize/2;
+    fill(white)
     circle(pandaX,pandaY,pandaSize);
     fill(black)
     circle(pandaX-pandaSize*2/5,pandaY-pandaSize/2,pandaSize/2);
@@ -65,14 +65,6 @@ function drawBee(beeX,beeY,beeSize,color1,color2,color3){
 }
 
 function mousePressed(){
-    redCircle(mouseX,mouseY);
-}
-
-function doubleClicked(){
-    myflower(mouseX,mouseY,100,"rgb(255,0,0)","rgb(0,0,255)")
-}
-
-function mousePressed(){
     if (mouseX >= 50 && mouseX <= 250 && mouseY <= 250) {
         if (currentstamp !== "clown") {
             currentstamp = "clown";
@@ -92,25 +84,50 @@ function mousePressed(){
         } else{
             currentstamp = ""
         }
-    } else {
-        if (currentstamp == "clown") {
-            myclown(mouseX,mouseY,100,"rgb(255,0,0)","rgb(0,0,255)")
-        } else if (currenctstamp = "panda") {
-            panda(mouseX,mouseY,100,"rgb(0,0,0)","rgb(250,250,250)")
-        } else if (currenctstamp = "bee") {
-            drawBee(mouseX,mouseY,100,"rgb(255,255,0)","rgb(255,255,0)","rgb(255,255,0)")
-        }
     }
-      
-    
+}
+
+function doubleClicked(){
+    strokeWeight(1);
+    if (currentstamp == "clown") {
+        myclown(mouseX,mouseY,50,"rgb(255,0,0)","rgb(0,0,255)")
+    } else if (currentstamp == "panda") {
+        panda(mouseX,mouseY,50,"rgb(0,0,0)","rgb(250,250,250)")
+    } else if (currentstamp == "bee") {
+        drawBee(mouseX,mouseY,50,"255","255","0")
+    }
+    strokeWeight(1);
+}
+
+function showcurrentstamp(){
+    if (currentstamp == "clown"){
+        fill(255,0,0)
+        circle(150,300,60)
+        fill(220)
+        circle(450,300,60)
+        circle(750,300,60)
+    } else if (currentstamp == "panda"){
+        fill(255,0,0)
+        circle(450,300,60)
+        fill(220)
+        circle(150,300,60)
+        circle(750,300,60)
+    } else if (currentstamp == "bee"){
+        fill(255,0,0)
+        circle(750,300,60)
+        fill(220)
+        circle(450,300,60)
+        circle(150,300,60)
+    }
 }
 
 function draw() {
     myclown(150,150,150,"rgb(255,0,0)","rgb(0,0,255)")
     panda(450,150,150,"rgb(0,0,0)","rgb(250,250,250)")
-    drawBee(750,150,150,"rgb(255,255,0)","rgb(255,255,0)","rgb(255,255,0)")
+    drawBee(750,150,150,"255","255","0")
+    showcurrentstamp()
 }
 
 function windowResized() {
     setup();
-}  
+}
