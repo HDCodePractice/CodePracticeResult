@@ -39,6 +39,11 @@ function draw() {
           }
         }
     } 
+    if (xposition<circleX+50&&xposition>circleX&&yposition<circleY+50&&yposition>circleY){
+      circleY=50
+      circleX = random(20,width-20)
+      score +=1
+    }
     happyFace(xposition,yposition,size)
     fill(255,255,0)
     circle(circleX,circleY,50)
