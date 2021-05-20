@@ -10,7 +10,8 @@ function setup() {
 function draw() {
     background(220);
     circle(circleX,circleY,50);
-    if (circleY > height-25) {
+    
+    if (circleY > width-30) {
         speedX = -11;
         speedY = -11;
     } else if (circleX > width-25) {
