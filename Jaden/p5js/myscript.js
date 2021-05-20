@@ -8,12 +8,16 @@ let circleX = 0
 let circleY = 50
 let score = 0
 let ballSize = 50
+let song;
+let song1;
 function setup() {
     createCanvas(windowWidth,windowHeight-50)
     xposition = width/2;
     yposition = height-50
     fill(255,255,0)
     circleX = random(20,width-20) 
+    song = loadSound('1627 Overland Dr 2 2.m4a')
+    song1 = loadSound('1627 Overland Dr 8.m4a')
 }   
 function draw() {
     background(220)
@@ -22,10 +26,12 @@ function draw() {
       circleY=50
       circleX = random(20,width-20)
       score +=1
+      song.play()
     }else if (circleY > height){
       circleY = 50
       circleX = random(20,width-20)
       score -= 1
+      song1.play()
     }
     if (keyIsPressed){
        if (keyCode === LEFT_ARROW) {
