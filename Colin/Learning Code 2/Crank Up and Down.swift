@@ -1,3 +1,5 @@
+let expert = Expert()
+let character = Character()
 func turnAround(){
     character.turnLeft()
     character.turnLeft()
