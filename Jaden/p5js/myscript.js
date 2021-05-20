@@ -7,6 +7,7 @@ let size = 50
 let circleX = 0
 let circleY = 50
 let score = 0
+let ballSize = 50
 function setup() {
     createCanvas(windowWidth,windowHeight-50)
     xposition = width/2;
@@ -17,7 +18,11 @@ function setup() {
 function draw() {
     background(220)
     circleY += speed
-    if (circleY > height){
+    if (xposition<=circleX+size&&xposition>=circleX-size&&yposition<=circleY+size&&yposition>=circleY){
+      circleY=50
+      circleX = random(20,width-20)
+      score +=1
+    }else if (circleY > height){
       circleY = 50
       circleX = random(20,width-20)
       score -= 1
@@ -38,17 +43,66 @@ function draw() {
             size -=1
           }
         }
-    } 
-    if (xposition<circleX+50&&xposition>circleX&&yposition<circleY+50&&yposition>circleY){
-      circleY=50
-      circleX = random(20,width-20)
-      score +=1
+        if(key === "l"){
+          speed +=1
+          if(speed >= 11){
+            speed-=1
+          }
+        }
+        if(key === "b"){  
+            playerSpeed += 1
+            if(playerSpeed >= 17){
+              playerSpeed -=1
+            }
+            
+          }
+        if(key === "k"){
+          playerSpeed -=1
+          if(playerSpeed <=7){
+            playerSpeed +=1
+          }
+        }
+    }   if(key === "t"){
+          speed -=1
+          if(speed <=5){
+            speed +=1
+          }
+    }
+    if(xposition>circleX){
+      xposition -= playerSpeed
+    }else if(xposition<circleX){
+      xposition += playerSpeed
     }
     happyFace(xposition,yposition,size)
     fill(255,255,0)
-    circle(circleX,circleY,50)
-    text(score,50,50)
-   
+    circle(circleX,circleY,ballSize)
+    text("score: "+score,50,50)
+    text("Your speed:"+playerSpeed,130,50)
+    text("Ball speed:" + speed, 230,50)
+    text("Press b to make your player's speed be faster or press k to lower it. Also, press A to make your charcter bigger, and press l to make the ball faster or press t to make it slower", 330,50)
+    text("Difficulty:Easy",50,100)
+    text("Difficulty:Medium",150,100)
+    text("Difficulty:Hard",280,100)
+    text("Reset Score",380,100)
+    // rect(380,87,70,20)
+
+}
+function mouseClicked(){
+  if(mouseX>=50&&mouseX<=130&&mouseY>=90&&mouseY<=110){
+    playerSpeed = 10
+    speed = 3
+    ballSize = 70
+  }else if(mouseX>=150&&mouseX<=250&&mouseY>=87&&mouseY<=107){
+    playerSpeed = 7
+    speed = 5
+    ballSize = 40
+  }else if(mouseX>=280&&mouseX<=360&&mouseY>=87&&mouseY<=107){
+    playerSpeed = 5
+    speed=8
+    ballSize = 25
+  }else if(mouseX>=380&&mouseX<=450&&mouseY>=87&&mouseY<=107){
+    score=0
+  }
 }
 function happyFace (x, y, diam) {
   // Face
