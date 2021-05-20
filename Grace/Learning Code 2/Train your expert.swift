@@ -1,3 +1,4 @@
+let expert = Expert()
 func move() {
     expert.moveForward()
     expert.moveForward()
