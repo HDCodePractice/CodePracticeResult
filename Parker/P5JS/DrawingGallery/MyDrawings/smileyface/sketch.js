@@ -13,7 +13,6 @@ function happyFace (x, y, diam) {
       strokeWeight(2);
       ellipse(x, y, diam, diam);
       
-      // Smile
       var startAng = .1*PI
       var endAng = .9*PI
       var smileDiam = .6*diam;
