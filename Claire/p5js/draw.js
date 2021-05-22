@@ -2,7 +2,7 @@ function setup() {
     createCanvas(windowWidth,windowHeight);
     background(220);
     img = createImg('https://flowergardengirl.co.uk/wp-content/uploads/2014/06/artificial-easy-grass-lawn-summer-house-sandstone-paving-and-white-flower-planting-scheme-3.jpg');
-    image(img,width/500,90,width+200,height+200);
+    image(img,width/500,0,width+200,height+100);
     img.hide();
 }
 
@@ -34,7 +34,6 @@ function mypanda(x,y,size,color1,color2){
     var pandaY=y;
     var pandaSize=size;
     var pandaDistance=pandaSize/2;
-    fill(color1)
     circle(pandaX,pandaY,pandaSize);
     fill(color2);
     circle(pandaX-pandaSize*2/5,pandaY-pandaSize/2,pandaSize/2);
