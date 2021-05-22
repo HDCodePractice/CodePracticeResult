@@ -16,8 +16,8 @@ function setup() {
     yposition = height-50
     fill(255,255,0)
     circleX = random(20,width-20) 
-    song = loadSound('1627 Overland Dr 2 2.m4a')
-    song1 = loadSound('1627 Overland Dr 8.m4a')
+    song = loadSound('1627 Overland Dr 10.m4a')
+    song1 = loadSound('1627 Overland Dr 11.m4a')
 }   
 function draw() {
     background(220)
@@ -74,11 +74,7 @@ function draw() {
             speed +=1
           }
     }
-    if(xposition>circleX){
-      xposition -= playerSpeed
-    }else if(xposition<circleX){
-      xposition += playerSpeed
-    }
+
     happyFace(xposition,yposition,size)
     fill(255,255,0)
     circle(circleX,circleY,ballSize)
@@ -90,7 +86,16 @@ function draw() {
     text("Difficulty:Medium",150,100)
     text("Difficulty:Hard",280,100)
     text("Reset Score",380,100)
-    // rect(380,87,70,20)
+    text("AI bot", 480,100)
+    text ("For AI keep your mouse on top of the text ai bot, but for the other ones just click them",600,100)
+    // rect(480,87,40,20)
+    if(mouseX>=480&&mouseX<=520&&mouseY>=87&&mouseY<=107){
+      if(xposition>circleX){
+        xposition -= playerSpeed
+      }else if(xposition<circleX){
+        xposition += playerSpeed
+      }
+    }
 
 }
 function mouseClicked(){
