@@ -1,18 +1,28 @@
-let character1 = Character()
-world.place(character1, atColumn: 2, row: 0)
-let character2 = Character()
-world.place(character2, atColumn: 4, row: 0)
-let character3 = Character()
-world.place(character3, atColumn: 6, row: 0)
-
-while !isBlocked {
-    if isOnClosedSwitch {
-        toggleSwitch()
-    }
-    moveForward()
+for i in 1 ... 2 {
+    let block = Block()
+    world.place(block, atColumn: 6, row: 2)
 }
-toggleSwitch()
-
-character1.collectGem()
-character2.collectGem()
-character3.collectGem()
+let block1 = Block()
+world.place(block1, atColumn: 4, row: 2)
+for i in 1 ... 2 {
+    let block2 = Block()
+    world.place(block2, atColumn: 2, row: 2)
+}
+for i in 1 ... 3 {
+    moveForward()
+    moveForward()
+    toggleSwitch()
+    turnRight()
+    moveForward()
+    moveForward()
+    moveForward()
+    moveForward()
+    collectGem()
+    turnLeft()
+    turnLeft()
+    moveForward()
+    moveForward()
+    moveForward()
+    moveForward()
+    turnRight()
+}
