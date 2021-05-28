@@ -1,35 +1,46 @@
-let circleY = 25;
-let circleX = 300;
-let speed = 40
-let speedY = speed;
-let speedX = speed;
+var xposition;
+var yposition;
+let circleSpeed = 5;
+let humanSpeed = 7;
+let size = 59;
+let circleX = 0;
+let circleY = 0;
+let score = 0;
+let humanXarea = 0;
 
 function setup() {
-    createCanvas(circleX*2, circleX*2);
-    background(220);
+    createCanvas(windowWidth,windowHeight-50)
+    xposition = width/2;
+    yposition = height-50;
+    fill(25,255,255);
+    circleX = random(20, width-20)
+}   
+
+function human(x,y,size){
+
 }
+
 function draw() {
-    background(220);
-    circle(circleX,circleY,50); 
-    if (circleX > width-25) {
-        speedX = 1*speed;
-    }else if(circleX<25){
-        speedX=-1*speed;
-    }
-    if(speedX>0){
-        //right
-        if(circleX<width/2){
-            circleY-=speedY;
-        }else{
-            circleY+=speedY
+    background(250)
+    circleX += speed;
+    
+
+
+
+    if (keyIsPressed){
+        } else if (keyCode === LEFT_ARROW) {
+            if (xposition > 50) {
+                xposition -= humanSpeed;
+            }
+        } else if (keyCode === RIGHT_ARROW) {
+            if (xposition < width-50) {
+                xposition += humanSpeed;
+            } 
         }
-    }else{
-        //left
-        if(circleX<width/2){
-            circleY+=speedY
-        }else{
-            circleY-=speedY
-        }
+        circle(xposition,yposition,50)
+        text()
     }
-    circleX+=speedX
+
+function windowResized() {
+    setup();
 }
