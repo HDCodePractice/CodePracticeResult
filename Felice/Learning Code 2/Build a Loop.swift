@@ -1,3 +1,4 @@
+let totalGems = randomNumberOfGems
 let character =  Character ()
 world.place (character, atColumn : 0 , row : 3 )
 world.place ( Block (), atColumn : 0 , row : 2 )
