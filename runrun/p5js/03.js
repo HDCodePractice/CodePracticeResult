@@ -113,5 +113,4 @@ function doubleClicked(){
 } 
 function windowResized() {
     setup();
-
 }
