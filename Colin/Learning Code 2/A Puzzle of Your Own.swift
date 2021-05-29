@@ -33,4 +33,3 @@ world.place(character, facing: .east, atColumn: 0, row: 3)
 character.move(distance: 6)
 while character.isBlocked{
     character.turnLeft()
-}
