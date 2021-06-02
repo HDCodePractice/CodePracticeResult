@@ -1,95 +1,119 @@
-let yposition = 50
-let word1 = ""
-let word2 = ""
-let word3 = ""
-let typeWord = ""
-let speed = 3
-let score = 0
-let xposition = 0
-let xposition1 = 0
-let xposition2 = 0
+let ys = [50,100,150,200,250,300,350,400,450];
+let speeds = [3,3,6,3,3,3,3];
+
 function setup() {
     createCanvas(windowWidth,windowHeight-60);
     background(220);
-    word1 = getRandomWord();
-    word2 = getRandomWord();
-    word3 = getRandomWord();
-    xposition = random(20,width-20)
-    xposition1 = random(20,width-20)
-    xposition2 = random(20,width-20)
 }
 
 function windowResized() {
     setup();
 }
 
-
-function getRandomWord(){
-    let words = "When will life return to normal? While the best vaccines are thought to be 95% effective, it takes a coordinated campaign to stop a pandemic. Anthony Fauci, the top infectious-disease official in the U.S., has said  vaccinating 70% to 85% of the U.S. population would enable a return to normalcy. On a global scale, a daunting level of vaccination. At the current pace of 26.8 million a day, it would take another year to achieve a high level of global immunity. The rate, however, is steadily increasing, and new vaccines by additional manufacturers are coming to market."
-    return random(words.split(" "));
-}
-
-
-function showWord(w,x,y){
-    textSize(20);
-    text(w,x,y);
-}
-
-
 function draw(){
     background(220);
-    showWord(word1,xposition,yposition);
-    showWord(word2,xposition1,yposition);
-    showWord(word3,xposition2,yposition);
-    textSize(20);
-    text(typeWord,100,200);
-    yposition += speed
-    if (yposition >= height){
-      yposition = 50
-      score -= 1
-      xposition = random(20,width-20)
-      xposition1 = random(20,width-20)
-      xposition2 = random(20,width-20)
+    for (let index = 0; index < ys.length; index++) {
+        let x = (index + 1) * 50;
+        circle(x,ys[index],30);
+        if (ys[index] >= height) {
+            ys[index] = -15
+        } else {
+            ys[index] += speeds[index];
+        }
     }
+}
+// let yposition = 50
+// let word1 = ""
+// let word2 = ""
+// let word3 = ""
+// let typeWord = ""
+// let speed = 3
+// let score = 0
+// let xposition = 0
+// let xposition1 = 0
+// let xposition2 = 0
+// function setup() {
+//     createCanvas(windowWidth,windowHeight-60);
+//     background(220);
+//     word1 = getRandomWord();
+//     word2 = getRandomWord();
+//     word3 = getRandomWord();
+//     xposition = random(20,width-20)
+//     xposition1 = random(20,width-20)
+//     xposition2 = random(20,width-20)
+// }
+
+// function windowResized() {
+//     setup();
+// }
+
+
+// function getRandomWord(){
+//     let words = "When will life return to normal? While the best vaccines are thought to be 95% effective, it takes a coordinated campaign to stop a pandemic. Anthony Fauci, the top infectious-disease official in the U.S., has said  vaccinating 70% to 85% of the U.S. population would enable a return to normalcy. On a global scale, a daunting level of vaccination. At the current pace of 26.8 million a day, it would take another year to achieve a high level of global immunity. The rate, however, is steadily increasing, and new vaccines by additional manufacturers are coming to market."
+//     return random(words.split(" "));
+// }
+
+
+// function showWord(w,x,y){
+//     textSize(20);
+//     text(w,x,y);
+// }
+
+
+// function draw(){
+//     background(220);
+//     showWord(word1,xposition,yposition);
+//     showWord(word2,xposition1,yposition);
+//     showWord(word3,xposition2,yposition);
+//     textSize(20);
+//     text(typeWord,100,200);
+//     yposition += speed
+//     if (yposition >= height){
+//       yposition = 50
+//       score -= 1
+//       xposition = random(20,width-20)
+//       xposition1 = random(20,width-20)
+//       xposition2 = random(20,width-20)
+//     }
     
-    text("score:"+score,500,50)
+//     text("score:"+score,500,50)
 
-}
+// }
 
-function keyTyped() {
-  if (keyCode === BACKSPACE || keyCode === DELETE){
-    typeWord=typeWord.slice(0,-1);
-  }else{
-    typeWord += key;
-  }
-  if(keyCode === RETURN){
-    word1 = getRandomWord()
-    word2 = getRandomWord()
-    word3 = getRandomWord()
-    typeWord = typeWord.slice(0,-5)
-  }
-  if (typeWord == word1){
-    typeWord = ""
-    word1 = getRandomWord();
-    score+=1
-    xposition = random(20,width-20)
-    yposition = 50
+// function keyTyped() {
+//   if (keyCode === BACKSPACE || keyCode === DELETE){
+//     typeWord=typeWord.slice(0,-1);
+//   }else{
+//     typeWord += key;
+//   }
+//   if(keyCode === RETURN){
+//     word1 = getRandomWord()
+//     word2 = getRandomWord()
+//     word3 = getRandomWord()
+//     typeWord = typeWord.slice(0,-5)
+//   }
+//   if (typeWord == word1){
+//     typeWord = ""
+//     word1 = getRandomWord();
+//     score+=1
+//     xposition = random(20,width-20)
+//     yposition = 50
 
-  } else if (typeWord == word2){
-    typeWord = ""
-    word2 = getRandomWord();
-    score+=1
-    xposition1 = random(20,width-20)
-    yposition = 50
-  }else if (typeWord == word3){
-    typeWord = ""
-    word3 =getRandomWord();
-    score+=1
-    xposition2 = random(20,width-20)
-    yposition = 50
-  }
-}
-// var xposition;
+//   } else if (typeWord == word2){
+//     typeWord = ""
+//     word2 = getRandomWord();
+//     score+=1
+//     xposition1 = random(20,width-20)
+//     yposition = 50
+//   }else if (typeWord == word3){
+//     typeWord = ""
+//     word3 =getRandomWord();
+//     score+=1
+//     xposition2 = random(20,width-20)
+//     yposition = 50
+//   }
+// }
+// // var xposition;
 // var yposition;
 // let speed = 5
 // let playerSpeed = 7
