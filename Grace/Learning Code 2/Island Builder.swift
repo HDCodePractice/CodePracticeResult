@@ -12,6 +12,3 @@ for i in sea {
     world.removeAllBlocks(at:i )
     world.place(Water(), at: i)
 }
-for i in island {
-    world.place(Block(), at: i)
-}
