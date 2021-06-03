@@ -11,3 +11,7 @@ for coordinate in allCoordinates {
 for i in landCoordinates {
     world.place(Block(), at: i)
 }
+for i in seaCoordinates {
+    world.removeAllBlocks(at:i )
+    world.place(Water(), at: i)
+}
