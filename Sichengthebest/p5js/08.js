@@ -67,17 +67,17 @@ function draw() {
         yposition = 0;
     }
     if (mouseIsPressed) {
-        if (mouseX > 250 && mouseX < 290 && mouseY > 100 && mouseY < 190) {
+        if (mouseX > 250 && mouseX < 330 && mouseY > 100 && mouseY < 130) {
             speed = 4;pointsadd = 2;
-        } else if (mouseX > 350 && mouseX < 430 && mouseY > 100 && mouseY < 180) {
+        } else if (mouseX > 350 && mouseX < 430 && mouseY > 100 && mouseY < 130) {
             speed = 3;pointsadd = 1;
-        } else if (mouseX > 450 && mouseX < 530 && mouseY > 100 && mouseY < 180) {
+        } else if (mouseX > 450 && mouseX < 530 && mouseY > 100 && mouseY < 130) {
             speed = 4.5;pointsadd = 3;
-        } else if (mouseX > 550 && mouseX < 630 && mouseY > 100 && mouseY < 180) {
+        } else if (mouseX > 550 && mouseX < 630 && mouseY > 100 && mouseY < 130) {
             speed = 6;pointsadd = 4;
-        } else if (mouseX > 650 && mouseX < 730 && mouseY > 100 && mouseY < 180) {
+        } else if (mouseX > 650 && mouseX < 730 && mouseY > 100 && mouseY < 130) {
             speed = 7.5;pointsadd = 5;
-        } else if (mouseX > 750 && mouseX < 830 && mouseY > 100 && mouseY < 180) {
+        } else if (mouseX > 750 && mouseX < 830 && mouseY > 100 && mouseY < 130) {
             speed = 10;pointsadd = 6;
         }
     }
