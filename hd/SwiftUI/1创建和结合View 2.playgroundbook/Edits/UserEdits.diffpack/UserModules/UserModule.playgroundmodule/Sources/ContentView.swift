@@ -1,19 +1,35 @@
-import SwiftUI
-import MapKit
-import PlaygroundSupport
 
-struct ContentView: View {
-    var body: some View {
+import SwiftUI
+
+public struct ContentView: View {
+    public init(){}
+    public var body: some View {
+        CircleImage()
+    }
+}
+
+
+public struct ContentView5: View {
+    public init(){}
+    public var body: some View {
+        MapView()
+    }
+}
+
+public struct ContentView6: View {
+    public init(){}
+    public var body: some View {
         VStack{
             MapView()
-                .ignoresSafeArea(edges:.top)
-                .frame(height:300)
+                .ignoresSafeArea(edges: .top)
+                .frame(height: 300)
             CircleImage()
-                .offset(y:-130)
-                .padding(.bottom,-130)
+                .offset(y: -130)
+                .padding(.bottom, -130)
             VStack(alignment: .leading) {
                 Text("Turtle Rock")
                     .font(.title)
+                
                 HStack {
                     Text("Joshua Tree National Park")
                         .font(.subheadline)
@@ -21,6 +37,9 @@ struct ContentView: View {
                     Text("California")
                         .font(.subheadline)
                 }
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+                
                 Divider()
                 Text("About Turtle Rock")
                     .font(.title2)
@@ -31,5 +50,3 @@ struct ContentView: View {
         }
     }
 }
-
-PlaygroundPage.current.setLiveView(ContentView())
