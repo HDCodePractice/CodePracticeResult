@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<playground version="6.0" requires-full-environment="false" target-platform="ios">
+    <pages>
+        <page name="Run SwiftUI"/>
+        <page name="Customize the Text View"/>
+        <page name="Combine Views Using Stacks"/>
+        <page name="Create a Custom Image View"/>
+        <page name="Use SwiftUI Views From Other Frameworks"/>
+        <page name="Compose the Detail View"/>
+    </pages>
+</playground>

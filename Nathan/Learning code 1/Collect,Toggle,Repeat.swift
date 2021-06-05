@@ -1,0 +1,15 @@
+func Do() {
+  moveForward()
+  collectGem()
+  moveForward()
+  toggleSwitch()
+  moveForward()
+}
+Do()
+turnLeft()
+Do()
+moveForward()
+turnLeft()
+Do()
+turnLeft()
+Do()
