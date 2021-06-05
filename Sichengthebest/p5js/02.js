@@ -38,7 +38,3 @@ function draw() {
 function windowResized() {
   setup();
 }
-
-function windowResized() {
-  setup()
-}
