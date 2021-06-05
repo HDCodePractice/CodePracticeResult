@@ -52,13 +52,13 @@ function draw(){
     background(220);
     showWord("Your Score: " + score,width/10,50);
     showWord("HP: " + HP,width/10,100);
-    // if(HP<=0){
-    //     background(0)
-    //     textSize(50)
-    //     fill(255,255,255)
-    //     text("Game Over",width/2,height/2)
-    //     fill(0,0,0)
-    // }
+    if(HP<=0){
+        background(0)
+        textSize(50)
+        fill(255,255,255)
+        text("Game Over",width/2,height/2)
+        fill(0,0,0)
+    }
     for (let index = 0; index < wordsCount; index++) {
       showWord(words[index],wordsx[index],wordsy[index])
       wordsy[index] += speed;
