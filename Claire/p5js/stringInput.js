@@ -11,7 +11,6 @@ let word3Y = "";
 let inputWord = "";
 var score = 1;
 var wordBeenTyped = 0;
-
 function setup() {
     createCanvas(windowWidth,windowHeight-60);
     background(220);
@@ -27,7 +26,7 @@ function windowResized() {
 }
 
 function getRandomWord(){
-    let paragraph = "Hypertension Intravenous Malignant Outpatient Epidermis Chronis Contusion Accumulation Decomposition Electrocardiogram Physician Maintaining Cardiopulmonary Resuscitation Abbreviations Acronyms Lipoprotein Cholesterol";
+    let paragraph = "Today’s interactive game Doodle celebrates swing dancing and the Savoy Ballroom—an iconic Swing Era dance hall that thrived from the 1920s to 50s in New York City’s Harlem neighborhood. On this day in 2002, Frankie Manning and Norma Miller, two of members of Whitey's Lindy Hoppers, unveiled a commemorative plaque where its entrance once stood.";
     return random(paragraph.split(" "));
 }
 
@@ -60,8 +59,8 @@ function draw(){
     background(96,199,209);
     fill(255,255,255)
     strokeWeight(3)
-    rect(width/1.75,height/1.5,-200,50)
-    text("Your Score: " + score, width/20,height/13);
+    rect(width/1.75,height/1.5,-200,50);
+    text("Your Score: " + score, 100,100);
     showWord(word1,word1X,word1Y,"rgb(0,102,153)");
     showWord(word2,word2X,word2Y,"rgb(0,102,153)");
     showWord(word3,word3X,word3Y,"rgb(0,102,153)");
