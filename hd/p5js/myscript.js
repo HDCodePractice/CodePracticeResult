@@ -1,8 +1,31 @@
-let ys = [50,100,150,200,250];
+let words = [];
+
+class Word{
+    constructor(word){
+        this.word = word;
+        this.reset();
+    }
+    reset(){
+        this.x = random(50,width-50);
+        this.y = 50;
+        this.randomColor();
+    }
+    display(){
+        fill(this.color);
+        text(this.word,this.x,this.y);
+    }
+    randomColor(){
+        this.color = random(["rgb(255,255,0)","rgb(255,0,255)","rgb(0,255,255)"])
+    }
+}
 
 function setup() {
     createCanvas(windowWidth,windowHeight-60);
     background(220);
+    for (let index = 0; index < 6; index++) {
+        word = new Word('hello');
+        words.push(word);
+    }
 }
 
 function windowResized() {
@@ -11,18 +34,12 @@ function windowResized() {
 
 function draw(){
     background(220);
-    for (let index = 0; index < ys.length; index++) {
-        let x = (index + 1) * 50;
-        circle(x,ys[index],30);
-        if (ys[index]>height){
-            ys[index] = 50;
+    for (let index = 0; index < words.length; index++) {
+        words[index].display();
+        if (words[index].y>height){
+            words[index].reset();
         }else{
-            if (index === 2){
-                ys[index] += 10;
-            }else{
-                ys[index] += 5;
-            }
-            
+            words[index].y += 5;
         }
     }
 }
