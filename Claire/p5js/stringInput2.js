@@ -11,6 +11,38 @@ let longWord = "When will life return to normal? While the best vaccines are tho
 let punctuations = "";
 let numbers = "";
 
+class Word{
+    constructor(word, type){
+        this.word = word;
+        this.type = type;
+        this.reset();
+    }
+    reset(){
+        this.xNormal = random(50, width-50);
+        this.yNormal = -50;
+        this.xSuper = -50;
+        this.ySuper = random(50, height-50);
+        this.colorNormal = 'rgb(0,0,0)'
+        this.colorSuper = randomColor();
+        if (this.type === 'super'){
+            this.displaySuper();
+        } else if (this.type === 'normal'){
+            this.displayNormal();
+        }
+    }
+    displaySuper(){
+        fill(this.colorSuper);
+        text(this.word, this.xSuper, this.ySuper);
+    }
+    displayNormal(){
+        fill(this.colorNormal);
+        text(this.word, this.xNormal, this.yNormal);
+    }
+    randomColor(){
+        this.color = random(['rgb(255,0,0)', 'rgb(0,255,0)', 'rgb(0,0,255)'])
+    }
+}
+
 function setup() {
     createCanvas(windowWidth,windowHeight-60);
     background(156,220,254);
@@ -18,6 +50,7 @@ function setup() {
         words.push(getRandomWord());
         wordsX.push(random(50,width-50));
         wordsY.push(50);
+        word = new Word (getRandomWord(), 'normal')
     }
 }
 
@@ -74,7 +107,7 @@ function draw(){
     }
 }
 
-function keyTyped() {
+function keyPressed() {
     if (key !== " "){
         if (keyCode === BACKSPACE || keyCode === DELETE){
             typeWord=typeWord.slice(0,-1);
