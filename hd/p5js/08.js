@@ -8,15 +8,19 @@ let completed;
 let linePosition = [];
 
 function randomGrid(){
-	opts = ['t','s','c']
+	opts = ['t','s','c','t','s','c','t','s','c','t','s','c','n']
 	return opts[floor(random(opts.length))];
 }
 
 function newGame() {
-	grid = new Array(gridSize * gridSize).fill('t');
-	for (let index = 0; index < grid.length; index++) {
-		grid[index] = randomGrid();
+	grid = new Array(gridSize * gridSize).fill('n');
+	gridsleft = [];
+	for (let index = 0; index < grid.length/2; index++) {
+		rg = randomGrid();
+		gridsleft.push(rg);
+        gridsleft.push(rg);
 	}
+	grid = shuffle(gridsleft);
 	gameOver = false;
 	completed = false;
 	score = 0;
@@ -32,6 +36,11 @@ function setup() {
 function mousePressed() {
     linePosition.push(mouseX);
     linePosition.push(mouseY);
+	if (mouseX > 0 && mouseX < cellSize && mouseY > scoreHeight && mouseY < scoreHeight+cellSize ){
+		grid[0] = 'n';
+		drawGrid();
+	}
+
     if (linePosition.length == 4) {
         line(linePosition[0],linePosition[1],linePosition[2],linePosition[3]);
         linePosition = [];
