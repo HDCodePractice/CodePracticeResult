@@ -23,7 +23,7 @@ class Word{
         this.xSuper = -50;
         this.ySuper = random(50, height-50);
         this.colorNormal = 'rgb(0,0,0)'
-        this.colorSuper = randomColor();
+        this.colorSuper = this.randomColor();
         if (this.type === 'super'){
             this.displaySuper();
         } else if (this.type === 'normal'){
