@@ -5,6 +5,7 @@ const scoreHeight = 100;
 let gameOver;
 let score;
 let completed;
+let linePosition = [];
 
 function randomGrid(){
     opts = ['t','s','c']
