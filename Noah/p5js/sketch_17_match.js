@@ -1,20 +1,28 @@
 const cellSize = 40;
 const gridSize = 12;
 const scoreHeight = 100;
-let grid;
+// let grid=['s','t','c','s','c','c','c','c','c','c','c','c','c','c','c','c'];
 let gameOver;
 let score;
 let completed;
-let mousePosition;
-let gridShapes;
+
+function randomGrid(){
+    opts = ['t','s','c']
+    return opts[floor(random(opts.length))];
+}
 
 function newGame() {
-    grid = new Array(gridSize * gridSize).fill(0);
+    grid = new Array(gridSize * gridSize).fill('t');
+    gridsleft = [];
+    for (let index = 0; index < grid.length/2; index++) {
+        shape = randomGrid();
+        gridsleft.push(shape);
+        gridsleft.push(shape);
+    }
+    grid = shuffle(gridsleft);
     gameOver = false;
     completed = false;
     score = 0;
-    mousePosition = []
-    gridShapes = [[],[],[],[],[],[],[],[],[],[],[],[]];
 }
 
 function setup() {
@@ -25,13 +33,20 @@ function setup() {
 }
 
 function mousePressed() {
-    mousePosition.push(mouseX);
-    mousePosition.push(mouseY);
-    if (mousePosition.length == 4) {
-        line(mousePosition[0],mousePosition[1],mousePosition[2],mousePosition[3]);
-        mousePosition = [];
+    linePosition.push(mouseX);
+    linePosition.push(mouseY);
+    for (let i = 0; i < gridSize; i++) {
+        if (mouseX > cellSize*i && mouseX < cellSize*(i+1) && mouseY > (scoreHeight+cellSize*i) && mouseY < scoreHeight+cellSize*(i+1) ){
+            grid[i] = 'n';
+            drawGrid();
+        }
     }
         
+
+    if (linePosition.length == 4) {
+        line(linePosition[0],linePosition[1],linePosition[2],linePosition[3]);
+        linePosition = [];
+    } 
 }
 
 function updateCanvas() {
@@ -46,14 +61,15 @@ function updateCanvas() {
     }
 }
 
+
 function drawCircle(row,col) {
     fill(0,250,0)
-    circle(col*cellSize+1+cellSize/2, row*cellSize+1+scoreHeight+cellSize/2, cellSize-15)
+    circle(col*cellSize+1+cellSize/2, row*cellSize+1+scoreHeight+cellSize/2, cellSize-cellSize/2.5)
 }
 
 function drawSquare(row, col) {
     fill(0,0,250)
-    square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize-15)
+    square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize-cellSize/2.5)
 }
 
 function drawTriangle(row, col) {
@@ -68,21 +84,16 @@ function drawGrid() {
         for (let col = 0; col < gridSize; col++) {
             let coloring = {};
             const idx = row * gridSize + col;
-            fill(235)
+            fill(235);
             strokeWeight(2);
             stroke(64);
             rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize);
-            let choices = ["C","S","T"];
-            var choice = random(choices);
-            if (choice == "C") {
-                drawCircle(row,col);
-                gridShapes[row].push("Circle");
-            } else if (choice == "S") {
+            if (grid[idx] === 's'){
                 drawSquare(row,col);
-                gridShapes[row].push("Square");
-            } else {
-                drawTriangle(row,col)
-                gridShapes[row].push("Triangle");
+            } else if (grid[idx] === 'c'){
+                drawCircle(row,col);
+            } else if (grid[idx]  === 't'){
+                drawTriangle(row,col);
             }
         }
     }
