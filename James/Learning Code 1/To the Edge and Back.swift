@@ -1,36 +1,19 @@
 
-func /*#-editable-code funcName*/ loop /*#-end-editable-code*/() {
-    //#-editable-code
+func code() {
     moveForward()
-    collectGem()
+    moveForward()
+    toggleSwitch()
+    turnLeft()
+    turnLeft()
+    moveForward()
+    moveForward()
     
-    //#-end-editable-code
 }
-//#-editable-code
-loop()
-loop()
-turnRight()
-
-loop()
-loop()
-loop()
-turnRight()
-
-loop()
-turnRight()
-
-loop()
-loop()
-turnLeft()
-
-
-loop()
-
-turnLeft()
-
-
-loop()
-loop()
-
-
-//#-end-editable-code
+for i in 1 ... 1 {
+    code()
+    code()
+    turnLeft()
+    code()
+    code()
+    
+}
