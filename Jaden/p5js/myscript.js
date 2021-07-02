@@ -1,83 +1,223 @@
-let speed = 3;
-let words = [];
-let wordselection = "When will life return to normal? While the best vaccines are thought to be 95% effective, it takes a coordinated campaign to stop a pandemic. Anthony Fauci, the top infectious-disease official in the U.S., has said that vaccinating 70% to 85% of the U.S. population would enable a return to normalcy.On a global scale, that’s a daunting level of vaccination. At the current pace of 26.8 million a day, it would take another year to achieve a high level of global immunity. The rate, however, is steadily increasing, and new vaccines by additional manufacturers are coming to market."
-let wordsx = [] ;
-let wordsy = [];
-let wordsCount = 3;
-let typeWord = ''
-let score = 0
-let hp = 100
+const cellSize = 100;
+const gridSize = 10;
+const scoreHeight = 100;
+let grid=['s','t','c','s','c','c','c','c','c','c','c','c','c','c','c','c'];
+let gameOver;
+let score;
+let completed;
+let linePosition = [];
+
+
+function randomGrid(){
+    const seed = random(1);
+    if (seed < 0.33) {
+     return 's'
+    }else if (seed > 0.77){
+     return 't'
+    }
+    return 'c'
+   }
+   
+   function newGame() {
+    grid = new Array(gridSize * gridSize).fill('t');
+    for (let index = 0; index < grid.length; index++) {
+     grid[index] = randomGrid();
+    }
+    gameOver = false;
+    completed = false;
+    score = 0;
+   }
 
 function setup() {
-    createCanvas(windowWidth,windowHeight-60);
-    for (let index = 0; index < wordsCount; index++) {
-      words.push(getRandomWord())
-      wordsx.push(random(50,width-50));
-      wordsy.push(50);
-    }
+ createCanvas(cellSize * gridSize + 2, cellSize * gridSize + 2 + scoreHeight);
+ newGame();
+ noLoop();
+ updateCanvas();
 }
 
-function windowResized() {
-    setup();
+function mousePressed() {
+    linePosition.push(mouseX);
+    linePosition.push(mouseY);
+    if (linePosition.length == 4) {
+        line(linePosition[0],linePosition[1],linePosition[2],linePosition[3]);
+        linePosition = [];
+    } 
 }
 
-function getRandomWord(){
-    return random(wordselection.split(" "));
+function updateCanvas() {
+ background(235);
+ drawScore();
+ drawGrid();
+ if (gameOver) {
+  drawGameOver();
+ }
+ if (completed) {
+  drawCompleted();
+ }
 }
 
-function showWord(w,x,y,color){
-  textSize(20); 
-  fill(color);
-  text(w,x,y);
+
+function drawCircle(row,col) {
+    fill(0,250,0)
+    circle(col*cellSize+1+cellSize/2, row*cellSize+1+scoreHeight+cellSize/2, cellSize*4/5)
 }
 
-function resetWorld(w){
-    wordsy[w] = 50;
-    wordsx[w] = random(50,width-50);
-    words[w] = getRandomWord();
+function drawSquare(row, col) {
+    fill(0,0,250)
+    square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5)
 }
 
-function draw(){
-  background(250)
-  showWord(typeWord,width/2,height-100,"rgb(255,0,0)");
-  showWord("Your Score:"+score,100,100,"rgb(255,0,0)");
-  showWord("HP:"+hp,100,200,"rgb(255,0,0)");
-  for (let index = 0; index < wordsCount; index++) {
-    showWord(words[index],wordsx[index],wordsy[index],"rgb(0,0,0)")
-    wordsy[index] += speed;
-    if (wordsy[index] >= height){
-      resetWorld(index);
-      hp -= words[index].length
-    }
+function drawTriangle(row, col) {
+    fill(250,0,0)
+    triangle(col*cellSize+1+cellSize/1.2,row*cellSize+1+scoreHeight+(cellSize-cellSize/5),
+        col*cellSize+1+cellSize/2,row*cellSize+1+scoreHeight+(cellSize-cellSize/1.25),
+        col*cellSize+1+(cellSize-cellSize/1.2),row*cellSize+1+scoreHeight+(cellSize-cellSize/5))
+}
+
+function drawGrid() {
+ for (let row = 0; row < gridSize; row++) {
+  for (let col = 0; col < gridSize; col++) {
+   let coloring = {};
+   const idx = row * gridSize + col;
+   fill(235);
+   strokeWeight(2);
+   stroke(64);
+   rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 10);
+   if(grid[idx]==='s'){
+       drawSquare(row,col)
+   }else if(grid[idx]==='c'){
+       drawCircle(row,col)
+   }else if(grid[idx]==='t'){
+       drawTriangle(row,col)
+   }
   }
+ }
+ 
+
 }
 
-function keyTyped() {
-    if (key === ' '){
-      return
-    }
-  
-    if (keyCode === BACKSPACE || keyCode === DELETE){
-      typeWord=typeWord.slice(0,-1);
-    } else if (keyCode === ENTER){
-      typeWord = ''
-    } else if (keyCode === UP_ARROW){
-      wordsCount += 1;
-    } else if (keyCode === DOWN_ARROW){
-      wordsCount -= 1;
-    } else{
-      typeWord += key
-    }
-    
-    for (let index = 0; index < wordsCount; index++) {
-      if (typeWord == words[index]){
-        resetWorld(index);
-        score += words[index].length
-        hp += words[index].length
-        typeWord = "";
-      }
-    }
-  }// let typeWord = ""
+function drawScore() {
+ drawText(`Score: ${score}`,
+  color(0, 220, 0, gameOver ? 128 : 255),
+  32,
+  width / 2,
+  scoreHeight / 2);
+}
+
+function drawGameOver() {
+ drawText('Game Over\r\nPress [Enter] to restart.',
+  color(220, 0, 0),
+  32,
+  width / 2,
+  height / 2 + scoreHeight / 2);
+}
+
+function drawCompleted() {
+ drawText('Congrats on 2048\r\nPress [Enter] to continue.',
+  color(0, 220, 0),
+  32,
+  width / 2,
+  height / 2 + scoreHeight / 2);
+}
+
+function drawText(msg, inkColor, size, x, y) {
+ textAlign(CENTER, CENTER);
+ textSize(size);
+ fill(inkColor);
+ noStroke();
+ text(msg, x, y);
+}
+// let wordselection = "When will life return to normal? While the best vaccines are thought to be 95% effective, it takes a coordinated campaign to stop a pandemic. Anthony Fauci, the top infectious-disease official in the U.S., has said that vaccinating 70% to 85% of the U.S. population would enable a return to normalcy.On a global scale, that’s a daunting level of vaccination. At the current pace of 26.8 million a day, it would take another year to achieve a high level of global immunity. The rate, however, is steadily increasing, and new vaccines by additional manufacturers are coming to market."
+// let vs = [];
+// let typeWord = ''
+// let hp = 100
+// let score = 0
+// let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+// class Word{
+//   constructor(w,x,y,color){
+//       this.w = w;
+//       this.x = x;
+//       this.y = y;
+//       this.color = color;
+//   }
+//   display(){
+//       fill(this.color);
+//       text(this.w,this.x,this.y);
+//   }
+// }
+
+// function getRandomWord(){
+//   return random(wordselection.split(" "));
+// }
+
+// function setup() {
+//   createCanvas(windowWidth,windowHeight-60);
+//   background(220);
+//   for (let index = 0; index < 3; index++) {
+//       word = new Word(getRandomWord(),random(50,width-50),100,"rgb(0,0,0)");
+//       vs.push(word);
+//   }
+// }
+
+// function showWord(w,x,y,xsize,ysize){
+//   textSize(20);
+//   text(w,x,y,xsize,ysize);
+// } 
+
+// function windowResized() {
+//     setup();
+// }
+
+// function draw(){
+//   background(220);
+//   for (let index = 0; index < vs.length; index++) {
+//       vs[index].display();
+//       if (vs[index].y>height){
+//           hp -= vs[index].w.length
+//           vs[index].w = getRandomWord();
+//           vs[index].y = 50;
+//           vs[index].x = random(50,width-50);
+//           typeWord = "";
+//       }else{
+//           vs[index].y += 3;
+//       }
+//   }
+
+//   for (let index = 0; index < vs.length; index++) {
+//     if (typeWord === vs[index].w){
+//       score += vs[index].w.length
+//       vs[index].w = getRandomWord();
+//       vs[index].y = 50;
+//       vs[index].x = random(50,width-50);
+//       typeWord = "";
+//     }
+//   }
+//   if(hp<=0){
+//     background(0)
+//     textSize(50)
+//     fill(255,255,255)
+//     text("Game Over",width/2,height/2)
+//     fill(0,0,0)
+//     }
+//   showWord(typeWord,width/2,height-100,1000,1000)
+//   showWord("Your HP:" + hp,100,100,1000,1000)
+//   showWord("Your Score:" + score,100,200,1000,1000)
+// }
+
+// function keyTyped() {
+//     if (key === ' '){
+//       return
+//     }
+//     if (keyCode === BACKSPACE || keyCode === DELETE){
+//       typeWord=typeWord.slice(0,-1);
+//     } else if (keyCode === ENTER){
+//       typeWord = ''
+//     } else{
+//       typeWord += key
+//     }
+//   }
+// let typeWord = ""
 // let score = 0
 // let speed = 3;
 // let words = [];
