@@ -1,31 +1,9 @@
-let words = [];
-
-class Word{
-    constructor(word){
-        this.word = word;
-        this.reset();
-    }
-    reset(){
-        this.x = random(50,width-50);
-        this.y = 50;
-        this.randomColor();
-    }
-    display(){
-        fill(this.color);
-        text(this.word,this.x,this.y);
-    }
-    randomColor(){
-        this.color = random(["rgb(255,255,0)","rgb(255,0,255)","rgb(0,255,255)"])
-    }
-}
+clickLink = []
 
 function setup() {
     createCanvas(windowWidth,windowHeight-60);
     background(220);
-    for (let index = 0; index < 6; index++) {
-        word = new Word('hello');
-        words.push(word);
-    }
+    noLoop();
 }
 
 function windowResized() {
@@ -34,12 +12,24 @@ function windowResized() {
 
 function draw(){
     background(220);
-    for (let index = 0; index < words.length; index++) {
-        words[index].display();
-        if (words[index].y>height){
-            words[index].reset();
-        }else{
-            words[index].y += 5;
-        }
+    circle(30, 30, 20);
+    circle(100, 100, 20);
+}
+
+function drawLine(clickLink){
+    x1 = clickLink[0][0];
+    y1 = clickLink[0][1];
+    x2 = clickLink[1][0];
+    y2 = clickLink[1][1];
+    line(x1,y1,x2,y2);
+}
+
+function mouseClicked() {
+    if (clickLink.length === 0){
+        clickLink.push([mouseX, mouseY]);
+    }else if (clickLink.length === 1){
+        clickLink.push([mouseX, mouseY]);
+        drawLine(clickLink);
+        clickLink = [];
     }
 }

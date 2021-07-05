@@ -1,0 +1,17 @@
+turnLeft()
+moveForward()
+moveForward()
+turnLeft()
+moveForward()
+moveForward()
+moveForward()
+moveForward()
+moveForward()
+toggleSwitch()
+moveForward()
+moveForward()
+moveForward()
+moveForward()
+collectGem()
+
+
