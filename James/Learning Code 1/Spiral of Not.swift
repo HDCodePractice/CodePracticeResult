@@ -5,6 +5,5 @@ for i in 1 ... 13 {
     } else {
         turnLeft()
         toggleSwitch()
-    }
-    
+    }  
 }
