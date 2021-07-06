@@ -1,8 +1,6 @@
 func gemJump() {
     moveForward()
     collectGem()
-    
-
 for i in 1 ... 2 {
     turnLeft()
     moveForward()
@@ -10,19 +8,11 @@ for i in 1 ... 2 {
     turnRight()
     turnRight()
     moveForward()
-    
-    
-    
 }
     turnLeft()
     moveForward()
     collectGem()
-    moveForward()
-    
-
-
-
-}
+    moveForward()}
 for i in 1 ... 4 {
     gemJump()
     
