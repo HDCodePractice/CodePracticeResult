@@ -4,7 +4,6 @@ func MasterCode() {
     }
     else if isOnClosedSwitch {toggleSwitch()
     }
-    
 }
 func MegaMasterCode() {
     MasterCode()
