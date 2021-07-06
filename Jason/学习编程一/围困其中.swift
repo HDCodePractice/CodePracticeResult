@@ -2,7 +2,6 @@ moveForward()
 func cort() {
     if isOnClosedSwitch {
         toggleSwitch()
-        
     } else if isOnGem {
         collectGem()
     }
