@@ -1,0 +1,17 @@
+func GemCollector() {
+  moveForward()
+  collectGem()
+}
+collectGem()
+GemCollector()
+GemCollector()
+turnRight()
+GemCollector()
+GemCollector()
+turnRight()
+GemCollector()
+GemCollector()
+turnRight()
+GemCollector()
+turnRight()
+GemCollector()
