@@ -15,7 +15,6 @@ turnLeft()
 moveForward()
 moveForward()
 turnLeft()
-
 for i in 1 ... 5 {
     collectOrToggle()
 }
