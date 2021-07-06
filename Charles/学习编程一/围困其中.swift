@@ -1,15 +1,11 @@
 func toggleorgem() {
     moveForward()
     if isOnClosedSwitch {
-        toggleSwitch()
-        
+        toggleSwitch()       
     }
     if isOnGem {
-        collectGem()
-        
-    }
-    
-    
+        collectGem()   
+    } 
 }
 toggleorgem()
 turnLeft()
