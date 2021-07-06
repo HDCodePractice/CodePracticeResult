@@ -4,11 +4,9 @@ func collectOrToggle() {
         toggleSwitch()
         moveForward()
         moveForward()
-        
     } else if isOnOpenSwitch {
         moveForward()
         moveForward()
-        
     } else if isOnGem {
         collectGem()
         moveForward()
@@ -17,12 +15,7 @@ func collectOrToggle() {
         moveForward()
         moveForward()
         
-    }
-    
-    
-    
-    
-    //#-end-editable-code
+    }    //#-end-editable-code
 }
 //#-editable-code
 collectOrToggle()
@@ -37,9 +30,5 @@ collectOrToggle()
 turnRight()
 collectOrToggle()
 collectOrToggle()
-
 collectOrToggle()
-
-
-
 //#-end-editable-code
