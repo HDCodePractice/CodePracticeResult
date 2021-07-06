@@ -1,11 +1,9 @@
 for i in 1 ... 4 {
     moveForward()
-    if isOnGem
-    {
+    if isOnGem{
         collectGem()
-        
-    } else{turnLeft()
-    
+    } else{
+        turnLeft()
         moveForward()
         moveForward()
         collectGem()
@@ -15,6 +13,5 @@ for i in 1 ... 4 {
         moveForward()
         turnLeft()
     }
-    
 }
 
