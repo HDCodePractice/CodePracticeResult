@@ -1,14 +1,15 @@
-moveForward()
-moveForward()
-isOnClosedSwitch
-toggleSwitch()
+for i in 1 ... 4 {
+    moveForward()
+    if isOnClosedSwitch {
+        toggleSwitch()
+        
+        
+    }
+    
+    
+    
+    
+}
 
-moveForward()
-isOnClosedSwitch
-toggleSwitch()
-
-moveForward()
-isOnClosedSwitch
-toggleSwitch()
 
 
