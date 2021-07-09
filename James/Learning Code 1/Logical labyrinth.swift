@@ -22,7 +22,6 @@ for i in 1 ... 14 {
     } else if isOnGem {
         collectGem()
     }
-    
 }
 for i in 1 ... 2 {
     turnLeft()
@@ -30,7 +29,3 @@ for i in 1 ... 2 {
 }
 moveForward()
 collectGem()
-
-
-
-
