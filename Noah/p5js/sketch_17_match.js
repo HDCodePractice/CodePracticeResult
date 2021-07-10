@@ -1,13 +1,12 @@
 const cellSize = 60;
-const gridSize = 10;
+const gridSize = 8;
 const scoreHeight = 100;
 let grid = [];
 let gameOver;
 let score;
 let completed;
 let linePosition = [];
-let gridnum1;
-let gridnum2;
+let chosenGrid = -1
 
 function randomGrid(){
     opts = ['t','s','c','t','s','c','t','s','c','t','s','c','t','s','c','t','s','c','n']
@@ -35,28 +34,66 @@ function setup() {
     updateCanvas();
 }
 
+function matchgrids(gridnum1,gridnum2) {
+    let match = false;
+    let turns = 0;
+
+    let row1 = (gridnum1 - (gridnum1 % gridSize)) / gridSize;
+    if (row1 == 0) {
+        col1 = gridnum1;
+    } else {
+        col1 = gridnum1 % (row1*gridSize);
+    }
+
+    let row2 = (gridnum2 - (gridnum2 % gridSize)) / gridSize;
+    if (row2 == 0) {
+        col2 = gridnum2;
+    } else {
+        col2 = gridnum2 % (row2*gridSize);
+    }
+
+    if (row1 == row2) {
+        if (row1 == 0 || row1 == gridSize-1) {
+            match = true
+        } else if ((grid[gridnum1 - Math.abs(gridnum1 - gridnum2 - 1)] == 'n' || grid[gridnum1 + Math.abs(gridnum1 - gridnum2 - 1)] == 'n') || Math.abs(col1 - col2) == 1) {
+            match = true
+        } 
+    } else if (col1 == col2) {
+        print(grid[gridSize * (row1 + Math.abs(row1 - row2))-1])
+        if (col1 == 0 || col1 == gridSize-1) {
+            match = true
+        } else if ((grid[gridSize * (row1 - Math.abs(row1 - row2 - 1))-1] == 'n' || grid[gridSize * (row1 + Math.abs(row1 - row2 - 1))-1] == 'n') || Math.abs(row1 - row2) == 1) {
+            match = true
+        }
+    }
+    return match
+}
+
 function mousePressed() {
     linePosition.push(mouseX);
     linePosition.push(mouseY);
-    gridnum1 = int(int((linePosition[1]-scoreHeight)/cellSize)*gridSize)+int(linePosition[0]/cellSize)
-    updateCanvas();
+    chosenGrid = int(int((linePosition[1]-scoreHeight)/cellSize)*gridSize)+int(linePosition[0]/cellSize)
+    row = chosenGrid
+    updateCanvas()
     if (linePosition.length == 4) {
+        gridnum1 = int(int((linePosition[1]-scoreHeight)/cellSize)*gridSize)+int(linePosition[0]/cellSize)
         gridnum2 = int(int((linePosition[3]-scoreHeight)/cellSize)*gridSize)+int(linePosition[2]/cellSize)
-        if (grid[gridnum1] == grid[gridnum2]) {
-            if (gridnum1 != gridnum2) {
-                print(gridnum1)
-                print(gridnum2)
-                // line(linePosition[0],linePosition[1],linePosition[2],linePosition[3]);
-                grid[gridnum1] = 'n';
-                grid[gridnum2] = 'n';
-                updateCanvas();
+        if (matchgrids(gridnum1,gridnum2) == true) {
+            if (grid[gridnum1] === grid[gridnum2]) {
+                if (gridnum1 !== gridnum2) {
+                    if (grid[gridnum1] != 'n' && grid[gridnum2] != 'n') {
+                        grid[gridnum1] = 'n'
+                        grid[gridnum2] = 'n'
+                        score += 1
+                        chosenGrid = -1
+                    }
+                }
             }
-            gridnum1 = 99999999;
-            gridnum2 = 99999999;
-            updateCanvas()
-            linePosition = [];
-        }
+        } 
+        chosenGrid = -1
+        linePosition = [];
     }
+    updateCanvas()
 }
 
 function updateCanvas() {
@@ -79,7 +116,7 @@ function drawCircle(row,col) {
 
 function drawSquare(row, col) {
     fill(0,0,250)
-    square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize-(cellSize*2/5))
+    square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5)
 }
 
 function drawTriangle(row, col) {
@@ -93,21 +130,14 @@ function drawGrid() {
     for (let row = 0; row < gridSize; row++) {
         for (let col = 0; col < gridSize; col++) {
             const idx = row * gridSize + col;
-            // if (gridnum1 != 99999999 || gridnum2 != 99999999) {
-            //     if (idx == gridnum1) {
-            //         fill(0);
-            //     } else if (grid[gridnum1] == grid[gridnum2] && idx == gridnum2) {
-            //         fill(0);
-            //     } else {
-            //         fill(235);
-            //     }   
-            // } else {
-            //     fill(235);
-            // }
-            fill(235);
-            stroke(64);
-            strokeWeight(2);
+            if (chosenGrid === idx) {
+                fill(0);
+            } else {
+                fill(235);
+            }
+            strokeWeight(2); 
             rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize);
+            stroke(64);
             if (grid[idx] === 's'){
                 drawSquare(row,col);
             } else if (grid[idx] === 'c'){
@@ -120,19 +150,11 @@ function drawGrid() {
 }
 
 function drawScore() {
-    drawText(`Score: ${score}`,
-    color(0, 220, 0, gameOver ? 128 : 255),
+    drawText(`Score: ${score}\r\nPress [Enter] to restart game.`,
+    color(0, gameOver ? 128 : 255),
     32,
     width / 2,
     scoreHeight / 2);
-}
-
-function drawGameOver() {
-    drawText('Game Over\r\nPress [Enter] to restart.',
-    color(220, 0, 0),
-    32,
-    width / 2,
-    height / 2 + scoreHeight / 2);
 }
 
 function drawCompleted() {
@@ -149,4 +171,12 @@ function drawText(msg, inkColor, size, x, y) {
     fill(inkColor);
     noStroke();
     text(msg, x, y);
+}
+
+
+function keyTyped() {
+    if (key === 'Enter') {
+        newGame();
+        setup();
+    }
 }
