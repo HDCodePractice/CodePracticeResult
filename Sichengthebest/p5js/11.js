@@ -45,10 +45,13 @@ function mousePressed() {
         if (grid[gridnum1] === grid[gridnum2]) {
             if (gridnum1 !== gridnum2) {
                 if (grid[gridnum1] != 'n' && grid[gridnum2] != 'n') {
-                    grid[gridnum1] = 'n'
-                    grid[gridnum2] = 'n'
-                    score += 1
-                    chosenGrid = -1
+                    if (checkGrids(grid,gridnum1,gridnum2)) {
+                        grid[gridnum1] = 'n'
+                        grid[gridnum2] = 'n'
+                        score += 1
+                        chosenGrid = -1
+                    }
+                    
                 }
             }
         }
@@ -56,6 +59,154 @@ function mousePressed() {
         linePosition = [];
     }
     updateCanvas()
+}
+
+function checkGrids(grid,gridnum1,gridnum2) {
+    row1 = int(gridnum1/gridSize);
+    col1 = gridnum1%gridSize;
+    row2 = int(gridnum2/gridSize);
+    col2 = gridnum2%gridSize;
+    if (row1 === row2) {
+        if (row1 === 0 || row1 === gridSize-1) {
+            return true;
+        } else if (col1 === col2-1 || col1 === col2+1) {
+            return true;
+        } else {
+            nnum = 0
+            for (let index = gridnum1+1; index < gridnum2; index++) {
+                if (grid[index] !== 'n') {
+                    nnum += 1
+                }
+            }
+            if (nnum === 0) {
+                return true;
+            } else {
+                nnum = 0
+                for (let index = gridnum1-gridSize; index <= gridnum2-gridSize; index++) {
+                    if (grid[index] !== 'n') {
+                        nnum += 1
+                    }
+                }
+                if (nnum === 0) {
+                    return true;
+                } else {
+                    nnum = 0
+                    for (let index = gridnum1+gridSize; index <= gridnum2+gridSize; index++) {
+                        if (grid[index] !== 'n') {
+                            nnum += 1
+                        }
+                    }
+                    if (nnum === 0) {
+                        return true;
+                    }
+                }
+            }
+        }
+    } else if (col1 === col2) {
+        if (col1 === 0 || col1 === gridSize-1) {
+            return true;
+        } else if (row1 === row2-1 || row1 === row2+1) {
+            return true;
+        } else {
+            nnum = 0
+            for (let index = gridnum1+gridSize; index < gridnum2; index+=gridSize) {
+                if (grid[index] !== 'n') {
+                    nnum += 1
+                }
+            }
+            if (nnum === 0) {
+                return true;
+            } else {
+                nnum = 0
+                for (let index = gridnum1-1+gridSize; index <= gridnum2-1; index+=gridSize) {
+                    if (grid[index] !== 'n') {
+                        nnum += 1
+                    }
+                }
+                if (nnum === 0) {
+                    return true;
+                } else {
+                    nnum = 0
+                    for (let index = gridnum1+1+gridSize; index <= gridnum2+1; index+=gridSize) {
+                        if (grid[index] !== 'n') {
+                            nnum += 1
+                        }
+                    }
+                    if (nnum === 0) {
+                        return true;
+                    }
+                }
+            }
+        }
+    } else {
+        // if (col2 === 0) {
+        //     nnum = col1-1
+        //     while (nnum > 0) {
+        //         if (grid[nnum*gridSize+row1] === 'n') {
+        //             nnum -= 1
+        //         }
+        //     }
+        //     if (nnum === 0) {
+        //         return true;
+        //     }
+        //     return false;
+        // } else if (col2 === gridSize) {
+        //     nnum = col1+1
+        //     while (nnum > 0) {
+        //         if (grid[nnum*gridSize+row1] === 'n') {
+        //             nnum += 1
+        //         }
+        //     }
+        //     if (nnum === gridSize) {
+        //         return true;
+        //     }
+        //     return false;
+        // }
+        if (gridnum2 > gridnum1 && col1 < col2) {
+            nnum = gridnum1+1
+            while (grid[nnum] === 'n' && nnum%gridSize <= col2 && nnum%gridSize < gridSize) {
+                nnum += 1;
+            }
+            nnum -= 1
+            while (grid[nnum] === 'n') {
+                nnum += gridSize;
+                if (nnum == gridnum2) {
+                    return true;
+                }
+            }
+            return false;
+        } else if (gridnum2 > gridnum1 && col1 > col2) {
+            nnum = gridnum1-1
+            while (grid[nnum] === 'n' && nnum%gridSize >= col2 && nnum%gridSize >= 0) {
+                nnum -= 1;
+                if (nnum%gridSize < 0) {
+                    break
+                }
+            }
+            nnum += 1
+            while (grid[nnum] === 'n') {
+                nnum += gridSize;
+                if (nnum == gridnum2) {
+                    return true;
+                }
+            }
+            nnum = gridnum1+gridSize
+            while (grid[nnum] === 'n' && nnum%gridSize >= col2 && nnum%gridSize >= 0) {
+                nnum += gridSize;
+                if (int(nnum/gridSize) > gridSize) {
+                    break
+                }
+            }
+            nnum -= gridSize
+            while (grid[nnum] === 'n') {
+                nnum += gridSize;
+                if (nnum == gridnum2) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 }
 
 function updateCanvas() {
