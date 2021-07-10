@@ -1,57 +1,103 @@
-const cellSize = 40;
-const gridSize = 12;
+const cellSize = 60;
+const gridSize = 8;
 const scoreHeight = 100;
-// let grid=['s','t','c','s','c','c','c','c','c','c','c','c','c','c','c','c'];
+let grid = [];
 let gameOver;
 let score;
 let completed;
 let linePosition = [];
+let chosenGrid = -1
 
 function randomGrid(){
-    opts = ['t','s','c']
+    opts = ['t','s','c','t','s','c','t','s','c','t','s','c','t','s','c','t','s','c','n']
     return opts[floor(random(opts.length))];
 }
 
 function newGame() {
     grid = new Array(gridSize * gridSize).fill('t');
-    gridsleft = [];
+    gridsnew = [];
     for (let index = 0; index < grid.length/2; index++) {
         shape = randomGrid();
-        gridsleft.push(shape);
-        gridsleft.push(shape);
+        gridsnew.push(shape);
+        gridsnew.push(shape);
     }
-    grid = shuffle(gridsleft);
+    grid = shuffle(gridsnew);
     gameOver = false;
     completed = false;
     score = 0;
 }
 
 function setup() {
-    createCanvas(cellSize * gridSize + 2, cellSize * gridSize + 2 + scoreHeight);
+    createCanvas(cellSize*gridSize+2, cellSize*gridSize+2+scoreHeight);
     newGame();
     noLoop();
     updateCanvas();
 }
 
+function matchgrids(gridnum1,gridnum2) {
+    let match = false;
+    let turns = 0;
+
+    let row1 = (gridnum1 - (gridnum1 % gridSize)) / gridSize;
+    if (row1 == 0) {
+        col1 = gridnum1;
+    } else {
+        col1 = gridnum1 % (row1*gridSize);
+    }
+
+    let row2 = (gridnum2 - (gridnum2 % gridSize)) / gridSize;
+    if (row2 == 0) {
+        col2 = gridnum2;
+    } else {
+        col2 = gridnum2 % (row2*gridSize);
+    }
+
+    if (row1 == row2) {
+        if (row1 == 0 || row1 == gridSize-1) {
+            match = true
+        } else if ((grid[gridnum1 - Math.abs(gridnum1 - gridnum2 - 1)] == 'n' || grid[gridnum1 + Math.abs(gridnum1 - gridnum2 - 1)] == 'n') || Math.abs(col1 - col2) == 1) {
+            match = true
+        } 
+    } else if (col1 == col2) {
+        print(grid[gridSize * (row1 + Math.abs(row1 - row2))-1])
+        if (col1 == 0 || col1 == gridSize-1) {
+            match = true
+        } else if ((grid[gridSize * (row1 - Math.abs(row1 - row2 - 1))-1] == 'n' || grid[gridSize * (row1 + Math.abs(row1 - row2 - 1))-1] == 'n') || Math.abs(row1 - row2) == 1) {
+            match = true
+        }
+    }
+    return match
+}
+
 function mousePressed() {
     linePosition.push(mouseX);
     linePosition.push(mouseY);
-    for (let i = 0; i < gridSize; i++) {
-        if (mouseX > cellSize*i && mouseX < cellSize*(i+1) && mouseY > (scoreHeight+cellSize*i) && mouseY < scoreHeight+cellSize*(i+1) ){
-            grid[i] = 'n';
-            drawGrid();
-        }
-    }
-        
-
+    chosenGrid = int(int((linePosition[1]-scoreHeight)/cellSize)*gridSize)+int(linePosition[0]/cellSize)
+    row = chosenGrid
+    updateCanvas()
     if (linePosition.length == 4) {
-        line(linePosition[0],linePosition[1],linePosition[2],linePosition[3]);
+        gridnum1 = int(int((linePosition[1]-scoreHeight)/cellSize)*gridSize)+int(linePosition[0]/cellSize)
+        gridnum2 = int(int((linePosition[3]-scoreHeight)/cellSize)*gridSize)+int(linePosition[2]/cellSize)
+        if (matchgrids(gridnum1,gridnum2) == true) {
+            if (grid[gridnum1] === grid[gridnum2]) {
+                if (gridnum1 !== gridnum2) {
+                    if (grid[gridnum1] != 'n' && grid[gridnum2] != 'n') {
+                        grid[gridnum1] = 'n'
+                        grid[gridnum2] = 'n'
+                        score += 1
+                        chosenGrid = -1
+                    }
+                }
+            }
+        } 
+        chosenGrid = -1
         linePosition = [];
-    } 
+    }
+    updateCanvas()
 }
 
 function updateCanvas() {
-    background(235);
+    background(245);
     drawScore();
     drawGrid();
     if (gameOver) {
@@ -65,12 +111,12 @@ function updateCanvas() {
 
 function drawCircle(row,col) {
     fill(0,250,0)
-    circle(col*cellSize+1+cellSize/2, row*cellSize+1+scoreHeight+cellSize/2, cellSize-cellSize/2.5)
+    circle(col*cellSize+1+cellSize/2, row*cellSize+1+scoreHeight+cellSize/2, cellSize-(cellSize*2/5))
 }
 
 function drawSquare(row, col) {
     fill(0,0,250)
-    square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize-cellSize/2.5)
+    square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5)
 }
 
 function drawTriangle(row, col) {
@@ -83,17 +129,20 @@ function drawTriangle(row, col) {
 function drawGrid() {
     for (let row = 0; row < gridSize; row++) {
         for (let col = 0; col < gridSize; col++) {
-            let coloring = {};
             const idx = row * gridSize + col;
-            fill(235);
-            strokeWeight(2);
-            stroke(64);
+            if (chosenGrid === idx) {
+                fill(0);
+            } else {
+                fill(235);
+            }
+            strokeWeight(2); 
             rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize);
+            stroke(64);
             if (grid[idx] === 's'){
                 drawSquare(row,col);
             } else if (grid[idx] === 'c'){
                 drawCircle(row,col);
-            } else if (grid[idx]  === 't'){
+            } else if (grid[idx] === 't'){
                 drawTriangle(row,col);
             }
         }
@@ -101,27 +150,19 @@ function drawGrid() {
 }
 
 function drawScore() {
-    drawText(`Score: ${score}`,
-        color(0, 220, 0, gameOver ? 128 : 255),
-        32,
-        width / 2,
-        scoreHeight / 2);
-}
-
-function drawGameOver() {
-    drawText('Game Over\r\nPress [Enter] to restart.',
-        color(220, 0, 0),
-        32,
-        width / 2,
-        height / 2 + scoreHeight / 2);
+    drawText(`Score: ${score}\r\nPress [Enter] to restart game.`,
+    color(0, gameOver ? 128 : 255),
+    32,
+    width / 2,
+    scoreHeight / 2);
 }
 
 function drawCompleted() {
-    drawText('Congrats on 2048\r\nPress [Enter] to continue.',
-        color(0, 220, 0),
-        32,
-        width / 2,
-        height / 2 + scoreHeight / 2);
+    drawText('Good job! You completed the Linking Game!\r\nPress [Enter] to continue.',
+    color(0, 220, 0),
+    32,
+    width / 2,
+    height / 2 + scoreHeight / 2);
 }
 
 function drawText(msg, inkColor, size, x, y) {
@@ -130,4 +171,12 @@ function drawText(msg, inkColor, size, x, y) {
     fill(inkColor);
     noStroke();
     text(msg, x, y);
+}
+
+
+function keyTyped() {
+    if (key === 'Enter') {
+        newGame();
+        setup();
+    }
 }
