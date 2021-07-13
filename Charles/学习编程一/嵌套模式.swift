@@ -1,22 +1,7 @@
-func turnAround() {
-  turnLeft()
+while !isBlocked {
+  while !isOnGem {
+    moveForward()
+  }
+  collectGem()
     turnLeft()
 }
-func solveStair() {
-moveForward()
-    collectGem()
-    
-}
-solveStair()
-turnAround()
-moveForward()
-moveForward()
-solveStair()
-turnAround()
-moveForward()
-turnLeft()
-solveStair()
-turnAround()
-moveForward()
-solveStair()
-
