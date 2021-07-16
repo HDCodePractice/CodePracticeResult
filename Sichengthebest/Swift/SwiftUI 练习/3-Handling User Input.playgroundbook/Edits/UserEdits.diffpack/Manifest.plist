@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseContentIdentifier</key>
+	<string>com.apple.playgrounds.blank</string>
+	<key>BaseContentVersion</key>
+	<string>1.0</string>
+	<key>ContentType</key>
+	<string>PlaygroundBookUserEdit</string>
+	<key>Diffs</key>
+	<dict>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/06BEC6B9-CF8A-4B3D-BDFF-7202C6AA034B.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/06BEC6B9-CF8A-4B3D-BDFF-7202C6AA034B.playgroundpage/main.swift</key>
+		<string>Modified</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/0702CD70-2E36-4C89-82D9-085EDF13A600.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Chapter1.playgroundchapter/UserManifest.plist</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/CircleImage.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/ContentView.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/FavoriteButton.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/Landmark.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/LandmarkDetail.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/LandmarkList.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/LandmarkRow.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/MapView.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/ModelData.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/SharedCode.swift</key>
+		<string>Removed</string>
+	</dict>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+	<key>UpdatedContentVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>
