@@ -109,9 +109,12 @@ function checkGrids(grid,gridnum1,gridnum2) {
             return true;
         } else {
             nnum = 0
-            for (let index = gridnum1+gridSize; index < gridnum2; index+=gridSize) {
-                if (grid[index] !== 'n') {
-                    nnum += 1
+            for (let idxrow = row1+1; idxrow < gridSize; idxrow++) {
+                for (let index = idxrow*gridSize+row1; index < idxrow*gridSize+row2; index+=gridSize) {
+                    print(index)
+                    if (grid[index] !== 'n') {
+                        nnum += 1
+                    }
                 }
             }
             if (nnum === 0) {
@@ -139,6 +142,100 @@ function checkGrids(grid,gridnum1,gridnum2) {
             }
         }
     } else {
+        nnum = gridnum1
+        if (col1 < col2) {
+            if (row1 < row2) {
+                nnum += 1
+                while (grid[nnum] === 'n' && nnum%gridSize < col2) {
+                    nnum += 1;
+                }
+                while (grid[nnum] === 'n' && int(nnum/gridSize) < row2) {
+                    nnum += gridSize;
+                }
+                if (nnum == gridnum2) {
+                    return true;
+                }
+                nnum = gridnum1+gridSize;
+                while (grid[nnum] === 'n' && int(nnum/gridSize) < row2) {
+                    nnum += gridSize;
+                }
+                while (grid[nnum] === 'n' && nnum%gridSize < col2) {
+                    nnum += 1;
+                }
+                if (nnum == gridnum2) {
+                    return true;
+                }
+                return false;
+            } else {
+                nnum += 1
+                while (grid[nnum] === 'n' && nnum%gridSize < col2) {
+                    nnum += 1
+                }
+                while (grid[nnum] === 'n' && int(nnum/gridSize) > row2) {
+                    nnum -= gridSize
+                }
+                if (nnum == gridnum2) {
+                    return true;
+                }
+                nnum = gridnum1-gridSize;
+                while (grid[nnum] === 'n' && int(nnum/gridSize) > row2) {
+                    nnum += gridSize;
+                }
+                while (grid[nnum] === 'n' && nnum%gridSize < col2) {
+                    nnum += 1;
+                }
+                if (nnum == gridnum2) {
+                    return true;
+                }
+                return false;
+            }
+        } else {
+            if (row1 < row2) {
+                nnum -= 1
+                while (grid[nnum] === 'n' && nnum%gridSize > col2) {
+                    nnum -= 1
+                }
+                while (grid[nnum] === 'n' && int(nnum/gridSize) < row2) {
+                    nnum += gridSize
+                }
+                if (nnum == gridnum2) {
+                    return true;
+                }
+                nnum = gridnum1+gridSize
+                while (grid[nnum] === 'n' && int(nnum/gridSize) < row2) {
+                    nnum += gridSize
+                }
+                while (grid[nnum] === 'n' && nnum%gridSize > col2) {
+                    nnum -= 1
+                }
+                if (nnum == gridnum2) {
+                    return true;
+                }
+                return false;
+            } else {
+                nnum -= 1
+                while (grid[nnum] === 'n' && nnum%gridSize > col2) {
+                    nnum -= 1
+                }
+                while (grid[nnum] === 'n' && int(nnum/gridSize) > row2) {
+                    nnum -= gridSize
+                }
+                if (nnum == gridnum2) {
+                    return true;
+                }
+                nnum = gridnum1-gridSize;
+                while (grid[nnum] === 'n' && int(nnum/gridSize) > row2) {
+                    nnum -= gridSize;
+                }
+                while (grid[nnum] === 'n' && nnum%gridSize > col2) {
+                    nnum -= 1;
+                }
+                if (nnum == gridnum2) {
+                    return true;
+                }
+                return false;
+            }
+        }
         // if (col2 === 0) {
         //     nnum = col1-1
         //     while (nnum > 0) {
@@ -162,50 +259,50 @@ function checkGrids(grid,gridnum1,gridnum2) {
         //     }
         //     return false;
         // }
-        if (gridnum2 > gridnum1 && col1 < col2) {
-            nnum = gridnum1+1
-            while (grid[nnum] === 'n' && nnum%gridSize <= col2 && nnum%gridSize < gridSize) {
-                nnum += 1;
-            }
-            nnum -= 1
-            while (grid[nnum] === 'n') {
-                nnum += gridSize;
-                if (nnum == gridnum2) {
-                    return true;
-                }
-            }
-            return false;
-        } else if (gridnum2 > gridnum1 && col1 > col2) {
-            nnum = gridnum1-1
-            while (grid[nnum] === 'n' && nnum%gridSize >= col2 && nnum%gridSize >= 0) {
-                nnum -= 1;
-                if (nnum%gridSize < 0) {
-                    break
-                }
-            }
-            nnum += 1
-            while (grid[nnum] === 'n') {
-                nnum += gridSize;
-                if (nnum == gridnum2) {
-                    return true;
-                }
-            }
-            nnum = gridnum1+gridSize
-            while (grid[nnum] === 'n' && nnum%gridSize >= col2 && nnum%gridSize >= 0) {
-                nnum += gridSize;
-                if (int(nnum/gridSize) > gridSize) {
-                    break
-                }
-            }
-            nnum -= gridSize
-            while (grid[nnum] === 'n') {
-                nnum += gridSize;
-                if (nnum == gridnum2) {
-                    return true;
-                }
-            }
-            return false;
-        }
+        // if (gridnum2 > gridnum1 && col1 < col2) {
+        //     nnum = gridnum1+1
+        //     while (grid[nnum] === 'n' && nnum%gridSize <= col2 && nnum%gridSize < gridSize) {
+        //         nnum += 1;
+        //     }
+        //     nnum -= 1
+        //     while (grid[nnum] === 'n') {
+        //         nnum += gridSize;
+        //         if (nnum == gridnum2) {
+        //             return true;
+        //         }
+        //     }
+        //     return false;
+        // } else if (gridnum2 > gridnum1 && col1 > col2) {
+        //     nnum = gridnum1-1
+        //     while (grid[nnum] === 'n' && nnum%gridSize >= col2 && nnum%gridSize >= 0) {
+        //         nnum -= 1;
+        //         if (nnum%gridSize < 0) {
+        //             break
+        //         }
+        //     }
+        //     nnum += 1
+        //     while (grid[nnum] === 'n') {
+        //         nnum += gridSize;
+        //         if (nnum == gridnum2) {
+        //             return true;
+        //         }
+        //     }
+        //     nnum = gridnum1+gridSize
+        //     while (grid[nnum] === 'n' && nnum%gridSize >= col2 && nnum%gridSize >= 0) {
+        //         nnum += gridSize;
+        //         if (int(nnum/gridSize) > gridSize) {
+        //             break
+        //         }
+        //     }
+        //     nnum -= gridSize
+        //     while (grid[nnum] === 'n') {
+        //         nnum += gridSize;
+        //         if (nnum == gridnum2) {
+        //             return true;
+        //         }
+        //     }
+        //     return false;
+        // }
     }
 }
 
@@ -220,7 +317,6 @@ function updateCanvas() {
         drawCompleted();
     }
 }
-
 
 function drawCircle(row,col) {
     fill(0,250,0)
