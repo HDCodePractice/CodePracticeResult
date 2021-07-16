@@ -22,5 +22,4 @@ for i in 1 ... 4 {
         turnRight()
         moveForward()
     }
-    
 }
