@@ -3,5 +3,5 @@ while !isBlocked {
     moveForward()
   }
   collectGem()
-    turnLeft()
+  turnLeft()
 }
