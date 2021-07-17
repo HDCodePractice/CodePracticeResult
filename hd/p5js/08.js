@@ -267,3 +267,10 @@ function drawText(msg, inkColor, size, x, y) {
     noStroke();
     text(msg, x, y);
 }
+
+function keyTyped() {
+    if (key === 'Enter') {
+        newGame();
+        setup();
+    }
+}
