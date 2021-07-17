@@ -48,15 +48,8 @@ function checkNull(col,row){
 }
 
 function checkCol(col,srow,erow){
-    print("检查",col,"列",srow,erow);
-    if (srow > erow){
-        const temp = srow;
-        srow = erow;
-        erow = temp;
-    }
     for (let index = srow + 1; index < erow; index++) {
         if (checkNull(col,index)===false){
-            print("检查",col,index,"不行");
             return false
         }
     }
@@ -64,15 +57,8 @@ function checkCol(col,srow,erow){
 }
 
 function checkRow(row,scol,ecol){
-    print("检查",row,"行",scol,ecol);
-    if (scol > ecol){
-        const temp = scol;
-        scol = ecol;
-        ecol = temp;
-    }
     for (let index = scol + 1; index < ecol; index++) {
         if (checkNull(index,row)===false){
-            print("检查",index,row,"不行");
             return false
         }
     }
@@ -80,54 +66,52 @@ function checkRow(row,scol,ecol){
 }
 
 function checkOneTurn(acol,arow,bcol,brow) {
-    if ( checkRow(arow,acol,bcol) ){
+    if (checkRow(arow,acol,bcol) ){
         if (checkCol(bcol,arow,brow) ){
             if (checkNull(bcol,arow)){
                 return true
             }
         }
     }
-    if ( checkCol(acol,arow,brow) ){
+    if (checkCol(acol,arow,brow) ){
         if (checkRow(brow,acol,bcol) ){
             if (checkNull(acol,brow)){
                 return true
             }
         }
     }
-    
     return false;
 }
 
-
-function checkColTwoTurn(acol,arow,bcol,brow) {
-    // 把col小的放在a里，大的放在b里
-    if ( acol > bcol ){
-        const tempcol = acol;
-        acol = bcol;
-        bcol = tempcol;
-        const temprow = arow;
-        arow = brow;
-        brow = temprow;
-    }
-    print("检查双折",acol,arow,bcol,brow)
-    for (let row = 0; row <= gridSize; row++) {
-        if (row !== arow && row !== brow) {
-            // 从A出发，到所有bcol和row的
-            if(checkOneTurn(acol,arow,bcol,row)){
-                if(checkCol(bcol,row,brow)){
-                    print("连通啦",acol,arow,bcol,brow,row)
-                    return true
+function checkTwoTurns(acol,arow,bcol,brow) {
+    for (let i = 0; i < gridSize; i++) {
+        if (checkCol(acol,arow,i)) {
+            if (checkRow(i,acol,bcol)) {
+                if (checkCol(bcol,i,brow)) {
+                    if (checkNull(acol,i)){
+                        if (checkNull(i,bcol)) {
+                            return true
+                        }   
+                    }
                 }
             }
-        }        
+        }
     }
-    return false;
+    for (let i = 0; i < gridSize; i++) {
+        if (checkRow(arow,acol,i)) {
+            if (checkCol(i,arow,brow)) {
+                if (checkRow(brow,i,bcol)) {
+                    if (checkNull(i,brow)){
+                        if (checkNull(arow,i)) {
+                            return true
+                        }   
+                    }
+                }
+            }
+        }
+    }
+    return false
 }
-
-
-// function checkTwoTurn(acol,arow,bcol,brow){
-    
-// }
 
 function checkPass(clickindex,lastindex){
     // [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
@@ -139,33 +123,44 @@ function checkPass(clickindex,lastindex){
     clickcol = clickindex - clickrow * gridSize;
     lastrow = int(lastindex / gridSize);
     lastcol = lastindex - lastrow * gridSize;
-    print("============================");
-    if (checkColTwoTurn(clickcol,clickrow,lastcol,lastrow)){
-        return true
-    }
-    print("****************************");
 
-    if (clickcol === lastcol){
+    if (clickcol === lastcol) {
         // 同一列
         // 在边儿上
         if (clickcol === 0  || clickcol === gridSize - 1) {
             return true;
         }
         // 两行之间是空的
-        return checkCol(clickcol,clickrow,lastrow);
-    }else if(clickrow === lastrow){
+        if (clickrow < lastrow){
+            return checkCol(clickcol,clickrow,lastrow);
+        } else {
+            if (checkCol(clickcol,lastrow,clickrow) == true) {
+                return true
+            } else {
+                return checkTwoTurns(clickcol,clickrow,lastcol,lastrow)
+            }  
+        }
+    } else if(clickrow === lastrow) {
         // 同一行
         // 在边儿上
         if (clickrow === 0  || clickrow === gridSize - 1) {
             return true;
         }
         // 两列之间是空的
-        return checkRow(clickrow,clickcol,lastcol);
-    }else{
-        if (clickindex < lastindex){
-            return checkOneTurn(clickcol,clickrow,lastcol,lastrow);
+        if (clickcol < lastcol){
+            return checkRow(clickrow,clickcol,lastcol);
         }else{
-            return checkOneTurn(lastcol,lastrow,clickcol,clickrow);
+            if (checkRow(clickrow,lastcol,clickcol) == true) {
+                return true
+            } else {
+                return checkTwoTurns(clickcol,clickrow,lastcol,lastrow)
+            }
+        }
+    } else {
+        if (checkOneTurn(clickrow,clickcol,lastrow,lastcol)) {
+            return true
+        } else {
+            return checkTwoTurns(clickcol,clickrow,lastcol,lastrow)
         }
     }
     return false;
@@ -205,7 +200,7 @@ function updateCanvas() {
 
 function drawCircle(row,col) {
     fill(0,250,0)
-    circle(col*cellSize+1+cellSize/2, row*cellSize+1+scoreHeight+cellSize/2, cellSize*4/5)
+    circle(col*cellSize+1+cellSize/2, row*cellSize+1+scoreHeight+cellSize/2, (cellSize-cellSize*2/5))
 }
 
 function drawSquare(row, col) {
@@ -266,11 +261,4 @@ function drawText(msg, inkColor, size, x, y) {
     fill(inkColor);
     noStroke();
     text(msg, x, y);
-}
-
-function keyTyped() {
-    if (key === 'Enter') {
-        newGame();
-        setup();
-    }
 }
