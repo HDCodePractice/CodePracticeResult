@@ -1,5 +1,5 @@
-const cellSize = 100;
-const gridSize = 10;
+const cellSize = 50;
+const gridSize = 8;
 const scoreHeight = 100;
 
 let mousecol = 0;
@@ -39,6 +39,14 @@ function setup() {
     updateCanvas();
 }
 
+function checkNull(col,row){
+    const idx = row * gridSize + col;
+    if (grid[idx] === "n"){
+        return true
+    }
+    return false
+}
+
 function checkCol(col,srow,erow){
     for (let index = srow + 1; index < erow; index++) {
         if (checkNull(col,index)===false){
@@ -57,14 +65,6 @@ function checkRow(row,scol,ecol){
     return true    
 }
 
-function checkNull(col,row) {
-    const idx = row * gridSize + col;
-    if(grid[idx] === "n"){
-        return true
-    }
-    return false
-}
-
 function checkPass(clickindex,lastindex){
     // [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
     // 0,1,2,3
@@ -76,24 +76,51 @@ function checkPass(clickindex,lastindex){
     lastrow = int(lastindex / gridSize);
     lastcol = lastindex - lastrow * gridSize;
 
-    // 相邻
-    if (lastcol===clickcol && Math.abs(clickrow-lastrow)===1){
-        // 上下相邻居
-        return true;
-    }else if (lastrow === clickrow && Math.abs(clickcol-lastcol)===1) {
-        // 左右相邻居
-        return true;
-    }else if (clickcol === lastcol){
+    if (clickcol === lastcol){
+        // 同一列
+        // 在边儿上
+        if (clickcol === 0  || clickcol === gridSize - 1) {
+            return true;
+        }
+        // 两行之间是空的
         if (clickrow < lastrow){
             return checkCol(clickcol,clickrow,lastrow);
         }else{
             return checkCol(clickcol,lastrow,clickrow);
         }
-    }else if (clickrow === lastrow){
+    }else if(clickrow === lastrow){
+        // 同一行
+        // 在边儿上
+        if (clickrow === 0  || clickrow === gridSize - 1) {
+            return true;
+        }
+        // 两列之间是空的
         if (clickcol < lastcol){
             return checkRow(clickrow,clickcol,lastcol);
         }else{
             return checkRow(clickrow,lastcol,clickcol);
+        }
+    }else{
+    }
+    return false;
+}
+
+function checkOneTurn(acol,arow,bcol,brow) {
+    print(acol,arow,bcol,brow);
+    if ( checkRow(arow,acol,bcol) ){
+        if (checkCol(bcol,arow,brow) ){
+            if (checkNull(bcol,arow)){
+                print(arow,acol,bcol,"true",bcol,arow,brow,"true");
+                return true;
+            }
+        }
+    }
+    if ( checkCol(acol,arow,brow) ){
+        if (checkRow(brow,acol,bcol) ){
+            if (checkNull(acol,brow)){
+                print(acol,arow,brow,"true",brow,acol,bcol,"true");
+                return true;
+            }
         }
     }
     return false;
@@ -115,7 +142,6 @@ function mousePressed() {
 
     lastclick = clickindex
 
-    print(mousecol,mouserow)
 
     if (linePosition.length == 4) {
         line(linePosition[0],linePosition[1],linePosition[2],linePosition[3]);
