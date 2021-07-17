@@ -48,8 +48,15 @@ function checkNull(col,row){
 }
 
 function checkCol(col,srow,erow){
+    print("检查",col,"列",srow,erow);
+    if (srow > erow){
+        const temp = srow;
+        srow = erow;
+        erow = temp;
+    }
     for (let index = srow + 1; index < erow; index++) {
         if (checkNull(col,index)===false){
+            print("检查",col,index,"不行");
             return false
         }
     }
@@ -57,8 +64,15 @@ function checkCol(col,srow,erow){
 }
 
 function checkRow(row,scol,ecol){
+    print("检查",row,"行",scol,ecol);
+    if (scol > ecol){
+        const temp = scol;
+        scol = ecol;
+        ecol = temp;
+    }
     for (let index = scol + 1; index < ecol; index++) {
         if (checkNull(index,row)===false){
+            print("检查",index,row,"不行");
             return false
         }
     }
@@ -84,6 +98,37 @@ function checkOneTurn(acol,arow,bcol,brow) {
     return false;
 }
 
+
+function checkColTwoTurn(acol,arow,bcol,brow) {
+    // 把col小的放在a里，大的放在b里
+    if ( acol > bcol ){
+        const tempcol = acol;
+        acol = bcol;
+        bcol = tempcol;
+        const temprow = arow;
+        arow = brow;
+        brow = temprow;
+    }
+    print("检查双折",acol,arow,bcol,brow)
+    for (let row = 0; row <= gridSize; row++) {
+        if (row !== arow && row !== brow) {
+            // 从A出发，到所有bcol和row的
+            if(checkOneTurn(acol,arow,bcol,row)){
+                if(checkCol(bcol,row,brow)){
+                    print("连通啦",acol,arow,bcol,brow,row)
+                    return true
+                }
+            }
+        }        
+    }
+    return false;
+}
+
+
+// function checkTwoTurn(acol,arow,bcol,brow){
+    
+// }
+
 function checkPass(clickindex,lastindex){
     // [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
     // 0,1,2,3
@@ -94,6 +139,11 @@ function checkPass(clickindex,lastindex){
     clickcol = clickindex - clickrow * gridSize;
     lastrow = int(lastindex / gridSize);
     lastcol = lastindex - lastrow * gridSize;
+    print("============================");
+    if (checkColTwoTurn(clickcol,clickrow,lastcol,lastrow)){
+        return true
+    }
+    print("****************************");
 
     if (clickcol === lastcol){
         // 同一列
@@ -102,11 +152,7 @@ function checkPass(clickindex,lastindex){
             return true;
         }
         // 两行之间是空的
-        if (clickrow < lastrow){
-            return checkCol(clickcol,clickrow,lastrow);
-        }else{
-            return checkCol(clickcol,lastrow,clickrow);
-        }
+        return checkCol(clickcol,clickrow,lastrow);
     }else if(clickrow === lastrow){
         // 同一行
         // 在边儿上
@@ -114,11 +160,7 @@ function checkPass(clickindex,lastindex){
             return true;
         }
         // 两列之间是空的
-        if (clickcol < lastcol){
-            return checkRow(clickrow,clickcol,lastcol);
-        }else{
-            return checkRow(clickrow,lastcol,clickcol);
-        }
+        return checkRow(clickrow,clickcol,lastcol);
     }else{
         if (clickindex < lastindex){
             return checkOneTurn(clickcol,clickrow,lastcol,lastrow);
