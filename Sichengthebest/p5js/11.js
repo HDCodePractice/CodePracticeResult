@@ -1,322 +1,216 @@
-const cellSize = 85;
-const gridSize = 6;
+const cellSize = 50;
+const gridSize = 8;
 const scoreHeight = 100;
+
+let mousecol = 0;
+let mouserow = 0;
 let grid = [];
-let gameOver;
+let clickindex
+let lastclick
+let currentlydrawing
+let click = 1
+
 let score;
-let completed;
 let linePosition = [];
-let chosenGrid = -1
 
 function randomGrid(){
-    opts = ['t','s','c','t','s','c','t','s','c','t','s','c','t','s','c','t','s','c','n']
+    opts = ['t','s','c']
     return opts[floor(random(opts.length))];
 }
 
 function newGame() {
     grid = new Array(gridSize * gridSize).fill('t');
-    gridsnew = [];
+    gridsleft = [];
     for (let index = 0; index < grid.length/2; index++) {
         shape = randomGrid();
-        gridsnew.push(shape);
-        gridsnew.push(shape);
+        gridsleft.push(shape);
+        gridsleft.push(shape);
     }
-    grid = shuffle(gridsnew);
+    grid = shuffle(gridsleft);
     gameOver = false;
     completed = false;
     score = 0;
 }
 
 function setup() {
-    createCanvas(cellSize*gridSize+2, cellSize*gridSize+2+scoreHeight);
+    createCanvas(cellSize * gridSize + 2, cellSize * gridSize + 2 + scoreHeight);
     newGame();
     noLoop();
     updateCanvas();
 }
 
+function checkNull(col,row){
+    const idx = row * gridSize + col;
+    if (grid[idx] === "n"){
+        return true
+    }
+    return false
+}
+
+function checkCol(col,srow,erow){
+    if (srow > erow){
+        const temp = srow;
+        srow = erow;
+        erow = temp;
+    }
+    for (let index = srow + 1; index < erow; index++) {
+        if (!checkNull(col,index)){
+            return false;
+        }
+    }
+    return true    
+}
+
+function checkRow(row,scol,ecol){
+    print("检查行",row,scol,ecol);
+    if (scol > ecol){
+        const temp = scol;
+        scol = ecol;
+        ecol = temp;
+    }
+    for (let index = scol + 1; index < ecol; index++) {
+        if (checkNull(index,row)===false){
+            print("检查",index,row,"不行");
+            return false
+        }
+    }
+    return true    
+}
+
+function checkOneTurn(acol,arow,bcol,brow) {
+    if ( checkRow(arow,acol,bcol) ){
+        if (checkCol(bcol,arow,brow) ){
+            if (checkNull(bcol,arow)){
+                return true
+            }
+        }
+    }
+    if ( checkCol(acol,arow,brow) ){
+        if (checkRow(brow,acol,bcol) ){
+            if (checkNull(acol,brow)){
+                return true
+            }
+        }
+    }
+    
+    return false;
+}
+
+
+function checkRowTwoTurn(acol,arow,bcol,brow){
+    if (arow > brow){
+        const temprow = arow;
+        arow = brow;
+        brow = temprow;
+        const tempcol = acol;
+        acol = bcol;
+        bcol = tempcol;
+    }
+    for (let icol = 0; icol <= gridSize; icol++) {
+        if (icol !== acol && icol !== bcol) {
+            if (checkOneTurn(acol,arow,icol,brow)) {
+                if (checkRow(brow,icol,bcol)) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+function checkColTwoTurn(acol,arow,bcol,brow) {
+    // 把col小的放在a里，大的放在b里
+    if ( acol > bcol ){
+        const tempcol = acol;
+        acol = bcol;
+        bcol = tempcol;
+        const temprow = arow;
+        arow = brow;
+        brow = temprow;
+    }
+    for (let row = 0; row <= gridSize; row++) {
+        if (row !== arow && row !== brow) {
+            // 从A出发，到所有bcol和row的
+            if(checkOneTurn(acol,arow,bcol,row)){
+                if(checkCol(bcol,row,brow)){
+                    return true;
+                }
+            }
+        }        
+    }
+    return false;
+}
+
+function checkPass(clickindex,lastindex){
+    // [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+    // 0,1,2,3
+    // 4,5,6,7
+    // 8,9,10,11
+    // 12,13,14,15
+    clickrow = int(clickindex / gridSize);
+    clickcol = clickindex - clickrow * gridSize;
+    lastrow = int(lastindex / gridSize);
+    lastcol = lastindex - lastrow * gridSize;
+    if (checkRowTwoTurn(clickcol,clickrow,lastcol,lastrow) || checkColTwoTurn(clickcol,clickrow,lastcol,lastrow)) {
+        return true;
+    }
+    if (clickcol === lastcol){
+        // 同一列
+        // 在边儿上
+        if (clickcol === 0  || clickcol === gridSize - 1) {
+            return true;
+        }
+        // 两行之间是空的
+        return checkCol(clickcol,clickrow,lastrow);
+    }else if(clickrow === lastrow){
+        // 同一行
+        // 在边儿上
+        if (clickrow === 0  || clickrow === gridSize - 1) {
+            return true;
+        }
+        // 两列之间是空的
+        return checkRow(clickrow,clickcol,lastcol);
+    }else{
+        if (clickindex < lastindex){
+            return checkOneTurn(clickcol,clickrow,lastcol,lastrow);
+        }else{
+            return checkOneTurn(lastcol,lastrow,clickcol,clickrow);
+        }
+    }
+    return false;
+}
+
+
 function mousePressed() {
     linePosition.push(mouseX);
     linePosition.push(mouseY);
-    chosenGrid = int(int((linePosition[1]-scoreHeight)/cellSize)*gridSize)+int(linePosition[0]/cellSize)
-    updateCanvas()
+
+    mousecol = Math.ceil(mouseX/cellSize)-1;
+    mouserow = Math.ceil((mouseY-scoreHeight)/cellSize)-1;
+
+    clickindex = ((mouserow)*gridSize)+mousecol
+
+    if (grid[lastclick] === grid[clickindex] && lastclick !== clickindex && checkPass(clickindex,lastclick)){
+        grid[lastclick] = "n"
+        grid[clickindex] = "n"
+    }
+
+    lastclick = clickindex
+
+
     if (linePosition.length == 4) {
-        gridnum1 = int(int((linePosition[1]-scoreHeight)/cellSize)*gridSize)+int(linePosition[0]/cellSize)
-        gridnum2 = int(int((linePosition[3]-scoreHeight)/cellSize)*gridSize)+int(linePosition[2]/cellSize)
-        if (grid[gridnum1] === grid[gridnum2]) {
-            if (gridnum1 !== gridnum2) {
-                if (grid[gridnum1] != 'n' && grid[gridnum2] != 'n') {
-                    if (checkGrids(grid,gridnum1,gridnum2)) {
-                        grid[gridnum1] = 'n'
-                        grid[gridnum2] = 'n'
-                        score += 1
-                        chosenGrid = -1
-                    }
-                    
-                }
-            }
-        }
-        chosenGrid = -1
+        line(linePosition[0],linePosition[1],linePosition[2],linePosition[3]);
         linePosition = [];
     }
-    updateCanvas()
-}
-
-function checkGrids(grid,gridnum1,gridnum2) {
-    row1 = int(gridnum1/gridSize);
-    col1 = gridnum1%gridSize;
-    row2 = int(gridnum2/gridSize);
-    col2 = gridnum2%gridSize;
-    if (row1 === row2) {
-        if (row1 === 0 || row1 === gridSize-1) {
-            return true;
-        } else if (col1 === col2-1 || col1 === col2+1) {
-            return true;
-        } else {
-            nnum = 0
-            for (let index = gridnum1+1; index < gridnum2; index++) {
-                if (grid[index] !== 'n') {
-                    nnum += 1
-                }
-            }
-            if (nnum === 0) {
-                return true;
-            } else {
-                nnum = 0
-                for (let index = gridnum1-gridSize; index <= gridnum2-gridSize; index++) {
-                    if (grid[index] !== 'n') {
-                        nnum += 1
-                    }
-                }
-                if (nnum === 0) {
-                    return true;
-                } else {
-                    nnum = 0
-                    for (let index = gridnum1+gridSize; index <= gridnum2+gridSize; index++) {
-                        if (grid[index] !== 'n') {
-                            nnum += 1
-                        }
-                    }
-                    if (nnum === 0) {
-                        return true;
-                    }
-                }
-            }
-        }
-    } else if (col1 === col2) {
-        if (col1 === 0 || col1 === gridSize-1) {
-            return true;
-        } else if (row1 === row2-1 || row1 === row2+1) {
-            return true;
-        } else {
-            nnum = 0
-            for (let idxrow = row1+1; idxrow < gridSize; idxrow++) {
-                for (let index = idxrow*gridSize+row1; index < idxrow*gridSize+row2; index+=gridSize) {
-                    print(index)
-                    if (grid[index] !== 'n') {
-                        nnum += 1
-                    }
-                }
-            }
-            if (nnum === 0) {
-                return true;
-            } else {
-                nnum = 0
-                for (let index = gridnum1-1+gridSize; index <= gridnum2-1; index+=gridSize) {
-                    if (grid[index] !== 'n') {
-                        nnum += 1
-                    }
-                }
-                if (nnum === 0) {
-                    return true;
-                } else {
-                    nnum = 0
-                    for (let index = gridnum1+1+gridSize; index <= gridnum2+1; index+=gridSize) {
-                        if (grid[index] !== 'n') {
-                            nnum += 1
-                        }
-                    }
-                    if (nnum === 0) {
-                        return true;
-                    }
-                }
-            }
-        }
-    } else {
-        nnum = gridnum1
-        if (col1 < col2) {
-            if (row1 < row2) {
-                nnum += 1
-                while (grid[nnum] === 'n' && nnum%gridSize < col2) {
-                    nnum += 1;
-                }
-                while (grid[nnum] === 'n' && int(nnum/gridSize) < row2) {
-                    nnum += gridSize;
-                }
-                if (nnum == gridnum2) {
-                    return true;
-                }
-                nnum = gridnum1+gridSize;
-                while (grid[nnum] === 'n' && int(nnum/gridSize) < row2) {
-                    nnum += gridSize;
-                }
-                while (grid[nnum] === 'n' && nnum%gridSize < col2) {
-                    nnum += 1;
-                }
-                if (nnum == gridnum2) {
-                    return true;
-                }
-                return false;
-            } else {
-                nnum += 1
-                while (grid[nnum] === 'n' && nnum%gridSize < col2) {
-                    nnum += 1
-                }
-                while (grid[nnum] === 'n' && int(nnum/gridSize) > row2) {
-                    nnum -= gridSize
-                }
-                if (nnum == gridnum2) {
-                    return true;
-                }
-                nnum = gridnum1-gridSize;
-                while (grid[nnum] === 'n' && int(nnum/gridSize) > row2) {
-                    nnum += gridSize;
-                }
-                while (grid[nnum] === 'n' && nnum%gridSize < col2) {
-                    nnum += 1;
-                }
-                if (nnum == gridnum2) {
-                    return true;
-                }
-                return false;
-            }
-        } else {
-            if (row1 < row2) {
-                nnum -= 1
-                while (grid[nnum] === 'n' && nnum%gridSize > col2) {
-                    nnum -= 1
-                }
-                while (grid[nnum] === 'n' && int(nnum/gridSize) < row2) {
-                    nnum += gridSize
-                }
-                if (nnum == gridnum2) {
-                    return true;
-                }
-                nnum = gridnum1+gridSize
-                while (grid[nnum] === 'n' && int(nnum/gridSize) < row2) {
-                    nnum += gridSize
-                }
-                while (grid[nnum] === 'n' && nnum%gridSize > col2) {
-                    nnum -= 1
-                }
-                if (nnum == gridnum2) {
-                    return true;
-                }
-                return false;
-            } else {
-                nnum -= 1
-                while (grid[nnum] === 'n' && nnum%gridSize > col2) {
-                    nnum -= 1
-                }
-                while (grid[nnum] === 'n' && int(nnum/gridSize) > row2) {
-                    nnum -= gridSize
-                }
-                if (nnum == gridnum2) {
-                    return true;
-                }
-                nnum = gridnum1-gridSize;
-                while (grid[nnum] === 'n' && int(nnum/gridSize) > row2) {
-                    nnum -= gridSize;
-                }
-                while (grid[nnum] === 'n' && nnum%gridSize > col2) {
-                    nnum -= 1;
-                }
-                if (nnum == gridnum2) {
-                    return true;
-                }
-                return false;
-            }
-        }
-        // if (col2 === 0) {
-        //     nnum = col1-1
-        //     while (nnum > 0) {
-        //         if (grid[nnum*gridSize+row1] === 'n') {
-        //             nnum -= 1
-        //         }
-        //     }
-        //     if (nnum === 0) {
-        //         return true;
-        //     }
-        //     return false;
-        // } else if (col2 === gridSize) {
-        //     nnum = col1+1
-        //     while (nnum > 0) {
-        //         if (grid[nnum*gridSize+row1] === 'n') {
-        //             nnum += 1
-        //         }
-        //     }
-        //     if (nnum === gridSize) {
-        //         return true;
-        //     }
-        //     return false;
-        // }
-        // if (gridnum2 > gridnum1 && col1 < col2) {
-        //     nnum = gridnum1+1
-        //     while (grid[nnum] === 'n' && nnum%gridSize <= col2 && nnum%gridSize < gridSize) {
-        //         nnum += 1;
-        //     }
-        //     nnum -= 1
-        //     while (grid[nnum] === 'n') {
-        //         nnum += gridSize;
-        //         if (nnum == gridnum2) {
-        //             return true;
-        //         }
-        //     }
-        //     return false;
-        // } else if (gridnum2 > gridnum1 && col1 > col2) {
-        //     nnum = gridnum1-1
-        //     while (grid[nnum] === 'n' && nnum%gridSize >= col2 && nnum%gridSize >= 0) {
-        //         nnum -= 1;
-        //         if (nnum%gridSize < 0) {
-        //             break
-        //         }
-        //     }
-        //     nnum += 1
-        //     while (grid[nnum] === 'n') {
-        //         nnum += gridSize;
-        //         if (nnum == gridnum2) {
-        //             return true;
-        //         }
-        //     }
-        //     nnum = gridnum1+gridSize
-        //     while (grid[nnum] === 'n' && nnum%gridSize >= col2 && nnum%gridSize >= 0) {
-        //         nnum += gridSize;
-        //         if (int(nnum/gridSize) > gridSize) {
-        //             break
-        //         }
-        //     }
-        //     nnum -= gridSize
-        //     while (grid[nnum] === 'n') {
-        //         nnum += gridSize;
-        //         if (nnum == gridnum2) {
-        //             return true;
-        //         }
-        //     }
-        //     return false;
-        // }
-    }
+    updateCanvas();
 }
 
 function updateCanvas() {
-    background(245);
+    background(235);
     drawScore();
     drawGrid();
-    if (gameOver) {
-        drawGameOver();
-    }
-    if (completed) {
-        drawCompleted();
-    }
 }
+
 
 function drawCircle(row,col) {
     fill(0,250,0)
@@ -338,21 +232,29 @@ function drawTriangle(row, col) {
 function drawGrid() {
     for (let row = 0; row < gridSize; row++) {
         for (let col = 0; col < gridSize; col++) {
+            currentlydrawing = ((row)*gridSize)+col
+            
             const idx = row * gridSize + col;
             fill(235);
-            strokeWeight(2);
-            if (chosenGrid === idx) {
-                stroke('red');
-            } else {
+
+            if (currentlydrawing === lastclick && click === 1){
+                strokeWeight(5);
+                stroke(255,0,0)
+                click = 2
+            }else{
+                strokeWeight(2);
                 stroke(64);
+                click = 1
             }
+
             rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 10);
-            stroke(64);
+            stroke(0);
+            strokeWeight(2);
             if (grid[idx] === 's'){
                 drawSquare(row,col);
-            } else if (grid[idx] === 'c'){
+            }else if (grid[idx] === 'c'){
                 drawCircle(row,col);
-            } else if (grid[idx] === 't'){
+            }else if (grid[idx]  === 't'){
                 drawTriangle(row,col);
             }
         }
@@ -361,18 +263,10 @@ function drawGrid() {
 
 function drawScore() {
     drawText(`Score: ${score}\r\nPress [Enter] to restart game.`,
-    color(0, gameOver ? 128 : 255),
+    color(0, 220, 0, gameOver ? 128 : 255),
     32,
     width / 2,
     scoreHeight / 2);
-}
-
-function drawCompleted() {
-    drawText('Good job! You completed the Linking Game!\r\nPress [Enter] to continue.',
-    color(0, 220, 0),
-    32,
-    width / 2,
-    height / 2 + scoreHeight / 2);
 }
 
 function drawText(msg, inkColor, size, x, y) {
@@ -382,7 +276,6 @@ function drawText(msg, inkColor, size, x, y) {
     noStroke();
     text(msg, x, y);
 }
-
 
 function keyTyped() {
     if (key === 'Enter') {
