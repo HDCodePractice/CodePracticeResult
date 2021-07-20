@@ -1,3 +1,4 @@
+Var gemCounter = 0
 for i in 1 ... 3 {
     while !isBlocked {
         collectGem()
