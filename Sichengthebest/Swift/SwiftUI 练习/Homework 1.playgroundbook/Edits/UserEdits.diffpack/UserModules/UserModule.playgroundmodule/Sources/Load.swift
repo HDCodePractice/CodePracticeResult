@@ -1,4 +1,3 @@
-
 import Foundation
 
 var countries: [Country] = load("capitals.json")
