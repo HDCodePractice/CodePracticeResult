@@ -1,5 +1,5 @@
 var gemCounter = 0
-for i in 1 ... 3{
+for i in 1 ... 5{
     if isBlocked {
         turnLeft()
         turnLeft()
