@@ -1,17 +1,17 @@
 var gemCounter = 0
 var switchCounter = 0
 while gemCounter<3{
-    moveForward()
     if isOnGem {
         collectGem()
         gemCounter=gemCounter+1
     }
     if isBlocked && isBlockedRight {
-        turnLeft()    
+        turnLeft()
     }
     if isBlocked {
-        turnRight()    
+        turnRight()
     }
+    moveForward()
 }
 while switchCounter<4 {
     moveForward()
@@ -20,6 +20,6 @@ while switchCounter<4 {
         switchCounter=switchCounter+1
     }
     if isBlocked {
-        turnRight()   
+        turnRight()
     }
 }
