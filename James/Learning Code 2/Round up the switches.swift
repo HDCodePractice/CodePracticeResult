@@ -1,12 +1,14 @@
-var gemCounter = 0
-var Switchcounter = 0
-for i in 1 ... 16 {
-    if gemCounter == 0 || (Switchcounter != 0){
-        moveForward()
-        collectGem()
+var gemNumber = numberOfGems
+var switchCounter = 0
+while switchCounter < gemNumber {
+    if isBlocked {
+        turnRight()
+    } else if isOnClosedSwitch {
         toggleSwitch()
-        if isBlocked {
-            turnRight()
-        }
-    }
+        switchCounter = switchCounter + 1
+    } else if isOnGem {
+        collectGem()
+    } else {
+        moveForward()
+    } 
 }
