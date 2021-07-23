@@ -21,3 +21,4 @@ bluePortal.isActive=false
 move(distance: 4)
 bluePortal.isActive=true
 move(distance: 4)
+collectGem()
