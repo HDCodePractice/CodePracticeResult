@@ -1,4 +1,3 @@
-let totalGems = randomNumberOfGems
 func Gem() {
         collectGem()
         moveForward()
