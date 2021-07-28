@@ -1,6 +1,10 @@
+
 import Foundation
 
-var countries: [Country] = load("capitals.json")
+final class ModelData: ObservableObject {
+    @Published var pokemons: [Pokemon] = load("pokemondata.json")
+}
+var pokemons: [Pokemon] = load("pokemondata.json")
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data

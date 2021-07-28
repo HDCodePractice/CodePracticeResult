@@ -2,9 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UserPageFilenames</key>
-	<array>
-		<string>06BEC6B9-CF8A-4B3D-BDFF-7202C6AA034B.playgroundpage</string>
-	</array>
+	<key>Name</key>
+	<string>Template Page</string>
+	<key>LiveViewEdgeToEdge</key>
+	<false/>
+	<key>LiveViewMode</key>
+	<string>HiddenByDefault</string>
 </dict>
 </plist>
