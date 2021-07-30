@@ -2,59 +2,50 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>BaseVersion</key>
-	<string>1.0</string>
-	<key>DiffPackType</key>
-	<string>UserEdit</string>
-	<key>DocumentType</key>
-	<string>PlaygroundBook</string>
-	<key>Name</key>
+	<key>BaseContentIdentifier</key>
 	<string>com.apple.playgrounds.blank</string>
-	<key>UpdateVersion</key>
+	<key>BaseContentVersion</key>
 	<string>1.0</string>
-	<key>Updates</key>
+	<key>ContentType</key>
+	<string>PlaygroundBookUserEdit</string>
+	<key>Diffs</key>
 	<dict>
-		<key>Added</key>
-		<array>
-			<dict>
-				<key>File</key>
-				<string>UserModules/UserModule.playgroundmodule/Sources/ContentView.swift</string>
-			</dict>
-			<dict>
-				<key>File</key>
-				<string>Chapters/Chapter1.playgroundchapter/UserManifest.plist</string>
-			</dict>
-			<dict>
-				<key>File</key>
-				<string>UserModules/UserModule.playgroundmodule/Sources/HexagonParameters.swift</string>
-			</dict>
-			<dict>
-				<key>File</key>
-				<string>UserModules/UserModule.playgroundmodule/Sources/BadgeBackground.swift</string>
-			</dict>
-			<dict>
-				<key>File</key>
-				<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/UserManifest.plist</string>
-			</dict>
-		</array>
-		<key>Modified</key>
-		<array>
-			<dict>
-				<key>Diff</key>
-				<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift.delta</string>
-				<key>File</key>
-				<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
-			</dict>
-		</array>
-		<key>Removed</key>
-		<array>
-			<dict>
-				<key>File</key>
-				<string>UserModules/UserModule.playgroundmodule/Sources/SharedCode.swift</string>
-			</dict>
-		</array>
-		<key>Replaced</key>
-		<array/>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/99B108E1-05E8-444E-8170-A18A17B54D8C.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/99B108E1-05E8-444E-8170-A18A17B54D8C.playgroundpage/main.swift</key>
+		<string>Modified</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/D31043DD-A780-46A8-B6A9-85448CFDA1F2.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/D31043DD-A780-46A8-B6A9-85448CFDA1F2.playgroundpage/main.swift</key>
+		<string>Modified</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/EFB0F245-99EC-4CA1-962C-AD06B39EBD5E.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/EFB0F245-99EC-4CA1-962C-AD06B39EBD5E.playgroundpage/main.swift</key>
+		<string>Modified</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</key>
+		<string>Modified</string>
+		<key>Chapters/Chapter1.playgroundchapter/UserManifest.plist</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/Badge.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/BadgeBackground.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/BadgeSymbol.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/ContentView.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/HexagonParameters.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/RotatedBadgeSymbol.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/SharedCode.swift</key>
+		<string>Removed</string>
 	</dict>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+	<key>UpdatedContentVersion</key>
+	<string>1.0</string>
 </dict>
 </plist>

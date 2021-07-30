@@ -2,7 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BasePageFilename</key>
+	<string>My Playground.playgroundpage</string>
 	<key>Name</key>
-	<string>Draw the Badge Background</string>
+	<string>Draw the Badge Symbol</string>
 </dict>
 </plist>

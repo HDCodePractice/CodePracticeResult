@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BaseFile</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
 	<key>Diffs</key>
 	<array>
 		<dict>
@@ -9,7 +11,7 @@
 			<string>import SwiftUI
 import PlaygroundSupport
 
-PlaygroundPage.current.setLiveView(ContentView2())
+PlaygroundPage.current.setLiveView(ContentView3())
 </string>
 			<key>ModifiedRange</key>
 			<string>{1, 92}</string>
