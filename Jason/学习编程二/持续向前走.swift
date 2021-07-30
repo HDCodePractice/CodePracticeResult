@@ -3,7 +3,7 @@ func move(distance: Int) {
   for i in 1 ... distance {
         expert.moveForward()
     }
-  
+}
   move(distance: 6)
 expert.turnRight()
 move(distance: 2)
