@@ -53,9 +53,18 @@ function checkMine(col,row){
 }
 
 function calNum(row, col) {
-    let num = 2;
-    
-    print(num);
+    const srow = (row===0) ? row : row-1;
+    const scol = (col===0) ? col : col-1;
+    const erow = (row>=gridSize-1) ? row : row+1;
+    const ecol = (col>=gridSize-1) ? col : col+1;
+    var num = 0;
+    for (let i = srow; i <= erow; i++) {
+        for (let j = scol; j <= ecol; j++) {
+            if (checkMine(j,i)) {
+                num += 1;
+            }
+        }
+    }
     return num;
 }
 
@@ -95,16 +104,6 @@ function drawGrid() {
             const idx = row * gridSize + col;
             fill(235);
 
-            // if (currentlydrawing === lastclick && click === 1){
-            //     strokeWeight(5);
-            //     stroke(255,0,0)
-            //     click = 2
-            // }else{
-            //     strokeWeight(2);
-            //     stroke(64);
-            //     click = 1
-            // }
-
             rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 10);
             stroke(0);
             strokeWeight(2);
@@ -118,9 +117,9 @@ function drawGrid() {
 }
 
 function drawScore() {
-    drawText(`Tag: ${tag}`,
+    drawText(`Score: ${score}\r\nPress [Enter] to restart game.\r\n🏴 left: ${tag}`,
     color(0, 220, 0, gameOver ? 128 : 255),
-    32,
+    24,
     width / 2,
     scoreHeight / 2);
 }
