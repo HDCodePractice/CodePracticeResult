@@ -33,13 +33,13 @@ function newGame() {
 
 function calNum(row,col) {
     let num = 0;
-    for (let index1 = row-1; index1 <= row + 1; index1++) {
-        for (let index2 = col-1; index2 <= col + 1; index2++) {
-            if (index1 > 0 && index2 > 0 ) {
-                if (index1 <= gridSize && index2 <= gridSize) {
+    for (let index1 = row; index1 <= row + 1; index1++) {
+        for (let index2 = col; index2 <= col + 1; index2++) {
+            if (index1 >= 0 && index2 >= 0 ) {
+                if (index1 < gridSize && index2 < gridSize) {
                     print(`${col},${row}`,`${index2-1},${index1-1}`)
-                    if (grid[index2-1*gridSize+index1-1] === 'm') {
-                         num += 1;
+                    if (grid[index2*gridSize+index1] === 'm') {
+                        num += 1;
                     }
                 }
             }
