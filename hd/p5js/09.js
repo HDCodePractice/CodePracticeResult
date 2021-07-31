@@ -5,20 +5,20 @@ const scoreHeight = 100;
 let mousecol = 0;
 let mouserow = 0;
 let grid = [];
-let tags = [];
+let flags = [];
 let clickindex;
 let currentlydrawing;
 let click = 1;
 
 let score;
 let mine = 10;
-let tag;
+let flag;
 let linePosition = [];
 
 function newGame() {
-    tag = mine;
+    flag = mine;
     grid = new Array(gridSize * gridSize - mine).fill('n');
-    tags = new Array(gridSize * gridSize).fill('n');
+    flags = new Array(gridSize * gridSize).fill('n');
     for (let index = 0; index < mine; index++) {
         grid.push("m")
     }
@@ -38,6 +38,7 @@ function newGame() {
 }
 
 function setup() {
+    document.addEventListener('contextmenu', event => event.preventDefault());
     createCanvas(cellSize * gridSize + 2, cellSize * gridSize + 2 + scoreHeight);
     newGame();
     noLoop();
@@ -77,6 +78,10 @@ function mousePressed() {
 
     clickindex = ((mouserow)*gridSize)+mousecol
 
+    if (mouseButton === RIGHT) {
+        flags[clickindex] = 't';
+    }
+
     updateCanvas();
 }
 
@@ -96,6 +101,11 @@ function drawNumber(row, col, num) {
     text(num,col*cellSize+cellSize/2,scoreHeight+row*cellSize+cellSize/2);
 }
 
+function drawFlag(row, col) {
+    fill(0, 102, 153);
+    text("🚩",col*cellSize+cellSize/2,scoreHeight+row*cellSize+cellSize/2);
+}
+
 function drawGrid() {
     for (let row = 0; row < gridSize; row++) {
         for (let col = 0; col < gridSize; col++) {
@@ -107,7 +117,9 @@ function drawGrid() {
             rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 10);
             stroke(0);
             strokeWeight(2);
-            if (grid[idx] === 'm'){
+            if (flags[idx] === 't') {
+                drawFlag(row, col);
+            }else if (grid[idx] === 'm'){
                 drawCircle(row,col);
             }else if ("1234567".includes(grid[idx])){
                 drawNumber(row,col,grid[idx]);
@@ -117,7 +129,7 @@ function drawGrid() {
 }
 
 function drawScore() {
-    drawText(`Score: ${score}\r\nPress [Enter] to restart game.\r\n🏴 left: ${tag}`,
+    drawText(`Score: ${score}\r\nPress [Enter] to restart game.\r\n🚩 left: ${flag}`,
     color(0, 220, 0, gameOver ? 128 : 255),
     24,
     width / 2,
