@@ -48,8 +48,15 @@ function checkNull(col,row){
 }
 
 function checkCol(col,srow,erow){
+    print("检查列",col,srow,erow);
+    if (srow > erow){
+        const temp = srow;
+        srow = erow;
+        erow = temp;
+    }
     for (let index = srow + 1; index < erow; index++) {
         if (checkNull(col,index)===false){
+            print("检查",col,index,"不行");
             return false
         }
     }
@@ -57,8 +64,15 @@ function checkCol(col,srow,erow){
 }
 
 function checkRow(row,scol,ecol){
+    print("检查行",row,scol,ecol);
+    if (scol > ecol){
+        const temp = scol;
+        scol = ecol;
+        ecol = temp;
+    }
     for (let index = scol + 1; index < ecol; index++) {
         if (checkNull(index,row)===false){
+            print("检查",index,row,"不行");
             return false
         }
     }
@@ -66,50 +80,67 @@ function checkRow(row,scol,ecol){
 }
 
 function checkOneTurn(acol,arow,bcol,brow) {
-    if (checkRow(arow,acol,bcol) ){
+    if ( checkRow(arow,acol,bcol) ){
         if (checkCol(bcol,arow,brow) ){
             if (checkNull(bcol,arow)){
                 return true
             }
         }
     }
-    if (checkCol(acol,arow,brow) ){
+    if ( checkCol(acol,arow,brow) ){
         if (checkRow(brow,acol,bcol) ){
             if (checkNull(acol,brow)){
                 return true
             }
         }
     }
+    
     return false;
 }
 
-function checkTwoTurns(acol,arow,bcol,brow) {
+
+function checkTwoTurn(acol,arow,bcol,brow){
+    if (acol > bcol) {
+        const temp = acol;
+        acol = bcol
+        bcol = temp
+    }
+    if (arow > brow) {
+        const temp = arow;
+        arow = brow
+        brow = temp
+    }
     for (let i = 0; i < gridSize; i++) {
-        if (checkCol(acol,arow,i)) {
-            if (checkRow(i,acol,bcol)) {
+        if (i != acol && i != bcol) {
+            if (checkCol(i,(i-arow),brow)) {
+                if (checkRow(brow,i,bcol)) { 
+                    if (checkCol(i,arow,brow)) {
+                        if (checkNull(i,arow)) {
+                            if (checkNull(i,brow)) {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    for (let i = 0; i < gridSize; i++) {
+        if (i != arow && i != brow) {
+            if (checkRow(i,(i-acol),brow)) {
                 if (checkCol(bcol,i,brow)) {
-                    if (checkNull(acol,i)){
-                        if (checkNull(i,bcol)) {
-                            return true
-                        }   
-                    }
+                    if (checkRow(i,arow,brow)) {
+                        if (checkNull(i,acol)) {
+                            if (checkNull(i,bcol)) {
+                                return true
+                            }
+                        }
+                    } 
                 }
             }
         }
     }
-    for (let i = 0; i < gridSize; i++) {
-        if (checkRow(arow,acol,i)) {
-            if (checkCol(i,arow,brow)) {
-                if (checkRow(brow,i,bcol)) {
-                    if (checkNull(i,brow)){
-                        if (checkNull(arow,i)) {
-                            return true
-                        }   
-                    }
-                }
-            }
-        }
-    }
+    return false
 }
 
 function checkPass(clickindex,lastindex){
@@ -123,43 +154,40 @@ function checkPass(clickindex,lastindex){
     lastrow = int(lastindex / gridSize);
     lastcol = lastindex - lastrow * gridSize;
 
-    if (clickcol === lastcol) {
+    if (clickcol === lastcol){
         // 同一列
         // 在边儿上
         if (clickcol === 0  || clickcol === gridSize - 1) {
             return true;
         }
         // 两行之间是空的
-        if (clickrow < lastrow){
-            return checkCol(clickcol,clickrow,lastrow);
-        } else {
-            if (checkCol(clickcol,lastrow,clickrow) == true) {
-                return true
-            } else {
-                return checkTwoTurns(clickcol,clickrow,lastcol,lastrow)
-            }  
+        if (checkCol(clickcol,clickrow,lastrow) == true) {
+            return true;
+        } 
+        if (checkTwoTurn(clickcol,clickrow,lastcol,lastrow)) {
+            return true;
         }
-    } else if(clickrow === lastrow) {
+    }else if(clickrow === lastrow){
         // 同一行
         // 在边儿上
         if (clickrow === 0  || clickrow === gridSize - 1) {
             return true;
         }
         // 两列之间是空的
-        if (clickcol < lastcol){
+        if (checkRow(clickrow,clickcol,lastcol)) {
             return checkRow(clickrow,clickcol,lastcol);
-        }else{
-            if (checkRow(clickrow,lastcol,clickcol) == true) {
-                return true
-            } else {
-                return checkTwoTurns(clickcol,clickrow,lastcol,lastrow)
-            }
+        } 
+        if (checkTwoTurn(clickcol,clickrow,lastcol,lastrow)) {
+            return true;
         }
-    } else {
-        if (checkOneTurn(clickrow,clickcol,lastrow,lastcol)) {
-            return true
-        } else {
-            return checkTwoTurns(clickcol,clickrow,lastcol,lastrow)
+    }else{
+        if (checkTwoTurn(clickcol,clickrow,lastcol,lastrow)) {
+            return checkTwoTurn(clickcol,clickrow,lastcol,lastrow)
+        }
+        if (clickindex < lastindex){
+            return checkOneTurn(clickcol,clickrow,lastcol,lastrow);
+        }else{
+            return checkOneTurn(lastcol,lastrow,clickcol,clickrow);
         }
     }
     return false;
@@ -199,12 +227,13 @@ function updateCanvas() {
 
 function drawCircle(row,col) {
     fill(0,250,0)
-    circle(col*cellSize+1+cellSize/2, row*cellSize+1+scoreHeight+cellSize/2, (cellSize-cellSize*2/5))
+    circle(col*cellSize+1+cellSize/2, row*cellSize+1+scoreHeight+cellSize/2, cellSize*4/5)
 }
 
 function drawSquare(row, col) {
     fill(0,0,250)
-    square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5)
+
+square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5)
 }
 
 function drawTriangle(row, col) {
