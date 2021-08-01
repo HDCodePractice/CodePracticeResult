@@ -1,5 +1,5 @@
 const cellSize = 50;
-const gridSize = 8;
+var gridSize = 8;
 const scoreHeight = 100;
 
 let mousecol = 0;
@@ -13,9 +13,19 @@ let click = 1
 let score;
 let linePosition = [];
 
+
+
 function randomGrid(){
     opts = ['t','s','c']
     return opts[floor(random(opts.length))];
+}
+
+function setDifficulty(dif){
+    if (dif == 'default'){
+        gridSize = 8
+    } else if (dif == 'baby'){
+        
+    }
 }
 
 function newGame() {
@@ -48,8 +58,15 @@ function checkNull(col,row){
 }
 
 function checkCol(col,srow,erow){
+    print("检查列",col,srow,erow);
+    if (srow > erow){
+        const temp = srow;
+        srow = erow;
+        erow = temp;
+    }
     for (let index = srow + 1; index < erow; index++) {
         if (checkNull(col,index)===false){
+            print("检查",col,index,"不行");
             return false
         }
     }
@@ -57,12 +74,42 @@ function checkCol(col,srow,erow){
 }
 
 function checkRow(row,scol,ecol){
+    print("检查行",row,scol,ecol);
+    if (scol > ecol){
+        const temp = scol;
+        scol = ecol;
+        ecol = temp;
+    }
     for (let index = scol + 1; index < ecol; index++) {
         if (checkNull(index,row)===false){
+            print("检查",index,row,"不行");
             return false
         }
     }
     return true    
+}
+
+function checkOneTurn(acol,arow,bcol,brow) {
+    if ( checkRow(arow,acol,bcol) ){
+        if (checkCol(bcol,arow,brow) ){
+            if (checkNull(bcol,arow)){
+                return true
+            }
+        }
+    }
+    if ( checkCol(acol,arow,brow) ){
+        if (checkRow(brow,acol,bcol) ){
+            if (checkNull(acol,brow)){
+                return true
+            }
+        }
+    }
+    
+    return false;
+}
+
+function checkColTwoTurns(){
+
 }
 
 function checkPass(clickindex,lastindex){
@@ -83,11 +130,7 @@ function checkPass(clickindex,lastindex){
             return true;
         }
         // 两行之间是空的
-        if (clickrow < lastrow){
-            return checkCol(clickcol,clickrow,lastrow);
-        }else{
-            return checkCol(clickcol,lastrow,clickrow);
-        }
+        return checkCol(clickcol,clickrow,lastrow);
     }else if(clickrow === lastrow){
         // 同一行
         // 在边儿上
@@ -95,36 +138,17 @@ function checkPass(clickindex,lastindex){
             return true;
         }
         // 两列之间是空的
-        if (clickcol < lastcol){
-            return checkRow(clickrow,clickcol,lastcol);
-        }else{
-            return checkRow(clickrow,lastcol,clickcol);
-        }
+        return checkRow(clickrow,clickcol,lastcol);
     }else{
+        if (clickindex < lastindex){
+            return checkOneTurn(clickcol,clickrow,lastcol,lastrow);
+        }else{
+            return checkOneTurn(lastcol,lastrow,clickcol,clickrow);
+        }
     }
     return false;
 }
 
-function checkOneTurn(acol,arow,bcol,brow) {
-    print(acol,arow,bcol,brow);
-    if ( checkRow(arow,acol,bcol) ){
-        if (checkCol(bcol,arow,brow) ){
-            if (checkNull(bcol,arow)){
-                print(arow,acol,bcol,"true",bcol,arow,brow,"true");
-                return true;
-            }
-        }
-    }
-    if ( checkCol(acol,arow,brow) ){
-        if (checkRow(brow,acol,bcol) ){
-            if (checkNull(acol,brow)){
-                print(acol,arow,brow,"true",brow,acol,bcol,"true");
-                return true;
-            }
-        }
-    }
-    return false;
-}
 
 function mousePressed() {
     linePosition.push(mouseX);
@@ -164,60 +188,4 @@ function drawCircle(row,col) {
 
 function drawSquare(row, col) {
     fill(0,0,250)
-    square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5)
-}
-
-function drawTriangle(row, col) {
-    fill(250,0,0)
-    triangle(col*cellSize+1+cellSize/1.2,row*cellSize+1+scoreHeight+(cellSize-cellSize/5),
-        col*cellSize+1+cellSize/2,row*cellSize+1+scoreHeight+(cellSize-cellSize/1.25),
-        col*cellSize+1+(cellSize-cellSize/1.2),row*cellSize+1+scoreHeight+(cellSize-cellSize/5))
-}
-
-function drawGrid() {
-    for (let row = 0; row < gridSize; row++) {
-        for (let col = 0; col < gridSize; col++) {
-            currentlydrawing = ((row)*gridSize)+col
-            
-            const idx = row * gridSize + col;
-            fill(235);
-
-            if (currentlydrawing === lastclick && click === 1){
-                strokeWeight(5);
-                stroke(255,0,0)
-                click = 2
-            }else{
-                strokeWeight(2);
-                stroke(64);
-                click = 1
-            }
-
-            rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 10);
-            stroke(0);
-            strokeWeight(2);
-            if (grid[idx] === 's'){
-                drawSquare(row,col);
-            }else if (grid[idx] === 'c'){
-                drawCircle(row,col);
-            }else if (grid[idx]  === 't'){
-                drawTriangle(row,col);
-            }
-        }
-    }
-}
-
-function drawScore() {
-    drawText(`Score: ${score}`,
-    color(0, 220, 0, gameOver ? 128 : 255),
-    32,
-    width / 2,
-    scoreHeight / 2);
-}
-
-function drawText(msg, inkColor, size, x, y) {
-    textAlign(CENTER, CENTER);
-    textSize(size);
-    fill(inkColor);
-    noStroke();
-    text(msg, x, y);
 }
