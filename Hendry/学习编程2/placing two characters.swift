@@ -1,0 +1,26 @@
+let character = Character()
+let expert = Expert()
+world.place(expert, facing: north, atColumn: 3, row: 0)
+expert.toggleSwitch()
+expert.turnLockUp()
+world .place(character, facing: north, atColumn: 0, row: 0)
+func collectjump() {
+    character.collectGem()
+    character.jump()
+    character.jump()
+}
+func jump2() {
+    character.jump()
+    character.jump()
+}
+collectjump()
+collectjump()
+character.collectGem()
+character.turnRight()
+jump2()
+character.collectGem()
+jump2()
+character.collectGem()
+character.turnLeft()
+jump2()
+character.collectGem()
