@@ -1,16 +1,15 @@
-let charecter = Character()
 let expert = Expert()
-world.place(charecter, facing: south, atColumn: 1, row: 8)
-for i in 1 ... 4 {
-    charecter.collectGem()
-    charecter.moveForward()
-}
-world.place(expert, facing: east, atColumn: 4, row: 5)
-for i in 1 ... 7 {
-    expert.collectGem()
-    expert.moveForward()
-    if expert.isBlocked {
-        expert.turnLockUp()
-        expert.turnRight()
-    }
-}
+world.place(expert, facing: west, atColumn: 3, row: 0)
+expert.toggleSwitch()
+world.place(expert, facing: west, atColumn: 0, row: 0)
+expert.collectGem()
+world.place(expert, facing: west, atColumn: 0, row: 2)
+expert.collectGem()
+world.place(expert, facing: west, atColumn: 0, row: 4)
+expert.collectGem()
+world.place(expert, facing: west, atColumn: 2, row: 4)
+expert.collectGem()
+world.place(expert, facing: west, atColumn: 4, row: 4)
+expert.collectGem()
+world.place(expert, facing: west, atColumn: 4, row: 6)
+expert.collectGem()
