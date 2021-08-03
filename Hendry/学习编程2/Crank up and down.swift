@@ -1,5 +1,5 @@
-let character = Character()
 let expert = Expert()
+let character = Character()
 func move(distance: Int) {
     for i in 1 ... distance {
         character.moveForward()
@@ -12,8 +12,8 @@ func turnLock(up: Bool, numberOfTimes: Int) {
         }
         if up==false {
             expert.turnLockDown()
-        }  
-    } 
+        }
+    }
 }
 func turnAround() {
     character.turnRight()
@@ -34,8 +34,6 @@ character.moveForward()
 turnLock(up: true, numberOfTimes: 3)
 character.turnLeft()
 move(distance: 1)
-let character= Character()
-let expert = Expert()
 character.collectGem()
 character.turnRight()
 expert.turnRight()
