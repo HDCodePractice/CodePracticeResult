@@ -159,7 +159,7 @@ function drawGameOver() {
                 drawFlag(row, col);
             } else if (grid[idx] === 'm') {
                 drawCircle(row,col)
-            }else if ("1234567".includes(grid[idx])){
+            }else if ("12345678".includes(grid[idx])){
                 drawNumber(row,col,grid[idx]);
             }
         }
