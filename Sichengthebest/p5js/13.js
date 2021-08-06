@@ -5,7 +5,6 @@ var grid;
 var score;
 var black = "rgb(0,0,0)"
 var white = "rgb(250,250,250)"
-var mode = "light"
 
 function newGame() {
 	grid = new Array(gridSize * gridSize).fill(0);
@@ -22,17 +21,9 @@ function setup() {
 }
 
 function updateCanvas() {
-	if (mode === "light") {
-		background(255);
-	} else { 
-		background(0);
-	}
+	background(255);
 	noStroke();
-	if (mode === "light") {
-		drawText('Score:' + score,black, 20, width / 2, scoreHeight / 2);
-	} else { 
-		drawText('Score:' + score,white, 20, width / 2, scoreHeight / 2);
-	}	
+	drawText('Score:' + score,black, 20, width / 2, scoreHeight / 2);
 	drawGrid();
 }
 
@@ -47,17 +38,10 @@ function keyPressed() {
 	if (keyCode === UP_ARROW || keyCode === DOWN_ARROW){
 		verticalSlide(keyCode);
 		updateCanvas();
-	} else if (keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW)
-		horizontalSlide(keyCode);
+	} else if (keyCode === LEFT_ARROW || keyCode === RIGHT_ARROW){
+        horizontalSlide(keyCode);
 		updateCanvas();
-
-	if (keyCode === 68){
-		mode = 'dark'
-		print(mode)
-	} else if (keyCode === 76){
-		mode = 'light'
-		print(mode)
-	}
+    }	
 }
 function verticalSlide(direction) {
 	let past = [];
@@ -192,30 +176,17 @@ function drawGrid() {
 	for (let row = 0; row < gridSize; row++) {
 		for (let col = 0; col < gridSize; col++) {
 			var idx = row * gridSize + col;
-
-			if (mode === "light") {
-				fill(white);
-			} else { 
-				fill(black);
-			}	
+            fill(white)
 
 			strokeWeight(2);
-			if (mode === "light") {
-				stroke(black);
-			} else { 
-				stroke(white);
-			}
+			stroke(black)
 			rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 10);
 			if (grid[idx] !== 0) {
 				var msg = `${grid[idx]}`;
 				var size = floor(map(sqrt(msg.length), 1, 3, 64, 14))-30;
 
-				if (mode === "light") {
-					drawText(msg,black, size,col * cellSize + cellSize / 2, row * cellSize + cellSize / 2 + scoreHeight);
-				} else { 
-					drawText(msg,white, size,col * cellSize + cellSize / 2, row * cellSize + cellSize / 2 + scoreHeight);
-				}	
-			}
+				drawText(msg,black, size,col * cellSize + cellSize / 2, row * cellSize + cellSize / 2 + scoreHeight);
+            }
 		}
 	}
 } 
