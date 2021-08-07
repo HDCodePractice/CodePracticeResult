@@ -1,5 +1,5 @@
 document.addEventListener('contextmenu', event => event.preventDefault());
-const cellSize = 50;
+const cellSize = 49;
 const gridSize = 10;
 const scoreHeight = 100;
 
