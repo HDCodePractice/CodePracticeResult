@@ -1,51 +1,41 @@
-const cellSize = 50;
-const gridSize = 8;
+document.addEventListener('contextmenu', event => event.preventDefault());
+const cellSize = 49;
+const gridSize = 10;
 const scoreHeight = 100;
 
 let mousecol = 0;
 let mouserow = 0;
 let grid = [];
-let tags = [];
+let flags = [];
 let clickindex;
-let lastclick;
 let currentlydrawing;
 let click = 1;
 
 let score;
 let mine = 10;
-let tag;
+let flag;
 let linePosition = [];
 
-
-
 function newGame() {
-    tag = mine;
+    flag = mine;
     grid = new Array(gridSize * gridSize - mine).fill('n');
-    tags = new Array(gridSize * gridSize).fill('n')
-    for (let index = 0; index < mine; index++){
-        grid.push('m')
+    flags = new Array(gridSize * gridSize).fill('n');
+    for (let index = 0; index < mine; index++) {
+        grid.push("m")
     }
-    grid = shuffle(grid)
-    gameOver = false;
-    completed = false;
-    score = 0;
-}
-
-function calNum(row,col) {
-    let num = 0;
-    for (let index1 = row; index1 <= row + 1; index1++) {
-        for (let index2 = col; index2 <= col + 1; index2++) {
-            if (index1 >= 0 && index2 >= 0 ) {
-                if (index1 < gridSize && index2 < gridSize) {
-                    print(`${col},${row}`,`${index2-1},${index1-1}`)
-                    if (grid[index2*gridSize+index1] === 'm') {
-                        num += 1;
-                    }
-                }
+    grid = shuffle(grid);
+    for (let col = 0; col < gridSize; col++) {
+        for (let row = 0; row < gridSize; row++) {
+            if (!checkMine(col,row)) {
+                num = calNum(row, col);
+                const idx = row * gridSize + col;
+                grid[idx] = num;
             }
         }
     }
-    return num;
+    gameOver = false;
+    completed = false;
+    score = 0;
 }
 
 function setup() {
@@ -53,6 +43,30 @@ function setup() {
     newGame();
     noLoop();
     updateCanvas();
+}
+
+function checkMine(col,row){
+    const idx = row * gridSize + col;
+    if (grid[idx] === "m"){
+        return true
+    }
+    return false
+}
+
+function calNum(row, col) {
+    const srow = (row===0) ? row : row-1;
+    const scol = (col===0) ? col : col-1;
+    const erow = (row>=gridSize-1) ? row : row+1;
+    const ecol = (col>=gridSize-1) ? col : col+1;
+    var num = 0;
+    for (let i = srow; i <= erow; i++) {
+        for (let j = scol; j <= ecol; j++) {
+            if (checkMine(j,i)) {
+                num += 1;
+            }
+        }
+    }
+    return num;
 }
 
 function mousePressed() {
@@ -64,6 +78,25 @@ function mousePressed() {
 
     clickindex = ((mouserow)*gridSize)+mousecol
 
+    if (mouseButton === RIGHT) {
+        if (flags[clickindex] === 'm') {
+            flags[clickindex] = 'n';
+            flag += 1;
+        } else {
+            if (flag > 0) {
+                flags[clickindex] = 'm';
+                flag -= 1;
+            }
+        }
+    } else if (mouseButton === LEFT) {
+        if (grid[clickindex] === 'm') {
+            if (flags[clickindex] === 'n') { 
+                drawGameOver();
+                return
+            }
+        }
+    }
+
     updateCanvas();
 }
 
@@ -71,6 +104,9 @@ function updateCanvas() {
     background(235);
     drawScore();
     drawGrid();
+    if (flags === grid) {
+        drawCompleted()
+    }
 }
 
 function drawCircle(row,col) {
@@ -78,9 +114,14 @@ function drawCircle(row,col) {
     circle(col*cellSize+1+cellSize/2, row*cellSize+1+scoreHeight+cellSize/2, cellSize*4/5)
 }
 
-function drawSquare(row, col) {
-    fill(0,0,250)
-    square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5)
+function drawNumber(row, col, num) {
+    fill(0, 102, 153);
+    text(num,col*cellSize+cellSize/2,scoreHeight+row*cellSize+cellSize/2);
+}
+
+function drawFlag(row, col) {
+    fill(0, 102, 153);
+    text("🚩",col*cellSize+cellSize/2,scoreHeight+row*cellSize+cellSize/2);
 }
 
 function drawGrid() {
@@ -91,28 +132,70 @@ function drawGrid() {
             const idx = row * gridSize + col;
             fill(235);
 
-            if (currentlydrawing === lastclick && click === 1){
-                strokeWeight(5);
-                stroke(255,0,0)
-                click = 2
-            }else{
-                strokeWeight(2);
-                stroke(64);
-                click = 1
-            }
             rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 10);
-            drawText(`${calNum(row,col)}`, color(0, 0, 0, gameOver ? 128 : 255), 20, col * cellSize + 30,row * cellSize + 130);
             stroke(0);
             strokeWeight(2);
-            if (grid[idx] === 'm'){
-                drawCircle(row,col);
+            if (flags[idx] === 'm') {
+                drawFlag(row, col);
+            }else if ("1234567".includes(grid[idx])){
+                drawNumber(row,col,grid[idx]);
             }
         }
     }
 }
 
+function drawGameOver() {
+    for (let row = 0; row < gridSize; row++) {
+        for (let col = 0; col < gridSize; col++) {
+            currentlydrawing = ((row)*gridSize)+col
+            
+            const idx = row * gridSize + col;
+            fill(235);
+
+            rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 10);
+            stroke(0);
+            strokeWeight(2);
+            if (flags[idx] === 'm') {
+                drawFlag(row, col);
+            } else if (grid[idx] === 'm') {
+                drawCircle(row,col)
+            }else if ("12345678".includes(grid[idx])){
+                drawNumber(row,col,grid[idx]);
+            }
+        }
+    }
+    textSize(40)
+    fill(255,0,0)
+    text('GAME OVER',gridSize*cellSize/2,gridSize*cellSize/2+scoreHeight)
+}
+
+function drawGameOver() {
+    for (let row = 0; row < gridSize; row++) {
+        for (let col = 0; col < gridSize; col++) {
+            currentlydrawing = ((row)*gridSize)+col
+            
+            const idx = row * gridSize + col;
+            fill(235);
+
+            rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 10);
+            stroke(0);
+            strokeWeight(2);
+            if (flags[idx] === 'm') {
+                drawFlag(row, col);
+            } else if (grid[idx] === 'm') {
+                drawCircle(row,col)
+            }else if ("1234567".includes(grid[idx])){
+                drawNumber(row,col,grid[idx]);
+            }
+        }
+    }
+    textSize(10)
+    fill(0,255,0)
+    text('Good job! Press [Enter] to restart game.',gridSize*cellSize/2,gridSize*cellSize/2+scoreHeight)
+}
+
 function drawScore() {
-    drawText(`Score: ${score}\r\nPress [Enter] to restart game.\r\n🏴 left: ${tag}`,
+    drawText(`Score: ${score}\r\nPress [Enter] to restart game.\r\n🚩 left: ${flag}`,
     color(0, 220, 0, gameOver ? 128 : 255),
     24,
     width / 2,

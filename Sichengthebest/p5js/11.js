@@ -85,7 +85,7 @@ function checkOneTurn(acol,arow,bcol,brow) {
             }
         }
     }
-    if ( checkCol(acol,arow,brow) ){
+    if (checkCol(acol,arow,brow) ){
         if (checkRow(brow,acol,bcol) ){
             if (checkNull(acol,brow)){
                 return true
