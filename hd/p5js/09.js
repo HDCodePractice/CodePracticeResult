@@ -11,7 +11,7 @@ let currentlydrawing;
 let click = 1;
 
 let score;
-let mine = 10;
+let mine = 20;
 let flag;
 let linePosition = [];
 let gameOver = false;
@@ -68,16 +68,23 @@ function clickBlank(row, col) {
     const scol = (col===0) ? col : col-1;
     const erow = (row>=gridSize-1) ? row : row+1;
     const ecol = (col>=gridSize-1) ? col : col+1;
-    var num = 0;
     const idx = row * gridSize + col;
+    // 野蛮方案
+    var num = 0;
     if (flags[idx] === 0){
         for (let i = srow; i <= erow; i++) {
             for (let j = scol; j <= ecol; j++) {
                 const index = i * gridSize + j;
+                if (flags[index] !== 0 && grid[index] === 0) {
+                    num +=1; // 点击后，新出的空格的数量加1
+                }
                 flags[index] = grid[index];
             }
         }
     }
+    return num; // 返回空格的数量
+
+    // 优化(sicheng)方案
 }
 
 function calNum(row, col) {
@@ -89,11 +96,11 @@ function calNum(row, col) {
     for (let i = srow; i <= erow; i++) {
         for (let j = scol; j <= ecol; j++) {
             if (checkMine(j,i)) {
-                num += 1;
+                num += 1;  
             }
         }
     }
-    return num;
+    return num;  
 }
 
 function mousePressed() {
@@ -121,7 +128,22 @@ function mousePressed() {
             if ( ! checkBlank(mousecol,mouserow)){
                 gameOver = true;
             }
-            clickBlank(mouserow,mousecol);
+            // 野蛮方案
+            let bnum = clickBlank(mouserow,mousecol);
+            while (bnum > 0) {
+                bnum = 0;
+                for (let col = 0; col < gridSize; col++) {
+                    for (let row = 0; row < gridSize; row++) {
+                        const index = row * gridSize + col;
+                        if (flags[index] === 0){
+                            bnum += clickBlank(row,col);
+                        }
+                    }
+                }
+                print(bnum);
+            }
+
+            // 优化(sicheng)方案
         }
     }
 
