@@ -268,7 +268,5 @@ function keyTyped() {
     if (key === 'Enter') {
         newGame();
         setup();
-        grid = [];
-        flags = [];
     }
 }
