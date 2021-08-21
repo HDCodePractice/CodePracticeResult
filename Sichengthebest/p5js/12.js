@@ -10,18 +10,18 @@ let clickindex;
 let currentlydrawing;
 let click = 1;
 
-let score;
 let mine = 10;
 let flag;
 let linePosition = [];
 let gameOver = false;
+let completed = false;
 
 function newGame() {
     flag = mine;
     grid = new Array(gridSize * gridSize - mine).fill('n');
     flags = new Array(gridSize * gridSize).fill('n');
     for (let index = 0; index < mine; index++) {
-        grid.push("m")
+        grid.push("m");
     }
     grid = shuffle(grid);
     for (let col = 0; col < gridSize; col++) {
@@ -35,7 +35,6 @@ function newGame() {
     }
     gameOver = false;
     completed = false;
-    score = 0;
 }
 
 function setup() {
@@ -49,9 +48,9 @@ function setup() {
 function checkMine(col,row){
     const idx = row * gridSize + col;
     if (grid[idx] === "m"){
-        return true
+        return true;
     }
-    return false
+    return false;
 }
 
 function checkBlank(col,row){
@@ -69,19 +68,38 @@ function clickBlank(row, col) {
     const erow = (row>=gridSize-1) ? row : row+1;
     const ecol = (col>=gridSize-1) ? col : col+1;
     const idx = row * gridSize + col;
+
+    // Savage way
+    // num = 0;
+    // if (flags[idx] === 0){
+    //    for (let i = srow; i <= erow; i++) {
+    //        for (let j = scol; j <= ecol; j++) {
+    //            const index = i * gridSize + j;
+    //            if (flags[index] !== 0 && grid[index] === 0) {
+    //                num += 1;
+    //            }
+    //            flags[index] = grid[index];
+    //        }
+    //    }
+    // }
+    // return num;
+
+    // Sicheng (better) way
     blanks = [];
     if (flags[idx] === 0){
         for (let i = srow; i <= erow; i++) {
             for (let j = scol; j <= ecol; j++) {
                 const index = i * gridSize + j;
-                flags[index] = grid[index];
-                blanks.push(i,j)
+                if (flags[index] !== 0 && grid[index] === 0 && flags[index] !== 'm') {
+                    blanks.push(index);
+                }
+                if (flags[index] !== 'm') {
+                    flags[index] = grid[index];
+                }
             }
         }
     }
-    while (blanks.length > 0) {
-        
-    }
+    return blanks;
 }
 
 function calNum(row, col) {
@@ -107,25 +125,54 @@ function mousePressed() {
     mousecol = Math.ceil(mouseX/cellSize)-1;
     mouserow = Math.ceil((mouseY-scoreHeight)/cellSize)-1;
 
-    clickindex = ((mouserow)*gridSize)+mousecol
+    clickindex = ((mouserow)*gridSize)+mousecol;
     if (! gameOver){
         if (mouseButton === RIGHT) {
-            if (flags[clickindex] == 'n' || flags[clickindex] == "t") {
-                if (flags[clickindex] != 't') {
+            if (flags[clickindex] == 'n' || flags[clickindex] == 'm') {
+                if (flags[clickindex] != 'm') {
                     if (flag > 0) {
-                        flags[clickindex] = 't';
+                        flags[clickindex] = 'm';
                         flag -= 1;
+                        if (flags === grid) {
+                            completed = true;
+                        }
                     }
                 } else {
                     flags[clickindex] = 'n';
                     flag += 1;
-                }  
+                }
             }        
         }else{
             if ( ! checkBlank(mousecol,mouserow)){
                 gameOver = true;
+            } else {
+                // Savage way
+                // num2 = clickBlank(mouserow,mousecol);
+                // while (num2 > 0) {
+                //     num2 = 0
+                //     for (let i = 0; i < gridSize; i++) {
+                //         for (let j = 0; j < gridSize; j++) {
+                //             const index = i * gridSize + j;
+                //             if (flags[index] === 0) {
+                //                 num2 += clickBlank(i,j);
+                //             }
+                //         }
+                //     }
+                // }
+
+                // Sicheng (better) way
+                blanks2 = clickBlank(mouserow,mousecol);
+                let tempblanks = [];
+                while (blanks2.length > 0) {
+                    for (let index = 0; index < blanks2.length; index++) {
+                        row = int(blanks2[index]/gridSize);
+                        col = blanks2[index]%gridSize;
+                        tempblanks.push.apply(tempblanks,clickBlank(row,col));
+                    }
+                    blanks2 = tempblanks;
+                    tempblanks = [];
+                }
             }
-            clickBlank(mouserow,mousecol);
         }
     }
 
@@ -136,6 +183,16 @@ function updateCanvas() {
     background(235);
     drawScore();
     drawGrid();
+    if (gameOver === true) {
+        fill(255,0,0)
+        textSize(cellSize*gridSize/10);
+        text('GAME OVER\nClick [Enter] to restart',width/2,height/2)
+    }
+    if (completed === true) {
+        fill(0,255,0)
+        textSize(cellSize*gridSize/10);
+        text('You won!\nClick [Enter] to restart',width/2,height/2)
+    }
 }
 
 function drawCircle(row,col) {
@@ -169,7 +226,7 @@ function drawGrid() {
             fill(235);
             rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 10);
 
-            if (flags[idx] === 't') {
+            if (flags[idx] === 'm') {
                 drawFlag(row, col);
             }else if (flags[idx] === 0) {
                 fill(255,248,220);
@@ -192,7 +249,7 @@ function drawGrid() {
 }
 
 function drawScore() {
-    drawText(`Score: ${score}\r\nPress [Enter] to restart game.\r\n🚩 left: ${flag}`,
+    drawText(`Press [Enter] to restart game.\r\n🚩 left: ${flag}`,
     color(0, 220, 0, gameOver ? 128 : 255),
     24,
     width / 2,
@@ -211,5 +268,7 @@ function keyTyped() {
     if (key === 'Enter') {
         newGame();
         setup();
+        grid = [];
+        flags = [];
     }
 }
