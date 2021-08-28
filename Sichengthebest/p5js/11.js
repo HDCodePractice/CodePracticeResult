@@ -156,10 +156,6 @@ function checkPass(clickindex,lastindex){
     }
     if (clickcol === lastcol){
         // 同一列
-        // 在边儿上
-        if (clickcol === 0  || clickcol === gridSize - 1) {
-            return true;
-        }
         // 两行之间是空的
         return checkCol(clickcol,clickrow,lastrow);
     }else if(clickrow === lastrow){
@@ -262,9 +258,9 @@ function drawGrid() {
 }
 
 function drawScore() {
-    drawText(`Score: ${score}\r\nPress [Enter] to restart game.`,
+    drawText(`Press [Enter] to restart game.`,
     color(0, 220, 0, gameOver ? 128 : 255),
-    32,
+    20,
     width / 2,
     scoreHeight / 2);
 }
