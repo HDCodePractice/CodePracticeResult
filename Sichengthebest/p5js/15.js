@@ -102,7 +102,7 @@ function draw() {
                 }
             }
             print(int(snake[index]/gridSize))
-            if (snake[index]%gridSize >= gridSize || int(snake[index]/gridSize) >= gridSize || snake[index]%gridSize === 0 || int(snake[index]/gridSize) <= 0) {
+            if (snake[index]%gridSize >= gridSize || int(snake[index]/gridSize) >= gridSize || snake[index]%gridSize === 0 || int(snake[index]/gridSize) < 0) {
                 gameOver = true;
             }
         }
