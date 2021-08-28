@@ -1,4 +1,3 @@
-
 const cellSize = 25;
 const gridSize = 20;
 const scoreHeight = 100;
@@ -24,6 +23,7 @@ function newGame() {
     score = 0;
     gameOver = false;
     completed = false;
+    direction = 0;
 }
 
 function drawScore() {
@@ -64,13 +64,52 @@ function draw() {
         drawScore();
         drawGrid();
         for (let index = 0; index < snake.length; index++) {
-            snake[index] += 1; 
-            if (snake[index]%gridSize >= gridSize) {
+            if (direction === 0) {
+                headrow = int(snake[0]/gridSize)
+                if (int(snake[index]/gridSize) === headrow) {
+                    snake[index] += 1; 
+                } else if (int(snake[index]/gridSize) > headrow) {
+                    snake[index] -= gridSize; 
+                } else if (int(snake[index]/gridSize) < headrow) {
+                    snake[index] += gridSize; 
+                }
+            } else if (direction === 1) {
+                headrow = int(snake[0]/gridSize)
+                if (int(snake[index]/gridSize) === headrow) {
+                    snake[index] -= 1; 
+                } else if (int(snake[index]/gridSize) > headrow) {
+                    snake[index] -= gridSize; 
+                } else if (int(snake[index]/gridSize) < headrow) {
+                    snake[index] += gridSize; 
+                }
+            } else if (direction === 2) {
+                headcol = snake[0]%gridSize
+                if (snake[index]%gridSize === headcol) {
+                    snake[index] += gridSize;
+                } else if (snake[index]%gridSize < headcol) {
+                    snake[index] += 1;
+                } else if (snake[index]%gridSize > headcol) {
+                    snake[index] -= 1;
+                }
+            } else if (direction === 3) {
+                headcol = snake[0]%gridSize
+                if (snake[index]%gridSize === headcol) {
+                    snake[index] -= gridSize;
+                } else if (snake[index]%gridSize < headcol) {
+                    snake[index] += 1;
+                } else if (snake[index]%gridSize > headcol) {
+                    snake[index] -= 1;
+                }
+            }
+            print(int(snake[index]/gridSize))
+            if (snake[index]%gridSize >= gridSize || int(snake[index]/gridSize) >= gridSize || snake[index]%gridSize === 0 || int(snake[index]/gridSize) <= 0) {
                 gameOver = true;
             }
         }
         if (snake.includes(apple)) {
-            score += 1/snake.length;
+            score += 1;
+            snake.push(snake[-1]-1);
+            apple = random(0,gridSize*gridSize-1)
         }
     } else {
         drawGameOver()
@@ -86,7 +125,7 @@ function drawApple(row, col) {
 function drawGameOver() {
     fill(255,0,0)
     textSize(int(cellSize*gridSize/10));
-    text('GAME OVER\nClick [Enter] to restart',width/2,height/2)
+    text('GAME OVER\nClick [Enter] to restart',cellSize*cellSize/15,cellSize*cellSize/2+scoreHeight)
 }
 
 function keyPressed() {
@@ -94,13 +133,21 @@ function keyPressed() {
         newGame();
         setup();
     }
-    if (keycode === LEFT_ARROW) {
-        direction = 1
-    } else if (keycode === RIGHT_ARROW) {
-        direction = 0
-    } else if (keycode === UP_ARROW) {
-        direction = 3
-    } else if (keycode === DOWN_ARROW) {
-        direction = 2
+    if (keyCode === LEFT_ARROW) {
+        if (direction !== 0) {
+            direction = 1
+        }
+    } else if (keyCode === RIGHT_ARROW) {
+        if (direction !== 1) {
+            direction = 0
+        }
+    } else if (keyCode === UP_ARROW) {
+        if (direction !== 2) {
+            direction = 3
+        }
+    } else if (keyCode === DOWN_ARROW) {
+        if (direction !== 3) {
+            direction = 2
+        }
     }
 }
