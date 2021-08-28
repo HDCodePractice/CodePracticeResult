@@ -126,6 +126,7 @@ function mousePressed() {
         }else{
             if ( ! checkBlank(mousecol,mouserow)){
                 gameOver = true;
+                text("GAME OVER", 100, 100)
             }
             let bnum = clickBlank(mouserow,mousecol);
             // while (bnum > 0) {
@@ -198,7 +199,7 @@ function drawGrid() {
             stroke(0);
             strokeWeight(2);
             fill(0,200,0);
-            rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 10);
+            rect(col * cellSize z+ 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 10);
 
             if (flags[idx] === 't') {
                 drawFlag(row, col);
