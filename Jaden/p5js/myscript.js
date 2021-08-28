@@ -1,132 +1,209 @@
-const cellSize = 100;
-const gridSize = 10;
-const scoreHeight = 100;
-let grid=['s','t','c','s','c','c','c','c','c','c','c','c','c','c','c','c'];
-let gameOver;
-let score;
-let completed;
-let linePosition = [];
-
-
-function randomGrid(){
-    const seed = random(1);
-    if (seed < 0.33) {
-     return 's'
-    }else if (seed > 0.77){
-     return 't'
-    }
-    return 'c'
-   }
-   
-   function newGame() {
-    grid = new Array(gridSize * gridSize).fill('t');
-    for (let index = 0; index < grid.length; index++) {
-     grid[index] = randomGrid();
-    }
-    gameOver = false;
-    completed = false;
-    score = 0;
-   }
-
-function setup() {
- createCanvas(cellSize * gridSize + 2, cellSize * gridSize + 2 + scoreHeight);
- newGame();
- noLoop();
- updateCanvas();
-}
-
-function mousePressed() {
-    linePosition.push(mouseX);
-    linePosition.push(mouseY);
-    if (linePosition.length == 4) {
-        line(linePosition[0],linePosition[1],linePosition[2],linePosition[3]);
-        linePosition = [];
-    } 
-}
-
-function updateCanvas() {
- background(235);
- drawScore();
- drawGrid();
- if (gameOver) {
-  drawGameOver();
- }
- if (completed) {
-  drawCompleted();
- }
-}
-
-
 function drawCircle(row,col) {
-    fill(0,250,0)
+    fill(200,0,0)
     circle(col*cellSize+1+cellSize/2, row*cellSize+1+scoreHeight+cellSize/2, cellSize*4/5)
 }
 
-function drawSquare(row, col) {
-    fill(0,0,250)
-    square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5)
+function drawNumber(row, col, num) {
+    fill(0, 102, 153);
+    text(num,col*cellSize+cellSize/2,scoreHeight+row*cellSize+cellSize/2);
 }
 
-function drawTriangle(row, col) {
-    fill(250,0,0)
-    triangle(col*cellSize+1+cellSize/1.2,row*cellSize+1+scoreHeight+(cellSize-cellSize/5),
-        col*cellSize+1+cellSize/2,row*cellSize+1+scoreHeight+(cellSize-cellSize/1.25),
-        col*cellSize+1+(cellSize-cellSize/1.2),row*cellSize+1+scoreHeight+(cellSize-cellSize/5))
+function drawNumber1(row, col, num) {
+    fill(255, 255, 255);
+    text(num,col*cellSize+cellSize/2,scoreHeight+row*cellSize+cellSize/2);
+}
+
+function drawFlag(row, col) {
+    fill(0, 102, 153);
+    text("🚩",col*cellSize+cellSize/2,scoreHeight+row*cellSize+cellSize/2);
 }
 
 function drawGrid() {
- for (let row = 0; row < gridSize; row++) {
-  for (let col = 0; col < gridSize; col++) {
-   let coloring = {};
-   const idx = row * gridSize + col;
-   fill(235);
-   strokeWeight(2);
-   stroke(64);
-   rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 10);
-   if(grid[idx]==='s'){
-       drawSquare(row,col)
-   }else if(grid[idx]==='c'){
-       drawCircle(row,col)
-   }else if(grid[idx]==='t'){
-       drawTriangle(row,col)
-   }
-  }
- }
- 
+    for (let row = 0; row < gridSize; row++) {
+        for (let col = 0; col < gridSize; col++) {
+            currentlydrawing = ((row)*gridSize)+col
+            
+            const idx = row * gridSize + col;
+            stroke(0);
+            strokeWeight(2);
+            fill(0,200,0);
+            rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 10);
 
+            if (flags[idx] === 't') {
+                drawFlag(row, col);
+            }else if (flags[idx] === 0) {
+                fill(200,100,0);
+                rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 10);
+            }else if ("12345678".includes(flags[idx])) {
+                fill(200,100,0);
+                rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 10);
+                drawNumber(row,col,grid[idx]);
+            }else if (grid[idx] === 'm'){
+                if(gameOver){
+                    fill(200,100,0);
+                    rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 10);
+                    drawCircle(row,col);
+                }
+            }else if ("12345678".includes(grid[idx])){
+                if(gameOver){
+                    drawNumber1(row,col,grid[idx]);
+                }
+            }
+        }
+    }
 }
 
 function drawScore() {
- drawText(`Score: ${score}`,
-  color(0, 220, 0, gameOver ? 128 : 255),
-  32,
-  width / 2,
-  scoreHeight / 2);
-}
-
-function drawGameOver() {
- drawText('Game Over\r\nPress [Enter] to restart.',
-  color(220, 0, 0),
-  32,
-  width / 2,
-  height / 2 + scoreHeight / 2);
-}
-
-function drawCompleted() {
- drawText('Congrats on 2048\r\nPress [Enter] to continue.',
-  color(0, 220, 0),
-  32,
-  width / 2,
-  height / 2 + scoreHeight / 2);
-}
+    drawText(`Score: ${score}\r\nPress [Enter] to restart game.\r\n🚩 left: ${flag}`,
+    color(0, 220, 0, gameOver ? 128 : 255),
+    24,
+    width / 2,
+    scoreHeight / 2);
+} 
 
 function drawText(msg, inkColor, size, x, y) {
- textAlign(CENTER, CENTER);
- textSize(size);
- fill(inkColor);
- noStroke();
- text(msg, x, y);
+    textAlign(CENTER, CENTER);
+    textSize(size);
+    fill(inkColor);
+    noStroke();
+    text(msg, x, y);
 }
+
+function keyTyped() {
+    if (key === 'Enter') {
+        newGame();
+        setup();
+    }
+}
+// const cellSize = 100;
+// const gridSize = 10;
+// const scoreHeight = 100;
+// let grid=['s','t','c','s','c','c','c','c','c','c','c','c','c','c','c','c'];
+// let gameOver;
+// let score;
+// let completed;
+// let linePosition = [];
+
+
+// function randomGrid(){
+//     const seed = random(1);
+//     if (seed < 0.33) {
+//      return 's'
+//     }else if (seed > 0.77){
+//      return 't'
+//     }
+//     return 'c'
+//    }
+   
+//    function newGame() {
+//     grid = new Array(gridSize * gridSize).fill('t');
+//     for (let index = 0; index < grid.length; index++) {
+//      grid[index] = randomGrid();
+//     }
+//     gameOver = false;
+//     completed = false;
+//     score = 0;
+//    }
+
+// function setup() {
+//  createCanvas(cellSize * gridSize + 2, cellSize * gridSize + 2 + scoreHeight);
+//  newGame();
+//  noLoop();
+//  updateCanvas();
+// }
+
+// function mousePressed() {
+//     linePosition.push(mouseX);
+//     linePosition.push(mouseY);
+//     if (linePosition.length == 4) {
+//         line(linePosition[0],linePosition[1],linePosition[2],linePosition[3]);
+//         linePosition = [];
+//     } 
+// }
+
+// function updateCanvas() {
+//  background(235);
+//  drawScore();
+//  drawGrid();
+//  if (gameOver) {
+//   drawGameOver();
+//  }
+//  if (completed) {
+//   drawCompleted();
+//  }
+// }
+
+
+// function drawCircle(row,col) {
+//     fill(0,250,0)
+//     circle(col*cellSize+1+cellSize/2, row*cellSize+1+scoreHeight+cellSize/2, cellSize*4/5)
+// }
+
+// function drawSquare(row, col) {
+//     fill(0,0,250)
+//     square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5)
+// }
+
+// function drawTriangle(row, col) {
+//     fill(250,0,0)
+//     triangle(col*cellSize+1+cellSize/1.2,row*cellSize+1+scoreHeight+(cellSize-cellSize/5),
+//         col*cellSize+1+cellSize/2,row*cellSize+1+scoreHeight+(cellSize-cellSize/1.25),
+//         col*cellSize+1+(cellSize-cellSize/1.2),row*cellSize+1+scoreHeight+(cellSize-cellSize/5))
+// }
+
+// function drawGrid() {
+//  for (let row = 0; row < gridSize; row++) {
+//   for (let col = 0; col < gridSize; col++) {
+//    let coloring = {};
+//    const idx = row * gridSize + col;
+//    fill(235);
+//    strokeWeight(2);
+//    stroke(64);
+//    rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 10);
+//    if(grid[idx]==='s'){
+//        drawSquare(row,col)
+//    }else if(grid[idx]==='c'){
+//        drawCircle(row,col)
+//    }else if(grid[idx]==='t'){
+//        drawTriangle(row,col)
+//    }
+//   }
+//  }
+ 
+
+// }
+
+// function drawScore() {
+//  drawText(`Score: ${score}`,
+//   color(0, 220, 0, gameOver ? 128 : 255),
+//   32,
+//   width / 2,
+//   scoreHeight / 2);
+// }
+
+// function drawGameOver() {
+//  drawText('Game Over\r\nPress [Enter] to restart.',
+//   color(220, 0, 0),
+//   32,
+//   width / 2,
+//   height / 2 + scoreHeight / 2);
+// }
+
+// function drawCompleted() {
+//  drawText('Congrats on 2048\r\nPress [Enter] to continue.',
+//   color(0, 220, 0),
+//   32,
+//   width / 2,
+//   height / 2 + scoreHeight / 2);
+// }
+
+// function drawText(msg, inkColor, size, x, y) {
+//  textAlign(CENTER, CENTER);
+//  textSize(size);
+//  fill(inkColor);
+//  noStroke();
+//  text(msg, x, y);
+// }
 // let wordselection = "When will life return to normal? While the best vaccines are thought to be 95% effective, it takes a coordinated campaign to stop a pandemic. Anthony Fauci, the top infectious-disease official in the U.S., has said that vaccinating 70% to 85% of the U.S. population would enable a return to normalcy.On a global scale, that’s a daunting level of vaccination. At the current pace of 26.8 million a day, it would take another year to achieve a high level of global immunity. The rate, however, is steadily increasing, and new vaccines by additional manufacturers are coming to market."
 // let vs = [];
 // let typeWord = ''
