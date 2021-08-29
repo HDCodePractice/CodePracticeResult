@@ -91,6 +91,15 @@ function updateSnake() {
             snake.splice(0,0,snake[0]-gridSize)
         }
     }
+    for (let index = 0; index < snake.length; index++) {
+        for (let index2 = 0; index2 < snake.length; index2++) {
+            if (snake[index] === snake[index2]) {
+                if (index !== index2) {
+                    gameOver = true;
+                }
+            }
+        }
+    }
 }
 
 function draw() {
