@@ -11,6 +11,7 @@ let gameOver = false;
 let completed = false;
 
 function setup() {
+    frameRate(7)
     createCanvas(cellSize * gridSize + 2, cellSize * gridSize + 2 + scoreHeight);
     background(220);
     newGame();
@@ -59,57 +60,57 @@ function drawGrid() {
     }
 }
 
+function updateSnake() {
+    if (direction === 0) {
+        if (snake[0]%gridSize === gridSize-1) {
+            gameOver = true;
+        } else {
+            snake.splice(snake.length-1, 1)
+            snake.splice(0,0,snake[0]+1)
+        }
+    } else if (direction === 1) {
+        if (snake[0]%gridSize === 0) {
+            gameOver = true;
+        } else {
+            snake.splice(snake.length-1, 1)
+            snake.splice(0,0,snake[0]-1)
+        }
+    } else if (direction === 2) {
+        if (snake[0] >= gridSize * (gridSize-1)) {
+            gameOver = true;
+        } else {
+            snake.splice(snake.length-1, 1)
+            snake.splice(0,0,snake[0]+gridSize)
+
+        }
+    } else if (direction === 3) {
+        if (snake[0] < gridSize) {
+            gameOver = true;
+        } else {
+            snake.splice(snake.length-1, 1)
+            snake.splice(0,0,snake[0]-gridSize)
+        }
+    }
+    for (let index = 0; index < snake.length; index++) {
+        for (let index2 = 0; index2 < snake.length; index2++) {
+            if (snake[index] === snake[index2]) {
+                if (index !== index2) {
+                    gameOver = true;
+                }
+            }
+        }
+    }
+}
+
 function draw() {
     if (gameOver === false) {
         drawScore();
         drawGrid();
-        for (let index = 0; index < snake.length; index++) {
-            if (direction === 0) {
-                headrow = int(snake[0]/gridSize)
-                if (int(snake[index]/gridSize) === headrow) {
-                    snake[index] += 1; 
-                } else if (int(snake[index]/gridSize) > headrow) {
-                    snake[index] -= gridSize; 
-                } else if (int(snake[index]/gridSize) < headrow) {
-                    snake[index] += gridSize; 
-                }
-            } else if (direction === 1) {
-                headrow = int(snake[0]/gridSize)
-                if (int(snake[index]/gridSize) === headrow) {
-                    snake[index] -= 1; 
-                } else if (int(snake[index]/gridSize) > headrow) {
-                    snake[index] -= gridSize; 
-                } else if (int(snake[index]/gridSize) < headrow) {
-                    snake[index] += gridSize; 
-                }
-            } else if (direction === 2) {
-                headcol = snake[0]%gridSize
-                if (snake[index]%gridSize === headcol) {
-                    snake[index] += gridSize;
-                } else if (snake[index]%gridSize < headcol) {
-                    snake[index] += 1;
-                } else if (snake[index]%gridSize > headcol) {
-                    snake[index] -= 1;
-                }
-            } else if (direction === 3) {
-                headcol = snake[0]%gridSize
-                if (snake[index]%gridSize === headcol) {
-                    snake[index] -= gridSize;
-                } else if (snake[index]%gridSize < headcol) {
-                    snake[index] += 1;
-                } else if (snake[index]%gridSize > headcol) {
-                    snake[index] -= 1;
-                }
-            }
-            print(int(snake[index]/gridSize))
-            if (snake[index]%gridSize >= gridSize || int(snake[index]/gridSize) >= gridSize || snake[index]%gridSize === 0 || int(snake[index]/gridSize) < 0) {
-                gameOver = true;
-            }
-        }
+        updateSnake()
         if (snake.includes(apple)) {
             score += 1;
             snake.push(snake[-1]-1);
-            apple = random(0,gridSize*gridSize-1)
+            apple = int(random(0,gridSize*gridSize));
         }
     } else {
         drawGameOver()
@@ -124,30 +125,21 @@ function drawApple(row, col) {
 
 function drawGameOver() {
     fill(255,0,0)
-    textSize(int(cellSize*gridSize/10));
-    text('GAME OVER\nClick [Enter] to restart',cellSize*cellSize/15,cellSize*cellSize/2+scoreHeight)
+    textSize(int(width/15));
+    text('GAME OVER\r\nClick [Enter] to restart',width/5,height/2)
 }
 
 function keyPressed() {
     if (key === 'Enter') {
-        newGame();
         setup();
     }
-    if (keyCode === LEFT_ARROW) {
-        if (direction !== 0) {
-            direction = 1
-        }
-    } else if (keyCode === RIGHT_ARROW) {
-        if (direction !== 1) {
-            direction = 0
-        }
-    } else if (keyCode === UP_ARROW) {
-        if (direction !== 2) {
-            direction = 3
-        }
-    } else if (keyCode === DOWN_ARROW) {
-        if (direction !== 3) {
-            direction = 2
-        }
+    if (keyCode === LEFT_ARROW && snake[1] != snake[0] - 1) {
+        direction = 1;
+    } else if (keyCode === RIGHT_ARROW && snake[1] != snake[0] + 1) {
+        direction = 0;
+    } else if (keyCode === UP_ARROW && snake[1] != snake[0] - gridSize) {
+        direction = 3;
+    } else if (keyCode === DOWN_ARROW && snake[1] != snake[0] + gridSize) {
+        direction = 2;
     }
 }
