@@ -63,30 +63,6 @@ function checkBlank(col,row){
     return false;
 }
 
-// function clickBlank(row, col) {
-//     const srow = (row===0) ? row : row-1;
-//     const scol = (col===0) ? col : col-1;
-//     const erow = (row>=gridSize-1) ? row : row+1;
-//     const ecol = (col>=gridSize-1) ? col : col+1;
-//     const idx = row * gridSize + col;
-//     // 野蛮方案
-//     var num = 0;
-//     if (flags[idx] === 0){
-//         for (let i = srow; i <= erow; i++) {
-//             for (let j = scol; j <= ecol; j++) {
-//                 const index = i * gridSize + j;
-//                 if (flags[index] !== 0 && grid[index] === 0) {
-//                     num +=1; // 点击后，新出的空格的数量加1
-//                 }
-//                 flags[index] = grid[index];
-//             }
-//         }
-//     }
-//     return num; // 返回空格的数量
-
-//     // 优化(sicheng)方案
-// }
-
 function clickBlank(row, col) {
     const srow = (row===0) ? row : row-1;
     const scol = (col===0) ? col : col-1;
@@ -94,22 +70,22 @@ function clickBlank(row, col) {
     const ecol = (col>=gridSize-1) ? col : col+1;
     const idx = row * gridSize + col;
     // 野蛮方案
-    var num = [];
+    var num = 0;
     if (flags[idx] === 0){
         for (let i = srow; i <= erow; i++) {
             for (let j = scol; j <= ecol; j++) {
                 const index = i * gridSize + j;
                 if (flags[index] !== 0 && grid[index] === 0) {
-                    // num 里加入 index
-                    num.push(index);
+                    num +=1; // 点击后，新出的空格的数量加1
                 }
                 flags[index] = grid[index];
             }
         }
     }
     return num; // 返回空格的数量
-}
 
+    // 优化(sicheng)方案
+}
 
 function calNum(row, col) {
     const srow = (row===0) ? row : row-1;
@@ -154,23 +130,20 @@ function mousePressed() {
             }
             // 野蛮方案
             let bnum = clickBlank(mouserow,mousecol);
-            // while (bnum > 0) {
-            //     bnum = 0;
-            //     for (let col = 0; col < gridSize; col++) {
-            //         for (let row = 0; row < gridSize; row++) {
-            //             const index = row * gridSize + col;
-            //             if (flags[index] === 0){
-            //                 bnum += clickBlank(row,col);
-            //             }
-            //         }
-            //     }
-            //     print(bnum);
-            // }
-
-            while bnum.length > 0 {
-
+            while (bnum > 0) {
+                bnum = 0;
+                for (let col = 0; col < gridSize; col++) {
+                    for (let row = 0; row < gridSize; row++) {
+                        const index = row * gridSize + col;
+                        if (flags[index] === 0){
+                            bnum += clickBlank(row,col);
+                        }
+                    }
+                }
+                print(bnum);
             }
 
+            // 优化(sicheng)方案
         }
     }
 
