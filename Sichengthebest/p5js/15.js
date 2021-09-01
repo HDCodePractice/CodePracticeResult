@@ -11,7 +11,7 @@ let gameOver = false;
 let completed = false;
 
 function setup() {
-    frameRate(7)
+    frameRate(10)
     createCanvas(cellSize * gridSize + 2, cellSize * gridSize + 2 + scoreHeight);
     background(220);
     newGame();
