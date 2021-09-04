@@ -9,6 +9,7 @@ let direction = "r";  // l, r, u, d
 let score;
 let apple = 0;
 let gameOver = false;
+let appleCount = 3;
 
 function colRowToIndex(col, row) {
   return row * gridSize + col;
@@ -30,7 +31,8 @@ function drawSquare(row, col) {
 
 function drawApple(row, col) {
     fill(0, 102, 153);
-    text("🍎",col*cellSize+cellSize/2,scoreHeight+row*cellSize+cellSize/2);
+    textSize(cellSize*3/4);
+    text("🍎",col*cellSize+cellSize/7,scoreHeight+row*cellSize+cellSize/1.3);
 }
 
 function newGame(){
@@ -39,7 +41,7 @@ function newGame(){
         colRowToIndex(2,int(gridSize/2)),
         colRowToIndex(1,int(gridSize/2))
     ];
-    direction = "r";
+    direction = "";
     apple = colRowToIndex(int(gridSize* 3/4), int(gridSize/2));
 }
 
@@ -65,42 +67,65 @@ function keyPressed() {
     }
 }
 
+function resetApple() {
+    notsnake = [];
+    for (let index = 0; index < gridSize*gridSize; index++) {
+        if (!snake.includes(index)) {
+            notsnake.push(index);
+        }
+    }
+    apple = int(random(notsnake));
+}
+
+function checkOnApple() {
+    if (snake[0] === apple){
+        resetApple();
+    } else {
+        snake.splice(snake.length-1, 1)
+    }
+}
+
 function updateSnake(){
     if (!gameOver){
         if (direction === "r"){
             if (snake[0] % gridSize === gridSize - 1){
                 gameOver = true;
             }else{
-                snake.splice(snake.length-1, 1)
+                checkOnApple();
                 snake.splice(0,0,snake[0]+1)
             }
         }else if (direction === "u"){
             if (snake[0] < gridSize){
                 gameOver = true;
             }else{
-                snake.splice(snake.length-1, 1)
-                snake.splice(0,0,snake[0]-gridSize)
+                checkOnApple();
+                snake.splice(0,0,snake[0]-gridSize);
             }
         }else if (direction === "d"){
             if (snake[0] >= gridSize * (gridSize-1)){
                 gameOver = true;
             }else{
-                snake.splice(snake.length-1, 1)
-                snake.splice(0,0,snake[0]+gridSize)
+                checkOnApple();
+                snake.splice(0,0,snake[0]+gridSize);
             }
         }else if (direction === "l"){
             if (snake[0] % gridSize === 0){
                 gameOver = true;
             }else{
-                snake.splice(snake.length-1, 1)
-                snake.splice(0,0,snake[0]-1)
+                checkOnApple();
+                snake.splice(0,0,snake[0]-1);
+            }
+        }
+        for (let s = 1; s < snake.length; s++) {
+            if (snake[0] == snake[s]) {
+                gameOver = true;
             }
         }
     }
 }
 
 function drawGameOver() {
-    fill(255,0,0)
+    fill(255,0,0);
     textSize(int(width/10));
     text(
         'GAME OVER\nClick [Enter] to restart',
