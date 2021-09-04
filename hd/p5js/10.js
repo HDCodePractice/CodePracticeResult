@@ -9,6 +9,7 @@ let direction = "r";  // l, r, u, d
 let score;
 let apple = 0;
 let gameOver = false;
+let appleCount = 3;
 
 function colRowToIndex(col, row) {
   return row * gridSize + col;
@@ -40,7 +41,7 @@ function newGame(){
         colRowToIndex(2,int(gridSize/2)),
         colRowToIndex(1,int(gridSize/2))
     ];
-    direction = "r";
+    direction = "";
     apple = colRowToIndex(int(gridSize* 3/4), int(gridSize/2));
 }
 
@@ -67,11 +68,13 @@ function keyPressed() {
 }
 
 function resetApple() {
-    apple = colRowToIndex(int(random(gridSize)), int(random(gridSize)));
-    while (snake.includes(apple)){
-        apple = colRowToIndex(int(random(gridSize)), int(random(gridSize)));
+    notsnake = [];
+    for (let index = 0; index < gridSize*gridSize; index++) {
+        if (!snake.includes(index)) {
+            notsnake.push(index);
+        }
     }
-    print(apple);
+    apple = int(random(notsnake));
 }
 
 function checkOnApple() {
@@ -113,13 +116,9 @@ function updateSnake(){
                 snake.splice(0,0,snake[0]-1);
             }
         }
-        for (let index = 0; index < snake.length; index++) {
-            for (let index2 = 0; index2 < snake.length; index2++) {
-                if (snake[index] === snake[index2]) {
-                    if (index !== index2) {
-                        gameOver = true;
-                    }
-                }
+        for (let s = 1; s < snake.length; s++) {
+            if (snake[0] == snake[s]) {
+                gameOver = true;
             }
         }
     }
