@@ -30,7 +30,8 @@ function drawSquare(row, col) {
 
 function drawApple(row, col) {
     fill(0, 102, 153);
-    text("🍎",col*cellSize+cellSize/2,scoreHeight+row*cellSize+cellSize/2);
+    textSize(cellSize*3/4);
+    text("🍎",col*cellSize+cellSize/7,scoreHeight+row*cellSize+cellSize/1.3);
 }
 
 function newGame(){
@@ -65,42 +66,67 @@ function keyPressed() {
     }
 }
 
+function resetApple() {
+    apple = colRowToIndex(int(random(gridSize)), int(random(gridSize)));
+    while (snake.includes(apple)){
+        apple = colRowToIndex(int(random(gridSize)), int(random(gridSize)));
+    }
+    print(apple);
+}
+
+function checkOnApple() {
+    if (snake[0] === apple){
+        resetApple();
+    } else {
+        snake.splice(snake.length-1, 1)
+    }
+}
+
 function updateSnake(){
     if (!gameOver){
         if (direction === "r"){
             if (snake[0] % gridSize === gridSize - 1){
                 gameOver = true;
             }else{
-                snake.splice(snake.length-1, 1)
+                checkOnApple();
                 snake.splice(0,0,snake[0]+1)
             }
         }else if (direction === "u"){
             if (snake[0] < gridSize){
                 gameOver = true;
             }else{
-                snake.splice(snake.length-1, 1)
-                snake.splice(0,0,snake[0]-gridSize)
+                checkOnApple();
+                snake.splice(0,0,snake[0]-gridSize);
             }
         }else if (direction === "d"){
             if (snake[0] >= gridSize * (gridSize-1)){
                 gameOver = true;
             }else{
-                snake.splice(snake.length-1, 1)
-                snake.splice(0,0,snake[0]+gridSize)
+                checkOnApple();
+                snake.splice(0,0,snake[0]+gridSize);
             }
         }else if (direction === "l"){
             if (snake[0] % gridSize === 0){
                 gameOver = true;
             }else{
-                snake.splice(snake.length-1, 1)
-                snake.splice(0,0,snake[0]-1)
+                checkOnApple();
+                snake.splice(0,0,snake[0]-1);
+            }
+        }
+        for (let index = 0; index < snake.length; index++) {
+            for (let index2 = 0; index2 < snake.length; index2++) {
+                if (snake[index] === snake[index2]) {
+                    if (index !== index2) {
+                        gameOver = true;
+                    }
+                }
             }
         }
     }
 }
 
 function drawGameOver() {
-    fill(255,0,0)
+    fill(255,0,0);
     textSize(int(width/10));
     text(
         'GAME OVER\nClick [Enter] to restart',
