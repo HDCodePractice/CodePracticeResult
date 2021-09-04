@@ -53,7 +53,6 @@ function setup() {
     newGame();
     gameOver = false;
     frameRate(speed);
-    drawApple(randomLocation()[0],randomLocation()[1]);       
 }
 
 function keyPressed() {
@@ -110,9 +109,10 @@ function updateSnake(){
             drawApple(applex,appley);   
             print(score)    
         } 
-        for (let s = 0; s < snake.length; s++) {
-            const element = array[s];
-            
+        for (let s = 1; s < snake.length; s++) {
+            if (snake[0] == snake[s]) {
+                gameOver = true
+            }
         }
     }
 }
