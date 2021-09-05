@@ -1,15 +1,16 @@
-const cellSize = 20;
-const gridSize = 15;
+const cellSize = 30;
+const gridSize = 10;
 const scoreHeight = 50;
-const speed = 2;
+const speed = 5;
 
 let grid = [];
 let snake = [];
 let direction = "r";  // l, r, u, d
-let score;
+let score = 0;
 let apple = 0;
+let applex;
+let appley;
 let gameOver = false;
-let appleCount = 3;
 
 function colRowToIndex(col, row) {
   return row * gridSize + col;
@@ -19,9 +20,9 @@ function indexToColRow(index) {
   return [ int(index / gridSize) , index % gridSize];
 }
 
-function drawCircle(row,col) {
-    fill(0,250,0)
-    circle(col*cellSize+1+cellSize/2, row*cellSize+1+scoreHeight+cellSize/2, cellSize*4/5)
+function drawHead(row,col) {
+    fill(100,0,100)
+    square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5)
 }
 
 function drawSquare(row, col) {
@@ -30,19 +31,21 @@ function drawSquare(row, col) {
 }
 
 function drawApple(row, col) {
-    fill(0, 102, 153);
-    textSize(cellSize*3/4);
-    text("🍎",col*cellSize+cellSize/7,scoreHeight+row*cellSize+cellSize/1.3);
+    fill(250,0,0)
+    square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5)
 }
 
 function newGame(){
+    applex = randomLocation()[0];
+    appley = randomLocation()[1];
     snake = [
         colRowToIndex(3,int(gridSize/2)),
         colRowToIndex(2,int(gridSize/2)),
         colRowToIndex(1,int(gridSize/2))
     ];
-    direction = "";
+    direction = "r";
     apple = colRowToIndex(int(gridSize* 3/4), int(gridSize/2));
+    print(apple)
 }
 
 function setup() {
@@ -57,31 +60,13 @@ function keyPressed() {
         setup();
     }
     if (keyCode === LEFT_ARROW && snake[1] != snake[0] - 1) {
-            direction = "l";
+        direction = "l";
     } else if (keyCode === RIGHT_ARROW && snake[1] != snake[0] + 1) {
-            direction = "r";
-    } else if (keyCode === UP_ARROW && snake[1] != snake[0] - gridSize) {
+        direction = "r";
+    } else if (keyCode === UP_ARROW  && snake[1] != snake[0] - gridSize) {
         direction = "u";
     } else if (keyCode === DOWN_ARROW && snake[1] != snake[0] + gridSize) {
         direction = "d";
-    }
-}
-
-function resetApple() {
-    notsnake = [];
-    for (let index = 0; index < gridSize*gridSize; index++) {
-        if (!snake.includes(index)) {
-            notsnake.push(index);
-        }
-    }
-    apple = int(random(notsnake));
-}
-
-function checkOnApple() {
-    if (snake[0] === apple){
-        resetApple();
-    } else {
-        snake.splice(snake.length-1, 1)
     }
 }
 
@@ -90,48 +75,52 @@ function updateSnake(){
         if (direction === "r"){
             if (snake[0] % gridSize === gridSize - 1){
                 gameOver = true;
-            }else{
-                checkOnApple();
+            } else {
+                snake.splice(snake.length-1, 1)
                 snake.splice(0,0,snake[0]+1)
             }
-        }else if (direction === "u"){
-            if (snake[0] < gridSize){
+        } else if (direction === "u") {
+            if (snake[0] < gridSize) {
                 gameOver = true;
-            }else{
-                checkOnApple();
-                snake.splice(0,0,snake[0]-gridSize);
+            } else {
+                snake.splice(snake.length-1, 1)
+                snake.splice(0,0,snake[0]-gridSize)
             }
-        }else if (direction === "d"){
-            if (snake[0] >= gridSize * (gridSize-1)){
+        } else if (direction === "d") {
+            if (snake[0] >= gridSize * (gridSize-1)) {
                 gameOver = true;
-            }else{
-                checkOnApple();
-                snake.splice(0,0,snake[0]+gridSize);
+            } else {
+                snake.splice(snake.length-1, 1)
+                snake.splice(0,0,snake[0]+gridSize)
             }
-        }else if (direction === "l"){
-            if (snake[0] % gridSize === 0){
+        } else if (direction === "l") {
+            if (snake[0] % gridSize === 0) {
                 gameOver = true;
-            }else{
-                checkOnApple();
-                snake.splice(0,0,snake[0]-1);
+            } else {
+                snake.splice(snake.length-1, 1)
+                snake.splice(0,0,snake[0]-1)
             }
-        }
+        } 
+        if (snake[0] == apple) {
+            score += 1;
+            snake.push(colRowToIndex(snake[snake.length+1],int(gridSize/2)))
+            applex = randomLocation()[0];
+            appley = randomLocation()[1];
+            drawApple(applex,appley);   
+            print(score)    
+        } 
         for (let s = 1; s < snake.length; s++) {
             if (snake[0] == snake[s]) {
-                gameOver = true;
+                gameOver = true
             }
         }
     }
 }
 
 function drawGameOver() {
-    fill(255,0,0);
-    textSize(int(width/10));
-    text(
-        'GAME OVER\nClick [Enter] to restart',
-        5,
-        height/2-10
-    );
+    fill(255,0,0)
+    textSize(int(width/(30-gridSize)));
+    text('GAME OVER\nClick [Enter] to restart',width/2,height/2)
 }
 
 function draw() {
@@ -139,22 +128,30 @@ function draw() {
         drawGameOver();
     }else{
         background(220);
+        stroke(0);
+        strokeWeight(1.5);
         updateSnake();
         for (let col = 0; col < gridSize; col++) {
             for (let row = 0; row < gridSize; row++) {
                 const idx = colRowToIndex(col, row);
-                fill(255,248,220);
+                fill(0,random(100,107),0);
                 rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 1);
                 if (snake.includes(idx)){
                     if (idx == snake[0]){
-                        drawCircle(row,col);
+                        drawHead(row,col);
                     } else {
                         drawSquare(row,col);
                     }
                 } else if (idx == apple) {
-                    drawApple(row,col);
+                    drawApple(applex,appley);    
+                    apple = colRowToIndex(appley,applex)   
                 }
+                
             }
         }
     }
+}
+
+function randomLocation() {
+    return [int(random(0,gridSize-1)), int(random(0,gridSize-1))]
 }
