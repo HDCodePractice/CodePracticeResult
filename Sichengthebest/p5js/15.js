@@ -9,9 +9,10 @@ let direction = 0; // 0 = right, 1 = left, 2 = down, 3 = up
 let apple = 0;
 let gameOver = false;
 let completed = false;
+let appleCount = 3
 
 function setup() {
-    frameRate(10)
+    frameRate(7)
     createCanvas(cellSize * gridSize + 2, cellSize * gridSize + 2 + scoreHeight);
     background(220);
     newGame();
@@ -60,26 +61,45 @@ function drawGrid() {
     }
 }
 
+function resetApple() {
+    notsnake = []
+    for (let index = 0; index < gridSize*gridSize; index++) {
+        if (!snake.includes(index)) {
+            notsnake.push(index)
+        }
+    }
+    apple = int(random(notsnake));
+}
+
+function checkOnApple() {
+    if (snake[0] === apple){
+        resetApple();
+        score += 1;
+    } else {
+        snake.splice(snake.length-1, 1)
+    }
+}
+
 function updateSnake() {
     if (direction === 0) {
         if (snake[0]%gridSize === gridSize-1) {
             gameOver = true;
         } else {
-            snake.splice(snake.length-1, 1)
+            checkOnApple()
             snake.splice(0,0,snake[0]+1)
         }
     } else if (direction === 1) {
         if (snake[0]%gridSize === 0) {
             gameOver = true;
         } else {
-            snake.splice(snake.length-1, 1)
+            checkOnApple()
             snake.splice(0,0,snake[0]-1)
         }
     } else if (direction === 2) {
         if (snake[0] >= gridSize * (gridSize-1)) {
             gameOver = true;
         } else {
-            snake.splice(snake.length-1, 1)
+            checkOnApple()
             snake.splice(0,0,snake[0]+gridSize)
 
         }
@@ -87,17 +107,13 @@ function updateSnake() {
         if (snake[0] < gridSize) {
             gameOver = true;
         } else {
-            snake.splice(snake.length-1, 1)
+            checkOnApple()
             snake.splice(0,0,snake[0]-gridSize)
         }
     }
-    for (let index = 0; index < snake.length; index++) {
-        for (let index2 = 0; index2 < snake.length; index2++) {
-            if (snake[index] === snake[index2]) {
-                if (index !== index2) {
-                    gameOver = true;
-                }
-            }
+    for (let s = 1; s < snake.length; s++) {
+        if (snake[0] == snake[s]) {
+            gameOver = true;
         }
     }
 }
@@ -107,11 +123,6 @@ function draw() {
         drawScore();
         drawGrid();
         updateSnake()
-        if (snake.includes(apple)) {
-            score += 1;
-            snake.push(snake[-1]-1);
-            apple = int(random(0,gridSize*gridSize));
-        }
     } else {
         drawGameOver()
     }
