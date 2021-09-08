@@ -1,6 +1,6 @@
 const cellSize = 25;
 const gridSize = 20;
-const scoreHeight = 100;
+const scoreHeight = 150;
 
 let score;
 let snake = [];
@@ -40,8 +40,8 @@ function newGame() {
 function drawScore() {
     background(220)
     fill(0, 220, 0);
-    textSize(24);
-    text(`Score: ${score}`,gridSize*cellSize / 2-50,scoreHeight / 2);
+    textSize(15);
+    text(`Score: ${score}\nNumber of apples: ${appleCount}\nFor your updated number of apples, please press [Enter].\nTo start game, press any arrow key (except the left).`,gridSize*cellSize / 2-200,scoreHeight / 2);
 }
 
 function drawRect(txt,x,y,fillColor,size,textcolor) {
@@ -191,10 +191,10 @@ function keyPressed() {
 }
 
 function mousePressed() {
-    if (mo3useX > gridSize*gridSize*0.8 && mouseX < gridSize*gridSize*0.8+40 && mouseY > 20 && mouseY < 60) {
+    if (mouseX > gridSize*gridSize*0.8 && mouseX < gridSize*gridSize*0.8+40 && mouseY > 20 && mouseY < 60) {
         appleCount += 1;
-    } else if (mouseX > mouseX > gridSize*gridSize*0.95 && mouseX < mouseX > gridSize*gridSize*0.95+40 && mouseY > 20 && mouseY < 60) {
-        if (appleCount > 0) {
+    } else if (mouseX > gridSize*gridSize*0.95 && mouseX < gridSize*gridSize*0.95+40 && mouseY > 20 && mouseY < 60) {
+        if (appleCount > 1) {
             appleCount -= 1;
         }
     }
