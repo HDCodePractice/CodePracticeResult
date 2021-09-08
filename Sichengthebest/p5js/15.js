@@ -6,10 +6,10 @@ let score;
 let snake = [];
 let grid = [];
 let direction = 0; // 0 = right, 1 = left, 2 = down, 3 = up
-let apple = 0;
+let apple = [];
 let gameOver = false;
 let completed = false;
-let appleCount = 3
+let appleCount = 1;
 
 function setup() {
     frameRate(7)
@@ -21,11 +21,20 @@ function setup() {
 function newGame() {
     grid = new Array(gridSize * gridSize).fill('n');
     snake = [int(gridSize/2)*gridSize+3,int(gridSize/2)*gridSize+2,int(gridSize/2)*gridSize+1];
-    apple = (int(gridSize/2) * gridSize + int(gridSize*3/4));
+    apple = []
+    notsnake = []
+    for (let index = 0; index < appleCount; index++) {
+        for (let index = 0; index < gridSize*gridSize; index++) {
+            if (!snake.includes(index) && !apple.includes(index)) {
+                notsnake.push(index);
+            }
+        }
+        apple.push(int(random(notsnake)));
+    }
     score = 0;
     gameOver = false;
     completed = false;
-    direction = 0;
+    direction = 5;
 }
 
 function drawScore() {
@@ -35,7 +44,17 @@ function drawScore() {
     text(`Score: ${score}`,gridSize*cellSize / 2-50,scoreHeight / 2);
 }
 
+function drawRect(txt,x,y,fillColor,size,textcolor) {
+    textSize(15);
+    fill(fillColor);
+    rect(x,y,size,size);
+    fill(textcolor);
+    text(txt,x+5,y+25);
+}
+
 function drawGrid() {
+    drawRect("  +",gridSize*gridSize*0.8,20,[100,205,200],40,200);
+    drawRect("  -",gridSize*gridSize*0.95,20,[107,215,105],40,200);
     for (let row = 0; row < gridSize; row++) {
         for (let col = 0; col < gridSize; col++) {
             currentlydrawing = ((row)*gridSize)+col;
@@ -54,30 +73,38 @@ function drawGrid() {
                     rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize);
                 }
             }
-            if (idx === apple) {
-                drawApple(row,col);
+            for (let checkedidx = 0; checkedidx < apple.length; checkedidx++) {
+                const checkedApple = apple[checkedidx];
+                if (idx === checkedApple) {
+                    drawApple(row,col);
+                }
             }
         }
     }
 }
 
-function resetApple() {
+function resetApple(appleidx) {
     notsnake = []
     for (let index = 0; index < gridSize*gridSize; index++) {
-        if (!snake.includes(index)) {
-            notsnake.push(index)
+        if (!snake.includes(index) && !apple.includes(index)) {
+            notsnake.push(index);
         }
     }
-    apple = int(random(notsnake));
+    apple.splice(appleidx,1);
+    apple.push(int(random(notsnake)));
 }
 
 function checkOnApple() {
-    if (snake[0] === apple){
-        resetApple();
-        score += 1;
-    } else {
-        snake.splice(snake.length-1, 1)
+    isApple = false;
+    for (let checkedidx = 0; checkedidx < apple.length; checkedidx++) {
+        const checkedApple = apple[checkedidx];
+        if (snake[0] === checkedApple) {
+            resetApple(apple.indexOf(snake[0]));
+            score += 1;
+            isApple = true;
+        }
     }
+    return isApple;
 }
 
 function updateSnake() {
@@ -85,21 +112,27 @@ function updateSnake() {
         if (snake[0]%gridSize === gridSize-1) {
             gameOver = true;
         } else {
-            checkOnApple()
+            if (!checkOnApple()) {
+                snake.splice(snake.length-1, 1)
+            }
             snake.splice(0,0,snake[0]+1)
         }
     } else if (direction === 1) {
         if (snake[0]%gridSize === 0) {
             gameOver = true;
         } else {
-            checkOnApple()
+            if (!checkOnApple()) {
+                snake.splice(snake.length-1, 1)
+            }
             snake.splice(0,0,snake[0]-1)
         }
     } else if (direction === 2) {
         if (snake[0] >= gridSize * (gridSize-1)) {
             gameOver = true;
         } else {
-            checkOnApple()
+            if (!checkOnApple()) {
+                snake.splice(snake.length-1, 1)
+            }
             snake.splice(0,0,snake[0]+gridSize)
 
         }
@@ -107,7 +140,9 @@ function updateSnake() {
         if (snake[0] < gridSize) {
             gameOver = true;
         } else {
-            checkOnApple()
+            if (!checkOnApple()) {
+                snake.splice(snake.length-1, 1)
+            }
             snake.splice(0,0,snake[0]-gridSize)
         }
     }
@@ -152,5 +187,15 @@ function keyPressed() {
         direction = 3;
     } else if (keyCode === DOWN_ARROW && snake[1] != snake[0] + gridSize) {
         direction = 2;
+    }
+}
+
+function mousePressed() {
+    if (mo3useX > gridSize*gridSize*0.8 && mouseX < gridSize*gridSize*0.8+40 && mouseY > 20 && mouseY < 60) {
+        appleCount += 1;
+    } else if (mouseX > mouseX > gridSize*gridSize*0.95 && mouseX < mouseX > gridSize*gridSize*0.95+40 && mouseY > 20 && mouseY < 60) {
+        if (appleCount > 0) {
+            appleCount -= 1;
+        }
     }
 }
