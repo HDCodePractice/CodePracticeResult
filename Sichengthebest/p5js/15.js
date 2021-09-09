@@ -10,9 +10,10 @@ let apple = [];
 let gameOver = false;
 let completed = false;
 let appleCount = 1;
+let speed = 7;
 
 function setup() {
-    frameRate(7)
+    frameRate(speed)
     createCanvas(cellSize * gridSize + 2, cellSize * gridSize + 2 + scoreHeight);
     background(220);
     newGame();
@@ -41,7 +42,7 @@ function drawScore() {
     background(220)
     fill(0, 220, 0);
     textSize(15);
-    text(`Score: ${score}\nNumber of apples: ${appleCount}\nFor your updated number of apples, please press [Enter].\nTo start game, press any arrow key (except the left).`,gridSize*cellSize / 2-200,scoreHeight / 2);
+    text(`Score: ${score}\nNumber of apples: ${appleCount}\nSpeed: ${speed}\nFor your updated number of apples/speed, please press [Enter].\nTo start game, press any arrow key (except the left).`,gridSize*cellSize / 2-200,scoreHeight/2.5);
 }
 
 function drawRect(txt,x,y,fillColor,size,textcolor) {
@@ -53,8 +54,10 @@ function drawRect(txt,x,y,fillColor,size,textcolor) {
 }
 
 function drawGrid() {
-    drawRect("  +",gridSize*gridSize*0.8,20,[100,205,200],40,200);
-    drawRect("  -",gridSize*gridSize*0.95,20,[107,215,105],40,200);
+    drawRect("+ 🍎",gridSize*gridSize*0.8,20,[100,205,200],40,200);
+    drawRect("- 🍎",gridSize*gridSize*0.95,20,[107,215,105],40,200);
+    drawRect("+ ⚡️",gridSize*gridSize*0.65,20,[200,205,10],40,200);
+    drawRect("- ⚡️",gridSize*gridSize*0.5,20,[207,15,15],40,200);
     for (let row = 0; row < gridSize; row++) {
         for (let col = 0; col < gridSize; col++) {
             currentlydrawing = ((row)*gridSize)+col;
@@ -196,6 +199,12 @@ function mousePressed() {
     } else if (mouseX > gridSize*gridSize*0.95 && mouseX < gridSize*gridSize*0.95+40 && mouseY > 20 && mouseY < 60) {
         if (appleCount > 1) {
             appleCount -= 1;
+        }
+    } else if (mouseX > gridSize*gridSize*0.65 && mouseX < gridSize*gridSize*0.65+40 && mouseY > 20 && mouseY < 60) {
+        speed += 1;
+    } else if (mouseX > gridSize*gridSize*0.5 && mouseX < gridSize*gridSize*0.5+40 && mouseY > 20 && mouseY < 60) {
+        if (speed > 1) {
+            speed -= 1;
         }
     }
 }
