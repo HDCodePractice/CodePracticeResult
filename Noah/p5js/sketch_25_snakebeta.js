@@ -76,15 +76,17 @@ function setup() {
 function response() {
     const r1 = speedInput.value();
     speedInput.value('');
-    r1.replaceAll("[^\\d.]", "");
-    speed = int(r1);
+    if (r1 > 0) {
+        speed = int(r1);
+    }
 }
 
 function response2() {
     const r2 = appleInput.value();
     appleInput.value('');
-    r2.replaceAll("[^\\d.]", "");
-    appleCount = int(r2);
+    if (r2 > 0) {
+        appleCount = int(r2);
+    }
 }
 
 function keyPressed() {
