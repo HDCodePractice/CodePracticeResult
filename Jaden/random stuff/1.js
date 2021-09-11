@@ -1,18 +1,11 @@
-function twosum(numbers_array, total) {
-    for (let i = 0; i < numbers_array.length; i++) {
-        for (let j = 0; j < numbers_array.length; j++) {
-            if (numbers_array[i] + numbers_array[j] == total){
-                return [i,j]
-            }
-            
-        }
-        
-    }
-
-
-    
+function reversenum(x)  { 
+let b = x.toString().split('').reverse().join('');
+if (b == x){
+    return true
+}else{
+    return false
 }
 
-
-answer = twosum([78, 2, 7, 8, 25, 45, 6, 3, 4], 156)
+}
+answer = reversenum(576)
 process.stdout.write(answer + "")

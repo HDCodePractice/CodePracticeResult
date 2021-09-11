@@ -76,6 +76,13 @@ function inputSpeed(){
 function inputApple(){
     appleCount = int(this.value())
     print(appleCount)
+    if (appleCount < apples.length){
+
+        print(appleCount);
+    }else if(appleConunt > apples.length){
+
+        print(appleConunt);
+    }
     appleCount==appleCount
 
 }
