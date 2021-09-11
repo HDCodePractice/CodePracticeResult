@@ -2,7 +2,6 @@ const cellSize = 20;
 const gridSize = 15;
 const scoreHeight = 50;
 let speed = 10;
-const appleConunt = 2;
 const selectWidth = 200;
 
 let grid = [];
