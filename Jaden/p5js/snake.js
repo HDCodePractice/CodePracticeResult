@@ -49,40 +49,43 @@ function newGame(){
     for (let index = 1; index < appleCount; index++) {
         apples.push(newApple());
     }
-    let inp = createInput('');
-    inp.position(325, height/2);
-    inp.size(100);
-    inp.input(myInputEvent);
-    
-    let inp2 = createInput('');
-    inp2.position(325, height/2+55);
-    inp2.size(100);
-    inp2.input(myInputEvent2);
 }
-
-function myInputEvent(){
-    speed = int(this.value());
-    print(speed);
-    frameRate(speed);
-    newGame();
-}
-
-function myInputEvent2(){
-    appleCount = int(this.value());
-    print(appleCount);
-    newGame();
-}
-
 
 function setup() {
     createCanvas(cellSize * gridSize + 2 + selectWidth, cellSize * gridSize + 2 + scoreHeight);
     newGame();
-    frameRate(speed)
-    gameOver = false
     
- 
+    let speedInput = createInput(speed);
+    speedInput.position(width - selectWidth + 90, height/2);
+    speedInput.size(selectWidth - 100, 20);
+    speedInput.input(inputSpeed);
+    gameOver = false;
+    frameRate(speed);
+    let appleInput = createInput(appleCount)
+    appleInput.position(width - selectWidth + 90, height/3)
+    appleInput.size(selectWidth-100, 20)
+    appleInput.input(inputApple)
+    gameOver = false
 }
 
+function inputSpeed(){
+    speed = int(this.value());
+    print(speed);
+    frameRate(speed);
+}
+function inputApple(){
+    appleCount = int(this.value())
+    print(appleCount)
+    if (appleCount < apples.length){
+
+        print(appleCount);
+    }else if(appleConunt > apples.length){
+
+        print(appleConunt);
+    }
+    appleCount==appleCount
+
+}
 function speeds(){
     frameRate(speed)
 }
@@ -210,9 +213,8 @@ function draw() {
         }
     }
     fill(0,0,0)
-    textSize(10)
-    text("Speed:",325, height/2-5)
-    text("Number of apples:",325, height/2+50)
-
+    textSize(20)
+    text("Speed:",width- selectWidth +15, height/2.4)
+    text("Apple:",width-selectWidth+10,height/4.1)
 
 }
