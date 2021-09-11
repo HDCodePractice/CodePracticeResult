@@ -50,6 +50,7 @@ function newGame(){
     for (let index = 1; index < appleCount; index++) {
         apples.push(newApple());
     }
+    gameOver = false;
 }
 
 function setup() {
@@ -66,8 +67,7 @@ function setup() {
     startButton = createButton("");
     startButton.position(width - selectWidth + 50, height/2+110);
     startButton.size(selectWidth - 100,20);
-    startButton.mousePressed(setup);
-    gameOver = false;
+    startButton.mousePressed(newGame);
     frameRate(speed);
 }
 
