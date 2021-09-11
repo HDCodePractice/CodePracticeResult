@@ -66,7 +66,7 @@ function setup() {
     startButton = createButton("");
     startButton.position(width - selectWidth + 50, height/2+110);
     startButton.size(selectWidth - 100,20);
-    startButton.mousePressed(newGame);
+    startButton.mousePressed(setup);
     gameOver = false;
     frameRate(speed);
 }
@@ -98,9 +98,9 @@ function inputAppleCount(){
 }
 
 function keyPressed() {
-    if (key === 'Enter') {
-        setup();
-    }
+    // if (key === 'Enter') {
+    //     setup();
+    // }
     if (keyCode === LEFT_ARROW && snake[1] != snake[0] - 1) {
             direction = "l";
     } else if (keyCode === RIGHT_ARROW && snake[1] != snake[0] + 1) {
