@@ -101,10 +101,30 @@ function checkOnApple() {
     isApple = false;
     for (let checkedidx = 0; checkedidx < apple.length; checkedidx++) {
         const checkedApple = apple[checkedidx];
-        if (snake[0] === checkedApple) {
-            resetApple(apple.indexOf(snake[0]));
-            score += 1;
-            isApple = true;
+        if (direction === 0) {
+            if (snake[0] === checkedApple-1) {
+                resetApple(apple.indexOf(snake[0]+1));
+                score += 1;
+                isApple = true;
+            }
+        } else if (direction === 1) {
+            if (snake[0] === checkedApple+1) {
+                resetApple(apple.indexOf(snake[0]-1));
+                score += 1;
+                isApple = true;
+            }
+        } else if (direction === 2) {
+            if (snake[0] === checkedApple-gridSize) {
+                resetApple(apple.indexOf(snake[0]+gridSize));
+                score += 1;
+                isApple = true;
+            }
+        } else if (direction === 3) {
+            if (snake[0] === checkedApple+gridSize) {
+                resetApple(apple.indexOf(snake[0]-gridSize));
+                score += 1;
+                isApple = true;
+            }
         }
     }
     return isApple;
@@ -196,15 +216,29 @@ function keyPressed() {
 function mousePressed() {
     if (mouseX > gridSize*gridSize*0.8 && mouseX < gridSize*gridSize*0.8+40 && mouseY > 20 && mouseY < 60) {
         appleCount += 1;
+        notsnake = []
+        for (let index = 0; index < gridSize*gridSize; index++) {
+            if (!snake.includes(index) && !apple.includes(index)) {
+                notsnake.push(index);
+            }
+        }
+        if (apple.length < appleCount) {
+            apple.push(int(random(notsnake)));
+        }
     } else if (mouseX > gridSize*gridSize*0.95 && mouseX < gridSize*gridSize*0.95+40 && mouseY > 20 && mouseY < 60) {
         if (appleCount > 1) {
             appleCount -= 1;
+            if (apple.length > appleCount) {
+                apple.splice(random(0,apple.length-1),1);
+            }
         }
     } else if (mouseX > gridSize*gridSize*0.65 && mouseX < gridSize*gridSize*0.65+40 && mouseY > 20 && mouseY < 60) {
         speed += 1;
+        frameRate(speed)
     } else if (mouseX > gridSize*gridSize*0.5 && mouseX < gridSize*gridSize*0.5+40 && mouseY > 20 && mouseY < 60) {
         if (speed > 1) {
             speed -= 1;
+            frameRate(speed)
         }
     }
-}
+}   
