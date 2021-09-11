@@ -1,13 +1,16 @@
 const cellSize = 20;
 const gridSize = 15;
 const scoreHeight = 50;
-const speed = 2;
+let speed = 2;
+const appleConunt = 2;
+const selectWidth = 200;
 
 let grid = [];
 let snake = [];
 let direction = "r";  // l, r, u, d
 let score;
 let apple = 0;
+let apples = [];
 let gameOver = false;
 let appleCount = 3;
 
@@ -42,14 +45,52 @@ function newGame(){
         colRowToIndex(1,int(gridSize/2))
     ];
     direction = "";
-    apple = colRowToIndex(int(gridSize* 3/4), int(gridSize/2));
+    apples = [];
+    apples.push(colRowToIndex(int(gridSize* 3/4), int(gridSize/2)));
+    for (let index = 1; index < appleCount; index++) {
+        apples.push(newApple());
+    }
 }
 
 function setup() {
-    createCanvas(cellSize * gridSize + 2, cellSize * gridSize + 2 + scoreHeight);
+    createCanvas(cellSize * gridSize + 2 + selectWidth, cellSize * gridSize + 2 + scoreHeight);
     newGame();
+    let speedInput = createInput(speed);
+    speedInput.position(width - selectWidth + 50, height/2);
+    speedInput.size(selectWidth - 100, 20);
+    speedInput.input(inputSpeed);
+    let appleCountInput = createInput(appleCount);
+    appleCountInput.position(width - selectWidth + 50, height/2+55);
+    appleCountInput.size(selectWidth - 100,20);
+    appleCountInput.input(inputAppleCount);
     gameOver = false;
     frameRate(speed);
+}
+
+function inputSpeed(){
+    val = this.value();
+    if (val === "" || val == null || isNaN(val)){
+        return;
+    }
+    speed = int(val);
+    frameRate(speed);
+}
+
+function inputAppleCount(){
+    val = this.value();
+    if (val === "" || val == null || isNaN(val)){
+        return;
+    }
+    appleCount = int(val);
+    if (appleCount < apples.length){
+        while (apples.length != appleCount){
+            apples.pop();
+        }
+    }else if(appleCount > apples.length){
+        while (apples.length != appleCount){
+            apples.push(newApple());
+        }
+    }
 }
 
 function keyPressed() {
@@ -67,19 +108,20 @@ function keyPressed() {
     }
 }
 
-function resetApple() {
+function newApple() {
     notsnake = [];
     for (let index = 0; index < gridSize*gridSize; index++) {
-        if (!snake.includes(index)) {
+        if (!snake.includes(index) && !apples.includes(index)){
             notsnake.push(index);
         }
     }
-    apple = int(random(notsnake));
+    return int(random(notsnake));
 }
 
 function checkOnApple() {
-    if (snake[0] === apple){
-        resetApple();
+    if (apples.includes(snake[0])){
+        idx = apples.indexOf(snake[0]);
+        apples[idx] = newApple();
     } else {
         snake.splice(snake.length-1, 1)
     }
@@ -151,10 +193,14 @@ function draw() {
                     } else {
                         drawSquare(row,col);
                     }
-                } else if (idx == apple) {
+                } else if (apples.includes(idx)) {
                     drawApple(row,col);
                 }
             }
         }
     }
+    fill(0,0,0)
+    textSize(10)
+    text("Speed:",width - selectWidth + 10, height/2-40)
+    text("Apples:",width - selectWidth + 10, height/2+20)
 }
