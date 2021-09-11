@@ -1,8 +1,7 @@
 const cellSize = 20;
 const gridSize = 15;
 const scoreHeight = 50;
-let speed = 2;
-const appleConunt = 2;
+let speed = 10;
 const selectWidth = 200;
 
 let grid = [];
@@ -50,6 +49,7 @@ function newGame(){
     for (let index = 1; index < appleCount; index++) {
         apples.push(newApple());
     }
+    gameOver = false;
 }
 
 function setup() {
@@ -63,7 +63,10 @@ function setup() {
     appleCountInput.position(width - selectWidth + 50, height/2+55);
     appleCountInput.size(selectWidth - 100,20);
     appleCountInput.input(inputAppleCount);
-    gameOver = false;
+    startButton = createButton("");
+    startButton.position(width - selectWidth + 50, height/2+110);
+    startButton.size(selectWidth - 100,20);
+    startButton.mousePressed(newGame);
     frameRate(speed);
 }
 
@@ -94,9 +97,9 @@ function inputAppleCount(){
 }
 
 function keyPressed() {
-    if (key === 'Enter') {
-        setup();
-    }
+    // if (key === 'Enter') {
+    //     setup();
+    // }
     if (keyCode === LEFT_ARROW && snake[1] != snake[0] - 1) {
             direction = "l";
     } else if (keyCode === RIGHT_ARROW && snake[1] != snake[0] + 1) {
@@ -179,6 +182,7 @@ function drawGameOver() {
 function draw() {
     if (gameOver){
         drawGameOver();
+        startButton.html("Start Game");
     }else{
         background(220);
         updateSnake();
@@ -198,9 +202,10 @@ function draw() {
                 }
             }
         }
+        startButton.html("Restart Game");
     }
-    fill(0,0,0)
-    textSize(10)
-    text("Speed:",width - selectWidth + 10, height/2-40)
-    text("Apples:",width - selectWidth + 10, height/2+20)
+    fill(0,0,0);
+    textSize(10);
+    text("Speed:",width - selectWidth + 10, height/2-40);
+    text("Apples:",width - selectWidth + 10, height/2+20);
 }
