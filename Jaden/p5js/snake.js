@@ -1,8 +1,9 @@
 const cellSize = 20;
 const gridSize = 15;
 const scoreHeight = 50;
-var speed = 2;
-
+let speed = 7;
+const appleConunt = 2;
+const selectWidth = 200;
 let grid = [];
 let snake = [];
 let direction = "r";  // l, r, u, d
@@ -10,11 +11,7 @@ let score;
 let apple = 0;
 let apples = [];
 let gameOver = false;
-let appleCount = 1;
-
-let snaker = 0
-let snakeg = 0
-let snakeb = 255
+let appleCount = 5;
 
 function colRowToIndex(col, row) {
   return row * gridSize + col;
@@ -24,8 +21,13 @@ function indexToColRow(index) {
   return [ int(index / gridSize) , index % gridSize];
 }
 
+function drawCircle(row,col) {
+    fill(0,250,0)
+    circle(col*cellSize+1+cellSize/2, row*cellSize+1+scoreHeight+cellSize/2, cellSize*4/5)
+}
+
 function drawSquare(row, col) {
-    fill(snaker,snakeg,snakeb)
+    fill(0,0,250)
     square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5)
 }
 
@@ -47,7 +49,6 @@ function newGame(){
     for (let index = 1; index < appleCount; index++) {
         apples.push(newApple());
     }
-    
     let inp = createInput('');
     inp.position(325, height/2);
     inp.size(100);
@@ -71,16 +72,28 @@ function myInputEvent2(){
     print(appleCount);
     newGame();
 }
+
+
 function setup() {
-    createCanvas(cellSize * gridSize + 202, cellSize * gridSize + 2 + scoreHeight);
+    createCanvas(cellSize * gridSize + 2 + selectWidth, cellSize * gridSize + 2 + scoreHeight);
     newGame();
-    gameOver = false;
-    frameRate(speed);
-}apple
+    frameRate(speed)
+    gameOver = false
+    
+ 
+}
+
+function speeds(){
+    frameRate(speed)
+}
 
 function keyPressed() {
     if (key === 'Enter') {
         setup();
+    }else if (key === 'Shift'){
+        speed +=1
+        print(speed)
+        speeds()
     }
     if (keyCode === LEFT_ARROW && snake[1] != snake[0] - 1) {
             direction = "l";
@@ -157,8 +170,7 @@ function updateSnake(){
         for (let s = 1; s < snake.length; s++) {
             if (snake[0] == snake[s]) {
                 gameOver = true;
-
-}
+            }
         }
     }
 }
@@ -174,6 +186,7 @@ function drawGameOver() {
 }
 
 function draw() {
+
     if (gameOver){
         drawGameOver();
     }else{
@@ -182,10 +195,14 @@ function draw() {
         for (let col = 0; col < gridSize; col++) {
             for (let row = 0; row < gridSize; row++) {
                 const idx = colRowToIndex(col, row);
-                fill(0,154,23);
+                fill(255,248,220);
                 rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 1);
                 if (snake.includes(idx)){
-                    drawSquare(row,col);
+                    if (idx == snake[0]){
+                        drawCircle(row,col);
+                    } else {
+                        drawSquare(row,col);
+                    }
                 } else if (apples.includes(idx)) {
                     drawApple(row,col);
                 }
@@ -196,4 +213,6 @@ function draw() {
     textSize(10)
     text("Speed:",325, height/2-5)
     text("Number of apples:",325, height/2+50)
+
+
 }
