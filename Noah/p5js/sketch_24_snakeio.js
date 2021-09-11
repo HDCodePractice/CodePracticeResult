@@ -111,7 +111,7 @@ function updateSnake(){
         } 
         for (let s = 1; s < snake.length; s++) {
             if (snake[0] == snake[s]) {
-                gameOver = true
+                gameOver = true;
             }
         }
     }
