@@ -1,9 +1,8 @@
 const cellSize = 20;
 const gridSize = 15;
 const scoreHeight = 50;
-let speed = 7;
-const appleConunt = 2;
-const selectWidth = 200;
+var speed = 2;
+
 let grid = [];
 let snake = [];
 let direction = "r";  // l, r, u, d
@@ -11,7 +10,11 @@ let score;
 let apple = 0;
 let apples = [];
 let gameOver = false;
-let appleCount = 5;
+let appleCount = 1;
+
+let snaker = 0
+let snakeg = 0
+let snakeb = 255
 
 function colRowToIndex(col, row) {
   return row * gridSize + col;
@@ -21,13 +24,8 @@ function indexToColRow(index) {
   return [ int(index / gridSize) , index % gridSize];
 }
 
-function drawCircle(row,col) {
-    fill(0,250,0)
-    circle(col*cellSize+1+cellSize/2, row*cellSize+1+scoreHeight+cellSize/2, cellSize*4/5)
-}
-
 function drawSquare(row, col) {
-    fill(0,0,250)
+    fill(snaker,snakeg,snakeb)
     square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5)
 }
 
@@ -49,54 +47,40 @@ function newGame(){
     for (let index = 1; index < appleCount; index++) {
         apples.push(newApple());
     }
-}
-
-function setup() {
-    createCanvas(cellSize * gridSize + 2 + selectWidth, cellSize * gridSize + 2 + scoreHeight);
-    newGame();
     
-    let speedInput = createInput(speed);
-    speedInput.position(width - selectWidth + 90, height/2);
-    speedInput.size(selectWidth - 100, 20);
-    speedInput.input(inputSpeed);
-    gameOver = false;
-    frameRate(speed);
-    let appleInput = createInput(appleCount)
-    appleInput.position(width - selectWidth + 90, height/3)
-    appleInput.size(selectWidth-100, 20)
-    appleInput.input(inputApple)
-    gameOver = false
+    let inp = createInput('');
+    inp.position(325, height/2);
+    inp.size(100);
+    inp.input(myInputEvent);
+    
+    let inp2 = createInput('');
+    inp2.position(325, height/2+55);
+    inp2.size(100);
+    inp2.input(myInputEvent2);
 }
 
-function inputSpeed(){
+function myInputEvent(){
     speed = int(this.value());
     print(speed);
     frameRate(speed);
+    newGame();
 }
-function inputApple(){
-    appleCount = int(this.value())
-    print(appleCount)
-    if (appleCount < apples.length){
 
-        print(appleCount);
-    }else if(appleConunt > apples.length){
-
-        print(appleConunt);
-    }
-    appleCount==appleCount
-
+function myInputEvent2(){
+    appleCount = int(this.value());
+    print(appleCount);
+    newGame();
 }
-function speeds(){
-    frameRate(speed)
-}
+function setup() {
+    createCanvas(cellSize * gridSize + 202, cellSize * gridSize + 2 + scoreHeight);
+    newGame();
+    gameOver = false;
+    frameRate(speed);
+}apple
 
 function keyPressed() {
     if (key === 'Enter') {
         setup();
-    }else if (key === 'Shift'){
-        speed +=1
-        print(speed)
-        speeds()
     }
     if (keyCode === LEFT_ARROW && snake[1] != snake[0] - 1) {
             direction = "l";
@@ -173,7 +157,8 @@ function updateSnake(){
         for (let s = 1; s < snake.length; s++) {
             if (snake[0] == snake[s]) {
                 gameOver = true;
-            }
+
+}
         }
     }
 }
@@ -189,7 +174,6 @@ function drawGameOver() {
 }
 
 function draw() {
-
     if (gameOver){
         drawGameOver();
     }else{
@@ -198,14 +182,10 @@ function draw() {
         for (let col = 0; col < gridSize; col++) {
             for (let row = 0; row < gridSize; row++) {
                 const idx = colRowToIndex(col, row);
-                fill(255,248,220);
+                fill(0,154,23);
                 rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize, 1);
                 if (snake.includes(idx)){
-                    if (idx == snake[0]){
-                        drawCircle(row,col);
-                    } else {
-                        drawSquare(row,col);
-                    }
+                    drawSquare(row,col);
                 } else if (apples.includes(idx)) {
                     drawApple(row,col);
                 }
@@ -213,8 +193,7 @@ function draw() {
         }
     }
     fill(0,0,0)
-    textSize(20)
-    text("Speed:",width- selectWidth +15, height/2.4)
-    text("Apple:",width-selectWidth+10,height/4.1)
-
+    textSize(10)
+    text("Speed:",325, height/2-5)
+    text("Number of apples:",325, height/2+50)
 }
