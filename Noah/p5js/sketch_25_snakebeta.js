@@ -119,6 +119,9 @@ function removeApple() {
     while (apple.length > appleCount) {
         apple.splice(random(0,apple.length-1),1)
     }
+    while (apple.length < appleCount) {
+        apple.push(resetApple())
+    }
 }
 
 function checkOnApple() {
