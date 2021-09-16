@@ -1,6 +1,8 @@
-const cellSize = 25;
+const cellSize = 20;
 const gridSize = 20;
 const scoreHeight = 150;
+const inputWidth = 200
+const resetHeight = 40
 
 let score;
 let snake = [];
@@ -13,10 +15,53 @@ let appleCount = 1;
 let speed = 7;
 
 function setup() {
-    frameRate(speed)
-    createCanvas(cellSize * gridSize + 2, cellSize * gridSize + 2 + scoreHeight);
-    background(220);
+    frameRate(speed);
     newGame();
+    createCanvas(cellSize * gridSize + inputWidth, cellSize * gridSize + 2 + scoreHeight+ resetHeight);
+    background(220);
+    button = createButton('New Game');
+    button.position(gridSize*cellSize/2,scoreHeight+gridSize*cellSize+resetHeight+20);
+    button.mousePressed(newGame);
+    let inp = createInput(appleCount);
+    inp.position(gridSize*cellSize+10,cellSize * gridSize/2+20);
+    inp.size(100);
+    inp.input(myInputEvent);
+    let inp2 = createInput(speed);
+    inp2.position(gridSize*cellSize+10,cellSize * gridSize/2+70);
+    inp2.size(100);
+    inp2.input(myInputEvent2);
+}
+
+function myInputEvent() {
+    inp = int(this.value());
+    if (!isNaN(inp)) {
+        if (inp > appleCount) {
+            while (inp > appleCount) {
+                appleCount += 1
+                for (let index = 0; index < gridSize*gridSize; index++) {
+                    if (!snake.includes(index) && !apple.includes(index)) {
+                        notsnake.push(index);
+                    }
+                }
+                apple.push(int(random(notsnake)));
+            }
+        } else if (inp < appleCount) {
+            while (inp < appleCount) {
+                appleCount -= 1;
+                if (apple.length > appleCount) {
+                    apple.splice(random(0,apple.length-1),1);
+                }
+            }
+        }
+    }
+}
+
+function myInputEvent2() {
+    inp = int(this.value());
+    if (!isNaN(inp)) {
+        speed = inp;
+        frameRate(speed);
+    }
 }
 
 function newGame() {
@@ -42,11 +87,13 @@ function drawScore() {
     background(220)
     fill(0, 220, 0);
     textSize(15);
-    text(`Score: ${score}\nNumber of apples: ${appleCount}\nSpeed: ${speed}\nFor your updated number of apples/speed, please press [Enter].\nTo start game, press any arrow key (except the left).`,gridSize*cellSize / 2-200,scoreHeight/2.5);
+    text(`Score: ${score}\nNumber of apples: ${appleCount}\nSpeed: ${speed}\nTo start game, press any arrow key (except the left).`,gridSize*cellSize / 2-200,scoreHeight/2.5);
+    text('Number of apples:',gridSize*cellSize+10,cellSize * gridSize/2-40);
+    text('Speed:',gridSize*cellSize+10,cellSize * gridSize/2+10);
 }
 
 function drawRect(txt,x,y,fillColor,size,textcolor) {
-    textSize(15);
+    textSize(14);
     fill(fillColor);
     rect(x,y,size,size);
     fill(textcolor);
@@ -54,10 +101,10 @@ function drawRect(txt,x,y,fillColor,size,textcolor) {
 }
 
 function drawGrid() {
-    drawRect("+ 🍎",gridSize*gridSize*0.8,20,[100,205,200],40,200);
-    drawRect("- 🍎",gridSize*gridSize*0.95,20,[107,215,105],40,200);
-    drawRect("+ ⚡️",gridSize*gridSize*0.65,20,[200,205,10],40,200);
-    drawRect("- ⚡️",gridSize*gridSize*0.5,20,[207,15,15],40,200);
+    drawRect(" + 🍎",gridSize*gridSize*0.8,20,[100,205,200],40,200);
+    drawRect(" - 🍎",gridSize*gridSize*0.95,20,[107,215,105],40,200);
+    drawRect(" + ⚡️",gridSize*gridSize*0.65,20,[200,205,10],40,200);
+    drawRect(" - ⚡️",gridSize*gridSize*0.5,20,[207,15,15],40,200);
     for (let row = 0; row < gridSize; row++) {
         for (let col = 0; col < gridSize; col++) {
             currentlydrawing = ((row)*gridSize)+col;
@@ -194,14 +241,12 @@ function drawApple(row, col) {
 
 function drawGameOver() {
     fill(255,0,0)
-    textSize(int(width/15));
-    text('GAME OVER\r\nClick [Enter] to restart',width/5,height/2)
+    textSize(int(width/20));
+    text('GAME OVER\r\nClick restart button to restart',width/5,height/2)
+    button.html('Restart');
 }
 
 function keyPressed() {
-    if (key === 'Enter') {
-        setup();
-    }
     if (keyCode === LEFT_ARROW && snake[1] != snake[0] - 1) {
         direction = 1;
     } else if (keyCode === RIGHT_ARROW && snake[1] != snake[0] + 1) {
@@ -240,5 +285,7 @@ function mousePressed() {
             speed -= 1;
             frameRate(speed)
         }
+    } else if (mouseX > gridSize*cellSize/2 && mouseX < gridSize*cellSize/2+40 && mouseY > scoreHeight+gridSize*cellSize && mouseY < scoreHeight+gridSize*cellSize+40) {
+        setup();
     }
-}   
+}
