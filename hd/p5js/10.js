@@ -1,13 +1,15 @@
 const cellSize = 20;
 const gridSize = 15;
 const scoreHeight = 50;
-const speed = 2;
+let speed = 10;
+const selectWidth = 200;
 
 let grid = [];
 let snake = [];
 let direction = "r";  // l, r, u, d
 let score;
 let apple = 0;
+let apples = [];
 let gameOver = false;
 let appleCount = 3;
 
@@ -42,20 +44,62 @@ function newGame(){
         colRowToIndex(1,int(gridSize/2))
     ];
     direction = "";
-    apple = colRowToIndex(int(gridSize* 3/4), int(gridSize/2));
+    apples = [];
+    apples.push(colRowToIndex(int(gridSize* 3/4), int(gridSize/2)));
+    for (let index = 1; index < appleCount; index++) {
+        apples.push(newApple());
+    }
+    gameOver = false;
 }
 
 function setup() {
-    createCanvas(cellSize * gridSize + 2, cellSize * gridSize + 2 + scoreHeight);
+    createCanvas(cellSize * gridSize + 2 + selectWidth, cellSize * gridSize + 2 + scoreHeight);
     newGame();
-    gameOver = false;
+    let speedInput = createInput(speed);
+    speedInput.position(width - selectWidth + 50, height/2);
+    speedInput.size(selectWidth - 100, 20);
+    speedInput.input(inputSpeed);
+    let appleCountInput = createInput(appleCount);
+    appleCountInput.position(width - selectWidth + 50, height/2+55);
+    appleCountInput.size(selectWidth - 100,20);
+    appleCountInput.input(inputAppleCount);
+    startButton = createButton("");
+    startButton.position(width - selectWidth + 50, height/2+110);
+    startButton.size(selectWidth - 100,20);
+    startButton.mousePressed(newGame);
     frameRate(speed);
 }
 
-function keyPressed() {
-    if (key === 'Enter') {
-        setup();
+function inputSpeed(){
+    val = this.value();
+    if (val === "" || val == null || isNaN(val)){
+        return;
     }
+    speed = int(val);
+    frameRate(speed);
+}
+
+function inputAppleCount(){
+    val = this.value();
+    if (val === "" || val == null || isNaN(val)){
+        return;
+    }
+    appleCount = int(val);
+    if (appleCount < apples.length){
+        while (apples.length != appleCount){
+            apples.pop();
+        }
+    }else if(appleCount > apples.length){
+        while (apples.length != appleCount){
+            apples.push(newApple());
+        }
+    }
+}
+
+function keyPressed() {
+    // if (key === 'Enter') {
+    //     setup();
+    // }
     if (keyCode === LEFT_ARROW && snake[1] != snake[0] - 1) {
             direction = "l";
     } else if (keyCode === RIGHT_ARROW && snake[1] != snake[0] + 1) {
@@ -67,19 +111,20 @@ function keyPressed() {
     }
 }
 
-function resetApple() {
+function newApple() {
     notsnake = [];
     for (let index = 0; index < gridSize*gridSize; index++) {
-        if (!snake.includes(index)) {
+        if (!snake.includes(index) && !apples.includes(index)){
             notsnake.push(index);
         }
     }
-    apple = int(random(notsnake));
+    return int(random(notsnake));
 }
 
 function checkOnApple() {
-    if (snake[0] === apple){
-        resetApple();
+    if (apples.includes(snake[0])){
+        idx = apples.indexOf(snake[0]);
+        apples[idx] = newApple();
     } else {
         snake.splice(snake.length-1, 1)
     }
@@ -137,6 +182,7 @@ function drawGameOver() {
 function draw() {
     if (gameOver){
         drawGameOver();
+        startButton.html("Start Game");
     }else{
         background(220);
         updateSnake();
@@ -151,10 +197,15 @@ function draw() {
                     } else {
                         drawSquare(row,col);
                     }
-                } else if (idx == apple) {
+                } else if (apples.includes(idx)) {
                     drawApple(row,col);
                 }
             }
         }
+        startButton.html("Restart Game");
     }
+    fill(0,0,0);
+    textSize(10);
+    text("Speed:",width - selectWidth + 10, height/2-40);
+    text("Apples:",width - selectWidth + 10, height/2+20);
 }
