@@ -175,6 +175,7 @@ function updateSnake(){
     if (!gameOver){
         if (direction != '') {
             turn += 1;
+            hp -= 1;
         }
         if (direction === "r"){
             if (snake[0] % gridSize === gridSize - 1){
@@ -218,7 +219,6 @@ function updateSnake(){
                 gameOver = true;
             }
         }
-        hp -= 1;
         if (hp < 0) {
             gameOver = true;
         }
