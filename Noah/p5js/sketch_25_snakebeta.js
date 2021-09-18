@@ -12,6 +12,7 @@ let direction = "";  // l, r, u, d
 let score = 0;
 let apple = [];
 let gameOver = false;
+let isStarted = false;
 
 function colRowToIndex(col, row) {
   return row * gridSize + col;
@@ -36,6 +37,18 @@ function drawApple(row, col) {
     square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5)
 }
 
+function mousePressed() {
+    if (mouseX > 15 && mouseX < 90) {
+        if (mouseY > 25 && mouseY < 65) {
+            if (isStarted = false) {
+                direction = "r"
+            } else if (isStarted = true) {
+                setup();
+            }
+        }
+    }
+}
+
 function newGame(){
     snake = [
         colRowToIndex(3,int(gridSize/2)),
@@ -54,6 +67,7 @@ function setup() {
     createCanvas(cellSize * gridSize + 2, cellSize * gridSize + 2 + scoreHeight + 100);
     newGame();
     gameOver = false;
+    isStarted = false;
     score = 0;
 
     speedInput = createInput();
@@ -76,9 +90,12 @@ function setup() {
 function response() {
     const r1 = speedInput.value();
     speedInput.value('');
+    print(speed)
     if (r1 > 0) {
         speed = int(r1);
+        
     }
+    
 }
 
 function response2() {
@@ -86,6 +103,7 @@ function response2() {
     appleInput.value('');
     if (r2 > 0) {
         appleCount = int(r2);
+        removeApple()
     }
 }
 
@@ -117,7 +135,7 @@ function resetApple() {
 
 function removeApple() {
     while (apple.length > appleCount) {
-        apple.splice(random(0,apple.length-1),1)
+        apple.pop()
     }
     while (apple.length < appleCount) {
         apple.push(resetApple())
@@ -135,18 +153,18 @@ function checkOnApple() {
             } 
         }       
     }
-    print(ate)
     if (ate == false) {
         snake.splice(snake.length-1, 1)
     }
 }
 
 function updateSnake(){
-    if (!gameOver){
+    if (!gameOver && isStarted == true){
         if (direction === "r"){
             if (snake[0] % gridSize === gridSize - 1){
                 gameOver = true;
             }else{
+                isStarted = true;
                 checkOnApple();
                 snake.splice(0,0,snake[0]+1)
             }
@@ -191,8 +209,8 @@ function drawGameOver() {
 }
 
 function drawRect(txt,x,y,fillColor,w,h,textcolor) {
-    if (gridSize <= 10) {
-        textSize(gridSize-3)
+    if (gridSize >= 10) {
+        textSize(gridSize-6)
     } else {
         textSize(gridSize)
     }
@@ -203,11 +221,7 @@ function drawRect(txt,x,y,fillColor,w,h,textcolor) {
 }
 
 function draw() {
-    if (previous != appleCount) {
-        removeApple()
-        previous = appleCount
-    }
-    frameRate(speed);
+    frameRate(speed)
     if (gameOver){
         drawGameOver();
     }else{
@@ -221,6 +235,12 @@ function draw() {
         strokeWeight(1.5);
         textSize(20)
         fill(0)
+        if (gameOver == false) {
+            drawRect("NEW GAME", 15,25,[0,150,0],75,40,[250])
+        } else {
+            drawRect("RESTART", 15,25,[0,150,0],75,40,[250])
+        }
+        textSize(15)
         text(`Score: ${score}`,cellSize*gridSize/4,50)
         text(`Speed: ${speed}`,cellSize*gridSize/4*2,50)
         text(`Apples: ${appleCount}`,cellSize*gridSize/4*3,50)
