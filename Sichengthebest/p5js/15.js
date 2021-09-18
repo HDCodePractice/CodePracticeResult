@@ -173,7 +173,9 @@ function resetApple(appleidx) {
 
 function updateSnake(){
     if (!gameOver){
-        turn += 1;
+        if (direction != '') {
+            turn += 1;
+        }
         if (direction === "r"){
             if (snake[0] % gridSize === gridSize - 1){
                 gameOver = true;
