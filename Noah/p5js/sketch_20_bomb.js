@@ -5,6 +5,7 @@ const scoreHeight = 100;
 let mousecol = 0;
 let mouserow = 0;
 let grid = [];
+let flag = []
 let clickindex
 let lastclick
 let currentlydrawing
@@ -63,81 +64,124 @@ function drawTriangle(row, col) {
         col*cellSize+1+(cellSize-cellSize/1.2),row*cellSize+1+scoreHeight+(cellSize-cellSize/5))
 }
 
+function drawFlag(row,col) {
+    textSize(30)
+    text("🚩",col*cellSize+25,row*cellSize+scoreHeight+25)
+}
+
 function drawText(msg, inkColor, size, x, y) {
     textAlign(CENTER, CENTER);
     textSize(size);
     fill(inkColor);
-    noStroke();
+    stroke(5)
     text(msg, x, y);
 }
 
 function detectBombs(idx) {
     let total = 0;
     try {
-        let first = idx - gridSize - 1;
-        if (grid[first] == "y") {
-            total += 1;
-        } 
+        if (idx % gridSize != 0) {
+            let first = idx - gridSize - 1;
+            if (grid[first] == "y") {
+                total += 1;
+            } 
+        }
     } catch {
 
     }
     try {
+        
         let second = idx - gridSize;
         if (grid[second] == "y") {
             total += 1;
         } 
+        
     } catch {
 
     }
     try {
-        let third = idx - gridSize + 1;
-        if (grid[third] == "y") {
-            total += 1;
-        } 
+        if (idx % gridSize != gridSize-1) {
+            let third = idx - gridSize + 1;
+            if (grid[third] == "y") {
+                total += 1;
+            } 
+        }
     } catch {
 
     }
     try {
-        let fourth = idx - 1;
-        if (grid[fourth] == "y") {
-            total += 1;
-        } 
+        if (idx % gridSize != 0) {
+            let fourth = idx - 1;
+            if (grid[fourth] == "y") {
+                total += 1;
+            } 
+        }
     } catch {
 
     }
     try {
-        let fifth = idx + 1;
-        if (grid[fifth] == "y") {
-            total += 1;
-        } 
+        if (idx % gridSize != gridSize-1) {
+            let fifth = idx + 1;
+            if (grid[fifth] == "y") {
+                total += 1;
+            } 
+        }
     } catch {
 
     }
     try {
-        let sixth = idx + gridSize - 1;
-        if (grid[sixth] == "y") {
-            total += 1;
-        } 
+        if (idx % gridSize != 0) {
+            let sixth = idx + gridSize - 1;
+            if (grid[sixth] == "y") {
+                total += 1;
+            } 
+        }
     } catch {
 
     }
     try {
+       
         let seventh = idx + gridSize;
         if (grid[seventh] == "y") {
             total += 1;
-        } 
+        }
+        
     } catch {
 
     }
     try {
-        let eigth = idx + gridSize + 1;
-        if (grid[eigth] == "y") {
-            total += 1;
-        } 
+        if (idx % gridSize != gridSize-1) {
+            let eigth = idx + gridSize + 1;
+            if (grid[eigth] == "y") {
+                total += 1;
+            } 
+        }
     } catch {
 
     }
     return total
+}
+
+function mousePressed() {
+    linePosition.push(mouseX);
+    linePosition.push(mouseY);
+
+    mousecol = Math.ceil(mouseX/cellSize)-1;
+    mouserow = Math.ceil((mouseY-scoreHeight)/cellSize)-1;
+
+    clickindex = ((mouserow)*gridSize)+mousecol
+    if (mouseButton == LEFT) {
+        flag[clickindex] = 'f'
+    }
+        
+    linePosition = []
+
+
+    // if (linePosition.length == 4) {
+    //     line(linePosition[0],linePosition[1],linePosition[2],linePosition[3]);
+    //     linePosition = [];
+    // }
+    updateCanvas();
 }
 
 function drawGrid() {
@@ -167,7 +211,9 @@ function drawGrid() {
                 drawTriangle(row,col);
             } else if (grid[idx] === 'n') {
                 print(detectBombs(idx))
-                text(detectBombs(idx), col*cellSize+25,row*cellSize+scoreHeight+25 )
+                drawText(detectBombs(idx), [150], 20, col*cellSize+25,row*cellSize+scoreHeight+25 )
+            } else if (flag[idx] === 'f') {
+                drawFlag(row,col)
             }
         }
     }
