@@ -1,0 +1,18 @@
+func a() {
+  moveForward()
+  collectGem()
+  moveForward()
+  collectGem()
+}
+collectGem()
+a()
+turnRight()
+a()
+turnRight()
+a()
+turnRight()
+moveForward()
+collectGem()
+turnRight()
+moveForward()
+collectGem()

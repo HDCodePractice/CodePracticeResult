@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<playground requires-full-environment="false" target-platform="ios" version="6.0">
+    <pages>
+        <page name="Xcode Playground"/>
+    </pages>
+</playground>

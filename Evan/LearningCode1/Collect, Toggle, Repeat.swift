@@ -1,0 +1,18 @@
+func MasterCode() {
+  moveForward()
+  collectGem()
+  moveForward()
+  toggleSwitch()
+  moveForward()
+  moveForward()
+  turnLeft()
+}
+moveForward()
+collectGem()
+moveForward()
+toggleSwitch()
+moveForward()
+turnLeft()
+MasterCode()
+MasterCode()
+MasterCode()
