@@ -6,7 +6,7 @@ const scoreHeight = 50;
 // General variables
 let speed = 10;
 let apples = [];
-let appleCount = 3;
+let appleCount = 50;
 let gameOver = false;
 let isStarted = false;
 let maxHp = 100;
