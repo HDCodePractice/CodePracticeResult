@@ -163,20 +163,21 @@ function keyPressed() {
 function newApple() {
     notsnake = [];
     for (let index = 0; index < gridSize*gridSize; index++) {
+        // if (!snake.includes(index) && !apples.includes(index)){
+        //     notsnake.push(index);
+        // }
         notsnake.push(index);
     }
     return int(random(notsnake));
 }
 
 function checkOnApple(snake) {
-    print("checkOnAppleRan")
     snake["hp"] -= 1;
     snake["turn"] += 1;
-    if (apples.includes(snake["snake"][0])){
-        idx = apples.indexOf(snake["snake"][0]);
+    if (apples.includes(snake[0])){
+        idx = apples.indexOf(snake[0]);
         apples[idx] = newApple();
         snake["hp"] = maxHp;
-        print("OnApple")
     } else {
         snake["snake"].splice(snake["snake"].length-1, 1)
     }
@@ -312,10 +313,10 @@ function draw() {
     }
     fill(0,0,0);
     textSize(10);
-    text("Speed:",width - selectWidth + 10, 90);
-    text("Apples:",width - selectWidth + 10, 120);
-    text("MaxHP:",width - selectWidth + 10, 150);
-    text("MaxTurn:",width - selectWidth + 10, 180);
+    text("Speed:",width - selectWidth + 10, 40);
+    text("Apples:",width - selectWidth + 10, 70);
+    text("MaxHP:",width - selectWidth + 10, 100);
+    text("MaxTurn:",width - selectWidth + 10, 130);
     textSize(15);
     // text("HP:"+hp,width - selectWidth + 15, 20);
     // text("Score:"+score,width - selectWidth + 70, 20);
