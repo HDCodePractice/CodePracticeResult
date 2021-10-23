@@ -1,3 +1,7 @@
+function indexToColRow(index) {
+    return [ int(index / gridSize) , index % gridSize];
+}
+
 function jaden2_getDirection(gridSize,snake,apples,direction){
     let smallest = 0
     let appleDistance = gridSize * 2
