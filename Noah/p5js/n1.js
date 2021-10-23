@@ -366,7 +366,7 @@ function updateSnake(element){
 }
 
 function drawGameOver() {
-    fill(255,0,0);
+    fill(0,150,150);
     textSize(int(width/10));
     if (human.score > ai.score) {
         text(
@@ -401,7 +401,6 @@ function drawGameOver() {
             );
         }
     }
-        
 }
 
 function draw() {
