@@ -252,11 +252,13 @@ function draw() {
         startButton.html("Start Game");
     }else{
         background(220);
-        members[1].direction = jaden2_getDirection(
-            gridSize, 
-            members[1].snake, 
-            apples, 
-            members[1].direction);
+        if (members[0].direction != ""){
+            members[1].direction = jaden2_getDirection(
+                gridSize, 
+                members[1].snake, 
+                apples, 
+                members[1].direction);
+        }
         for (let index = 0; index < members.length; index++) {
             const member = members[index];
             updateSnake(member);
