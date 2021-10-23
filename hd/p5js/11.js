@@ -224,10 +224,21 @@ function updateSnake(member) {
                 checkOnApple(member);
                 snake.splice(0,0,snake[0]-1);
             }
-        }
-        for (let s = 1; s < snake.length; s++) {
-            if (snake[0] == snake[s]) {
-                gameOver = true;
+        } 
+        for (let index = 1; index < members.length; index++) {
+            const m = members[index];
+            if (m.snake[0] === snake[0]){
+                for (let s = 1; s < m.snake.length; s++) {
+                    if (snake[0] == m.snake[s]) {
+                        gameOver = true;
+                    }
+                }
+            }else{
+                for (let s = 0; s < m.snake.length; s++) {
+                    if (snake[0] == m.snake[s]) {
+                        gameOver = true;
+                    }
+                }                
             }
         }
         if (hp <= 0 || (turn >= maxTurn && maxTurn != 0)){
