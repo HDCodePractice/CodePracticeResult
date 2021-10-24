@@ -1,34 +1,43 @@
 
+var readline = require('readline');
+let tries = 0
+var randomNumber = Math.round(Math.random() * 100);
 
-function findnum()  { 
-    let tries  = 0 
-    let b = 100;
-    let x = Math.floor(Math.random(1,100)*b)
-    const readline =  require('readline'). createInterface({
-        input:process.stdin,
-        output: process.stdout
-    })
-    var waitForUserInput = function() {
-    readline.question('What number do you guess?', function(reply){
-        c = Number(reply)
-    if( x == c){
-        console.log("You got it right","You took",tries,"tries")
 
-    }else if( c > x){
-        tries += 1
-        console.log("Your number is too high")
-        waitForUserInput()
-    }else if(c<x){
-        tries +=1
-        console.log("Your number is too low")
-        waitForUserInput()
-    }
-        
-    })
+var terminal = readline.createInterface(
+{
+  input : process.stdin,
+  output : process.stdout
+});
 
-} 
+terminal.setPrompt('Guess the number!');
+terminal.prompt();
+terminal.on('line', function(answer)
+{
+  var answerNum = parseInt(answer);
+  
+  if (answerNum > randomNumber){
+    tries +=1
+    console.log('Too high!',"Tries:", tries);
 
-}
-findnum()
-waitForUserInput();
-answer = findnum()
+  }else if (answerNum < randomNumber){
+    tries +=1
+    console.log('Too low!',"Tries:", tries);
+
+  }else if (answerNum === randomNumber){
+    tries +=1
+    console.log('You got it', "You took",tries,"tries");
+
+  }else{
+    console.log("That wasn't a number I recognise. Put in an actual number!");
+
+  }
+
+ 
+  
+  terminal.prompt();
+});
+
+terminal.on('close', function()
+{})
+;

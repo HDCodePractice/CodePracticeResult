@@ -144,128 +144,104 @@ function inputAppleCount(){
 }
 
 function keyPressed() {
-    snake = human["snake"]
+    snake = members[0].snake;
     if (keyCode === LEFT_ARROW && snake[1] != snake[0] - 1) {
-        human["direction"] = "l";
-        print (human["direction"])
+            direction = "l";
     } else if (keyCode === RIGHT_ARROW && snake[1] != snake[0] + 1) {
-        human["direction"] = "r";
-        print (human["direction"])
+            direction = "r";
     } else if (keyCode === UP_ARROW && snake[1] != snake[0] - gridSize) {
-        human["direction"] = "u";
-        print (human["direction"])
+        direction = "u";
     } else if (keyCode === DOWN_ARROW && snake[1] != snake[0] + gridSize) {
-        human["direction"] = "d";
-        print (human["direction"])
+        direction = "d";
     }
+    members[0].direction = direction;
+}
+
+function isOnSnake(idx) {
+    for (let index = 0; index < members.length; index++) {
+        const snake = members[index].snake;
+        if (snake.includes(idx)){
+            return true;
+        }
+    }
+    return false;
 }
 
 function newApple() {
     notsnake = [];
     for (let index = 0; index < gridSize*gridSize; index++) {
-        notsnake.push(index);
+        if (!isOnSnake(index) && !apples.includes(index)){
+            notsnake.push(index);
+        }
     }
     return int(random(notsnake));
 }
 
-function checkOnApple(snake) {
-    print("checkOnAppleRan")
-    snake["hp"] -= 1;
-    snake["turn"] += 1;
-    if (apples.includes(snake["snake"][0])){
-        idx = apples.indexOf(snake["snake"][0]);
+function checkOnApple(member) {
+    member.hp -= 1;
+    member.turn += 1;
+    if (apples.includes(member.snake[0])){
+        idx = apples.indexOf(member.snake[0]);
         apples[idx] = newApple();
-        snake["hp"] = maxHp;
-        print("OnApple")
+        member.hp = maxHp;
+        member.score += 1;
     } else {
-        snake["snake"].splice(snake["snake"].length-1, 1)
+        member.snake.splice(member.snake.length-1, 1)
     }
 }
 
-function updateSnake(){
+function updateSnake(member) {
+    snake = member.snake;
+    direction = member.direction;
+    hp = member.hp;
+    turn = member.turn;
     if (!gameOver){
-        
-        ai["direction"]=hdcola_getDirection(gridSize,ai["snake"],apples,ai['direction'])
-        
-        if (human["direction"] === "r"){
-            if (human["snake"][0] % gridSize === gridSize - 1){
+        if (direction === "r"){
+            if (snake[0] % gridSize === gridSize - 1){
                 gameOver = true;
             }else{
-                checkOnApple(human);
-                human["snake"].splice(0,0,human["snake"][0]+1)
+                checkOnApple(member);
+                snake.splice(0,0,snake[0]+1)
             }
-        }else if (human["direction"] === "u"){
-            if (human["snake"][0] < gridSize){
+        }else if (direction === "u"){
+            if (snake[0] < gridSize){
                 gameOver = true;
             }else{
-                checkOnApple(human);
-                human["snake"].splice(0,0,human["snake"][0]-gridSize);
+                checkOnApple(member);
+                snake.splice(0,0,snake[0]-gridSize);
             }
-        }else if (human["direction"] === "d"){
-            if (human["snake"][0] >= gridSize * (gridSize-1)){
+        }else if (direction === "d"){
+            if (snake[0] >= gridSize * (gridSize-1)){
                 gameOver = true;
             }else{
-                checkOnApple(human);
-                human["snake"].splice(0,0,human["snake"][0]+gridSize);
+                checkOnApple(member);
+                snake.splice(0,0,snake[0]+gridSize);
             }
-        }else if (human["direction"] === "l"){
-            if (human["snake"][0] % gridSize === 0){
+        }else if (direction === "l"){
+            if (snake[0] % gridSize === 0){
                 gameOver = true;
             }else{
-                checkOnApple(human);
-                human["snake"].splice(0,0,human["snake"][0]-1);
+                checkOnApple(member);
+                snake.splice(0,0,snake[0]-1);
+            }
+        } 
+        for (let index = 1; index < members.length; index++) {
+            const m = members[index];
+            if (m.snake[0] === snake[0]){
+                for (let s = 1; s < m.snake.length; s++) {
+                    if (snake[0] == m.snake[s]) {
+                        gameOver = true;
+                    }
+                }
+            }else{
+                for (let s = 0; s < m.snake.length; s++) {
+                    if (snake[0] == m.snake[s]) {
+                        gameOver = true;
+                    }
+                }                
             }
         }
-        for (let s = 1; s < human["snake"].length; s++) {
-            if (human["snake"][0] == human["snake"][s]) {
-                gameOver = true;
-            }
-        }
-
-
-        for (let s = 1; s < ai["snake"].length; s++) {
-            if (human["snake"][0] == ai["snake"][s]) {
-                gameOver = true;
-            }
-        }
-
-        if (ai["direction"] === "r"){
-            if (ai["snake"][0] % gridSize === gridSize - 1){
-                gameOver = true;
-            }else{
-                checkOnApple(ai);
-                ai["snake"].splice(0,0,ai["snake"][0]+1)
-            }
-        }else if (ai["direction"] === "u"){
-            if (ai["snake"][0] < gridSize){
-                gameOver = true;
-            }else{
-                checkOnApple(ai);
-                ai["snake"].splice(0,0,ai["snake"][0]-gridSize);
-            }
-        }else if (ai["direction"] === "d"){
-            if (ai["snake"][0] >= gridSize * (gridSize-1)){
-                gameOver = true;
-            }else{
-                checkOnApple(ai);
-                ai["snake"].splice(0,0,ai["snake"][0]+gridSize);
-            }
-        }else if (ai["direction"] === "l"){
-            if (ai["snake"][0] % gridSize === 0){
-                gameOver = true;
-            }else{
-                checkOnApple(ai);
-                ai["snake"].splice(0,0,ai["snake"][0]-1);
-            }
-        }
-        
-        for (let s = 1; s < human["snake"].length; s++) {
-            if (human["snake"][0] == human["snake"][s]) {
-                gameOver = true;
-            }
-        }
-
-        if (human["hp"] <= 0 || (human["turn"] >= maxTurn && maxTurn != 0)){
+        if (hp <= 0 || (turn >= maxTurn && maxTurn != 0)){
             gameOver = true;
         }
     }
@@ -287,7 +263,17 @@ function draw() {
         startButton.html("Start Game");
     }else{
         background(220);
-        updateSnake();
+        if (members[0].direction != ""){
+            members[1].direction = jaden2_getDirection(
+                gridSize, 
+                members[1].snake, 
+                apples, 
+                members[1].direction);
+        }
+        for (let index = 0; index < members.length; index++) {
+            const member = members[index];
+            updateSnake(member);
+        }
         for (let col = 0; col < gridSize; col++) {
             for (let row = 0; row < gridSize; row++) {
                 const idx = colRowToIndex(col, row);
@@ -312,10 +298,10 @@ function draw() {
     }
     fill(0,0,0);
     textSize(10);
-    text("Speed:",width - selectWidth + 10, 90);
-    text("Apples:",width - selectWidth + 10, 120);
-    text("MaxHP:",width - selectWidth + 10, 150);
-    text("MaxTurn:",width - selectWidth + 10, 180);
+    text("Speed:",width - selectWidth + 10, 40);
+    text("Apples:",width - selectWidth + 10, 70);
+    text("MaxHP:",width - selectWidth + 10, 100);
+    text("MaxTurn:",width - selectWidth + 10, 130);
     textSize(15);
     // text("HP:"+hp,width - selectWidth + 15, 20);
     // text("Score:"+score,width - selectWidth + 70, 20);
