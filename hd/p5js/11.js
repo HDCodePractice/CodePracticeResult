@@ -8,6 +8,7 @@ let appleCount = 3;
 let gameOver = false;
 let maxHp = 25;
 let maxTurn = 0;
+let maxAI = 5;
 
 let human = {
     name: "human",
@@ -15,7 +16,8 @@ let human = {
     direction: "",
     score: 0,
     hp: 0,
-    turn: 0
+    turn: 0,
+    color: 0
 };
 
 let ai = {
@@ -24,10 +26,12 @@ let ai = {
     direction: "",
     score: 0,
     hp: 0,
-    turn: 0
+    turn: 0,
+    color: 0
 };
 
 let members = [human,ai];
+let snakecolors = []
 
 function colRowToIndex(col, row) {
   return row * gridSize + col;
@@ -42,9 +46,9 @@ function drawCircle(row,col) {
     circle(col*cellSize+1+cellSize/2, row*cellSize+1+scoreHeight+cellSize/2, cellSize*4/5)
 }
 
-function drawSquare(row, col) {
-    fill(0,0,250)
-    square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5)
+function drawSquare(row, col, color) {
+    fill(color);
+    square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5);
 }
 
 function drawApple(row, col) {
@@ -61,6 +65,18 @@ function newGame(){
     }
     gameOver = false;
 
+    members = [human];
+    for(let index=0; index < maxAI; index++){
+        members.push({
+            name: "ai"+index,
+            snake: [],
+            direction: "",
+            score: 0,
+            hp: 0,
+            turn: 0,
+            color: 0
+        });
+    }
     for (let index = 0; index < members.length; index++) {
         const element = members[index];
         element.snake = [
@@ -72,11 +88,21 @@ function newGame(){
         element.score = 0;
         element.hp = maxHp;
         element.turn = 0;
+        element.color = snakecolors[index];
     }
 }
 
 function setup() {
     createCanvas(cellSize * gridSize + 2 + selectWidth, cellSize * gridSize + 2 + scoreHeight);
+    snakecolors = [
+        color(0, 0, 255),
+        color(255, 0, 0),
+        color(0, 255, 0),
+        color(255,165,0),
+        color(255,255,0),
+        color(230,230,250),
+        color(255,192,203)
+    ]
     newGame();
     let speedInput = createInput(speed);
     speedInput.position(width - selectWidth + 60, 80);
@@ -288,7 +314,7 @@ function draw() {
                         if (idx == snake[0]){
                             drawCircle(row,col);
                         } else {
-                            drawSquare(row,col);
+                            drawSquare(row,col,members[index].color);
                         }
                     } 
                 }
