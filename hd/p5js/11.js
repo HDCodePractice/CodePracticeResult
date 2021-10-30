@@ -227,28 +227,28 @@ function updateSnake(member) {
     if (!gameOver){
         if (direction === "r"){
             if (snake[0] % gridSize === gridSize - 1){
-                snake[0].gameOver = true;
+                member.gameOver = true;
             }else{
                 checkOnApple(member);
                 snake.splice(0,0,snake[0]+1)
             }
         }else if (direction === "u"){
             if (snake[0] < gridSize){
-                snake[0].gameOver = true;
+                member.gameOver = true;
             }else{
                 checkOnApple(member);
                 snake.splice(0,0,snake[0]-gridSize);
             }
         }else if (direction === "d"){
             if (snake[0] >= gridSize * (gridSize-1)){
-                snake[0].gameOver = true;
+                member.gameOver = true;
             }else{
                 checkOnApple(member);
                 snake.splice(0,0,snake[0]+gridSize);
             }
         }else if (direction === "l"){
             if (snake[0] % gridSize === 0){
-                snake[0].gameOver = true;
+                member.gameOver = true;
             }else{
                 checkOnApple(member);
                 snake.splice(0,0,snake[0]-1);
@@ -277,7 +277,7 @@ function updateSnake(member) {
             }
         }
         if (hp <= 0 || (turn >= maxTurn && maxTurn != 0)){
-            gameOver = true;
+            member.gameOver = true;
         }
     }
 }
@@ -321,7 +321,9 @@ function draw() {
         }
         for (let index = 0; index < members.length; index++) {
             const member = members[index];
-            updateSnake(member);
+            if (!member.gameOver){
+                updateSnake(member);
+            }
         }
         for (let col = 0; col < gridSize; col++) {
             for (let row = 0; row < gridSize; row++) {
