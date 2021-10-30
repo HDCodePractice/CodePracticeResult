@@ -144,6 +144,7 @@ function inputAppleCount(){
 }
 
 function keyPressed() {
+    snake = members[0].snake;
     if (keyCode === LEFT_ARROW && snake[1] != snake[0] - 1) {
             direction = "l";
     } else if (keyCode === RIGHT_ARROW && snake[1] != snake[0] + 1) {
@@ -153,6 +154,7 @@ function keyPressed() {
     } else if (keyCode === DOWN_ARROW && snake[1] != snake[0] + gridSize) {
         direction = "d";
     }
+    members[0].direction = direction;
 }
 
 function isOnSnake(idx) {
@@ -175,53 +177,68 @@ function newApple() {
     return int(random(notsnake));
 }
 
-function checkOnApple() {
-    hp -= 1;
-    turn += 1;
-    if (apples.includes(snake[0])){
-        idx = apples.indexOf(snake[0]);
+function checkOnApple(member) {
+    member.hp -= 1;
+    member.turn += 1;
+    if (apples.includes(member.snake[0])){
+        idx = apples.indexOf(member.snake[0]);
         apples[idx] = newApple();
-        hp = maxHp;
-        score += 1;
+        member.hp = maxHp;
+        member.score += 1;
     } else {
-        snake.splice(snake.length-1, 1)
+        member.snake.splice(member.snake.length-1, 1)
     }
 }
 
-function updateSnake(){
+function updateSnake(member) {
+    snake = member.snake;
+    direction = member.direction;
+    hp = member.hp;
+    turn = member.turn;
     if (!gameOver){
         if (direction === "r"){
             if (snake[0] % gridSize === gridSize - 1){
                 gameOver = true;
             }else{
-                checkOnApple();
+                checkOnApple(member);
                 snake.splice(0,0,snake[0]+1)
             }
         }else if (direction === "u"){
             if (snake[0] < gridSize){
                 gameOver = true;
             }else{
-                checkOnApple();
+                checkOnApple(member);
                 snake.splice(0,0,snake[0]-gridSize);
             }
         }else if (direction === "d"){
             if (snake[0] >= gridSize * (gridSize-1)){
                 gameOver = true;
             }else{
-                checkOnApple();
+                checkOnApple(member);
                 snake.splice(0,0,snake[0]+gridSize);
             }
         }else if (direction === "l"){
             if (snake[0] % gridSize === 0){
                 gameOver = true;
             }else{
-                checkOnApple();
+                checkOnApple(member);
                 snake.splice(0,0,snake[0]-1);
             }
-        }
-        for (let s = 1; s < snake.length; s++) {
-            if (snake[0] == snake[s]) {
-                gameOver = true;
+        } 
+        for (let index = 1; index < members.length; index++) {
+            const m = members[index];
+            if (m.snake[0] === snake[0]){
+                for (let s = 1; s < m.snake.length; s++) {
+                    if (snake[0] == m.snake[s]) {
+                        gameOver = true;
+                    }
+                }
+            }else{
+                for (let s = 0; s < m.snake.length; s++) {
+                    if (snake[0] == m.snake[s]) {
+                        gameOver = true;
+                    }
+                }                
             }
         }
         if (hp <= 0 || (turn >= maxTurn && maxTurn != 0)){
@@ -246,7 +263,17 @@ function draw() {
         startButton.html("Start Game");
     }else{
         background(220);
-        // updateSnake();
+        if (members[0].direction != ""){
+            members[1].direction = jaden2_getDirection(
+                gridSize, 
+                members[1].snake, 
+                apples, 
+                members[1].direction);
+        }
+        for (let index = 0; index < members.length; index++) {
+            const member = members[index];
+            updateSnake(member);
+        }
         for (let col = 0; col < gridSize; col++) {
             for (let row = 0; row < gridSize; row++) {
                 const idx = colRowToIndex(col, row);
