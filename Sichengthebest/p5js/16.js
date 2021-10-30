@@ -356,9 +356,7 @@ function resetApple(appleidx) {
 function updateSnake(member){
     if (members[0].direction != '') {
         for (let memberIndex = 1; memberIndex < members.length; memberIndex++) {
-            if (members.includes(memberslist[memberIndex])) {
-                members[memberIndex].direction = sicheng_getDirection(gridSize,members[memberIndex].snake,apple,members[memberIndex].direction)
-            }
+            members[memberIndex].direction = sicheng_getDirection(gridSize,members[memberIndex].snake,apple,members[memberIndex].direction)
         }
     }
     if (member.gameOver != true) {
