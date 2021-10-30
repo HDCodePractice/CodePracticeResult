@@ -331,6 +331,11 @@ function draw() {
     text("MaxHP:",width - selectWidth + 10, 100);
     text("MaxTurn:",width - selectWidth + 10, 130);
     textSize(15);
+    for (let index = 0; index < members.length; index++) {
+        strokeWeight(1)
+        fill(members[index].color)
+        rect(310, 235+index*20, 160 * (members[index].hp/maxHp)/1.5, 20)
+    }
     // text("HP:"+hp,width - selectWidth + 15, 20);
     // text("Score:"+score,width - selectWidth + 70, 20);
     // text("Turn:"+turn,width - selectWidth + 130, 20);
