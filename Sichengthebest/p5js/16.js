@@ -1,7 +1,7 @@
 const cellSize = 20;
-const gridSize = 20;
+const gridSize = 15;
 const scoreHeight = 150;
-const inputWidth = 200;
+const inputWidth = 500;
 const resetHeight = 40;
 
 let grid = [];
@@ -13,24 +13,74 @@ let hpMax = 100;
 let turnMax = 0;
 
 let human = {
-    name: 'human',
+    name: 'Sichengthebest',
     snake: [],
     direction: '',
     turn: 0,
     score: 0,
     hp: hpMax,
-    gameOver: false
+    gameOver: false,
+    deathMessage: '',
+    color: [0]
 }
 let ai = {
-    name: 'ai',
+    name: 'Sichengtheworse',
     snake: [],
     direction: '',
     turn: 0,
     score: 0,
     hp: hpMax,
-    gameOver: false
+    gameOver: false,
+    deathMessage: '',
+    color: [255,0,0]
 }
-let members = [human,ai]
+let ai2 = {
+    name: 'Sichengthebad',
+    snake: [],
+    direction: '',
+    turn: 0,
+    score: 0,
+    hp: hpMax,
+    gameOver: false,
+    deathMessage: '',
+    color: [0,255,0]
+}
+let ai3 = {
+    name: 'Parker (aka terrible)',
+    snake: [],
+    direction: '',
+    turn: 0,
+    score: 0,
+    hp: hpMax,
+    gameOver: false,
+    deathMessage: '',
+    color: [255,255,0]
+}
+let ai4 = {
+    name: 'Other Sichengthebad',
+    snake: [],
+    direction: '',
+    turn: 0,
+    score: 0,
+    hp: hpMax,
+    gameOver: false,
+    deathMessage: '',
+    color: [0,255,255]
+}
+let ai5 = {
+    name: 'Other other Sichengthebad',
+    snake: [],
+    direction: '',
+    turn: 0,
+    score: 0,
+    hp: hpMax,
+    gameOver: false,
+    deathMessage: '',
+    color: [255,0,255]
+}
+
+let members = [human,ai,ai2,ai3,ai4,ai5]
+let memberslist = [human,ai,ai2,ai3,ai4,ai5]
 
 function colRowtoIndex(col,row) {
     return row*gridSize+col
@@ -43,7 +93,7 @@ function setup() {
     background(220);
     button = createButton('New Game');
     button.position(gridSize*cellSize/2,scoreHeight+gridSize*cellSize+resetHeight+20);
-    button.mousePressed(setup);
+    button.mousePressed(newGame);
     let inp = createInput(appleCount);
     inp.position(gridSize*cellSize+10,cellSize * gridSize/2+20);
     inp.size(100);
@@ -60,8 +110,34 @@ function setup() {
     inp4.position(gridSize*cellSize+10,cellSize * gridSize/2+290);
     inp4.size(100);
     inp4.input(myInputEvent4);
-    hp = hpMax;
-    turn = 0;
+    let inp5 = createColorPicker(members[0].color);
+    inp5.position(gridSize*cellSize+150,140);  
+    inp5.input(myInputEvent5);
+    let inp6 = createColorPicker(members[1].color);
+    inp6.position(gridSize*cellSize+150,190);  
+    inp6.input(myInputEvent6);
+    let inp7 = createColorPicker(members[2].color);
+    inp7.position(gridSize*cellSize+150,240);  
+    inp7.input(myInputEvent7);
+    let inp8 = createColorPicker(members[3].color);
+    inp8.position(gridSize*cellSize+150,290);  
+    inp8.input(myInputEvent8);
+    let inp9 = createColorPicker(members[4].color);
+    inp9.position(gridSize*cellSize+150,340);  
+    inp9.input(myInputEvent9);
+    let inp10 = createColorPicker(members[5].color);
+    inp10.position(gridSize*cellSize+150,390);
+    inp10.input(myInputEvent10);
+    let checkbox = createCheckbox(memberslist[1].name, true);
+    let checkbox2 = createCheckbox(memberslist[2].name, true);
+    let checkbox3 = createCheckbox(memberslist[3].name, true);
+    let checkbox4 = createCheckbox(memberslist[4].name, true);
+    let checkbox5 = createCheckbox(memberslist[5].name, true);
+    checkbox.changed(myCheckedEvent);
+    checkbox2.changed(myCheckedEvent2);
+    checkbox3.changed(myCheckedEvent3);
+    checkbox4.changed(myCheckedEvent4);
+    checkbox5.changed(myCheckedEvent5);
 }
 
 function myInputEvent() {
@@ -116,6 +192,62 @@ function myInputEvent4() {
     }
 }
 
+function myInputEvent5() {
+    members[0].color = this.value()
+}
+function myInputEvent6() {
+    members[1].color = this.value()
+}
+function myInputEvent7() {
+    members[2].color = this.value()
+}
+function myInputEvent8() {
+    members[3].color = this.value()
+}
+function myInputEvent9() {
+    members[4].color = this.value()
+}
+function myInputEvent10() {
+    members[5].color = this.value()
+}
+
+function myCheckedEvent() {
+    if (this.checked()) {
+        members.push(memberslist[1])
+    } else {
+        members.splice(members.indexOf(memberslist[1]),1)
+    }
+}
+function myCheckedEvent2() {
+    if (this.checked()) {
+        members.push(memberslist[2])
+    } else {
+        members.splice(members.indexOf(memberslist[2]),1)
+    }
+}
+function myCheckedEvent3() {
+    if (this.checked()) {
+        members.push(memberslist[3])
+    } else {
+        members.splice(members.indexOf(memberslist[3]),1)
+    }
+}
+function myCheckedEvent4() {
+    if (this.checked()) {
+        members.push(memberslist[4])
+    } else {
+        members.splice(members.indexOf(memberslist[4]),1)
+    }
+}
+function myCheckedEvent5() {
+    if (this.checked()) {
+        members.push(memberslist[5])
+    } else {
+        members.splice(members.indexOf(memberslist[5]),1)
+    }
+}
+
+
 function isOnApple(apple) {
     for (let memberIndex = 0; memberIndex < members.length; memberIndex++) {
         const snake = members[memberIndex].snake
@@ -143,6 +275,7 @@ function newGame() {
         member.hp = hpMax;
         member.gameOver = false;
         member.direction = ''
+        member.deathMessage = ''
     }
     for (let index = 0; index < appleCount; index++) {
         for (let index2 = 0; index2 < gridSize*gridSize; index2++) {
@@ -157,8 +290,14 @@ function newGame() {
 function drawScore() {
     background(220)
     fill(0, 220, 0);
-    textSize(25);
-    text(`Score: ${score}\nTo start game, press any arrow key (except the left).`,10,scoreHeight/2.5);
+    textSize(15);
+    text1 = ''
+    for (let memberIndex = 0; memberIndex < members.length; memberIndex++) {
+        const member = members[memberIndex]
+        text1 += `${member.name}'s score: ${member.score}\n`
+    }
+    text1 += 'To start game, press any arrow key (except the left).'
+    text(text1,10,25);
     textSize(15);
     text('Number of apples:',gridSize*cellSize+10,cellSize * gridSize/2-40);
     text('Speed:',gridSize*cellSize+10,cellSize * gridSize/2+10);
@@ -183,11 +322,7 @@ function drawGrid() {
                         fill(0,0,255);
                         circle(col * cellSize + 1+cellSize/2, row * cellSize + 1+cellSize/2 + scoreHeight, cellSize);
                     } else {
-                        if (index == 0) {
-                            fill(0);
-                        } else {
-                            fill(255,0,0)
-                        }
+                        fill(member.color)
                         rect(col * cellSize + 1, row * cellSize + 1 + scoreHeight, cellSize, cellSize);
                     }
                 }
@@ -219,71 +354,90 @@ function resetApple(appleidx) {
 }
 
 function updateSnake(member){
-    members[1].direction = sicheng2_getDirection(gridSize,members[1].snake,apple,members[1].direction)
-    if (member.direction != '') {
-        member.turn += 1;
-        member.hp -= 1;
-    }
-    if (member.direction === "r"){
-        if (member.snake[0] % gridSize === gridSize - 1){
-            member.gameOver = true;
-        }else{
-            if (!checkOnApple(member)) {
-                member.snake.splice(member.snake.length-1, 1)
+    if (members[0].direction != '') {
+        for (let memberIndex = 1; memberIndex < members.length; memberIndex++) {
+            if (members.includes(memberslist[memberIndex])) {
+                members[memberIndex].direction = sicheng_getDirection(gridSize,members[memberIndex].snake,apple,members[memberIndex].direction)
             }
-            member.snake.splice(0,0,member.snake[0]+1)
         }
-    }else if (member.direction === "u"){
-        if (member.snake[0] < gridSize){
-            member.gameOver = true;
-        }else{
-            if (!checkOnApple(member)) {
-                member.snake.splice(member.snake.length-1, 1)
+    }
+    if (member.gameOver != true) {
+        if (member.direction != '') {
+            member.turn += 1;
+            member.hp -= 1;
+        }
+        if (member.direction === "r"){
+            if (member.snake[0] % gridSize === gridSize - 1){
+                member.deathMessage = 'Collided with wall'
+                member.hp = 0
+                member.gameOver = true;
+            }else{
+                if (!checkOnApple(member)) {
+                    member.snake.splice(member.snake.length-1, 1)
+                }
+                member.snake.splice(0,0,member.snake[0]+1)
             }
-            member.snake.splice(0,0,member.snake[0]-gridSize);
-        }
-    }else if (member.direction === "d"){
-        if (member.snake[0] >= gridSize * (gridSize-1)){
-            member.gameOver = true;
-        }else{
-            if (!checkOnApple(member)) {
-                member.snake.splice(member.snake.length-1, 1)
+        }else if (member.direction === "u"){
+            if (member.snake[0] < gridSize){
+                member.deathMessage = 'Collided with wall'
+                member.hp = 0
+                member.gameOver = true;
+            }else{
+                if (!checkOnApple(member)) {
+                    member.snake.splice(member.snake.length-1, 1)
+                }
+                member.snake.splice(0,0,member.snake[0]-gridSize);
             }
-            member.snake.splice(0,0,member.snake[0]+gridSize);
-        }
-    }else if (member.direction === "l"){
-        if (member.snake[0] % gridSize === 0){
-            member.gameOver = true;
-        }else{
-            if (!checkOnApple(member)) {
-                member.snake.splice(member.snake.length-1, 1)
+        }else if (member.direction === "d"){
+            if (member.snake[0] >= gridSize * (gridSize-1)){
+                member.deathMessage = 'Collided with wall'
+                member.hp = 0
+                member.gameOver = true;
+            }else{
+                if (!checkOnApple(member)) {
+                    member.snake.splice(member.snake.length-1, 1)
+                }
+                member.snake.splice(0,0,member.snake[0]+gridSize);
             }
-            member.snake.splice(0,0,member.snake[0]-1);
+        }else if (member.direction === "l"){
+            if (member.snake[0] % gridSize === 0){
+                member.deathMessage = 'Collided with wall'
+                member.hp = 0
+                member.gameOver = true;
+            }else{
+                if (!checkOnApple(member)) {
+                    member.snake.splice(member.snake.length-1, 1)
+                }
+                member.snake.splice(0,0,member.snake[0]-1);
+            }
         }
-    }
-    for (let s = 1; s < member.snake.length; s++) {
-        if (member.snake[0] == member.snake[s]) {
-            member.gameOver = true;
-        }
-    }
-    if (member.hp < 0) {
-        member.gameOver = true;
-    }
-    if (member.turn > turnMax && turnMax !== 0) {
-        member.hp = 0
-        member.gameOver = true;
-    }
-    for (let s = 0; s < member.snake.length; s++) {
-        if (member.name == 'human') {
-            if (member.snake[0] == members[1].snake[s]) {
+        for (let s = 1; s < member.snake.length; s++) {
+            if (member.snake[0] == member.snake[s]) {
+                member.deathMessage = 'Collided with own self'
                 member.hp = 0
                 member.gameOver = true;
             }
-        } else if (member.name == 'ai') {
-            if (member.snake[0] == members[0].snake[s]) {
-                member.hp = 0
-                member.gameOver = true;
+        }
+        if (member.turn > turnMax && turnMax !== 0) {
+            member.deathMessage = 'Ran out of turns'
+            member.hp = 0
+            member.gameOver = true;
+        }
+        for (let memberIndex = 0; memberIndex < members.length; memberIndex++) {
+            const member2 = members[memberIndex];
+            for (let s = 0; s < member2.snake.length; s++) {
+                if (member2 != member) {
+                    if (member.snake[0] == member2.snake[s]) {
+                        member.deathMessage = 'Collided with another snake'
+                        member.hp = 0
+                        member.gameOver = true;
+                    }
+                }
             }
+        }
+        if (member.hp < 1 && member.deathMessage == '') {
+            member.deathMessage = 'Starved to death'
+            member.gameOver = true;
         }
     }
 }
@@ -326,19 +480,34 @@ function checkOnApple(member) {
 }
 
 function draw() {
-    background(220)
-    for (let memberIndex = 0; memberIndex < members.length; memberIndex++) {
-        const member = members[memberIndex]
-        if (member.gameOver === false) {
-            //drawScore();
-            drawGrid();
-            drawHp();
-            //drawTurn();
+    background(220);
+    drawScore();
+    drawGrid();
+    drawHp();
+    drawTurn();
+    if (checkIfGameOver()) {
+        drawGameOver();
+    } else {
+        for (let memberIndex = 0; memberIndex < members.length; memberIndex++) {
+            const member = members[memberIndex];
+            if (member.gameOver == true) {
+                member.snake = []
+            }
             updateSnake(member);
-        } else {
-            drawGameOver()
         }
     }
+}
+
+function checkIfGameOver() {
+    gameovers = []
+    for (let memberIndex = 0; memberIndex < members.length; memberIndex++) {
+        const member = members[memberIndex];
+        gameovers.push(member.gameOver);
+    }
+    if (gameovers.includes(false)) {
+        return false;
+    }
+    return true;
 }
 
 function drawApple(row, col) {
@@ -357,35 +526,47 @@ function drawGameOver() {
 function drawHp() {
     fill(0, 220, 0);
     textSize(15);
-    text(`HP: ${members[0].hp}, HP: ${members[1].hp}`,gridSize*cellSize+10,gridSize*cellSize/2+120);
-    rectLength = int(hp*100/hpMax);
-    originalLength = 106;
-    if (rectLength > 100) {
-        rectLength = 100;
-    }
-    stroke(0);
-    strokeWeight(6);
-    fill(220);
-    rect(gridSize*cellSize+10,gridSize*cellSize/2+133,originalLength,26)
-    if (rectLength >= 60) {
+    for (let memberIndex = 0; memberIndex < members.length; memberIndex++) {
+        const member = members[memberIndex]
+        rectLength = int(member.hp*100/hpMax);
+        originalLength = 106;
+        if (rectLength > 100) {
+            rectLength = 100;
+        }
         fill(0, 220, 0);
-    } else if (rectLength >= 40 && rectLength < 60) {
-        fill(230, 230, 0)
-    } else if (rectLength >= 20 && rectLength < 40) {
-        fill(220, 150, 0)
-    } else {
-        fill(220,0,0)
+        text(`${member.name}'s HP: ${member.hp}`,gridSize*cellSize+210,80+50*memberIndex);
+        stroke(0);
+        strokeWeight(6);
+        fill(220);
+        rect(gridSize*cellSize+210,-45+133+50*memberIndex,originalLength,26)
+        if (rectLength >= 60) {
+            fill(0, 220, 0);
+        } else if (rectLength >= 40 && rectLength < 60) {
+            fill(230, 230, 0)
+        } else if (rectLength >= 20 && rectLength < 40) {
+            fill(220, 150, 0)
+        } else {
+            fill(220,0,0)
+        }
+        noStroke()
+        rect(gridSize*cellSize+213,-45+136+50*memberIndex,rectLength,20)
+        textSize(8)
+        text(member.deathMessage,gridSize*cellSize+213,-45+153+50*memberIndex)
+        textSize(15)
+        stroke(0);
+        strokeWeight(2);
     }
-    noStroke()
-    rect(gridSize*cellSize+13,gridSize*cellSize/2+136,rectLength,20)
-    stroke(0);
-    strokeWeight(2);
 }
 
 function drawTurn() {
     fill(0, 220, 0);
-    textSize(15);
-    text(`Turn: ${turn}`,gridSize*cellSize+10,gridSize*cellSize/2+190);
+    textSize(10);
+    text1 = ''
+    for (let memberIndex = 0; memberIndex < members.length; memberIndex++) {
+        const member = members[memberIndex]
+        text1 += `\n${member.name}'s turn: ${member.turn}`
+    }
+    text(text1,gridSize*cellSize+10,gridSize*cellSize/2+260);
 }
 
 function keyPressed() {
@@ -397,57 +578,5 @@ function keyPressed() {
         members[0].direction = 'u';
     } else if (keyCode === DOWN_ARROW && members[0].snake[1] != members[0].snake[0] + gridSize) {
         members[0].direction = 'd';
-    }
-}
-
-function sicheng2_getDirection(gridSize,snake,apples,direction){
-    let row = int(snake[0]/gridSize);
-    let col = snake[0]%gridSize;
-    if (gridSize%2 === 0) {
-        if (col === gridSize-1) {
-            if (row == gridSize-1) {
-                return 'l'
-            } else {
-                return 'd'
-            }
-        } else {
-            if (row%2 !== 0 && col != 0) {
-                return 'l'
-            } else if ((row%2 === 0 &&  col < gridSize-2) || (row === 0 &&  col === gridSize-2)) {
-                return 'r'
-            } else {
-                return 'u'
-            }
-        }
-    } else {
-        if (col === 0) {
-            if (row === gridSize-1) {
-                return 'r';
-            } else {
-                return 'd';
-            }
-        } else if (row < gridSize-3 && col > 0 && col < gridSize-1) {
-            if ((row%2 === 0 && col !== 1) || (row === 0 && col === 1)) {
-                return 'l';
-            } else if (row%2 != 0) {
-                return 'r';
-            } else {
-                return 'u';
-            }
-        } else if (row > gridSize-3 && row < gridSize && col > 0) {
-            if ((direction === 'r' && row%2 === 0) || (row === gridSize-2 && col === gridSize-1)) {
-                return 'u';
-            } else if (direction === 'r' && row%2 !== 0) {
-                return 'd';
-            } else {
-                return 'r';
-            }
-        } else {
-            if (row%2 === 0 && col !== 1) {
-                return 'l';
-            } else {
-                return 'u';
-            }
-        }
     }
 }
