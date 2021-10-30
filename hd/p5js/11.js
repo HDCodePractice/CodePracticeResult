@@ -10,29 +10,7 @@ let maxHp = 25;
 let maxTurn = 0;
 let maxAI = 5;
 
-let human = {
-    name: "human",
-    snake: [],
-    direction: "",
-    score: 0,
-    hp: 0,
-    turn: 0,
-    color: 0,
-    gameOver: false
-};
-
-let ai = {
-    name: "ai",
-    snake: [],
-    direction: "",
-    score: 0,
-    hp: 0,
-    turn: 0,
-    color: 0,
-    gameOver: false
-};
-
-let members = [human,ai];
+let members = [];
 let snakecolors = []
 
 function colRowToIndex(col, row) {
@@ -67,8 +45,8 @@ function newGame(){
     }
     gameOver = false;
 
-    members = [human];
-    for(let index=0; index < maxAI; index++){
+    members = [];
+    for(let index=0; index <= maxAI; index++){
         members.push({
             name: "ai"+index,
             snake: [],
@@ -80,6 +58,7 @@ function newGame(){
             gameOver: false
         });
     }
+    members[0].name = "human"
     for (let index = 0; index < members.length; index++) {
         const element = members[index];
         element.snake = [
