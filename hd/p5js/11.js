@@ -17,7 +17,8 @@ let human = {
     score: 0,
     hp: 0,
     turn: 0,
-    color: 0
+    color: 0,
+    gameOver: false
 };
 
 let ai = {
@@ -27,7 +28,8 @@ let ai = {
     score: 0,
     hp: 0,
     turn: 0,
-    color: 0
+    color: 0,
+    gameOver: false
 };
 
 let members = [human,ai];
@@ -74,7 +76,8 @@ function newGame(){
             score: 0,
             hp: 0,
             turn: 0,
-            color: 0
+            color: 0,
+            gameOver: false
         });
     }
     for (let index = 0; index < members.length; index++) {
@@ -224,28 +227,28 @@ function updateSnake(member) {
     if (!gameOver){
         if (direction === "r"){
             if (snake[0] % gridSize === gridSize - 1){
-                gameOver = true;
+                snake[0].gameOver = true;
             }else{
                 checkOnApple(member);
                 snake.splice(0,0,snake[0]+1)
             }
         }else if (direction === "u"){
             if (snake[0] < gridSize){
-                gameOver = true;
+                snake[0].gameOver = true;
             }else{
                 checkOnApple(member);
                 snake.splice(0,0,snake[0]-gridSize);
             }
         }else if (direction === "d"){
             if (snake[0] >= gridSize * (gridSize-1)){
-                gameOver = true;
+                snake[0].gameOver = true;
             }else{
                 checkOnApple(member);
                 snake.splice(0,0,snake[0]+gridSize);
             }
         }else if (direction === "l"){
             if (snake[0] % gridSize === 0){
-                gameOver = true;
+                snake[0].gameOver = true;
             }else{
                 checkOnApple(member);
                 snake.splice(0,0,snake[0]-1);
@@ -256,15 +259,21 @@ function updateSnake(member) {
             if (m.snake[0] === snake[0]){
                 for (let s = 1; s < m.snake.length; s++) {
                     if (snake[0] == m.snake[s]) {
-                        gameOver = true;
+                        m.gameOver = true;
                     }
                 }
             }else{
                 for (let s = 0; s < m.snake.length; s++) {
                     if (snake[0] == m.snake[s]) {
-                        gameOver = true;
+                        m.gameOver = true;
                     }
                 }                
+            }
+        }
+        for (let index = 0; index < members.length; index++) {
+            const m = members[index];
+            if (m.gameOver){
+                m.snake = [];
             }
         }
         if (hp <= 0 || (turn >= maxTurn && maxTurn != 0)){
@@ -283,8 +292,20 @@ function drawGameOver() {
     );
 }
 
+function checkIfGameOver() {
+    gameovers = []
+    for (let memberIndex = 0; memberIndex < members.length; memberIndex++) {
+        const member = members[memberIndex];
+        gameovers.push(member.gameOver);
+    }
+    if (gameovers.includes(false)) {
+        return false;
+    }
+    return true;
+}
+
 function draw() {
-    if (gameOver){
+    if (checkIfGameOver()){
         drawGameOver();
         startButton.html("Start Game");
     }else{
@@ -334,7 +355,7 @@ function draw() {
     for (let index = 0; index < members.length; index++) {
         strokeWeight(1)
         fill(members[index].color)
-        rect(310, 235+index*20, 160 * (members[index].hp/maxHp)/1.5, 20)
+        rect(310, 160+index*25, 280 * (members[index].hp/maxHp)/1.5, 20)
     }
     // text("HP:"+hp,width - selectWidth + 15, 20);
     // text("Score:"+score,width - selectWidth + 70, 20);
