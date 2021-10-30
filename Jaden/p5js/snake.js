@@ -344,10 +344,11 @@ function draw() {
     }
     fill(0,0,0);
     textSize(10);
-    text("Speed:",width - selectWidth + 10, 40);
-    text("Apples:",width - selectWidth + 10, 70);
-    text("MaxHP:",width - selectWidth + 10, 100);
-    text("MaxTurn:",width - selectWidth + 10, 130);
+    text("Speed:",width - selectWidth + 10, 45);
+    text("Apples:",width - selectWidth + 10, 75);
+    text("MaxHP:",width - selectWidth + 10, 105);
+    text("MaxTurn:",width - selectWidth + 10, 135);
+    text("Max Ai:",width - selectWidth + 10,165)
     textSize(15);
     for (let index = 0; index < members.length; index++) {
         strokeWeight(1)
