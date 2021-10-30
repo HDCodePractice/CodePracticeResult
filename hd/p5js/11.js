@@ -290,7 +290,7 @@ function draw() {
     }else{
         background(220);
         if (members[0].direction != ""){
-            for (let index = 0; index < members.length; index++) {
+            for (let index = 1; index < members.length; index++) {
                 members[index].direction = jaden2_getDirection(
                     gridSize, 
                     members[index].snake, 
