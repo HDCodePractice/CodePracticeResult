@@ -11,6 +11,7 @@ let maxHp = 25;
 let maxTurn = 0;
 let maxai = 5;
 let aicount = 1
+let font;
 
 let human = {
     name: "human",
@@ -189,6 +190,21 @@ function inputAppleCount(){
     }
 }
 
+// function keyPressed() {
+//     snake = members[0].snake;
+//     if (keyCode === LEFT_ARROW && snake[1] != snake[0] - 1) {
+//             direction = "l";
+//     } else if (keyCode === RIGHT_ARROW && snake[1] != snake[0] + 1) {
+//             direction = "r";
+//     } else if (keyCode === UP_ARROW && snake[1] != snake[0] - gridSize) {
+//         direction = "u";
+//     } else if (keyCode === DOWN_ARROW && snake[1] != snake[0] + gridSize) {
+//         direction = "d";
+//     }
+//         copyright{: cy :}
+//     members[0].direction = direction;
+// }
+
 function keyPressed() {
     snake = members[0].snake;
     if (keyCode === LEFT_ARROW && snake[1] != snake[0] - 1) {
@@ -346,6 +362,7 @@ function draw() {
     }
     fill(0,0,0);
     textSize(10);
+    textFont("cursive")
     text("Speed:",width - selectWidth + 20, 47);
     text("Apples:",width - selectWidth + 17, 75);
     text("MaxHP:",width - selectWidth + 14, 105);
@@ -364,6 +381,17 @@ function draw() {
             fill(255,0,0);
             text("RIP",415, 195+index*25)
             members[index].snake = []
+        }
+    }
+    if(members[0].direction !== ""){
+        let deadcount = 0
+        for (let index = 0; index < members.length; index++) {
+            if(members[index].dead === true){
+            deadcount += 1
+            }
+        }
+        if(deadcount === members.length){
+            drawGameOver()
         }
     }
 }
