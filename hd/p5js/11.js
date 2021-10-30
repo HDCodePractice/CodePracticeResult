@@ -38,11 +38,6 @@ function drawApple(row, col) {
 }
 
 function newGame(){
-    apples = [];
-    apples.push(colRowToIndex(int(gridSize* 3/4), int(gridSize/2)));
-    for (let index = 1; index < appleCount; index++) {
-        apples.push(newApple());
-    }
     gameOver = false;
 
     members = [];
@@ -71,6 +66,11 @@ function newGame(){
         element.hp = maxHp;
         element.turn = 0;
         element.color = snakecolors[index];
+    }
+    apples = [];
+    apples.push(colRowToIndex(int(gridSize* 3/4), int(gridSize/2)));
+    for (let index = 1; index < appleCount; index++) {
+        apples.push(newApple());
     }
 }
 
