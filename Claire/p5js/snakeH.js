@@ -394,4 +394,5 @@ function draw() {
             drawGameOver()
         }
     }
+    
 }
