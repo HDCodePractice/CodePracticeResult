@@ -1,6 +1,6 @@
 function ways(a){
-    console.log( a,a,a,a,
-        )
+    console.log("\x1b[37m",a,a,a,a)
+
     console.log(" ",a,a,a,
         )  
     console.log("  ",a,a,

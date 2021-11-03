@@ -8,19 +8,7 @@ let appleCount = 3;
 let gameOver = false;
 let maxHp = 25;
 let maxTurn = 0;
-let maxai = 5;
-let aicount = 1
-
-let human = {
-    name: "human",
-    snake: [],
-    direction: "",
-    score: 0,
-    hp: 0,
-    turn: 0,
-    color: 0,
-    dead:false
-};
+let maxAI = 5;
 
 let members = [];
 let snakecolors = []
@@ -50,16 +38,10 @@ function drawApple(row, col) {
 }
 
 function newGame(){
-    apples = [];
-    apples.push(colRowToIndex(int(gridSize* 3/4), int(gridSize/2)));
-    for (let index = 1; index < appleCount; index++) {
-        apples.push(newApple());
-    }
     gameOver = false;
 
-    members = [human]
-
-    for (let index = 0; index < aicount; index++) {
+    members = [];
+    for(let index=0; index <= maxAI; index++){
         members.push({
             name: "ai"+index,
             snake: [],
@@ -68,15 +50,10 @@ function newGame(){
             hp: 0,
             turn: 0,
             color: 0,
-            dead:false
+            gameOver: false
         });
-        
     }
-    for (let index = 0; index < members.length; index++) {
-        members[index].dead = false
-    }
-
-
+    members[0].name = "human"
     for (let index = 0; index < members.length; index++) {
         const element = members[index];
         element.snake = [
@@ -89,6 +66,11 @@ function newGame(){
         element.hp = maxHp;
         element.turn = 0;
         element.color = snakecolors[index];
+    }
+    apples = [];
+    apples.push(colRowToIndex(int(gridSize* 3/4), int(gridSize/2)));
+    for (let index = 1; index < appleCount; index++) {
+        apples.push(newApple());
     }
 }
 
@@ -124,12 +106,6 @@ function setup() {
     startButton.position(width - selectWidth + 50, height/2+195);
     startButton.size(selectWidth - 100,20);
     startButton.mousePressed(newGame);
-
-    let aiInput = createInput(aicount);
-    aiInput.position(width - selectWidth + 60, 200);
-    aiInput.size(selectWidth - 100, 20);
-    aiInput.input(inputAiCount);
-
     frameRate(speed);
 }
 
@@ -139,18 +115,6 @@ function inputmaxTurn(){
         return;
     }
     maxTurn = int(val);
-}
-
-function inputAiCount(){
-    val = this.value();
-    if (val > maxai){
-        aicount = maxai
-    }
-    else{
-        aicount = val
-    }
-
-    newGame
 }
 
 function inputMaxhp(){
@@ -239,31 +203,31 @@ function updateSnake(member) {
     direction = member.direction;
     hp = member.hp;
     turn = member.turn;
-    if (!member.dead){
+    if (!gameOver){
         if (direction === "r"){
             if (snake[0] % gridSize === gridSize - 1){
-                member.dead = true;
+                member.gameOver = true;
             }else{
                 checkOnApple(member);
                 snake.splice(0,0,snake[0]+1)
             }
         }else if (direction === "u"){
             if (snake[0] < gridSize){
-                member.dead = true;
+                member.gameOver = true;
             }else{
                 checkOnApple(member);
                 snake.splice(0,0,snake[0]-gridSize);
             }
         }else if (direction === "d"){
             if (snake[0] >= gridSize * (gridSize-1)){
-                member.dead = true;
+                member.gameOver = true;
             }else{
                 checkOnApple(member);
                 snake.splice(0,0,snake[0]+gridSize);
             }
         }else if (direction === "l"){
             if (snake[0] % gridSize === 0){
-                member.dead = true;
+                member.gameOver = true;
             }else{
                 checkOnApple(member);
                 snake.splice(0,0,snake[0]-1);
@@ -274,19 +238,25 @@ function updateSnake(member) {
             if (m.snake[0] === snake[0]){
                 for (let s = 1; s < m.snake.length; s++) {
                     if (snake[0] == m.snake[s]) {
-                        member.dead = true;
+                        m.gameOver = true;
                     }
                 }
             }else{
                 for (let s = 0; s < m.snake.length; s++) {
                     if (snake[0] == m.snake[s]) {
-                        member.dead = true;
+                        m.gameOver = true;
                     }
                 }                
             }
         }
-        if (hp === 0 || (turn >= maxTurn && maxTurn != 0)){
-            member.dead = true;
+        for (let index = 0; index < members.length; index++) {
+            const m = members[index];
+            if (m.gameOver){
+                m.snake = [];
+            }
+        }
+        if (hp <= 0 || (turn >= maxTurn && maxTurn != 0)){
+            member.gameOver = true;
         }
     }
 }
@@ -301,8 +271,20 @@ function drawGameOver() {
     );
 }
 
+function checkIfGameOver() {
+    gameovers = []
+    for (let memberIndex = 0; memberIndex < members.length; memberIndex++) {
+        const member = members[memberIndex];
+        gameovers.push(member.gameOver);
+    }
+    if (gameovers.includes(false)) {
+        return false;
+    }
+    return true;
+}
+
 function draw() {
-    if (gameOver){
+    if (checkIfGameOver()){
         drawGameOver();
         startButton.html("Start Game");
     }else{
@@ -313,12 +295,14 @@ function draw() {
                     gridSize, 
                     members[index].snake, 
                     apples, 
-                    members[index].direction)
+                    members[index].direction);
             }
         }
         for (let index = 0; index < members.length; index++) {
             const member = members[index];
-            updateSnake(member);
+            if (!member.gameOver){
+                updateSnake(member);
+            }
         }
         for (let col = 0; col < gridSize; col++) {
             for (let row = 0; row < gridSize; row++) {
@@ -344,35 +328,19 @@ function draw() {
     }
     fill(0,0,0);
     textSize(10);
-    text("Speed:",width - selectWidth + 10, 45);
-    text("Apples:",width - selectWidth + 10, 75);
-    text("MaxHP:",width - selectWidth + 10, 105);
-    text("MaxTurn:",width - selectWidth + 10, 135);
-    text("Max Ai:",width - selectWidth + 10,165)
+    text("Speed:",width - selectWidth + 10, 40);
+    text("Apples:",width - selectWidth + 10, 70);
+    text("MaxHP:",width - selectWidth + 10, 100);
+    text("MaxTurn:",width - selectWidth + 10, 130);
     textSize(15);
     for (let index = 0; index < members.length; index++) {
         strokeWeight(1)
-        fill(members[index].color) 
-        rect(310, 235+index*20, 160 * (members[index].hp/maxHp)/1.5,20);
-        fill(0,0,0)
-        textSize(10)
-        text("HP:" + members[index].hp,310, 250+index*20)
-        text("Score:" + members[index].score,355, 250+index*20)
-        if(members[index].dead === true){
-            text("DEAD",410, 250+index*20)
-            members[index].snake = []
-        }
+        fill(members[index].color)
+        rect(310, 160+index*25, 160 * (members[index].hp/maxHp)/1.5, 20)
     }
-    if(members[0].direction !== ""){
-        let deadcount = 0
-        for (let index = 0; index < members.length; index++) {
-            if(members[index].dead === true){
-            deadcount += 1
-            }
-        }
-        if(deadcount === members.length){
-            drawGameOver()
-        }
-    }
-
+    // text("HP:"+hp,width - selectWidth + 15, 20);
+    // text("Score:"+score,width - selectWidth + 70, 20);
+    // text("Turn:"+turn,width - selectWidth + 130, 20);
+    // fill(255,0,0);
+    // rect(width - selectWidth + 10, 160, 160 * hp/maxHp,10);
 }
