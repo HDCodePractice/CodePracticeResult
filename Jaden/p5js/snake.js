@@ -10,36 +10,56 @@ let maxHp = 25;
 let maxTurn = 0;
 let maxAI = 5;
 
-let members = [];
-let snakecolors = []
+let memberSelect = [];
 
+let human = {
+    name: "human",
+    snake: [],
+    direction: "",
+    score: 0,
+    hp: 0,
+    turn: 0,
+    color: 0,
+    gameOver: false
+};
+let ai = {
+    name: "ai",
+    snake: [],
+    direction: "",
+    score: 0,
+    hp: 0,
+    turn: 0,
+    color: 0,
+    gameOver: false
+};
+let members = [human,ai];
+let snakecolors = []
 function colRowToIndex(col, row) {
   return row * gridSize + col;
 }
-
 function indexToRowCol(index) {
   return [ int(index / gridSize) , index % gridSize];
 }
-
 function drawCircle(row,col) {
     fill(0,250,0)
     circle(col*cellSize+1+cellSize/2, row*cellSize+1+scoreHeight+cellSize/2, cellSize*4/5)
 }
-
 function drawSquare(row, col, color) {
     fill(color);
     square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5);
 }
-
 function drawApple(row, col) {
     fill(0, 102, 153);
     textSize(cellSize*3/4);
     text("🍎",col*cellSize+cellSize/7,scoreHeight+row*cellSize+cellSize/1.3);
 }
-
 function newGame(){
+    apples = [];
+    apples.push(colRowToIndex(int(gridSize* 3/4), int(gridSize/2)));
+    for (let index = 1; index < appleCount; index++) {
+        apples.push(newApple());
+    }
     gameOver = false;
-
     members = [];
     for(let index=0; index <= maxAI; index++){
         members.push({
@@ -53,7 +73,6 @@ function newGame(){
             gameOver: false
         });
     }
-    members[0].name = "human"
     for (let index = 0; index < members.length; index++) {
         const element = members[index];
         element.snake = [
@@ -67,13 +86,7 @@ function newGame(){
         element.turn = 0;
         element.color = snakecolors[index];
     }
-    apples = [];
-    apples.push(colRowToIndex(int(gridSize* 3/4), int(gridSize/2)));
-    for (let index = 1; index < appleCount; index++) {
-        apples.push(newApple());
-    }
 }
-
 function setup() {
     createCanvas(cellSize * gridSize + 2 + selectWidth, cellSize * gridSize + 2 + scoreHeight);
     snakecolors = [
@@ -106,7 +119,36 @@ function setup() {
     startButton.position(width - selectWidth + 50, height/2+195);
     startButton.size(selectWidth - 100,20);
     startButton.mousePressed(newGame);
-    frameRate(speed);
+    for (let index = 0; index < maxAI+1; index++) {
+        const member = members[index];
+        let sel = createSelect();
+        sel.position(440, 188+25*(index+1));
+        if(index == 0){
+            sel.option("human")
+        }
+        if(sel.value == "------"){
+            member.gameOver = true;
+
+        }
+   
+        sel.option("Jaden2");
+        sel.option("------");
+        sel.changed(memberSelectEvent);
+        memberSelect.push(sel)
+    }
+  frameRate(speed);
+}
+
+function memberSelectEvent(){
+    let msg = ""
+    for (let index = 0; index < memberSelect.length; index++) {
+        const element = memberSelect[index];
+        let item = memberSelect[index].value();
+        msg += index +":"+item+" "
+
+    }
+    print(msg)
+
 }
 
 function inputmaxTurn(){
@@ -116,7 +158,6 @@ function inputmaxTurn(){
     }
     maxTurn = int(val);
 }
-
 function inputMaxhp(){
     val = this.value();
     if (val === "" || val == null || isNaN(val)){
@@ -124,16 +165,15 @@ function inputMaxhp(){
     }
     maxHp = int(val);
 }
-
 function inputSpeed(){
-    val = this.value();
+
+val = this.value();
     if (val === "" || val == null || isNaN(val)){
         return;
     }
     speed = int(val);
     frameRate(speed);
 }
-
 function inputAppleCount(){
     val = this.value();
     if (val === "" || val == null || isNaN(val)){
@@ -150,7 +190,6 @@ function inputAppleCount(){
         }
     }
 }
-
 function keyPressed() {
     snake = members[0].snake;
     if (keyCode === LEFT_ARROW && snake[1] != snake[0] - 1) {
@@ -164,7 +203,6 @@ function keyPressed() {
     }
     members[0].direction = direction;
 }
-
 function isOnSnake(idx) {
     for (let index = 0; index < members.length; index++) {
         const snake = members[index].snake;
@@ -174,7 +212,6 @@ function isOnSnake(idx) {
     }
     return false;
 }
-
 function newApple() {
     notsnake = [];
     for (let index = 0; index < gridSize*gridSize; index++) {
@@ -184,7 +221,6 @@ function newApple() {
     }
     return int(random(notsnake));
 }
-
 function checkOnApple(member) {
     member.hp -= 1;
     member.turn += 1;
@@ -197,7 +233,6 @@ function checkOnApple(member) {
         member.snake.splice(member.snake.length-1, 1)
     }
 }
-
 function updateSnake(member) {
     snake = member.snake;
     direction = member.direction;
@@ -213,6 +248,7 @@ function updateSnake(member) {
             }
         }else if (direction === "u"){
             if (snake[0] < gridSize){
+                snake[0].gameOver = true;
                 member.gameOver = true;
             }else{
                 checkOnApple(member);
@@ -256,11 +292,11 @@ function updateSnake(member) {
             }
         }
         if (hp <= 0 || (turn >= maxTurn && maxTurn != 0)){
+            gameOver = true;
             member.gameOver = true;
         }
     }
 }
-
 function drawGameOver() {
     fill(255,0,0);
     textSize(int(width/10));
@@ -270,19 +306,17 @@ function drawGameOver() {
         height/2-10
     );
 }
-
 function checkIfGameOver() {
-    gameovers = []
-    for (let memberIndex = 0; memberIndex < members.length; memberIndex++) {
-        const member = members[memberIndex];
-        gameovers.push(member.gameOver);
+        gameovers = []
+        for (let memberIndex = 0; memberIndex < members.length; memberIndex++) {
+            const member = members[memberIndex];
+            gameovers.push(member.gameOver);
+        }
+        if (gameovers.includes(false)) {
+            return false;
+        }
+        return true;
     }
-    if (gameovers.includes(false)) {
-        return false;
-    }
-    return true;
-}
-
 function draw() {
     if (checkIfGameOver()){
         drawGameOver();
@@ -336,7 +370,7 @@ function draw() {
     for (let index = 0; index < members.length; index++) {
         strokeWeight(1)
         fill(members[index].color)
-        rect(310, 160+index*25, 160 * (members[index].hp/maxHp)/1.5, 20)
+        rect(310, 160+index*25, 180 * (members[index].hp/maxHp)/1.5, 20)
     }
     // text("HP:"+hp,width - selectWidth + 15, 20);
     // text("Score:"+score,width - selectWidth + 70, 20);
