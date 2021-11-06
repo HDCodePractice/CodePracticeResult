@@ -44,7 +44,7 @@ function newGame(){
     gameOver = false;
 
     members = [];
-    for(let index=0; index <= maxAI+1; index++){
+    for(let index=0; index <= maxAI; index++){
         members.push({
             name: memberChoice[index],
             snake: [],
@@ -56,9 +56,9 @@ function newGame(){
             gameOver: false
         });
         members[index].snake = [
-            colRowToIndex(3,int(gridSize/(members.length+1))*(index+1)),
-            colRowToIndex(2,int(gridSize/(members.length+1))*(index+1)),
-            colRowToIndex(1,int(gridSize/(members.length+1))*(index+1))                
+            colRowToIndex(3,int(gridSize/(maxAI+1))*(index+1)),
+            colRowToIndex(2,int(gridSize/(maxAI+1))*(index+1)),
+            colRowToIndex(1,int(gridSize/(maxAI+1))*(index+1))                
         ];
         if (members[index].name === "-----") {
             members[index].gameOver = true;
