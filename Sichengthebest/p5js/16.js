@@ -1,7 +1,7 @@
 const cellSize = 20;
 const gridSize = 15;
 const scoreHeight = 150;
-const inputWidth = 500;
+const inputWidth = 550;
 const resetHeight = 40;
 
 let grid = [];
@@ -21,7 +21,8 @@ let human = {
     hp: hpMax,
     gameOver: false,
     deathMessage: '',
-    color: [0]
+    color: [0],
+    ai: 'human'
 }
 let ai = {
     name: 'Sichengtheworse',
@@ -32,7 +33,8 @@ let ai = {
     hp: hpMax,
     gameOver: false,
     deathMessage: '',
-    color: [255,0,0]
+    color: [255,0,0],
+    ai: 'sicheng'
 }
 let ai2 = {
     name: 'Sichengthebad',
@@ -43,7 +45,8 @@ let ai2 = {
     hp: hpMax,
     gameOver: false,
     deathMessage: '',
-    color: [0,255,0]
+    color: [0,255,0],
+    ai: 'sicheng'
 }
 let ai3 = {
     name: 'Parker (aka terrible)',
@@ -54,7 +57,8 @@ let ai3 = {
     hp: hpMax,
     gameOver: false,
     deathMessage: '',
-    color: [255,255,0]
+    color: [255,255,0],
+    ai: 'sicheng'
 }
 let ai4 = {
     name: 'Other Sichengthebad',
@@ -65,7 +69,8 @@ let ai4 = {
     hp: hpMax,
     gameOver: false,
     deathMessage: '',
-    color: [0,255,255]
+    color: [0,255,255],
+    ai: 'sicheng'
 }
 let ai5 = {
     name: 'Other other Sichengthebad',
@@ -76,7 +81,8 @@ let ai5 = {
     hp: hpMax,
     gameOver: false,
     deathMessage: '',
-    color: [255,0,255]
+    color: [255,0,255],
+    ai: 'sicheng'
 }
 
 let members = [human,ai,ai2,ai3,ai4,ai5]
@@ -128,11 +134,53 @@ function setup() {
     let inp10 = createColorPicker(members[5].color);
     inp10.position(gridSize*cellSize+150,390);
     inp10.input(myInputEvent10);
-    let checkbox = createCheckbox(memberslist[1].name, true);
-    let checkbox2 = createCheckbox(memberslist[2].name, true);
-    let checkbox3 = createCheckbox(memberslist[3].name, true);
-    let checkbox4 = createCheckbox(memberslist[4].name, true);
-    let checkbox5 = createCheckbox(memberslist[5].name, true);
+    let inp11 = createSelect(members[1].ai);
+    inp11.position(gridSize*cellSize+370,200);
+    inp11.option('sicheng')
+    inp11.option('sicheng-goaround')
+    inp11.option('parker')
+    inp11.changed(myInputEvent11)
+    let inp12 = createSelect(members[2].ai);
+    inp12.position(gridSize*cellSize+370,250);
+    inp12.option('sicheng')
+    inp12.option('sicheng-goaround')
+    inp12.option('parker')
+    inp12.changed(myInputEvent12)
+    let inp13 = createSelect(members[3].ai);
+    inp13.position(gridSize*cellSize+370,300);
+    inp13.option('sicheng')
+    inp13.option('sicheng-goaround')
+    inp13.option('parker')
+    inp13.changed(myInputEvent13)
+    let inp14 = createSelect(members[4].ai);
+    inp14.position(gridSize*cellSize+370,350);
+    inp14.option('sicheng')
+    inp14.option('sicheng-goaround')
+    inp14.option('parker')
+    inp14.changed(myInputEvent14)
+    let inp15 = createSelect(members[5].ai);
+    inp15.position(gridSize*cellSize+370,400);
+    inp15.option('sicheng')
+    inp15.option('sicheng-goaround')
+    inp15.option('parker')
+    inp15.changed(myInputEvent15)
+    let inp16 = createSelect(members[0].ai);
+    inp16.position(gridSize*cellSize+370,150);
+    inp16.option('human')
+    inp16.option('sicheng')
+    inp16.option('sicheng-goaround')
+    inp16.option('parker')
+    inp16.changed(myInputEvent16)
+    let checkbox = createCheckbox('',true);
+    let checkbox2 = createCheckbox('',true);
+    let checkbox3 = createCheckbox('',true);
+    let checkbox4 = createCheckbox('',true);
+    let checkbox5 = createCheckbox('',true);
+    checkbox.position(gridSize*cellSize+330,190);
+    checkbox2.position(gridSize*cellSize+330,240);
+    checkbox3.position(gridSize*cellSize+330,290);
+    checkbox4.position(gridSize*cellSize+330,340);
+    checkbox5.position(gridSize*cellSize+330,390);
     checkbox.changed(myCheckedEvent);
     checkbox2.changed(myCheckedEvent2);
     checkbox3.changed(myCheckedEvent3);
@@ -210,6 +258,24 @@ function myInputEvent9() {
 function myInputEvent10() {
     members[5].color = this.value()
 }
+function myInputEvent11() {
+    members[1].ai = this.value()
+}
+function myInputEvent12() {
+    members[0].ai = this.value()
+}
+function myInputEvent13() {
+    members[3].ai = this.value()
+}
+function myInputEvent14() {
+    members[4].ai = this.value()
+}
+function myInputEvent15() {
+    members[5].ai = this.value()
+}
+function myInputEvent16() {
+    members[0].ai = this.value()
+}
 
 function myCheckedEvent() {
     if (this.checked()) {
@@ -274,8 +340,8 @@ function newGame() {
         ]
         member.hp = hpMax;
         member.gameOver = false;
-        member.direction = ''
-        member.deathMessage = ''
+        member.direction = '';
+        member.deathMessage = '';
     }
     for (let index = 0; index < appleCount; index++) {
         for (let index2 = 0; index2 < gridSize*gridSize; index2++) {
@@ -303,6 +369,12 @@ function drawScore() {
     text('Speed:',gridSize*cellSize+10,cellSize * gridSize/2+10);
     text('Maximum HP:',gridSize*cellSize+10,cellSize * gridSize/2+60);
     text('Maximum number of turns:',gridSize*cellSize+10,cellSize * gridSize/2+230);
+    textSize(10)
+    text('Which AI code should this AI use?',gridSize*cellSize+370,150)
+    text('Which AI code should this AI use?',gridSize*cellSize+370,200)
+    text('Which AI code should this AI use?',gridSize*cellSize+370,250)
+    text('Which AI code should this AI use?',gridSize*cellSize+370,300)
+    text('Which AI code should this AI use?',gridSize*cellSize+370,350)
 }
 
 function drawGrid() {
@@ -354,9 +426,19 @@ function resetApple(appleidx) {
 }
 
 function updateSnake(member){
-    if (members[0].direction != '') {
-        for (let memberIndex = 1; memberIndex < members.length; memberIndex++) {
-            members[memberIndex].direction = sicheng_getDirection(gridSize,members[memberIndex].snake,apple,members[memberIndex].direction)
+    if (members[0].direction != '' || members[0].ai != 'human') {
+        for (let memberIndex = 0; memberIndex < members.length; memberIndex++) {
+            if (members[memberIndex].ai == 'sicheng') {
+                members[memberIndex].direction = sicheng_getDirection(gridSize,members[memberIndex].snake,apple,members[memberIndex].direction)
+            } else if (members[memberIndex].ai == 'sicheng-goaround') {
+                members[memberIndex].direction = sicheng2_getDirection(gridSize,members[memberIndex].snake,apple,members[memberIndex].direction)
+            } else if (members[memberIndex].ai == 'parker') {
+                members[memberIndex].direction = parker_getDirection(gridSize,members[memberIndex].snake,apple,members[memberIndex].direction)
+            } else if (members[memberIndex].ai == 'human') {
+
+            } else {
+                members[memberIndex].direction = sicheng2_getDirection(gridSize,members[memberIndex].snake,apple,members[memberIndex].direction)
+            }
         }
     }
     if (member.gameOver != true) {
@@ -568,13 +650,15 @@ function drawTurn() {
 }
 
 function keyPressed() {
-    if (keyCode === LEFT_ARROW && members[0].snake[1] != members[0].snake[0] - 1) {
-        members[0].direction = 'l';
-    } else if (keyCode === RIGHT_ARROW && members[0].snake[1] != members[0].snake[0] + 1) {
-        members[0].direction = 'r';
-    } else if (keyCode === UP_ARROW && members[0].snake[1] != members[0].snake[0] - gridSize) {
-        members[0].direction = 'u';
-    } else if (keyCode === DOWN_ARROW && members[0].snake[1] != members[0].snake[0] + gridSize) {
-        members[0].direction = 'd';
+    if (members[0].ai == 'human') {
+        if (keyCode === LEFT_ARROW && members[0].snake[1] != members[0].snake[0] - 1) {
+            members[0].direction = 'l';
+        } else if (keyCode === RIGHT_ARROW && members[0].snake[1] != members[0].snake[0] + 1) {
+            members[0].direction = 'r';
+        } else if (keyCode === UP_ARROW && members[0].snake[1] != members[0].snake[0] - gridSize) {
+            members[0].direction = 'u';
+        } else if (keyCode === DOWN_ARROW && members[0].snake[1] != members[0].snake[0] + gridSize) {
+            members[0].direction = 'd';
+        }
     }
 }
