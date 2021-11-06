@@ -14,6 +14,7 @@ let members = [];
 let snakecolors = []
 
 let memberSelect = [];
+let memberChoice = [];
 
 function colRowToIndex(col, row) {
   return row * gridSize + col;
@@ -43,32 +44,40 @@ function newGame(){
     gameOver = false;
 
     members = [];
-    for(let index=0; index <= maxAI; index++){
+    for(let index=0; index <= maxAI+1; index++){
         members.push({
-            name: "ai"+index,
+            name: memberChoice[index],
             snake: [],
             direction: "",
             score: 0,
-            hp: 0,
+            hp: maxHp,
             turn: 0,
-            color: 0,
+            color: snakecolors[index],
             gameOver: false
         });
-    }
-    members[0].name = "human"
-    for (let index = 0; index < members.length; index++) {
-        const element = members[index];
-        element.snake = [
+        members[index].snake = [
             colRowToIndex(3,int(gridSize/(members.length+1))*(index+1)),
             colRowToIndex(2,int(gridSize/(members.length+1))*(index+1)),
             colRowToIndex(1,int(gridSize/(members.length+1))*(index+1))                
         ];
-        element.direction = "";
-        element.score = 0;
-        element.hp = maxHp;
-        element.turn = 0;
-        element.color = snakecolors[index];
+        if (members[index].name === "-----") {
+            members[index].gameOver = true;
+        }
     }
+    // members[0].name = "human"`
+    // for (let index = 0; index < members.length; index++) {
+    //     const element = members[index];
+    //     element.snake = [
+    //         colRowToIndex(3,int(gridSize/(members.length+1))*(index+1)),
+    //         colRowToIndex(2,int(gridSize/(members.length+1))*(index+1)),
+    //         colRowToIndex(1,int(gridSize/(members.length+1))*(index+1))                
+    //     ];
+    //     element.direction = "";
+    //     element.score = 0;
+    //     element.hp = maxHp;
+    //     element.turn = 0;
+    //     element.color = snakecolors[index];
+    // }
     apples = [];
     apples.push(colRowToIndex(int(gridSize* 3/4), int(gridSize/2)));
     for (let index = 1; index < appleCount; index++) {
@@ -87,7 +96,6 @@ function setup() {
         color(230,230,250),
         color(255,192,203)
     ]
-    newGame();
     let speedInput = createInput(speed);
     speedInput.position(width - selectWidth + 60, 80);
     speedInput.size(selectWidth - 100, 20);
@@ -113,23 +121,28 @@ function setup() {
         sel.position(440, 188+25*(index+1));
         if (index == 0){
             sel.option("human");
+            memberChoice.push("human");
+        }else{
+            memberChoice.push("jaden2");
         }
         sel.option("jaden2");
         sel.option("-----");
         sel.changed(memberSelectEvent);
         memberSelect.push(sel);
     }
+    newGame();
     frameRate(speed);
 }
 
 function memberSelectEvent(){
     let msg = ""
+    memberChoice = []
     for (let index = 0; index < memberSelect.length; index++) {
         const element = memberSelect[index];
         let item = memberSelect[index].value();
-        msg += index + ":" +item+" ";
+        memberChoice.push(item);
     }
-    print(msg);
+    newGame();
 }
 
 function inputmaxTurn(){
