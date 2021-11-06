@@ -2,12 +2,12 @@ const cellSize = 20;
 const gridSize = 15;
 const selectWidth = 600;
 const scoreHeight = 200;
-let checkbox1;
-let checkbox2;
-let checkbox3;
-let checkbox4;
-let checkbox5;
-let checkbox6;
+let sel1;
+let sel2;
+let sel3;
+let sel4;
+let sel5;
+let sel6;
 
 // General variables
 let speed = 10;
@@ -33,7 +33,7 @@ let ai3 = {name: "ai3", snake: [], direction: "", score: 0, hp: 0, turn: 0, invi
 let ai4 = {name: "ai4", snake: [], direction: "", score: 0, hp: 0, turn: 0, invis: true};
 let ai5 = {name: "ai5", snake: [], direction: "", score: 0, hp: 0, turn: 0, invis: true};
 
-let members = [human,ai1,ai2,ai3,ai4,ai5];
+let members = [human, ai1, ai2, ai3, ai4, ai5];
 
 function colRowToIndex(col, row) {
   return row * gridSize + col;
