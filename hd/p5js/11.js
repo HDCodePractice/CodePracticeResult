@@ -230,29 +230,29 @@ function updateSnake(member) {
             if (snake[0] % gridSize === gridSize - 1){
                 member.gameOver = true;
             }else{
-                checkOnApple(member);
                 snake.splice(0,0,snake[0]+1)
+                checkOnApple(member);
             }
         }else if (direction === "u"){
             if (snake[0] < gridSize){
                 member.gameOver = true;
             }else{
-                checkOnApple(member);
                 snake.splice(0,0,snake[0]-gridSize);
+                checkOnApple(member);
             }
         }else if (direction === "d"){
             if (snake[0] >= gridSize * (gridSize-1)){
                 member.gameOver = true;
             }else{
-                checkOnApple(member);
                 snake.splice(0,0,snake[0]+gridSize);
+                checkOnApple(member);
             }
         }else if (direction === "l"){
             if (snake[0] % gridSize === 0){
                 member.gameOver = true;
             }else{
-                checkOnApple(member);
                 snake.splice(0,0,snake[0]-1);
+                checkOnApple(member);
             }
         } 
         for (let s = 1; s < snake.length; s++) {
