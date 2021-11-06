@@ -13,6 +13,8 @@ let maxAI = 5;
 let members = [];
 let snakecolors = []
 
+let memberSelect = [];
+
 function colRowToIndex(col, row) {
   return row * gridSize + col;
 }
@@ -106,7 +108,28 @@ function setup() {
     startButton.position(width - selectWidth + 50, height/2+195);
     startButton.size(selectWidth - 100,20);
     startButton.mousePressed(newGame);
+    for (let index = 0; index < maxAI+1; index++) {
+        let sel = createSelect();
+        sel.position(440, 188+25*(index+1));
+        if (index == 0){
+            sel.option("human");
+        }
+        sel.option("jaden2");
+        sel.option("-----");
+        sel.changed(memberSelectEvent);
+        memberSelect.push(sel);
+    }
     frameRate(speed);
+}
+
+function memberSelectEvent(){
+    let msg = ""
+    for (let index = 0; index < memberSelect.length; index++) {
+        const element = memberSelect[index];
+        let item = memberSelect[index].value();
+        msg += index + ":" +item+" ";
+    }
+    print(msg);
 }
 
 function inputmaxTurn(){
@@ -336,7 +359,7 @@ function draw() {
     for (let index = 0; index < members.length; index++) {
         strokeWeight(1)
         fill(members[index].color)
-        rect(310, 160+index*25, 280 * (members[index].hp/maxHp)/1.5, 20)
+        rect(310, 160+index*25, 180 * (members[index].hp/maxHp)/1.5, 20)
     }
     // text("HP:"+hp,width - selectWidth + 15, 20);
     // text("Score:"+score,width - selectWidth + 70, 20);
