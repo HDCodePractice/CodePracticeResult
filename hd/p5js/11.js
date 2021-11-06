@@ -264,7 +264,10 @@ function updateSnake(member) {
             const each = members[index];
             for (let s = 0; s < each.snake.length; s++) {
                 if (each != member) {
-                    if (snake[0] == each.snake[s]) {
+                    if (snake[0] == each.snake[0]) {
+                        member.gameOver = true;
+                        each.gameOver = true;
+                    } else if (snake[0] == each.snake[s]) {
                         member.gameOver = true;
                     }
                 }
