@@ -8,26 +8,12 @@ let appleCount = 3;
 let gameOver = false;
 let maxHp = 25;
 let maxTurn = 0;
+let maxAI = 5;
 
-let human = {
-    name: "human",
-    snake: [],
-    direction: "",
-    score: 0,
-    hp: 0,
-    turn: 0
-};
+let members = [];
+let snakecolors = []
 
-let ai = {
-    name: "ai",
-    snake: [],
-    direction: "",
-    score: 0,
-    hp: 0,
-    turn: 0
-};
-
-let members = [human,ai];
+let memberSelect = [];
 
 function colRowToIndex(col, row) {
   return row * gridSize + col;
@@ -42,9 +28,9 @@ function drawCircle(row,col) {
     circle(col*cellSize+1+cellSize/2, row*cellSize+1+scoreHeight+cellSize/2, cellSize*4/5)
 }
 
-function drawSquare(row, col) {
-    fill(0,0,250)
-    square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5)
+function drawSquare(row, col, color) {
+    fill(color);
+    square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5);
 }
 
 function drawApple(row, col) {
@@ -54,13 +40,22 @@ function drawApple(row, col) {
 }
 
 function newGame(){
-    apples = [];
-    apples.push(colRowToIndex(int(gridSize* 3/4), int(gridSize/2)));
-    for (let index = 1; index < appleCount; index++) {
-        apples.push(newApple());
-    }
     gameOver = false;
 
+    members = [];
+    for(let index=0; index <= maxAI; index++){
+        members.push({
+            name: "ai"+index,
+            snake: [],
+            direction: "",
+            score: 0,
+            hp: 0,
+            turn: 0,
+            color: 0,
+            gameOver: false
+        });
+    }
+    members[0].name = "human"
     for (let index = 0; index < members.length; index++) {
         const element = members[index];
         element.snake = [
@@ -72,11 +67,26 @@ function newGame(){
         element.score = 0;
         element.hp = maxHp;
         element.turn = 0;
+        element.color = snakecolors[index];
+    }
+    apples = [];
+    apples.push(colRowToIndex(int(gridSize* 3/4), int(gridSize/2)));
+    for (let index = 1; index < appleCount; index++) {
+        apples.push(newApple());
     }
 }
 
 function setup() {
     createCanvas(cellSize * gridSize + 2 + selectWidth, cellSize * gridSize + 2 + scoreHeight);
+    snakecolors = [
+        color(0, 0, 255),
+        color(255, 0, 0),
+        color(0, 255, 0),
+        color(255,165,0),
+        color(255,255,0),
+        color(230,230,250),
+        color(255,192,203)
+    ]
     newGame();
     let speedInput = createInput(speed);
     speedInput.position(width - selectWidth + 60, 80);
@@ -98,7 +108,28 @@ function setup() {
     startButton.position(width - selectWidth + 50, height/2+195);
     startButton.size(selectWidth - 100,20);
     startButton.mousePressed(newGame);
+    for (let index = 0; index < maxAI+1; index++) {
+        let sel = createSelect();
+        sel.position(440, 188+25*(index+1));
+        if (index == 0){
+            sel.option("human");
+        }
+        sel.option("jaden2");
+        sel.option("-----");
+        sel.changed(memberSelectEvent);
+        memberSelect.push(sel);
+    }
     frameRate(speed);
+}
+
+function memberSelectEvent(){
+    let msg = ""
+    for (let index = 0; index < memberSelect.length; index++) {
+        const element = memberSelect[index];
+        let item = memberSelect[index].value();
+        msg += index + ":" +item+" ";
+    }
+    print(msg);
 }
 
 function inputmaxTurn(){
@@ -198,28 +229,28 @@ function updateSnake(member) {
     if (!gameOver){
         if (direction === "r"){
             if (snake[0] % gridSize === gridSize - 1){
-                gameOver = true;
+                member.gameOver = true;
             }else{
                 checkOnApple(member);
                 snake.splice(0,0,snake[0]+1)
             }
         }else if (direction === "u"){
             if (snake[0] < gridSize){
-                gameOver = true;
+                member.gameOver = true;
             }else{
                 checkOnApple(member);
                 snake.splice(0,0,snake[0]-gridSize);
             }
         }else if (direction === "d"){
             if (snake[0] >= gridSize * (gridSize-1)){
-                gameOver = true;
+                member.gameOver = true;
             }else{
                 checkOnApple(member);
                 snake.splice(0,0,snake[0]+gridSize);
             }
         }else if (direction === "l"){
             if (snake[0] % gridSize === 0){
-                gameOver = true;
+                member.gameOver = true;
             }else{
                 checkOnApple(member);
                 snake.splice(0,0,snake[0]-1);
@@ -230,19 +261,25 @@ function updateSnake(member) {
             if (m.snake[0] === snake[0]){
                 for (let s = 1; s < m.snake.length; s++) {
                     if (snake[0] == m.snake[s]) {
-                        gameOver = true;
+                        m.gameOver = true;
                     }
                 }
             }else{
                 for (let s = 0; s < m.snake.length; s++) {
                     if (snake[0] == m.snake[s]) {
-                        gameOver = true;
+                        m.gameOver = true;
                     }
                 }                
             }
         }
+        for (let index = 0; index < members.length; index++) {
+            const m = members[index];
+            if (m.gameOver){
+                m.snake = [];
+            }
+        }
         if (hp <= 0 || (turn >= maxTurn && maxTurn != 0)){
-            gameOver = true;
+            member.gameOver = true;
         }
     }
 }
@@ -257,22 +294,38 @@ function drawGameOver() {
     );
 }
 
+function checkIfGameOver() {
+    gameovers = []
+    for (let memberIndex = 0; memberIndex < members.length; memberIndex++) {
+        const member = members[memberIndex];
+        gameovers.push(member.gameOver);
+    }
+    if (gameovers.includes(false)) {
+        return false;
+    }
+    return true;
+}
+
 function draw() {
-    if (gameOver){
+    if (checkIfGameOver()){
         drawGameOver();
         startButton.html("Start Game");
     }else{
         background(220);
         if (members[0].direction != ""){
-            members[1].direction = jaden2_getDirection(
-                gridSize, 
-                members[1].snake, 
-                apples, 
-                members[1].direction);
+            for (let index = 1; index < members.length; index++) {
+                members[index].direction = jaden2_getDirection(
+                    gridSize, 
+                    members[index].snake, 
+                    apples, 
+                    members[index].direction);
+            }
         }
         for (let index = 0; index < members.length; index++) {
             const member = members[index];
-            updateSnake(member);
+            if (!member.gameOver){
+                updateSnake(member);
+            }
         }
         for (let col = 0; col < gridSize; col++) {
             for (let row = 0; row < gridSize; row++) {
@@ -288,7 +341,7 @@ function draw() {
                         if (idx == snake[0]){
                             drawCircle(row,col);
                         } else {
-                            drawSquare(row,col);
+                            drawSquare(row,col,members[index].color);
                         }
                     } 
                 }
@@ -303,6 +356,11 @@ function draw() {
     text("MaxHP:",width - selectWidth + 10, 100);
     text("MaxTurn:",width - selectWidth + 10, 130);
     textSize(15);
+    for (let index = 0; index < members.length; index++) {
+        strokeWeight(1)
+        fill(members[index].color)
+        rect(310, 160+index*25, 180 * (members[index].hp/maxHp)/1.5, 20)
+    }
     // text("HP:"+hp,width - selectWidth + 15, 20);
     // text("Score:"+score,width - selectWidth + 70, 20);
     // text("Turn:"+turn,width - selectWidth + 130, 20);
