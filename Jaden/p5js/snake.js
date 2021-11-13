@@ -1,6 +1,6 @@
 const cellSize = 20;
 const gridSize = 15;
-const selectWidth = 200;
+const selectWidth = 220;
 const scoreHeight = 50;
 let speed = 10;
 let apples = [];
@@ -64,20 +64,6 @@ function newGame(){
             members[index].gameOver = true;
         }
     }
-    // members[0].name = "human"`
-    // for (let index = 0; index < members.length; index++) {
-    //     const element = members[index];
-    //     element.snake = [
-    //         colRowToIndex(3,int(gridSize/(members.length+1))*(index+1)),
-    //         colRowToIndex(2,int(gridSize/(members.length+1))*(index+1)),
-    //         colRowToIndex(1,int(gridSize/(members.length+1))*(index+1))                
-    //     ];
-    //     element.direction = "";
-    //     element.score = 0;
-    //     element.hp = maxHp;
-    //     element.turn = 0;
-    //     element.color = snakecolors[index];
-    // }
     apples = [];
     apples.push(colRowToIndex(int(gridSize* 3/4), int(gridSize/2)));
     for (let index = 1; index < appleCount; index++) {
@@ -244,54 +230,50 @@ function updateSnake(member) {
             if (snake[0] % gridSize === gridSize - 1){
                 member.gameOver = true;
             }else{
-                checkOnApple(member);
                 snake.splice(0,0,snake[0]+1)
+                checkOnApple(member);
             }
         }else if (direction === "u"){
             if (snake[0] < gridSize){
                 member.gameOver = true;
             }else{
-                checkOnApple(member);
                 snake.splice(0,0,snake[0]-gridSize);
+                checkOnApple(member);
             }
         }else if (direction === "d"){
             if (snake[0] >= gridSize * (gridSize-1)){
                 member.gameOver = true;
             }else{
-                checkOnApple(member);
                 snake.splice(0,0,snake[0]+gridSize);
+                checkOnApple(member);
             }
         }else if (direction === "l"){
             if (snake[0] % gridSize === 0){
                 member.gameOver = true;
             }else{
-                checkOnApple(member);
                 snake.splice(0,0,snake[0]-1);
+                checkOnApple(member);
             }
         } 
-        for (let index = 1; index < members.length; index++) {
-            const m = members[index];
-            if (m.snake[0] === snake[0]){
-                for (let s = 1; s < m.snake.length; s++) {
-                    if (snake[0] == m.snake[s]) {
-                        m.gameOver = true;
+        for (let s = 1; s < snake.length; s++) {
+            if (snake[0] == snake[s]) {
+                member.gameOver = true;
+            }
+        }
+        for (let index = 0; index < members.length; index ++) {
+            const each = members[index];
+            for (let s = 0; s < each.snake.length; s++) {
+                if (each != member) {
+                    if (snake[0] == each.snake[0]) {
+                        member.gameOver = true;
+                        each.gameOver = true;
+                    } else if (snake[0] == each.snake[s]) {
+                        member.gameOver = true;
                     }
                 }
-            }else{
-                for (let s = 0; s < m.snake.length; s++) {
-                    if (snake[0] == m.snake[s]) {
-                        m.gameOver = true;
-                    }
-                }                
             }
         }
-        for (let index = 0; index < members.length; index++) {
-            const m = members[index];
-            if (m.gameOver){
-                m.snake = [];
-            }
-        }
-        if (hp <= 0 || (turn >= maxTurn && maxTurn != 0)){
+        if ((turn > maxTurn && maxTurn != 0) || member.hp <= 0) {
             member.gameOver = true;
         }
     }
@@ -338,6 +320,8 @@ function draw() {
             const member = members[index];
             if (!member.gameOver){
                 updateSnake(member);
+            }else{
+                member.snake = [];
             }
         }
         for (let col = 0; col < gridSize; col++) {
