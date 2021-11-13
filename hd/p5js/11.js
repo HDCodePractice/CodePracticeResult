@@ -307,13 +307,20 @@ function draw() {
         startButton.html("Start Game");
     }else{
         background(220);
+        let memberssnakes = []
+        for (let index = 0; index < members.length; index++) {
+            memberssnakes.push(members[index].snake)
+        }
         if (members[0].direction != ""){
-            for (let index = 1; index < members.length; index++) {
-                members[index].direction = jaden2_getDirection(
-                    gridSize, 
-                    members[index].snake, 
-                    apples, 
-                    members[index].direction);
+            for (let index = 0; index < members.length; index++) {
+                if (members[index].name != "human"){
+                    members[index].direction = jaden2_getDirection(
+                        gridSize, 
+                        members[index].snake, 
+                        apples, 
+                        members[index].direction,
+                        memberssnakes);
+                }
             }
         }
         for (let index = 0; index < members.length; index++) {
