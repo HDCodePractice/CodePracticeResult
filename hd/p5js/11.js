@@ -10,6 +10,7 @@ let maxHp = 25;
 let maxTurn = 0;
 let maxAI = 5;
 
+let ais = {};
 let members = [];
 let snakecolors = []
 
@@ -60,6 +61,9 @@ function newGame(){
             colRowToIndex(2,int(gridSize/(maxAI+1))*(index+1)),
             colRowToIndex(1,int(gridSize/(maxAI+1))*(index+1))                
         ];
+        if (memberChoice[index] != "human" && memberChoice[index] != "-----"){
+            ais[memberChoice[index]].newGame();
+        }
         if (members[index].name === "-----") {
             members[index].gameOver = true;
         }
@@ -107,15 +111,19 @@ function setup() {
         sel.position(440, 188+25*(index+1));
         if (index == 0){
             sel.option("human");
+            sel.option("-----");
             memberChoice.push("human");
         }else{
-            memberChoice.push("jaden2");
+            sel.option("-----");
+            memberChoice.push("-----");
         }
-        sel.option("jaden2");
-        sel.option("-----");
+        for(var key in ais){
+            sel.option(key);
+        }
         sel.changed(memberSelectEvent);
         memberSelect.push(sel);
     }
+
     newGame();
     frameRate(speed);
 }
@@ -313,8 +321,8 @@ function draw() {
         }
         if (members[0].direction != ""){
             for (let index = 0; index < members.length; index++) {
-                if (members[index].name != "human"){
-                    members[index].direction = jaden2_getDirection(
+                if (members[index].name != "human" && members[index].name != "-----"){
+                    members[index].direction = ais[memberChoice[index]].getDirection(
                         gridSize, 
                         members[index].snake, 
                         apples, 
