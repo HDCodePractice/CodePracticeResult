@@ -1,6 +1,6 @@
 const cellSize = 20;
 const gridSize = 15;
-const selectWidth = 200;
+const selectWidth = 220;
 const scoreHeight = 50;
 let speed = 10;
 let apples = [];
@@ -10,83 +10,67 @@ let maxHp = 25;
 let maxTurn = 0;
 let maxAI = 5;
 
-let memberSelect = [];
-
-let human = {
-    name: "human",
-    snake: [],
-    direction: "",
-    score: 0,
-    hp: 0,
-    turn: 0,
-    color: 0,
-    gameOver: false
-};
-let ai = {
-    name: "ai",
-    snake: [],
-    direction: "",
-    score: 0,
-    hp: 0,
-    turn: 0,
-    color: 0,
-    gameOver: false
-};
-let members = [human,ai];
+let members = [];
 let snakecolors = []
+
+let memberSelect = [];
+let memberChoice = [];
+
 function colRowToIndex(col, row) {
   return row * gridSize + col;
 }
+
 function indexToRowCol(index) {
   return [ int(index / gridSize) , index % gridSize];
 }
+
 function drawCircle(row,col) {
     fill(0,250,0)
     circle(col*cellSize+1+cellSize/2, row*cellSize+1+scoreHeight+cellSize/2, cellSize*4/5)
 }
+
 function drawSquare(row, col, color) {
     fill(color);
     square(col*cellSize+1+cellSize/5,row*cellSize+1+scoreHeight+cellSize/5, cellSize*3/5);
 }
+
 function drawApple(row, col) {
     fill(0, 102, 153);
     textSize(cellSize*3/4);
     text("🍎",col*cellSize+cellSize/7,scoreHeight+row*cellSize+cellSize/1.3);
 }
+
 function newGame(){
+    gameOver = false;
+
+    members = [];
+    for(let index=0; index <= maxAI; index++){
+        members.push({
+            name: memberChoice[index],
+            snake: [],
+            direction: "",
+            score: 0,
+            hp: maxHp,
+            turn: 0,
+            color: snakecolors[index],
+            gameOver: false
+        });
+        members[index].snake = [
+            colRowToIndex(3,int(gridSize/(maxAI+1))*(index+1)),
+            colRowToIndex(2,int(gridSize/(maxAI+1))*(index+1)),
+            colRowToIndex(1,int(gridSize/(maxAI+1))*(index+1))                
+        ];
+        if (members[index].name === "-----") {
+            members[index].gameOver = true;
+        }
+    }
     apples = [];
     apples.push(colRowToIndex(int(gridSize* 3/4), int(gridSize/2)));
     for (let index = 1; index < appleCount; index++) {
         apples.push(newApple());
     }
-    gameOver = false;
-    members = [];
-    for(let index=0; index <= maxAI; index++){
-        members.push({
-            name: "ai"+index,
-            snake: [],
-            direction: "",
-            score: 0,
-            hp: 0,
-            turn: 0,
-            color: 0,
-            gameOver: false
-        });
-    }
-    for (let index = 0; index < members.length; index++) {
-        const element = members[index];
-        element.snake = [
-            colRowToIndex(3,int(gridSize/(members.length+1))*(index+1)),
-            colRowToIndex(2,int(gridSize/(members.length+1))*(index+1)),
-            colRowToIndex(1,int(gridSize/(members.length+1))*(index+1))                
-        ];
-        element.direction = "";
-        element.score = 0;
-        element.hp = maxHp;
-        element.turn = 0;
-        element.color = snakecolors[index];
-    }
 }
+
 function setup() {
     createCanvas(cellSize * gridSize + 2 + selectWidth, cellSize * gridSize + 2 + scoreHeight);
     snakecolors = [
@@ -98,7 +82,6 @@ function setup() {
         color(230,230,250),
         color(255,192,203)
     ]
-    newGame();
     let speedInput = createInput(speed);
     speedInput.position(width - selectWidth + 60, 80);
     speedInput.size(selectWidth - 100, 20);
@@ -120,35 +103,32 @@ function setup() {
     startButton.size(selectWidth - 100,20);
     startButton.mousePressed(newGame);
     for (let index = 0; index < maxAI+1; index++) {
-        const member = members[index];
         let sel = createSelect();
         sel.position(440, 188+25*(index+1));
-        if(index == 0){
-            sel.option("human")
+        if (index == 0){
+            sel.option("human");
+            memberChoice.push("human");
+        }else{
+            memberChoice.push("jaden2");
         }
-        if(sel.value == "------"){
-            member.gameOver = true;
-
-        }
-   
-        sel.option("Jaden2");
-        sel.option("------");
+        sel.option("jaden2");
+        sel.option("-----");
         sel.changed(memberSelectEvent);
-        memberSelect.push(sel)
+        memberSelect.push(sel);
     }
-  frameRate(speed);
+    newGame();
+    frameRate(speed);
 }
 
 function memberSelectEvent(){
     let msg = ""
+    memberChoice = []
     for (let index = 0; index < memberSelect.length; index++) {
         const element = memberSelect[index];
         let item = memberSelect[index].value();
-        msg += index +":"+item+" "
-
+        memberChoice.push(item);
     }
-    print(msg)
-
+    newGame();
 }
 
 function inputmaxTurn(){
@@ -158,6 +138,7 @@ function inputmaxTurn(){
     }
     maxTurn = int(val);
 }
+
 function inputMaxhp(){
     val = this.value();
     if (val === "" || val == null || isNaN(val)){
@@ -165,15 +146,16 @@ function inputMaxhp(){
     }
     maxHp = int(val);
 }
-function inputSpeed(){
 
-val = this.value();
+function inputSpeed(){
+    val = this.value();
     if (val === "" || val == null || isNaN(val)){
         return;
     }
     speed = int(val);
     frameRate(speed);
 }
+
 function inputAppleCount(){
     val = this.value();
     if (val === "" || val == null || isNaN(val)){
@@ -190,6 +172,7 @@ function inputAppleCount(){
         }
     }
 }
+
 function keyPressed() {
     snake = members[0].snake;
     if (keyCode === LEFT_ARROW && snake[1] != snake[0] - 1) {
@@ -203,6 +186,7 @@ function keyPressed() {
     }
     members[0].direction = direction;
 }
+
 function isOnSnake(idx) {
     for (let index = 0; index < members.length; index++) {
         const snake = members[index].snake;
@@ -212,6 +196,7 @@ function isOnSnake(idx) {
     }
     return false;
 }
+
 function newApple() {
     notsnake = [];
     for (let index = 0; index < gridSize*gridSize; index++) {
@@ -221,6 +206,7 @@ function newApple() {
     }
     return int(random(notsnake));
 }
+
 function checkOnApple(member) {
     member.hp -= 1;
     member.turn += 1;
@@ -233,6 +219,7 @@ function checkOnApple(member) {
         member.snake.splice(member.snake.length-1, 1)
     }
 }
+
 function updateSnake(member) {
     snake = member.snake;
     direction = member.direction;
@@ -243,60 +230,55 @@ function updateSnake(member) {
             if (snake[0] % gridSize === gridSize - 1){
                 member.gameOver = true;
             }else{
-                checkOnApple(member);
                 snake.splice(0,0,snake[0]+1)
+                checkOnApple(member);
             }
         }else if (direction === "u"){
             if (snake[0] < gridSize){
-                snake[0].gameOver = true;
                 member.gameOver = true;
             }else{
-                checkOnApple(member);
                 snake.splice(0,0,snake[0]-gridSize);
+                checkOnApple(member);
             }
         }else if (direction === "d"){
             if (snake[0] >= gridSize * (gridSize-1)){
                 member.gameOver = true;
             }else{
-                checkOnApple(member);
                 snake.splice(0,0,snake[0]+gridSize);
+                checkOnApple(member);
             }
         }else if (direction === "l"){
             if (snake[0] % gridSize === 0){
                 member.gameOver = true;
             }else{
-                checkOnApple(member);
                 snake.splice(0,0,snake[0]-1);
+                checkOnApple(member);
             }
         } 
-        for (let index = 1; index < members.length; index++) {
-            const m = members[index];
-            if (m.snake[0] === snake[0]){
-                for (let s = 1; s < m.snake.length; s++) {
-                    if (snake[0] == m.snake[s]) {
-                        m.gameOver = true;
+        for (let s = 1; s < snake.length; s++) {
+            if (snake[0] == snake[s]) {
+                member.gameOver = true;
+            }
+        }
+        for (let index = 0; index < members.length; index ++) {
+            const each = members[index];
+            for (let s = 0; s < each.snake.length; s++) {
+                if (each != member) {
+                    if (snake[0] == each.snake[0]) {
+                        member.gameOver = true;
+                        each.gameOver = true;
+                    } else if (snake[0] == each.snake[s]) {
+                        member.gameOver = true;
                     }
                 }
-            }else{
-                for (let s = 0; s < m.snake.length; s++) {
-                    if (snake[0] == m.snake[s]) {
-                        m.gameOver = true;
-                    }
-                }                
             }
         }
-        for (let index = 0; index < members.length; index++) {
-            const m = members[index];
-            if (m.gameOver){
-                m.snake = [];
-            }
-        }
-        if (hp <= 0 || (turn >= maxTurn && maxTurn != 0)){
-            gameOver = true;
+        if ((turn > maxTurn && maxTurn != 0) || member.hp <= 0) {
             member.gameOver = true;
         }
     }
 }
+
 function drawGameOver() {
     fill(255,0,0);
     textSize(int(width/10));
@@ -306,17 +288,19 @@ function drawGameOver() {
         height/2-10
     );
 }
+
 function checkIfGameOver() {
-        gameovers = []
-        for (let memberIndex = 0; memberIndex < members.length; memberIndex++) {
-            const member = members[memberIndex];
-            gameovers.push(member.gameOver);
-        }
-        if (gameovers.includes(false)) {
-            return false;
-        }
-        return true;
+    gameovers = []
+    for (let memberIndex = 0; memberIndex < members.length; memberIndex++) {
+        const member = members[memberIndex];
+        gameovers.push(member.gameOver);
     }
+    if (gameovers.includes(false)) {
+        return false;
+    }
+    return true;
+}
+
 function draw() {
     if (checkIfGameOver()){
         drawGameOver();
@@ -336,6 +320,8 @@ function draw() {
             const member = members[index];
             if (!member.gameOver){
                 updateSnake(member);
+            }else{
+                member.snake = [];
             }
         }
         for (let col = 0; col < gridSize; col++) {
