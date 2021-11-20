@@ -144,6 +144,7 @@ function setup() {
         sel.option("sicheng");
         sel.option("sicheng-goaround");
         sel.option('parker')
+        sel.option('sichengthebest')
         sel.changed(memberSelectEvent);
         memberSelect.push(sel);
     }
@@ -436,6 +437,8 @@ function updateSnake(member){
                 members[memberIndex].direction = parker_getDirection(gridSize,members,memberIndex,apple,members[memberIndex].direction)
             } else if (members[memberIndex].ai == 'human') {
 
+            } else if (members[memberIndex].ai == 'sichengthebest') {
+                members[memberIndex].direction = sichengthebest_getDirection(gridSize,members,memberIndex,apple,members[memberIndex].direction)
             } else {
                 members[memberIndex].direction = sicheng2_getDirection(gridSize,members,memberIndex,apple,members[memberIndex].direction)
             }
