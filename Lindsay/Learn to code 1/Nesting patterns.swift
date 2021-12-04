@@ -1,0 +1,21 @@
+moveForward()
+    collectGem()
+    turnLeft()
+    turnLeft()
+    moveForward()
+    moveForward()
+    turnLeft()
+    turnLeft()
+    collectGem()
+    moveForward()
+    turnLeft()
+    moveForward()
+    collectGem()
+    turnLeft()
+    turnLeft()
+    moveForward()
+    moveForward()
+    collectGem()
+    
+    
+    
