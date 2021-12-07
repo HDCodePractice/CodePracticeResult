@@ -3,7 +3,7 @@ func tog(){
     moveForward()
     toggleSwitch()
 
-
+}
 func toggle(){
     moveForward()
     moveForward()
@@ -13,7 +13,7 @@ func toggle(){
     moveForward()
     moveForward()
 
-
+}
 
 
 
