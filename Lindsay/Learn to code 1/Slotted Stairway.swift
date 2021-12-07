@@ -1,7 +1,18 @@
-func solveRow() {
-collectGemTurnAround()
-collectGemTurnAround()
+func collectGemTurnAround() {
+    moveFoward()
+    moveFoward()
+    collectGem()
+    turnLeft()
+    turnLeft()
+    moveFoward()
+    moveFoward()
 }
+
+func solveRow() {
+   collectGemTurnAround()
+   collectGemTurnAround()
+}
+
 solveRow()
 turnRight()
 moveForward()
