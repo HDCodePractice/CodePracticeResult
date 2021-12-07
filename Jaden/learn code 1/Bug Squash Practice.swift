@@ -1,5 +1,5 @@
 
-turnLeft()
+moveForward()
 turnLeft()
 moveForward()
 moveForward()
