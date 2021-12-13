@@ -8,10 +8,3 @@ moveForward()
 turnRight()
 
 }
-
-moveForward()
-collectGem()
-moveForward()
-moveForward()
-moveForward()
-turnRight()
