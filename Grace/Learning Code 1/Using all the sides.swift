@@ -1,13 +1,10 @@
-func gemCollect() {
-    moveForward()
-    collectGem()
-    moveForward()
-    moveForward()
-    moveForward()
-    turnRight()
+for i in 1 ... 3 {
+moveForward()
+collectGem()
+moveForward()
+moveForward()
+moveForward()
+turnRight()
 }
-gemCollect()
-gemCollect()
-gemCollect()
 moveForward()
 collectGem()
