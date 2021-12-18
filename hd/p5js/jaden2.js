@@ -2,7 +2,7 @@ function indexToColRow(index) {
     return [ int(index / gridSize) , index % gridSize];
 }
 
-function jaden2_getDirection(gridSize,snake,apples,direction){
+function jaden2_getDirection(gridSize,snake,apples,direction,snakes){
     let smallest = 0
     let appleDistance = gridSize * 2
     for (let i = 0; i < apples.length; i++) {
@@ -59,3 +59,8 @@ function jaden2_newGame(){
 
     return;
 }
+
+ais['jaden2'] = {
+    getDirection: jaden2_getDirection,
+    newGame: jaden2_newGame
+};

@@ -1,6 +1,6 @@
 const cellSize = 20;
 const gridSize = 15;
-const selectWidth = 200;
+const selectWidth = 220;
 const scoreHeight = 50;
 let speed = 10;
 let apples = [];
@@ -10,10 +10,12 @@ let maxHp = 25;
 let maxTurn = 0;
 let maxAI = 5;
 
+let ais = {};
 let members = [];
 let snakecolors = []
 
 let memberSelect = [];
+let memberChoice = [];
 
 function colRowToIndex(col, row) {
   return row * gridSize + col;
@@ -45,29 +47,26 @@ function newGame(){
     members = [];
     for(let index=0; index <= maxAI; index++){
         members.push({
-            name: "ai"+index,
+            name: memberChoice[index],
             snake: [],
             direction: "",
             score: 0,
-            hp: 0,
+            hp: maxHp,
             turn: 0,
-            color: 0,
+            color: snakecolors[index],
             gameOver: false
         });
-    }
-    members[0].name = "human"
-    for (let index = 0; index < members.length; index++) {
-        const element = members[index];
-        element.snake = [
-            colRowToIndex(3,int(gridSize/(members.length+1))*(index+1)),
-            colRowToIndex(2,int(gridSize/(members.length+1))*(index+1)),
-            colRowToIndex(1,int(gridSize/(members.length+1))*(index+1))                
+        members[index].snake = [
+            colRowToIndex(3,int(gridSize/(maxAI+1))*(index+1)),
+            colRowToIndex(2,int(gridSize/(maxAI+1))*(index+1)),
+            colRowToIndex(1,int(gridSize/(maxAI+1))*(index+1))                
         ];
-        element.direction = "";
-        element.score = 0;
-        element.hp = maxHp;
-        element.turn = 0;
-        element.color = snakecolors[index];
+        if (memberChoice[index] != "human" && memberChoice[index] != "-----"){
+            ais[memberChoice[index]].newGame();
+        }
+        if (members[index].name === "-----") {
+            members[index].gameOver = true;
+        }
     }
     apples = [];
     apples.push(colRowToIndex(int(gridSize* 3/4), int(gridSize/2)));
@@ -87,7 +86,6 @@ function setup() {
         color(230,230,250),
         color(255,192,203)
     ]
-    newGame();
     let speedInput = createInput(speed);
     speedInput.position(width - selectWidth + 60, 80);
     speedInput.size(selectWidth - 100, 20);
@@ -113,23 +111,32 @@ function setup() {
         sel.position(440, 188+25*(index+1));
         if (index == 0){
             sel.option("human");
+            sel.option("-----");
+            memberChoice.push("human");
+        }else{
+            sel.option("-----");
+            memberChoice.push("-----");
         }
-        sel.option("jaden2");
-        sel.option("-----");
+        for(var key in ais){
+            sel.option(key);
+        }
         sel.changed(memberSelectEvent);
         memberSelect.push(sel);
     }
+
+    newGame();
     frameRate(speed);
 }
 
 function memberSelectEvent(){
     let msg = ""
+    memberChoice = []
     for (let index = 0; index < memberSelect.length; index++) {
         const element = memberSelect[index];
         let item = memberSelect[index].value();
-        msg += index + ":" +item+" ";
+        memberChoice.push(item);
     }
-    print(msg);
+    newGame();
 }
 
 function inputmaxTurn(){
@@ -231,54 +238,50 @@ function updateSnake(member) {
             if (snake[0] % gridSize === gridSize - 1){
                 member.gameOver = true;
             }else{
-                checkOnApple(member);
                 snake.splice(0,0,snake[0]+1)
+                checkOnApple(member);
             }
         }else if (direction === "u"){
             if (snake[0] < gridSize){
                 member.gameOver = true;
             }else{
-                checkOnApple(member);
                 snake.splice(0,0,snake[0]-gridSize);
+                checkOnApple(member);
             }
         }else if (direction === "d"){
             if (snake[0] >= gridSize * (gridSize-1)){
                 member.gameOver = true;
             }else{
-                checkOnApple(member);
                 snake.splice(0,0,snake[0]+gridSize);
+                checkOnApple(member);
             }
         }else if (direction === "l"){
             if (snake[0] % gridSize === 0){
                 member.gameOver = true;
             }else{
-                checkOnApple(member);
                 snake.splice(0,0,snake[0]-1);
+                checkOnApple(member);
             }
         } 
-        for (let index = 1; index < members.length; index++) {
-            const m = members[index];
-            if (m.snake[0] === snake[0]){
-                for (let s = 1; s < m.snake.length; s++) {
-                    if (snake[0] == m.snake[s]) {
-                        m.gameOver = true;
+        for (let s = 1; s < snake.length; s++) {
+            if (snake[0] == snake[s]) {
+                member.gameOver = true;
+            }
+        }
+        for (let index = 0; index < members.length; index ++) {
+            const each = members[index];
+            for (let s = 0; s < each.snake.length; s++) {
+                if (each != member) {
+                    if (snake[0] == each.snake[0]) {
+                        member.gameOver = true;
+                        each.gameOver = true;
+                    } else if (snake[0] == each.snake[s]) {
+                        member.gameOver = true;
                     }
                 }
-            }else{
-                for (let s = 0; s < m.snake.length; s++) {
-                    if (snake[0] == m.snake[s]) {
-                        m.gameOver = true;
-                    }
-                }                
             }
         }
-        for (let index = 0; index < members.length; index++) {
-            const m = members[index];
-            if (m.gameOver){
-                m.snake = [];
-            }
-        }
-        if (hp <= 0 || (turn >= maxTurn && maxTurn != 0)){
+        if ((turn > maxTurn && maxTurn != 0) || member.hp <= 0) {
             member.gameOver = true;
         }
     }
@@ -312,19 +315,28 @@ function draw() {
         startButton.html("Start Game");
     }else{
         background(220);
+        let memberssnakes = []
+        for (let index = 0; index < members.length; index++) {
+            memberssnakes.push(members[index].snake)
+        }
         if (members[0].direction != ""){
-            for (let index = 1; index < members.length; index++) {
-                members[index].direction = jaden2_getDirection(
-                    gridSize, 
-                    members[index].snake, 
-                    apples, 
-                    members[index].direction);
+            for (let index = 0; index < members.length; index++) {
+                if (members[index].name != "human" && members[index].name != "-----"){
+                    members[index].direction = ais[memberChoice[index]].getDirection(
+                        gridSize, 
+                        members[index].snake, 
+                        apples, 
+                        members[index].direction,
+                        memberssnakes);
+                }
             }
         }
         for (let index = 0; index < members.length; index++) {
             const member = members[index];
             if (!member.gameOver){
                 updateSnake(member);
+            }else{
+                member.snake = [];
             }
         }
         for (let col = 0; col < gridSize; col++) {

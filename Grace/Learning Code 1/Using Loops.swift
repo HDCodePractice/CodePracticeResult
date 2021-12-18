@@ -1,6 +1,6 @@
 for i in 1 ... 5 {
-moveForward()
-moveForward()
-collectGem()
-moveForward() 
+  moveForward()
+    moveForward()
+    collectGem()
+    moveForward()
 }
