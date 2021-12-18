@@ -1,0 +1,17 @@
+func Repeatgem () {
+    moveFoward()
+    collectGem()
+}
+collectGem()
+Repeatgem()
+Repeatgem()
+turnRight()
+Repeatgem()
+Repeatgem()
+turnRight()
+Repeatgem()
+Repeatgem()
+turnRight()
+Repeatgem()
+turnRight()
+Repeatgem()

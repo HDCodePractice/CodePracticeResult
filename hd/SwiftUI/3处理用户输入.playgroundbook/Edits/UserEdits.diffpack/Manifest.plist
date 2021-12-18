@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseContentIdentifier</key>
+	<string>com.apple.playgrounds.blank</string>
+	<key>BaseContentVersion</key>
+	<string>1.0</string>
+	<key>ContentType</key>
+	<string>PlaygroundBookUserEdit</string>
+	<key>Diffs</key>
+	<dict>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/4C66483D-59B4-447E-8F5E-7893792656F3.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/4C66483D-59B4-447E-8F5E-7893792656F3.playgroundpage/main.swift</key>
+		<string>Modified</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/5B578A4B-F6AA-4557-B188-9A8D9B46003D.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/5B578A4B-F6AA-4557-B188-9A8D9B46003D.playgroundpage/main.swift</key>
+		<string>Modified</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/8912C293-2898-4178-B933-19CCCD7643EE.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/8912C293-2898-4178-B933-19CCCD7643EE.playgroundpage/main.swift</key>
+		<string>Modified</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/FFBD92B4-B720-4E1A-BFE3-62867D89C099.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/FFBD92B4-B720-4E1A-BFE3-62867D89C099.playgroundpage/main.swift</key>
+		<string>Modified</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</key>
+		<string>Modified</string>
+		<key>Chapters/Chapter1.playgroundchapter/UserManifest.plist</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/CircleImage.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/FavoriteButton.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/Landmark.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/LandmarkDetail.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/LandmarkList.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/LandmarkRow.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/MapView.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/ModelData.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/SharedCode.swift</key>
+		<string>Removed</string>
+	</dict>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+	<key>UpdatedContentVersion</key>
+	<string>1.0</string>
+</dict>
+</plist>

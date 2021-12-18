@@ -1,0 +1,5 @@
+var expert = Expert()
+world.place(expert, atColumn: 1, row: 5)
+world.place(Gem(), atColumn: 1, row: 4)
+expert.moveForward()
+expert.collectGem()

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>var formation = [
+    [0,0,0,0],    
+    [0,0,0,0],    
+    [0,0,0,0],    
+    [0,0,0,0]
+]
+
+let acceptedResponses = [
+    "r","l","u","d",
+    "R","L","U","D",
+    "right","left","up","down",
+    "Right","Left","Up","Down"
+]
+
+show(rules())
+
+
+var name = ""
+var end = false
+formation = generate(formation)
+show(display(formation))
+
+while end == false || check_game_over(formation) == false || check_victory(formation) == false {
+    if check_victory(formation) == true {
+        show("Congrats! You beat the game! :) \n Author: Noah Tairan Chen")
+        break
+    } else if check_game_over(formation) == true {
+        show("Game over. :(")
+        end = true
+        break 
+    } 
+    
+    var name = ask("What is your move?")
+    if acceptedResponses.contains(name) {
+        formation = moves(name,formation: formation)
+        show(display(formation))
+    } else if ["Rules","rules"].contains(name){
+        show(rules())
+        show(display(formation))
+    } else if ["Show","show"].contains(name) {
+        show("""
+Here are the correspondents of the emojis:
+
+0: 🔘
+2: 🌏
+4: 🌕
+8: 🌑
+16: 🏵 
+32: 🔮
+64: 💎
+128: ⭐️
+256: ❄️
+512: 💦
+1024: 🌊 
+2048: 🌈
+4096: 🔥
+8192: 🎁
+""")
+        show(display(formation))
+    } else if ["End","end"].contains(name) {
+        show("The game has been ended.")
+        end = true 
+        break
+    } else {
+        show("Invaid move. Enter 'Rules' for information on how to play.")
+        show(display(formation))
+    }
+} 
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 1461}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 253}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,4 @@
+while isOnCloseSwitch {
+toggleSwitch()
+  moveForwrd()
+}
