@@ -1,4 +1,4 @@
-func ToggleCollectGemTurnAround() {
+for i in 1 ... 3 {
     turnLeft()
     moveForward()
     toggleSwitch()
@@ -19,6 +19,3 @@ func ToggleCollectGemTurnAround() {
     turnRight()
     moveForward()
 }
-ToggleCollectGemTurnAround()
-ToggleCollectGemTurnAround()
-ToggleCollectGemTurnAround()
