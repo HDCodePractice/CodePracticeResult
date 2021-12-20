@@ -1,4 +1,4 @@
-func Gracé() {
+for i in 1 ... 4 {
     moveForward()
     collectGem()
     moveForward()
@@ -16,8 +16,3 @@ func Gracé() {
     collectGem()
     moveForward()
 }
-
-Gracé()
-Gracé()
-Gracé()
-Gracé()
