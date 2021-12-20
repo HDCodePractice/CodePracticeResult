@@ -1,4 +1,4 @@
-func loop2() {
+func getGemSwitch() {
     if isOnClosedSwitch {
         toggleSwitch()
         
@@ -7,20 +7,18 @@ func loop2() {
     }
 }
 
+
 moveForward()
-loop2()
+getGemSwitch()
 turnLeft()
-
-
 moveForward()
 
 for i in 1 ... 3 {
     turnLeft()
-    
-    loop2()
+    getGemSwitch()
     for i in 1 ... 2 {
         moveForward()
-        loop2()
+        getGemSwitch()
         
     }
     
