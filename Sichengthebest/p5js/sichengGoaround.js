@@ -1,6 +1,6 @@
-function sicheng2_getDirection(gridSize,snake,apples,direction){
-    let row = int(snake[0]/gridSize);
-    let col = snake[0]%gridSize;
+function sicheng2_getDirection(gridSize,members,memberIndex,apples,direction){
+    let row = int(members[memberIndex].snake[0]/gridSize);
+    let col = members[memberIndex].snake[0]%gridSize;
     if (gridSize%2 === 0) {
         if (col === gridSize-1) {
             if (row == gridSize-1) {
