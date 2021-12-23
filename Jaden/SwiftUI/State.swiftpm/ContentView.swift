@@ -8,21 +8,25 @@ struct ContentView: View {
     var body: some View {
         Form{
             Section{
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundColor(.accentColor)
-                Text("Hello, world!")
-                Text("Hello, world!")
-                Text("Hello, world!")
-                Text("Hello, world!")
+                Button("Student 001"){
+                    
+                }
             }header: {
                 HStack{
-                    Image(systemName: "globe")
+                    Spacer()
+                    Image(systemName: "circle")
                         .imageScale(.large)
-                        .foregroundColor(.accentColor)
-                    Text("Noah")
-                        .font(.headline)
-                }
+                        .foregroundColor(.red)
+                    Image(systemName: "triangle")
+                        .imageScale(.large)
+                        .foregroundColor(.red)
+                    Image(systemName: "square")
+                        .imageScale(.large)
+                        .foregroundColor(.red)
+                    Text("Student Ids")
+                    Spacer()
+                        
+                }.font(.title)
             }
             
             Section{
@@ -42,7 +46,7 @@ struct ContentView: View {
                
             }header: {
                 Text("Parker")
-                    .font(.title)
+                    .font(.headline)
             }
             
             Section{
