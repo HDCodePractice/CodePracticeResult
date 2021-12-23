@@ -17,7 +17,9 @@ struct ContentView: View {
             HStack{
                 Text("Code:          ")
                 Image("BarCode")
-                    .frame(width: 5.0, height: 5.0)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 200.0, height: 200.0)
             }
         }
         
