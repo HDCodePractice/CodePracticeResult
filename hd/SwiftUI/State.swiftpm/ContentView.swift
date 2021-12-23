@@ -6,7 +6,7 @@ import SwiftUI
 // Spacer
 // @State
 // TextField
-// 如果对State var 做set， $
+// 如何对State var 做set， $变量名
 
 struct ContentView: View {
     @State var tapCount = 100
