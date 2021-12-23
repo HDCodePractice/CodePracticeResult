@@ -9,7 +9,8 @@ struct ContentView: View {
         Form{
             Section{
                 Button("Student 001"){
-                    
+                    Text("Student 001")
+                    Image("circ")
                 }
             }header: {
                 HStack{
