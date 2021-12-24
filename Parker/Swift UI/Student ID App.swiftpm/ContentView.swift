@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var showText = false
     var body: some View {
         HStack {
             Text("Student ID")
@@ -12,10 +13,22 @@ struct ContentView: View {
             
             Image("the-rock")
                 .border(Color.black, width: 8)
-            Text("Name: Dwayne Johnson")
-                .font(.system(size: 30))
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text("---------------------")
+            HStack {
+                Text("Name: Dwayne Johnson")
+                    .font(.system(size: 27))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Button("Show Student Details") {
+                            showText.toggle()
+                            }
+
+                            if showText {
+                                Text("Birthdate:  1972-05-02")
+                            }
+                
+
+            }
+
+            Text("--------------------------------")
                 .font(.system(size: 30))
                 .frame(maxWidth: .infinity, alignment: .leading)
             
@@ -25,8 +38,13 @@ struct ContentView: View {
             Link("University of Miami", destination: URL(string: "https://welcome.miami.edu/")!)
                 .font(.system(size: 20))
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Image("Barcode")
-                    .resizable()
+            HStack {
+                Text("Student Code:")
+                    .font(.system(size: 45))
+                    .frame(maxWidth: .infinity)
+                Image("Barcode")
+                        .resizable()
+            }
         }
     }
 }
