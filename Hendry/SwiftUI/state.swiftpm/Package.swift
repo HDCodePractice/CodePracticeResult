@@ -8,15 +8,15 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "FirstApp",
+    name: "state",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "FirstApp",
+            name: "state",
             targets: ["AppModule"],
-            bundleIdentifier: "one.hdcola.First-app",
+            bundleIdentifier: "one.hdcola.Hendry.state",
             teamIdentifier: "4K2F95K9Z2",
             displayVersion: "1.0",
             bundleVersion: "1",

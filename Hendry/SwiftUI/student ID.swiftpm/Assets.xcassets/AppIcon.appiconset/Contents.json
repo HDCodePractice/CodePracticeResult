@@ -36,7 +36,6 @@
       "size" : "60x60"
     },
     {
-      "filename" : "IMG_0381x180.jpeg",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "60x60"
@@ -67,7 +66,6 @@
       "size" : "40x40"
     },
     {
-      "filename" : "IMG_0381x80.jpeg",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "40x40"
@@ -88,7 +86,6 @@
       "size" : "83.5x83.5"
     },
     {
-      "filename" : "IMG_0381x1024.jpeg",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
