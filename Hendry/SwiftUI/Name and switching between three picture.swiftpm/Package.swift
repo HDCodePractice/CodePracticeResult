@@ -8,15 +8,15 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "FirstApp",
+    name: "Nameandthreepicture",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "FirstApp",
+            name: "Nameandthreepicture",
             targets: ["AppModule"],
-            bundleIdentifier: "one.hdcola.claire.FirstApp",
+            bundleIdentifier: "one.hdcola.Hendry.Name-and-switching-between-three-picture",
             teamIdentifier: "4K2F95K9Z2",
             displayVersion: "1.0",
             bundleVersion: "1",
@@ -37,10 +37,7 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "AppModule",
-            path: ".",
-            resources: [
-                .process("Resources")
-            ]
+            path: "."
         )
     ]
 )
