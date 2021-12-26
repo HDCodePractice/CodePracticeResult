@@ -8,13 +8,13 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "Student ID",
+    name: "Loop and Picker",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "Student ID",
+            name: "Loop and Picker",
             targets: ["AppModule"],
             bundleIdentifier: "one.hdcola.hd.Loop",
             teamIdentifier: "T4W3MN6QHA",
