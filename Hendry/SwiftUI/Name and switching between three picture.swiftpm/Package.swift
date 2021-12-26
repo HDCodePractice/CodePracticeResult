@@ -8,16 +8,16 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "Student ID",
+    name: "Nameandthreepicture",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "Student ID",
+            name: "Nameandthreepicture",
             targets: ["AppModule"],
-            bundleIdentifier: "one.hdcola.hd.Loop",
-            teamIdentifier: "T4W3MN6QHA",
+            bundleIdentifier: "one.hdcola.Hendry.Name-and-switching-between-three-picture",
+            teamIdentifier: "4K2F95K9Z2",
             displayVersion: "1.0",
             bundleVersion: "1",
             iconAssetName: "AppIcon",

@@ -8,16 +8,15 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "Student ID",
+    name: "State",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "Student ID",
+            name: "State",
             targets: ["AppModule"],
-            bundleIdentifier: "one.hdcola.hd.Loop",
-            teamIdentifier: "T4W3MN6QHA",
+            bundleIdentifier: "one.hdcola.noah.State",
             displayVersion: "1.0",
             bundleVersion: "1",
             iconAssetName: "AppIcon",
@@ -37,7 +36,10 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "AppModule",
-            path: "."
+            path: ".",
+            resources: [
+                .process("Resources")
+            ]
         )
     ]
 )
