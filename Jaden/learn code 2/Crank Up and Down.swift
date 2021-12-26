@@ -1,0 +1,60 @@
+let expert = Expert()
+let character = Character()
+for i in 1 ... 4 {
+    expert.turnLockUp()
+    expert.turnLeft()
+}
+character.move(distance: 2)
+character.collectGem()
+character.turnLeft()
+character.turnLeft()
+character.move(distance: 2)
+character.turnRight()
+character.move(distance: 4)
+character.turnLeft()
+character.moveForward()
+character.turnLeft()
+character.move(distance: 7)
+character.collectGem()
+character.turnLeft()
+character.turnLeft()
+character.move(distance: 2)
+character.turnRight()
+character.move(distance: 4)
+character.collectGem()
+character.turnLeft()
+character.turnLeft()
+character.move(distance: 2)
+character.turnLeft()
+character.move(distance: 2)
+character.collectGem()
+character.turnLeft()
+character.turnLeft()
+character.move(distance: 2)
+character.turnLeft()
+character.move(distance: 4)
+character.collectGem()
+character.turnLeft()
+character.turnLeft()
+character.move(distance: 2)
+character.turnLeft()
+character.move(distance: 5)
+character.turnLeft()
+character.move(distance: 1)
+character.turnLeft()
+for i in 1 ... 4 {
+    expert.turnLock(up: true, numberOfTimes: 3)
+    expert.turnLeft()
+    
+}
+character.move(distance: 6)
+character.collectGem()
+character.turnLeft()
+character.move(distance: 4)
+character.collectGem()
+
+
+
+
+
+
