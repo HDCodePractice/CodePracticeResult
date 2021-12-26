@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "uoml.png",
+      "filename" : "uoml2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "uoml-1.png",
+      "filename" : "uoml2-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "uoml-2.png",
+      "filename" : "uoml2-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
