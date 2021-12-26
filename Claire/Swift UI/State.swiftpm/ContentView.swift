@@ -1,21 +1,19 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var tapCount = 100
     @State var name1 = ""
     @State var school1 = ""
     @State var name2 = ""
     @State var school2 = ""
-    @State var person = ["Student 1 Avatar 1", "Student 1 Avatar 2", "Student 1 Avatar 3"]
-    @State var personPicture = "Student 1 Avatar 1"
-    @State var person2 = ["Student 1 Avatar 1", "Student 1 Avatar 2", "Student 1 Avatar 3"]
-    @State var person2Picture = "Student 1 Avatar 1"
+    @State var tapCount = 1
+    @State var img = "Student 1 Avatar 1"
+    @State var img2 = "Student 1 Avatar 1"
     
     var body: some View {
         Form {
             Section {
                 VStack {
-                    Image(personPicture)
+                    Image(img)
                         .frame(width: 100.0, height: 100.0)
                     HStack {
                         Text("Name: ")
@@ -27,7 +25,14 @@ struct ContentView: View {
                     }
                     Image("Student 1 Barcode")
                     Button("Switch Image") {
-                        personPicture = person.randomElement()!
+                        tapCount += 1
+                        if tapCount % 3 == 0{
+                            img = "Student 1 Avatar 3"
+                        } else if tapCount % 3 == 1 || tapCount == 1{
+                            img = "Student 1 Avatar 1"
+                        } else if tapCount % 3 == 2 || tapCount == 2{
+                            img = "Student 1 Avatar 2"
+                        }
                     }.buttonStyle(.borderedProminent)
                 }
             } header: {
@@ -42,7 +47,7 @@ struct ContentView: View {
             
             Section {
                 VStack {
-                    Image(person2Picture)
+                    Image(img2)
                         .frame(width: 100.0, height: 100.0)
                     HStack {
                         Text("Name: ")
@@ -54,7 +59,14 @@ struct ContentView: View {
                     }
                     Image("Student 1 Barcode")
                     Button("Switch Image") {
-                        person2Picture = person2.randomElement()!
+                        tapCount += 1
+                        if tapCount % 3 == 0{
+                            img2 = "Student 1 Avatar 3"
+                        } else if tapCount % 3 == 1 || tapCount == 1{
+                            img2 = "Student 1 Avatar 1"
+                        } else if tapCount % 3 == 2 || tapCount == 2{
+                            img2 = "Student 1 Avatar 2"
+                        }
                     }.buttonStyle(.borderedProminent)
                 }
             } header: {
