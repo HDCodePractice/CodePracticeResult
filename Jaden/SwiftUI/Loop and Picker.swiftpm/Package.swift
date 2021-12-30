@@ -8,16 +8,16 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "Student ID",
+    name: "Loop and Picker.swift",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "Student ID",
+            name: "Loop and Picker.swift",
             targets: ["AppModule"],
-            bundleIdentifier: "one.hdcola.hd.Loop",
-            teamIdentifier: "T4W3MN6QHA",
+            bundleIdentifier: "one.hdcola.jaden.Loop-and-Picker-swift",
+            teamIdentifier: "K9TTSTB9MU",
             displayVersion: "1.0",
             bundleVersion: "1",
             iconAssetName: "AppIcon",
