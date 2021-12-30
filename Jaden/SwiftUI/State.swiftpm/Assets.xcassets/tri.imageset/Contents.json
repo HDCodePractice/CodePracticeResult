@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "65168a_SquidGame_SoldierTriangle_POPTV_Sculpt_Turn_WEB.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "65168a_SquidGame_SoldierTriangle_POPTV_Sculpt_Turn_WEB-1.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "65168a_SquidGame_SoldierTriangle_POPTV_Sculpt_Turn_WEB-2.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
