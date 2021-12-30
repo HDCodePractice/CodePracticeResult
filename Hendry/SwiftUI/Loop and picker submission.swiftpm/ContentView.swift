@@ -14,13 +14,6 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
         Form{
-            Section{
-            ForEach(0..<2){
-                i in Text("Hello world\(i)")
-            }
-            }header: {
-                Text("Demo")
-            }
                 Section{
                     Image(choiceActor)
                         .resizable()

@@ -8,15 +8,15 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "loop and picker",
+    name: "Loop and picker submission",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "loop and picker",
+            name: "Loop and picker submission",
             targets: ["AppModule"],
-            bundleIdentifier: "one.hdcola.Hendry.loop-and-picker",
+            bundleIdentifier: "one.hdcola.Hendry.Loop-and-picker-submission",
             teamIdentifier: "4K2F95K9Z2",
             displayVersion: "1.0",
             bundleVersion: "1",
