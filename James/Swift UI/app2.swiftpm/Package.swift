@@ -8,16 +8,16 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "Student ID App",
+    name: "app2",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "Student ID App",
+            name: "app2",
             targets: ["AppModule"],
-            bundleIdentifier: "one.hdcola.parkerchen.Student-ID-App",
-            teamIdentifier: "W9SGDGC53Q",
+            bundleIdentifier: "one.hdcola.James.app2",
+            teamIdentifier: "W6Z3642ML7",
             displayVersion: "1.0",
             bundleVersion: "1",
             iconAssetName: "AppIcon",
