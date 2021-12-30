@@ -8,15 +8,15 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "Student ID App",
+    name: "Loop and Picker",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "Student ID App",
+            name: "Loop and Picker",
             targets: ["AppModule"],
-            bundleIdentifier: "one.hdcola.parkerchen.Student-ID-App",
+            bundleIdentifier: "one.hdcola.parker.Loop-and-Picker",
             teamIdentifier: "W9SGDGC53Q",
             displayVersion: "1.0",
             bundleVersion: "1",
