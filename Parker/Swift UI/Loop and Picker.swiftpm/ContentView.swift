@@ -53,7 +53,7 @@ struct ContentView: View {
                         ForEach(0..<51){
                             Text("\($0)")
                         }
-                    }.pickerStyle(.automatic)
+                    }.pickerStyle(.automatic) 
                     Picker("Unit Price",selection: $unitPrice){
                         ForEach(unitPrices,id: \.self){ i in
                             Text("\(i)")
