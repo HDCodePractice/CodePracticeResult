@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    var images = ["the-rock","john-cena","botogod pfp"]
     @State private var showText = false
     var body: some View {
         HStack {
