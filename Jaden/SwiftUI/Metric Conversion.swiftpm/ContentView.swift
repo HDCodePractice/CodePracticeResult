@@ -17,14 +17,31 @@ struct ContentView: View {
         "Area"
     ]
     var body: some View {
-        Form{
-            ForEach(0..<froms.count){
-                MetricConversionUnitView(
-                    froms: froms[$0],
-                    exchange: exchanges[$0],
-                    unitName: unitNames[$0]
-                )
+        NavigationView{
+            Form{
+                NavigationLink("\(unitNames[0])"){
+                    MetricConversionUnitView(
+                        froms: froms[0],
+                        exchange: exchanges[0],
+                        unitName: unitNames[0]
+                    )
+                }
+                NavigationLink("\(unitNames[1])"){
+                    MetricConversionUnitView(
+                        froms: froms[1],
+                        exchange: exchanges[1],
+                        unitName: unitNames[1]
+                    )
+                }
+                NavigationLink("\(unitNames[2])"){
+                    MetricConversionUnitView(
+                        froms: froms[2],
+                        exchange: exchanges[2],
+                        unitName: unitNames[2]
+                    )
+                }
             }
+
         }
     }
 }
@@ -36,42 +53,70 @@ struct MetricConversionUnitView: View {
     @State var fromSelect = 0
     @State var toSelect = 0
     @State var fromUnit = 1.0
+    @State var x = 0
+    @State var total = 0
+    @State var z = 0
     var toUnit: Double{
         let from = fromUnit / exchange[fromSelect]
         let toUnit = from * exchange[toSelect]
         return toUnit
     }
-    var body: some View {
-            Section{
-                HStack{
-                    Text("From")
-                    Picker("", selection: $fromSelect){
-                        ForEach(0..<froms.count){
-                            Text(froms[$0])
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                }
-                HStack{
-                    Text("How")
-                    TextField("Input From Unit", value: $fromUnit,format: . number)
-                }
-                HStack{
-                    Text("To:")
-                    Picker("", selection: $toSelect){
-                        ForEach(0..<froms.count){
-                            Text(froms[$0])
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                }
-                HStack{
-                    Text("Is \(toUnit)")
-                }
-                
-                Text("\(fromSelect)")
-            }header: {
-                Text(unitName)
-            }
+    func pow (_ base:Int, _ power:Int) -> Int {
+      var answer : Int = 1
+      for _ in 0..<power { answer *= base }
+      return answer
     }
+
+    var body: some View {
+        NavigationView{
+            Form{
+                Section{
+                    HStack{
+                        Text("Current Unit")
+                        Spacer()
+                        Text("Final Unit")
+
+                    }
+                    HStack{
+                        Picker("", selection: $fromSelect){
+                            ForEach(0..<froms.count){
+                                Text(froms[$0])
+                            }
+                        }
+                        .pickerStyle(.)
+//                        Spacer()
+//                        Spacer()
+//                        Spacer()
+//                        Spacer()
+//                        Picker("", selection: $toSelect){
+//                            ForEach(0..<froms.count){
+//                                Text(froms[$0])
+//                            }
+//                        }
+//                        .pickerStyle(.automatic)
+
+                    }
+                    HStack{
+                        Text("How Much:")
+                        Text("\(total)")
+                    }
+                    Button("1"){
+                        z = pow(10, x)
+                        total += 1*z
+                        x += 1
+                        
+                    }
+                    HStack{
+                        Text("Is \(toUnit)")
+                    }
+                    
+                    Text("\(fromSelect)")
+                }header: {
+                    Text(unitName)
+                }
+            }
+
+        }
+    }
+        
 }
