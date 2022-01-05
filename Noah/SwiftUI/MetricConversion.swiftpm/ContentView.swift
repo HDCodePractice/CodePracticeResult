@@ -31,14 +31,27 @@ struct ContentView: View {
 //    }r
     var body: some View {
         NavigationView {
-            Form{
-                ForEach(0..<froms.count) { each in
-                    NavigationLink("\(unitNames[each])") {
-                        MetricConversionUnitView(expanded: fromsExpanded[each], froms: froms[each], exchange: exchanges[each], unitName: unitNames[each])
-                    }
-                }
-            }
-            .navigationTitle("Metric Conversion")
+            
+            ZStack {
+                
+                LinearGradient(colors: [.purple,.blue], startPoint: .top, endPoint: .bottom)
+                
+                HStack {
+                    VStack(alignment: .leading, spacing: 20){
+                        ForEach(0..<froms.count) { each in
+                            NavigationLink("\(unitNames[each])") {
+                                MetricConversionUnitView(expanded: fromsExpanded[each], froms: froms[each], exchange: exchanges[each], unitName: unitNames[each])
+                            }.font(.title)
+                        }
+                    }.padding()
+                    Spacer()
+                }.padding()
+                .navigationTitle("Metric Conversion")
+                .foregroundColor(.white)
+                    
+            }.ignoresSafeArea()
+            
+            
         }
     }
 }
