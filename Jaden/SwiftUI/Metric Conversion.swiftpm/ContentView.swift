@@ -27,12 +27,11 @@ struct ContentView: View{
             ZStack{
                 LinearGradient(colors: [.purple,.blue], startPoint: .top, endPoint: .bottom)
                 VStack(spacing:20){
-                    ForEach(unitNames,id: \.self){unitName in
                         NavigationLink(){
                             ConversionView(expanded: fromsExpanded[0], froms: froms[0], exchange: exchanges[0], unitName: unitNames[0])
                         }label: {
                             ZStack{
-                                Text(unitName)
+                                Text("Mass")
                                     .font(.title)
                                     .padding()
                             }
@@ -42,7 +41,34 @@ struct ContentView: View{
                             .cornerRadius(20)
                             .shadow(radius: 5)
                         }
-                    }
+                        NavigationLink(){
+                            ConversionView(expanded: fromsExpanded[1], froms: froms[1], exchange: exchanges[1], unitName: unitNames[1])
+                        }label: {
+                            ZStack{
+                                Text("Length")
+                                    .font(.title)
+                                    .padding()
+                            }
+                            .frame(width:300)
+                            .foregroundColor(.white)
+                            .background(.gray)
+                            .cornerRadius(20)
+                            .shadow(radius: 5)
+                        }
+                        NavigationLink(){
+                            ConversionView(expanded: fromsExpanded[2], froms: froms[2], exchange: exchanges[2], unitName: unitNames[2])
+                        }label: {
+                            ZStack{
+                                Text("Area")
+                                    .font(.title)
+                                    .padding()
+                            }
+                            .frame(width:300)
+                            .foregroundColor(.white)
+                            .background(.gray)
+                            .cornerRadius(20)
+                            .shadow(radius: 5)
+                        }
                 }
             }
             .ignoresSafeArea()
@@ -58,9 +84,19 @@ struct ConversionView: View {
     @State var fromSelect = 0
     @State var toSelect = 0
     @State var andSelect = 0
-    @State var fromUnit = "1"
+    @State var fromUnit = ""
+//    let fromsUnit = Double(fromUnit)
     @State var andUnit = "1"
-    let inputOrder = [["1","2","3"],["4","5","6"],["7","8","9"],["C","0","."]]
+    @State var total = ""
+    @State var totals = ""
+    @State var operate = ""
+    @State var sum = 1.0
+    let inputOrder = [["7","8","9","/"],["4","5","6","*"],["1","2","3","-"],["C","0",".","+"]]
+    var toUnit: Double{
+        let from = sum / exchange[fromSelect]
+        let toUnit = from * exchange[toSelect]
+        return toUnit
+    }
     var body: some View {
         VStack(spacing:20){
             Text(unitName)
@@ -83,8 +119,13 @@ struct ConversionView: View {
                 }
                 .pickerStyle(MenuPickerStyle())
                 Spacer()
-                Spacer()
-                Spacer()
+                HStack {
+                    Button("\(Image(systemName: "arrow.left.arrow.right.circle.fill"))") {
+                        andSelect = fromSelect
+                        fromSelect = toSelect
+                        toSelect = andSelect
+                    }.font(.title)
+                }
                 Spacer()
                 Picker("", selection: $toSelect){
                     ForEach(0..<froms.count){
@@ -95,10 +136,17 @@ struct ConversionView: View {
                 .pickerStyle(MenuPickerStyle())
 
             }
-            HStack(){
-                Text("Input")
+            HStack{
+                Text("\(total)")
                 Spacer()
-                Text(fromUnit)
+            }.padding()
+            HStack(){
+                Text("\(sum)")
+                    .font(.title)
+                Spacer()
+                Text("\(toUnit)")
+                    .font(.title)
+
             }
             .padding()
             Spacer()
@@ -108,14 +156,65 @@ struct ConversionView: View {
                         ForEach(row,id:\.self){ item in
                             Button{
                                 if item == "C"{
-                                    fromUnit = "0"
+                                    sum = 1.0
+                                    fromUnit = ""
+                                    total = ""
+                                    totals = ""
+                                    operate = ""
+                                }else if item == "." && fromUnit.contains(".") {
+                                    return
+                                }else if item == "*"{
+                                    total += fromUnit
+                                    totals = String(sum)
+                                    operate = "*"
+                                    total += operate
+                                    fromUnit = ""
+                                }else if item == "/"{
+                                    total += fromUnit
+                                    totals = String(sum)
+                                    operate = "/"
+                                    total += operate
+                                    fromUnit = ""
+
+
+                                }else if item == "-"{
+                                    total += fromUnit
+                                    totals = String(sum)
+                                    operate = "-"
+                                    total += operate
+                                    fromUnit = ""
+
+
+                                }else if item == "+"{
+                                    total += fromUnit
+                                    totals = String(sum)
+                                    operate = "+"
+                                    total += operate
+                                    fromUnit = ""
+
+
                                 }else{
                                     fromUnit += item
+                                    sum = Double(fromUnit) ?? 0
                                 }
-
+                                let sums = Double(fromUnit) ?? 0
+                                let summed = Double(totals) ?? 0
+                                if sum == 0.000000 && operate == "/"{
+                                    sum = 1
+                                }
+                                if operate == "+"{
+                                    sum = sums + summed
+                                }else if operate == "*"{
+                                    sum = sums * summed
+                                }else if operate == "-"{
+                                    sum = summed - sums
+                                }else if operate == "/"{
+                                    sum = summed / sums
+                                }
                             }label: {
                                 ButtonView(item: item)
                             }
+
                         }
                     }
                 }
