@@ -1,6 +1,12 @@
 import SwiftUI
 
-struct ContentView: View {
+struct ContentView: View{
+    
+    let fromsExpanded = [
+        ["Kilogram","Pound","Gram","Ounce"],
+        ["Kilometre","Mile","Yard","Metre"],
+        ["Square Kilometre","Square Mile","Acre"]
+    ]
     let froms = [
         ["kg","lb","g","oz"],
         ["km","mi","yd","m"],
@@ -16,107 +22,231 @@ struct ContentView: View {
         "Length",
         "Area"
     ]
-    var body: some View {
+    var body: some View{
         NavigationView{
-            Form{
-                NavigationLink("\(unitNames[0])"){
-                    MetricConversionUnitView(
-                        froms: froms[0],
-                        exchange: exchanges[0],
-                        unitName: unitNames[0]
-                    )
-                }
-                NavigationLink("\(unitNames[1])"){
-                    MetricConversionUnitView(
-                        froms: froms[1],
-                        exchange: exchanges[1],
-                        unitName: unitNames[1]
-                    )
-                }
-                NavigationLink("\(unitNames[2])"){
-                    MetricConversionUnitView(
-                        froms: froms[2],
-                        exchange: exchanges[2],
-                        unitName: unitNames[2]
-                    )
+            ZStack{
+                LinearGradient(colors: [.purple,.blue], startPoint: .top, endPoint: .bottom)
+                VStack(spacing:20){
+                        NavigationLink(){
+                            ConversionView(expanded: fromsExpanded[0], froms: froms[0], exchange: exchanges[0], unitName: unitNames[0])
+                        }label: {
+                            ZStack{
+                                Text("Mass")
+                                    .font(.title)
+                                    .padding()
+                            }
+                            .frame(width:300)
+                            .foregroundColor(.white)
+                            .background(.gray)
+                            .cornerRadius(20)
+                            .shadow(radius: 5)
+                        }
+                        NavigationLink(){
+                            ConversionView(expanded: fromsExpanded[1], froms: froms[1], exchange: exchanges[1], unitName: unitNames[1])
+                        }label: {
+                            ZStack{
+                                Text("Length")
+                                    .font(.title)
+                                    .padding()
+                            }
+                            .frame(width:300)
+                            .foregroundColor(.white)
+                            .background(.gray)
+                            .cornerRadius(20)
+                            .shadow(radius: 5)
+                        }
+                        NavigationLink(){
+                            ConversionView(expanded: fromsExpanded[2], froms: froms[2], exchange: exchanges[2], unitName: unitNames[2])
+                        }label: {
+                            ZStack{
+                                Text("Area")
+                                    .font(.title)
+                                    .padding()
+                            }
+                            .frame(width:300)
+                            .foregroundColor(.white)
+                            .background(.gray)
+                            .cornerRadius(20)
+                            .shadow(radius: 5)
+                        }
                 }
             }
-
+            .ignoresSafeArea()
+            .navigationTitle("Metric Conversion")
         }
     }
 }
-
-struct MetricConversionUnitView: View {
-    let froms : [String]
-    let exchange : [Double]
-    let unitName : String
+struct ConversionView: View {
+    let expanded: [String]
+    let froms: [String]
+    let exchange: [Double]
+    let unitName: String
     @State var fromSelect = 0
     @State var toSelect = 0
-    @State var fromUnit = 1.0
-    @State var x = 0
-    @State var total = 0
-    @State var z = 0
+    @State var andSelect = 0
+    @State var fromUnit = ""
+//    let fromsUnit = Double(fromUnit)
+    @State var andUnit = "1"
+    @State var total = ""
+    @State var totals = ""
+    @State var operate = ""
+    @State var sum = 1.0
+    let inputOrder = [["7","8","9","/"],["4","5","6","*"],["1","2","3","-"],["C","0",".","+"]]
     var toUnit: Double{
-        let from = fromUnit / exchange[fromSelect]
+        let from = sum / exchange[fromSelect]
         let toUnit = from * exchange[toSelect]
         return toUnit
     }
-    func pow (_ base:Int, _ power:Int) -> Int {
-      var answer : Int = 1
-      for _ in 0..<power { answer *= base }
-      return answer
-    }
-
     var body: some View {
-        NavigationView{
-            Form{
-                Section{
-                    HStack{
-                        Text("Current Unit")
-                        Spacer()
-                        Text("Final Unit")
+        VStack(spacing:20){
+            Text(unitName)
+                .font(.largeTitle)
+            HStack{
+                Text("Current Unit")
+                    .font(.title)
+                Spacer()
+                Text("Final Unit")
+                    .font(.title)
 
+            }
+            .padding()
+            HStack{
+                Picker("", selection: $fromSelect){
+                    ForEach(0..<froms.count){
+                        Text(froms[$0])
+                            .font(.title)
                     }
+                }
+                .pickerStyle(MenuPickerStyle())
+                Spacer()
+                HStack {
+                    Button("\(Image(systemName: "arrow.left.arrow.right.circle.fill"))") {
+                        andSelect = fromSelect
+                        fromSelect = toSelect
+                        toSelect = andSelect
+                    }.font(.title)
+                }
+                Spacer()
+                Picker("", selection: $toSelect){
+                    ForEach(0..<froms.count){
+                        Text(froms[$0])
+                            .font(.title)
+                    }
+                }
+                .pickerStyle(MenuPickerStyle())
+
+            }
+            HStack{
+                Text("\(total)")
+                Spacer()
+            }.padding()
+            HStack(){
+                Text("\(sum)")
+                    .font(.title)
+                Spacer()
+                Text("\(toUnit)")
+                    .font(.title)
+
+            }
+            .padding()
+            Spacer()
+            VStack{
+                ForEach(inputOrder,id:\.self){row in
                     HStack{
-                        Picker("", selection: $fromSelect){
-                            ForEach(0..<froms.count){
-                                Text(froms[$0])
+                        ForEach(row,id:\.self){ item in
+                            Button{
+                                if item == "C"{
+                                    sum = 1.0
+                                    fromUnit = ""
+                                    total = ""
+                                    totals = ""
+                                    operate = ""
+                                }else if item == "." && fromUnit.contains(".") {
+                                    return
+                                }else if item == "*"{
+                                    total += fromUnit
+                                    totals = String(sum)
+                                    operate = "*"
+                                    total += operate
+                                    fromUnit = ""
+                                }else if item == "/"{
+                                    total += fromUnit
+                                    totals = String(sum)
+                                    operate = "/"
+                                    total += operate
+                                    fromUnit = ""
+
+
+                                }else if item == "-"{
+                                    total += fromUnit
+                                    totals = String(sum)
+                                    operate = "-"
+                                    total += operate
+                                    fromUnit = ""
+
+
+                                }else if item == "+"{
+                                    total += fromUnit
+                                    totals = String(sum)
+                                    operate = "+"
+                                    total += operate
+                                    fromUnit = ""
+
+
+                                }else{
+                                    fromUnit += item
+                                    sum = Double(fromUnit) ?? 0
+                                }
+                                let sums = Double(fromUnit) ?? 0
+                                let summed = Double(totals) ?? 0
+                                if sum == 0.000000 && operate == "/"{
+                                    sum = 1
+                                }
+                                if operate == "+"{
+                                    sum = sums + summed
+                                }else if operate == "*"{
+                                    sum = sums * summed
+                                }else if operate == "-"{
+                                    sum = summed - sums
+                                }else if operate == "/"{
+                                    sum = summed / sums
+                                }
+                            }label: {
+                                ButtonView(item: item)
                             }
-                        }
-                        .pickerStyle(.)
-//                        Spacer()
-//                        Spacer()
-//                        Spacer()
-//                        Spacer()
-//                        Picker("", selection: $toSelect){
-//                            ForEach(0..<froms.count){
-//                                Text(froms[$0])
-//                            }
-//                        }
-//                        .pickerStyle(.automatic)
 
+                        }
                     }
-                    HStack{
-                        Text("How Much:")
-                        Text("\(total)")
-                    }
-                    Button("1"){
-                        z = pow(10, x)
-                        total += 1*z
-                        x += 1
-                        
-                    }
-                    HStack{
-                        Text("Is \(toUnit)")
-                    }
-                    
-                    Text("\(fromSelect)")
-                }header: {
-                    Text(unitName)
                 }
             }
-
         }
     }
-        
 }
+
+struct ConversionView_Previews: PreviewProvider {
+    static var previews: some View {
+        ConversionView(
+            expanded: ["Kilogram","Pound","Gram","Ounce"],
+            froms: ["kg","lb","g","oz"],
+            exchange: [1.0,2.20462262,1000.0,35.27],
+            unitName: "Mass")
+    }
+}
+
+struct ButtonView: View {
+    var item : String
+    var body: some View {
+        ZStack{
+            Color.blue
+            Text("\(item)")
+                .font(.title)
+                .foregroundColor(.white)
+        }
+        .frame(width: .infinity)
+        .cornerRadius(20)
+        .shadow(radius: 5)
+        
+    }
+}
+
+
