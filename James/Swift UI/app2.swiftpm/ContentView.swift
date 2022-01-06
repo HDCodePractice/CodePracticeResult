@@ -9,7 +9,8 @@ struct ContentView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 200, height: 200)
-            ForEach(f,id:|.self){f in Text(f)}.PickerStyle(segmented)
+            ForEach(f,id:.self){f in Text(f)}.PickerStyle(segmented)
+            
         }
     }
 }
