@@ -66,15 +66,40 @@ struct ConversionView: View {
     @State var fromSelect = 0
     @State var toSelect = 0
     @State var andSelect = 0
-    @State var fromUnit = "1"
+    @State var fromUnit = ""
     @State var andUnit = "1"
-    let inputOrder = [["1","2","3"],["4","5","6"],["7","8","9"],["C","0","."]]
+    @State var history = ""
+    @State var endResult = 0.0
+    @State var operators = ""
+    var fromUnitNumber : Double{
+        return Double(fromUnit) ?? 0
+    }
+    
+    func calculation(op : String){
+        if op == "+" {
+            endResult += fromUnitNumber
+        }else if op == "-"{
+            endResult -= fromUnitNumber
+        }else if op == "×"{
+            endResult *= fromUnitNumber
+        }else if op == "÷"{
+            endResult /= fromUnitNumber
+        }
+    }
+    
+    let inputOrder = [["1","2","3","+"],["4","5","6","-"],["7","8","9","×"],["C","0",".","÷"]]
     
     var body: some View {
         VStack(spacing:20){
             Text(unitName)
                 .font(.title)
-            HStack(){
+            HStack{
+                Text("History")
+                Spacer()
+                Text(history)
+            }
+            .padding()
+            HStack{
                 Text("Input")
                 Spacer()
                 Text(fromUnit)
@@ -88,6 +113,51 @@ struct ConversionView: View {
                             Button{
                                 if item == "C" {
                                     fromUnit = "0"
+                                    history = ""
+                                    endResult = 0.0
+                                }else if item == "+"{
+                                    if history.count == 0{
+                                        endResult += fromUnitNumber
+                                        history += "\(fromUnit)+"
+                                    }else{
+                                        calculation(op: operators)
+                                        history += "\(fromUnit)=\(endResult)\n\(endResult)+"
+                                    }
+                                    operators = item
+                                    fromUnit = ""
+                                }else if item == "-"{
+                                    endResult -= fromUnitNumber
+                                    if history.count == 0{
+                                        endResult += fromUnitNumber
+                                        history += "\(fromUnit)-"
+                                    }else{
+                                        calculation(op: operators)
+                                        history += "\(fromUnit)=\(endResult)\n\(endResult)-"
+                                    }
+                                    operators = item
+                                    fromUnit = ""
+                                }else if item == "×"{
+                                    endResult = endResult * fromUnitNumber
+                                    if history.count == 0{
+                                        endResult += fromUnitNumber
+                                        history += "\(fromUnit)×"
+                                    }else{
+                                        calculation(op: operators)
+                                        history += "\(fromUnit)=\(endResult)\n\(endResult)×"
+                                    }
+                                    operators = item
+                                    fromUnit = ""
+                                }else if item == "÷"{
+                                    endResult /= fromUnitNumber
+                                    if history.count == 0{
+                                        endResult += fromUnitNumber
+                                        history += "\(fromUnit)÷"
+                                    }else{
+                                        calculation(op: operators)
+                                        history += "\(fromUnit)=\(endResult)\n\(endResult)÷"
+                                    }
+                                    operators = item
+                                    fromUnit = ""
                                 }else{
                                     fromUnit += item
                                 }
