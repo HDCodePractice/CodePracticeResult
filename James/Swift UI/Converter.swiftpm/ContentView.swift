@@ -68,12 +68,25 @@ struct ConversionView: View {
     @State var andSelect = 0
     @State var fromUnit = "1"
     @State var andUnit = "1"
-    let inputOrder = [["1","2","3"],["4","5","6"],["7","8","9"],["C","0","."]]
+    @State var history = ""
+    @state var endresult = ""
+    
+    var fromUnitNumber : Double{
+        return Double(fromUnit) ?? 0
+    }
+    
+    let inputOrder = [["1","2","3","+"],["4","5","6","-"],["7","8","9","×"],["C","0",".","÷"]]
     
     var body: some View {
         VStack(spacing:20){
             Text(unitName)
                 .font(.title)
+            HStack{
+                Text("History")
+                Spacer()
+                Text(history)
+            }
+            .padding()
             HStack(){
                 Text("Input")
                 Spacer()
@@ -88,9 +101,36 @@ struct ConversionView: View {
                             Button{
                                 if item == "C" {
                                     fromUnit = "0"
-                                }else{
-                                    fromUnit += item
-                                }
+                                    history = ""
+                                    
+                                }else if item == "+"{
+                                    if history.count == 0{
+                                        history += "\(fromUnit)"
+                                    }else{
+                                        history += "\(fromUnit)=\(endresult)\n\(endresult)"
+                                    }
+                                    fromUnit = ""
+                                }else if item == "-"{
+                                    if history.count == 0{
+                                        history += "\(fromUnit)"
+                                    }else{
+                                        history -= "\(fromUnit)=\(endresult)\n\(endresult)"
+                                    }
+                                    fromUnit = ""
+                                }else if item *= "×"{
+                                    if history.count == 0{
+                                        history += "\(fromUnit)"
+                                    }else{
+                                        history *= "\(fromUnit)=\(endresult)\n\(endresult)"
+                                    }
+                                    fromUnit = ""
+                                }else if item /= "÷"{
+                                    if history.count == 0{
+                                        history += "\(fromUnit)"
+                                    }else{
+                                        history /= "\(fromUnit)=\(endresult)\n\(endresult)"
+                                    }
+                                    fromUnit = ""}
                             }label: {
                                 ButtonView(item: item)
                             }
