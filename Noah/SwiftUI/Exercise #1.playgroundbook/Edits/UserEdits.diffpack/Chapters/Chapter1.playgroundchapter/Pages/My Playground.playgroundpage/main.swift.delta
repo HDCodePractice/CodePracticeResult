@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import SwiftUI
+import PlaygroundSupport
+
+struct Image: View {
+    init() {}
+    var body: some View {
+        VStack(alignment: .leading) {
+            ZStack {
+                HStack {
+                    Circle()
+                        .fill(Color(#colorLiteral(red: 0.4816868901, green: 0.1280925274, blue: 0.6221188307, alpha: 1.0)))
+                        .padding(50)
+                    Circle()
+                        .fill(Color(#colorLiteral(red: 0.1706665456, green: 0.07356759161, blue: 0.464532733, alpha: 1.0)))
+                        .padding(50)
+                    
+                }
+                VStack(alignment:.leading){
+                    Spacer()
+                    Text("Hello SwiftUI").font(.title).padding(50)
+                    HStack{
+                        Text("Hello SwiftUI").padding(50)
+                        Spacer()
+                        Text("Hello SwiftUI").padding(50)
+                    }
+                }.padding(50)
+                .offset(y:50)
+            }
+            HStack {
+                Circle() 
+                    .fill(Color(#colorLiteral(red: 0.5791940689, green: 0.1280144453, blue: 0.5726861358, alpha: 1.0)))
+                    .padding(50)
+                Circle()
+                    .fill(Color(#colorLiteral(red: 0.0, green: 0.2595015466, blue: 0.6651419401, alpha: 1.0)))
+                    .padding(50)
+            }
+        }
+        
+    }
+}
+
+
+PlaygroundPage.current.setLiveView(Image())
+
+//  import SwiftUI
+//  import PlaygroundSupport
+//  
+//  public struct ContentView: View {
+//      public init() {}
+//      public var body: some View {
+//          CircleImage()
+//      }
+//  }
+//  
+//  public struct ContentView5: View {
+//      public init() {}
+//      public var body: some View {
+//          MapView()
+//      }
+//  }
+//  
+//  public struct ContentView6: View {
+//      public init() {}
+//      public var body: some View {
+//          VStack {
+//              MapView()
+//                  .ignoresSafeArea(edges: .top)
+//                  .frame(height: 300)
+//              
+//              CircleImage()
+//                  .offset(y: -130)
+//                  .padding(.bottom, -130)
+//              
+//              VStack(alignment: .leading) {
+//                  Text("Turtle Rock")
+//                      .font(.title)
+//                  
+//                  HStack {
+//                      Text("Joshua Tree National Park")
+//                          .font(.subheadline)
+//                      Spacer()
+//                      Text("California")
+//                          .font(.subheadline)
+//                  }
+//                  
+//                  Divider()
+//                  
+//                  Text("About Turtle Rock")
+//                      .font(.title2)
+//                  Text("Descriptive text goes here.")
+//              }
+//              .padding()
+//              
+//              Spacer()
+//          }
+//      }
+//  }
+//  
+</string>
+			<key>ModifiedRange</key>
+			<string>{1, 2963}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>

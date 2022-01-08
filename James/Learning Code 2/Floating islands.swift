@@ -1,0 +1,17 @@
+let character = Character()
+func islandRaid() {
+    character.collectGem()
+    character.jump()
+    character.toggleSwitch()
+    character.turnRight()
+    character.jump()
+    character.turnRight()
+    character.jump()
+    character.toggleSwitch()
+}
+world.place(character, facing: north, atColumn: 1, row: 6)
+islandRaid()
+world.place(character, facing: south, atColumn: 6, row: 4)
+islandRaid()
+world.place(character, facing: west, atColumn: 2, row: 1)
+islandRaid()

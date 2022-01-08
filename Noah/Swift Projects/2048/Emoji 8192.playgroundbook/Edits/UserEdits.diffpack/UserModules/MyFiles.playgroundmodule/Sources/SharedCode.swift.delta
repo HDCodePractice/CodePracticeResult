@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>public func rules() -&gt; String {
+    return """
+Welcome to 8192 (Emoji Version!), a remixed version of 2048 in Swift Playgrounds. 
+
+When two equal tiles collide, they combine to give you one greater tile that displays their sum. The more you do this, obviously, the higher the tiles get and the more crowded the board becomes. Every move you make, if the board is not filled that is, a new tile will spawn in an empty space of the board. Your objective is to reach 8192 ('🎁') before the board fills up.
+
+Here are the correspondents of the emojis:
+
+0: 🔘
+2: 🌏
+4: 🌕
+8: 🌑
+16: 🏵 
+32: 🔮
+64: 💎
+128: ⭐️
+256: ❄️
+512: 💦
+1024: 🌊 
+2048: 🌈
+4096: 🔥
+8192: 🎁
+
+For a list of these correspondents, type "Show" in the "What is your move?" text box.
+
+To move the tiles up, type "Up" or simply "u".
+To move the tiles down, type "Down" or simply "d".
+To move the tiles left, type "Left" or simply "l".
+To move the tiles right, type "Right" or simply "r".
+
+To display the rules again, type "Rules".
+
+To end a game, type "End".
+
+Good Luck! 
+
+Here are your tiles:
+"""
+}
+public func check_game_over(_ formation: [[Int]]) -&gt; Bool {
+    let ret = formation
+    if ret == moveRight(ret) &amp;&amp; ret == moveLeft(ret) &amp;&amp; ret == moveUp(ret) &amp;&amp; ret == moveDown(ret) {
+        return true
+    }
+    return false
+}
+
+public func check_victory(_ formation: [[Int]]) -&gt; Bool {
+    for line in formation {
+        if line.contains(8192) {
+            return true
+        }
+    }
+    return false
+}
+public func moves(_ name:String, formation: [[Int]]) -&gt; [[Int]] {
+    var ret = formation
+    if ["r","R","right","Right"].contains(name) {
+        if ret != moveRight(ret) {
+            ret = moveRight(ret)
+            ret = generate(ret)
+        } else {
+            show("The tiles won't move if you move that way! Choose a different way!")
+        }
+    } else if ["l","L","left","Left"].contains(name) {
+        if ret != moveLeft(ret) {
+            ret = moveLeft(ret)
+            ret = generate(ret)
+        } else {
+            show("The tiles won't move if you move that way! Choose a different way!")
+        }
+    } else if ["u","U","up","Up"].contains(name){
+        if ret != moveUp(ret) {
+            ret = moveUp(ret)
+            ret = generate(ret)
+        } else {
+            show("The tiles won't move if you move that way! Choose a different way!")
+        }
+    } else if ["d","down","D","Down"].contains(name) {
+        if ret != moveDown(ret) {
+            ret = moveDown(ret)
+            ret = generate(ret)
+        } else {
+            show("The tiles won't move if you move that way! Choose a different way!")
+        }
+    }
+    return ret
+}
+
+
+public func display(_ formation: [[Int]]) -&gt; String {
+    var display = ""
+    let correspondent: [Int:String] = [
+        0:"🔘",2:"🌏",4:"🌕",8:"🌑",
+        16:"🏵",32:"🔮",64:"💎",
+        128:"⭐️",256:"❄️",512:"💦",
+        1024:"🌊",2048:"🌈",
+        4096:"🔥",8192:"🎁"
+    ]
+    for line in formation {
+        for each in line {
+            display += "\(correspondent[each]!)  "
+        }
+        display += "\n"
+    }
+    return display
+}
+
+public func generate(_ formation:[[Int]]) -&gt; [[Int]]{
+    var ret = formation
+    
+    var Zero = 0
+    var randomLine = Int.random(in: 0..&lt;4)
+    var randomNumber = Int.random(in: 0..&lt;4)
+    
+    let RandomNumberChoices = [2,2,2,4]
+
+    for line in ret {
+        for each in line {
+            if each == 0 {
+                Zero += 1
+            }
+        }
+    }
+    while ret[randomLine][randomNumber] != 0 &amp;&amp; Zero != 0 {
+        randomLine = Int.random(in: 0..&lt;4)
+        randomNumber = Int.random(in: 0..&lt;4)
+    }
+    ret[randomLine][randomNumber] = RandomNumberChoices.randomElement()!
+    
+    return ret
+}
+
+public func moveZeroes(_ formation: [Int], direction: String) -&gt; [Int] {
+    var ret = formation
+    if direction == "Right" || direction == "Down" {
+        for double in 1 ... 2 {
+            for each in [3,2,1] {
+                for position in [3,2,1] {
+                    if ret[position] == 0 {
+                        for i in 0 ... each {
+                            ret.swapAt(position, position-1)
+                        }
+                    }
+                }
+            }
+        }
+    } else if direction == "Left"  || direction == "Up" {
+        for double in 1 ... 2 {
+            for each in 0 ... 2 {
+                for position in 0 ... 2 {
+                    if ret[position] == 0 {
+                        for i in 0 ... (4-each) {
+                            ret.swapAt(position,position+1)
+                        }
+                    }
+                }
+            }
+        }
+    } 
+    return ret
+}
+
+public func Combine(_ formation: [Int], direction: String) -&gt; [Int] {
+    var ret = formation
+    if direction == "Right" || direction == "Down" {
+        if ret[3] == ret[2] {
+            ret[3] = ret[3] + ret[2]
+            ret[2] = 0
+        } else if ret[2] == ret[1] {
+            ret[2] = ret[1] + ret[2]
+            ret[1] = 0
+        }
+        if ret[1] == ret[0]{
+            ret[1] = ret[1] + ret[0]
+            ret[0] = 0
+        } 
+        ret = moveZeroes(ret, direction: "Right")
+    } else if direction == "Left" || direction == "Up" {
+        if ret[0] == ret[1]{
+            ret[0] = ret[1] + ret[0]
+            ret[1] = 0
+        } else if ret[2] == ret[1] {
+            ret[1] = ret[1] + ret[2]
+            ret[2] = 0
+        }
+        if ret[2] == ret[3]{
+            ret[2] = ret[2] + ret[3]
+            ret[3] = 0
+        } 
+        ret = moveZeroes(ret, direction: "Left")
+    }
+    return ret
+}
+
+public func moveRight(_ formation: [[Int]]) -&gt; [[Int]]{
+    var ret = formation
+    for line in 0 ... 3 {
+        ret[line] = moveZeroes(ret[line], direction: "Right")
+        ret[line] = Combine(ret[line], direction: "Right")
+    }
+    return ret
+}
+
+public func moveLeft(_ formation: [[Int]]) -&gt; [[Int]]{
+    var ret = formation
+    for line in 0 ... 3 {
+        ret[line] = moveZeroes(ret[line], direction: "Left")
+        ret[line] =  Combine(ret[line], direction: "Left")
+    }
+    return ret
+}
+
+public func moveUp(_ formation: [[Int]]) -&gt; [[Int]]{
+    var ret = formation
+    var verticalLines: [[Int]] = [[],[],[],[]]
+    for line in 0 ... 3 {
+        for each in 0 ... 3 {
+            verticalLines[each].append(ret[line][each])
+        }
+    }
+    for line in 0 ... 3 {
+        verticalLines[line] = moveZeroes(verticalLines[line], direction: "Up")        
+        verticalLines[line] =  Combine(verticalLines[line], direction: "Up")
+    }
+    for each in 0 ... 3 {
+        for line in 0 ... 3 {
+            ret[each][line] = verticalLines[line][each]
+        }
+    }
+    return ret
+}
+
+public func moveDown(_ formation: [[Int]]) -&gt; [[Int]]{
+    var ret = formation
+    var verticalLines: [[Int]] = [[],[],[],[]]
+    for line in 0 ... 3 {
+        for each in 0 ... 3 {
+            verticalLines[each].append(ret[line][each])
+        }
+    }
+    for line in 0 ... 3 {
+        verticalLines[line] = moveZeroes(verticalLines[line], direction: "Down")        
+        verticalLines[line] =  Combine(verticalLines[line], direction: "Down")
+    }
+    for each in 0 ... 3 {
+        for line in 0 ... 3 {
+            ret[each][line] = verticalLines[line][each]
+        }
+    }
+    return ret
+}
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 7252}</string>
+			<key>OriginalContent</key>
+			<string>//#-localizable-zone(Answers01)
+// Shared Code
+// Code written in this file is available on all pages in this Playground Book.
+//#-end-localizable-zone
+</string>
+			<key>OriginalRange</key>
+			<string>{0, 152}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>
