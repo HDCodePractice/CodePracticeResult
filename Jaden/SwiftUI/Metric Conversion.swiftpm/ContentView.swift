@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentView: View{
-    
+
     let fromsExpanded = [
         ["Kilogram","Pound","Gram","Ounce"],
         ["Kilometre","Mile","Yard","Metre"],
@@ -164,35 +164,55 @@ struct ConversionView: View {
                                 }else if item == "." && fromUnit.contains(".") {
                                     return
                                 }else if item == "*"{
-                                    total += fromUnit
-                                    totals = String(sum)
                                     operate = "*"
-                                    total += operate
+                                    if total.count == 0{
+                                        totals = fromUnit
+                                        total += "\(fromUnit)\(operate)"
+                                        fromUnit = ""
+                                    }else{
+                                        totals = String(sum)
+                                        total += "\(fromUnit)=\(sum)\n\(sum)*"
+                                        fromUnit = ""
+                                    }
                                     fromUnit = ""
                                 }else if item == "/"{
-                                    total += fromUnit
-                                    totals = String(sum)
                                     operate = "/"
-                                    total += operate
+                                    if total.count == 0{
+//                                        endResult += fromUnitNumber
+                                        totals = fromUnit
+                                        total += "\(fromUnit)\(operate)"
+                                        fromUnit = ""
+                                    }else{
+                                        totals = String(sum)
+                                        total += "\(fromUnit)=\(sum)\n\(sum)/"
+                                        fromUnit = ""
+                                    }
                                     fromUnit = ""
 
 
                                 }else if item == "-"{
-                                    total += fromUnit
-                                    totals = String(sum)
                                     operate = "-"
-                                    total += operate
-                                    fromUnit = ""
-
-
+                                    if total.count == 0{
+                                        totals = fromUnit
+                                        total += "\(fromUnit)\(operate)"
+                                        fromUnit = ""
+                                    }else{
+                                        totals = String(sum)
+                                        total += "\(fromUnit)=\(sum)\n\(sum)-"
+                                        fromUnit = ""
+                                    }
                                 }else if item == "+"{
-                                    total += fromUnit
-                                    totals = String(sum)
                                     operate = "+"
-                                    total += operate
+                                    if total.count == 0{
+                                        totals = fromUnit
+                                        total += "\(fromUnit)\(operate)"
+                                        fromUnit = ""
+                                    }else{
+                                        totals = String(sum)
+                                        total += "\(fromUnit)=\(sum)\n\(sum)+"
+                                        fromUnit = ""
+                                    }
                                     fromUnit = ""
-
-
                                 }else{
                                     fromUnit += item
                                     sum = Double(fromUnit) ?? 0
@@ -245,8 +265,9 @@ struct ButtonView: View {
         .frame(width: .infinity)
         .cornerRadius(20)
         .shadow(radius: 5)
-        
+
     }
 }
+
 
 
