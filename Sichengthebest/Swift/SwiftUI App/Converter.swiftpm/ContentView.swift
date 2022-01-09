@@ -163,3 +163,15 @@ struct ContentView: View {
         }
     }
 }
+
+struct ConversionView: View {
+    var body: some View {
+        Text("Hello")
+    }
+}
+
+struct ConversionView_Previews: PreviewProvider {
+    static var previews: some View {
+        ConversionView()
+    }
+}
