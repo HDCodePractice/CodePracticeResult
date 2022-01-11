@@ -1,18 +1,10 @@
-moveForward()
-gemSwitch()
-moveForward()
-justSwitch()
-moveForward()
-moveForward()
-gemSwitch()
-toggleSwitch()
-turnLeft()
-moveForward()
-collectGem()
-moveForward()
-gemSwitch()    
-    
+for i in 1 ... 8{
+    moveForward()
+    gemSwitch()
+    justGemorSwitch()
+}
 
+    
 
 func gemSwitch() {
     if isBlockedLeft && isOnClosedSwitch && isOnGem {
@@ -27,15 +19,22 @@ func gemSwitch() {
         moveForward()
         moveForward()
         turnRight()
-        moveForward()
+        
         
     }
     
 }
-func justSwitch() {
+
+func justGemorSwitch() {
     if isBlocked && isBlockedLeft || isOnClosedSwitch {
         toggleSwitch()
         turnLeft()
+    
     }
-  
+    if isOnGem  {
+        collectGem()
+    }
 }
+
+
+
