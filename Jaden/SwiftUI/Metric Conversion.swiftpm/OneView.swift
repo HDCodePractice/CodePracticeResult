@@ -1,205 +1,202 @@
+//import SwiftUI
 //
-//  File.swift
-//  Metric Conversion
+//struct ContentView: View {
 //
-//  Created by Jaden Cheung on 1/1/22.
+//    let fromsExpanded = [
+//        ["Kilogram","Pound","Gram","Ounce"],
+//        ["Kilometre","Mile","Yard","Metre"],
+//        ["Square Kilometre","Square Mile","Acre"]
+//    ]
+//    let froms = [
+//        ["kg","lb","g","oz"],
+//        ["km","mi","yd","m"],
+//        ["km²","mi²","ac"]
+//    ]
+//    let exchanges = [
+//        [1.0,2.20462262,1000.0,35.27],
+//        [1.0,0.621371192,1093.6133,1000.0],
+//        [1,1000000,247.105381]
+//    ]
+//    let unitNames = [
+//        "Mass",
+//        "Length",
+//        "Area"
+//    ]
 //
-
-import SwiftUI
-
-struct OneView: View {
-    let froms = [
-        ["kg","lb","g","oz"],
-        ["km","mi","yd","m"],
-        ["km²","mi²","ac"]
-    ]
-    let exchanges = [
-        [1.0,2.20462262,1000.0,35.27],
-        [1.0,0.621371192,1093.6133,1000.0],
-        [1,1000000,247.105381]
-    ]
-    let unitNames = [
-        "Mass",
-        "Length",
-        "Area"
-    ]
-    var body: some View {
-        NavigationView{
-            Form{
-                NavigationLink("\(unitNames[0])"){
-                    MetricConversionUnitView(
-                        froms: froms[0],
-                        exchange: exchanges[0],
-                        unitName: unitNames[0]
-                    )
-                }
-                NavigationLink("\(unitNames[1])"){
-                    MetricConversionUnitView(
-                        froms: froms[1],
-                        exchange: exchanges[1],
-                        unitName: unitNames[1]
-                    )
-                }
-                NavigationLink("\(unitNames[2])"){
-                    MetricConversionUnitView(
-                        froms: froms[2],
-                        exchange: exchanges[2],
-                        unitName: unitNames[2]
-                    )
-                }
-            }
-
-        }
-    }
-}
-
-struct MetricConversionUnitView: View {
-    let froms : [String]
-    let exchange : [Double]
-    let unitName : String
-    @State var fromSelect = 0
-    @State var toSelect = 0
-    @State var fromUnit = 1.0
-    @State var x = 0
-    @State var total = 0
-    @State var z = 0
-    var toUnit: Double{
-        let from = fromUnit / exchange[fromSelect]
-        let toUnit = from * exchange[toSelect]
-        return toUnit
-    }
-    func pow (_ base:Int, _ power:Int) -> Int {
-      var answer : Int = 1
-      for _ in 0..<power { answer *= base }
-      return answer
-    }
-
-    var body: some View {
-        NavigationView{
-            Form{
-                Section{
-                    HStack{
-                        Text("Current Unit")
-                        Spacer()
-                        Text("Final Unit")
-
-                    }
-                    HStack{
-                        Picker("", selection: $fromSelect){
-                            ForEach(0..<froms.count){
-                                Text(froms[$0])
-                            }
-                        }
-                        .pickerStyle(MenuPickerStyle())
-                        Spacer()
-                        Spacer()
-                        Spacer()
-                        Spacer()
-                        Picker("", selection: $toSelect){
-                            ForEach(0..<froms.count){
-                                Text(froms[$0])
-                            }
-                        }
-                        .pickerStyle(MenuPickerStyle())
-
-                    }
-                    HStack{
-                        Text("\(total)")
-                        Spacer()
-                        Text("\(toUnit)")
-                    }
-                }header: {
-                    Text(unitName)
-                }
-                Section{
-                    
-                    Button("1"){
-                        z = pow(10, x)
-                        total = total*10+1
-                      fromUnit = Double(total)
-                        x += 1
-                        
-                    }
-                    Button("2"){
-                        z = pow(10, x)
-                        total = total*10+2
-                      fromUnit = Double(total)
-                        x += 1
-                        
-                    }
-                    Button("3"){
-                        z = pow(10, x)
-                        total = total*10+3
-                      fromUnit = Double(total)
-                        x += 1
-                        
-                    }
-                    Button("4"){
-                        z = pow(10, x)
-                        total = total*10+4
-                      fromUnit = Double(total)
-                        x += 1
-                        
-                    }
-                    Button("5"){
-                        z = pow(10, x)
-                        total = total*10+5
-                      fromUnit = Double(total)
-                        x += 1
-                        
-                    }
-                    Button("6"){
-                        z = pow(10, x)
-                        total = total*10+6
-                      fromUnit = Double(total)
-                        x += 1
-                        
-                    }
-                    Button("7"){
-                        z = pow(10, x)
-                        total = total*10+7
-                      fromUnit = Double(total)
-                        x += 1
-                        
-                    }
-                    Button("8"){
-                        z = pow(10, x)
-                        total = total*10+8
-                        fromUnit = Double(total)
-                        x += 1
-                        
-                    }
-                    Button("9"){
-                        z = pow(10, x)
-                        total = total*10+9
-                      fromUnit = Double(total)
-                        x += 1
-                        
-                    }
-                    Button("0"){
-                        z = pow(10, x)
-                        total += total*10-total
-                      fromUnit = Double(total)
-                        
-                    }
-                }header: {
-                    Text("Buttons")
-                }
-                Section{
-                   
-                    Button("C"){
-                        z = pow(10, x)
-                        total = 0
-                      fromUnit = Double(total)
-                        x = 0
-                    }
-
-                }header: {
-                    Text("Buttons Cont")
-                }
-            }
-
-        }
-    }
-        
-}
+//    var body: some View {
+//        NavigationView{
+//            ZStack{
+//                LinearGradient(colors: [.purple,.blue], startPoint: .top, endPoint: .bottom)
+//
+//                VStack(spacing:20){
+//                    ForEach(unitNames,id: \.self){ unitName in
+//                        NavigationLink(){
+//                            ConversionView(
+//                                expanded: fromsExpanded[0],
+//                                froms: froms[0],
+//                                exchange: exchanges[0],
+//                                unitName: unitNames[0]
+//                            )
+//                        }label: {
+//                            ZStack{
+//                                Text(unitName)
+//                                    .font(.title)
+//                                    .padding()
+//                            }
+//                            .frame(width:300)
+//                            .foregroundColor(.white)
+//                            .background(.gray)
+//                            .cornerRadius(10)
+//                            .shadow(radius: 5)
+//                        }
+//                    }
+//                }
+//            }
+//            .ignoresSafeArea()
+//            .navigationTitle("Metric Conversion")
+//        }
+//    }
+//}
+//
+//struct ConversionView: View {
+//    let expanded: [String]
+//    let froms: [String]
+//    let exchange: [Double]
+//    let unitName: String
+//    @State var fromSelect = 0
+//    @State var toSelect = 0
+//    @State var andSelect = 0
+//    @State var fromUnit = "1"
+//    @State var andUnit = "1"
+//    @State var history = ""
+//    @State var endResult = 0.0
+//    @State var operators = ""
+//    var fromUnitNumber : Double{
+//        return Double(fromUnit) ?? 0
+//    }
+//    func calculation(op : String){
+//        if op == "+"{
+//            endResult += fromUnitNumber
+//        }else if op == "-"{
+//            endResult -= fromUnitNumber
+//        }else if op == "*"{
+//            endResult *= fromUnitNumber
+//        }else if op == "/"{
+//            endResult /= fromUnitNumber
+//        }
+//    }
+//    let inputOrder = [["1","2","3","+"],["4","5","6","-"],["7","8","9","*"],["C","0",".","÷"]]
+//
+//    var body: some View {
+//        VStack(spacing:20){
+//            Text(unitName)
+//                .font(.title)
+//            HStack{
+//                Text("History")
+//                Spacer()
+//                Text(history)
+//            }
+//            .padding()
+//            HStack(){
+//                Text("Input")
+//                Spacer()
+//                Text(fromUnit)
+//            }
+//            .padding()
+//            Spacer()
+//            VStack{
+//                ForEach(inputOrder,id:\.self){ row in
+//                    HStack{
+//                        ForEach(row,id:\.self){ item in
+//                            Button{
+//                                if item == "C" {
+//                                    fromUnit = "0"
+//                                    history = ""
+//                                    endResult = 0.0
+//                                }else if item == "+" {
+//
+//                                    if history.count == 0{
+//                                        endResult += fromUnitNumber
+//
+//                                        history += "\(fromUnit)+"
+//                                    }else{
+//                                        calculation(op: operators)
+//                                        history += "\(fromUnit)=\(endResult)\n\(endResult)+"
+//                                    }
+//                                    operators = item
+//                                    fromUnit = ""
+//                                }else if item == "-" {
+//                                    endResult -= fromUnitNumber
+//                                    if history.count == 0{
+//                                        endResult += fromUnitNumber
+//
+//                                        history += "\(fromUnit)+"
+//                                    }else{
+//                                        calculation(op: operators)
+//                                        history += "\(fromUnit)=\(endResult)\n\(endResult)-"
+//                                    }
+//                                    operators = item
+//                                    fromUnit = ""
+//                                }else if item == "*" {
+//                                    endResult *= fromUnitNumber
+//                                    if history.count == 0{
+//                                        endResult += fromUnitNumber
+//                                        history += "\(fromUnit)+"
+//                                    }else{
+//                                        calculation(op: operators)
+//                                        history += "\(fromUnit)=\(endResult)\n\(endResult)*"
+//                                    }
+//                                    operators = item
+//                                    fromUnit = ""
+//                                }else if item == "÷" {
+//                                    endResult /= fromUnitNumber
+//                                    if history.count == 0{
+//                                        endResult += fromUnitNumber
+//                                        history += "\(fromUnit)+"
+//                                    }else{
+//                                        calculation(op: operators)
+//                                        history += "\(fromUnit)=\(endResult)\n\(endResult)÷"
+//                                    }
+//                                    operators = item
+//                                    fromUnit = ""
+//                                }else{
+//                                    fromUnit += item
+//                                }
+//                            }label: {
+//                                ButtonView(item: item)
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            .padding()
+//        }
+//    }
+//}
+//
+//struct ConversionView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ConversionView(
+//            expanded: ["Kilogram","Pound","Gram","Ounce"],
+//            froms: ["kg","lb","g","oz"],
+//            exchange: [1.0,2.20462262,1000.0,35.27],
+//            unitName: "Mass")
+//    }
+//}
+//
+//
+//struct ButtonView: View {
+//    var item : String
+//    var body: some View {
+//        ZStack{
+//            Color.blue
+//            Text("\(item)")
+//                .font(.title)
+//                .foregroundColor(.white)
+//        }
+//        .frame(width:.infinity)
+//        .cornerRadius(5)
+//        .shadow(radius: 5)
+//    }
+//}
+//

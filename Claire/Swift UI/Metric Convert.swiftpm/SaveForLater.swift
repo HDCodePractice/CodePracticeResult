@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ContentView: View {
+struct ContentViews: View {
     
     let fromsExpanded = [
         ["Kilogram","Pound","Gram","Ounce"],
@@ -58,7 +58,7 @@ struct ContentView: View {
     }
 }
 
-struct ConversionView: View {
+struct ConversionsViews: View {
     let expanded: [String]
     let froms: [String]
     let exchange: [Double]
@@ -69,9 +69,9 @@ struct ConversionView: View {
     @State var fromUnit = "1"
     @State var andUnit = "1"
     @State var history = ""
-    @state var endresult = ""
+    @State var endResult = 0.0
     
-    var fromUnitNumber : Double{
+    var fromUnitNumber : Double {
         return Double(fromUnit) ?? 0
     }
     
@@ -86,7 +86,6 @@ struct ConversionView: View {
                 Spacer()
                 Text(history)
             }
-            .padding()
             HStack(){
                 Text("Input")
                 Spacer()
@@ -102,35 +101,42 @@ struct ConversionView: View {
                                 if item == "C" {
                                     fromUnit = "0"
                                     history = ""
-                                    
-                                }else if item == "+"{
-                                    if history.count == 0{
-                                        history += "\(fromUnit)"
+                                    endResult = 0.0
+                                } else if item == "+" {
+                                    endResult += fromUnitNumber
+                                    if history.count == 0 {
+                                        history += "\(fromUnit)+"
                                     }else{
-                                        history += "\(fromUnit)=\(endresult)\n\(endresult)"
+                                        history += "\(fromUnit) = \(endResult)\n\(endResult)+"
                                     }
                                     fromUnit = ""
-                                }else if item == "-"{
-                                    if history.count == 0{
-                                        history += "\(fromUnit)"
+                                }else if item == "-" {
+                                    endResult -= fromUnitNumber
+                                    if history.count == 0 {
+                                        history += "\(fromUnit)-"
                                     }else{
-                                        history -= "\(fromUnit)=\(endresult)\n\(endresult)"
+                                        history += "\(fromUnit) = \(endResult)\n\(endResult)-"
                                     }
                                     fromUnit = ""
-                                }else if item *= "×"{
-                                    if history.count == 0{
-                                        history += "\(fromUnit)"
+                                }else if item == "×" {
+                                    endResult *= fromUnitNumber
+                                    if history.count == 0 {
+                                        history += "\(fromUnit)×"
                                     }else{
-                                        history *= "\(fromUnit)=\(endresult)\n\(endresult)"
+                                        history += "\(fromUnit) = \(endResult)\n\(endResult)×"
                                     }
                                     fromUnit = ""
-                                }else if item /= "÷"{
-                                    if history.count == 0{
-                                        history += "\(fromUnit)"
+                                }else if item == "÷" {
+                                    endResult /= fromUnitNumber
+                                    if history.count == 0 {
+                                        history += "\(fromUnit)÷"
                                     }else{
-                                        history /= "\(fromUnit)=\(endresult)\n\(endresult)"
+                                        history += "\(fromUnit) = \(endResult)\n\(endResult)÷"
                                     }
-                                    fromUnit = ""}
+                                    fromUnit = ""
+                                }else{
+                                    fromUnit += item
+                                }
                             }label: {
                                 ButtonView(item: item)
                             }
@@ -143,7 +149,7 @@ struct ConversionView: View {
     }
 }
 
-struct ConversionView_Previews: PreviewProvider {
+struct ConversionsViews_Previews: PreviewProvider {
     static var previews: some View {
         ConversionView(
             expanded: ["Kilogram","Pound","Gram","Ounce"],
@@ -164,7 +170,7 @@ struct ButtonView: View {
                 .foregroundColor(.white)
         }
         .frame(width:.infinity)
-        .cornerRadius(5)
+        .cornerRadius(900)
         .shadow(radius: 5)
     }
 }

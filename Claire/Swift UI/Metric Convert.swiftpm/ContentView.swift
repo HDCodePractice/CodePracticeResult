@@ -69,9 +69,10 @@ struct ConversionView: View {
     @State var fromUnit = "1"
     @State var andUnit = "1"
     @State var history = ""
-    @state var endresult = ""
+    @State var historyCount = 0
+    @State var endResult = 0.0
     
-    var fromUnitNumber : Double{
+    var fromUnitNumber : Double {
         return Double(fromUnit) ?? 0
     }
     
@@ -86,7 +87,6 @@ struct ConversionView: View {
                 Spacer()
                 Text(history)
             }
-            .padding()
             HStack(){
                 Text("Input")
                 Spacer()
@@ -101,36 +101,59 @@ struct ConversionView: View {
                             Button{
                                 if item == "C" {
                                     fromUnit = "0"
+                                    endResult = 0.0
                                     history = ""
-                                    
-                                }else if item == "+"{
-                                    if history.count == 0{
-                                        history += "\(fromUnit)"
+                                } else if item == "+" {
+                                    endResult += fromUnitNumber
+                                    if history.count == 0 {
+                                        history += "\(fromUnit)+"
                                     }else{
-                                        history += "\(fromUnit)=\(endresult)\n\(endresult)"
+                                        history += "\(fromUnit) = \(endResult)\n\(endResult)+"
+                                        historyCount += 1
+                                        if historyCount == 4{
+                                            history = ""
+                                        }
                                     }
                                     fromUnit = ""
-                                }else if item == "-"{
-                                    if history.count == 0{
-                                        history += "\(fromUnit)"
+                                }else if item == "-" {
+                                    endResult -= fromUnitNumber
+                                    if history.count == 0 {
+                                        history += "\(fromUnit)-"
                                     }else{
-                                        history -= "\(fromUnit)=\(endresult)\n\(endresult)"
+                                        history += "\(fromUnit) = \(endResult)\n\(endResult)-"
+                                        historyCount += 1
+                                        if historyCount == 4{
+                                            history = ""
+                                        }
                                     }
                                     fromUnit = ""
-                                }else if item *= "×"{
-                                    if history.count == 0{
-                                        history += "\(fromUnit)"
+                                }else if item == "×" {
+                                    endResult = endResult * fromUnitNumber
+                                    if history.count == 0 {
+                                        history += "\(fromUnit)×"
                                     }else{
-                                        history *= "\(fromUnit)=\(endresult)\n\(endresult)"
+                                        history += "\(fromUnit) = \(endResult)\n\(endResult)×"
+                                        historyCount += 1
+                                        if historyCount == 4{
+                                            history = ""
+                                        }
                                     }
                                     fromUnit = ""
-                                }else if item /= "÷"{
-                                    if history.count == 0{
-                                        history += "\(fromUnit)"
+                                }else if item == "÷" {
+                                    endResult /= fromUnitNumber
+                                    if history.count == 0 {
+                                        history += "\(fromUnit)÷"
                                     }else{
-                                        history /= "\(fromUnit)=\(endresult)\n\(endresult)"
+                                        history += "\(fromUnit) = \(endResult)\n\(endResult)÷"
+                                        historyCount += 1
+                                        if historyCount == 4{
+                                            history = ""
+                                        }
                                     }
-                                    fromUnit = ""}
+                                    fromUnit = ""
+                                }else{
+                                    fromUnit += item
+                                }
                             }label: {
                                 ButtonView(item: item)
                             }
@@ -154,7 +177,7 @@ struct ConversionView_Previews: PreviewProvider {
 }
 
 
-struct ButtonView: View {
+struct ButtonsView: View {
     var item : String
     var body: some View {
         ZStack{
@@ -164,7 +187,7 @@ struct ButtonView: View {
                 .foregroundColor(.white)
         }
         .frame(width:.infinity)
-        .cornerRadius(5)
+        .cornerRadius(900)
         .shadow(radius: 5)
     }
 }
