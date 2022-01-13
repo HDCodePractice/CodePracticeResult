@@ -8,15 +8,15 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "Convert2",
+    name: "Metric Conversion",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "Convert2",
+            name: "Metric Conversion",
             targets: ["AppModule"],
-            bundleIdentifier: "one.hdcola.parker.Convert2",
+            bundleIdentifier: "one.hdcola.parker.Metric-Conversion",
             teamIdentifier: "W9SGDGC53Q",
             displayVersion: "1.0",
             bundleVersion: "1",
