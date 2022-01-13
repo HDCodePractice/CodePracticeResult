@@ -46,17 +46,41 @@ struct ContentView: View {
 struct GameView: View {
     let reflextime = 0.00
     var body: some View {
-        ZStack{
+        VStack{
+            Text("Click the button below when the text on the button says GO")
+                .font(.title)
+                .padding()
+            
             VStack{
-                Text("Tap the screen when it turns green")
-                sleep(5)
-                    
-                Text("We love FORTNITE")
-                
+                Button {
+                    print("Button tapped!")
+                } label: {
+                    Text("Don't Tap me!")
+                        .font(.title)
+                        .bold()
+                        .frame(width:300,height:150)
+                        .foregroundColor(.white)
+                        .background(.red)
+                        .cornerRadius(10)
+                        .shadow(radius: 5)
                 }
+                
+                Button {
+                    print("Button tapped!")
+                } label: {
+                    Text("Tap me!")
+                        .font(.title)
+                        .bold()
+                        .frame(width:300,height:150)
+                        .foregroundColor(.white)
+                        .background(.green)
+                        .cornerRadius(10)
+                        .shadow(radius: 5)
+            }
             }
         }
     }
+}
 
 struct MoreInfoView: View {
     
