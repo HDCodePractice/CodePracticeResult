@@ -119,12 +119,72 @@ public struct MetricConversionUnitView: View {
                 }
                 .padding()
             }
+        
+        public var body: some View {
+                VStack {
+                    HStack {
+                        Text("Current Unit")
+                            .font(.body)
+                            .foregroundColor(.gray)
+                        Spacer()
+                        Text("Final Unit")
+                            .font(.body)
+                            .foregroundColor(.gray)
+                    }.padding()
+                    HStack {
+                        Picker("", selection: $fromSelect) {
+                            ForEach(0..<froms.count) {
+                                Text(expanded[$0])
+                            }
+                        }.font(.title)
+                        Spacer()
+                        Picker("", selection: $toSelect) {
+                            ForEach(0..<froms.count) {
+                                Text(expanded[$0])
+                            }
+                        }.font(.title)
+                    }.padding()
+                    HStack {
+                        Button("\(Image(systemName: "arrow.left.arrow.right.circle.fill"))") {
+                            andSelect = fromSelect
+                            fromSelect = toSelect
+                            toSelect = andSelect
+                        }.font(.title)
+                    }
+                    HStack {
+                        if fromUnit.contains("."){
+                            Text("\(fromUnit)")
+                                .font(.largeTitle)
+                                .foregroundColor(.red)
+
+                        } else {
+                            Text("\(String(forTrailingZero(temp: Double(fromUnit) ?? 0.0)))")
+                                .font(.largeTitle)
+                                .foregroundColor(.red)
+                        }
+                        Spacer()
+                        Text("\(toUnit)")
+                            .font(.largeTitle)
+                    }.padding()
+                    HStack {
+                        Text("(\(froms[fromSelect]))")
+                            .font(.body)
+                            .foregroundColor(.gray)
+                        Spacer()
+                        Text("(\(froms[toSelect]))")
+                            .font(.body)
+                            .foregroundColor(.gray)
+                    }.padding()
+                    Spacer()
+                }
+        }
+    }
         }
     
 
     struct ConversionView_Previews: PreviewProvider {
         static var previews: some View {
-            ConversionView(
+            MetricConversionUnitView(
                 expanded: ["Kilogram","Pound","Gram","Ounce"],
                 froms: ["kg","lb","g","oz"],
                 exchange: [1.0,2.20462262,1000.0,35.27],
@@ -148,62 +208,3 @@ public struct MetricConversionUnitView: View {
         }
     }
 
-    public var body: some View {
-            VStack {
-                HStack {
-                    Text("Current Unit")
-                        .font(.body)
-                        .foregroundColor(.gray)
-                    Spacer()
-                    Text("Final Unit")
-                        .font(.body)
-                        .foregroundColor(.gray)
-                }.padding()
-                HStack {
-                    Picker("", selection: $fromSelect) {
-                        ForEach(0..<froms.count) {
-                            Text(expanded[$0])
-                        }
-                    }.font(.title)
-                    Spacer()
-                    Picker("", selection: $toSelect) {
-                        ForEach(0..<froms.count) {
-                            Text(expanded[$0])
-                        }
-                    }.font(.title)
-                }.padding()
-                HStack {
-                    Button("\(Image(systemName: "arrow.left.arrow.right.circle.fill"))") {
-                        andSelect = fromSelect
-                        fromSelect = toSelect
-                        toSelect = andSelect
-                    }.font(.title)
-                }
-                HStack {
-                    if fromUnit.contains("."){
-                        Text("\(fromUnit)")
-                            .font(.largeTitle)
-                            .foregroundColor(.red)
-
-                    } else {
-                        Text("\(String(forTrailingZero(temp: Double(fromUnit) ?? 0.0)))")
-                            .font(.largeTitle)
-                            .foregroundColor(.red)
-                    }
-                    Spacer()
-                    Text("\(toUnit)")
-                        .font(.largeTitle)
-                }.padding()
-                HStack {
-                    Text("(\(froms[fromSelect]))")
-                        .font(.body)
-                        .foregroundColor(.gray)
-                    Spacer()
-                    Text("(\(froms[toSelect]))")
-                        .font(.body)
-                        .foregroundColor(.gray)
-                }.padding()
-                Spacer()
-            }
-    }
-}
