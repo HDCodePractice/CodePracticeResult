@@ -1,0 +1,247 @@
+[
+    {
+        "id":0,
+        "name":"🇫🇷 France // 法国 🇫🇷",
+        "yes":"Paris // 巴黎",
+        "no":["Calais // 加来","Marseilles // 马赛","Versailles // 凡尔赛","Québec // 魁北克"],
+        "haha":["thE eIFFel ToWEr obVioUSlY // 当然是诶福尔铁塔啦～","Macron City // 马克龙城","Beaconsfield // 比肯斯菲尔德"]
+    },
+    {
+        "id":1,
+        "name": "🇨🇦 Canada // 加拿大 🇨🇦",
+        "yes":"Ottawa // 渥太华",
+        "no":["Toronto // 多伦多","Kingston // 金斯敦","Vancouver // 温歌华"],
+        "haha":["The North Pole HOHOHO // 北极……好冷啊","Beaconsfield // 比肯斯菲尔德"]
+    },
+    {
+        "id":2,
+        "name": "🇨🇳 China // 中国 🇨🇳",
+        "yes": "Beijing // 北京",
+        "no":["Shanghai // 上海","Beijiing // 北进","Guangzhou // 广州"],
+        "haha" : ["Centre City // 中城","Baconsfield // 培根之地"]
+    },
+    {
+        "id":3,
+        "name": "🇬🇧 UK // 英国 🇬🇧",
+        "yes": "London // 伦敦",
+        "no":["Windsor // 温莎","Oxford // 牛津","Cambridge // 剑桥","Manchester // 曼切斯特"],
+        "haha":["Small Ben? // 小本钟？？？","England's Beaconsfield // 英国的比肯斯菲尔德"]
+    },
+    {
+        "id":4,
+        "name": "🇧🇷 Brazil // 巴西 🇧🇷",
+        "yes": "Brasília // 巴西利亚",
+        "no": ["São Paulo // 圣保罗","Rio de Janeiro // 里约热内卢","Fortaleza // 福塔莱萨"],
+        "haha": ["Amazonia // 亚马逊，公司还是丛林？？？","Where the 2016 Olympics were held? // 2016年奥运举行的哪个地儿？","Beaconsfield // 比肯斯菲尔德"]
+    },
+    {
+        "id":5,
+        "name": "🇰🇷 South Korea // 韩国 🇰🇷",
+        "yes": "Seoul // 首尔",
+        "no": ["Busan // 釜山", "Gwangzhou // 光州", "Incheon // 仁川"],
+        "haha": ["A Place Where Kim-Jong-Un hates? // 金正恩讨厌的地方？","Beaconsfield // 比肯斯菲尔德"]
+    },
+    {
+        "id":6,
+        "name": "🇷🇺 Russia // 俄罗斯 🇷🇺",
+        "yes": "Moscow // 莫斯科",
+        "no": ["St-Petersburg // 圣彼得堡","Arkhangelsk // 阿尔汉格尔斯克","Volgograd // 伏尔加格勒"],
+        "haha": ["Vladimirputingrad // 弗拉基米尔普丁格勒","USSR II City // 苏联II 城","Beaconsfield // 比肯斯菲尔德"]
+    },
+    {
+        "id":7,
+        "name": "🇯🇵 Japan // 日本 🇯🇵",
+        "yes": "Tokyo // 东京",
+        "no": ["Osaka // 大阪","Nagasaki // 长崎","Hiroshima // 广岛","Fukushima // 福岛"],
+        "haha": ["Toyota City // 丰田城", "Beaconsfield // 比肯斯菲尔德"]
+    },
+    {
+        "id":8,
+        "name": "🇺🇸 USA // 美国 🇺🇸",
+        "yes": "Washington DC // 华盛顿 DC",
+        "no": ["New York // 纽约", "New Youk // 新约","Washington DD // 华盛顿 DD","Philadelphia // 费城"],
+        "haha": ["The Place Where There Is A Very Messy Election? // 选举非常混乱的地方？","Beaconsfield // 比肯斯菲尔德"]
+    },
+    {
+        "id":9,
+        "name": "🇮🇳 India // 印度 🇮🇳",
+        "yes": "New Delhi // 新德里",
+        "no":["Delhi // 德里","Calcutta // 加尔各答","Mumbai // 孟买"],
+        "haha":["Kashmere // 卡什米尔","Beaconsfield // 比肯斯菲尔德"]
+    },
+    {
+        "id":10,
+        "name": "🇸🇪 Sweden // 瑞典 🇸🇪",
+        "yes": "Stockholm // 斯德哥尔摩",
+        "no":["Hallashölm // 哈拉索尔姆","Göteborg // 哥德堡","Umeå // 梅阿"],
+        "haha":["Malmö // 马尔默","Copenhaguen // 哥本哈根"]
+    },
+    {
+        "id":11,
+        "name": "🇳🇴 Norway // 挪威 🇳🇴",
+        "yes": "Oslo // 奥斯陆",
+        "no":["Helsinki // 赫尔辛基","Bergen // 卑尔根","Trondheim // 特隆赫姆"],
+        "haha":["Bodø // 博德","Tromsø // 特罗姆瑟"]
+    },
+    {
+        "id":12,
+        "name": "🇫🇮 Finland // 芬兰 🇫🇮",
+        "yes": "Helsinki // 赫尔辛基",
+        "no": ["Turku // 图尔库","Oslo // 奥斯陆","Joensuu // 约恩苏"],
+        "haha": ["Oulu // 奥卢","Tampere // 坦佩雷"]
+    },
+    {
+        "id":13,
+        "name": "🇦🇺 Australia // 澳大利亚 🇦🇺",
+        "yes": "Canberra // 堪培拉",
+        "no": ["Sydney // 悉尼","Melbourne // 墨尔本"],
+        "haha": ["Perth // 珀斯","Brisbane // 布里斯班"]
+    },
+    {
+        "id":14,
+        "name": "🇩🇰 Denmark // 丹麦 🇩🇰",
+        "yes": "Copenhaguen // 哥本哈根",
+        "no": ["Stockholm // 斯德哥尔摩","Aarhus // 奥胡斯","Odense // 欧登塞"],
+        "haha": ["Aalborg // 奥尔堡","Esbjerg // 埃斯比约"]
+    },
+    {
+        "id":15,
+        "name": "🇩🇿 Algeria // 阿尔及利亚 🇩🇿",
+        "yes": "Algiers // 阿尔及尔",
+        "no": ["Ouargla // 瓦尔格拉","Constantine // 君士坦丁","Bejaïa // 贝贾亚"],
+        "haha": ["Annaba // 安那巴","Oran // 奥兰"]
+    },
+    {
+        "id":16,
+        "name": "🇵🇪 Peru // 秘鲁 🇵🇪",
+        "yes": "Lima // 利马",
+        "no": ["Trujillo // 特鲁希略","Cuzco // 库斯科"],
+        "haha": ["Areqipa // 阿雷基帕","Iquitos // 伊基托斯"]
+    },
+    {
+        "id":17,
+        "name": "🇳🇿 New Zealand // 新西兰 🇳🇿",
+        "yes": "Wellington // 惠灵顿",
+        "no": ["Auckland // 奥克兰","Hamilton // 哈密尔顿(新西兰)"],
+        "haha": ["Christchurch // 基督城","Dunedin // 达尼丁"]
+    },
+    {
+        "id":18,
+        "name": "🇵🇹 Portugal // 葡萄牙 🇵🇹",
+        "yes": "Lisbon // 里斯本",
+        "no": ["Porto // 波尔图","Almendralejo // 阿尔门德拉莱霍"],
+        "haha": ["Faro // 法鲁","Coimbra // 科英布拉"]
+    },
+    {
+        "id":19,
+        "name": "🇮🇷 Iran // 伊朗 🇮🇷",
+        "yes": "Tehran // 德黑兰",
+        "no": ["Baghdad // 巴格达","Tabriz // 大不里士","Isfahan // 伊斯法罕"],
+        "haha": ["Shiraz // 设拉子","Zahedan // 扎赫丹"]
+    },
+    {
+        "id":20,
+        "name": "🇻🇪 Venezuela // 委内瑞拉 🇻🇪",
+        "yes": "Caracas // 加拉加斯",
+        "no":["Maracaibo // 马拉开波","Barquisimeto // 巴基西梅托","Venezuelia // 委内瑞拉城"],
+        "haha":["Valencia // 巴伦西亚"]
+    },
+    {
+        "id":21,
+        "name": "🇨🇴 Colombia // 哥伦比亚 🇨🇴",
+        "yes": "Bogotá // 波哥大",
+        "no":["Barranquilla // 巴兰基亚","Medellín // 麦德林","Cartagena // 卡塔赫纳"],
+        "haha":["Cali // 卡利","Montería // 蒙特里亚"]
+    },
+    {
+        "id":22,
+        "name": "🇺🇦 Ukraine // 乌克兰 🇺🇦",
+        "yes": "Kiev // 基辅",
+        "no": ["Odessa // 敖德萨", "Dnipropetrovsk // 第聂伯罗彼得罗夫斯克","Kharkiv // 哈尔科夫"],
+        "haha": ["Chernobyl // 切尔诺贝利","Zaporizhia // 扎波罗热"]
+    },
+    {
+        "id":23,
+        "name": "🇱🇻 Latvia // 拉脱维亚 🇱🇻",
+        "yes": "Riga // 里加",
+        "no": ["Daugavpils // 陶格夫匹尔斯","Liepāja // 利耶帕亚"],
+        "haha": ["Ventspils // 文茨皮尔斯","Rēzekne // 雷泽克内"]
+    },
+    {
+        "id":24,
+        "name": "🇬🇪 Georgia // 格鲁吉亚 🇬🇪",
+        "yes": "Tbilisi // 第比利斯",
+        "no" : ["Kutaisi // 库塔伊西","Batumi // 巴统"],
+        "haha" : ["Borjomi // 博尔若米","Rustavi // 鲁斯塔维"] 
+    },
+    {
+        "id":25,
+        "name": "🇨🇬 Congo // 刚果 🇨🇬",
+        "yes": "Brazzaville // 布拉柴维尔",
+        "no": ["Kinshasa // 金夏沙","Pointe-Noire // 黑角","Dolisie // 卢博莫"],
+        "haha": ["Libreville // 利伯维尔","Mbandaka // 姆班达卡"]
+    },
+    {
+        "id":26,
+        "name": "🇨🇱 Chile // 智利 🇨🇱",
+        "yes": "Santiago // 圣地亚哥",
+        "no": ["Antofagasta // 安托法加斯塔","Concepción // 康塞普西翁","Valparaíso // 瓦尔帕莱索"],
+        "haha": ["Punta Arenas // 蓬塔阿雷纳斯","Copiapó // 科皮亚波"]
+    },
+    {
+        "id":27,
+        "name": "🇵🇱 Poland // 波兰 🇵🇱",
+        "yes": "Warsaw // 华沙",
+        "no": ["Wrocław // 弗罗茨瓦夫","Szczecin // 什切青","Gdańsk // 格但斯克"],
+        "haha": ["Lódź // 罗兹","Lublin // 鲁布林"]
+    },
+    {
+        "id":28,
+        "name": "🇵🇬 Papua New Guinea // 巴布亚新几内亚 🇵🇬",
+        "yes": "Port Moresby // 莫尔兹比港",
+        "no":["Daru // 达鲁","Lae // 莱城"],
+        "haha":["Jayapura // 查亚普拉"]
+    },
+    {
+        "id":29,
+        "name": "🇸🇮 Slovenia // 斯洛文尼亚 🇸🇮",
+        "yes": "Ljubljana // 卢布尔雅那",
+        "no":["Bratislava // 布拉迪斯拉发","Maribor // 马里博尔"],
+        "haha":["Velenje // 维伦耶","Koper // 科珀"]
+    },
+    {
+        "id":30,
+        "name": "🇲🇰 North Macedonia // 马其顿 🇲🇰",
+        "yes": "Skopje // 斯科普里",
+        "no": ["Podgorica // 波德戈里察","Bitola // 比托拉"],
+        "haha": ["Ohrid // 奥赫里德","Prilep // 普里列普"]
+    },
+    {
+        "id":31,
+        "name": "🇲🇪 Montenegro // 黑山 🇲🇪",
+        "yes": "Podgorica // 波德戈里察",
+        "no": ["Skopje // 斯科普里","Nikšić // 尼克希奇"],
+        "haha": ["Berane // 贝拉内","Kotor // 科托尔"]
+    },
+    {
+        "id":32,
+        "name": "🇱🇹 Lithuania // 立陶宛 🇱🇹",
+        "yes": "Vilnius // 维尔纽斯",
+        "no": ["Kaunas // 考纳斯","Šiauliai // 希奥利艾","Klaipėda // 克莱佩达"],
+        "haha": ["Panevėžys // 帕内韦日斯","Palanga // 帕兰加"]
+    },
+    {
+        "id":33,
+        "name": "🇧🇯 Benin // 贝宁 🇧🇯",
+        "yes": "Porto-Novo // 波多诺伏",
+        "no": ["Parakou // 帕拉库","Natitinqou // 纳蒂丁古"],
+        "haha": ["Cotonou // 科托努","Kandi // 坎迪"]
+    },
+    {
+        "id":34,
+        "name": "🇸🇰 Slovakia // 斯洛伐克 🇸🇰",
+        "yes": "Bratislava // 布拉迪斯拉发",
+        "no": ["Košice // 科希策","Ljubljana // 卢布尔雅那"],
+        "haha": ["Lučenec // 卢切内茨","Zvolen // 兹沃伦","Nové Zámky // 新扎姆基"]
+    }
+]

@@ -1,0 +1,17 @@
+func Gemandswitch () {
+moveForward()
+    collectGem()
+    moveForward()
+    toggleSwitch()
+    }
+    Gemandswitch()
+moveForward()
+turnLeft()
+Gemandswitch()
+moveForward()
+moveForward()
+turnLeft()
+Gemandswitch()
+moveForward()
+turnLeft()
+Gemandswitch()

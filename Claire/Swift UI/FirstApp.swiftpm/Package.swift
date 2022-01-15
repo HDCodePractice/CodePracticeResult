@@ -17,7 +17,7 @@ let package = Package(
             name: "FirstApp",
             targets: ["AppModule"],
             bundleIdentifier: "one.hdcola.claire.FirstApp",
-            teamIdentifier: "A3938YBP77",
+            teamIdentifier: "4K2F95K9Z2",
             displayVersion: "1.0",
             bundleVersion: "1",
             iconAssetName: "AppIcon",

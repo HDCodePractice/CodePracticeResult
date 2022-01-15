@@ -1,5 +1,0 @@
-moveForward()
-moveForward()
-moveForward()
-collectGem()
-

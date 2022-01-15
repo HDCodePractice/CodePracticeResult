@@ -16,8 +16,8 @@ let package = Package(
         .iOSApplication(
             name: "State",
             targets: ["AppModule"],
-            bundleIdentifier: "one.hdcola.claire.State",
-            teamIdentifier: "A3938YBP77",
+            bundleIdentifier: "one.hdcola.hd.Loop",
+            teamIdentifier: "T4W3MN6QHA",
             displayVersion: "1.0",
             bundleVersion: "1",
             iconAssetName: "AppIcon",

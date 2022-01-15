@@ -1,0 +1,18 @@
+let expert = Expert()
+world.place(expert, facing: north, atColumn: 1, row: 5)
+for i in 1 ... 3 {
+    expert.collectGem()
+    expert.moveForward()
+}
+expert.collectGem()
+world.place(expert, atColumn: 5, row: 1)
+expert.collectGem()
+expert.moveForward()
+expert.collectGem()
+world.place(expert, atColumn: 5, row: 4)
+expert.collectGem()
+expert.moveForward()
+expert.collectGem()
+expert.turnLeft()
+expert.moveForward()
+expert.collectGem()

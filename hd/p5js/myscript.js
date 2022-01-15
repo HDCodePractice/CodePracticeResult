@@ -1,31 +1,35 @@
-let word = ""
-let typeWord = ""
+clickLink = []
 
 function setup() {
     createCanvas(windowWidth,windowHeight-60);
     background(220);
-    word = getRandomWord();
+    noLoop();
 }
 
 function windowResized() {
     setup();
 }
 
-
-function getRandomWord(){
-    let words = "When will life return to normal? While the best vaccines are thought to be 95% effective, it takes a coordinated campaign to stop a pandemic. Anthony Fauci, the top infectious-disease official in the U.S., has said that vaccinating 70% to 85% of the U.S. population would enable a return to normalcy.On a global scale, that’s a daunting level of vaccination. At the current pace of 26.8 million a day, it would take another year to achieve a high level of global immunity. The rate, however, is steadily increasing, and new vaccines by additional manufacturers are coming to market."
-    return random(words.split(" "));
-}
-
-
 function draw(){
     background(220);
-    textSize(20);
-    text(word,100,100);
-    textSize(20);
-    text(typeWord,100,200);
+    circle(30, 30, 20);
+    circle(100, 100, 20);
 }
 
-function keyTyped() {
-    typeWord += key;
+function drawLine(clickLink){
+    x1 = clickLink[0][0];
+    y1 = clickLink[0][1];
+    x2 = clickLink[1][0];
+    y2 = clickLink[1][1];
+    line(x1,y1,x2,y2);
+}
+
+function mouseClicked() {
+    if (clickLink.length === 0){
+        clickLink.push([mouseX, mouseY]);
+    }else if (clickLink.length === 1){
+        clickLink.push([mouseX, mouseY]);
+        drawLine(clickLink);
+        clickLink = [];
+    }
 }
