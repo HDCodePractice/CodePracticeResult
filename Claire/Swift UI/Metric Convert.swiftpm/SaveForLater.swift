@@ -160,7 +160,7 @@ struct ConversionsViews_Previews: PreviewProvider {
 }
 
 
-struct ButtonView: View {
+struct ButtonnView: View {
     var item : String
     var body: some View {
         ZStack{
