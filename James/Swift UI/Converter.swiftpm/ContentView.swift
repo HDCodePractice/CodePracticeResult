@@ -114,7 +114,7 @@ struct ConversionView: View {
                                     if history.count == 0{
                                         history += "\(fromUnit)"
                                     }else{
-                                        history -= "\(fromUnit)=\(endresult)\n\(endresult)"
+                                        history -= \(fromUnit)="\ (endresult)\n\(endresult)"
                                     }
                                     fromUnit = ""
                                 }else if item *= "×"{

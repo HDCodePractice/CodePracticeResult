@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct ContentView: View {
-    
+struct ContentView: View{
+
     let fromsExpanded = [
         ["Kilogram","Pound","Gram","Ounce"],
         ["Kilometre","Mile","Yard","Metre"],
@@ -22,34 +22,53 @@ struct ContentView: View {
         "Length",
         "Area"
     ]
-    
-    var body: some View {
+    var body: some View{
         NavigationView{
             ZStack{
                 LinearGradient(colors: [.purple,.blue], startPoint: .top, endPoint: .bottom)
-                
                 VStack(spacing:20){
-                    ForEach(unitNames,id: \.self){ unitName in
                         NavigationLink(){
-                            ConversionView(
-                                expanded: fromsExpanded[0],
-                                froms: froms[0],
-                                exchange: exchanges[0],
-                                unitName: unitNames[0]
-                            )
+                            ConversionView(expanded: fromsExpanded[0], froms: froms[0], exchange: exchanges[0], unitName: unitNames[0])
                         }label: {
                             ZStack{
-                                Text(unitName)
+                                Text("Mass")
                                     .font(.title)
                                     .padding()
                             }
                             .frame(width:300)
                             .foregroundColor(.white)
                             .background(.gray)
-                            .cornerRadius(10)
+                            .cornerRadius(20)
                             .shadow(radius: 5)
                         }
-                    }
+                        NavigationLink(){
+                            ConversionView(expanded: fromsExpanded[1], froms: froms[1], exchange: exchanges[1], unitName: unitNames[1])
+                        }label: {
+                            ZStack{
+                                Text("Length")
+                                    .font(.title)
+                                    .padding()
+                            }
+                            .frame(width:300)
+                            .foregroundColor(.white)
+                            .background(.gray)
+                            .cornerRadius(20)
+                            .shadow(radius: 5)
+                        }
+                        NavigationLink(){
+                            ConversionView(expanded: fromsExpanded[2], froms: froms[2], exchange: exchanges[2], unitName: unitNames[2])
+                        }label: {
+                            ZStack{
+                                Text("Area")
+                                    .font(.title)
+                                    .padding()
+                            }
+                            .frame(width:300)
+                            .foregroundColor(.white)
+                            .background(.gray)
+                            .cornerRadius(20)
+                            .shadow(radius: 5)
+                        }
                 }
             }
             .ignoresSafeArea()
@@ -57,7 +76,6 @@ struct ContentView: View {
         }
     }
 }
-
 struct ConversionView: View {
     let expanded: [String]
     let froms: [String]
@@ -66,102 +84,189 @@ struct ConversionView: View {
     @State var fromSelect = 0
     @State var toSelect = 0
     @State var andSelect = 0
-    @State var fromUnit = "1"
+    @State var fromUnit = ""
+//    let fromsUnit = Double(fromUnit)
     @State var andUnit = "1"
-    @State var history = ""
+    @State var total = ""
+    @State var totals = ""
+    @State var operate = ""
+    @State var sum = 1.0
     @State var historyCount = 0
-    @State var endResult = 0.0
-    
-    var fromUnitNumber : Double {
-        return Double(fromUnit) ?? 0
+    let inputOrder = [["7","8","9","/"],["4","5","6","*"],["1","2","3","-"],["C","0",".","+"]]
+    var toUnit: Double{
+        let from = sum / exchange[fromSelect]
+        let toUnit = from * exchange[toSelect]
+        return toUnit
     }
-    
-    let inputOrder = [["1","2","3","+"],["4","5","6","-"],["7","8","9","×"],["C","0",".","÷"]]
-    
     var body: some View {
         VStack(spacing:20){
             Text(unitName)
                 .font(.title)
+                .foregroundColor(Color.blue)
             HStack{
-                Text("History")
-                Spacer()
-                Text(history)
-            }
-            HStack(){
                 Text("Input")
+                    .font(.headline)
+                    .foregroundColor(Color.gray)
                 Spacer()
-                Text(fromUnit)
+                Text("Outcome")
+                    .font(.headline)
+                    .foregroundColor(Color.gray)
+
+            }
+            .padding()
+            HStack{
+                Picker("", selection: $fromSelect){
+                    ForEach(0..<froms.count){
+                        Text(froms[$0])
+                            .font(.title)
+                    }
+                }
+                .pickerStyle(MenuPickerStyle())
+                Spacer()
+                HStack {
+                    Button("\(Image(systemName: "arrow.left.arrow.right"))") {
+                        andSelect = fromSelect
+                        fromSelect = toSelect
+                        toSelect = andSelect
+                    }.font(.title)
+                }
+                Spacer()
+                Picker("", selection: $toSelect){
+                    ForEach(0..<froms.count){
+                        Text(froms[$0])
+                            .font(.title)
+                    }
+                }
+                .pickerStyle(MenuPickerStyle())
+
+            }
+            HStack{
+                Text("\(total)")
+                Spacer()
+            }.padding()
+            HStack(){
+                Text("\(sum)")
+                    .font(.title)
+                Spacer()
+                Text("\(toUnit)")
+                    .font(.title)
+
             }
             .padding()
             Spacer()
             VStack{
-                ForEach(inputOrder,id:\.self){ row in
+                ForEach(inputOrder,id:\.self){row in
                     HStack{
                         ForEach(row,id:\.self){ item in
                             Button{
-                                if item == "C" {
-                                    fromUnit = "0"
-                                    endResult = 0.0
-                                    history = ""
-                                } else if item == "+" {
-                                    endResult += fromUnitNumber
-                                    if history.count == 0 {
-                                        history += "\(fromUnit)+"
+                                if item == "C"{
+                                    sum = 1.0
+                                    fromUnit = ""
+                                    total = ""
+                                    totals = ""
+                                    operate = ""
+                                    historyCount += 1
+                                    if historyCount == 4 {
+                                        total = ""
+                                    }
+                                }else if item == "." && fromUnit.contains(".") {
+                                    return
+                                    historyCount += 1
+                                    if historyCount == 4 {
+                                        total = ""
+                                    }
+                                }else if item == "*"{
+                                    operate = "*"
+                                    historyCount += 1
+                                    if historyCount == 4 {
+                                        total = ""
+                                    }
+                                    if total.count == 0{
+                                        totals = fromUnit
+                                        total += "\(fromUnit)\(operate)"
+                                        fromUnit = ""
                                     }else{
-                                        history += "\(fromUnit) = \(endResult)\n\(endResult)+"
-                                        historyCount += 1
-                                        if historyCount == 4{
-                                            history = ""
-                                        }
+                                        totals = String(sum)
+                                        total += "\(fromUnit)=\(sum)\n\(sum)*"
+                                        fromUnit = ""
                                     }
                                     fromUnit = ""
-                                }else if item == "-" {
-                                    endResult -= fromUnitNumber
-                                    if history.count == 0 {
-                                        history += "\(fromUnit)-"
+                                }else if item == "/"{
+                                    operate = "/"
+                                    historyCount += 1
+                                    if historyCount == 4 {
+                                        total = ""
+                                    }
+                                    if total.count == 0{
+//                                        endResult += fromUnitNumber
+                                        totals = fromUnit
+                                        total += "\(fromUnit)\(operate)"
+                                        fromUnit = ""
                                     }else{
-                                        history += "\(fromUnit) = \(endResult)\n\(endResult)-"
-                                        historyCount += 1
-                                        if historyCount == 4{
-                                            history = ""
-                                        }
+                                        totals = String(sum)
+                                        total += "\(fromUnit)=\(sum)\n\(sum)/"
+                                        fromUnit = ""
                                     }
                                     fromUnit = ""
-                                }else if item == "×" {
-                                    endResult = endResult * fromUnitNumber
-                                    if history.count == 0 {
-                                        history += "\(fromUnit)×"
-                                    }else{
-                                        history += "\(fromUnit) = \(endResult)\n\(endResult)×"
-                                        historyCount += 1
-                                        if historyCount == 4{
-                                            history = ""
-                                        }
+
+
+                                }else if item == "-"{
+                                    operate = "-"
+                                    historyCount += 1
+                                    if historyCount == 4 {
+                                        total = ""
                                     }
-                                    fromUnit = ""
-                                }else if item == "÷" {
-                                    endResult /= fromUnitNumber
-                                    if history.count == 0 {
-                                        history += "\(fromUnit)÷"
+                                    if total.count == 0{
+                                        totals = fromUnit
+                                        total += "\(fromUnit)\(operate)"
+                                        fromUnit = ""
                                     }else{
-                                        history += "\(fromUnit) = \(endResult)\n\(endResult)÷"
-                                        historyCount += 1
-                                        if historyCount == 4{
-                                            history = ""
-                                        }
+                                        totals = String(sum)
+                                        total += "\(fromUnit)=\(sum)\n\(sum)-"
+                                        fromUnit = ""
+                                    }
+                                }else if item == "+"{
+                                    operate = "+"
+                                    historyCount += 1
+                                    if historyCount == 4 {
+                                        total = ""
+                                    }
+                                    if total.count == 0{
+                                        totals = fromUnit
+                                        total += "\(fromUnit)\(operate)"
+                                        fromUnit = ""
+                                    }else{
+                                        totals = String(sum)
+                                        total += "\(fromUnit)=\(sum)\n\(sum)+"
+                                        fromUnit = ""
                                     }
                                     fromUnit = ""
                                 }else{
                                     fromUnit += item
+                                    sum = Double(fromUnit) ?? 0
+                                }
+                                let sums = Double(fromUnit) ?? 0
+                                let summed = Double(totals) ?? 0
+                                if sum == 0.000000 && operate == "/"{
+                                    sum = 1
+                                }
+                                if operate == "+"{
+                                    sum = sums + summed
+                                }else if operate == "*"{
+                                    sum = sums * summed
+                                }else if operate == "-"{
+                                    sum = summed - sums
+                                }else if operate == "/"{
+                                    sum = summed / sums
                                 }
                             }label: {
                                 ButtonView(item: item)
                             }
+
                         }
                     }
                 }
             }
-            .padding()
         }
     }
 }
@@ -176,8 +281,7 @@ struct ConversionView_Previews: PreviewProvider {
     }
 }
 
-
-struct ButtonsView: View {
+struct ButtonView: View {
     var item : String
     var body: some View {
         ZStack{
@@ -186,8 +290,9 @@ struct ButtonsView: View {
                 .font(.title)
                 .foregroundColor(.white)
         }
-        .frame(width:.infinity)
-        .cornerRadius(900)
+        .frame(width: .infinity)
+        .cornerRadius(20)
         .shadow(radius: 5)
+
     }
 }

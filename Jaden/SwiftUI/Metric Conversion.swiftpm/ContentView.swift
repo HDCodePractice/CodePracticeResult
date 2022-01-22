@@ -76,6 +76,7 @@ struct ContentView: View{
         }
     }
 }
+
 struct ConversionView: View {
     let expanded: [String]
     let froms: [String]
@@ -91,7 +92,7 @@ struct ConversionView: View {
     @State var totals = ""
     @State var operate = ""
     @State var sum = 1.0
-    let inputOrder = [["7","8","9","/"],["4","5","6","*"],["1","2","3","-"],["C","0",".","+"]]
+    let inputOrder = [["7","8","9","/"],["4","5","6","*"],["1","2","3","-"],["C","0",".","+"],["="]]
     var toUnit: Double{
         let from = sum / exchange[fromSelect]
         let toUnit = from * exchange[toSelect]
@@ -138,7 +139,6 @@ struct ConversionView: View {
             }
             HStack{
                 Text("\(total)")
-                Spacer()
             }.padding()
             HStack(){
                 Text("\(sum)")
@@ -174,7 +174,6 @@ struct ConversionView: View {
                                         total += "\(fromUnit)=\(sum)\n\(sum)*"
                                         fromUnit = ""
                                     }
-                                    fromUnit = ""
                                 }else if item == "/"{
                                     operate = "/"
                                     if total.count == 0{
@@ -187,7 +186,6 @@ struct ConversionView: View {
                                         total += "\(fromUnit)=\(sum)\n\(sum)/"
                                         fromUnit = ""
                                     }
-                                    fromUnit = ""
 
 
                                 }else if item == "-"{
@@ -212,7 +210,55 @@ struct ConversionView: View {
                                         total += "\(fromUnit)=\(sum)\n\(sum)+"
                                         fromUnit = ""
                                     }
-                                    fromUnit = ""
+                                }else if item == "="{
+                                    if operate == "*"{
+                                        operate = ""
+                                        if total.count == 0{
+                                            totals = fromUnit
+                                            total += "\(fromUnit)\(operate)"
+                                            fromUnit = ""
+                                        }else{
+                                            totals = String(sum)
+                                            total += "\(fromUnit)=\(sum)\n\(sum)"
+                                            fromUnit = ""
+                                        }
+                                    }else if operate == "/"{
+                                        operate = ""
+                                        if total.count == 0{
+    //                                        endResult += fromUnitNumber
+                                            totals = fromUnit
+                                            total += "\(fromUnit)\(operate)"
+                                            fromUnit = ""
+                                        }else{
+                                            totals = String(sum)
+                                            total += "\(fromUnit)=\(sum)\n\(sum)"
+                                            fromUnit = ""
+                                        }
+
+
+                                    }else if operate == "-"{
+                                        operate = ""
+                                        if total.count == 0{
+                                            totals = fromUnit
+                                            total += "\(fromUnit)\(operate)"
+                                            fromUnit = ""
+                                        }else{
+                                            totals = String(sum)
+                                            total += "\(fromUnit)=\(sum)\n\(sum)"
+                                            fromUnit = ""
+                                        }
+                                    }else if operate == "+"{
+                                        operate = ""
+                                        if total.count == 0{
+                                            totals = fromUnit
+                                            total += "\(fromUnit)\(operate)"
+                                            fromUnit = ""
+                                        }else{
+                                            totals = String(sum)
+                                            total += "\(fromUnit)=\(sum)\n\(sum)"
+                                            fromUnit = ""
+                                        }
+                                    }
                                 }else{
                                     fromUnit += item
                                     sum = Double(fromUnit) ?? 0
@@ -268,6 +314,7 @@ struct ButtonView: View {
 
     }
 }
+
 
 
 
