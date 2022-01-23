@@ -1,5 +1,4 @@
 import SwiftUI
-
 struct ContentView: View{
 
     let fromsExpanded = [
@@ -81,47 +80,42 @@ struct ConversionView: View {
     let froms: [String]
     let exchange: [Double]
     let unitName: String
+    @State var equations : Equations = Equations()
+    @State var equation : Equation = Equation()
     @State var fromSelect = 0
-    
     @State var toSelect = 0
-    
     @State var andSelect = 0
-    
     @State var fromUnit = ""
-    
+    var total : String{
+        return equations.text
+    }
+    var endResult : Double{
+        return equation.end
+    }
+    var fromUnitNumber : Double{
+        return Double(fromUnit) ?? 0
+    }
     @State var andUnit = "1"
-    
-    @State var total = ""
-    
     @State var totals = ""
-    
     @State var operate = ""
-    
     @State var sum = 1.0
-    
-    @State var historyCount = 0
-    
     let inputOrder = [["7","8","9","/"],["4","5","6","*"],["1","2","3","-"],["C","0",".","+"]]
-    
     var toUnit: Double{
         let from = sum / exchange[fromSelect]
         let toUnit = from * exchange[toSelect]
         return toUnit
     }
-    
     var body: some View {
+        
         VStack(spacing:20){
             Text(unitName)
-                .font(.title)
-                .foregroundColor(Color.blue)
+                .font(.largeTitle)
             HStack{
-                Text("Input")
-                    .font(.headline)
-                    .foregroundColor(Color.gray)
+                Text("Current Unit")
+                    .font(.title)
                 Spacer()
-                Text("Outcome")
-                    .font(.headline)
-                    .foregroundColor(Color.gray)
+                Text("Final Unit")
+                    .font(.title)
 
             }
             .padding()
@@ -135,11 +129,11 @@ struct ConversionView: View {
                 .pickerStyle(MenuPickerStyle())
                 Spacer()
                 HStack {
-//                    Button("\(Image(systemName: "arrow.left.arrow.right"))") {
-//                        andSelect = fromSelect
-//                        fromSelect = toSelect
-//                        toSelect = andSelect
-//                    }.font(.title)
+                    Button("\(Image(systemName: "arrow.left.arrow.right.circle.fill"))") {
+                        andSelect = fromSelect
+                        fromSelect = toSelect
+                        toSelect = andSelect
+                    }.font(.title)
                 }
                 Spacer()
                 Picker("", selection: $toSelect){
@@ -153,7 +147,6 @@ struct ConversionView: View {
             }
             HStack{
                 Text("\(total)")
-                Spacer()
             }.padding()
             HStack(){
                 Text("\(sum)")
@@ -173,93 +166,35 @@ struct ConversionView: View {
                                 if item == "C"{
                                     sum = 1.0
                                     fromUnit = ""
-                                    total = ""
                                     totals = ""
                                     operate = ""
-                                    historyCount += 1
-                                    if historyCount == 4 {
-                                        total = ""
-                                    }
+                                    equations = Equations()
+                                    equation = Equation()
                                 }else if item == "." && fromUnit.contains(".") {
                                     return
-                                    historyCount += 1
-                                    if historyCount == 4 {
-                                        total = ""
-                                    }
-                                }else if item == "*"{
-                                    operate = "*"
-                                    historyCount += 1
-                                    if historyCount == 4 {
-                                        total = ""
-                                    }
-                                    if total.count == 0{
+                                }else if item == "*" || item == "+" || item == "-" || item == "/" {
+                                    operate = item
+                                    if equations.items.count == 0 && equation.operation == ""{
+                                        equation.one = fromUnitNumber
+                                        equation.operation = item
                                         totals = fromUnit
-                                        total += "\(fromUnit)\(operate)"
-                                        fromUnit = ""
                                     }else{
+                                        equation.two = fromUnitNumber
+                                        equations.items.append(equation)
+                                        equation = Equation(one: equation.end, operation: item)
                                         totals = String(sum)
-                                        total += "\(fromUnit)=\(sum)\n\(sum)*"
-                                        fromUnit = ""
-                                    }
-                                    fromUnit = ""
-                                }else if item == "/"{
-                                    operate = "/"
-                                    historyCount += 1
-                                    if historyCount == 4 {
-                                        total = ""
-                                    }
-                                    if total.count == 0{                 totals = fromUnit
-                                        total += "\(fromUnit)\(operate)"
-                                        fromUnit = ""
-                                    }else{
-                                        totals = String(sum)
-                                        total += "\(fromUnit)=\(sum)\n\(sum)/"
-                                        fromUnit = ""
-                                    }
-                                    fromUnit = ""
-
-
-                                }else if item == "-"{
-                                    operate = "-"
-                                    historyCount += 1
-                                    if historyCount == 4 {
-                                        total = ""
-                                    }
-                                    if total.count == 0{
-                                        totals = fromUnit
-                                        total += "\(fromUnit)\(operate)"
-                                        fromUnit = ""
-                                    }else{
-                                        totals = String(sum)
-                                        total += "\(fromUnit)=\(sum)\n\(sum)-"
-                                        fromUnit = ""
-                                    }
-                                }else if item == "+"{
-                                    operate = "+"
-                                    historyCount += 1
-                                    if historyCount == 4 {
-                                        total = ""
-                                    }
-                                    if total.count == 0{
-                                        totals = fromUnit
-                                        total += "\(fromUnit)\(operate)"
-                                        fromUnit = ""
-                                    }else{
-                                        totals = String(sum)
-                                        total += "\(fromUnit)=\(sum)\n\(sum)+"
-                                        fromUnit = ""
+                                        
                                     }
                                     fromUnit = ""
                                 }else{
                                     fromUnit += item
-                                    sum = Double(fromUnit) ?? 0
+                                    sum = fromUnitNumber
                                 }
                                 let sums = Double(fromUnit) ?? 0
                                 let summed = Double(totals) ?? 0
                                 if sum == 0.000000 && operate == "/"{
                                     sum = 1
                                 }
-                                
                                 if operate == "+"{
                                     sum = sums + summed
                                 }else if operate == "*"{
@@ -269,7 +204,6 @@ struct ConversionView: View {
                                 }else if operate == "/"{
                                     sum = summed / sums
                                 }
-                                
                             }label: {
                                 ButtonView(item: item)
                             }
@@ -281,7 +215,6 @@ struct ConversionView: View {
         }
     }
 }
-
 struct ConversionView_Previews: PreviewProvider {
     static var previews: some View {
         ConversionView(

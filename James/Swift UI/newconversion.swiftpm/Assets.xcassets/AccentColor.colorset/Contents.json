@@ -1,10 +1,6 @@
 {
   "colors" : [
     {
-      "color" : {
-        "platform" : "tvos",
-        "reference" : "systemOrangeColor"
-      },
       "idiom" : "universal"
     }
   ],

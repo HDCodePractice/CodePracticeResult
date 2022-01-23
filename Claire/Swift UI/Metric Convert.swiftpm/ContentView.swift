@@ -81,6 +81,8 @@ struct ConversionView: View {
     let froms: [String]
     let exchange: [Double]
     let unitName: String
+    let equations : Equations = Equations()
+    let equation : Equation = Equation()
     @State var fromSelect = 0
     @State var toSelect = 0
     @State var andSelect = 0
@@ -98,6 +100,11 @@ struct ConversionView: View {
         let toUnit = from * exchange[toSelect]
         return toUnit
     }
+    
+    var history : String {
+        return equations.text
+    }
+    
     var body: some View {
         VStack(spacing:20){
             Text(unitName)
@@ -144,15 +151,7 @@ struct ConversionView: View {
                 Text("\(total)")
                 Spacer()
             }.padding()
-            HStack(){
-                Text("\(sum)")
-                    .font(.title)
-                Spacer()
-                Text("\(toUnit)")
-                    .font(.title)
-
-            }
-            .padding()
+                   
             Spacer()
             VStack{
                 ForEach(inputOrder,id:\.self){row in
@@ -166,15 +165,16 @@ struct ConversionView: View {
                                     totals = ""
                                     operate = ""
                                     historyCount += 1
+                                    
                                     if historyCount == 4 {
                                         total = ""
                                     }
                                 }else if item == "." && fromUnit.contains(".") {
-                                    return
                                     historyCount += 1
                                     if historyCount == 4 {
                                         total = ""
                                     }
+                                    return
                                 }else if item == "*"{
                                     operate = "*"
                                     historyCount += 1
@@ -293,6 +293,5 @@ struct ButtonView: View {
         .frame(width: .infinity)
         .cornerRadius(20)
         .shadow(radius: 5)
-
     }
 }
