@@ -6,7 +6,6 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             let statistics = game.GetStats()
-            let playresults = game.play()
             VStack (spacing: 60) {
                 if game.Game == false {
                     VStack(spacing:15) {
@@ -40,6 +39,7 @@ struct ContentView: View {
                     }
                     Spacer()
                 } else if game.Game == true {
+                    let playresults = game.play()
                     VStack(spacing:15){
                         HStack {
                             Text("Wins: " + String(statistics[1]))
