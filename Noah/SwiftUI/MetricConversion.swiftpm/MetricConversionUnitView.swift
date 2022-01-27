@@ -5,12 +5,12 @@ func forTrailingZero(temp: Double) -> String {
     return tempVar
 }
 
-func solveForEquation(Equation: String, Plus: String, Minus: String, Multiply: String, Divide: String) -> String {
+func solveForEquation(fromUnit: String) -> String {
     var EndsWithNumber = true
-    if Equation.suffix(1) == " " {
+    if fromUnit.suffix(1) == " " {
         EndsWithNumber = false
     }
-    var tempVar = Equation
+    var tempVar = fromUnit
     if (EndsWithNumber == false) {
         tempVar.removeLast()
         tempVar.removeLast()
@@ -22,12 +22,10 @@ func solveForEquation(Equation: String, Plus: String, Minus: String, Multiply: S
         ret += i
     }
     
-    ret = ret.replacingOccurrences(of: ". ", with: ".0 ")
-    ret = ret.replacingOccurrences(of: Plus, with: "+")
-    ret = ret.replacingOccurrences(of: Minus, with: "-")
-    ret = ret.replacingOccurrences(of: Multiply, with: "*")
-    ret = ret.replacingOccurrences(of: Divide, with: "/")
-    
+    ret = ret
+        .replacingOccurrences(of: ". ", with: " ")
+        .replacingOccurrences(of: "×", with: "*")
+        .replacingOccurrences(of: "÷", with: "/")
     
     let expression = NSExpression(format:ret)
     var value : Double? = expression.expressionValue(with: nil, context: nil) as? Double
@@ -44,15 +42,15 @@ public struct MetricConversionUnitView: View {
     @State var toSelect = 0
     @State var andSelect = 0
     @State var fromUnit = "1"
-    @State var equation = "1"
+    @State var equation = ""
     @State var lastAction = ""
     let inputOrder = [["1","2","3","÷"],["4","5","6","×"],["7","8","9","-"],["C","0",".","+"]]
     var toUnit: String {
-        let answer = solveForEquation(Equation: equation, Plus: "+", Minus: "-", Multiply: "×", Divide: "÷")
+        let answer = solveForEquation(fromUnit: equation)
         let from = (Double(answer) ?? 1.0) / (exchange[fromSelect])
-        let Unit1 = from * exchange[toSelect]
-        let Unit2 = forTrailingZero(temp: Unit1)
-        return Unit2
+        let to = from * exchange[toSelect]
+        let final = forTrailingZero(temp: to)
+        return final
     }
     
     public var body: some View {
@@ -126,7 +124,7 @@ public struct MetricConversionUnitView: View {
                     .foregroundColor(.red)
 
             } else {
-                let answer = solveForEquation(Equation: equation, Plus: "+", Minus: "-", Multiply: "×", Divide: "÷")
+                let answer = solveForEquation(fromUnit: equation)
                 Text("\(String(forTrailingZero(temp: Double(answer) ?? 0.0)))")
                     .font(.largeTitle)
                     .foregroundColor(.red)
