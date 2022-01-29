@@ -75,8 +75,7 @@ struct ContentView: View {
                     HStack {
                         Text("Tax %:")
                         TextField("Tax", value: $tax, format: .number)
-                            .keyboardType(.decimalPad)
-                            .focused($taxFocused)
+                            .keyboardType(.decimalPad)l
                     }
                     HStack {
                         Text("Total Price: ")
@@ -92,13 +91,6 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Metric Conversion")
-            .toolbar() {
-                ToolbarItemGroup(placement: .keyboard) {
-                    Button("done") {
-                        taxFocused = false
-                    }
-                }
-            }
         }
     }
 }
