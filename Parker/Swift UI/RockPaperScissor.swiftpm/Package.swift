@@ -8,15 +8,15 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "Reflex Trainer",
+    name: "RPS",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "Reflex Trainer",
+            name: "RPS",
             targets: ["AppModule"],
-            bundleIdentifier: "one.hdcola.parker.Reflex-Trainer",
+            bundleIdentifier: "one.hdcola.Parker",
             teamIdentifier: "W9SGDGC53Q",
             displayVersion: "1.0",
             bundleVersion: "1",
