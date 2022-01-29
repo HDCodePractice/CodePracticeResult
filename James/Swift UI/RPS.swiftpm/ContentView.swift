@@ -26,6 +26,8 @@ struct ContentView: View {
     
     var gameStarting: some View{
         VStack(spacing:60) {
+            print(winstreak)
+            print(losestreak)
             Image(game.computer)
                 .resizable()
                 .scaledToFit()
@@ -48,7 +50,7 @@ struct ContentView: View {
                 .cornerRadius(20)
             
             HStack(spacing:20){
-                Image("rock")
+                Image("Rock")
                     .resizable()
                     .scaledToFit()
                     .cornerRadius(20)
@@ -58,7 +60,7 @@ struct ContentView: View {
                         game.starting = false
                     }
                 
-                Image("scissors")
+                Image("Scissor")
                     .resizable()
                     .scaledToFit()
                     .cornerRadius(20)
