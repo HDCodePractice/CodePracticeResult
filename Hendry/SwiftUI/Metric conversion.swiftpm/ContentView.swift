@@ -7,7 +7,7 @@ func forTrailingZero(temp: Double) -> String {
 
 
 
-public struct MetricConversionUnitView: View {
+public struct MetricConversionUnitsView: View {
         let expanded: [String]
         let froms: [String]
         let exchange: [Double]
@@ -38,7 +38,7 @@ public struct MetricConversionUnitView: View {
         
         let inputOrder = [["1","2","3","+"],["4","5","6","-"],["7","8","9","×"],["C","0",".","÷"]]
         
-    public var body: some View {
+    public var body1: some View {
             VStack(spacing:20){
                 Text(unitName)
                     .font(.title)
@@ -120,7 +120,7 @@ public struct MetricConversionUnitView: View {
                 .padding()
             }
         
-        public var body: some View {
+         var converting1: some View {
                 VStack {
                     HStack {
                         Text("Current Unit")
@@ -184,7 +184,7 @@ public struct MetricConversionUnitView: View {
 
     struct ConversionView_Previews: PreviewProvider {
         static var previews: some View {
-            MetricConversionUnitView(
+            MetricConversionUnitsView(
                 expanded: ["Kilogram","Pound","Gram","Ounce"],
                 froms: ["kg","lb","g","oz"],
                 exchange: [1.0,2.20462262,1000.0,35.27],

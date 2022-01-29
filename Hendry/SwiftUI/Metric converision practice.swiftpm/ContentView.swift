@@ -63,28 +63,22 @@ struct ConversionView: View {
     let froms: [String]
     let exchange: [Double]
     let unitName: String
+    @State var equations : Equations = Equations()
+    @State var equation : Equation = Equation()
     @State var fromSelect = 0
     @State var toSelect = 0
     @State var andSelect = 0
     @State var fromUnit = ""
     @State var andUnit = "1"
-    @State var history = ""
-    @State var endResult = 0.0
     @State var operators = ""
     var fromUnitNumber : Double{
         return Double(fromUnit) ?? 0
     }
-    
-    func calculation(op : String){
-        if op == "+" {
-            endResult += fromUnitNumber
-        }else if op == "-"{
-            endResult -= fromUnitNumber
-        }else if op == "×"{
-            endResult *= fromUnitNumber
-        }else if op == "÷"{
-            endResult /= fromUnitNumber
-        }
+    var history : String{
+        return equations.text
+    }
+    var endResult : Double {
+        return equation.end
     }
     
     let inputOrder = [["1","2","3","+"],["4","5","6","-"],["7","8","9","×"],["C","0",".","÷"]]
@@ -113,49 +107,19 @@ struct ConversionView: View {
                             Button{
                                 if item == "C" {
                                     fromUnit = "0"
-                                    history = ""
-                                    endResult = 0.0
-                                }else if item == "+"{
-                                    if history.count == 0{
-                                        endResult += fromUnitNumber
-                                        history += "\(fromUnit)+"
+                                    equations = Equations()
+                                    equation = Equation()
+                                }else if item == "+" || item == "-" || item == "×" || item == "÷"{
+                                    if equations.items.count == 0 && equation.operation == ""{
+                                        equation.one = fromUnitNumber
+                                        equation.operation = item
                                     }else{
-                                        calculation(op: operators)
-                                        history += "\(fromUnit)=\(endResult)\n\(endResult)+"
+                                        equation.two = fromUnitNumber
+                                        equations.items.append(equation)
+                                        equation = Equation(one: equation.end, operation: item)
                                     }
-                                    operators = item
-                                    fromUnit = ""
-                                }else if item == "-"{
-                                    endResult -= fromUnitNumber
-                                    if history.count == 0{
-                                        endResult += fromUnitNumber
-                                        history += "\(fromUnit)-"
-                                    }else{
-                                        calculation(op: operators)
-                                        history += "\(fromUnit)=\(endResult)\n\(endResult)-"
-                                    }
-                                    operators = item
-                                    fromUnit = ""
-                                }else if item == "×"{
-                                    endResult = endResult * fromUnitNumber
-                                    if history.count == 0{
-                                        endResult += fromUnitNumber
-                                        history += "\(fromUnit)×"
-                                    }else{
-                                        calculation(op: operators)
-                                        history += "\(fromUnit)=\(endResult)\n\(endResult)×"
-                                    }
-                                    operators = item
-                                    fromUnit = ""
-                                }else if item == "÷"{
-                                    endResult /= fromUnitNumber
-                                    if history.count == 0{
-                                        endResult += fromUnitNumber
-                                        history += "\(fromUnit)÷"
-                                    }else{
-                                        calculation(op: operators)
-                                        history += "\(fromUnit)=\(endResult)\n\(endResult)÷"
-                                    }
+                                    print(equations)
+                                    print(equation)
                                     operators = item
                                     fromUnit = ""
                                 }else{

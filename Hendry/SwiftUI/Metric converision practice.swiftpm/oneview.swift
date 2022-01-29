@@ -1,5 +1,13 @@
 import SwiftUI
 
+
+
+struct OneView_Previews: PreviewProvider {
+    static var previews: some View {
+        OneView()
+    }
+}
+
 struct OneView: View {
     let froms = [
         ["kg","lb","g","oz"],
@@ -75,3 +83,4 @@ struct MetricConversionUnitView: View {
         }
     }
 }
+
