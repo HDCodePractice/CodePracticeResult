@@ -69,7 +69,7 @@ struct ConversionView: View {
     @State var fromUnit = "1"
     @State var andUnit = "1"
     @State var history = ""
-    @state var endresult = ""
+    @State var endresult = ""
     
     var fromUnitNumber : Double{
         return Double(fromUnit) ?? 0
@@ -105,7 +105,7 @@ struct ConversionView: View {
                                     
                                 }else if item == "+"{
                                     if history.count == 0{
-                                        history += "\(fromUnit)"
+                                        Double(history) += "\(fromUnit)"
                                     }else{
                                         history += "\(fromUnit)=\(endresult)\n\(endresult)"
                                     }
@@ -114,17 +114,17 @@ struct ConversionView: View {
                                     if history.count == 0{
                                         history += "\(fromUnit)"
                                     }else{
-                                        history -= \(fromUnit)="\ (endresult)\n\(endresult)"
+                                        history - = "\(fromUnit)=\(endresult)\n\(endresult)"
                                     }
                                     fromUnit = ""
-                                }else if item *= "×"{
+                                }else if item == "×"{
                                     if history.count == 0{
                                         history += "\(fromUnit)"
                                     }else{
                                         history *= "\(fromUnit)=\(endresult)\n\(endresult)"
                                     }
                                     fromUnit = ""
-                                }else if item /= "÷"{
+                                }else if item == "÷"{
                                     if history.count == 0{
                                         history += "\(fromUnit)"
                                     }else{
