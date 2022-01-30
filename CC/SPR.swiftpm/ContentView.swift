@@ -114,6 +114,8 @@ struct ContentView: View {
                             strImage = "question"
                         }
                 }
+                .frame(height: 100)
+                .padding(.bottom, 25.0)
             }
             
             ZStack(alignment: .top){
