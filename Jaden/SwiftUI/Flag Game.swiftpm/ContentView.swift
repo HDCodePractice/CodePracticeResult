@@ -5,22 +5,28 @@ struct ContentView: View {
     @State var answer: [String]?
     var body: some View {
         VStack{
-            if let answer = answer{
+            if game.gameStart{
                 HStack{
-                    Text(answer[0])
+                    Text(game.question)
 //                    Text(answer[1])
                 }
                 Text("")
-                ForEach(game.flags,id:\.self){flag in
+                ForEach(game.answers,id:\.self){flag in
                     Text(flag)
-                    
+                        .font(.largeTitle)
+
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(.green)
+                    Image(systemName: "x.circle.fill")
+                        .foregroundColor(.red)
+
                 }
             }else{
                 Text("A! Nothing!")
             }
-            Text("Start")
+            Text("Play")
                 .onTapGesture{
-                    answer = game.newGame()
+                    game.newGame()
                     
                 }
 
