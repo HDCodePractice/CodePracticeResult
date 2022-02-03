@@ -2,18 +2,23 @@ import SwiftUI
 
 struct ContentView: View {
     @State var game = Game()
-    @State var answer : [String]?
     
     var body: some View {
         VStack{
-            if let answer = answer{
+            if game.gameStart {
                 HStack{
-                    Text(answer[0])
-//                    Text(answer[1])
+                    Text(game.question)
                 }
                 Text("")
-                ForEach(game.flags,id:\.self){ flag in
-                    Text(flag)
+                ForEach(game.answers,id:\.self){ flag in
+                    HStack{
+                        Text(flag)
+                            .font(.largeTitle)
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundColor(.green)
+                        Image(systemName: "x.circle.fill")
+                            .foregroundColor(.red)
+                    }
                 }
                 
             }else{
@@ -22,7 +27,7 @@ struct ContentView: View {
             
             Text("Start")
                 .onTapGesture {
-                    answer = game.newGame()
+                    game.newGame()
                 }
         }
     }
