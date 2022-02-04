@@ -4,6 +4,10 @@ struct ContentView: View {
     @State var user : String = "Please choose!"
     @State var computer : String = "AI not choose yet"
     @State var wl : String = "Scissors paper rock!"
+    @State var scoreW : Int = 0
+    @State var scoreL : Int = 0
+    @State var scoreT : Int = 0
+    
     func triggerAI() {
         let all = ["Rock","Paper","Scissors"]
         
@@ -41,8 +45,11 @@ struct ContentView: View {
                 wl = result[2]
             }
         }
-            
-            
+    }
+    func scoreUpDate() {
+        scoreW += 1
+        scoreL += 1
+        scoreT += 1
     }
     var body: some View {
         VStack {
