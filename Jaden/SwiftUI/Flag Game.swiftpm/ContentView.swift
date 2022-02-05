@@ -14,11 +14,19 @@ struct ContentView: View {
                 ForEach(game.answers,id:\.self){flag in
                     Text(flag)
                         .font(.largeTitle)
+                        .onTapGesture{
+                            game.check = game.correct
+                        }
+                    if game.display == "yes"{
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundColor(.green)
+                            
+                    }else{
+                        Image(systemName: "x.circle.fill")
+                            .foregroundColor(.red)
 
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(.green)
-                    Image(systemName: "x.circle.fill")
-                        .foregroundColor(.red)
+                    }
+
 
                 }
             }else{

@@ -13,7 +13,9 @@ struct Game{
     var question : String = ""
     var gameStart : Bool = false
     var correct : String = ""
-    
+    var check = ""
+    var display = ""
+
     mutating func newGame(){
         let rCountries = Array(countries.shuffled().prefix(4))
         if let q = rCountries.first {
@@ -29,5 +31,14 @@ struct Game{
             }
             gameStart = true
         }
+    }
+    mutating func checking(){
+        newGame()
+        if check == correct{
+            display = "yes"
+        }else{
+            display = "no"
+        }
+            
     }
 }
