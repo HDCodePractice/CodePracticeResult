@@ -1,84 +1,74 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var game : Game = Game()
+    @State var user : String = "No Choose"
+    @State var computer : String = "No Choose"
+    @State var result : String = "Please Choose"
+    
+    func winOrLoose() {
+        let all = ["rock","paper","scissors"]
+        if let c = all.randomElement() {
+            computer = c
+            if computer == user {
+                result = "You Tied"
+            }
+            if (user=="rock"&&computer=="scissors") ||
+                (user=="scissors"&&computer=="paper") ||
+                (user=="paper"&&computer=="rock"){
+                result = "You Won"
+            }
+            if (user=="scissors"&&computer=="rock") ||
+                       (user=="paper"&&computer=="scissors") ||
+                (user=="rock"&&computer=="paper") {
+                result = "You Lost"
+            }
+            
+        }else{
+            computer = "No Choose"
+        }
+    }
     
     var body: some View {
-        if game.starting {
-            gameStarting
-        }else{
-            gameRestule
-        }
-    }
-    
-    var gameRestule: some View{
-        VStack{
-            Text(game.result)
+        VStack {
+            Text(computer)
                 .font(.largeTitle)
-            
-            Text("Play again")
-                .font(.largeTitle)
-                .onTapGesture(){
-                    game.starting = true
-                }
-        }
-    }
-    
-    var gameStarting: some View{
-        VStack(spacing:60) {
-            Image(game.computer)
-                .resizable()
-                .scaledToFit()
-                .cornerRadius(20)
             Image(systemName: "desktopcomputer")
                 .resizable()
                 .scaledToFit()
+                .foregroundColor(.accentColor)
+                .frame(width: 100, height: 100)
                 .padding()
-                .frame(width: 120, height: 120)
-                .onTapGesture(){
-                    game.genComputer()
-                }
-                            
-            Text(game.result)
+            Text(result)
                 .font(.largeTitle)
-            
-            Image(game.player)
-                .resizable()
-                .scaledToFit()
-                .cornerRadius(20)
-            
-            HStack(spacing:20){
+            HStack{
                 Image("rock")
                     .resizable()
                     .scaledToFit()
-                    .cornerRadius(20)
-                    .onTapGesture(){
-                        game.player = "rock"
-                        game.genComputer()
-                        game.starting = false
+                    .cornerRadius(30)
+                    .onTapGesture {
+                        user = "rock"
+                        winOrLoose()
                     }
-                
-                Image("scissors")
-                    .resizable()
-                    .scaledToFit()
-                    .cornerRadius(20)
-                    .onTapGesture(){
-                        game.player = "scissors"
-                        game.genComputer()
-                        game.starting = false
-                    }
-                
                 Image("paper")
                     .resizable()
                     .scaledToFit()
-                    .cornerRadius(20)
-                    .onTapGesture(){
-                        game.player = "paper"
-                        game.genComputer()
-                        game.starting = false
+                    .cornerRadius(30)
+                    .onTapGesture {
+                        user = "paper"
+                        winOrLoose()
+                    }
+                Image("scissors")
+                    .resizable()
+                    .scaledToFit()
+                    .cornerRadius(30)
+                    .onTapGesture {
+                        user = "scissors"
+                        winOrLoose()
                     }
             }
             .padding()
+            Text(user)
+                .font(.largeTitle)
         }
     }
 }
