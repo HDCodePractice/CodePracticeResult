@@ -8,15 +8,15 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "RPS",
+    name: "IDK",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "RPS",
+            name: "IDK",
             targets: ["AppModule"],
-            bundleIdentifier: "one.hdcola.Parker",
+            bundleIdentifier: "one.hdcola.parker.IDK",
             teamIdentifier: "W9SGDGC53Q",
             displayVersion: "1.0",
             bundleVersion: "1",
