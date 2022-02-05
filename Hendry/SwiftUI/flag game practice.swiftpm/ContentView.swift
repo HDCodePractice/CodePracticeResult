@@ -14,19 +14,18 @@ struct ContentView: View {
                         Text(flag)
                             .font(.largeTitle)
                         Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(.green.onTapGesture {
-                                flagput = flags[flag]
-                            })
-                        forEach(game.answers,id:\.self){
-                            i in Text(i)
-                            if countries[i] == flags[i] && flagput == flags[i]{
-                                Text("You are correct")
+                            .foregroundColor(.green)
+                            .onTapGesture {
+                                flagput = flag
                             }
-                            
+                        if flagput == flag{
+                            Text("You are correct")
                         }
                         
                     }
+                    
                 }
+                
                 
             }else{
                 Text("A! Nothing!")
