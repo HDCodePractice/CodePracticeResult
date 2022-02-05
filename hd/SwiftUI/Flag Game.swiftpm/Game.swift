@@ -14,6 +14,8 @@ struct Game{
     var question : String = ""
     var gameStart : Bool = false
     var correct : String = ""
+    var answer : String = ""
+    var score : Int = 0
     
     mutating func newGame(){
         let rCountries = Array(countries.shuffled().prefix(4))
@@ -30,5 +32,11 @@ struct Game{
             }
             gameStart = true
         }
+    }
+    
+    mutating func toggleAnswer(tAnswer: String){
+        answer = tAnswer
+        score += 1
+        gameStart = false
     }
 }
