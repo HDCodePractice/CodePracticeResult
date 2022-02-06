@@ -7,7 +7,7 @@ struct ContentView: View {
     @State var scoreW : Int = 0
     @State var scoreL : Int = 0
     @State var scoreT : Int = 0
-    @State var gameMode : Int  = 1
+    @State var gameMode : Int  = 0
     //0 start 1 gameing 2 result
     func triggerAI() {
         let all = ["Rock","Paper","Scissors"]
@@ -85,6 +85,19 @@ struct ContentView: View {
                 triggerAI()
             }
     }
+    var startPage: some View{
+        VStack {
+            Text("Scissors paper rock!").font(.largeTitle).fontWeight(.medium)
+            ZStack {
+                Rectangle().fill(Color.blue)
+                    .frame(width: 150, height: 50).cornerRadius(20)
+                Text("Start!")
+                    .font(.title2).fontWeight(.medium).foregroundColor(/*@START_MENU_TOKEN@*/.white/*@END_MENU_TOKEN@*/).onTapGesture {
+                        gameMode = 1
+                    }
+            }
+        }
+    }
     var gameResult: some View {
         VStack{
             Text(wl).font(.largeTitle).fontWeight(.medium)
@@ -156,7 +169,9 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             Rectangle().fill(Color.blue).frame(width: .infinity, height: 85).padding(.bottom, 650).ignoresSafeArea()
-            if gameMode == 1{
+            if gameMode == 0 {
+                startPage
+            }else if gameMode == 1{
                 gamePlay
             }else if gameMode == 2{
                 gameResult
