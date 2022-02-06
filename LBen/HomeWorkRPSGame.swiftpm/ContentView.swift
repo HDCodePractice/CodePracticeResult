@@ -1,58 +1,16 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var result:String = "Paper! Rock! Scissor! Go!";
-    @State var user:String = "";
-    @State var computer:String = "";
-    @State var resultCount:[String: Int] =  [
-        "win": 0,
-        "lose": 0,
-        "draw": 0
-    ];
-    @State var rpsSet:[Int:String] = [
-        1: "rocks",
-        2: "paper",
-        3: "scissors"
-    ];
-    
-    func winOrLose(userOutput:Int) -> String{
-        var statement:String = "";
-        let computerOutput = rpsSet.randomElement()!.key
-        computer = rpsSet[computerOutput]!
-        if (userOutput == computerOutput) {
-            statement = "Draw!!"
-            resultCount["draw"]! = resultCount["draw"]! + 1;
-        } else if (userOutput ==  computerOutput + 1) {
-            statement = "You Win!!"
-            resultCount["win"]! = resultCount["win"]! + 1;
-        } else {
-            statement = "You Lose!!"
-            resultCount["lose"]! = resultCount["lose"]! + 1
-        }
-        return statement;
-    }
-    
-    func resetResultCount() {
-        resultCount =  [
-            "win": 0,
-            "lose": 0,
-            "draw": 0
-        ];
-    }
-    func playAgain() {
-    result = "Paper! Rock! Scissor! Go!"
-    user = "";
-    computer = "";
-    }
+    @State var game = Game()
     var body: some View {
-        if (result == "Paper! Rock! Scissor! Go!") {
+        if (game.result == "Paper! Rock! Scissor! Go!") {
             VStack {
                 Image(systemName: "desktopcomputer")
                     .resizable()
                     .frame(width: 80, height: 80,alignment: .center)
                     .foregroundColor(.accentColor)
                     .padding()
-                Text(result)
+                Text(game.result)
                 HStack {
                     Image("rocks")
                         .resizable()
@@ -60,8 +18,8 @@ struct ContentView: View {
                         .clipShape(Circle())
                         .padding()
                         .onTapGesture{
-                            result = winOrLose(userOutput: 1)
-                            user = "rocks"
+                            game.result = game.winOrLose(userOutput: 1)
+                            game.user = "rocks"
                         }
                     Image("paper")
                         .resizable()
@@ -69,8 +27,8 @@ struct ContentView: View {
                         .clipShape(Circle())
                         .padding()
                         .onTapGesture{
-                            result = winOrLose(userOutput: 2)
-                            user = "paper"
+                            game.result = game.winOrLose(userOutput: 2)
+                            game.user = "paper"
                         }
                     Image("scissors")
                         .resizable()
@@ -78,20 +36,20 @@ struct ContentView: View {
                         .clipShape(Circle())
                         .padding()
                         .onTapGesture{
-                            result = winOrLose(userOutput: 3)
-                            user = "scissors"
+                            game.result = game.winOrLose(userOutput: 3)
+                            game.user = "scissors"
                         }
                     }
                 }
         } else {
             VStack {
                 HStack{
-                    Text("Win: " + String(resultCount["win"]!))
-                    Text("Lose: " + String(resultCount["lose"]!))
-                    Text("Draw: " + String(resultCount["draw"]!))
+                    Text("Win: " + String(game.resultCount["win"]!))
+                    Text("Lose: " + String(game.resultCount["lose"]!))
+                    Text("Draw: " + String(game.resultCount["draw"]!))
                 }
                 
-                Image(computer)
+                Image(game.computer)
                     .resizable()
                     .scaledToFit()
                     .clipShape(Circle())
@@ -102,9 +60,9 @@ struct ContentView: View {
                     .frame(width: 80, height: 80,alignment: .center)
                     .foregroundColor(.accentColor)
                     .padding()
-                Text(result)
+                Text(game.result)
                 HStack {
-                    Image(user)
+                    Image(game.user)
                         .resizable()
                         .scaledToFit()
                         .clipShape(Circle())
@@ -112,14 +70,60 @@ struct ContentView: View {
                     }
                 HStack {
                     Button( "Play Again?", action:{
-                        playAgain()
+                        game.playAgain()
                     }).foregroundColor(.blue)
                     Button("Reset Count!",action:{
-                        resetResultCount();
-                        playAgain()
+                        game.resetResultCount();
+                        game.playAgain()
                     }).foregroundColor(.red)
-                }
+                }.padding()
             }
         }
+    }
+}
+
+struct Game {
+    var result:String = "Paper! Rock! Scissor! Go!";
+    var user:String = "";
+    var computer:String = "";
+    var resultCount:[String: Int] =  [
+        "win": 0,
+        "lose": 0,
+        "draw": 0
+    ];
+    var rpsSet:[Int:String] = [
+        1: "rocks",
+        2: "paper",
+        3: "scissors"
+    ];
+    
+    mutating func winOrLose(userOutput:Int) -> String{
+        var statement:String = "";
+        let computerOutput = rpsSet.randomElement()!.key
+        computer = rpsSet[computerOutput]!
+        if (userOutput == computerOutput) {
+            statement = "Draw!!"
+            resultCount["draw"]! = resultCount["draw"]! + 1;
+        } else if (userOutput ==  computerOutput + 1 || userOutput == computerOutput - 2) {
+            statement = "You Win!!"
+            resultCount["win"]! = resultCount["win"]! + 1;
+        } else {
+            statement = "You Lose!!"
+            resultCount["lose"]! = resultCount["lose"]! + 1
+        }
+        return statement;
+    }
+    
+    mutating func resetResultCount() {
+        resultCount =  [
+            "win": 0,
+            "lose": 0,
+            "draw": 0
+        ];
+    }
+    mutating func playAgain() {
+    result = "Paper! Rock! Scissor! Go!"
+    user = "";
+    computer = "";
     }
 }
