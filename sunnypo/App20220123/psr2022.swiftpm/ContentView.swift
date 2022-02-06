@@ -20,7 +20,7 @@ struct ContentView: View {
         caculateResult()
     }
     func caculateResult() {
-        let result = ["You win!", "L", "Tie!"]
+        let result = ["You win!", "You lose!", "Tie!"]
         if user == "Rock" {
             if computer == "Rock"{
                 wl = result[2]
@@ -116,15 +116,15 @@ struct ContentView: View {
         VStack {
             
             Text(computer).font(.title2)
-                .fontWeight(.heavy)
+                .fontWeight(.heavy).foregroundColor(Color.white)
             if computer == "Rock"{
-                imageRock
+                imageRock.imageScale(.small).padding(.all, 20.0) 
             }else if computer == "Paper"{
-                imagePaper
+                imagePaper.imageScale(.small).padding(.all, 20.0)
             }else if computer == "Scissors"{
-                imageScissors
+                imageScissors.imageScale(.small).padding(.all, 20.0)
             }else {
-                imageRock.hidden()
+                imageRock.hidden().imageScale(.small).padding(.all, 20.0)
             }
             
             Image(systemName: "desktopcomputer").resizable().scaledToFit()
@@ -155,13 +155,13 @@ struct ContentView: View {
     }
     var body: some View {
         ZStack {
-//            Rectangle().fill(Color.blue).ignoresSafeArea().frame(width: 500, height: 70).padding(.bottom, 650)
+            Rectangle().fill(Color.blue).frame(width: .infinity, height: 85).padding(.bottom, 650).ignoresSafeArea()
             if gameMode == 1{
                 gamePlay
             }else if gameMode == 2{
                 gameResult
             }
-            
+
         }
         
     }
