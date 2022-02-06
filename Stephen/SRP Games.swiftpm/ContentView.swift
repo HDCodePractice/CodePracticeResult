@@ -39,13 +39,13 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Text(computer)
-                .font(.largeTitle)
+//                .font(.largeTitle)
             Image(comImage)
                 .resizable()
                 .scaledToFit()
                 .foregroundColor(.accentColor)
                 .cornerRadius(20)
-                .frame(width:200,height: 100)
+                .frame(width:400,height: 200)
             Text(result)
                 .font(/*@START_MENU_TOKEN@*/.largeTitle/*@END_MENU_TOKEN@*/)
                 .multilineTextAlignment(.center)
@@ -86,10 +86,11 @@ struct ContentView: View {
                     .resizable()
                     .scaledToFit()
                     .cornerRadius(20)
-                    .frame(width:200,height: 100)
+                    .frame(width:400,height: 200)
                 Text(user)
                
                 Image(systemName: "restart.circle")
+                    .frame(width: 25, height:25)
                     .onTapGesture {
                         result = "Please choose"
                         user = "No Choose!"
