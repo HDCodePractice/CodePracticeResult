@@ -4,6 +4,13 @@ struct ContentView: View {
     @State var game = Game()
     var body: some View {
         if (game.result == "Paper! Rock! Scissor! Go!") {
+            startingView
+        } else {
+            finishView
+        }
+    }
+    
+    var startingView: some View {
             VStack {
                 Image(systemName: "desktopcomputer")
                     .resizable()
@@ -12,74 +19,61 @@ struct ContentView: View {
                     .padding()
                 Text(game.result)
                 HStack {
-                    Image("rocks")
-                        .resizable()
-                        .scaledToFit()
-                        .clipShape(Circle())
-                        .padding()
-                        .onTapGesture{
-                            game.result = game.winOrLose(userOutput: 1)
-                            game.user = "rocks"
-                        }
-                    Image("paper")
-                        .resizable()
-                        .scaledToFit()
-                        .clipShape(Circle())
-                        .padding()
-                        .onTapGesture{
-                            game.result = game.winOrLose(userOutput: 2)
-                            game.user = "paper"
-                        }
-                    Image("scissors")
-                        .resizable()
-                        .scaledToFit()
-                        .clipShape(Circle())
-                        .padding()
-                        .onTapGesture{
-                            game.result = game.winOrLose(userOutput: 3)
-                            game.user = "scissors"
-                        }
+                    ForEach(game.rpsSet.sorted(by: <), id: \.key) { key, value in
+                        Image(value)
+                            .resizable()
+                            .scaledToFit()
+                            .clipShape(Circle())
+                            .padding()
+                            .onTapGesture{
+                                game.result = game.winOrLose(userOutput: key)
+                                game.user = value
+                            }
+                    }
+
+
                     }
                 }
-        } else {
-            VStack {
-                HStack{
-                    Text("Win: " + String(game.resultCount["win"]!))
-                    Text("Lose: " + String(game.resultCount["lose"]!))
-                    Text("Draw: " + String(game.resultCount["draw"]!))
-                }
-                
-                Image(game.computer)
+        }
+    var finishView: some View {
+        VStack {
+            HStack{
+                Text("Win: " + String(game.resultCount["win"]!))
+                Text("Lose: " + String(game.resultCount["lose"]!))
+                Text("Draw: " + String(game.resultCount["draw"]!))
+            }
+            
+            Image(game.computer)
+                .resizable()
+                .scaledToFit()
+                .clipShape(Circle())
+                .padding()
+                .rotationEffect(.degrees(180))
+            Image(systemName: "desktopcomputer")
+                .resizable()
+                .frame(width: 80, height: 80,alignment: .center)
+                .foregroundColor(.accentColor)
+                .padding()
+            Text(game.result)
+            HStack {
+                Image(game.user)
                     .resizable()
                     .scaledToFit()
                     .clipShape(Circle())
                     .padding()
-                    .rotationEffect(.degrees(180))
-                Image(systemName: "desktopcomputer")
-                    .resizable()
-                    .frame(width: 80, height: 80,alignment: .center)
-                    .foregroundColor(.accentColor)
-                    .padding()
-                Text(game.result)
-                HStack {
-                    Image(game.user)
-                        .resizable()
-                        .scaledToFit()
-                        .clipShape(Circle())
-                        .padding()
-                    }
-                HStack {
-                    Button( "Play Again?", action:{
-                        game.playAgain()
-                    }).foregroundColor(.blue)
-                    Button("Reset Count!",action:{
-                        game.resetResultCount();
-                        game.playAgain()
-                    }).foregroundColor(.red)
-                }.padding()
-            }
+                }
+            HStack {
+                Button( "Play Again?", action:{
+                    game.playAgain()
+                }).foregroundColor(.blue)
+                Button("Reset Count!",action:{
+                    game.resetResultCount();
+                    game.playAgain()
+                }).foregroundColor(.red)
+            }.padding()
         }
     }
+    
 }
 
 struct Game {
