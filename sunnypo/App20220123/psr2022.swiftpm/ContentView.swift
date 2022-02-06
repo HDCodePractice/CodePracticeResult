@@ -61,6 +61,30 @@ struct ContentView: View {
         scoreL = 0
         scoreT = 0
     }
+    var imageRock: some View{
+        Image("Rock")
+            .resizable().scaledToFit()
+            .cornerRadius(5).onTapGesture {
+                user = "Rock"
+                triggerAI()
+            }
+    }
+    var imagePaper: some View{
+        Image("Paper")
+            .resizable().scaledToFit()
+            .cornerRadius(5).onTapGesture {
+                user = "Paper"
+                triggerAI()
+            }
+    }
+    var imageScissors: some View{
+        Image("Scissors")
+            .resizable().scaledToFit()
+            .cornerRadius(5).onTapGesture {
+                user = "Scissors"
+                triggerAI()
+            }
+    }
     var gameResult: some View {
         VStack{
             Text(wl).font(.largeTitle).fontWeight(.medium)
@@ -90,30 +114,29 @@ struct ContentView: View {
     }
     var gamePlay: some View {
         VStack {
+            
             Text(computer).font(.title2)
-                .fontWeight(.medium)
+                .fontWeight(.heavy)
+            if computer == "Rock"{
+                imageRock
+            }else if computer == "Paper"{
+                imagePaper
+            }else if computer == "Scissors"{
+                imageScissors
+            }else {
+                imageRock.hidden()
+            }
+            
             Image(systemName: "desktopcomputer").resizable().scaledToFit()
                 .foregroundColor(.accentColor)
                 .padding(.all, 20)
-                .frame(width: 200, height: 200)
-            //.imageScale(.large)
+                .frame(width: 200, height: 100)
+                .imageScale(.small)
             Text(wl).font(.largeTitle).fontWeight(.medium)
             HStack {
-                Image("Rock")
-                    .resizable().scaledToFit()
-                    .cornerRadius(5).onTapGesture {
-                        user = "Rock"
-                        triggerAI()
-                    }
-                Image("Paper").resizable().scaledToFit()
-                    .cornerRadius(5).onTapGesture {
-                        user = "Paper"
-                        triggerAI()
-                    }
-                Image("Scissors").resizable().scaledToFit().cornerRadius(5).onTapGesture {
-                    user = "Scissors"
-                    triggerAI()
-                }
+                imageRock
+                imagePaper
+                imageScissors
             }
             .padding(.all, 10.0)
             Text(user)
@@ -127,15 +150,19 @@ struct ContentView: View {
                         gameMode = 2
                     }
             }
+            //.padding(.bottom, 150.0)
         }
     }
     var body: some View {
-        VStack {
+        ZStack {
+//            Rectangle().fill(Color.blue).ignoresSafeArea().frame(width: 500, height: 70).padding(.bottom, 650)
             if gameMode == 1{
                 gamePlay
             }else if gameMode == 2{
                 gameResult
             }
+            
         }
+        
     }
 }
