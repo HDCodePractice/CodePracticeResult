@@ -127,20 +127,30 @@ struct ContentView: View {
                 Text("Play it again")
                     .font(.largeTitle)
                     .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                    .overlay(RoundedRectangle(cornerRadius: 15)
+                                .stroke(lineWidth: 3))
+                    .foregroundColor(Color.blue)
                     .onTapGesture {
                         playingornot = true
                         computer = "No Choose"
                         user = "No Choose"
                         result = "Please Choose"
                     }
+                    
                 HStack {
                     Text("won: \(won)")
+                        .font(.title)
                     Text("lost: \(lost)")
+                        .font(.title)
                     Text("tied: \(tied)")
+                        .font(.title)
                 }
                 Text("Restart")
                     .font(.largeTitle)
                     .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
+                    .overlay(RoundedRectangle(cornerRadius: 15)
+                                .stroke(lineWidth: 3))
+                    .foregroundColor(Color.blue)
                     .onTapGesture {
                         playingornot = true
                         computer = "No Choose"
