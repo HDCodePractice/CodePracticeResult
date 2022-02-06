@@ -92,6 +92,9 @@ struct ContentView: View {
                 Image(systemName: "restart.circle")
                     .onTapGesture {
                         result = "Please choose"
+                        user = "No Choose!"
+                        computer = "No Choose!"
+                        comImage = "robot"
                     }
                 VStack(
                        alignment: .leading,
