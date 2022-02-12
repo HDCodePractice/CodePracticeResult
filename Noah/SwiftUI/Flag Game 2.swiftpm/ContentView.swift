@@ -47,21 +47,6 @@ struct GameView: View {
                 } else {
                     if game.gameStart {
                         gamestart
-                        VStack {
-                            Button() {
-                                game.current += 1
-                                game.newGame()
-                            } label: {
-                                ZStack {
-                                    Color.red
-                                    Text("Continue")
-                                        .foregroundColor(.white)
-                                }
-                                .frame(width: 140, height: 50)
-                                .cornerRadius(5)
-                                .shadow(radius: 5)
-                            }
-                        }
                     } else {
                         gameEnd
                         VStack {
