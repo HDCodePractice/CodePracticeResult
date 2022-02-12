@@ -89,7 +89,7 @@ struct GameView: View {
         }
         .ignoresSafeArea()
     }
-    
+
     var gamestart: some View {
         VStack{
             Text("\(game.current+1)/\(game.total)")
@@ -120,24 +120,22 @@ struct GameView: View {
                 .font(.largeTitle)
             Button(){
                 started = false
-                
+                game.newGame()
             } label: {
                 ZStack{
                     Color.blue
                     Text("Play Again")
                         .foregroundColor(.white)
                         .font(.largeTitle)
-                
-                        
+
+
                 }
                 .frame(width: 200, height: 100)
                 .cornerRadius(15)
                 }
             }
-            
-
         }
-    }
+    
     
     var gameEnd: some View{
         VStack{
