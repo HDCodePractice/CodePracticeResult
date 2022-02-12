@@ -59,6 +59,7 @@ struct Game{
         flog.append(countries[source[2]])
         flog.append(countries[source[3]])
         countries.remove(at: currentIndex)
+        
         print(rCountries)
         questionNumber += 1
         charger += 1
@@ -88,6 +89,10 @@ struct Game{
             }
             gameStart = true
         }
+//        flog.remove(at: countries[source[0]])
+//        flog.remove(at:  countries[source[1]])
+//        flog.remove(at:  countries[source[2]])
+//        flog.remove(at:  countries[source[3]])
     }
     mutating func toggleAnswer(tAnswer: String){
         answer = tAnswer
