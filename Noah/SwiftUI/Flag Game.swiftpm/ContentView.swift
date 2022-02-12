@@ -3,26 +3,31 @@ struct ContentView: View {
     let difficulties = ["Easy","Medium","Hard"]
     var body: some View {
         NavigationView {
-            VStack {
-                ForEach(difficulties,id: \.self){ difficulty in
-                    NavigationLink() {
-                        GameView(
-                            Difficulty: difficulty
-                        )
-                    } label: {
-                        ZStack {
-                            Text(difficulty)
-                                .font(.title)
-                                .padding()
+            ZStack {
+                LinearGradient(colors: [.orange,.yellow], startPoint: .top, endPoint: .bottom)
+                VStack {
+                    
+                    ForEach(difficulties,id: \.self){ difficulty in
+                        NavigationLink() {
+                            GameView(
+                                Difficulty: difficulty
+                            )
+                        } label: {
+                            ZStack {
+                                Text(difficulty)
+                                    .font(.title)
+                                    .padding()
+                            }
+                            .frame(width:300)
+                            .foregroundColor(.white)
+                            .background(.red)
+                            .cornerRadius(10)
+                            .shadow(radius: 5)
                         }
-                        .frame(width:300)
-                        .foregroundColor(.white)
-                        .background(.gray)
-                        .cornerRadius(10)
-                        .shadow(radius: 5)
                     }
                 }
             }
+            .ignoresSafeArea()
             .navigationTitle("Guess the Flag  🚩")
         }
     }
@@ -59,18 +64,18 @@ struct GameView: View {
                     }
                     continueButton = true
                     chosenResponse = flag
-
+                    
                 } label: {
                     Text(flag)
                         .font(.system(size: 60))
                 }
-                if response == "x.circle.fill" && flag == chosenResponse {
-                    Image(systemName: response)
-                        .foregroundColor(.red)
+                if flag == chosenResponse {
+                    Image(systemName: flag == game.CorrectAnswer ? "checkmark.circle.fill" : "x.circle.fill")
+                        .foregroundColor(chosenResponse == game.CorrectAnswer ? .green : .red)
                 }
-                if (response == "checkmark.circle.fill" && flag == chosenResponse) || (flag == game.CorrectAnswer && response != "") {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundColor(.green)
+                if flag == game.CorrectAnswer && flag != chosenResponse {
+                    Image(systemName: flag == game.CorrectAnswer ? "checkmark.circle.fill" : "x.circle.fill")
+                        .foregroundColor(chosenResponse == game.CorrectAnswer ? .green : .red)
                 }
             }
         }
@@ -89,9 +94,9 @@ struct GameView: View {
                     Text("Continue")
                         .foregroundColor(.white)
                 }
-                    .frame(width: 140, height: 50)
-                    .cornerRadius(5)
-                    .shadow(radius: 5)
+                .frame(width: 140, height: 50)
+                .cornerRadius(5)
+                .shadow(radius: 5)
             }
         }
     }
@@ -109,9 +114,9 @@ struct GameView: View {
                     Text("Start")
                         .foregroundColor(.white)
                 }
-                    .frame(width: 140, height: 50)
-                    .cornerRadius(5)
-                    .shadow(radius: 5)
+                .frame(width: 140, height: 50)
+                .cornerRadius(5)
+                .shadow(radius: 5)
             }
         }
     }
