@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var game = Game()
-    
+    @State var answer = ""
     var body: some View {
         VStack{
             if game.gameStart {
@@ -16,7 +16,7 @@ struct ContentView: View {
                             .font(.largeTitle)
                         Image(systemName: "checkmark.circle.fill")
                             .foregroundColor(.green)
-                            .onTapGesture(answers = flag)
+                            .onTapGesture(answer = flag)
                         Image(systemName: "x.circle.fill")
                             .foregroundColor(.red)
                     }
