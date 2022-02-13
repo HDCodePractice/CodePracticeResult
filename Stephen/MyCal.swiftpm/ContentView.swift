@@ -100,31 +100,31 @@ struct ContentView: View {
                     .imageScale(.large)
                     .foregroundColor(.accentColor)
                     .onTapGesture {
-                        cal.input = "/"
+                        cal.tmpOpt = "/"
                     }
                 Image(systemName: "multiply.circle")
                     .imageScale(.large)
                     .foregroundColor(.accentColor)
                     .onTapGesture {
-                        cal.input = "*"
+                        cal.tmpOpt = "*"
                     }
                 Image(systemName: "minus.circle")
                     .imageScale(.large)
                     .foregroundColor(.accentColor)
                     .onTapGesture {
-                        cal.input = "-"
+                        cal.tmpOpt = "-"
                     }
                 Image(systemName: "plus.circle")
                     .imageScale(.large)
                     .foregroundColor(.accentColor)
                     .onTapGesture {
-                        cal.input = "+"
+                        cal.tmpOpt = "+"
                     }
                 Image(systemName: "equal.circle")
                     .imageScale(.large)
                     .foregroundColor(.accentColor)
                     .onTapGesture {
-                        cal.input = "="
+                        cal.equal = "="
                     }
             }
         }
@@ -143,7 +143,7 @@ struct Calcu {
     var tmpN1 : String = ""
     var tmpN2 : String = ""
     var tmpOpt : String = ""
-    var equal : String = "+"
+    var equal : String = "="
     let allopt = ["+","-","*","/"]
     
 //    let numberRows = ["row1", "row2", "row3"]
@@ -169,7 +169,10 @@ struct Calcu {
         output = "0"
     }
 
-    mutating func inputResult(){
-        
+    mutating func inputResult(input:String){
+        if input == equal{
+            N1 = Double(tmpN1)
+            N2 = Double(tmpN2)
+        }
     }
 }
