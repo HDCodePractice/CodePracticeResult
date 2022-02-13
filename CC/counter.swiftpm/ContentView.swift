@@ -155,10 +155,20 @@ class calculate {
     }
     
     func onOper(oper:String){
+        if isPoint{
+            strNum = String("\(Int(currentNum)).\(Int(afterPoint))")
+            currentNum = Double(strNum) ?? 0
+        }
         isPoint = false
         currentOpe = oper
+        
         if isMinus{
-            currentEqu = currentEqu + String("(-\(currentNum))")
+            if currentNum > 0 {
+                currentEqu = currentEqu + String("(-\(currentNum))")
+            }else{
+                currentEqu = currentEqu + String("\(currentNum)")
+            }
+            isMinus = false
         }else{
             currentEqu = currentEqu + String("\(currentNum)")
         }
@@ -172,25 +182,24 @@ class calculate {
         if currentOpe != ""{
             currentEqu = currentEqu + currentOpe
             currentOpe = ""
-            strNum = String("\(currentNum)")
+            strNum = String("\(clickNum)")
         }
         if isPercent {
-            currentNum = Double(clickNum)
+            //currentNum = Double(clickNum)
             isPercent = false
         }
         if isPoint {
             afterPoint = afterPoint * 10 + clickNum
-        }
-        if afterPoint > 0 {
             strNum = String("\(Int(currentNum)).\(Int(afterPoint))")
-        }else if !isPoint {
+//            if afterPoint > 0 {
+//                strNum = String("\(Int(currentNum)).\(Int(afterPoint))")
+//            }
+        }else{
             currentNum = currentNum * 10 + clickNum
             strNum = String("\(currentNum)")
         }
         if isMinus {
-            strNum = String("-\(currentNum)")
-        }else{
-            strNum = String("\(currentNum)")
+            strNum = String("-\(strNum)")
         }
     }
     
@@ -258,6 +267,8 @@ class calculate {
         
         let Res = NSExpression(format: currentEqu).expressionValue(with: nil, context: nil) as? Double
         strNum = currentEqu + " = " + String("\(Res!)")
+        currentNum = Res!
+        currentEqu = ""
         
     }
 
