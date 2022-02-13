@@ -7,17 +7,6 @@ struct ContentView: View {
     let arrtop = ["AC", "+/-", "%", "/"]
     let calcu = calculate()
     @State var strResult:String = "0"
-//    @State var strNum:String = ""
-//    @State var strEquation:String = ""
-//    @State var strOper:String = ""
-//    @State var isNum:Bool = false
-//    @State var isOper:Bool = false
-//    @State var isMinus:Bool = false
-//    @State var isAC:Bool = true
-//    @State var result:Double = 0
-//    @State var isOp:Bool = false
-//    @State var isMi:Bool = false
-//    @State var isPercent:Bool = false
     
     var body: some View {
         VStack {
@@ -137,95 +126,6 @@ struct ContentView: View {
         }
         strResult = calcu.strNum
     }
-//        if isOp {
-//            isOper = true
-//            isNum = false
-//            isPercent = false
-//            strOper = input
-//            if strResult == "0" {
-//                strNum = "0"
-//            }
-//
-//            if isMinus {
-//                strEquation = strEquation + "-(" + strNum + ")"
-//            }else{
-//                strEquation = strEquation + strNum
-//            }
-//            strEquation = strEquation + strOper
-//            strResult = strEquation
-//
-//            strNum = ""
-//            isMinus = false
-//            return
-//        }
-//        if isMi {
-//            if strResult == "0"{
-//                strNum = "0"
-//            }
-//            if isMinus {
-//                isMinus = false
-//            }else{
-//                isMinus = true
-//            }
-//            if isMinus {
-//                strResult = "-" + strNum
-//            }else {
-//                strResult = strNum
-//            }
-//            isNum = true
-//            isOper = false
-//            return
-//        }
-//        if isNum {
-//
-//            if strEquation != "" && strOper != ""{
-//                strEquation = strEquation + strOper
-//            }
-//            //strOper = ""
-//            if isPercent{
-//                strNum = strNum + "/100"
-//                isPercent = false
-//            }else{
-//                if strResult == "0" || strNum == "0"{
-//                    strNum = input
-//                }else{
-//                    strNum = strNum + input
-//                }
-//            }
-//            strResult = strNum
-//            //strResult = String(Double(strNum) ?? 0)
-//            //strEquation = strNum
-//        }
-//    }
-    
-//    func calculate(){
-//
-//        if strOper != ""{
-//            strEquation = String("\result") + strOper + String("\result")
-////            result = Double(strEquation) ?? 0
-////            strResult = String("\result")
-//        }else{
-////            result = Double(strEquation) ?? 0
-////            strResult = String("\result")
-//        }
-//        //clear()
-//       // if strOper == "" {
-//            strResult = strEquation
-//       // }else{
-//       //     strResult = "111"
-//       // }
-//    }
-//
-//    func clear (){
-//        //strResult = "0"
-//        strNum = ""
-//        strEquation = ""
-//        strOper = ""
-//        isNum = false
-//        isOper = false
-//        isMinus = false
-//    }
-    
    
 }
 
@@ -358,12 +258,6 @@ class calculate {
         
         let Res = NSExpression(format: currentEqu).expressionValue(with: nil, context: nil) as? Double
         strNum = currentEqu + " = " + String("\(Res!)")
-        
-//       strNum = String(Double("\(2.0*4.0-2.0)") ?? 0)
-//        Text(String(Double("\(50+0.5123)") ?? 0))
-//        Text(String(Double("\(501/100.0+1)") ?? 0))
-//        let expression = NSExpression(format:currentEqu)
-//        var _ : Double? = expression.expressionValue(with: nil, context: nil) as? Double
         
     }
 
