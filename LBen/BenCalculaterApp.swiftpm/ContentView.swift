@@ -9,7 +9,6 @@ struct ContentView: View {
     ]
     var body: some View {
         VStack(alignment: .trailing) {
-            Text(cal.history)
             Text(cal.output).font(.largeTitle)
         }
         VStack {
