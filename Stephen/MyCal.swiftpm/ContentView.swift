@@ -142,6 +142,7 @@ struct Calcu {
     var input : String = ""
     var tmpN1 : String = ""
     var tmpN2 : String = ""
+    var tmpOpt : String = ""
     var equal : String = "+"
     let allopt = ["+","-","*","/"]
     
@@ -161,17 +162,14 @@ struct Calcu {
     }
     
     mutating func inputOperator(opt:String){
-        if input == "+" {
-            
-            
-        }
+        tmpOpt = input
     }
 
     mutating func inputAC(inputstring: String){
         output = "0"
     }
 
-//   func inputResult(){
-//
-//    }
+    mutating func inputResult(){
+        
+    }
 }
