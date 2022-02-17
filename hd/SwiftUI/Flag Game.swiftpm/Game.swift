@@ -11,7 +11,9 @@ struct Game{
     let flags = ["🇨🇦","🇺🇸","🇨🇳","🇻🇨","🇬🇧","🇷🇺","🇯🇵","🇬🇸"]
     let countries = ["Canada","United States","China","St. Vincent & Grenadines","United Kingdom","Russia","Japan","South Georgia & South Sandwich Islands"]
 
+    // game start & game end
     var gameStart : Bool = false
+    var questionStart : Bool = false
     // flags
     var answers : [String] = []
     // countrie name
@@ -30,6 +32,8 @@ struct Game{
         total = exams.count
         current = 0
         setQuestion()
+        gameStart = true
+        questionStart = true
     }
     
     mutating func setQuestion(){
@@ -56,17 +60,24 @@ struct Game{
         }
         // question
         question = countries[currentIndex]
-        gameStart = true
     }
     
     mutating func nextQuestion(){
-        current += 1
-        setQuestion()
+        if current == total - 1 {
+            gameStart = false
+            questionStart = false
+        }else{
+            current += 1
+            setQuestion()
+            questionStart = true
+        }
     }
     
     mutating func toggleAnswer(tAnswer: String){
         answer = tAnswer
         score += 1
-        gameStart = false
+        
+        questionStart = false
+        gameStart = true
     }
 }
