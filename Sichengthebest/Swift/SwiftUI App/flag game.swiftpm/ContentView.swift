@@ -3,7 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @State var game = Game()
     
-    var gamestart: some View {
+    var questionstart: some View {
         VStack{
             HStack{
                 Text(game.question)
@@ -21,7 +21,7 @@ struct ContentView: View {
         }
     }
     
-    var gameEnd: some View{
+    var questionEnd: some View{
         VStack{
             HStack{
                 Text(game.question)
@@ -46,14 +46,20 @@ struct ContentView: View {
     
     var body: some View {
         VStack{
-            if game.gameStart {
-                gamestart
+            if game.questionStart {
+                questionstart
             }else{
-                gameEnd
-                Text("Next")
-                    .onTapGesture {
+                questionEnd
+                Text("\(game.current) out of \(game.total)")
+                if game.gameStart == false {
+                    Text("Start")
+                        .onTapGesture {
                         game.newGame()
                     }
+                } else {
+                    Text("Next")
+                }
+                    
             }
             
         }
