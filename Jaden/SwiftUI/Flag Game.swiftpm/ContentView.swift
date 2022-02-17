@@ -3,33 +3,17 @@ import SwiftUI
 struct ContentView: View {
     let difficulties = ["Start"]
     var body: some View {
-        GameView(Difficulty: "Start")
-//        NavigationView {
-//            ZStack {
-//                VStack {
-//                    ForEach(difficulties,id: \.self){ difficulty in
-//                        NavigationLink() {
-//                            GameView(
-//                                Difficulty: difficulty
-//                            )
-//                        } label: {
-//                            ZStack {
-//                                Text(difficulty)
-//                                    .font(.title)
-//                                    .padding()
-//                            }
-//                            .frame(width:200)
-//                            .foregroundColor(.white)
-//                            .background(.blue)
-//                            .cornerRadius(5)
-//
-//                        }
-//                    }
-//                }
-//            }
-//            .ignoresSafeArea()
-//            .navigationTitle("Flag Game")
-//        }
+        NavigationView{
+            ZStack{
+                VStack{
+                    GameView(Difficulty: "Start")
+                }
+
+            }
+
+        }
+        .ignoresSafeArea()
+        .navigationTitle("Flag Game")
     }
 }
 
@@ -41,13 +25,13 @@ struct GameView: View {
     var body: some View {
         ZStack {
             VStack{
-                if game.Results {
-                    Results
+                if game.result {
+                    result
                 } else {
                     if game.gameStart {
-                        gamestart
+                        start
                     } else {
-                        gameEnd
+                        end
                         VStack {
                             if started == true {
                                 Button() {
@@ -89,8 +73,8 @@ struct GameView: View {
         }
         .ignoresSafeArea()
     }
-
-    var gamestart: some View {
+//make func not work 2/14/22
+    var start: some View {
         VStack{
             Text("\(game.current+1)/\(game.total)")
                 .font(.title)
@@ -113,14 +97,19 @@ struct GameView: View {
         }
     }
     
-    var Results: some View {
+    var result: some View {
         VStack {
             Text("You got a score of:")
             Text("\(game.score)/\(game.total)")
                 .font(.largeTitle)
             Button(){
-                started = false
-                game.newGame()
+//                started = false
+//                game.newGame()
+                game.current = 0
+                game.score = 0
+                game.result = false
+                game.gameStart = true
+                game.mixup()
             } label: {
                 ZStack{
                     Color.blue
@@ -137,7 +126,7 @@ struct GameView: View {
         }
     
     
-    var gameEnd: some View{
+    var end: some View{
         VStack{
             if started == true {
                 Text("\(game.current+1)/\(game.total)")

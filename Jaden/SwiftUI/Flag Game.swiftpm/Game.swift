@@ -1,9 +1,9 @@
 import Foundation
 
 struct Game{
-    var Difficulty: String = "Easy"
-    let EasyFlags = ["🇨🇦","🇺🇸","🇨🇳","🇬🇧","🇷🇺","🇯🇵","🇦🇷","🇦🇺","🇧🇷","🇧🇪","🇬🇷","🇮🇳","🇿🇦","🇪🇸","🇵🇹","🇫🇷"]
-    var EasyCountries = ["Canada","United States","China","United Kingdom","Russia","Japan","Argentina","Australia","Brazil","Belgium","Greece","India","South Africa","Spain","Portugal","France"]
+    var Difficulty: String = "Start"
+    var Flags = ["🇨🇦","🇺🇸","🇨🇳","🇬🇧","🇷🇺","🇯🇵","🇦🇷","🇦🇺","🇧🇷","🇧🇪","🇬🇷","🇮🇳","🇿🇦","🇪🇸","🇵🇹","🇫🇷"]
+    var Countries = ["Canada","United States","China","United Kingdom","Russia","Japan","Argentina","Australia","Brazil","Belgium","Greece","India","South Africa","Spain","Portugal","France"]
     var answers : [String] = []
     var question : String = ""
     var gameStart : Bool = false
@@ -13,16 +13,16 @@ struct Game{
     var exams : [String] = []
     var current : Int = 0
     var total : Int = 10
-    var Results: Bool = false
+    var result: Bool = false
     
-    mutating func execute(Countries: [String], Flags: [String]) {
+    mutating func county(Countries: [String], Flags: [String]) {
         if current < total {
-            var xe = Countries
+            var  country = Countries
             if let index = Countries.firstIndex(of: exams[current]) {
-                xe.remove(at: index)
+                country.remove(at: index)
             }
             
-            var rCountries = Array(xe.shuffled().prefix(3))
+            var rCountries = Array(country.shuffled().prefix(3))
             rCountries.append(exams[current])
             if let q = rCountries.last {
                 question = q
@@ -38,24 +38,27 @@ struct Game{
                 gameStart = true
             }
         } else {
-            Results = true
+            result = true
         }
     }
     
     mutating func newGame() {
         if current == 0 {
             if Difficulty == "Start" {
-                exams = Array(EasyCountries.shuffled().prefix(10))
+                exams = Array(Countries.shuffled().prefix(10))
             }
             total = exams.count
         }
         if Difficulty == "Start" {
-            execute(Countries: EasyCountries, Flags: EasyFlags)
+            county(Countries: Countries, Flags: Flags)
         }
     }
     
     mutating func toggleAnswer(tAnswer: String){
         answer = tAnswer
         gameStart = false
+    }
+    mutating func mixup(){
+        exams = Array(Countries.shuffled().prefix(10))
     }
 }
