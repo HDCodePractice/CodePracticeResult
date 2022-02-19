@@ -138,9 +138,11 @@ class calculate {
     var isMinus = false     //是否否数
     var isPercent = false   //是否百分数
     var isPoint = false     //是否小数
+    var decimal = 0.0        //小数位数
     var strNum = "0"       //显示数字
     var dRes = 0.0          //结果
-    var Res = 0.0
+    var Res = 0.0           //最终结果
+    var restart = false
     
     func onAC(){
         currentNum = 0
@@ -152,48 +154,64 @@ class calculate {
         isPercent = false
         isPoint = false
         strNum = "0"
+        decimal = 0
     }
     
     func onOper(oper:String){
-        if isPoint{
-            strNum = String("\(Int(currentNum)).\(Int(afterPoint))")
-            currentNum = Double(strNum) ?? 0
+        if decimal > 0{
+            //strNum = String("\(Int(currentNum)).\(Int(afterPoint))")
+            currentNum = currentNum + afterPoint/decimal
+            decimal = 0
         }
+        strNum = String("\(currentNum)")
+        
         isPoint = false
         currentOpe = oper
         
-        if isMinus{
-            if currentNum > 0 {
-                currentEqu = currentEqu + String("(-\(currentNum))")
-            }else{
-                currentEqu = currentEqu + String("\(currentNum)")
-            }
-            isMinus = false
-        }else{
+//        if isMinus{
+//            if currentNum > 0 {
+//                currentEqu = currentEqu + String("(-\(currentNum))")
+//            }else{
+//                currentEqu = currentEqu + String("\(currentNum)")
+//            }
+//            isMinus = false
+//        }else{
             currentEqu = currentEqu + String("\(currentNum)")
-        }
+//        }
 //        if oper == "+" || oper == "-" {
 //            getResult()
 //        }
         currentNum = 0
+        afterPoint = 0
+        
     }
     
     func onNum(clickNum:Double){
+        if restart {
+            currentNum = 0
+            restart = false
+        }
         if currentOpe != ""{
             currentEqu = currentEqu + currentOpe
             currentOpe = ""
             strNum = String("\(clickNum)")
         }
         if isPercent {
-            //currentNum = Double(clickNum)
+            currentNum = 0
+            afterPoint = 0
+            decimal = 0
             isPercent = false
         }
         if isPoint {
+            if decimal == 0{
+                decimal = 10
+            }else{
+                decimal = decimal * 10
+            }
             afterPoint = afterPoint * 10 + clickNum
-            strNum = String("\(Int(currentNum)).\(Int(afterPoint))")
-//            if afterPoint > 0 {
-//                strNum = String("\(Int(currentNum)).\(Int(afterPoint))")
-//            }
+            dRes = currentNum+afterPoint/decimal
+            strNum = String("\(dRes)")
+            //isPoint = false
         }else{
             currentNum = currentNum * 10 + clickNum
             strNum = String("\(currentNum)")
@@ -224,20 +242,32 @@ class calculate {
     func onMinus(){
         //currentOpe = ""
         isMinus = true
-        if currentNum > 0 {
-            currentNum = -currentNum
-            if afterPoint > 0 {
-                strNum = String("\(Int(currentNum)).\(Int(afterPoint))")
-            }else{
-                strNum = String("\(currentNum)")
-            }
-        }else if currentNum == 0 {
-            if afterPoint > 0 {
-                strNum = String("-\(Int(currentNum)).\(Int(afterPoint))")
-            }else{
-                strNum = String("-\(currentNum)")
-            }
+        currentNum = -currentNum
+        //decimal = -decimal
+        if decimal != 0{
+            decimal = -decimal
+            dRes = currentNum+afterPoint/decimal
+        }else{
+            dRes = currentNum
         }
+        
+        strNum = String("\(dRes)")
+//        if currentNum > 0 {
+//            currentNum = -currentNum
+//            if afterPoint > 0 {
+//                dRes = currentNum+afterPoint/decimal
+//                strNum = String("\(dRes)")
+//                //strNum = String("\(Int(currentNum)).\(Int(afterPoint))")
+//            }else{
+//                strNum = String("\(currentNum)")
+//            }
+//        }else if currentNum == 0 {
+//            if afterPoint > 0 {
+//                strNum = String("-\(Int(currentNum)).\(Int(afterPoint))")
+//            }else{
+//                strNum = String("-\(currentNum)")
+//            }
+//        }
     }
     func onPoint(){
         //currentOpe = ""
@@ -255,12 +285,16 @@ class calculate {
     }
     
     func getResult(){
-        
         if currentOpe != ""{
             dRes = Double(currentEqu) ?? 0
             currentEqu = String("\(dRes)" + currentOpe + "\(dRes)")
         }else{
-            currentEqu = currentEqu + String("\(currentNum)")
+            if decimal > 0{
+                dRes = currentNum+afterPoint/decimal
+            }else{
+                dRes = currentNum
+            }
+            currentEqu = currentEqu + String("\(dRes)")
         }
         //currentEqu = "(" + currentEqu + ")"
         //strNum = currentEqu
@@ -269,6 +303,7 @@ class calculate {
         strNum = currentEqu + " = " + String("\(Res!)")
         currentNum = Res!
         currentEqu = ""
+        restart = true
         
     }
 
