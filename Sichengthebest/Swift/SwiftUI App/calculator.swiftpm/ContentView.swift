@@ -8,6 +8,30 @@ struct ContentView: View {
                     Circle()
                         .frame(width: 50,height:50)
                         .foregroundColor(.blue)
+                    Text("(")
+                }
+                ZStack{
+                    Circle()
+                        .frame(width: 50,height:50)
+                        .foregroundColor(.blue)
+                    Text(")")
+                }
+                ZStack{
+                    Circle()
+                        .frame(width: 50,height:50)
+                        .foregroundColor(.blue)
+                    Text("%")
+                }
+                ZStack{
+                    Circle()
+                        .frame(width: 50,height:50)
+                        .foregroundColor(.orange)
+                    Text("÷")
+                }
+                ZStack{
+                    Circle()
+                        .frame(width: 50,height:50)
+                        .foregroundColor(.blue)
                     Text("AC")
                 }
                 ZStack{
