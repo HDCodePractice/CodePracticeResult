@@ -28,6 +28,7 @@ struct Game{
         setQuestion()
         gameStart = true
         questionStart = true
+        score = 0
     }
     
     mutating func setQuestion(){
@@ -62,14 +63,12 @@ struct Game{
             questionStart = false
         }else{
             current += 1
-            setQuestion()
             questionStart = true
         }
     }
     
     mutating func toggleAnswer(tAnswer: String){
         answer = tAnswer
-        score += 1
         
         questionStart = false
         gameStart = true
