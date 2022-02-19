@@ -80,7 +80,7 @@ struct ContentView: View {
             }
             HStack{
                 Text("0")
-                    .frame(width: 60.0)
+                    .frame(width: 68.0)
                     .background(.gray)
                     .font(.title)
                 Text(".")
