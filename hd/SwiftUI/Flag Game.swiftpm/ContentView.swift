@@ -3,8 +3,9 @@ import SwiftUI
 struct ContentView: View {
     @State var game = Game()
     
-    var gamestart: some View {
+    var questionStart: some View {
         VStack{
+            Text("\(game.current) out of \(game.total)")
             HStack{
                 Text(game.question)
             }
@@ -21,8 +22,9 @@ struct ContentView: View {
         }
     }
     
-    var gameEnd: some View{
+    var questionEnd: some View{
         VStack{
+            Text("\(game.current) out of \(game.total)")
             HStack{
                 Text(game.question)
             }
@@ -46,15 +48,24 @@ struct ContentView: View {
     
     var body: some View {
         VStack{
-            if game.gameStart {
-                gamestart
-            }else{
-                gameEnd
-            }
-            Text("Start")
-                .onTapGesture {
-                    game.newGame()
+            if game.gameStart{
+                if game.questionStart {
+                    questionStart
+                }else{
+                    questionEnd
                 }
+                Text("Next")
+                    .onTapGesture {
+                        game.nextQuestion()
+                    }
+                    .disabled(game.questionStart ? true : false)
+                    .foregroundColor(game.questionStart ? .secondary : .primary)
+            }else{
+                Text("Start")
+                    .onTapGesture {
+                        game.newGame()
+                    }
+            }
         }
     }
 }
