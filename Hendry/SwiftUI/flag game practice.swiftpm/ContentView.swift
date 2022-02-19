@@ -2,7 +2,6 @@ import SwiftUI
 
 struct ContentView: View {
     @State var game = Game()
-    @State var score = 0
     var questionStart: some View {
         VStack{
             Text("\(game.current) out of \(game.total)")
@@ -29,9 +28,10 @@ struct ContentView: View {
                 Text(game.question)
             }
             Text("")
+            Text("\(game.score)")
             ForEach(game.answers,id:\.self){ flag in
                 HStack{
-                    Text(score)
+                    
                     Text(flag)
                         .font(.largeTitle)
                     if flag == game.answer{
@@ -41,7 +41,6 @@ struct ContentView: View {
                     if flag == game.correct && flag != game.answer {
                         Image(systemName: flag == game.correct ? "checkmark.circle.fill" : "x.circle.fill")
                             .foregroundColor(flag == game.correct ? .green : .red)
-                        score+=1
                     }
                 }
             }
