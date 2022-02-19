@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    let inputOrder = [["AC","+/-","%","÷"],["7","8","9","×"],["4","5","6","-"],["1","2","3","+"],["0",".","="]]
+    let calc = [["AC","+/-","%","÷"],["7","8","9","×"],["4","5","6","-"],["1","2","3","+"],["0",".","="]]
     var body: some View {
         ZStack {
             Color(.black)
             VStack(spacing:-29) {
-                    ForEach(inputOrder, id: \.self) { column in
+                    ForEach(calc, id: \.self) { column in
                         HStack (spacing: 3) {
                             ForEach(column, id: \.self) { row in
                                 Button() {
@@ -23,7 +23,6 @@ struct ContentView: View {
                                             }
                                             Text("\(row)")
                                                 .font(.title)
-                                                .foregroundColor(.white)
                                         }
                                         .frame(width: 70, height: 70)
                                         .clipShape(RoundedRectangle(cornerRadius: 40))
@@ -33,7 +32,6 @@ struct ContentView: View {
                                             Color.red
                                             Text("\(row)")
                                                 .font(.title)
-                                                .foregroundColor(.white)
                                         }
                                         .frame(width: 150, height: 70)
                                         .clipShape(RoundedRectangle(cornerRadius: 40))
