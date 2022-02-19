@@ -5,9 +5,8 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             ZStack{
-                VStack{
-                    GameView(Difficulty: "Start")
-                }
+                LinearGradient(colors: [.purple,.blue,.green], startPoint: .top, endPoint: .bottom)
+                GameView(Difficulty: "Start")
 
             }
 
@@ -24,6 +23,7 @@ struct GameView: View {
     let Difficulty: String
     var body: some View {
         ZStack {
+            LinearGradient(colors: [.indigo,.blue,.cyan,.teal], startPoint: .top, endPoint: .bottom)
             VStack{
                 if game.result {
                     result
@@ -39,12 +39,14 @@ struct GameView: View {
                                     game.newGame()
                                 } label: {
                                     ZStack {
-                                        Color.blue
-                                        Text("Continue")
+                                        LinearGradient(colors: [.pink,.red,.orange,.yellow,.white], startPoint: .top, endPoint: .bottom)
+                                        Text("Next")
+                                            .font(.system(size: 40, design: .rounded))
+                                            .bold()
                                             .foregroundColor(.white)
                                             .font(.title)
                                     }
-                                    .frame(width: 140, height: 50)
+                                    .frame(width: 300, height: 100)
                                     .cornerRadius(20)
 
                                 }
@@ -55,14 +57,16 @@ struct GameView: View {
                                     game.newGame()
                                 } label: {
                                     ZStack{
-                                        Color.blue
+                                        LinearGradient(colors: [.pink,.red,.orange,.yellow,.white], startPoint: .top, endPoint: .bottom)
                                         Text("Start")
+                                            .font(.system(size: 40, design: .rounded))
+                                            .bold()
                                             .foregroundColor(.white)
                                             .font(.largeTitle)
                                     
                                             
                                     }
-                                    .frame(width: 200, height: 100)
+                                    .frame(width: 300, height: 100)
                                     .cornerRadius(15)
                                 }
                             }
@@ -76,11 +80,17 @@ struct GameView: View {
 //make func not work 2/14/22
     var start: some View {
         VStack{
+            
             Text("\(game.current+1)/\(game.total)")
+                .font(.system(size: 20, design: .rounded))
+                .bold()
+                .foregroundColor(.white)
                 .font(.title)
-            Text(game.question)
-                .font(.largeTitle)
-
+            Text("Which one of these flags is \(game.question)'s Flag")
+                .font(.system(size: 30, design: .rounded))
+                .bold()
+                .foregroundColor(.white)
+                .padding()
             Text("")
             ForEach(game.answers,id:\.self){ flag in
                 HStack{
@@ -100,7 +110,14 @@ struct GameView: View {
     var result: some View {
         VStack {
             Text("You got a score of:")
+                .font(.system(size: 40, design: .rounded))
+                .bold()
+                .foregroundColor(.white)
+                .font(.title)
             Text("\(game.score)/\(game.total)")
+                .font(.system(size: 40, design: .rounded))
+                .bold()
+                .foregroundColor(.white)
                 .font(.largeTitle)
             Button(){
 //                started = false
@@ -112,14 +129,16 @@ struct GameView: View {
                 game.mixup()
             } label: {
                 ZStack{
-                    Color.blue
+                    LinearGradient(colors: [.pink,.red,.orange,.yellow,.white], startPoint: .top, endPoint: .bottom)
                     Text("Play Again")
+                        .font(.system(size: 40, design: .rounded))
+                        .bold()
                         .foregroundColor(.white)
                         .font(.largeTitle)
 
 
                 }
-                .frame(width: 200, height: 100)
+                .frame(width: 300, height: 200)
                 .cornerRadius(15)
                 }
             }
@@ -130,10 +149,11 @@ struct GameView: View {
         VStack{
             if started == true {
                 Text("\(game.current+1)/\(game.total)")
-                    .font(.system(size: 25, design: .rounded))
+                    .font(.system(size: 20, design: .rounded))
+                    .bold()
                     .foregroundColor(.white)
-                Text(game.question)
-                    .font(.system(size: 40, design: .rounded))
+                Text("\(game.question)'s Flag is \(game.correct)")
+                    .font(.system(size: 30, design: .rounded))
                     .bold()
                     .foregroundColor(.white)
                 Text("")
@@ -141,14 +161,39 @@ struct GameView: View {
                     HStack{
                         Text(flag)
                             .font(.system(size: 60))
+//                        if flag == game.answer{
+//                            Image(systemName: flag == game.correct ? "checkmark.circle.fill" : "x.circle.fill")
+//                                .foregroundColor(flag == game.correct ? .green : .red)
+//                        }
+//                        if flag == game.correct && flag != game.answer {
+//                            Image(systemName: flag == game.correct ? "checkmark.circle.fill" : "x.circle.fill")
+//                                .foregroundColor(flag == game.correct ? .green : .red)
+//
+//                        }
+
+                        if flag == game.correct{
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(.green)
+                            Text("Correct Answer")
+                                .font(.system(size: 20, design: .rounded))
+                                .bold()
+                                .foregroundColor(.white)
+                        }else{
+                            Image(systemName: "x.circle.fill")
+                                .foregroundColor(.red)
+                            Text("Wrong Answer")
+                                .font(.system(size: 20, design: .rounded))
+                                .bold()
+                                .foregroundColor(.white)
+                        }
                         if flag == game.answer{
-                            Image(systemName: flag == game.correct ? "checkmark.circle.fill" : "x.circle.fill")
-                                .foregroundColor(flag == game.correct ? .green : .red)
+                            Text("<-- Your Answer")
+                                .font(.system(size: 25, design: .rounded))
+                                .bold()
+                                .foregroundColor(.white)
+                                .padding()
                         }
-                        if flag == game.correct && flag != game.answer {
-                            Image(systemName: flag == game.correct ? "checkmark.circle.fill" : "x.circle.fill")
-                                .foregroundColor(flag == game.correct ? .green : .red)
-                        }
+
                     }
                 }
             }
