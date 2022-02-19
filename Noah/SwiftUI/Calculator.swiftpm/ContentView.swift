@@ -14,7 +14,7 @@ struct ContentView: View {
                                 } label: {
                                     if row != "0" {
                                         ZStack {
-                                            if ["C","+","-","×","÷"].contains(row) {
+                                            if ["=","+","-","×","÷"].contains(row) {
                                                 Color.init(red: 0.0, green: 0.0, blue: 250.0)
                                             } else if ["AC","+/-","%"] .contains(row) {
                                                 Color.init(red: 0.0, green: 50.0, blue: 50.0)
