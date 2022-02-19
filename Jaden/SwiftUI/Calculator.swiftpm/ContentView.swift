@@ -1,218 +1,50 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var button = 0
+    let inputOrder = [["AC","+/-","%","÷"],["7","8","9","×"],["4","5","6","-"],["1","2","3","+"],["0",".","="]]
     var body: some View {
-        VStack {
-            VStack{
-                HStack{
-                    Button{
-                        button += 1
-                    }label: {
-                        ZStack{
-                            LinearGradient(colors: [.pink], startPoint: .top, endPoint: .bottom)
-                            Text("AC")
-                                .font(.system(size: 40, design: .rounded))
-                                .bold()
-                                .foregroundColor(.black)
-                                .font(.largeTitle)
-                        }
-                        
-                }
-                    .frame(width: 70, height: 70)
-                    .cornerRadius(100)
-                    .padding()
-                    Spacer()
-                }
+        ZStack {
+            Color(.black)
+            VStack(spacing:-29) {
+                    ForEach(inputOrder, id: \.self) { column in
+                        HStack (spacing: 3) {
+                            ForEach(column, id: \.self) { row in
+                                Button() {
 
-
-                HStack{
-                    Button{
-                        button += 1
-                    }label: {
-                        ZStack{
-                            LinearGradient(colors: [.pink,.red,.orange,.yellow,.white], startPoint: .top, endPoint: .bottom)
-                            Text("7")
-                                .font(.system(size: 40, design: .rounded))
-                                .bold()
-                                .foregroundColor(.black)
-                                .font(.largeTitle)
-                        }
-                        
+                                } label: {
+                                    if row != "0" {
+                                        ZStack {
+                                            if ["=","+","-","×","÷"].contains(row) {
+                                                Color.init(red: 155.0, green: 0.0, blue: 20.0)
+                                            } else if ["AC","+/-","%"] .contains(row) {
+                                                Color.init(red: 00.0, green: 50.0, blue: 100.0)
+                                            } else {
+                                                Color.red
+                                            }
+                                            Text("\(row)")
+                                                .font(.title)
+                                                .foregroundColor(.white)
+                                        }
+                                        .frame(width: 70, height: 70)
+                                        .clipShape(RoundedRectangle(cornerRadius: 40))
+                                        .shadow(radius: 5)
+                                    } else if row == "0" {
+                                        ZStack {
+                                            Color.red
+                                            Text("\(row)")
+                                                .font(.title)
+                                                .foregroundColor(.white)
+                                        }
+                                        .frame(width: 150, height: 70)
+                                        .clipShape(RoundedRectangle(cornerRadius: 40))
+                                        .shadow(radius: 5)
+                                    }
+                                }
+                            }
+                        }.padding()
+                    }
                 }
-                    .frame(width: 70, height: 70)
-                    .cornerRadius(100)
-                    .padding()
-                    Spacer()
-                }
-                HStack{
-                    Button{
-                        button += 1
-                    }label: {
-                        ZStack{
-                            LinearGradient(colors: [.pink,.red,.orange,.yellow,.white], startPoint: .top, endPoint: .bottom)
-                            Text("4")
-                                .font(.system(size: 40, design: .rounded))
-                                .bold()
-                                .foregroundColor(.black)
-                                .font(.largeTitle)
-                        }
-                        
-                }
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(100)
-                    .padding()
-                    Spacer()
-                    Button{
-                        button += 1
-                    }label: {
-                        ZStack{
-                            LinearGradient(colors: [.pink,.red,.orange,.yellow,.white], startPoint: .top, endPoint: .bottom)
-                            Text("4")
-                                .font(.system(size: 40, design: .rounded))
-                                .bold()
-                                .foregroundColor(.black)
-                                .font(.largeTitle)
-                        }
-                        
-                }
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(100)
-                    .padding()
-                    Spacer()
-                    Button{
-                        button += 1
-                    }label: {
-                        ZStack{
-                            LinearGradient(colors: [.pink,.red,.orange,.yellow,.white], startPoint: .top, endPoint: .bottom)
-                            Text("4")
-                                .font(.system(size: 40, design: .rounded))
-                                .bold()
-                                .foregroundColor(.black)
-                                .font(.largeTitle)
-                        }
-                        
-                }
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(100)
-                    .padding()
-                    Spacer()
-                    Button{
-                        button += 1
-                    }label: {
-                        ZStack{
-                            LinearGradient(colors: [.pink,.red,.orange,.yellow,.white], startPoint: .top, endPoint: .bottom)
-                            Text("4")
-                                .font(.system(size: 40, design: .rounded))
-                                .bold()
-                                .foregroundColor(.black)
-                                .font(.largeTitle)
-                        }
-                        
-                }
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(100)
-                    .padding()
-                    Spacer()
-                }
-                    
-                }
-                HStack{
-                    Button{
-                        button += 1
-                    }label: {
-                        ZStack{
-                            LinearGradient(colors: [.pink,.red,.orange,.yellow,.white], startPoint: .top, endPoint: .bottom)
-                            Text("1")
-                                .font(.system(size: 40, design: .rounded))
-                                .bold()
-                                .foregroundColor(.black)
-                                .font(.largeTitle)
-                        }
-                        
-                }
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(100)
-                    .padding()
-                    Spacer()
-                    Button{
-                        button += 1
-                    }label: {
-                        ZStack{
-                            LinearGradient(colors: [.pink,.red,.orange,.yellow,.white], startPoint: .top, endPoint: .bottom)
-                            Text("2")
-                                .font(.system(size: 40, design: .rounded))
-                                .bold()
-                                .foregroundColor(.black)
-                                .font(.largeTitle)
-                        }
-                        
-                }
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(100)
-                    .padding()
-                    Spacer()
-                    Button{
-                        button += 1
-                    }label: {
-                        ZStack{
-                            LinearGradient(colors: [.pink,.red,.orange,.yellow,.white], startPoint: .top, endPoint: .bottom)
-                            Text("3")
-                                .font(.system(size: 40, design: .rounded))
-                                .bold()
-                                .foregroundColor(.black)
-                                .font(.largeTitle)
-                        }
-                        
-                }
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(100)
-                    .padding()
-                    Spacer()
-                    Button{
-                        button += 1
-                    }label: {
-                        ZStack{
-                            LinearGradient(colors: [.red], startPoint: .top, endPoint: .bottom)
-                            Text("1")
-                                .font(.system(size: 40, design: .rounded))
-                                .bold()
-                                .foregroundColor(.black)
-                                .font(.largeTitle)
-                        }
-                        
-                }
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(100)
-                    .padding()
-                    Spacer()
-                }
-                
-                HStack{
- 
-                    Button{
-                        button += 1
-                    }label: {
-                        ZStack{
-                            LinearGradient(colors: [.pink,.red,.orange,.yellow,.white], startPoint: .top, endPoint: .bottom)
-                            Text("0")
-                                .font(.system(size: 40, design: .rounded))
-                                .bold()
-                                .foregroundColor(.black)
-                                .font(.largeTitle)
-                        }
-                }
-                    .frame(width: 200, height: 50)
-                    .cornerRadius(100)
-                    .padding()
-                Spacer()
-                    
-                }
-                
-
-            
-
-            
         }
+        .ignoresSafeArea()
     }
 }
