@@ -26,11 +26,13 @@ struct Game{
     var score : Int = 0
     var exams : [String] = []
     var total : Int = 10
+    var firstGame : Bool = true
     
     mutating func newGame(){
         exams = Array(countries.shuffled().prefix(10))
         total = exams.count
         current = 0
+        score = 0
         setQuestion()
     }
     
@@ -63,13 +65,21 @@ struct Game{
     }
     
     mutating func nextQuestion(){
-        current += 1
-        setQuestion()
+        if current >= total-1 {
+            gameStart = false
+            firstGame = false
+        } else {
+            current += 1
+            setQuestion()
+            questionStart = true
+        }
     }
     
     mutating func toggleAnswer(tAnswer: String){
         answer = tAnswer
-        score += 1
+        if flags[current] == answer {
+            score += 1
+        }
         gameStart = true
         questionStart = false
     }

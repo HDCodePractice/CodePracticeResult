@@ -49,17 +49,28 @@ struct ContentView: View {
             if game.questionStart {
                 questionstart
             }else{
-                questionEnd
-                Text("\(game.current) out of \(game.total)")
                 if game.gameStart == false {
-                    Text("Start")
-                        .onTapGesture {
-                        game.newGame()
+                    if game.firstGame == true {
+                        Text("Start")
+                            .onTapGesture {
+                                game.newGame()
+                            }
+                    } else {
+                        Text("You got \(game.score) out of \(game.total)")
+                        Text("Restart")
+                            .onTapGesture {
+                                game.newGame()
+                            }
                     }
                 } else {
+                    Text("\(game.current+1) out of \(game.total)")
+                    questionEnd
                     Text("Next")
+                        .onTapGesture {
+                            game.nextQuestion()
+                        }
                 }
-                    
+                
             }
             
         }
