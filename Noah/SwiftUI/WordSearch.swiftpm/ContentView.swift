@@ -33,7 +33,7 @@ struct Line: View {
     var body: some View {
         Path { path in
             path.move(to: point(at: startPos ?? Position(row: 2, col: 2)))
-            path.addLine(to: point(at: endPos ?? Position(row: 8, col: 8)))
+            path.addLine(to: point(at: endPos ?? Position(row: 50, col: 50)))
         }
         .stroke(style: StrokeStyle(lineWidth: lineStyle.lineWidth, lineCap: .round))
         .foregroundColor(.green)
@@ -45,7 +45,7 @@ struct ContentView: View {
     @State private var pt: CGPoint = .zero
     var body: some View {
         let myGesture = DragGesture(minimumDistance: 0, coordinateSpace: .global).onChanged({
-            self.pt = $0.startLocation
+            self.pt = $0.location
         })
         Line(cellSize: CGSize(width: pt.x, height: pt.y-40), startPos: Position(row: Int(pt.x), col: Int(pt.y-40)))
         .border(Color.green)
