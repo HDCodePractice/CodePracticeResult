@@ -5,6 +5,7 @@ struct ContentView: View {
     
     var gamestart: some View {
         VStack{
+            Text("\(game.current) out of \(game.total)")
             HStack{
                 Text(game.question)
             }
@@ -23,6 +24,8 @@ struct ContentView: View {
     
     var gameEnd: some View{
         VStack{
+            Text("\(game.current) out of \(game.total)")
+            Text("\(game.score) out of \(game.total)")
             HStack{
                 Text(game.question)
             }
