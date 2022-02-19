@@ -13,6 +13,8 @@ struct Game {
     var Question: String = ""
     var GameStart: Bool = false
     var CorrectAnswer: String = ""
+    var CorrectAnswerCount: Int = 0
+    var Progress: [Int] = [0,0]
     
     mutating func newGame() {
         var randomCountries: [String] = []

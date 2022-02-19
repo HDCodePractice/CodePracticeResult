@@ -1,6 +1,68 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var game = Game()
+    
+    var body: some View {
+        VStack {
+            Text(game.computer)
+            Image(game.comImage)
+                .resizable()
+                .scaledToFit()
+                .foregroundColor(.accentColor)
+                .cornerRadius(20)
+                .frame(width:400,height: 200)
+            Text(game.result)
+                .font(/*@START_MENU_TOKEN@*/.largeTitle/*@END_MENU_TOKEN@*/)
+                .multilineTextAlignment(.center)
+        }
+        if game.result == "Please choose"{
+            HStack{
+                ForEach(game.all, id: \.self){i in
+                    Image(i)
+                        .resizable()
+                        .scaledToFit()
+                        .cornerRadius(20)
+                        .onTapGesture {
+                            game.caiQ(userInput:i)
+                        }
+                }
+            }
+            .padding(.all, 5.0)
+            Text(game.user)
+        }else{
+            VStack{
+                Image(game.user)
+                    .resizable()
+                    .scaledToFit()
+                    .cornerRadius(20)
+                    .frame(width:400,height: 200)
+                Text(game.user)
+               
+                Image(systemName: "restart.circle")
+                    .frame(width: 25, height:25)
+                    .onTapGesture {
+                        game.result = "Please choose"
+                        game.user = "No Choose!"
+                        game.computer = "No Choose!"
+                        game.comImage = "robot"
+                    }
+                VStack(
+                       alignment: .leading,
+                       spacing: 3
+                ) {
+                    Text("You played \(game.gameCounts) times.")
+                    Text("You won \(game.winCounts) times.")
+                    Text("You tied \(game.tiedCounts) times.")
+                    Text("You lost \(game.lossCounts) times.")
+                }
+            }
+        }
+    }
+}
+
+
+struct Game {
     @State var user : String = "No Choose"
     @State var computer : String = "No Choose"
     @State var comImage : String = "robot"
@@ -10,12 +72,13 @@ struct ContentView: View {
     @State var lossCounts : Int = 0
     @State var tiedCounts : Int = 0
     
-    func caiQ(){
-        let all = ["rock", "paper","scissors"]
+    let all = ["rock","paper","scissors"]
+    
+    mutating func caiQ(userInput: String){
+        user = userInput
         gameCounts += 1
         comImage = "robot"
 
-        
         if let c = all.randomElement(){
             computer  = c
             comImage = computer
@@ -36,77 +99,4 @@ struct ContentView: View {
         }
     }
     
-    var body: some View {
-        VStack {
-            Text(computer)
-//                .font(.largeTitle)
-            Image(comImage)
-                .resizable()
-                .scaledToFit()
-                .foregroundColor(.accentColor)
-                .cornerRadius(20)
-                .frame(width:400,height: 200)
-            Text(result)
-                .font(/*@START_MENU_TOKEN@*/.largeTitle/*@END_MENU_TOKEN@*/)
-                .multilineTextAlignment(.center)
-        }
-        if result == "Please choose"{
-            HStack{
-                Image("rock")
-                    .resizable()
-                    .scaledToFit()
-                    .cornerRadius(20)
-                    .onTapGesture {
-                        user = "rock"
-                        caiQ()
-                    }
-                Image("scissors")
-                    .resizable()
-                    .scaledToFit()
-                    .cornerRadius(20)
-                    .onTapGesture {
-                        user = "scissors"
-                        caiQ()
-                    }
-                Image("paper")
-                    .resizable()
-                    .scaledToFit()
-                    .cornerRadius(20)
-                    .onTapGesture {
-                        user = "paper"
-                        caiQ()
-                    }
-                
-            }
-            .padding(.all, 5.0)
-            Text(user)
-        }else{
-            VStack{
-                Image(user)
-                    .resizable()
-                    .scaledToFit()
-                    .cornerRadius(20)
-                    .frame(width:400,height: 200)
-                Text(user)
-               
-                Image(systemName: "restart.circle")
-                    .frame(width: 25, height:25)
-                    .onTapGesture {
-                        result = "Please choose"
-                        user = "No Choose!"
-                        computer = "No Choose!"
-                        comImage = "robot"
-                    }
-                VStack(
-                       alignment: .leading,
-                       spacing: 3
-                ) {
-                    Text("You played \(gameCounts) times.")
-                    Text("You won \(winCounts) times.")
-                    Text("You tied \(tiedCounts) times.")
-                    Text("You lost \(lossCounts) times.")
-                }
-            }
-        }
-    }
 }

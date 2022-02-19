@@ -20,7 +20,7 @@ struct Game{
                 if let index = countries.firstIndex(of: c){
                     answers.append(flags[index])
                 }
-                if answers = countries{
+                if answer == countries{
                     print("win")
                 }else{
                     print("lose")
