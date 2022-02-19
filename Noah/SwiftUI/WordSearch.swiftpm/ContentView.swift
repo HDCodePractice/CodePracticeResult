@@ -44,7 +44,7 @@ struct ContentView: View {
     @State var num = 0
     @State private var pt: CGPoint = .zero
     var body: some View {
-        let myGesture = DragGesture(minimumDistance: 0, coordinateSpace: .global).onEnded({
+        let myGesture = DragGesture(minimumDistance: 0, coordinateSpace: .global).onChanged({
             self.pt = $0.startLocation
         })
         Line(cellSize: CGSize(width: pt.x, height: pt.y-40), startPos: Position(row: Int(pt.x), col: Int(pt.y-40)))
