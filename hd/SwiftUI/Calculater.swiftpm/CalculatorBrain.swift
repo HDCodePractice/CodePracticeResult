@@ -1,6 +1,6 @@
 //
 //  CalculatorBrain.swift
-//  Calculater
+//  Calculator
 //
 //  Created by 老房东 on 2022-02-20.
 //
@@ -9,8 +9,8 @@ import Foundation
 
 enum CalculatorBrain{
     case left(String) // 10
-    case leftOp(left: String, op: CalculaterButtonItem.Op) // 10 +
-    case leftOpRight(left:String,op: CalculaterButtonItem.Op,right:String) // 10 + 20
+    case leftOp(left: String, op: CalculatorButtonItem.Op) // 10 +
+    case leftOpRight(left:String,op: CalculatorButtonItem.Op,right:String) // 10 + 20
     case error
     
     var output: String{
@@ -28,7 +28,7 @@ enum CalculatorBrain{
         return result
     }
     
-    func apply(item: CalculaterButtonItem) -> CalculatorBrain{
+    func apply(item: CalculatorButtonItem) -> CalculatorBrain{
         switch item{
         case .digit(let num):
             return applyNumber(num: num)
@@ -41,7 +41,7 @@ enum CalculatorBrain{
         }
     }
 
-    private func applyOp(op: CalculaterButtonItem.Op) -> CalculatorBrain{
+    private func applyOp(op: CalculatorButtonItem.Op) -> CalculatorBrain{
         switch self {
         case .left(let left):
             return CalculatorBrain.leftOp(left: left, op: op)
