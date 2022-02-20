@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 
-struct MyView: View {
+struct Button: View {
     var buttonTitle : String = ""
     var background : Color = .gray
     var width : CGFloat = 66
@@ -21,12 +21,13 @@ struct MyView: View {
             .foregroundColor(.white)
             .background(background)
             .cornerRadius(height/2)
+
     }
 }
 
 struct MyView_Previews: PreviewProvider {
     static var previews: some View {
-        MyView(buttonTitle: "AC")
-        MyView(buttonTitle: "0", background: .yellow)
+        Button(buttonTitle: "AC")
+        Button(buttonTitle: "0", background: .yellow)
     }
 }
