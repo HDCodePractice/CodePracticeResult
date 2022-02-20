@@ -14,4 +14,8 @@ struct CalculatorModel {
                                               [.digit(1),.digit(2),.digit(3),.op(.plus)],
                                         [.digit(0),.dot,.op(.equal)]
     ]
+    var brain : CalculatorBrain = CalculatorBrain.left("0")
+    mutating func applyButton(button: CalculatorButtonItem) {
+        brain = brain.apply(item: button)
+    }
 }
