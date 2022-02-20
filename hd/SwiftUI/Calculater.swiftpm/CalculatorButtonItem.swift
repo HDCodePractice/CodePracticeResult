@@ -1,6 +1,6 @@
 //
-//  CalculaterButtonItem.swift
-//  Calculater
+//  CalculatorButtonItem.swift
+//  Calculator
 //
 //  Created by 老房东 on 2022-02-13.
 //
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum CalculaterButtonItem {
+enum CalculatorButtonItem {
     enum Op:String{
         case plus = "+"
         case minus = "-"
@@ -29,7 +29,7 @@ enum CalculaterButtonItem {
     case op(Op)
 }
 
-extension CalculaterButtonItem{
+extension CalculatorButtonItem{
     var title: String{
         switch self{
         case .digit(let value):
@@ -68,4 +68,4 @@ extension CalculaterButtonItem{
     }
 }
 
-extension CalculaterButtonItem: Hashable{}
+extension CalculatorButtonItem: Hashable{}

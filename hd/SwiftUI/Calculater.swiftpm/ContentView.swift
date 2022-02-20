@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var vm = CalculaterModel()
+    @State var vm = CalculatorModel()
     
     fileprivate func screen(number: String) -> some View {
         return Text(number)
