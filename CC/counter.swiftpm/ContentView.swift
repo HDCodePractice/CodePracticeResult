@@ -269,15 +269,32 @@ class calculate {
     
     func onMinus(){
         //currentOpe = ""
-        isMinus = true
-        currentNum = -currentNum
-        //decimal = -decimal
-        if decimal != 0{
-            decimal = -decimal
-            dRes = currentNum+afterPoint/decimal
+        
+        if isMinus == true {
+            isMinus = false
+            if decimal != 0{
+                dRes = currentNum+afterPoint/decimal
+            }else{
+                dRes = currentNum
+            }
         }else{
-            dRes = currentNum
+            isMinus = true
+            if decimal != 0{
+                decimal = -decimal
+                dRes = -currentNum+afterPoint/decimal
+            }else{
+                dRes = -currentNum
+            }
         }
+            
+        //currentNum = -currentNum
+        //decimal = -decimal
+//        if decimal != 0{
+//            decimal = -decimal
+//            dRes = -currentNum+afterPoint/decimal
+//        }else{
+//            dRes = -currentNum
+//        }
         
         strNum = String("\(dRes)")
 //        if currentNum > 0 {
