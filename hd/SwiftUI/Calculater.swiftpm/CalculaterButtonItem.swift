@@ -10,7 +10,7 @@ import SwiftUI
 
 enum CalculaterButtonItem {
     enum Op:String{
-        case pluse = "+"
+        case plus = "+"
         case minus = "-"
         case multiply = "x"
         case divide = "÷"
