@@ -7,6 +7,8 @@ struct ContentView: View {
     let row3 = ["1", "2", "3", "+"]
     let row4 = ["0", "", ".", "="]
     @State var number : Double = 0
+    @State var numberResult : Double = 0
+    @State var functionState : Int = 0 // 空+-x÷
     func tapIn(tapedContent : String) {
         if Int(tapedContent) != nil {
             number = number*10 + Double(tapedContent)!
@@ -14,7 +16,32 @@ struct ContentView: View {
             number = number * -1
         }else if tapedContent == "%"{
             number = number / 100
+        }else if tapedContent == "C"{
+            numberResult = number
+            number = 0
+        }else if tapedContent == "/"{
+            numberResult = number
+            number = 0
+        }else if tapedContent == "x"{
+            numberResult = number
+            number = 0
+        }else if tapedContent == "-"{
+            numberResult = number
+            number = 0
+        }else if tapedContent == "+"{
+            numberResult = number
+            number = 0
+        }else if tapedContent == "="{
+            //show number result
         }
+    }
+    func caculateMethod() -> Double{
+        if functionState == 0 {
+            return numberResult
+        }else if functionState == 1{
+            return number + numberResult
+        }
+        return 0
     }
     var body: some View {
         VStack(spacing: 0){
