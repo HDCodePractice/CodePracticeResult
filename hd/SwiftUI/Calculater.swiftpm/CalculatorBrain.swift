@@ -51,7 +51,7 @@ enum CalculatorBrain{
             if op == .equal{
                 return CalculatorBrain.leftOp(left: right, op: oldop)
             }else{
-                return CalculatorBrain.leftOp(left: "\(left)\(oldop.rawValue)\(right)", op: op)
+                return CalculatorBrain.leftOp(left: String(eval("\(left)\(oldop.rawValue)\(right)")), op: op)
             }
         case .error:
             return self
@@ -69,6 +69,12 @@ enum CalculatorBrain{
         case .error:
             return self
         }
+    }
+    
+    private func eval(_ str:String) -> Double{
+        let exp: NSExpression = NSExpression(format: str)
+        let result: Double = exp.expressionValue(with:nil, context: nil) as! Double
+        return result
     }
 }
 
