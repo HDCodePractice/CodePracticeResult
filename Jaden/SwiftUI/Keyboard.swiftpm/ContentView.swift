@@ -14,13 +14,268 @@ struct ContentView: View {
                                 } label: {
                                     if row != " " && row != "microphone" && row != "keyboard" && row != "return" && row != "globe" && row != "delete" && row != "up" && row != "uP"{
                                         ZStack {
+                                            
                                             if ["Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Z","X","C","V","B","N","M",",","."," "].contains(row) {
                                                 Color.gray
                                             }else{
                                                 Color.init(red: 0.2, green: 0.2, blue: 0.2)
                                             }
+                                            if row == "Q"{
+                                                VStack{
+                                                    Text("1")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "W"{
+                                                VStack{
+                                                    Text("2")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "E"{
+                                                VStack{
+                                                    Text("3")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "R"{
+                                                VStack{
+                                                    Text("4")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "T"{
+                                                VStack{
+                                                    Text("5")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "Y"{
+                                                VStack{
+                                                    Text("6")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "U"{
+                                                VStack{
+                                                    Text("7")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "I"{
+                                                VStack{
+                                                    Text("8")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "O"{
+                                                VStack{
+                                                    Text("9")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "P"{
+                                                VStack{
+                                                    Text("0")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "A"{
+                                                VStack{
+                                                    Text("@")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "S"{
+                                                VStack{
+                                                    Text("#")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "D"{
+                                                VStack{
+                                                    Text("¥")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "F"{
+                                                VStack{
+                                                    Text("&")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "G"{
+                                                VStack{
+                                                    Text("*")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "H"{
+                                                VStack{
+                                                    Text("(")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "J"{
+                                                VStack{
+                                                    Text(")")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "K"{
+                                                VStack{
+                                                    Text("'")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "L"{
+                                                VStack{
+                                                    Text(""")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "Z"{
+                                                VStack{
+                                                    Text("%")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "X"{
+                                                VStack{
+                                                    Text("-")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "C"{
+                                                VStack{
+                                                    Text("+")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "V"{
+                                                VStack{
+                                                    Text("=")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "B"{
+                                                VStack{
+                                                    Text("/")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "N"{
+                                                VStack{
+                                                    Text(";")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "M"{
+                                                VStack{
+                                                    Text(":")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == ","{
+                                                VStack{
+                                                    Text("!")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            } else if row == "."{
+                                                VStack{
+                                                    Text("?")
+                                                        .font(.system(size: 20, design: .rounded))
+                                                        .foregroundColor(.white)
+//                                                        .padding()
+                                                    Spacer()
+                                                }
+
+                                            }
                                             Text("\(row)")
                                                 .font(.title)
+                                                .foregroundColor(.white)
                                         }
                                         .frame(width: 70, height: 70)
                                         .clipShape(RoundedRectangle(cornerRadius: 5))
@@ -104,6 +359,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-.previewInterfaceOrientation(.portraitUpsideDown)
+            .previewInterfaceOrientation(.landscapeLeft)
     }
 }
