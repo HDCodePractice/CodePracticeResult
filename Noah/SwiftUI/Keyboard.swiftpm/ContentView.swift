@@ -77,7 +77,7 @@ struct ContentView: View {
                                                 } else {
                                                     Color.mint
                                                     Image(systemName: "shift")
-                                                        .font(.system(size:500))
+                                                        .font(.system(size:20))
                                                         .foregroundColor(.white)
                                                 }
                                             } else {
