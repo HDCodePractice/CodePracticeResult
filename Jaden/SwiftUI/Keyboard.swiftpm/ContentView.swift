@@ -24,7 +24,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("1")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -33,7 +33,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("2")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -42,7 +42,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("3")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -51,7 +51,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("4")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -60,7 +60,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("5")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -69,7 +69,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("6")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -78,7 +78,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("7")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -87,7 +87,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("8")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -96,7 +96,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("9")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -105,7 +105,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("0")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -114,7 +114,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("@")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -123,7 +123,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("#")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -132,7 +132,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("¥")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -141,7 +141,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("&")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -150,7 +150,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("*")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -159,7 +159,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("(")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -168,7 +168,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text(")")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -177,16 +177,16 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("'")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
 
                                             } else if row == "L"{
                                                 VStack{
-                                                    Text(""")
+                                                    Text("''")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -195,7 +195,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("%")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -204,7 +204,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("-")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -213,7 +213,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("+")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -222,7 +222,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("=")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -231,7 +231,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("/")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -240,7 +240,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text(";")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -249,7 +249,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text(":")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -258,7 +258,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("!")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -267,7 +267,7 @@ struct ContentView: View {
                                                 VStack{
                                                     Text("?")
                                                         .font(.system(size: 20, design: .rounded))
-                                                        .foregroundColor(.white)
+                                                        .foregroundColor(Color.init(red: 0.7, green: 0.7, blue: 0.7))
 //                                                        .padding()
                                                     Spacer()
                                                 }
@@ -292,6 +292,7 @@ struct ContentView: View {
                                         ZStack {
                                             Color.init(red: 0.2, green: 0.2, blue: 0.2)
                                             Image(systemName: "mic")
+                                                .foregroundColor(.white)
                                         }
                                         .frame(width: 70, height: 70)
                                         .clipShape(RoundedRectangle(cornerRadius:5))
@@ -301,6 +302,7 @@ struct ContentView: View {
                                         ZStack {
                                             Color.init(red: 0.2, green: 0.2, blue: 0.2)
                                             Image(systemName: "keyboard.chevron.compact.down")
+                                                .foregroundColor(.white)
                                         }
                                         .frame(width: 70, height: 70)
                                         .clipShape(RoundedRectangle(cornerRadius:5))
@@ -309,6 +311,7 @@ struct ContentView: View {
                                         ZStack {
                                             Color.init(red: 0.2, green: 0.2, blue: 0.2)
                                             Image(systemName: "globe")
+                                                .foregroundColor(.white)
                                         }
                                         .frame(width: 70, height: 70)
                                         .clipShape(RoundedRectangle(cornerRadius:5))
@@ -317,6 +320,8 @@ struct ContentView: View {
                                         ZStack {
                                             Color.init(red: 0.8, green: 0.8, blue: 0.8)
                                             Image(systemName: "arrow.up")
+                                                .foregroundColor(.black)
+                                                
                                         }
                                         .frame(width: 70, height: 70)
                                         .clipShape(RoundedRectangle(cornerRadius:5))
@@ -325,6 +330,8 @@ struct ContentView: View {
                                         ZStack {
                                             Color.init(red: 0.8, green: 0.8, blue: 0.8)
                                             Image(systemName: "arrow.up")
+                                                .foregroundColor(.black)
+                                               
                                         }
                                         .frame(width: 70, height: 70)
                                         .clipShape(RoundedRectangle(cornerRadius:5))
@@ -333,6 +340,7 @@ struct ContentView: View {
                                         ZStack {
                                             Color.init(red: 0.2, green: 0.2, blue: 0.2)
                                             Text("return")
+                                                .foregroundColor(.white)
                                         }
                                         .frame(width: 100, height: 70)
                                         .clipShape(RoundedRectangle(cornerRadius:5))
@@ -341,6 +349,7 @@ struct ContentView: View {
                                         ZStack {
                                             Color.init(red: 0.2, green: 0.2, blue: 0.2)
                                             Image(systemName: "delete.left")
+                                                .foregroundColor(.white)
                                         }
                                         .frame(width: 70, height: 70)
                                         .clipShape(RoundedRectangle(cornerRadius:5))
