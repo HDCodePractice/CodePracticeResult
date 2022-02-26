@@ -68,7 +68,9 @@ struct Game{
     
     mutating func toggleAnswer(tAnswer: String){
         answer = tAnswer
-        
+        if answer == correct{
+            score += 1
+        }
         questionStart = false
         gameStart = true
     }
