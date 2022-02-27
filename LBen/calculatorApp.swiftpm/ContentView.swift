@@ -23,7 +23,7 @@ struct ContentView: View {
                 HStack (spacing: 10){
                     ForEach (row, id: \.self) {
                         button in
-                        MyView(buttonTitle: button.title,background: button.background,width: button.width, height:  button.height).onTapGesture {
+                        Button(buttonTitle: button.title,background: button.background,width: button.width, height:  button.height).onTapGesture {
                             vm.applyButton(button: button)
                         }
                     }
