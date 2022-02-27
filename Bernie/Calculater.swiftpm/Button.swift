@@ -2,9 +2,8 @@
 //  File.swift
 //  Calculater
 //
-//  Created by Bernie Zhang on 2/13/22.
+//  Created by 老房东 on 2022-02-13.
 //
-
 import Foundation
 import SwiftUI
 
@@ -17,8 +16,8 @@ struct Button: View {
     var body: some View {
         Text(buttonTitle)
             .font(.largeTitle)
-            .foregroundColor(buttonTitle.color)
-            .frame(width: width, height: height)
+            .foregroundColor(.white)
+            .frame(width: width , height: height)
             .background(background)
             .cornerRadius(height/2)
     }
@@ -26,7 +25,7 @@ struct Button: View {
 
 struct Button_Previews: PreviewProvider {
     static var previews: some View {
-        Button(buttonTitle: "AC", background: .green, width: 120, height: 120)
-        Button(buttonTitle: "0", background: .red,width: 120, height: 60)
+        Button(buttonTitle: "AC", background: .green,width: 120,height: 120)
+        Button(buttonTitle: "0", background: .red,width: 120,height: 60)
     }
 }

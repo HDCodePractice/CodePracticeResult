@@ -1,23 +1,22 @@
 //
-//  File.swift
-//  Calculater
+//  CalculatorButtonItem.swift
+//  Calculator
 //
-//  Created by Bernie Zhang on 2/13/22.
+//  Created by 老房东 on 2022-02-13.
 //
-
 import Foundation
 import SwiftUI
 
-enum CalculaterButtonItem{
-    enum Op: String{
-        case pluse = "+"
+enum CalculatorButtonItem {
+    enum Op:String{
+        case plus = "+"
         case minus = "-"
         case multiply = "x"
         case divide = "÷"
         case equal = "="
     }
     
-    enum Command: String{
+    enum Command:String {
         case clear = "AC"
         case flip = "+/-"
         case percent = "%"
@@ -29,7 +28,7 @@ enum CalculaterButtonItem{
     case op(Op)
 }
 
-extension CalculaterButtonItem{
+extension CalculatorButtonItem{
     var title: String{
         switch self{
         case .digit(let value):
@@ -38,43 +37,35 @@ extension CalculaterButtonItem{
             return "."
         case .command(let command):
             return command.rawValue
-        case.op(let op):
+        case .op(let op):
             return op.rawValue
         }
     }
+    
     var background: Color{
-        switch self{
+        switch self {
         case .digit(_):
             return .yellow
         case .dot:
             return .red
         case .command(_):
             return .green
-        case.op(_):
+        case .op(_):
             return .blue
         }
     }
+    
     var width : CGFloat {
-        if self == .digit(0){
+        if self == .digit(0) {
             return 142
         }
         return 66
     }
+    
     var height : CGFloat {
         return 66
     }
 }
 
-extension CalculaterButtonItem: Hashable{}
-
-extension String{
-    var color: Color{
-        if self == "="{
-            return.black
-        }
-        return .white
-    }
-}
-
-
+extension CalculatorButtonItem: Hashable{}
 
