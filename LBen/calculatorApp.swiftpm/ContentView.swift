@@ -2,26 +2,33 @@ import SwiftUI
 
 struct ContentView: View {
     @State var vm = CalculatorModel()
+
+    
+    fileprivate func screen(number:String) -> some View {
+        return Text(number)
+            .font(.system(size: 90))
+            .lineLimit(1)
+            .minimumScaleFactor(0.5)
+            .padding()
+            .frame(minWidth: 0,  maxWidth: .infinity, alignment: .trailing)
+    }
+    
     var body: some View {
-        VStack(alignment: .trailing) {
-            Text(vm.tmpOutput).font(.largeTitle)
-            Text(vm.tmpOutput2).font(.largeTitle)
-            Text(vm.tmpOperator).font(.largeTitle)
-            Text(vm.output).font(.largeTitle)
-        }
-        VStack {
+        
+        VStack{
+            Spacer()
+            screen(number: vm.brain.output)
             ForEach (vm.keyboard, id: \.self) {
                 row in
                 HStack (spacing: 10){
                     ForEach (row, id: \.self) {
                         button in
-                        Button(buttonTitle: button.title,background: button.background,width: button.width, height:  button.height)
-                        .onTapGesture { vm.calculatorStep(inputButton: button)
+                        MyView(buttonTitle: button.title,background: button.background,width: button.width, height:  button.height).onTapGesture {
+                            vm.applyButton(button: button)
                         }
                     }
                 }
-                
             }
-        }
+        }.padding()
     }
 }
