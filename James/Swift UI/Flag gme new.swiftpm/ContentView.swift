@@ -35,7 +35,6 @@ struct ContentView: View {
                     Text(flag)
                         .font(.largeTitle)
                     if flag == game.answer{
-                        game.score += 1
                         Image(systemName: flag == game.correct ? "checkmark.circle.fill" : "x.circle.fill")
                             .foregroundColor(flag == game.correct ? .green : .red)
                     }
