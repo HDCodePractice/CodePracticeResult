@@ -18,7 +18,9 @@ struct CalculaterModel{
     
     var brain = CalculaterBrain.left("0")
     
-    mutating func applyButton(button: CalculaterButtonItem){
+    mutating func applyButton(button:CalculaterButtonItem){
         brain = brain.apply(item: button)
     }
+
 }
+
