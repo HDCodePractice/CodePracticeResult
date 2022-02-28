@@ -8,9 +8,9 @@
 import Foundation
 
 enum CalculatorBrain{
-    case left(String) // 10
-    case leftOp(left: String, op: CalculatorButtonItem.Op) // 10 +
-    case leftOpRight(left:String,op: CalculatorButtonItem.Op,right:String) // 10 + 20
+    case left(String)
+    case leftOp(left: String, op: CalculatorButtonItem.Op)
+    case leftOpRight(left:String,op: CalculatorButtonItem.Op,right:String)
     case error
     
     var output: String{
