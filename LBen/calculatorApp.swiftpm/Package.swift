@@ -8,16 +8,16 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "1.1 homework",
+    name: "calculatorApp",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "1.1 homework",
+            name: "calculatorApp",
             targets: ["AppModule"],
-            bundleIdentifier: "one.hdcola.Hendry.--1-homework",
-            teamIdentifier: "4K2F95K9Z2",
+            bundleIdentifier: "com.loopalgo.calculatorApp",
+            teamIdentifier: "J82D2P8E84",
             displayVersion: "1.0",
             bundleVersion: "1",
             iconAssetName: "AppIcon",
