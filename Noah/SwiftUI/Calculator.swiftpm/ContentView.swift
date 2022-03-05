@@ -29,7 +29,7 @@ struct ContentView: View {
                                                 Color.gray
                                             }
                                             Text("\(row)")
-                                                .font(.title)
+                                                .font(.title2)
                                                 .foregroundColor(.white)
                                         }
                                         .frame(width: 70, height: 60)
@@ -39,7 +39,7 @@ struct ContentView: View {
                                         ZStack {
                                             Color.blue
                                             Text("\(row)")
-                                                .font(.title)
+                                                .font(.title2)
                                                 .foregroundColor(.white)
                                         }
                                         .frame(width: 143, height: 60)
