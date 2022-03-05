@@ -3,6 +3,7 @@ import SwiftUI
 struct ContentView: View {
     let difficulties = ["Easy","Medium","Hard"]
     var body: some View {
+
         NavigationView {
             ZStack {
                 LinearGradient(colors: [.orange,.yellow], startPoint: .top, endPoint: .bottom)
