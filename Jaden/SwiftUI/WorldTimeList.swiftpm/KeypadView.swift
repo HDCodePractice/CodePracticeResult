@@ -11,7 +11,7 @@ struct KeyPadView: View {
     @State var vm = ViewModel()
     
     var body: some View {
-        ScrollView{
+        
             
             ZStack {
                 Color(.black)
@@ -28,17 +28,21 @@ struct KeyPadView: View {
                             }.padding(30)
                             Divider().background(Color.white)
                         }
-                        ForEach(vm.items) { item in
-                            HStack (spacing: 60){
-                                TimeItemView(time: item.times, hours: item.timeDifference, title: item.name, checker: item.check)
-                                
+                        ScrollView{
+                            ForEach(vm.items) { item in
+                                HStack (spacing: 60){
+                                    TimeItemView(time: item.times, hours: item.timeDifference, title: item.name, checker: item.check)
+                                    
+                                }
                             }
+                            Spacer()
                         }
-                        Spacer()
+                        
+
                     }
                 }
             }.ignoresSafeArea()
-        }
+        
 
         
     }
