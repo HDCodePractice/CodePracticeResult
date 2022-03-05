@@ -11,28 +11,35 @@ struct ContentView: View {
     @State var functionState : Int = 0 // 空+-x÷
     func tapIn(tapedContent : String) {
         if Int(tapedContent) != nil {
-            number = number*10 + Double(tapedContent)!
+            number = number * 10 + Double(tapedContent)!
         }else if tapedContent == "+/-"{
             number = number * -1
         }else if tapedContent == "%"{
             number = number / 100
+        }else if tapedContent == "AC"{
+            number = 0
+            numberResult = 0
         }else if tapedContent == "C"{
-            numberResult = number
             number = 0
         }else if tapedContent == "/"{
-            numberResult = number
+            functionState = 4
+            numberResult = caculateMethod()
             number = 0
         }else if tapedContent == "x"{
-            numberResult = number
+            functionState = 3
+            numberResult = caculateMethod()
             number = 0
         }else if tapedContent == "-"{
-            numberResult = number
+            functionState = 2
+            numberResult = caculateMethod()
             number = 0
         }else if tapedContent == "+"{
-            numberResult = number
+            functionState = 1
+            numberResult = caculateMethod()
             number = 0
         }else if tapedContent == "="{
-            //show number result
+            numberResult = caculateMethod()
+            number = numberResult
         }
     }
     func caculateMethod() -> Double{
@@ -40,6 +47,12 @@ struct ContentView: View {
             return numberResult
         }else if functionState == 1{
             return number + numberResult
+        }else if functionState == 2{
+            return numberResult - number
+        }else if functionState == 3{
+            return number * numberResult
+        }else if functionState == 4{
+            return numberResult / number
         }
         return 0
     }
@@ -49,13 +62,13 @@ struct ContentView: View {
             Rectangle().fill(Color.white).frame(width: .infinity)
             ZStack(alignment:.trailing){
                 Rectangle().fill(Color.white).frame(width: .infinity)
-                Text("\(number)").font(.title).foregroundColor(Color.black).padding(/*@START_MENU_TOKEN@*/.all, 10.0/*@END_MENU_TOKEN@*/)
+                Text("\(number)").font(.title).foregroundColor(Color.black).padding(.all, 10.0)
             }
             HStack(spacing: 0){
                 ForEach(function,id: \.self)
                                { i in
                                    ZStack {
-                                       Circle().padding(/*@START_MENU_TOKEN@*/.all, 4.0/*@END_MENU_TOKEN@*/).foregroundColor(String(i) == "/" ? Color.gray : Color.orange)
+                                       Circle().padding(.all, 4.0).foregroundColor(String(i) == "/" ? Color.gray : Color.orange)
                                        Text("\(i)")
                                            .font(.title).foregroundColor(Color.white)
                                     }
@@ -69,7 +82,7 @@ struct ContentView: View {
             HStack(spacing: 0){
                 ForEach(row1,id:\.self){ n in
                     ZStack {
-                        Circle().padding(/*@START_MENU_TOKEN@*/.all, 4.0/*@END_MENU_TOKEN@*/).foregroundColor(Int(n) == nil ? Color.gray : Color.pink)
+                        Circle().padding(.all, 4.0).foregroundColor(Int(n) == nil ? Color.gray : Color.pink)
                         Text("\(n)")
                             .font(.title).foregroundColor(Color.white)
                      }
@@ -82,7 +95,7 @@ struct ContentView: View {
             HStack(spacing: 0){
                 ForEach(row2,id:\.self){ n in
                     ZStack {
-                        Circle().padding(/*@START_MENU_TOKEN@*/.all, 4.0/*@END_MENU_TOKEN@*/).foregroundColor(Int(n) == nil ? Color.gray : Color.pink)
+                        Circle().padding(.all, 4.0).foregroundColor(Int(n) == nil ? Color.gray : Color.pink)
                         Text("\(n)")
                             .font(.title).foregroundColor(Color.white)
                      }
@@ -95,7 +108,7 @@ struct ContentView: View {
             HStack(spacing: 0){
                 ForEach(row3,id:\.self){ n in
                     ZStack {
-                        Circle().padding(/*@START_MENU_TOKEN@*/.all, 4.0/*@END_MENU_TOKEN@*/).foregroundColor(Int(n) == nil ? Color.gray : Color.pink)
+                        Circle().padding(.all, 4.0).foregroundColor(Int(n) == nil ? Color.gray : Color.pink)
                         Text("\(n)")
                             .font(.title).foregroundColor(Color.white)
                      }
@@ -108,7 +121,7 @@ struct ContentView: View {
             HStack(spacing: 0){
                 ForEach(row4,id:\.self){ n in
                     ZStack {
-                        Circle().padding(/*@START_MENU_TOKEN@*/.all, 4.0/*@END_MENU_TOKEN@*/).foregroundColor(Int(n) == nil ? Color.gray : Color.pink)
+                        Circle().padding(.all, 4.0).foregroundColor(Int(n) == nil ? Color.gray : Color.pink)
                         Text("\(n)")
                             .font(.title).foregroundColor(Color.white)
                      }
