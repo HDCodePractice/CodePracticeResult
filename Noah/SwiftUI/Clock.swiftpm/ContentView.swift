@@ -10,13 +10,14 @@ struct ContentView: View {
                     HStack {
                         VStack {
                             Text(item.timeDifference)
-                                .font(.caption)
+                                .font(.footnote)
                             Text(item.name)
-                                .font(.body)
+                                .font(.title)
                         }
                         Spacer()
                         VStack {
                             Text(item.time)
+                                .font(.title)
                         }
                     }.padding(30)
                     Divider()
