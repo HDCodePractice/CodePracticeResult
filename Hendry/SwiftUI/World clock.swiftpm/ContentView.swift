@@ -12,6 +12,7 @@ struct ContentView: View {
                         .foregroundColor(.white)
                     Spacer()
                 }
+                ScrollView{
                 ForEach (vm.items){item in
                     HStack{
                         VStack{
@@ -29,10 +30,11 @@ struct ContentView: View {
                                 .foregroundColor(.white)
                         }
                     }
-                    Divider().foregroundColor(.white)
+                    Divider().foregroundColor(.gray)
+                }
                 }
             }
-        }
+        }.ignoresSafeArea()
     }
 }
 
