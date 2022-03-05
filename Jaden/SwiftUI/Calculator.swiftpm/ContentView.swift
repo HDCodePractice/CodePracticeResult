@@ -10,7 +10,7 @@ struct ContentView: View {
                         HStack (spacing: 3) {
                             ForEach(column, id: \.self) { row in
                                 Button() {
-
+                                    
                                 } label: {
                                     if row != "0" {
                                         ZStack {
@@ -51,6 +51,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-.previewInterfaceOrientation(.portraitUpsideDown)
+.previewInterfaceOrientation(.landscapeLeft)
     }
 }
