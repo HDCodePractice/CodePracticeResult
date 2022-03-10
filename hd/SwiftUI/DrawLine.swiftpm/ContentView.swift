@@ -6,9 +6,9 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             Color.red
-            Line(start: vm.start, end: vm.end)
+            MyRectangle(start: vm.start, end: vm.end)
             ForEach(vm.lines){ linePoints in
-                Line(
+                MyRectangle(
                     start: linePoints.start,
                     end: linePoints.end
                 )
