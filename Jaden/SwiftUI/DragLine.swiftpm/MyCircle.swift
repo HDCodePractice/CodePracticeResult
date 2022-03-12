@@ -5,29 +5,29 @@
 //  Created by Jaden Cheung on 3/9/22.
 //
 
-import SwiftUI
-
-struct MyCircle: View {
-    let color : Color
-    let start:CGPoint
-    let end: CGPoint
-    var distance: Double{
-        hypotenuse(a: Double(end.x-start.x), b:  Double(end.y-start.y)) * 2
-    }
-
-    var body: some View {
-        Circle()
-            .frame(width: distance, height: distance)
-            .position(start)
-            .foregroundColor(color)
-    }
-    
-    
-    private func hypotenuse(a: Double, b: Double) -> Double {
-        return (a * a + b * b).squareRoot()
-    }
-
-}
+//import SwiftUI
+//
+//struct MyCircle: View {
+//    let color : Color
+//    let start:CGPoint
+//    let end: CGPoint
+//    var distance: Double{
+//        hypotenuse(a: Double(end.x-start.x), b:  Double(end.y-start.y)) * 2
+//    }
+//
+//    var body: some View {
+//        Circle()
+//            .frame(width: distance, height: distance)
+//            .position(start)
+//            .foregroundColor(color)
+//    }
+//    
+//    
+//    private func hypotenuse(a: Double, b: Double) -> Double {
+//        return (a * a + b * b).squareRoot()
+//    }
+//
+//}
 
 //struct MyCircle_Previews: PreviewProvider {
 //    static var previews: some View {

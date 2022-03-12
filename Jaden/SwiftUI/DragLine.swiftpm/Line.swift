@@ -19,7 +19,7 @@ struct Line: View {
             path.addLine(to: end)
         }
         .strokedPath(StrokeStyle(lineWidth:20,lineCap: .round))
-        
+        .foregroundColor(color)
         
         
     }
