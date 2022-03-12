@@ -10,7 +10,6 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             BackgroundColor
-            drawGrid()
             draw
             VStack {
                 options
@@ -120,4 +119,3 @@ struct ContentView: View {
         }
     }
 }
-
