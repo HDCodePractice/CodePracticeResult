@@ -53,7 +53,7 @@ struct ContentView: View {
                 Color.init(red: 149/255, green: 246/255, blue: 205/255, opacity: 100.0)
                 VStack(alignment: .trailing, spacing: (sW/6.75)-32) {
                     let input = Shift ? lowerL : lowerSL
-                    ForEach(input, id: \.self) { column in
+                    (input, id: \.self) { column in
                         HStack(spacing: sW/6.75) {
                             ForEach(column, id: \.self) { row in
                                 Button() {
