@@ -16,4 +16,6 @@ struct LinePoints: Identifiable{
     var id = UUID()
     var start : CGPoint
     var end :CGPoint
+    var color: Color
 }
+

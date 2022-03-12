@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct Line: View {
+    @State private var bgColor = Color.blue
+    let color : Color
     let start:CGPoint
     let end:CGPoint
     var body: some View {
@@ -17,15 +19,18 @@ struct Line: View {
             path.addLine(to: end)
         }
         .strokedPath(StrokeStyle(lineWidth:20,lineCap: .round))
+        
+        
+        
     }
 }
 
 struct Line_Previews: PreviewProvider {
     static var previews: some View {
         ZStack{
-            Line(start: CGPoint(x: 100, y: 200), end: CGPoint(x: 300, y: 700))
-            Line(start: CGPoint(x: 100, y: 200), end: CGPoint(x: 300, y: 400))
-            Line(start: CGPoint(x: 100, y: 200), end: CGPoint(x: 300, y: 100))
+//            Line(start: CGPoint(x: 100, y: 200), end: CGPoint(x: 300, y: 700,))
+//            Line(start: CGPoint(x: 100, y: 200), end: CGPoint(x: 300, y: 400))
+//            Line(start: CGPoint(x: 100, y: 200), end: CGPoint(x: 300, y: 100))
         }
         
     }
