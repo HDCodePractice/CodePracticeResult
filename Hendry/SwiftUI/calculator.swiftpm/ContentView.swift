@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    let calc = [["(",")","mc","m+","m-","mr","AC","+/-","%","÷"],["2nd","x2","x3","xy","2x","10x","7","8","9","×"],["1/x","2√x","3√x","y√x","In","log10","4","5","6","-"],["x!","sin","cos","tan","e","EE","1","2","3","+"],["Rad","sinh","cosh","tanh","∏","Rand","0",".","="]]
+    let calc = [["(",")","q","w","e","r","t","y","u","i","o","p","[","]"],["a","s","d","f","g","h","j","k","l",";","'","return"],["1/x","2√x","3√x","y√x","In","log10","4","5","6","-"]]
     var body: some View {
         ZStack {
             Color(.black)
