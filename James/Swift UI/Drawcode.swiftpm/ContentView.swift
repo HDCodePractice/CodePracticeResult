@@ -13,7 +13,7 @@ struct ContentView: View {
                     Color.green
                 }
                 Button("Blue"){
-                    Color.blue
+                    Color.red
                 }
             }
             Line(start: vm.start, end: vm.end)
@@ -25,7 +25,7 @@ struct ContentView: View {
             }
             VStack{
                 Button("erase"){
-                    Line.disabled(<#T##self: Line##Line#>)
+                    Line.disabled(Line:"")
                 }
             }
         }
