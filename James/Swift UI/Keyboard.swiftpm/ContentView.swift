@@ -4,7 +4,7 @@ struct ContentView: View {
     let key = [["q","w","e","r","t","y","u","i","o","p","delete"],["CAP","a","s","d","f","g","h","j","k","l","return"],["z", "x","c","v","b","n","m",",","."]]
     var body: some View {
         ZStack {
-            Color(.black)
+            Color(.white)
             VStack(spacing:-29) {
                     ForEach(key, id: \.self) { column in
                         HStack (spacing: 3) {
@@ -26,8 +26,8 @@ struct ContentView: View {
                                             Text("\(row)")
                                                 .font(.title)
                                         }
-                                        .frame(width: 146, height: 70)
-                                        .clipShape(RoundedRectangle(cornerRadius: 40))
+                                        .frame(width: 70, height: 70)
+                                        .clipShape(RoundedRectangle(cornerRadius: 20))
                                         .shadow(radius: 5)
                                     }
                                 }

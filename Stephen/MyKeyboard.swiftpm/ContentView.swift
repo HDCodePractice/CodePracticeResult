@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var vm = CalculaterModel()
-
+    @State var vm = KeyboardModel()
+    
     fileprivate func screen(number:String) -> some View {
         return Text(number)
             .font(.system(size:70))
@@ -13,9 +13,9 @@ struct ContentView: View {
     }
     
     var body: some View {
-        VStack(){
-            Spacer()
-            screen(number: vm.brain.output)
+        VStack {
+//            Spacer()
+//            screen(number: vm.brain.output)
             
             ForEach(vm.keyboard, id:\.self){row in
                 HStack(spacing:10){
@@ -25,12 +25,19 @@ struct ContentView: View {
                             background: button.background,
                             width: button.width,
                             height: button.height
-                        ).onTapGesture {
-                                vm.applyButton(button: button)
-                        }
+                        )
                     }
                 }
             }
         }
     }
 }
+
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+.previewInterfaceOrientation(.landscapeLeft)
+    }
+}
+
