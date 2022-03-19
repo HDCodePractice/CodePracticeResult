@@ -9,7 +9,7 @@ struct ContentView: View {
                     HStack {
                         Spacer()
                         Text("0")
-                            .font(.`system(size:60))
+                            .font(.system(size:60))
                             .foregroundColor(.white)
                     }.padding(50)
                     ForEach(inputOrder, id: \.self) { column in
