@@ -25,7 +25,7 @@ struct ContentView: View {
             }
             VStack{
                 Button("erase"){
-                    Line.disabled(Line:"")
+                    Line.disabled("")
                 }
             }
         }
