@@ -11,7 +11,7 @@ struct ContentView: View {
             VStack {
                 Text("dwejifojriofjwofjeowifjeiow")
                     .foregroundColor(.red)
-                ColorPicker("Change all Color line", selection: $bgColor)
+                ColorPicker("Change Color", selection: $bgColor)
                 HStack{
                     Text("Drawing: ")
                     Picker(draw,selection: $draws){
