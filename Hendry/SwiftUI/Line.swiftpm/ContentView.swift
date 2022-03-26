@@ -27,6 +27,7 @@ struct ContentView: View {
                     Text("Clear")
                         .font(.system(size: 70, design: .rounded))
                         .foregroundColor(.white)
+                    
                 }
                 .frame(width: 200, height: 100)
                 .cornerRadius(5)
