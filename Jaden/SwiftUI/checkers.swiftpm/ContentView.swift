@@ -1,6 +1,13 @@
 import SwiftUI
 
-
+struct ContentView : View {
+    @State var vm = ViewModel()
+    var body: some View{
+        ZStack(){
+            
+        }
+    }
+}
 enum Checker:String {
     case white = "white"
     case black = "black"
@@ -64,19 +71,10 @@ enum Grid: String {
     
     
 }
-
 struct GridItem: Identifiable, Hashable{
     let id:UUID = UUID()
     var gridColor: Grid
     var checker: Checker
-}
-struct ContentView : View {
-    @State var vm = ViewModel()
-    var body: some View{
-        ZStack(){
-            
-        }
-    }
 }
 struct ViewModel {
     var grid :[[GridItem]]=[[
