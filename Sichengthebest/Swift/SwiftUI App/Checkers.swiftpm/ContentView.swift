@@ -29,12 +29,39 @@ struct ImageView: View {
                     item.chess = "whitepiece"
                 }
         } else {
-            Image(item.chess)
-                .resizable()
-                .scaledToFit()
-                .onTapGesture {
-                    item.chess = "whitepiece"
-                }
+            if item.chess == "whitepiece" {
+                Image(systemName: "circle.fill")
+                    .foregroundColor(.white)
+                    .resizable()
+                    .scaledToFit()
+                    .onTapGesture {
+                        item.chess = "blackpiece"
+                    }
+            } else if item.chess == "blackpiece" {
+                Image(systemName: "circle.fill")
+                    .foregroundColor(.black)
+                    .resizable()
+                    .scaledToFit()
+                    .onTapGesture {
+                        item.chess = "whitequeen"
+                    }
+            } else if item.chess == "whitequeen" {
+                Image(systemName: "crown.fill")
+                    .foregroundColor(.white)
+                    .resizable()
+                    .scaledToFit()
+                    .onTapGesture {
+                        item.chess = "blackqueen"
+                    }
+            } else if item.chess == "blackqueen" {
+                Image(systemName: "crown.fill")
+                    .foregroundColor(.black)
+                    .resizable()
+                    .scaledToFit()
+                    .onTapGesture {
+                        item.chess = "no"
+                    }
+            }
         }
     }
 }
