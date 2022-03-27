@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum key:Hashable{
-    enum symbol:String{
+    enum Symbol:String{
         case at = "@"
         case hash = "#"
         case dollar = "$"
@@ -30,7 +30,8 @@ enum key:Hashable{
         case period = "."
         case question = "?"
         case change = "123"
-        
-        
     }
+    case letter(String)
+    case symbol(Symbol)
+    
 }
