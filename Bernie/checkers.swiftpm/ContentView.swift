@@ -50,9 +50,4 @@ struct GridItemView : View{
     }
 }
 
-//struct ViewModel{
-//    var gridSize = 8
-//    var gridBackGround : [[GridBackGround]]
-//    var chessGrid:[[ChessItem]]
-//}
 
