@@ -5,39 +5,29 @@ struct ContentView : View {
     var body: some View{
         ZStack{
             Color.gray
-            VStack{
-//
-//                // green
-//                Image(systemName: "circle.fill")
-//                    .resizable()
-//                    .scaledToFit()
-//                    .foregroundColor(.green)
-//                    .onTapGesture {
-//                        vm.printGrid()
+//            VStack{
+//                VStack(spacing:-1){
+//                    ForEach(vm.grid,id:\.self){row in
+//                        HStack(spacing:-1){
+//                            ForEach(row){item in
+//                                GridItemView(item:item)
+//                            }
+//                        }
 //                    }
-//                // black
-//                Image(systemName: "circle.fill")
-//                    .resizable()
-//                    .scaledToFit()
-//                    .foregroundColor(.black)
-//                // greenWin
-//                Image(systemName: "star.circle.fill")
-//                    .resizable()
-//                    .scaledToFit()
-//                    .foregroundColor(.green)
-//                // blackWin
-//                Image(systemName: "star.circle.fill")
-//                    .resizable()
-//                    .scaledToFit()
-//                    .foregroundColor(.black)
-//                // nothing
-//                Image(systemName: "circle.fill")
-//                    .resizable()
-//                    .scaledToFit()
-//                    .foregroundColor(.gray)
-                
-            }
+//                }
+//            }
         }.ignoresSafeArea()
 
     }
 }
+//struct GridItemView: View {
+//    @State var item : Connect
+//    var body: some View {
+//        ZStack{
+//            Image(systemName: item.imageName)
+//                .onTapGesture {
+//                    item.connect = item.connect.color
+//                }
+//        }
+//    }
+//}

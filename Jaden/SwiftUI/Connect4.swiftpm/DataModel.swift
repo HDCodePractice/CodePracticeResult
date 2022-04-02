@@ -7,13 +7,16 @@
 //
 import Foundation
 import SwiftUI
+
+
 enum Connect: String {
+
     case green
     case black
     case greenWin
     case blackWin
     case nothing
-    
+
     var color:Color{
         switch self {
         case . green, .greenWin:
@@ -24,7 +27,7 @@ enum Connect: String {
             return .white
         }
     }
-    
+
     var imageName:String{
         switch self {
         case . green, .black:
