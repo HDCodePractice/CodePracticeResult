@@ -1,10 +1,23 @@
 import SwiftUI
 
  struct ContentView: View {
-     @State var vm = ViewModule()
      var body: some View {
+         enum  connect4 : String{
+         case green
+         case grey
+         }
+         switch self{
+         case green{
+         return green
+         }
+         case grey{
+         return grey
+         }
+         }
          VStack {
-             Image("white piece")
+             HStack{
+                 Grid
+             }
          }
      }
  }
