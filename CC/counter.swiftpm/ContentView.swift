@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    //var strOper:String = ""
+
     let strColor = Color(.sRGB, red:0.43 , green:0.57, blue: 0.31)
     let arrright = ["*", "-", "+"]
     let arrtop = ["AC", "+/-", "%", "/"]
@@ -163,9 +163,13 @@ class calculate {
             currentNum = currentNum + afterPoint/decimal
             decimal = 0
         }
+        if isMinus{
+            currentNum = -currentNum
+        }
         strNum = String("\(currentNum)")
         
         isPoint = false
+        isMinus = false
         currentOpe = oper
         
 //        if isMinus{
@@ -210,11 +214,35 @@ class calculate {
             }
             afterPoint = afterPoint * 10 + clickNum
             dRes = currentNum+afterPoint/decimal
-            strNum = String("\(dRes)")
-            //isPoint = false
+            if afterPoint == 0{
+                strNum = String("\(Int(currentNum))")
+            }else{
+                strNum = String("\(dRes)")
+            }
+            if clickNum == 0 {
+                if afterPoint == 0{
+                    var i = decimal
+                    strNum = strNum + "."
+                    while i/10 >= 1{
+                        i = i/10
+                        strNum = strNum + "0"
+                    }
+                }else{
+                    var temp = Int(afterPoint)
+                    while temp % 10 == 0 {
+                        temp = temp/10
+                        strNum = strNum + "0"
+                    }
+                }
+                
+            }
         }else{
             currentNum = currentNum * 10 + clickNum
-            strNum = String("\(currentNum)")
+            if currentNum == 0{
+                strNum = String("\(Int(currentNum))")
+            }else{
+                strNum = String("\(currentNum)")
+            }
         }
         if isMinus {
             strNum = String("-\(strNum)")
@@ -241,15 +269,32 @@ class calculate {
     
     func onMinus(){
         //currentOpe = ""
-        isMinus = true
-        currentNum = -currentNum
-        //decimal = -decimal
-        if decimal != 0{
-            decimal = -decimal
-            dRes = currentNum+afterPoint/decimal
+        
+        if isMinus == true {
+            isMinus = false
+            if decimal != 0{
+                dRes = currentNum+afterPoint/decimal
+            }else{
+                dRes = currentNum
+            }
         }else{
-            dRes = currentNum
+            isMinus = true
+            if decimal != 0{
+                decimal = -decimal
+                dRes = -currentNum+afterPoint/decimal
+            }else{
+                dRes = -currentNum
+            }
         }
+            
+        //currentNum = -currentNum
+        //decimal = -decimal
+//        if decimal != 0{
+//            decimal = -decimal
+//            dRes = -currentNum+afterPoint/decimal
+//        }else{
+//            dRes = -currentNum
+//        }
         
         strNum = String("\(dRes)")
 //        if currentNum > 0 {
@@ -293,6 +338,9 @@ class calculate {
                 dRes = currentNum+afterPoint/decimal
             }else{
                 dRes = currentNum
+            }
+            if isMinus{
+                dRes = -dRes
             }
             currentEqu = currentEqu + String("\(dRes)")
         }
