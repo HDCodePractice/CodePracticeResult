@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  Connect4
-//
-//  Created by Jaden Cheung on 3/27/22.
-//
-
 import Foundation
 import SwiftUI
 
@@ -13,31 +6,32 @@ struct ViewModel{
     var gridHeight = 7
     var gridBackground  = Color.red
     var gridItemBackground = Color.white
-    var grid : [[Connect]] = []
+    var grid : [[GridItem]] = []
+    
     init(){
-            for _ in 1 ... gridWidth {
-                var col : [Connect] = []
-                for _ in 1 ... gridHeight {
-                    col.append(.nothing)
+        for _ in 1 ... gridWidth  {
+            var col : [GridItem] = []
+            for _ in 1 ... gridHeight {
+                col.append(GridItem(connect: .nothing))
             }
             grid.append(col)
         }
     }
-    func printGrid() {
-        var a = ""
-        for col in grid{
-            for i in col{
-                switch i {
-                case .nothing:
-                    a += "0"
-                default:
-                    a += "1" 
-                }
-            }
-            a += "\n"
+    
+    
+    func tapColumn(column : [GridItem]) -> [GridItem]{
+        var rColumn = column
+        if rColumn[0].connect != .nothing{
+            return rColumn
         }
-        print(a)
+        for i in 0..<rColumn.count{
+            if rColumn[i].connect != .nothing{
+                rColumn[i-1] = GridItem(connect: .green)
+                return rColumn
+            }
+
+        }
+        rColumn[rColumn.count-1] = GridItem(connect: .green)
+        return rColumn
     }
 }
-
-
