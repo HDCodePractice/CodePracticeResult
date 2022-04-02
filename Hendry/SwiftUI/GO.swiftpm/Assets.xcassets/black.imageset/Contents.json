@@ -1,6 +1,7 @@
 {
   "images" : [
     {
+      "filename" : "截屏2022-03-19 上午9.15.21.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -9,7 +10,6 @@
       "scale" : "2x"
     },
     {
-      "filename" : "截屏2022-03-19 上午9.15.21.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -1,42 +1,44 @@
 import SwiftUI
 
-struct ContentView: View {
-    @State var x = 1
-    let items = Array(1...100)
-    let layout = [GridItem(.adaptive(minimum: 26))]
-    var body: some View {
-        ZStack{
-            Color.brown
-            ScrollView{
-                LazyVGrid(columns: layout, content: {
-                    ForEach(items, id: \.self) { item in
-                        HStack{
-                            ZStack{
-                                VStack(){
-                                    HStack{
-                                        Image("2")
-                                            .resizable()
-                                            .frame(width: 5, height: 5)
-                                            .padding()
-                                            .onTapGesture {
-                                                x = 0
-                                            }
-                                    }
-                                    
-                                }
-                            }
-                        }
+struct ContentView : View {
+    @State var vm = ViewModel()
+    var body: some View{
+        VStack(spacing:0){
+            ForEach(vm.chessBoard,id:\.self){row in
+                HStack(spacing:0){
+                    ForEach(row){ item in
+                        GrideItemView(item: item)
                     }
-
-                })
+                }
             }
-        }.ignoresSafeArea()
-
+        }
     }
 }
 
-struct Previews_ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+struct GrideItemView : View{
+    @State var x = 1
+    @State var item : ChessBoardItem
+    var body: some View{
+        ZStack{
+            Image(item.background)
+                .resizable()
+                .scaledToFit()
+            if (item.chess != "no"){
+                Image(item.chess)
+                    .resizable()
+                    .scaledToFit()
+            }
+
+        }
+        .onTapGesture {
+            if x == 1{
+                item.chess = "3"
+                x = 2
+            }else if x == 2{
+                item.chess = "2"
+                x = 1
+            }
+
+        }
     }
 }
