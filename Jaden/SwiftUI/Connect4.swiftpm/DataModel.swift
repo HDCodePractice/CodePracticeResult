@@ -1,41 +1,45 @@
-//
-//  File.swift
-//  Connect4
-//
-//  Created by Jaden Cheung on 3/27/22.
-//
-//
-import Foundation
 import SwiftUI
 
+struct GridItem : Identifiable, Hashable{
+    var id = UUID()
+    var connect : Connect
+}
 
-enum Connect: String {
-
+enum Connect {
     case green
     case black
     case greenWin
     case blackWin
     case nothing
-
+    
     var color:Color{
         switch self {
-        case . green, .greenWin:
+        case . green, . greenWin:
             return .green
         case .black, .blackWin:
             return .black
-        default:
+        case .nothing:
             return .white
         }
     }
-
+    var nextConnect: Connect{
+        switch self {
+        case .nothing:
+            return  .green
+        case .green:
+            return .black
+        case .black:
+            return .nothing
+        default:
+            return .nothing
+        }
+    }
     var imageName:String{
         switch self {
-        case . green, .black:
+        case . green, .black, .nothing:
             return "circle.fill"
         case . greenWin, .blackWin:
             return "star.fill"
-        default:
-            return "circle.fill"
         }
     }
 }
