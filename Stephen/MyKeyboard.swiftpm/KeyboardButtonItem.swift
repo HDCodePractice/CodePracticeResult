@@ -9,15 +9,15 @@ import Foundation
 import SwiftUI
 
 enum KeyboardButtonItem{
-    enum Command:String{
-        case Return = "return"
-        case number = "123"
-        case clear = "delete"
-        case shift = "shift"
-        case space = "space"
-        // 希望是能直接放置图片在这里，而不是文字
-        case language = "Global"
-        case hide = "Hide"
+    enum Function: String{
+        case returnC = "return"
+        case delete = "delete.backword"
+        case lshift = "shift.fill"
+        case rshift = "shift.fill"
+        case globle = "globle"
+        case mic = "mic"
+        case keyboard = "keyboard.chevron.compact.down"
+        case number = "textformat.123"
     }
     
         
@@ -29,19 +29,24 @@ enum KeyboardButtonItem{
     
 
 
-extension KeyboardButtonItem{
-    var title: String{
-        switch self{
-        case .letter(let value):
-            return String(value)
-        case .dot:
-            return "."
-        case .command(let command):
-            return command.rawValue
-        case .comma:
-            return ","
-        }
+extension KeyBoardItem{
+ var KeyItemView : some View{
+  VStact{
+   switch self{
+    case .space : Rectangle().hidden()
+    case .letter: (let primary, let secondary)  {
+     Text(secondary).foregroundColor(.secondary)
+     Text(primary).foregroundColor(.white).font(.title)
     }
+   case .function(let function):
+      case return:
+           Text(function.rawValue)
+      default:
+           Image(systemName: function.rawValue)
+
+  }
+ }
+
     
     var background: Color{
         switch self {
@@ -69,4 +74,4 @@ extension KeyboardButtonItem{
     }
 }
 
-extension KeyboardButtonItem: Hashable{}
+//extension KeyboardButtonItem: Hashable{}
