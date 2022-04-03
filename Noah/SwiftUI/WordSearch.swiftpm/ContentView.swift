@@ -31,8 +31,8 @@ struct ContentView: View {
             .onEnded{ value in
                 vm.lines.append(
                     LinePoints(
-                        start: value.startLocation,
-                        end: value.location,
+                        start: CGPoint(x: 35*round(value.startLocation.x / 35), y: 35*round(value.startLocation.y / 35)),
+                        end: CGPoint(x: 35*round(value.location.x / 35), y: 35*round(value.location.y / 35)),
                         color: DrawColor,
                         type: DrawingOptions[Drawing]
                     ))
@@ -41,22 +41,9 @@ struct ContentView: View {
     
     var draw: some View {
         ZStack {
-            if Drawing == 0 {
-                Line(start: vm.start, end: vm.end, color: DrawColor, type: "Line")
-            } else if Drawing == 1{
-                MyCircle(start: vm.start, end: vm.end, color: DrawColor, type: "Circle")
-            } else if Drawing == 2 {
-                MyRectangle(start: vm.start, end: vm.end, color: DrawColor, type: "Rectangle")
-            }
-            
+            Line(start: vm.start, end: vm.end, color: DrawColor, type: "Line")
             ForEach(vm.lines) { linePoints in
-                if linePoints.type == "Line" {
-                    Line(start: linePoints.start, end: linePoints.end, color: linePoints.color, type: linePoints.type)
-                } else if linePoints.type == "Circle" {
-                    MyCircle(start: linePoints.start, end: linePoints.end, color: linePoints.color, type: linePoints.type)
-                } else if linePoints.type == "Rectangle" {
-                    MyRectangle(start: linePoints.start, end: linePoints.end, color: linePoints.color, type: linePoints.type)
-                }
+                Line(start: linePoints.start, end: linePoints.end, color: linePoints.color, type: linePoints.type)
             }
         }
     }
