@@ -6,18 +6,37 @@
 //
 
 import Foundation
+import SwiftUI
+
 struct ViewModel{
-    var gridRow = 7
-    var gridColumn = 8
+    var row = 6
+    var column = 7
+    var background = Color.gray
     var grid:[[GridItem]] = []
+    // var grid =[[GridItem]]()
     
     init(){
-        for i in 1...gridColumn{
-            var row:[GridItem] = []
-            for j in 1...gridRow{
-                row.append(GridItem(background: .gray, connet4: .nothing))
+        for _ in 0..<row{
+            var col:[GridItem] = []
+            for _ in 0..<column{
+                col.append(GridItem(connect: .nothing))
+                //            }
             }
-            grid.append(row)
+            grid.append(col)
         }
+    }
+    func tapeColumn(column:[GridItem])->[GridItem]{
+        var rColumn = column
+        if column[0].connect == .nothing{
+            for i in 0..<column.count{
+                if column[i].connect != .nothing{
+                    rColumn[i-1].connect = .green
+                    return rColumn
+                }
+            }
+            rColumn[column.count-1].connect = .green
+        }
+        
+        return rColumn
     }
 }
