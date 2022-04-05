@@ -15,10 +15,12 @@ struct ContentView: View {
                 Text("Address")
                     .fontWeight(.bold)
                     .foregroundColor(Color.gray)
+                    
                 Text("1600 Pennsylvania Avenue NW, Washington, DC 20500")
                     .font(.footnote)
                     .fontWeight(.regular)
                     .foregroundColor(Color.gray)
+                    .padding(.leading, 50.0)
             }
             HStack{
                 Image("email")
@@ -26,9 +28,11 @@ struct ContentView: View {
                         Text("Email")
                             .fontWeight(.bold)
                             .foregroundColor(Color.gray)
+                            
                         Text("Address")
                             .fontWeight(.bold)
                             .foregroundColor(Color.gray)
+                            
                     }
                 Text("xxxxx@xxxx.xxx")
                     .font(.footnote)
@@ -41,9 +45,11 @@ struct ContentView: View {
                     Text("Phone")
                         .fontWeight(.bold)
                         .foregroundColor(Color.gray)
+                        
                     Text("Number")
                         .fontWeight(.bold)
                         .foregroundColor(Color.gray)
+                        
                 }
                 Text("+86 10086")
                     .font(.footnote)

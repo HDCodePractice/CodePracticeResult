@@ -1,12 +1,12 @@
-////
-////  File.swift
-////  Test
-////
-////  Created by 老房东 on 2022-01-26.
-////
 //
-//import Foundation
+//  File.swift
+//  Test
 //
+//  Created by 老房东 on 2022-01-26.
+//
+
+import Foundation
+
 //struct Game{
 //    var computer : String = "rock"
 //    var player: String = "rock"

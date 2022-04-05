@@ -4,7 +4,7 @@ struct ContentView: View {
     @State var game = Game()
     
     var body: some View {
-        if game.gameStarting{
+        if game.gameStarting {
             gameStarting
         }else{
             gameEnding
@@ -24,12 +24,12 @@ struct ContentView: View {
                 .scaledToFit()
                 .cornerRadius(30)
                 .padding()
-                .onTapGesture {
+                .onTapGesture{
                     game.restart()
                 }
         }
     }
-    var gameStarting: some View{
+    var gameStarting : some View{
         VStack {
             Text(game.computer)
                 .font(.largeTitle)
@@ -51,7 +51,6 @@ struct ContentView: View {
                             game.winOrLoose(userInput: i)
                         }
                 }
-                
             }
             .padding()
             Text(game.user)
@@ -60,9 +59,10 @@ struct ContentView: View {
     }
 }
 
-struct Game{
-    var user : String = "No Choose"
-    var computer : String = "No Choose"
+
+struct Game {
+    var user : String = "Please Choose"
+    var computer : String = "Please Choose"
     var result : String = "Please Choose"
     let all = ["rock","paper","scissors"]
     var gameStarting : Bool = true
@@ -80,7 +80,7 @@ struct Game{
                 result = "You Won"
             }
             if (user=="scissors"&&computer=="rock") ||
-                (user=="paper"&&computer=="scissors") ||
+                       (user=="paper"&&computer=="scissors") ||
                 (user=="rock"&&computer=="paper") {
                 result = "You Lost"
             }
@@ -89,10 +89,11 @@ struct Game{
         }
         gameStarting = false
     }
+    
     mutating func restart(){
         gameStarting = true
-        user = "No Choose"
-        computer = "No Choose"
+        user = "Please Choose"
+        computer = "Please Choose"
         result = "Please Choose"
     }
 }

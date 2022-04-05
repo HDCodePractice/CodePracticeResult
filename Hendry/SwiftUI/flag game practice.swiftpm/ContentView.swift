@@ -1,40 +1,72 @@
 import SwiftUI
+
 struct ContentView: View {
     @State var game = Game()
-    @State var flagput = ""
+    var questionStart: some View {
+        VStack{
+            Text("\(game.current) out of \(game.total)")
+            HStack{
+                Text(game.question)
+            }
+            Text("")
+            ForEach(game.answers,id:\.self){ flag in
+                HStack{
+                    Text(flag)
+                        .font(.largeTitle)
+                        .onTapGesture{
+                            game.toggleAnswer(tAnswer: flag)
+                        }
+                }
+            }
+        }
+    }
+    
+    var questionEnd: some View{
+        VStack{
+            Text("\(game.current) out of \(game.total)")
+            HStack{
+                Text(game.question)
+            }
+            Text("")
+            Text("\(game.score)")
+            ForEach(game.answers,id:\.self){ flag in
+                HStack{
+                    
+                    Text(flag)
+                        .font(.largeTitle)
+                    if flag == game.answer{
+                        Image(systemName: flag == game.correct ? "checkmark.circle.fill" : "x.circle.fill")
+                            .foregroundColor(flag == game.correct ? .green : .red)
+                    }
+                    if flag == game.correct && flag != game.answer {
+                        Image(systemName: flag == game.correct ? "checkmark.circle.fill" : "x.circle.fill")
+                            .foregroundColor(flag == game.correct ? .green : .red)
+                    }
+                }
+            }
+        }
+    }
+    
     var body: some View {
         VStack{
-            if game.gameStart {
-                HStack{
-                    Text(game.question)
+            if game.gameStart{
+                if game.questionStart {
+                    questionStart
+                }else{
+                    questionEnd
                 }
-                Text("")
-                ForEach(game.answers,id:\.self){ flag in
-                    HStack{
-                        Text(flag)
-                            .font(.largeTitle)
-                        Image(systemName: "checkmark.circle.fill")
-                            .foregroundColor(.green)
-                            .onTapGesture {
-                                flagput = flag
-                            }
-                        if flagput == flag{
-                            Text("You are correct")
-                        }
-                        
+                Text("Next")
+                    .onTapGesture {
+                        game.nextQuestion()
                     }
-                    
-                }
-                
-                
+                    .disabled(game.questionStart ? true : false)
+                    .foregroundColor(game.questionStart ? .secondary : .primary)
             }else{
-                Text("A! Nothing!")
+                Text("Start")
+                    .onTapGesture {
+                        game.newGame()
+                    }
             }
-            
-            Text("Start")
-                .onTapGesture {
-                    game.newGame()
-                }
         }
     }
 }
