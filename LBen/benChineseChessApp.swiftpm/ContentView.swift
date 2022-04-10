@@ -225,7 +225,7 @@ struct GridView: View{
                     Circle()
                         .frame(width: 1.0, height: 1.0).foregroundColor(.black)
                 Circle()
-                    .strokeBorder()
+               //     .strokeBorder()
                     .foregroundColor(gridItem.chess.color)
                 
                     Text(gridItem.chess.title)
