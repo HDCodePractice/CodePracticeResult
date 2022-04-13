@@ -19,6 +19,7 @@ struct ContentView : View {
 }
 struct ColumnView: View {
     @State var column : [GridItem]
+    @State var items : GridItem
     var vm  = ViewModel()
     
     var body: some View {
@@ -34,6 +35,14 @@ struct ColumnView: View {
                     }
                     .onTapGesture {
                         column = vm.tapColumn(column: column)
+                        if item.connect == .nothing {
+                            items = ViewModel.changePiece()
+                            if ViewModel.changer == 1{
+                                column.connect.color = Color.green
+                            }else if ViewModel.changer == 2{
+                                column.connect.color = Color.black
+                            }
+                        }
                     }
                 }
             }

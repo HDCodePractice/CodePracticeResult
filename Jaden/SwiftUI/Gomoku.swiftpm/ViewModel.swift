@@ -1,5 +1,6 @@
 import Foundation
 class ViewModel {
+    var display = "edew"
     var chessBoard : [[ChessBoardItem]] = []
     static var changer = 1
     init(){
@@ -12,6 +13,15 @@ class ViewModel {
             chessBoard.append(row)
         }
     }
+//    func checkWin(){
+//        for i in 1 ... 19{
+//            for j in 1 ... 19{
+//                if chessBoard[i][j]==ChessBoardItem(background: "Mid2",chess: "2") || chessBoard[i+1][j]==ChessBoardItem(background: "Mid2",chess: "2") || chessBoard[i+2][j]==ChessBoardItem(background: "Mid2",chess: "2") || chessBoard[i+3][j]==ChessBoardItem(background: "Mid2",chess: "2") || chessBoard[i+4][j]==ChessBoardItem(background: "Mid2",chess: "2"){
+//                    display = "You Win!"
+//                }
+//            }
+//        }
+//    }
     func change() {
         chessBoard[0][1]=ChessBoardItem(background: "Mid2",chess: "no")
     }
