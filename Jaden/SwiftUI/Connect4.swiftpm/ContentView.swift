@@ -2,32 +2,42 @@ import SwiftUI
 
 struct ContentView : View {
     @State var vm = ViewModel()
+
     var body: some View{
         ZStack{
-            Color.gray
-//            VStack{
-//                VStack(spacing:-1){
-//                    ForEach(vm.grid,id:\.self){row in
-//                        HStack(spacing:-1){
-//                            ForEach(row){item in
-//                                GridItemView(item:item)
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-        }.ignoresSafeArea()
-
+            HStack{
+                ForEach(vm.grid,id:\.self){column in
+                    ColumnView(column: column)
+                }
+            }
+            .padding(10)
+            .background(.gray)
+            .cornerRadius(10)
+            .padding()
+        }
     }
 }
-//struct GridItemView: View {
-//    @State var item : Connect
-//    var body: some View {
-//        ZStack{
-//            Image(systemName: item.imageName)
-//                .onTapGesture {
-//                    item.connect = item.connect.color
-//                }
-//        }
-//    }
-//}
+struct ColumnView: View {
+    @State var column : [GridItem]
+    var vm  = ViewModel()
+    
+    var body: some View {
+        VStack{
+            ForEach(column){item in
+                VStack{
+                    ZStack{
+                        Image(systemName: item.connect.imageName)
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundColor(item.connect.color)
+                            .padding(2)
+                    }
+                    .onTapGesture {
+                        column = vm.tapColumn(column: column)
+                    }
+                }
+            }
+        }
+    }
+}
+
