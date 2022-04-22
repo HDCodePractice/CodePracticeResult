@@ -32,10 +32,12 @@ struct BlockItem: Identifiable, Hashable{
     let id = UUID()
     var status : BlockStatus
     var caption : String
+    var column : Int
+    var row : Int
 }
     
-enum KeyPadButton{
-    case number
+enum KeyPadButton: Hashable{
+    case number(String)
     case delete
     case check
         
@@ -47,10 +49,20 @@ enum KeyPadButton{
                 return .orange
         }
     }
+    
+    var title:String{
+        switch self{
+        case .number(let number):
+            return number
+        case .delete:
+            return "delete"
+        case .check:
+            return "check"
+        }
+    }
 }
 
-struct KeyPadButtonItem: Identifiable{
+struct KeyPadButtonItem: Identifiable, Hashable{
     let id = UUID()
-    var status = KeyPadButton.self
-    var caption : String
+    var button : KeyPadButton
 }
