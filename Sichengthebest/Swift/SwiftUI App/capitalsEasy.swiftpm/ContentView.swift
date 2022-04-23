@@ -16,12 +16,15 @@ struct ContentView: View {
                                 vm.atQuestion = -1
                                 
                             }
-                        Text("⬅ Quit to start screen")
-                            .onTapGesture {
-                            vm.questionEnded = false
-                            vm.quit = true
-                            vm.atQuestion = -1
-                            
+                        HStack {
+                            Image(systemName: "chevron.left.2")
+                            Text("Quit to start screen")
+                                .onTapGesture {
+                                vm.questionEnded = false
+                                vm.quit = true
+                                vm.atQuestion = -1
+                                
+                            }
                         }
                     }
                     Divider()
@@ -30,7 +33,6 @@ struct ContentView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 300)
-                        .padding(20)
                     Text(vm.currentQuestion.title)
                     ForEach(vm.currentQuestion.answers) {answer in
                         ZStack {
