@@ -46,40 +46,50 @@ struct ViewModel{
     
     mutating func putNumber(button: KeyPadButtonItem){
         let click = button.button.title
-        grid[currentRow][currentColumn].caption = click
-        // Index out of range after inputing all the grid
         
         if button.button.title == "delete"{
+            // have to click twice to delete a number when it is not the last number in the column
             grid[currentRow][currentColumn].caption = ""
-            currentColumn -= 1
-            // Cannot input number after delete
-            // Have to click twice to delete a number
+            if currentColumn > 0{
+                currentColumn -= 1
+            } else {
+                return
+            }
         } else {
+            grid[currentRow][currentColumn].caption = click
             if currentColumn == 4{
-                currentRow += 1
-                currentColumn = 0
-                // Doesn't really work
-                // Have to disable input
+                if currentRow == 6{
+                    return
+                }
+                return
             } else {
                 currentColumn += 1
-                // Easy to be index out of range
             }
         }
         
-        if button.button.title == "check"{
-            // Do all the guess work
-        }
-        
-        
-
-
-        
+            // Hello, world
+            
+            // "for" to check
+            
+            // Set all status
+                // if allStatus == "correct" { Win View }
+                // else {
+//                  if currentRow == 6 { Lose View , Text(answer)}
+//                  currentRow += 1 && currentColumn = 0
+//                 }
     }
     
     mutating func check(){
         
+        var correctCount = 0
+        
+        // count is int and cannot be for
+        for answerEx in answer{
+            for diff in 0...5{
+                if answerEx != grid[currentRow][diff]{
+                    
+                }
+            }
+        }
     }
-    
-    
-    
 }

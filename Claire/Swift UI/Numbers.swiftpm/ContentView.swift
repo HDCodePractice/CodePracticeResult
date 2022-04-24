@@ -8,6 +8,7 @@ struct ContentView: View {
             LinearGradient(colors: [.yellow,.red], startPoint: .top, endPoint: .bottom)
             
             VStack{
+                Spacer()
                 VStack{
                     ForEach(vm.grid, id:\.self){ row in
                         HStack{
@@ -15,27 +16,39 @@ struct ContentView: View {
                                 ZStack{
                                     Rectangle()
                                         .fill(Color.white)
+                                        .cornerRadius(15)
+                                        .shadow(radius: 5)
                                         .padding()
+                                        
                                     Text("\(item.caption), \(item.column), \(item.row)")
                                 }
                             }
                         }
                     }
+                    Spacer()
                     VStack{
                         ForEach(vm.keyPad, id:\.self){ row in
                             HStack{
                                 ForEach(row){ button in
-                                    Text("\(button.button.title)")
-                                        .onTapGesture{
-                                            vm.putNumber(button: button)
-                                        }
-                                    
+                                    ZStack{
+                                        Rectangle()
+                                            .fill(Color.white)
+                                            .cornerRadius(15)
+                                            .shadow(radius: 5)
+                                            .padding()
+                                        Text("\(button.button.title)")
+                                            .onTapGesture{
+                                                vm.putNumber(button: button)
+                                            }
+                                    }
                                 }
                             }
                         }
                     }
+                    
                 }
             }
+            Spacer()
             
         }
         .ignoresSafeArea()
