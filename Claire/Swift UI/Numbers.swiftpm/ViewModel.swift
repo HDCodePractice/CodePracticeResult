@@ -56,7 +56,19 @@ struct ViewModel{
                 return
             }
         } else {
-            grid[currentRow][currentColumn].caption = click
+            if button.button.title == "check"{
+                grid[currentRow][currentColumn].caption = ""
+                // delete the last input in the column
+                check()
+                currentRow += 1
+                // when start a new row, skip the first block
+                currentColumn = 0
+            }
+            
+            if button.button.title == "1" || button.button.title == "2" || button.button.title == "3" || button.button.title == "4" || button.button.title == "5" || button.button.title == "6" || button.button.title == "7" || button.button.title == "8" || button.button.title == "9" || button.button.title == "0"{
+                grid[currentRow][currentColumn].caption = click
+            }
+            
             if currentColumn == 4{
                 if currentRow == 6{
                     return
@@ -66,30 +78,24 @@ struct ViewModel{
                 currentColumn += 1
             }
         }
-        
-            // Hello, world
-            
-            // "for" to check
-            
-            // Set all status
-                // if allStatus == "correct" { Win View }
-                // else {
-//                  if currentRow == 6 { Lose View , Text(answer)}
-//                  currentRow += 1 && currentColumn = 0
-//                 }
     }
     
     mutating func check(){
         
         var correctCount = 0
-        
-        // count is int and cannot be for
-        for answerEx in answer{
-            for diff in 0...5{
-                if answerEx != grid[currentRow][diff]{
-                    
+        for answerCheck in answer{
+            for count in 0...5{
+                if answerCheck != grid[currentRow][count].caption {
+                    return grid[currentRow][currentColumn].status = .wrong
+                } else if answerCheck == grid[currentRow][currentColumn].caption && answerCheck != String(currentColumn){
+                    return grid[currentRow][currentColumn].status = .wOrder
+                } else if answerCheck == grid[currentRow][currentColumn].caption && answerCheck == String(currentColumn){
+                    correctCount += 1
+                    return grid[currentRow][count].status = .correct
                 }
             }
         }
+        
+        // only check the last input in the column
     }
 }

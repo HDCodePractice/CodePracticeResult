@@ -15,7 +15,7 @@ struct ContentView: View {
                             ForEach(row){ item in
                                 ZStack{
                                     Rectangle()
-                                        .fill(Color.white)
+                                        .fill(item.status.color)
                                         .cornerRadius(15)
                                         .shadow(radius: 5)
                                         .padding()
