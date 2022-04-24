@@ -18,7 +18,7 @@ struct ViewModel{
     var gameFinished : Bool = false
     var gameWin : Bool = false
     var answer : [String] = []
-        
+    
     var currentRow = 0
     var currentColumn = 0
     
@@ -48,34 +48,41 @@ struct ViewModel{
         let click = button.button.title
         
         if button.button.title == "delete"{
-            // have to click twice to delete a number when it is not the last number in the column
-            grid[currentRow][currentColumn].caption = ""
             if currentColumn > 0{
-                currentColumn -= 1
+                if grid[currentRow][currentColumn].caption != ""{
+                    grid[currentRow][currentColumn].caption = ""
+                } else {
+                    currentColumn -= 1
+                    grid[currentRow][currentColumn].caption = ""
+                }
             } else {
+                grid[currentColumn][0].caption = ""
                 return
             }
+
         } else {
             if button.button.title == "check"{
-                grid[currentRow][currentColumn].caption = ""
-                // delete the last input in the column
-                check()
-                currentRow += 1
-                // when start a new row, skip the first block
-                currentColumn = 0
+                if grid[currentRow][currentColumn].caption == ""{
+                    return
+                } else {
+                    check()
+                    currentRow += 1
+                    currentColumn = 0
+                }
+                
             }
             
             if button.button.title == "1" || button.button.title == "2" || button.button.title == "3" || button.button.title == "4" || button.button.title == "5" || button.button.title == "6" || button.button.title == "7" || button.button.title == "8" || button.button.title == "9" || button.button.title == "0"{
                 grid[currentRow][currentColumn].caption = click
-            }
-            
-            if currentColumn == 4{
-                if currentRow == 6{
+                
+                if currentColumn == 4{
+                    if currentRow == 6{
+                        return
+                    }
                     return
+                } else {
+                    currentColumn += 1
                 }
-                return
-            } else {
-                currentColumn += 1
             }
         }
     }
@@ -83,19 +90,19 @@ struct ViewModel{
     mutating func check(){
         
         var correctCount = 0
-        for answerCheck in answer{
-            for count in 0...5{
-                if answerCheck != grid[currentRow][count].caption {
-                    return grid[currentRow][currentColumn].status = .wrong
-                } else if answerCheck == grid[currentRow][currentColumn].caption && answerCheck != String(currentColumn){
-                    return grid[currentRow][currentColumn].status = .wOrder
-                } else if answerCheck == grid[currentRow][currentColumn].caption && answerCheck == String(currentColumn){
-                    correctCount += 1
-                    return grid[currentRow][count].status = .correct
+        
+            for gridCheck in grid[currentRow] {
+                for count in 0..<5{
+                    if gridCheck.caption != answer[count] {
+                        grid[currentRow][count].status = .wrong
+                    } else if gridCheck.caption == answer[count] && answer[count] != String(gridCheck.column) {
+                        grid[currentRow][count].status = .wOrder
+                    } else if gridCheck.caption == answer[count] && answer[count] == String(gridCheck.column){
+                        correctCount += 1
+                        grid[currentRow][count].status = .correct
+                    }
+                    // wrong check
                 }
             }
-        }
-        
-        // only check the last input in the column
     }
 }

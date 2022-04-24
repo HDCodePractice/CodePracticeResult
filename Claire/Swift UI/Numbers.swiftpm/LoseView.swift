@@ -9,8 +9,15 @@ import SwiftUI
 
 struct LoseView: View {
     var body: some View {
-        LinearGradient(colors: [.yellow,.red], startPoint: .top, endPoint: .bottom)
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ZStack{
+            LinearGradient(colors: [.yellow,.red], startPoint: .top, endPoint: .bottom)
+            Text("You Lost!")
+                .font(.custom("Gill Sans", size: 60))
+                .foregroundColor(.white)
+                .shadow(radius: 20, y: 90)
+                .offset(y: -60)
+        }.ignoresSafeArea()
+        
     }
 }
 
