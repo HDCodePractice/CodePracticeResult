@@ -7,9 +7,10 @@
 
 import Foundation
 
-struct ViewModel{
+class ViewModel{
     var gridSize = 8
     var grid : [[GridItem]] = []
+    static var changer = 1
     
     init(){
             // 按gridSize初始化 grid
@@ -23,10 +24,17 @@ struct ViewModel{
             }
             grid.append(row)
         }
-//            grid[0][0].checker = .black
-//            grid[3][4].checker = .blackKing
-//            grid[4][3].checker = .white
-//            grid[4][4].checker = .whiteKing
-//            grid[4][5].checker = .blackKing
+    }
+    static func changePiece(item: GridItem) -> GridItem {
+        print(changer)
+        if changer == 1{
+            changer = 2
+            return GridItem(background: item.background, checker: .nothing)
+        }else if changer == 2{
+            changer = 1
+            return GridItem(background: item.background, checker: .whiteKing)
+        }
+        return GridItem(background: item.background, checker: .nothing)
+        
     }
 }
