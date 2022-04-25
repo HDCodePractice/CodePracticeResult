@@ -19,18 +19,22 @@ struct ViewModel{
     var gameWin : Bool = false
     var answer : [String] = []
     
+    var views = 0
+    
     var currentRow = 0
     var currentColumn = 0
     
     let numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
     
-    init(){
+    mutating func inition() {
+        grid = []
         answer = Array(numbers.shuffled().prefix(5))
+        print("\(answer)")
         for height in 0..<gridHeight{
             var items : [BlockItem] = []
             for width in 0..<gridWidth{
                 items.append(
-                    BlockItem(status: .nothing, caption: "", column: height, row: width)
+                    BlockItem(status: .nothing, caption: "", column: width, row: height)
                 )
             }
             grid.append(items)
@@ -43,6 +47,12 @@ struct ViewModel{
             [KeyPadButtonItem(button: .number("3")), KeyPadButtonItem(button: .number("6")), KeyPadButtonItem(button: .number("9")), KeyPadButtonItem(button: .number("0"))],
         ]
     }
+    
+    init(){
+        inition()
+    }
+    
+    
     
     mutating func putNumber(button: KeyPadButtonItem){
         let click = button.button.title
@@ -91,18 +101,30 @@ struct ViewModel{
         
         var correctCount = 0
         
-            for gridCheck in grid[currentRow] {
-                for count in 0..<5{
-                    if gridCheck.caption != answer[count] {
-                        grid[currentRow][count].status = .wrong
-                    } else if gridCheck.caption == answer[count] && answer[count] != String(gridCheck.column) {
-                        grid[currentRow][count].status = .wOrder
-                    } else if gridCheck.caption == answer[count] && answer[count] == String(gridCheck.column){
-                        correctCount += 1
-                        grid[currentRow][count].status = .correct
-                    }
-                    // wrong check
+        
+        for gridCheck in grid[currentRow]{
+            let answerColumn = answer.firstIndex(of: gridCheck.caption) ?? -1
+                if !answer.contains(gridCheck.caption){
+                    grid[currentRow][gridCheck.column].status = .wrong
+                } else if answer.contains(gridCheck.caption) && answerColumn != gridCheck.column {
+                    grid[currentRow][gridCheck.column].status = .wOrder
+                } else if answer.contains(gridCheck.caption) && answerColumn == gridCheck.column {
+                    grid[currentRow][gridCheck.column].status = .correct
+                    correctCount += 1
                 }
-            }
+        }
+        
+        if correctCount == 5{
+            views = 2
+            currentColumn = 0
+            currentRow = 0
+            inition()
+        } else if currentColumn == 4 && currentRow == 5{
+            views = 3
+            currentColumn = 0
+            currentRow = 0
+            inition()
+        }
+        
     }
 }
