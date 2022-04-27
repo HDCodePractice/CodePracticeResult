@@ -82,6 +82,7 @@ struct ContentView: View {
                 .offset(y: -60)
             Button {
                 vm.views = 1
+                vm.inition()
             }label: {
                 ZStack{
                     Color.orange
@@ -359,6 +360,7 @@ struct ContentView: View {
                     .offset(x: 0, y: 275)
                 Button {
                     vm.views = 1
+                    vm.inition()
                 }label: {
                     ZStack{
                         Color.white
@@ -389,6 +391,7 @@ struct ContentView: View {
             
             Button {
                 vm.views = 1
+                vm.inition()
             }label: {
                 ZStack{
                     Color.orange

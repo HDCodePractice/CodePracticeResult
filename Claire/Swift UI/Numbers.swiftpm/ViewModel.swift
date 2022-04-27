@@ -12,7 +12,6 @@ struct ViewModel{
     var gridWidth = 5
     var gridHeight = 6
     var gridBackground = Color.white
-    var inputNumber : [String] = []
     var grid : [[BlockItem]] = []
     var keyPad : [[KeyPadButtonItem]] = []
     var gameFinished : Bool = false
@@ -29,7 +28,6 @@ struct ViewModel{
     mutating func inition() {
         grid = []
         answer = Array(numbers.shuffled().prefix(5))
-        print("\(answer)")
         for height in 0..<gridHeight{
             var items : [BlockItem] = []
             for width in 0..<gridWidth{
@@ -39,6 +37,13 @@ struct ViewModel{
             }
             grid.append(items)
         }
+        
+        currentColumn = 0
+        currentRow = 0
+    }
+    
+    init(){
+        inition()
         keyPad = [
             [KeyPadButtonItem(button: .number("1")), KeyPadButtonItem(button: .number("4")), KeyPadButtonItem(button: .number("7")), KeyPadButtonItem(button: .delete)],
             
@@ -48,14 +53,11 @@ struct ViewModel{
         ]
     }
     
-    init(){
-        inition()
-    }
-    
     
     
     mutating func putNumber(button: KeyPadButtonItem){
         let click = button.button.title
+        print("\(currentRow),\(currentColumn)")
         
         if button.button.title == "delete"{
             if currentColumn > 0{
@@ -116,14 +118,15 @@ struct ViewModel{
         
         if correctCount == 5{
             views = 2
+            inition()
             currentColumn = 0
             currentRow = 0
-            inition()
         } else if currentColumn == 4 && currentRow == 5{
             views = 3
+            inition()
             currentColumn = 0
             currentRow = 0
-            inition()
+            
         }
         
     }

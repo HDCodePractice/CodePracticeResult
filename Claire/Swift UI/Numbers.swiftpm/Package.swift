@@ -8,13 +8,13 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "Numbers",
+    name: "Numble",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "Numbers",
+            name: "Numble",
             targets: ["AppModule"],
             bundleIdentifier: "one.hdcola.claire.Numbers",
             teamIdentifier: "A3938YBP77",
