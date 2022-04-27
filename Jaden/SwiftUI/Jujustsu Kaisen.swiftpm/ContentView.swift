@@ -66,21 +66,38 @@ struct ContentView: View {
                         Image(image8)
                             .resizable()
                             .frame(width: 30, height: 30)
-                        Image(image8)
+                        Image(image9)
                             .resizable()
                             .frame(width: 30, height: 30)
-                        Image(image8)
+                        Image(image10)
                             .resizable()
                             .frame(width: 30, height: 30)
-                        Image(image8)
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                        
+                        HStack{
+                            VStack{
+                                Image(image11)
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                Image(image14)
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                Image(image15)
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                
+                            }
+                            Image(image12)
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                            Image(image13)
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                            Image(image14)
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                            
+                        }
                     }
-
-                    
                 }
-
                 Spacer()
             }
         }
