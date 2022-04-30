@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ViewModel{
     var viewNumber = 0
-    var type = 0
+    var cardpull : [String] = []
+    var whatsc = 0
     var picd = ""
     var picl1 = ""
     var picl2 = ""
@@ -20,12 +21,32 @@ struct ViewModel{
     var picc3 = ""
     var picc4 = ""
     var picc5 = ""
-    let cards = ["0","0a","1","1a","2","2a","3","3a","4","4a","5","5a","6","6a","7","7a","8","8a","9","9a","10","10a","11","11a","12","12a","13","13a","14","14a","15","15a","16","16a","17","17a","18","18a","19","19a","20","20a","21","21a","22","22a","23","23a","24","24a","25","25a","26","26a","27","27a","28","28a","29","29a","30","30a","31","31a","32","32a","33","33a","34","34a","35","35a","36","36a","37","37a","38","38a","39","39a","40","40a","41","42","42a","43","43a","44","44a","45","45a","46","46a","47","47a","48","48a","49","49a","50","50a","51","51a","52","52a","53","53a","54","54a","55","55a","56","56a","57","57a","58","58a","59","59a","60","60a","61","61a","62","62a","63","63a","64","64a","65","65a","66","66a","67","67a","68","68a","69","69a","70","70a","71","71a","72","72a","73","73a","74","74a","75","75a","76","76a","77","77a"]
+    var uorr = Int.random(in: 1...156)
+    var uorr1 = Int.random(in: 1...156)
+    var uorr2 = Int.random(in: 1...156)
+    var uorr3 = Int.random(in: 1...156)
+    var uorr4 = Int.random(in: 1...156)
+    var uorr5 = Int.random(in: 1...156)
+    var uorr6 = Int.random(in: 1...156)
+    var uorr7 = Int.random(in: 1...156)
+    var uorr8 = Int.random(in: 1...156)
+    var uorr9 = Int.random(in: 1...156)
+    let cards = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77"]
     var body : some View{
         Text("")
     }
     mutating func rcard(){
-        let card = cards.shuffled().prefix(156)
+        let card = cards.shuffled().prefix(78)
+         uorr = Int.random(in: 1...156)
+         uorr1 = Int.random(in: 1...156)
+         uorr2 = Int.random(in: 1...156)
+         uorr3 = Int.random(in: 1...156)
+         uorr4 = Int.random(in: 1...156)
+         uorr5 = Int.random(in: 1...156)
+         uorr6 = Int.random(in: 1...156)
+         uorr7 = Int.random(in: 1...156)
+         uorr8 = Int.random(in: 1...156)
+         uorr9 = Int.random(in: 1...156)
         picd = card[20]
         picl1 = card[14]
         picl2 = card[37]
@@ -33,8 +54,8 @@ struct ViewModel{
         picl4 = card[54]
         picc1 = card[31]
         picc2 = card[53]
-        picc3 = card [132]
-        picc4 = card[121]
-        picc5 = card [78]
+        picc3 = card[45]
+        picc4 = card[36]
+        picc5 = card[76]
     }
 }
