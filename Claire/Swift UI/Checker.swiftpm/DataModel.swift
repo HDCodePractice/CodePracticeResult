@@ -63,13 +63,34 @@ import SwiftUI
 //}
 import SwiftUI
 
-enum Connect: String {
+struct GridItem: Identifiable, Hashable {
+    var id = UUID()
+    var connect: Connect
+}
+
+enum Connect {
     case green
     case black
     case greenWin
     case blackWin
     case nothing
     
+    func nextConnect()->Connect {
+           switch self {
+           case .nothing:
+               return .green
+           case .green:
+               return .greenWin
+           case .greenWin:
+               return .black
+           case .black:
+               return .blackWin
+           case .blackWin:
+               return .nothing
+           default:
+               return .nothing
+           }
+       }
     var color:Color{
         switch self {
         case . green, . greenWin:

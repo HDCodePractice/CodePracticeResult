@@ -26,7 +26,14 @@ struct GridItemView: View {
             Image(systemName: item.checker.rawValue)
         }
         .onTapGesture {
-            item.checker = item.checker.nextchecker
+            if item.checker == .nothing{
+                item = ViewModel.changePiece(item:item)
+                if ViewModel.changer == 1{
+                    item.checker = .white
+                }else if ViewModel.changer == 2{
+                    item.checker = .black
+                }
+            }
         }
     }
 }

@@ -38,8 +38,10 @@ extension CheckerItem{
             return .blackKing
         case .blackKing:
             return .nothing
+        case .nothing:
+            return .white
         default:
-            return  .white
+            return  .nothing
         }
     }
 }

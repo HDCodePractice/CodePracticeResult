@@ -4,7 +4,6 @@ struct Line: View {
     let start: CGPoint
     let end: CGPoint
     let color: Color
-    let type: String
     
     var body: some View {
         Path{ path in
