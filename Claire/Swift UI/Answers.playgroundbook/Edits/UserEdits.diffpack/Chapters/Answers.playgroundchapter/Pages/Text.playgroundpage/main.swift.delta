@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>// 0 - nothing
+// 1 - one
+// 2 - two
+let grid = [
+    [0,0,0,1,0,1,1,0],
+    [1,0,0,0,0,0,0,2],
+    [1,0,0,2,2,2,0,0],
+    [1,1,1,0,0,2,0,0],
+    [1,0,0,0,2,0,0,0],
+    [0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0]
+]
+
+// 检查connects是不是都是actor
+func checkWon(connects: [Int], user: Int )-&gt;Bool{
+    if connects.count != 4 {
+        return false
+    }
+    for i in 0...3{
+        if connects[i] != user{
+            return false
+        }
+    }
+    return true
+}
+
+// check isConnect4
+func checkHorizontalWon(user: Int)-&gt;Bool{
+    for k in 0...6{
+        for i in 0...4{
+            var connects : [Int] = []
+            connects.append(grid[i][k])
+            if checkWon(connects:connects,user:1){
+                return true
+            }
+        }
+    }
+    return false
+}
+func checkOneWon()-&gt;Bool{
+    for i in 0...4{
+        var connects : [Int] = []
+        for j in 0...3{
+            connects.append(grid[0][i+j])
+        }
+        if checkWon(connects:connects,user:1){
+            return true
+        }
+        if checkHorizontalWon(user: 1){
+            return true
+        }
+    }
+    return false
+}
+
+func checkTwoWon()-&gt;Bool{
+    for i in 0...4{
+        var connects : [Int] = []
+        for j in 0...3{
+            connects.append(grid[0][i+j])
+        }
+        if checkWon(connects:connects,user:1){
+            return true
+        }
+        if checkHorizontalWon(user: 1){
+            return true
+        }
+    }
+    return false
+}
+
+show("\(grid[0])\n\(grid[1])\n\(grid[2])\n\(grid[3])\n\(grid[4])\n\(grid[5])\n\(grid[6])")
+show("one: \(checkHorizontalWon(user: 1))")
+show("two: \(checkHorizontalWon(user: 2))")
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 1620}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 253}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</string>
+</dict>
+</plist>
