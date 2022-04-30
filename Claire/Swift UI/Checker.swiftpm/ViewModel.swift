@@ -31,6 +31,7 @@ import Foundation
 //}
 //
 
+import Foundation
 import SwiftUI
 
 struct ViewModel{
@@ -38,6 +39,16 @@ struct ViewModel{
     var gridHeight = 7
     var gridBackground  = Color.red
     var gridItemBackground = Color.white
-    var grid : [[Connect]] = []
+    var grid : [[GridItem]] = []
+    
+    init(){
+        for _ in 1 ... gridWidth  {
+            var col : [Connect] = []
+            for _ in 1 ... gridHeight {
+                col.append(GridItem(connect: .nothing))
+            }
+            grid.append(col)
+        }
+    }
 }
 
