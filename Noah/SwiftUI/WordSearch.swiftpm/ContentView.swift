@@ -4,8 +4,6 @@ struct ContentView: View {
     @State var vm = ViewModule()
     @State var DrawColor = Color(.sRGB, red: 0.0, green: 0.0, blue: 0.0)
     @State var BackgroundColor = Color(.sRGB, red: 1.0, green: 1.0, blue: 1.0)
-    @State var Drawing = 0
-    @State var DrawingOptions = ["Line","Circle","Rectangle"]
 
     var body: some View {
         ZStack {
@@ -25,25 +23,25 @@ struct ContentView: View {
     var drag: some Gesture {
         return DragGesture()
             .onChanged { value in
-                vm.start = value.startLocation
-                vm.end = value.location
+                vm.start = [Int(value.startLocation.x)/31,Int(value.startLocation.y)/35]
+                vm.end = [Int(value.location.x)/31,Int(value.location.y)/35]
             }
             .onEnded{ value in
                 vm.lines.append(
                     LinePoints(
-                        start: CGPoint(x: 35*round(value.startLocation.x / 35), y: 35*round(value.startLocation.y / 35)),
-                        end: CGPoint(x: 35*round(value.location.x / 35), y: 35*round(value.location.y / 35)),
-                        color: DrawColor,
-                        type: DrawingOptions[Drawing]
-                    ))
+                        start: [Int(value.startLocation.x)/31,Int(value.startLocation.y)/35],
+                        end: [Int(value.location.x)/31,Int(value.location.y)/35],
+                        color: DrawColor
+                    )
+                )
             }
     }
     
     var draw: some View {
         ZStack {
-            Line(start: vm.start, end: vm.end, color: DrawColor, type: "Line")
+            Line(start: CGPoint(x: Int(vm.start[0])*31, y: Int(vm.start[1])*35), end: CGPoint(x: Int(vm.end[0])*31, y: Int(vm.end[1])*35), color: DrawColor)
             ForEach(vm.lines) { linePoints in
-                Line(start: linePoints.start, end: linePoints.end, color: linePoints.color, type: linePoints.type)
+                Line(start: CGPoint(x: Int(linePoints.start[0])*31, y: Int(linePoints.start[1])*35), end: CGPoint(x: Int(linePoints.end[0])*31, y: Int(linePoints.end[1])*35), color: linePoints.color)
             }
         }
     }
@@ -66,11 +64,6 @@ struct ContentView: View {
                 Text("Drawing:")
                     .font(.system(size: 20, design: .rounded))
                     .bold()
-                Picker(selection: $Drawing, label: Text("Shape")) {
-                    ForEach(0 ..< DrawingOptions.count) {
-                        Text(DrawingOptions[$0])
-                    }
-                }
                 Spacer(minLength: 30)
             }
         }
@@ -85,13 +78,13 @@ struct ContentView: View {
                     if vm.lines.count > 0 {
                         vm.lines.removeLast()
                     }
-                    vm.start = CGPoint(x: 0, y: 0)
-                    vm.end = CGPoint(x: 0, y: 0)
+                    vm.start = [0,0]
+                    vm.end = [0,0]
                 }
             Button() {
                 vm.lines = []
-                vm.start = CGPoint(x: 0, y: 0)
-                vm.end = CGPoint(x: 0, y: 0)
+                vm.start = [0,0]
+                vm.end = [0,0]
             } label: {
                 ZStack {
                     Color.accentColor

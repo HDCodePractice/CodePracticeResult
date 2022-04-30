@@ -1,12 +1,12 @@
 import SwiftUI
 
-struct Line: View {
+struct DrawLine: View {
     let start: CGPoint
     let end: CGPoint
     let color: Color
     
     var body: some View {
-        Path{ path in
+        Path { path in
             path.move(to: start)
             path.addLine(to: end)
         }
