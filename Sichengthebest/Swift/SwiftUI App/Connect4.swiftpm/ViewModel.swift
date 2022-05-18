@@ -2,113 +2,92 @@ import Foundation
 import SwiftUI
 
 struct ViewModel{
-    var gridWidth = 8
-    var gridHeight = 7
-    var gridBackground  = Color.red
-    var gridItemBackground = Color.white
+    var gridWidth = 7
+    var gridHeight = 8
+    var gridBackground  = Color.gray
     var grid : [[GridItem]] = []
+    var isBlock = true
     
     init(){
-        for _ in 1 ... gridWidth  {
+        for column in 0 ..< gridWidth  {
             var col : [GridItem] = []
-            for _ in 1 ... gridHeight {
-                col.append(GridItem(connect:.nothing))
+            for row in 0 ..< gridHeight {
+                col.append(
+                    GridItem(connect: .nothing,column: column, row: row)
+                )
             }
             grid.append(col)
         }
     }
-    func tapColumn(column: [GridItem]) -> [GridItem] {
-        var rColumn = column
-        for i in 0..<rColumn.count {
-            rColumn[i] = GridItem(connect: checkOneWin())
+    
+    mutating func tapColumn(column : [GridItem]) {
+        let col = column[0].column
+        let row = checkLastNothing(column: column)
+        if row > -1 {
+            grid[col][row].connect = isBlock ? .black : .green
+            isBlock.toggle()
         }
-        return rColumn
-    }
-    func checkOneWin()->Connect{
-        var row = 0
-        var col = 0
-        var diagonal = 0
-        for i in grid{
-            for j in i {
-                if j.connect == .green {
-                    row += 1
-                } else {
-                    if row < 4 {
-                        row = 0
-                    }
-                }
+        if checkHorizontal(col: col, row: row){
+            if grid[col][row].connect == .black{
+                grid[col][row].connect = .blackWin
             }
-        }
-        for j in 0...7 {
-            for i in grid {
-                if i[j].connect == .green {
-                    col += 1
-                } else {
-                    if col < 4 {
-                        col = 0
-                    }
-                }
+            if grid[col][row].connect == .green{
+                grid[col][row].connect = .greenWin
             }
-        }
-        for i in 0...7 {
-            for j in 0...7 {
-                if grid[i][j].connect == .green {
-                    diagonal += 1
-                } else {
-                    if diagonal < 4 {
-                        diagonal = 0
-                    }
-                }
-            }
-        }
-        if row >= 4 || col >= 4 {
-            return .greenWin
-        } else {
-            return .green
         }
     }
-
-    func checkTwoWin()->Connect{
-        var row = 0
-        var col = 0
-        var diagonal = 0
-        for i in grid {
-            for j in i {
-                if j.connect == .black {
-                    row += 1
-                } else {
-                    if row < 4 {
-                        row = 0
+    
+    mutating func checkHorizontal(col: Int,row: Int)->Bool{
+        var connects : [GridItem] = []
+        for i in 0...gridWidth-1{
+            connects.append(grid[i][row])
+        }
+        return checkConnectsWon(
+            connects: connects,
+            connect: grid[col][row].connect
+        )
+    }
+    
+    mutating func checkConnectsWon(connects:[GridItem],connect: Connect)->Bool{
+        for i in 0...connects.count-5{
+            if check4ConnecsWon(
+                connects: [
+                    connects[i],
+                    connects[i+1],
+                    connects[i+2],
+                    connects[i+3]
+                ],
+                connect: connect
+            ){
+                for j in i...1+3 {
+                    let c = grid[connects[j].column][connects[j].row].connect
+                    if c == .black {
+                        grid[connects[j].column][connects[j].row].connect = .blackWin
+                    } else {
+                        grid[connects[j].column][connects[j].row].connect = .greenWin
                     }
                 }
             }
         }
-        for j in 0...7 {
-            for i in grid {
-                if i[j].connect == .black {
-                    col += 1
-                } else {
-                    if col < 4 {
-                        col = 0
-                    }
-                }
+        return false
+    }
+    
+    func check4ConnecsWon(connects:[GridItem],connect: Connect)->Bool {
+        for i in connects{
+            if i.connect != connect{
+                return false
             }
         }
-        for i in 0...7 {
-            for j in 0...7 {
-                if grid[i][j].connect == .black {
-                    diagonal += 1
-                } else {
-                    if diagonal < 4 {
-                        diagonal = 0
-                    }
-                }
+        return true
+    }
+    
+    
+    func checkLastNothing(column : [GridItem]) -> Int{
+        for item in column{
+            if item.connect != .nothing{
+                return item.row - 1
             }
         }
-        if row >= 4 || col >= 4 {
-            return .blackWin
-        } else {
-            return .black
-        }
+        return column.last!.row
     }
 }
