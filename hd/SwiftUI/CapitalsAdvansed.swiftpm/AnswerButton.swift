@@ -12,14 +12,19 @@ struct AnswerButton: View {
     var isRight:Bool = false
     var isClick:Bool = false
     
-    init(_ title:String,isRight:Bool=false,isClick:Bool=false){
-        self.title = title
-        self.isRight = isRight
-        self.isClick = isClick
+    init(_ answer: Question.Answer){
+        self.title = answer.name
+        self.isRight = answer.right
+        self.isClick = answer.click
     }
     
     var body: some View {
         ZStack{
+            Rectangle()
+                .fill(.blue)
+                .frame(maxHeight: 70)
+                .cornerRadius(30)
+                .shadow(color: isClick ? isRight ? .green : .red : .clear, radius: 10)
             Text(title)
                 .font(.system(size: 50))
                 .lineLimit(1)
@@ -28,9 +33,6 @@ struct AnswerButton: View {
                 .foregroundColor(.white)
                 .padding()
                 .padding(.horizontal)
-                .background(.blue)
-                .cornerRadius(30)
-                .shadow(color: isClick ? isRight ? .green : .red : .clear, radius: 10)
             Image(systemName: isRight ? "checkmark.circle.fill" : "x.circle.fill")
                 .font(.largeTitle)
                 .foregroundColor(isClick ? isRight ? .green : .red : .clear)
@@ -42,10 +44,10 @@ struct AnswerButton: View {
 struct AnswerButton_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing:30){
-            AnswerButton("Beaconsfield Beaconsfield Beaconsfield",isRight: true,isClick: false)
-            AnswerButton("Beaconsfield Beaconsfield Beaconsfield",isRight: false,isClick: false)
-            AnswerButton("Beaconsfield",isRight: true,isClick: true)
-            AnswerButton("Beaconsfield",isRight: false,isClick: true)
+            AnswerButton(Question.Answer(name: "Beaconsfiled", right: true, click: false))
+            AnswerButton(Question.Answer(name: "Beaconsfiled", right: false, click: false))
+            AnswerButton(Question.Answer(name: "Beaconsfiled", right: true, click: true))
+            AnswerButton(Question.Answer(name: "Beaconsfiled", right: false, click: true))
         }
     }
 }
