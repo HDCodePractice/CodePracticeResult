@@ -22,7 +22,7 @@ struct Question: Identifiable{
             Question.Answer(name:"Sydney",right:false,click: false),
             Question.Answer(name:"Nuevo Madrid",right:false,click: false),
             Question.Answer(name:"Kawakra",right:false,click: false),
-            Question.Answer(name:"Click me, I'm the right one",right:false,click: false)
+            Question.Answer(name:"Click me!",right:false,click: false)
         ]
     
     struct Answer: Identifiable {

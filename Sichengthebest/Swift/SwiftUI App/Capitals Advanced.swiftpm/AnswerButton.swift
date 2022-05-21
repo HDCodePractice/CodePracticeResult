@@ -2,8 +2,14 @@ import SwiftUI
 
 struct AnswerButton:View {
     var name: String
-    var isRight: Bool
-    var isClick: Bool
+    var isRight: Bool = false
+    var isClick: Bool = false
+    
+    init(_ answer: Question.Answer) {
+        self.name = answer.name
+        self.isRight = answer.right
+        self.isClick = answer.click
+    }
     
     var body: some View {
         VStack {
@@ -32,11 +38,11 @@ struct AnswerButton:View {
 
 struct AnswerButton_Previews: PreviewProvider {
     static var previews: some View {
-        VStack(spacing:30) {
-            AnswerButton(name: "Beaconsfield",isRight: true,isClick: false)
-                .previewDevice("iPhone 12 mini")
-            AnswerButton(name: "Beaconsfield",isRight: false,isClick: true)
+        VStack(spacing:30){
+            AnswerButton(Question.Answer(name: "Beaconsfiled", right: true, click: false))
+            AnswerButton(Question.Answer(name: "Beaconsfiled", right: false, click: false))
+            AnswerButton(Question.Answer(name: "Beaconsfiled", right: true, click: true))
+            AnswerButton(Question.Answer(name: "Beaconsfiled", right: false, click: true))
         }
-        .previewDevice("iPhone 12 mini")
     }
 }
