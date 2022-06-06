@@ -104,7 +104,7 @@ struct ContentView: View {
                     }
                 }
             } else {
-                Text("Welcome to Sichengthebest’s Geography Quiz!")
+                Text("Welcome to Jaden’s Geography Quiz!")
                     .font(.headline)
                     .multilineTextAlignment(.center)
                 Divider()
