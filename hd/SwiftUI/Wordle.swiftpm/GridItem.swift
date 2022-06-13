@@ -1,30 +1,46 @@
 import SwiftUI
 
-struct GridItem: Identifiable{
+struct GridItem: Identifiable,Hashable{
     let id = UUID()
     var letter: String
-    var status: ItemStatus
+    var status: Status
 }
 
-enum ItemStatus{
-    case empty
-    case gray
-    case green
-    case yellow
-    case inComplete
-}
-
-extension ItemStatus{
-    var background : Color{
-        switch self{
-        case .empty,.inComplete:
+extension GridItem{
+    var backgroundColor:Color{
+        let notused = Color.white
+        let gray = Color.gray
+        let green = Color.green
+        let yello = Color.yellow
+        
+        switch status {
+            case .notused:
+                return notused
+            case .gray:
+                return gray
+            case .green:
+                return green
+            case .yellow:
+                return yello
+            }
+    }
+    
+    var foregroundColor:Color{
+        switch status{
+        case .notused:
+            return .black
+        default:
             return .white
-        case .gray:
-            return .gray
-        case .yellow:
-            return .yellow
-        case .green:
-            return .green
+        }
+    }
+    
+    var boardColor:Color{
+        let notused = Color(red: 212/255, green: 214/255, blue: 208/255)
+        switch status{
+        case .notused:
+            return notused
+        default:
+            return .black
         }
     }
 }
