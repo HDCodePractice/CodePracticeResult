@@ -12,7 +12,6 @@ struct GameResults: View {
                 VStack{
                     Text ("Player")
                         .font(.largeTitle)
-                    let _ = print(player)
                     Image(systemName: choices[player])
                         .resizable()
                         .scaledToFit()
