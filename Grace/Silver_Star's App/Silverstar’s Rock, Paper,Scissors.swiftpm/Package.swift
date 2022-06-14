@@ -8,13 +8,13 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "Silverstar's Rock, Paper, Scissors",
+    name: "CM-SS’s Rock, Paper, Scissors!",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "Silverstar's Rock, Paper, Scissors",
+            name: "CM-SS’s Rock, Paper, Scissors!",
             targets: ["AppModule"],
             bundleIdentifier: "one.hdcola.grace.rock-paper-scissors",
             teamIdentifier: "T4W3MN6QHA",
