@@ -16,6 +16,8 @@ let package = Package(
         .iOSApplication(
             name: "Silverstar's Rock, Paper, Scissors",
             targets: ["AppModule"],
+            bundleIdentifier: "one.hdcola.grace.rock-paper-scissors",
+            teamIdentifier: "T4W3MN6QHA",
             displayVersion: "1.0",
             bundleVersion: "1",
             appIcon: .asset("AppIcon"),
@@ -29,7 +31,8 @@ let package = Package(
                 .landscapeRight,
                 .landscapeLeft,
                 .portraitUpsideDown(.when(deviceFamilies: [.pad]))
-            ]
+            ],
+            appCategory: .arcadeGames
         )
     ],
     targets: [
