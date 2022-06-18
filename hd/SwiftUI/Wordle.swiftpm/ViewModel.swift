@@ -4,44 +4,44 @@ import SwiftUI
 class ViewModel:ObservableObject{
     @Published var keyboard : [[KeyboardButton]]=[
         [
-            .letter("Q", .notused),
-            .letter("W", .notused),
-            .letter("E", .notused),
-            .letter("R", .notused),
-            .letter("T", .notused),
-            .letter("Y", .notused),
-            .letter("U", .notused),
-            .letter("I", .notused),
-            .letter("O", .notused),
-            .letter("P", .notused)
+            .letter("Q", .empty),
+            .letter("W", .empty),
+            .letter("E", .empty),
+            .letter("R", .empty),
+            .letter("T", .empty),
+            .letter("Y", .empty),
+            .letter("U", .empty),
+            .letter("I", .empty),
+            .letter("O", .empty),
+            .letter("P", .empty)
         ],
         [
-            .letter("A", .notused),
-            .letter("S", .notused),
-            .letter("D", .notused),
-            .letter("F", .notused),
-            .letter("G", .notused),
-            .letter("H", .notused),
-            .letter("J", .notused),
-            .letter("K", .notused),
-            .letter("L", .notused)
+            .letter("A", .empty),
+            .letter("S", .empty),
+            .letter("D", .empty),
+            .letter("F", .empty),
+            .letter("G", .empty),
+            .letter("H", .empty),
+            .letter("J", .empty),
+            .letter("K", .empty),
+            .letter("L", .empty)
         ],
         [
             .function(.enter),
-            .letter("Z", .notused),
-            .letter("X", .notused),
-            .letter("C", .notused),
-            .letter("V", .notused),
-            .letter("B", .notused),
-            .letter("N", .notused),
-            .letter("M", .notused),
+            .letter("Z", .empty),
+            .letter("X", .empty),
+            .letter("C", .empty),
+            .letter("V", .empty),
+            .letter("B", .empty),
+            .letter("N", .empty),
+            .letter("M", .empty),
             .function(.delete)
         ]
     ]
     @Published var grid:[[GridItem]]=[]
     var line = 0
     var colum = 0
-    var answer = ["b","r","e","e","d"]
+    var answer = ["B","R","E","E","D"]
     
     init(){
         initGrid()
@@ -52,9 +52,48 @@ class ViewModel:ObservableObject{
         for _ in 0..<6{
             var line = [GridItem]()
             for _ in 0..<5{
-                line.append(GridItem(letter: " ", status: .notused))
+                line.append(GridItem(letter: " ", status: .empty))
             }
             grid.append(line)
+        }
+    }
+    
+    func changeKeyboardButtonStatus(letter:String,status: Status){
+        for line in 0..<keyboard.count{
+            for index in 0..<keyboard[line].count{
+                if keyboard[line][index].title == letter{
+                    switch status{
+                    case .green:
+                        keyboard[line][index] = .letter(letter, .green)
+                        return
+                    case .yellow:
+                        if keyboard[line][index] == .letter(letter, .green){
+                            return
+                        }
+                        keyboard[line][index] = .letter(letter, .yellow)
+                        return
+                    case .gray:
+                        keyboard[line][index] = .letter(letter, .gray)
+                    default:
+                        return
+                    }
+                }
+            }
+        }
+    }
+    
+    func checkAnswer(){
+        for i in 0..<grid[line].count{
+            if grid[line][i].letter==answer[i]{
+                grid[line][i].status = .green
+                changeKeyboardButtonStatus(letter: grid[line][i].letter, status: .green)
+            }else if answer.contains(grid[line][i].letter){
+                grid[line][i].status = .yellow
+                changeKeyboardButtonStatus(letter: grid[line][i].letter, status: .yellow)
+            }else{
+                grid[line][i].status = .gray
+                changeKeyboardButtonStatus(letter: grid[line][i].letter, status: .gray)
+            }
         }
     }
     
@@ -65,17 +104,20 @@ class ViewModel:ObservableObject{
             case .delete:
                 if colum>0{
                     grid[line][colum-1].letter = " "
+                    grid[line][colum-1].status = .empty
                     colum-=1
                 }
             case .enter:
                 if line<grid.count && colum==grid[line].count{
+                    checkAnswer()
                     line+=1
                     colum=0
                 }
             }
         case .letter(_, _):
             if colum<grid[line].count && line<grid.count{
-                grid[line][colum].letter=button.title
+                grid[line][colum].letter = button.title
+                grid[line][colum].status = .input
                 colum+=1
             }
         }
