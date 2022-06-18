@@ -1,7 +1,13 @@
 import SwiftUI
 
-
 class ViewModel:ObservableObject{
+    enum GameMode{
+        case start
+        case gameing
+        case won
+        case lost
+    }
+    @Published var gameMode : GameMode = .start
     @Published var keyboard : [[KeyboardButton]]=[
         [
             .letter("Q", .empty),
@@ -43,9 +49,7 @@ class ViewModel:ObservableObject{
     var colum = 0
     var answer = ["B","R","E","E","D"]
     
-    init(){
-        initGrid()
-    }
+    init(){}
     
     func initGrid(){
         grid = []
@@ -56,6 +60,12 @@ class ViewModel:ObservableObject{
             }
             grid.append(line)
         }
+        let answerStr = words.randomElement()!.uppercased()
+        answer = []
+        for c in answerStr{
+            answer.append(String(c))
+        }
+        print(answer)
     }
     
     func changeKeyboardButtonStatus(letter:String,status: Status){
@@ -82,7 +92,7 @@ class ViewModel:ObservableObject{
         }
     }
     
-    func checkAnswer(){
+    func checkAnswer()->Bool{
         for i in 0..<grid[line].count{
             if grid[line][i].letter==answer[i]{
                 grid[line][i].status = .green
@@ -95,6 +105,12 @@ class ViewModel:ObservableObject{
                 changeKeyboardButtonStatus(letter: grid[line][i].letter, status: .gray)
             }
         }
+        for i in grid[line]{
+            if i.status != .green{
+                return false
+            } 
+        }
+        return true
     }
     
     func tapButton(button: KeyboardButton){
@@ -109,7 +125,14 @@ class ViewModel:ObservableObject{
                 }
             case .enter:
                 if line<grid.count && colum==grid[line].count{
-                    checkAnswer()
+                    if checkAnswer() {
+                        self.gameMode = .won
+                        return
+                    }
+                    if line == grid.count - 1 {
+                        self.gameMode = .lost
+                        return
+                    }
                     line+=1
                     colum=0
                 }
