@@ -13,7 +13,9 @@ struct KeyboardView: View {
                             .background(kb.backgroundColor)
                             .cornerRadius(10)
                             .onTapGesture {
-                                vm.tapButton(button: kb)
+                                if vm.gameMode == .gameing{
+                                    vm.tapButton(button: kb)
+                                }
                             }
                     }
                 }
