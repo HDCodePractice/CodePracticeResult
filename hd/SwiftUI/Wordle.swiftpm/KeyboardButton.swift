@@ -34,7 +34,7 @@ extension KeyboardButton:Hashable{
         switch self {
         case .letter(_, let status):
             switch status {
-            case .notused:
+            case .empty,.input:
                 return notused
             case .gray:
                 return gray
@@ -54,7 +54,7 @@ extension KeyboardButton:Hashable{
             return .black
         case .letter(_, let status):
             switch status{
-            case .notused:
+            case .input,.empty:
                 return .black
             default:
                 return .white

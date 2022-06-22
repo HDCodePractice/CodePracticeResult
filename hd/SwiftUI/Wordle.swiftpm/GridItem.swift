@@ -14,7 +14,7 @@ extension GridItem{
         let yello = Color.yellow
         
         switch status {
-            case .notused:
+            case .empty,.input:
                 return notused
             case .gray:
                 return gray
@@ -27,7 +27,7 @@ extension GridItem{
     
     var foregroundColor:Color{
         switch status{
-        case .notused:
+        case .empty,.input:
             return .black
         default:
             return .white
@@ -35,12 +35,13 @@ extension GridItem{
     }
     
     var boardColor:Color{
-        let notused = Color(red: 212/255, green: 214/255, blue: 208/255)
         switch status{
-        case .notused:
-            return notused
+        case .empty:
+            return .gray
+        case .input:
+            return .red
         default:
-            return .black
+            return .clear
         }
     }
 }

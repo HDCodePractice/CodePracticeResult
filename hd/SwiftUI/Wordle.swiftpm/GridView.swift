@@ -11,7 +11,7 @@ struct GridView: View {
                             .foregroundColor(item.foregroundColor)
                             .padding()
                             .background(item.backgroundColor)
-                            .border(.black)
+                            .border(item.boardColor)
                     }
                 }
             }

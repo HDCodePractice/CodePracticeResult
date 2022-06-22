@@ -1,7 +1,8 @@
 import SwiftUI
 
 enum Status{
-    case notused 
+    case input
+    case empty
     case gray
     case green
     case yellow
