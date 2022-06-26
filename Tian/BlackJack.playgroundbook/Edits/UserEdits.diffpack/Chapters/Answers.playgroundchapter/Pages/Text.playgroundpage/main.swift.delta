@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>struct Animal {
+    var name: String?
+    var age: Int
+    var energy: Int = 1000
+    mutating func run(start: Int, end: Int) {
+        energy = energy-(end-start)
+}
+    mutating func eat (food:Int){
+        energy = energy + food
+    }
+    
+    func poop() -&gt; Int{
+        return Int.random(in: 1...10)
+    }
+}
+
+var xiaoA = Animal(age:1)
+var xiaoB = Animal(name:"xiaoB",age: 10, energy: 100)
+
+show(xiaoA.poop())
+show(xiaoB.poop())
+
+xiaoA.run(start: 10, end: 200)
+show(xiaoA.energy)
+
+xiaoB.run(start: 10, end: 20)
+show(xiaoB.energy)
+
+xiaoA.name = "lalala"
+show(xiaoA.name!)
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 574}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 252}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</string>
+</dict>
+</plist>
