@@ -2,30 +2,40 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Diff</key>
+	<key>Diffs</key>
 	<array>
 		<dict>
 			<key>ModifiedContent</key>
-			<string>func genCards() -&gt; [String]{
-    let suits : [String] = ["♦️","♣️","♥️","♠️"]
-    let numbers : [String] = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"]
-    var cards : [String] = []
-    
-    for i in suits{
-        for j in numbers{
-            cards.append("\(i)\(j)")
-        }
-    }
-    return cards
-}
+			<string>
+let cs = genCards()
+var cards = genCardIndexes()
+cards.append(contentsOf: genCardIndexes())
+cards.append(contentsOf: genCardIndexes())
 
-var cards = genCards()
-cards.append(contentsOf: genCards())
-cards.append(contentsOf: genCards())
-print(cards)
+var cardMarks = genCardMarks()
+//print(genCardIndexes())
+//print(cardMarks)
+//print(cs)
+
+cards.shuffle()
+
+let card = cards.randomElement()!
+//print(card,cs[card],cardMarks[card])
+
+let david = [3,19,50,30]
+let davidMark = cardMarks[3]+cardMarks[19]+cardMarks[50]+cardMarks[30]
+let davidMarkSmall = 
+    cardMarks[3].getSmallMark() + 
+    cardMarks[19].getSmallMark() + 
+    cardMarks[50].getSmallMark() +
+    cardMarks[30].getSmallMark()
+print(cs[3],cs[19],cs[50],cs[30],davidMark,davidMarkSmall)
+
+let result = david.reduce(0, {x,y in x+y })
+print(result)
 </string>
 			<key>ModifiedRange</key>
-			<string>{265, 426}</string>
+			<string>{265, 692}</string>
 			<key>OriginalContent</key>
 			<string>import UIKit
 
@@ -60,7 +70,7 @@ pauseUntilTapped(message: "/*#-localizable-zone(text15)*/Ready to continue?/*#-e
 			<string>{265, 2091}</string>
 		</dict>
 	</array>
-	<key>File</key>
-	<string>Chapters/Answers.playgroundchapter/Pages/API Overview.playgroundpage/main.swift</string>
+	<key>FormatVersion</key>
+	<integer>2</integer>
 </dict>
 </plist>
