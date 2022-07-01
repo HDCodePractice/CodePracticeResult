@@ -6,7 +6,7 @@
 	<array>
 		<dict>
 			<key>ModifiedContent</key>
-			<string>
+			<string>//test
 // 1. mutiple playground
 
 func showString(_ string: String){
@@ -198,7 +198,7 @@ var b = dealCards(a, players)
 
 </string>
 			<key>ModifiedRange</key>
-			<string>{265, 4939}</string>
+			<string>{265, 4945}</string>
 			<key>OriginalContent</key>
 			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
 
