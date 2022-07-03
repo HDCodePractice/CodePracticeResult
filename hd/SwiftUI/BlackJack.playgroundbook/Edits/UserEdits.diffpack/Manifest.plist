@@ -30,12 +30,16 @@
 		<string>Added</string>
 		<key>UserModules/MyFiles.playgroundmodule/Sources/Quiz.swift</key>
 		<string>Removed</string>
+		<key>UserModules/MyFiles.playgroundmodule/Sources/SendCards.swift</key>
+		<string>Added</string>
 		<key>UserModules/MyFiles.playgroundmodule/Sources/SharedCode.swift</key>
 		<string>Removed</string>
+		<key>UserModules/MyFiles.playgroundmodule/Sources/ShowCards.swift</key>
+		<string>Added</string>
+		<key>UserModules/MyFiles.playgroundmodule/Sources/ShuffleCards.swift</key>
+		<string>Added</string>
 		<key>UserModules/MyFiles.playgroundmodule/Sources/StringExtension.swift</key>
 		<string>Removed</string>
-		<key>UserModules/MyFiles.playgroundmodule/Sources/Test.swift</key>
-		<string>Added</string>
 	</dict>
 	<key>FormatVersion</key>
 	<integer>2</integer>

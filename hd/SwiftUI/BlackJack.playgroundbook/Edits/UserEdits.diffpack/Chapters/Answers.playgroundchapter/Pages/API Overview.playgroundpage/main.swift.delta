@@ -6,36 +6,9 @@
 	<array>
 		<dict>
 			<key>ModifiedContent</key>
-			<string>
-let cs = genCards()
-var cards = genCardIndexes()
-cards.append(contentsOf: genCardIndexes())
-cards.append(contentsOf: genCardIndexes())
-
-var cardMarks = genCardMarks()
-//print(genCardIndexes())
-//print(cardMarks)
-//print(cs)
-
-cards.shuffle()
-
-let card = cards.randomElement()!
-//print(card,cs[card],cardMarks[card])
-
-let david = [3,19,50,30]
-let davidMark = cardMarks[3]+cardMarks[19]+cardMarks[50]+cardMarks[30]
-let davidMarkSmall = 
-    cardMarks[3].getSmallMark() + 
-    cardMarks[19].getSmallMark() + 
-    cardMarks[50].getSmallMark() +
-    cardMarks[30].getSmallMark()
-print(cs[3],cs[19],cs[50],cs[30],davidMark,davidMarkSmall)
-
-let result = david.reduce(0, {x,y in x+y })
-print(result)
-</string>
+			<string></string>
 			<key>ModifiedRange</key>
-			<string>{265, 692}</string>
+			<string>{265, 0}</string>
 			<key>OriginalContent</key>
 			<string>import UIKit
 
@@ -64,10 +37,9 @@ let number = askForNumber("/*#-localizable-zone(text14)*/Number/*#-end-localizab
 
 // /*#-localizable-zone(k7)*/7. Pause until the user taps the button./*#-end-localizable-zone*/
 pauseUntilTapped(message: "/*#-localizable-zone(text15)*/Ready to continue?/*#-end-localizable-zone*/")
-
 </string>
 			<key>OriginalRange</key>
-			<string>{265, 2091}</string>
+			<string>{265, 2090}</string>
 		</dict>
 	</array>
 	<key>FormatVersion</key>
