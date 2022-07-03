@@ -1,4 +1,4 @@
-public func genCards() -> [String]{
+func genCards() -> [String]{
     let suits : [String] = ["♦️","♣️","♥️","♠️"]
     let numbers : [String] = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"]
     var cards : [String] = []
@@ -11,7 +11,7 @@ public func genCards() -> [String]{
     return cards
 }
 
-public func genCardMarks() -> [Int]{
+func genCardMarks() -> [Int]{
     let suits : [String] = ["♦️","♣️","♥️","♠️"]
     let numbers : [Int] = [2,3,4,5,6,7,8,9,10,10,10,10,11]
     var cards : [Int] = []
@@ -24,7 +24,7 @@ public func genCardMarks() -> [Int]{
     return cards
 }
 
-public func genCardIndexes()->[Int]{
+func genCardIndexes()->[Int]{
     var cards = [Int]()
     for i in 0..<52{
         cards.append(i)
@@ -33,7 +33,7 @@ public func genCardIndexes()->[Int]{
 }
 
 
-public extension Int{
+extension Int{
     func getSmallMark()->Int {
         if self==11{
             return 1

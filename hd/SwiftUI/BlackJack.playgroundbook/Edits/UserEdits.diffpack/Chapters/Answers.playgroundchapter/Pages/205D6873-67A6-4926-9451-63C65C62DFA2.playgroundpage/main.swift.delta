@@ -8,13 +8,17 @@
 	<array>
 		<dict>
 			<key>ModifiedContent</key>
-			<string>let a = "♦️A"
+			<string>startGame(playerNumber: 40, suitsNumber: 1)
 
-print(a.last)
+print(players)
+
+for player in players{
+    show(showCardsString(cardIndexes: player))
+}
 
 </string>
 			<key>ModifiedRange</key>
-			<string>{242, 30}</string>
+			<string>{242, 134}</string>
 			<key>OriginalContent</key>
 			<string></string>
 			<key>OriginalRange</key>
