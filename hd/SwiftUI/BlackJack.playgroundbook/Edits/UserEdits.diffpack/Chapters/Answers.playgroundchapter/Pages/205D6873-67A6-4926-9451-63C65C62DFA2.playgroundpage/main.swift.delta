@@ -8,17 +8,30 @@
 	<array>
 		<dict>
 			<key>ModifiedContent</key>
-			<string>startGame(playerNumber: 40, suitsNumber: 1)
+			<string>//startGame(playerNumber: 40, suitsNumber: 1)
+//
+//print(players)
+//
+//for player in players{
+//    show(showCardsString(cardIndexes: player))
+//}
+//
 
-print(players)
+//let cards=[50,48,49,27]
+//show(showCardsString(cardIndexes: cards))
+//show(CalcuResult(cards: cards))
 
-for player in players{
-    show(showCardsString(cardIndexes: player))
-}
 
+//let players=[[50,48,49,27,51],[40,50,48,49,27],[40,41,50,48,49,27]]
+//for cards in players{
+//    show(showCardsString(cardIndexes: cards))
+//}
+//show("\(CalcuResults(players: players))")
+
+print(GetMoreCard())
 </string>
 			<key>ModifiedRange</key>
-			<string>{242, 134}</string>
+			<string>{242, 469}</string>
 			<key>OriginalContent</key>
 			<string></string>
 			<key>OriginalRange</key>

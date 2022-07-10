@@ -26,7 +26,11 @@
 		<string>Added</string>
 		<key>UserModules/MyFiles.playgroundmodule/Sources/Adventure.swift</key>
 		<string>Removed</string>
+		<key>UserModules/MyFiles.playgroundmodule/Sources/CalcuResult.swift</key>
+		<string>Added</string>
 		<key>UserModules/MyFiles.playgroundmodule/Sources/GenCards.swift</key>
+		<string>Added</string>
+		<key>UserModules/MyFiles.playgroundmodule/Sources/IsMoreCard.swift</key>
 		<string>Added</string>
 		<key>UserModules/MyFiles.playgroundmodule/Sources/Quiz.swift</key>
 		<string>Removed</string>
@@ -39,7 +43,7 @@
 		<key>UserModules/MyFiles.playgroundmodule/Sources/ShuffleCards.swift</key>
 		<string>Added</string>
 		<key>UserModules/MyFiles.playgroundmodule/Sources/StringExtension.swift</key>
-		<string>Removed</string>
+		<string>Modified</string>
 	</dict>
 	<key>FormatVersion</key>
 	<integer>2</integer>
