@@ -1,12 +1,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var vm = ViewModel()
     var body: some View {
         HStack {
-            ForEach(1...7,id:\.self){ _ in
+            ForEach(0..<vm.pieces.count,id:\.self){ column in
                 VStack{
-                    ForEach(10...15,id:\.self){ _ in
-                        PiceView(color: .red, connected: true)
+                    ForEach(0..<vm.pieces[column].count,id:\.self){ row in
+                        ZStack{
+                            PiceView(
+                                color: vm.pieceColors[column][row],
+                                connected: vm.pieces[column][row])
+                                .onTapGesture {
+                                    vm.tapPice(colum: column, row: row)
+                                }
+                            Text("\(column),\(row)")
+                                .foregroundColor(.black)
+                        }
                     }
                 }
             }
