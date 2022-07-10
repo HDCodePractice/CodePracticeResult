@@ -6,9 +6,26 @@
 	<array>
 		<dict>
 			<key>ModifiedContent</key>
-			<string></string>
+			<string>startGame(playerNumber: 2, suitsNumber: 2)
+
+func showAllPlayers(){
+    for i in 0..&lt;players.count{
+        show("第\(i+1)人: \(showCardsString(cardIndexes: players[i])) \(CalcuResult(cards: players[i]))")
+    }
+}
+
+
+showAllPlayers()
+for i in 0..&lt;players.count{
+    while IsMoreCard() {
+        sendCards(player: i)
+        showAllPlayers()
+    }
+    
+}
+</string>
 			<key>ModifiedRange</key>
-			<string>{265, 0}</string>
+			<string>{265, 350}</string>
 			<key>OriginalContent</key>
 			<string>import UIKit
 
@@ -37,9 +54,10 @@ let number = askForNumber("/*#-localizable-zone(text14)*/Number/*#-end-localizab
 
 // /*#-localizable-zone(k7)*/7. Pause until the user taps the button./*#-end-localizable-zone*/
 pauseUntilTapped(message: "/*#-localizable-zone(text15)*/Ready to continue?/*#-end-localizable-zone*/")
+
 </string>
 			<key>OriginalRange</key>
-			<string>{265, 2090}</string>
+			<string>{265, 2091}</string>
 		</dict>
 	</array>
 	<key>FormatVersion</key>
