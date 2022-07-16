@@ -8,7 +8,7 @@
 import Foundation
 
 struct ViewModel{
-    var gridSize = 9
+    var gridSize = 11
     var grid : [[GridItem]] = []
     
     init(){

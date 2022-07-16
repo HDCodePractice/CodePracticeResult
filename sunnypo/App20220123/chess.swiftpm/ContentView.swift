@@ -3,14 +3,18 @@ import SwiftUI
 
 struct ContentView: View {
     @State var vm = ViewModel()
-    let block = [1,2,3,4,5,6,7,8,9,10]
+    let block = [1,2,3,4,5,6,7,8,9,10,11,12]
     var body: some View{
         ZStack{
             VStack(spacing:0){
                 ForEach(block,id: \.self){row in
                     HStack(spacing:0){
                         ForEach(block,id: \.self){ colume in
-                            Rectangle().fill(.yellow).border(.black)
+                            if row == 1 || row == 12 || colume == 1 || colume == 12 {
+                                Rectangle().fill(.yellow)
+                            }else {
+                                Rectangle().fill(.yellow).border(.black)
+                            }
                         }
                     }
                 }
@@ -25,7 +29,7 @@ struct ContentView: View {
                     }
 
                 }
-            }.frame(width: 260, height: 260)
+            }.frame(width: 263, height: 263)
         }.frame(width: 300, height: 300)
     }
 }
