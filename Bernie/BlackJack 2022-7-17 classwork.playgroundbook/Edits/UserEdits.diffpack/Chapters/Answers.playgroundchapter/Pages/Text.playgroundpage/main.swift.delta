@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>// 为了支持双平台cmd&amp;SwiftPlayground
+
+func showString(_ string: String){
+    // 如果是cmd
+//    print(string)
+    // 如果是swift playgrounds
+     show(string)
+}
+
+func getInput(inputPrompt:String,
+              startNumber:Int,
+              endNumber:Int,
+              errorPrompt:String,
+              defaultInput: Int
+              )-&gt;Int{
+    showString(inputPrompt)
+    var ui = askForNumber()
+    
+    while ui &lt; startNumber || ui &gt; endNumber{
+        showString(errorPrompt)
+        ui = askForNumber()
+    }
+    
+//    var seq=[String]()
+//    for i in 1...capital{
+//        seq.append(String(i)) 
+//    }
+//    let ui = Int(getInput(
+//            inputPrompt:inputPrompt,
+//            inputElement:seq,
+//            errorPrompt: errorPrompt,
+//            defaultInput: "\(defaultInput)"
+//        )) ?? defaultInput
+    
+    return ui
+}
+
+//闲家输入信息
+func getInput(inputPrompt:String, 
+              inputElement:[String], 
+              errorPrompt:String, 
+              defaultInput: String) -&gt; String{
+//    var ui = ""
+//    repeat{
+//        print ("")
+//        if ui==""{
+//            print (inputPrompt)
+//        }else{
+//            print (errorPrompt)
+//        }
+//        ui = readLine () ?? defaultInput
+//    }while !inputElement.contains(ui)
+//    return ui
+     showString(inputPrompt)
+     return askForChoice(strings: inputElement)
+}
+
+//庄家掷骰子
+func genDieNumber()-&gt;Int{
+    return [1,2,3,4,5,6].randomElement()!
+}
+
+
+// 骰子数字转换为“大”或“小”
+func isBigOrSmall(num: Int)-&gt;String{
+    if num&lt;4{
+        return "s"
+    }
+    return "b"
+}
+//************************************************************
+//比较大小
+func isWin(user:String,computer:Int)-&gt;Bool{
+    if user==isBigOrSmall(num: computer){
+        return true
+    }
+    return false
+}
+
+//一局胜负
+func playRound() -&gt; Bool {
+    let userInput = getInput(
+        inputPrompt:"请输入b/s代表你押注的大小:",
+        inputElement:["b","s"],
+        errorPrompt: "输入的不是b/s，请重新输入你押注的大小：",
+        defaultInput: "b"
+    )
+    
+    let computer = genDieNumber()
+    let result = isWin(user:userInput,computer:computer)
+    
+    showString("您押注的是\(userInput=="b" ? "大" : "小")")
+    showString("🎲的结果是\(computer)")
+    showString("您\(result ? "赢了" : "输了" )")
+    return result
+}
+
+func playSet(_ round:Int=5)-&gt;Bool{
+    let win=round/2+1
+    var playerWin = 0
+    var playerLoss = 0
+    while playerWin&lt;win &amp;&amp; playerLoss&lt;win{
+        if playRound(){
+            playerWin += 1
+        }else{
+            playerLoss += 1
+        }
+        showString("\n您玩了\( playerWin+playerLoss )轮,\(playerWin)胜 \(playerLoss)负")
+    }
+    if playerWin==win{
+        return true
+    }
+    return false
+}
+
+func bet(_ capital:Int)-&gt;Int{
+    var betSum=0
+    betSum = getInput(inputPrompt: "请输入你押注的筹码大小:从1到\(capital)", startNumber: 1, endNumber: capital, errorPrompt: "输入的筹码不对，请重新输入你的赌注（从1到\(capital)）:", defaultInput: 1)
+    return betSum
+}
+
+func settlement(capital:Int,bet:Int,win:Bool,rate:Int=2)-&gt;Int{
+    if win{
+        return capital+bet*rate
+    }else{
+        return capital
+    }
+}
+
+let round = 5
+var capital = 100
+let sets = 5
+var setsNumber = 1
+
+while setsNumber&lt;=sets &amp;&amp; capital&gt;0{
+    let betNumber = bet(capital)
+    capital -= betNumber
+    let win=playSet(round)
+    capital = settlement(capital: capital,bet: betNumber,win: win)
+    
+    showString("这是第\(setsNumber)局，您押注了$\(betNumber)，本局您\( win ? "赢" : "输" )了,你的本金还有$\(capital)")
+    setsNumber += 1
+}
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 3385}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 252}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>
