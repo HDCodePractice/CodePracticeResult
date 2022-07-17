@@ -72,3 +72,11 @@ public func getPlayerName()->String{
         errorPrompt:"你输入的不是一个只包括字母或数字的名字，请重新输入" )
     return ui
 }
+
+public func genPlayerArray(playerNum:Int)->[String]{
+    var names = [String]()
+    for i in 0...playerNum-1{
+        names.append(getPlayerName())
+    }
+    return names
+}
