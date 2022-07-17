@@ -17,7 +17,7 @@ func showAllPlayers(){
 
 showAllPlayers()
 for i in 0..&lt;players.count{
-    while IsMoreCard() {
+    while GetMoreCard() {
         sendCards(player: i)
         showAllPlayers()
     }
@@ -25,7 +25,7 @@ for i in 0..&lt;players.count{
 }
 </string>
 			<key>ModifiedRange</key>
-			<string>{265, 350}</string>
+			<string>{265, 351}</string>
 			<key>OriginalContent</key>
 			<string>import UIKit
 

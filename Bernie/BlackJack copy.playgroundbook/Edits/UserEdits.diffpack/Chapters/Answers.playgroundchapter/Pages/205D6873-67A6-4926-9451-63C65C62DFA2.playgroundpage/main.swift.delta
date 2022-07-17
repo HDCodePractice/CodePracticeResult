@@ -28,10 +28,20 @@
 //}
 //show("\(CalcuResults(players: players))")
 
-print(GetMoreCard())
+//print(GetMoreCard())
+
+//var myinput = getInput(
+//    inputPrompt: "请输入有几个玩家，人数要大于1",
+//    startNumber: 2, 
+//    errorPrompt:"你输入的不是一个大于1的数字，请重新输入",
+//    defaultInput: 2)
+//show(myinput)
+//print(type(of: myinput))
+
+//print(getPlayerName())
 </string>
 			<key>ModifiedRange</key>
-			<string>{242, 469}</string>
+			<string>{242, 693}</string>
 			<key>OriginalContent</key>
 			<string></string>
 			<key>OriginalRange</key>
