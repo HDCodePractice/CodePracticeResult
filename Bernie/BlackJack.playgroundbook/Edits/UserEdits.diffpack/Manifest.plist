@@ -24,33 +24,13 @@
 				<key>File</key>
 				<string>Chapters/Answers.playgroundchapter/UserManifest.plist</string>
 			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/GenCards.swift</string>
+			</dict>
 		</array>
 		<key>Modified</key>
 		<array>
-			<dict>
-				<key>Diff</key>
-				<string>UserModules/MyFiles.playgroundmodule/Sources/Quiz.swift.delta</string>
-				<key>File</key>
-				<string>UserModules/MyFiles.playgroundmodule/Sources/Quiz.swift</string>
-			</dict>
-			<dict>
-				<key>Diff</key>
-				<string>UserModules/MyFiles.playgroundmodule/Sources/Adventure.swift.delta</string>
-				<key>File</key>
-				<string>UserModules/MyFiles.playgroundmodule/Sources/Adventure.swift</string>
-			</dict>
-			<dict>
-				<key>Diff</key>
-				<string>UserModules/MyFiles.playgroundmodule/Sources/SharedCode.swift.delta</string>
-				<key>File</key>
-				<string>UserModules/MyFiles.playgroundmodule/Sources/SharedCode.swift</string>
-			</dict>
-			<dict>
-				<key>Diff</key>
-				<string>UserModules/MyFiles.playgroundmodule/Sources/StringExtension.swift.delta</string>
-				<key>File</key>
-				<string>UserModules/MyFiles.playgroundmodule/Sources/StringExtension.swift</string>
-			</dict>
 			<dict>
 				<key>Diff</key>
 				<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift.delta</string>
@@ -59,7 +39,24 @@
 			</dict>
 		</array>
 		<key>Removed</key>
-		<array/>
+		<array>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/Quiz.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/Adventure.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/SharedCode.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/StringExtension.swift</string>
+			</dict>
+		</array>
 		<key>Replaced</key>
 		<array/>
 	</dict>

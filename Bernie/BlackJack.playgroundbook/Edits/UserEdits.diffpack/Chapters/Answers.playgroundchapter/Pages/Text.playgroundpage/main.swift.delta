@@ -6,38 +6,147 @@
 	<array>
 		<dict>
 			<key>ModifiedContent</key>
-			<string>enum RunEnviroment{
-    case console
-    case swiftPlayground
-}
-
-let runEnviroment = runEnviroment.swiftPlay
-
-func getInput(inputPrompt:String, 
-              inputElement:[String], 
-              errorPrompt:String, 
-              defaultInput: String) -&gt;String{
-    print(inputPrompt)
-    var input = readLine() ?? defaultInput
-    while !inputElement.contains(input){
-        print(errorPrompt)
-        input = readLine() ?? defaultInput 
+			<string>func game()-&gt;String{
+    let playerNum = askPlayerNum()
+    var mPlayerCard = multiPlayer(playerNum:playerNum)
+    let cardStart = genIndices()
+    var msg: String = ""
+    print("*****二*********")
+    //先各发两张牌
+    let first2Draw = mPlayer2Draw(cardB4: cardStart ,mPlayerCardB4: mPlayerCard ,playerNum: playerNum)
+    var cardAft = first2Draw.cardAft
+    mPlayerCard = first2Draw.mPlayerCardAft
+    print(mPlayerCard)
+    print(score(mPlayerCard:mPlayerCard))
+    print(card(mPlayerCard:mPlayerCard))
+    
+    if is21(mPlayerCard:mPlayerCard).contains(true){
+        msg = winner21(mPlayerCard: mPlayerCard)
+        if msg != ""{
+            return msg
+        }
     }
-    return input
+    
+    if is21Bigger(mPlayerCard:mPlayerCard).contains(true){
+        msg = loser21Plus(mPlayerCard: mPlayerCard)
+        if msg != ""{
+            return msg
+        }
+    }
+    print("******三********")
+    if msg == ""{
+        var mPInputResult = askInputs(mPlayerInputs:[],playerNum:playerNum)
+        if noNewCard(currentInputResult: mPInputResult){
+            msg = whoIsBigger(mPlayerCard:mPlayerCard)
+        }else{
+            let thirdDraw = mPlayerDraw(cardB4:cardAft,mPlayerCardB4:mPlayerCard,playerNum:playerNum,currentInputResult:mPInputResult)
+            cardAft = thirdDraw.cardAft
+            mPlayerCard = thirdDraw.mPlayerCardAft
+            print(mPlayerCard)
+            print(score(mPlayerCard:mPlayerCard))
+            print(card(mPlayerCard:mPlayerCard))
+            
+            if is21(mPlayerCard:mPlayerCard).contains(true){
+                msg = winner21(mPlayerCard: mPlayerCard)
+                if msg != ""{
+                    return msg
+                }
+            }
+            
+            if is21Bigger(mPlayerCard:mPlayerCard).contains(true){
+                msg = loser21Plus(mPlayerCard: mPlayerCard)
+                if msg != ""{
+                    return msg
+                }
+            }
+            print("******四********")
+            if msg == ""{
+                mPInputResult = askInputs(mPlayerInputs:[],playerNum:playerNum)
+                if noNewCard(currentInputResult: mPInputResult){
+                    msg = whoIsBigger(mPlayerCard:mPlayerCard)
+                }else{
+                    let fourthDraw = mPlayerDraw(cardB4:cardAft,mPlayerCardB4:mPlayerCard,playerNum:playerNum,currentInputResult:mPInputResult)
+                    cardAft = fourthDraw.cardAft
+                    mPlayerCard = fourthDraw.mPlayerCardAft
+                    print(mPlayerCard)
+                    print(score(mPlayerCard:mPlayerCard))
+                    print(card(mPlayerCard:mPlayerCard))
+                    
+                    
+                    if is21(mPlayerCard:mPlayerCard).contains(true){
+                        msg = winner21(mPlayerCard: mPlayerCard)
+                        if msg != ""{
+                            return msg
+                        }
+                    }
+                    
+                    if is21Bigger(mPlayerCard:mPlayerCard).contains(true){
+                        msg = loser21Plus(mPlayerCard: mPlayerCard)
+                        if msg != ""{
+                            return msg
+                        }
+                    }
+                    print("******五********")
+                    if msg == ""{
+                        mPInputResult = askInputs(mPlayerInputs:[],playerNum:playerNum)
+                        if noNewCard(currentInputResult: mPInputResult){
+                            msg = whoIsBigger(mPlayerCard:mPlayerCard)
+                        }else{
+                            let fifthDraw = mPlayerDraw(cardB4:cardAft,mPlayerCardB4:mPlayerCard,playerNum:playerNum,currentInputResult:mPInputResult)
+                            cardAft = fifthDraw.cardAft
+                            mPlayerCard = fifthDraw.mPlayerCardAft
+                            print(score(mPlayerCard:mPlayerCard))
+                            print(card(mPlayerCard:mPlayerCard))
+                            
+                            if is21(mPlayerCard:mPlayerCard).contains(true){
+                                msg = winner21(mPlayerCard: mPlayerCard)
+                                if msg != ""{
+                                    return msg
+                                }
+                            }
+                            
+                            if is21Bigger(mPlayerCard:mPlayerCard).contains(true){
+                                msg = loser21Plus(mPlayerCard: mPlayerCard)
+                                if msg != ""{
+                                    return msg
+                                }
+                            }
+                            print("**************")
+                            if msg == ""{
+                                msg = whoIsBigger(mPlayerCard:mPlayerCard)
+                            }
+                        }  
+                    }
+                }
+            }
+        }   
+    }   
+    
+    return msg   
 }
 </string>
 			<key>ModifiedRange</key>
-			<string>{265, 467}</string>
+			<string>{265, 4956}</string>
 			<key>OriginalContent</key>
 			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
 
 let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
 
 show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
-
 </string>
 			<key>OriginalRange</key>
-			<string>{265, 253}</string>
+			<string>{265, 252}</string>
+		</dict>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>print(game())
+</string>
+			<key>ModifiedRange</key>
+			<string>{5222, 14}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{518, 0}</string>
 		</dict>
 	</array>
 	<key>File</key>
