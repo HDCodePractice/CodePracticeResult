@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>func report(_ results: [Int])-&gt;String{
+    let total = results.reduce(0,{x,y in x+y})
+    let average: Double = Double(total)/Double(results.count)
+    var above = 0
+    var at = 0
+    var below = 0
+    for i in results{
+        if i &gt; 60 {
+            above += 1
+        }else if i == 60 {
+            at += 1
+        }else{
+            below += 1
+        }
+    }
+    let msg = "平均分:\(average)\n及格人数为:\(above+at)\n不及格人数为:\(below)"
+    return msg 
+}
+
+// let result = [95,52,60,71,]
+// print(report(result))
+
+
+func splitBill(_ people:[Int],_ expense:[Int])-&gt;[Double]{
+    let totalPpl = people.reduce(0,{x,y in x+y})
+    let totalBill = expense.reduce(0,{x,y in x+y})
+    let average: Double = Double(totalBill)/Double(totalPpl)
+    var result = [Double]()
+    for i in people{
+        let a:String = String(format: "%0.2f",average*Double(i)) 
+        let b = Double(a)!
+        result.append(b)
+    }
+    return result
+}
+
+print(splitBill([3,3,4],[170,230,190,421]))
+
+
+import Foundation
+func tip(_ rate:Int, _ splitResult: [Double])-&gt;[Double]{
+    var tips = [Double]()
+    let tipRate = Double(rate)*pow(10.0,-2.0)
+    for i in splitResult{
+        let a:String = String(format: "%0.2f",i*tipRate) 
+        let b = Double(a)!
+        tips.append(b) 
+    }  
+    return tips
+}
+
+print(tip(20,splitBill([3,3,4],[170,230,190,421])))
+
+func totalBill(_ people:[Int],_ expense:[Int],_ rate:Int)-&gt;[Double]{
+    let familyBill = splitBill(people,expense)
+    let familyTip = tip(rate,familyBill)
+    var familyTotal = [Double]()
+    for i in 0...people.count-1{
+        let a:String = String(format: "%0.2f",familyBill[i]+familyTip[i]) 
+        let b = Double(a)!
+        familyTotal.append(b)
+    }
+    return familyTotal
+}
+
+print(totalBill([3,3,4],[170,230,190,421],20))
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 1764}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 252}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</string>
+</dict>
+</plist>

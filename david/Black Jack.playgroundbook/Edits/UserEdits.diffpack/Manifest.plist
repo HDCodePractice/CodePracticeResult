@@ -32,32 +32,86 @@
 				<key>File</key>
 				<string>Chapters/Answers.playgroundchapter/Pages/6BC039A4-64A0-432A-852C-E7E1B6560968.playgroundpage/UserManifest.plist</string>
 			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/calculation.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/Dealing cards.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/draft.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/eachRound.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/first2rounds.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/Gain.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/genCardIndexes.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/genCardMarks.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/000Adventure.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/000Quiz.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/000SharedCode.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/genvards.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/getinput.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/judgement.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/output.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/plbet.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/plCapital.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/showString.swift</string>
+			</dict>
 		</array>
 		<key>Modified</key>
 		<array>
 			<dict>
 				<key>Diff</key>
-				<string>UserModules/MyFiles.playgroundmodule/Sources/Adventure.swift.delta</string>
-				<key>File</key>
-				<string>UserModules/MyFiles.playgroundmodule/Sources/Adventure.swift</string>
-			</dict>
-			<dict>
-				<key>Diff</key>
 				<string>UserModules/MyFiles.playgroundmodule/Sources/StringExtension.swift.delta</string>
 				<key>File</key>
 				<string>UserModules/MyFiles.playgroundmodule/Sources/StringExtension.swift</string>
-			</dict>
-			<dict>
-				<key>Diff</key>
-				<string>UserModules/MyFiles.playgroundmodule/Sources/Quiz.swift.delta</string>
-				<key>File</key>
-				<string>UserModules/MyFiles.playgroundmodule/Sources/Quiz.swift</string>
-			</dict>
-			<dict>
-				<key>Diff</key>
-				<string>UserModules/MyFiles.playgroundmodule/Sources/SharedCode.swift.delta</string>
-				<key>File</key>
-				<string>UserModules/MyFiles.playgroundmodule/Sources/SharedCode.swift</string>
 			</dict>
 			<dict>
 				<key>Diff</key>
@@ -67,7 +121,20 @@
 			</dict>
 		</array>
 		<key>Removed</key>
-		<array/>
+		<array>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/Adventure.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/Quiz.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/SharedCode.swift</string>
+			</dict>
+		</array>
 		<key>Replaced</key>
 		<array/>
 	</dict>
