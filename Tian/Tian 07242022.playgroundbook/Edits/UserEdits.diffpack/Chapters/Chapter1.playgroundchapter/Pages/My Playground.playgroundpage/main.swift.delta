@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>//1.有一数组里面存有”y”（黄）,”r”（红）,”n”（没），数组表示一列，向一列中放入一个棋子（可以是r或y），返回放入棋子后的一列。[“n”,”n”,”n”,”y”,”r”],我们向其中放入一个y，返回应是[“n”,”n”,”y”,”y”,”r”]。如果棋子满了，不会发生任何改变。
+
+
+//var array = ["n", "n", "n", "y", "r"]
+//
+//if let i = array.firstIndex(of: "y") {
+//    array[i-1] = "y"
+//}
+//
+//print(array)
+
+
+
+//2.我们使用一个column和一个row生成一个高为hight，宽为width的棋盘。例：hight=3，width=2。生成的棋盘为[[“n”,”n”,”n”],[“n”,”n”,”n”]]
+
+//var board = Array(repeating: Array(repeating: "n", count: 3), count: 2)
+//for array in board {
+//    for value in array {
+//        print(value, terminator: " ")
+//    }
+//    print(" ")
+//}
+
+
+//3.使用一个棋盘，向其中的指定的column放入一个”y”或”r”的棋子，返回新的棋盘
+
+var board = Array(repeating: Array(repeating: "n", count: 6), count: 7)
+
+for array in board {
+    for value in array {
+        print(value, terminator: " ")
+    }
+    print(" ")
+}
+
+print("-----------------")
+
+board [2][3] = "y" 
+for array in board {
+    for value in array {
+        print(value, terminator: " ")
+    }
+    print(" ")
+}
+
+
+
+
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 962}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{0, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>
