@@ -9,9 +9,11 @@
 			<string>let a = ["r","r","y","y","n","n","n","n","n","y","y","y","y"]
 print(isSameColor(a,mark: "n"))
 
+
+AsyncThrowingStream
 </string>
 			<key>ModifiedRange</key>
-			<string>{1, 95}</string>
+			<string>{1, 116}</string>
 			<key>OriginalContent</key>
 			<string></string>
 			<key>OriginalRange</key>
