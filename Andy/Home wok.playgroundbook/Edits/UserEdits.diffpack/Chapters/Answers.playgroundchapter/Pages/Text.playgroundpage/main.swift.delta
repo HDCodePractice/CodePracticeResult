@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import SwiftUI
+
+
+    func genChessBoard()-&gt;[[String]]{
+        var board : [[String]] = []
+        for i in 0...9{
+            var row = [String]()
+            for j in 0...8{
+                row.append("--")
+            }
+            board.append(row)
+        }
+        return board
+    }
+    
+    var chessBoard = genChessBoard()
+    var chessName : [String] = ["炮","炮","俥","傌","傌","俥","车","车","马","马"]
+    var chessRow : [Int] = [7,7,9,9,9,9,0,0,0,0]
+    var chessColumn : [Int] = [1,7,0,1,7,8,0,8,1,7]
+    
+    for i in 0...4{
+    
+    chessName.append("兵")
+    chessRow.append(6)
+    chessColumn.append(i*2)
+    }
+    for i in 0 ... 4{
+    chessName.append("卒")
+    chessRow.append(3)
+    chessColumn.append(i*2)
+    }
+    
+    for i in 0..&lt;chessName.count{
+    //    show("\(i) \(chessName[i]) \(chessRow[i]) \(chessColumn[i])")
+    chessBoard[chessRow[i]][chessColumn[i]]=chessName[i]
+    }
+    
+    var data : String  = ""
+    for subarray in chessBoard{
+    data += "\n"
+    for i in subarray{
+    data += i
+    }
+    }
+    show(data)
+func moveHorse(from:Int, To:Int) -&gt; Bool{
+    for i in 1 ... 32{
+        if (chessRow[]*10 + chessColumn[]) == from &amp;&amp; 
+        
+    }
+}
+    
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 1186}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 253}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</string>
+</dict>
+</plist>
