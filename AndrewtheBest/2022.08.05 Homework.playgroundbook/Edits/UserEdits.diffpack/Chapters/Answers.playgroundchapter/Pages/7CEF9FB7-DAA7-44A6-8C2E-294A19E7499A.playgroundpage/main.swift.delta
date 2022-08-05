@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseFile</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Template.playgroundpage/main.swift</string>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>func genChessBoard()-&gt;[[String]]{
+    var board : [[String]] = []
+    for i in 0...9{
+        var row = [String]()
+        for j in 0...8{
+            row.append("_")
+        }
+        board.append(row)
+    }
+    return board
+}
+
+var chessBoard = genChessBoard()
+for i in stride(from: 0, to: 9, by: 2){
+    chessBoard[6][i]="兵"
+}
+chessBoard[7][1]="炮"
+chessBoard[7][7]="炮"
+chessBoard[9][0]="俥"
+chessBoard[9][1]="傌"
+chessBoard[9][2]="相"
+chessBoard[9][3]="仕"
+chessBoard[9][4]="帥"
+chessBoard[9][5]="仕"
+chessBoard[9][6]="相"
+chessBoard[9][7]="傌"
+chessBoard[9][8]="俥"
+chessBoard[0][0]="俥"
+chessBoard[0][1]="馬"
+chessBoard[0][2]="象"
+chessBoard[0][3]="士"
+chessBoard[0][4]="將"
+chessBoard[0][5]="士"
+chessBoard[0][6]="象"
+chessBoard[0][7]="馬"
+chessBoard[0][8]="車"
+chessBoard[2][1]="砲"
+chessBoard[2][7]="砲"
+for i in stride(from: 0, to: 9, by: 2){
+    chessBoard[3][i]="卒"
+}
+
+
+func showBoard(board:[[String]]){
+    var showString = ""
+    for row in board{
+        for i in row{
+            showString += i
+        }
+        showString += "\n"
+    }
+    show(showString)
+}
+
+
+
+
+
+
+
+
+
+func checkElephant(board:[[String]],positions:[[Int]])-&gt;Bool{
+    var from = positions[0]
+    var to = positions[1]
+    if from[0] &gt; 9 || from[1] &gt; 8{
+        return false
+    }else if to[0] &gt; 9 || to[1] &gt; 8{
+        return false
+    }
+    if board[from[0]][from[1]] == "相" || board[from[0]][from[1]] == "象"{
+        if abs(from[1] - to[1]) + abs(from[0] - to[0]) == 4{
+            if (from[0] - to[0] == 2) &amp;&amp; (from[1] - to[1] == -2){ //This is the upper right part Correct
+                if board[(from[0] - 1)][(from[1] + 1)] == "_"{
+                    return true
+                }else{
+                    return false
+                }
+            }else if (from[0] - to[0] == 2) &amp;&amp; (from[1] - to[1] == 2){ //This is the upper left part Correct
+                if board[(from[0] - 1)][(from[1] - 1)] == "_"{
+                    return true
+                }else{
+                    return false
+                }
+            }else if (from[0] - to[0] == -2) &amp;&amp; (from[1] - to[1] == -2){ //This is the lower right part 
+                if board[(from[0] + 1)][(from[1] + 1)] == "_" {
+                    return true
+                }else{
+                    return false
+                }
+            }else if (from[0] - to[0] == -2) &amp;&amp; (from[1] - to[1] == 2){ //This is the lower left part
+                if board[(from[0] + 1)][(from[1] - 1)] == "_"{
+                    return true
+                }else{
+                    return false
+                }
+            }
+        }
+    }
+    
+    return false
+}
+
+chessBoard[8][3] = "炮"
+showBoard(board: chessBoard)
+print(checkElephant(board: chessBoard, positions: [[9,2],[7,4]]))
+print(checkElephant(board: chessBoard, positions: [[9,2],[9,4]]))
+
+print(checkElephant(board: chessBoard, positions: [[9,2],[11,4]]))
+print(checkElephant(board: chessBoard, positions: [[0,3],[1,2]]))
+print(checkElephant(board: chessBoard, positions: [[9,2],[7,0]]))
+print(checkElephant(board: chessBoard, positions: [[0,6],[2,8]]))
+print(checkElephant(board: chessBoard, positions: [[0,2],[2,0]]))
+print(checkElephant(board: chessBoard, positions: [[2,0],[4,2]]))
+</string>
+			<key>ModifiedRange</key>
+			<string>{242, 3170}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{242, 0}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>
