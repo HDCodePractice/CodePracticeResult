@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>func genChessBoard()-&gt;[[String]]{
+    var board : [[String]] = []
+    for i in 0...9{
+        var row = [String]()
+        for j in 0...8{
+            row.append("--")
+        }
+        board.append(row)
+    }
+    return board
+}
+
+var chessBoard = genChessBoard()
+show("\(chessBoard)")
+
+var chessName : [String] = []
+var chessRow : [Int] = []
+var chessColum : [Int] = []
+for i in stride(from: 0, to: 9, by: 2){
+    chessName.append("兵")
+    chessRow.append(6)
+    chessColum.append(i)
+}
+show("\(chessName)\n\(chessRow)\n\(chessColum)")
+</string>
+			<key>ModifiedRange</key>
+			<string>{1, 535}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>
