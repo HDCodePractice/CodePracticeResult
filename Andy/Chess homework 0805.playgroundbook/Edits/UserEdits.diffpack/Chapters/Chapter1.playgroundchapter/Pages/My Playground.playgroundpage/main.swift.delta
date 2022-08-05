@@ -6,37 +6,58 @@
 	<array>
 		<dict>
 			<key>ModifiedContent</key>
-			<string>func genChessBoard()-&gt;[[String]]{
-    var board : [[String]] = []
-    for i in 0...9{
-        var row = [String]()
-        for j in 0...8{
-            row.append("--")
+			<string>func MoveElephant(board:[[String]], positions:[[Int]]) -&gt; Bool{
+    if positions[0][0]*10+positions[0][1] &gt; -1 &amp;&amp; positions[0][0]*10+positions[0][1] &lt; 98 &amp;&amp; positions[1][0]*10+positions[1][1] &gt; -1 &amp;&amp; positions[1][0]*10+positions[1][1] &lt; 98 {
+        
+        
+        for i in 1 ... 21{
+            if chessName[i] == "相" &amp;&amp; chessRow[i] == positions[0][0] &amp;&amp; chessColumn[i] == positions[0][1] || chessName[i] == "象" &amp;&amp; chessRow[i] == positions[0][0] &amp;&amp; chessColumn[i] == positions[0][1]{
+                
+                var thing = chessBoard[positions[0][0]][positions[0][1]]
+                if positions[0][0]==positions[1][0]-2 &amp;&amp; positions[0][1]==positions[1][1]-2 || positions[0][0]==positions[1][0]+2 &amp;&amp; positions[0][1]==positions[1][1]-2 || positions[0][0]==positions[1][0]-2 &amp;&amp; positions[0][1]==positions[1][1]+2 || positions[0][0]==positions[1][0]+2 &amp;&amp; positions[0][1]==positions[1][1]+2{
+                    print("0")
+                    if positions[0][0]&lt;positions[1][0] &amp;&amp; positions[0][1] &lt; positions[1][1]{
+                        if chessBoard[positions[0][0]+1][positions[0][1]+1] == "--" &amp;&amp; chessBoard[positions[0][0]+2][positions[0][1]+2] == "--"{
+                            
+                            chessBoard[positions[0][0]][positions[0][1]] = "--"
+                            chessBoard[positions[1][0]][positions[1][1]] = thing
+                        }
+                    }
+                    if positions[0][0]&lt;positions[1][0] &amp;&amp; positions[0][1] &gt; positions[1][1]{
+                        if chessBoard[positions[0][0]+1][positions[0][1]-1] == "--" &amp;&amp; chessBoard[positions[0][0]+2][positions[0][1]-2] == "--"{
+                            
+                            chessBoard[positions[0][0]][positions[0][1]] = "--"
+                            chessBoard[positions[1][0]][positions[1][1]] = thing
+                        }
+                    }
+                    if positions[0][0] &gt; positions[1][0] &amp;&amp; positions[0][1] &lt; positions[1][1]{
+                        if chessBoard[positions[0][0]-1][positions[0][1]+1] == "--" &amp;&amp; chessBoard[positions[0][0]-2][positions[0][1]+2] == "--"{
+                            
+                            chessBoard[positions[0][0]][positions[0][1]] = "--"
+                            chessBoard[positions[1][0]][positions[1][1]] = thing
+                        }
+                    }
+                    if positions[0][0] &gt; positions[1][0] &amp;&amp; positions[0][1] &gt; positions[1][1]{
+                        if chessBoard[positions[0][0]-1][positions[0][1]-1] == "--" &amp;&amp; chessBoard[positions[0][0]-2][positions[0][1]-2] == "--"{
+                            
+                            chessBoard[positions[0][0]][positions[0][1]] = "--"
+                            chessBoard[positions[1][0]][positions[1][1]] = thing
+                        }
+                    }
+                }
+            }
         }
-        board.append(row)
     }
-    return board
+    return false
 }
-
-var chessBoard = genChessBoard()
-show("\(chessBoard)")
-
-var chessName : [String] = []
-var chessRow : [Int] = []
-var chessColum : [Int] = []
-for i in stride(from: 0, to: 9, by: 2){
-    chessName.append("兵")
-    chessRow.append(6)
-    chessColum.append(i)
-}
-show("\(chessName)\n\(chessRow)\n\(chessColum)")
 </string>
 			<key>ModifiedRange</key>
-			<string>{1, 535}</string>
+			<string>{0, 2905}</string>
 			<key>OriginalContent</key>
-			<string></string>
+			<string>
+</string>
 			<key>OriginalRange</key>
-			<string>{1, 0}</string>
+			<string>{0, 1}</string>
 		</dict>
 	</array>
 	<key>File</key>
