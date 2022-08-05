@@ -51,16 +51,42 @@
     }
     }
     show(data)
-func moveHorse(from:Int, To:Int) -&gt; Bool{
-    for i in 1 ... 32{
-        if (chessRow[]*10 + chessColumn[]) == from &amp;&amp; 
+func moveHorse(from: [Int], To: [Int]) -&gt; Bool{
+    var answer : Bool = false
+    for i in 0 ... 9{ 
         
+        if chessName[i] == "马" || chessName[i] == "傌"{
+            print("0")
+            if chessRow[i] == from[0] &amp;&amp; chessColumn[i] == from[1]{
+                print("1")
+                var posFrom = (from[0]*10)+from[1]
+                var posTo = (To[0]*10)+To[1]
+                if posTo &lt; 91{
+                    if posFrom &gt; posTo{
+                        if posFrom - posTo == 12 || posFrom - posTo == 21 || posFrom - posTo == 19 || posFrom - posTo == 8{
+                            return true
+                            print("hi")
+                            
+                        }
+                    }
+                    if posFrom &lt; posTo{
+                        if posTo - posFrom == 12 || posTo - posFrom == 21 || posTo - posFrom == 19 || posTo - posFrom == 8 {
+                            return true
+                            print("hi")
+                            
+                        }
+                    }
+                }
+        }
     }
 }
-    
+    return false
+}
+
+print(moveHorse(from: [0,2], To: [2,3]))
 </string>
 			<key>ModifiedRange</key>
-			<string>{265, 1186}</string>
+			<string>{265, 2194}</string>
 			<key>OriginalContent</key>
 			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
 
