@@ -18,11 +18,11 @@
 		<array>
 			<dict>
 				<key>File</key>
-				<string>Chapters/Chapter1.playgroundchapter/UserManifest.plist</string>
+				<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/UserManifest.plist</string>
 			</dict>
 			<dict>
 				<key>File</key>
-				<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/UserManifest.plist</string>
+				<string>Chapters/Chapter1.playgroundchapter/UserManifest.plist</string>
 			</dict>
 		</array>
 		<key>Modified</key>
