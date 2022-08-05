@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseFile</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Template.playgroundpage/main.swift</string>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>var number : [Int] = [50]
+var count = 48
+while number.count &lt;= 24{
+    number.append(count)
+    count -= 2
+}
+for i in 0...24{
+    show(number[i])
+}
+
+var count = 50
+for i in 0 ... 24{
+    show(count-i*2)
+}
+var number = 50
+while true{
+    if number &gt;= 0{
+        show(number)
+        number -= 2
+    } else{
+        break
+    }
+}
+func bigToSmall(start:Int) -&gt; Int{
+    return start
+}
+var num = 50
+for i in 1 ... 25{
+    show(bigToSmall(start: num))
+        num-=2
+}
+</string>
+			<key>ModifiedRange</key>
+			<string>{242, 464}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{242, 0}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

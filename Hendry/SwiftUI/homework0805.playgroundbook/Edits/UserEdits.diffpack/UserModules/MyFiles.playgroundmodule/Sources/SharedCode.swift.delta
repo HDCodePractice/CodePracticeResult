@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string></string>
+			<key>ModifiedRange</key>
+			<string>{0, 0}</string>
+			<key>OriginalContent</key>
+			<string>//#-localizable-zone(Answers01)
+</string>
+			<key>OriginalRange</key>
+			<string>{0, 32}</string>
+		</dict>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>// Code written in this file is available on all pages in this Playground Boo
+</string>
+			<key>ModifiedRange</key>
+			<string>{15, 78}</string>
+			<key>OriginalContent</key>
+			<string>// Code written in this file is available on all pages in this Playground Book.
+//#-end-localizable-zone
+</string>
+			<key>OriginalRange</key>
+			<string>{47, 105}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

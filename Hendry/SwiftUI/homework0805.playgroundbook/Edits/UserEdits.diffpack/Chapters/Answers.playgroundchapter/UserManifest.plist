@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UserPageFilenames</key>
+	<array>
+		<string>Text.playgroundpage</string>
+		<string>API Overview.playgroundpage</string>
+		<string>Quiz.playgroundpage</string>
+		<string>ChooseYourOwnAdventure.playgroundpage</string>
+		<string>CrystalBall.playgroundpage</string>
+		<string>2A581B9D-FB0A-41FB-AB3D-D511997CEFB2.playgroundpage</string>
+		<string>913312BC-24D7-40B7-A388-F3AEB65B2EF9.playgroundpage</string>
+		<string>811F3E44-DB0E-400A-80F8-FAC57D774570.playgroundpage</string>
+		<string>D30B8F44-6C2B-4D55-8A8A-716D01D49037.playgroundpage</string>
+	</array>
+</dict>
+</plist>
