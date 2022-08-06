@@ -68,6 +68,7 @@ func MoveElephant(board:[[String]], positions:[[Int]]) -&gt; Bool{
                             
                             chessBoard[positions[0][0]][positions[0][1]] = "--"
                             chessBoard[positions[1][0]][positions[1][1]] = thing
+                            return true
                         }
                     }
                     if positions[0][0]&lt;positions[1][0] &amp;&amp; positions[0][1] &gt; positions[1][1]{
@@ -75,6 +76,7 @@ func MoveElephant(board:[[String]], positions:[[Int]]) -&gt; Bool{
                             
                             chessBoard[positions[0][0]][positions[0][1]] = "--"
                             chessBoard[positions[1][0]][positions[1][1]] = thing
+                            return true
                         }
                     }
                     if positions[0][0] &gt; positions[1][0] &amp;&amp; positions[0][1] &lt; positions[1][1]{
@@ -82,6 +84,7 @@ func MoveElephant(board:[[String]], positions:[[Int]]) -&gt; Bool{
                             
                             chessBoard[positions[0][0]][positions[0][1]] = "--"
                             chessBoard[positions[1][0]][positions[1][1]] = thing
+                            return true
                         }
                     }
                     if positions[0][0] &gt; positions[1][0] &amp;&amp; positions[0][1] &gt; positions[1][1]{
@@ -89,6 +92,7 @@ func MoveElephant(board:[[String]], positions:[[Int]]) -&gt; Bool{
                             
                             chessBoard[positions[0][0]][positions[0][1]] = "--"
                             chessBoard[positions[1][0]][positions[1][1]] = thing
+                            return true
                         }
                     }
                 }
@@ -99,7 +103,7 @@ func MoveElephant(board:[[String]], positions:[[Int]]) -&gt; Bool{
 }
 </string>
 			<key>ModifiedRange</key>
-			<string>{0, 3954}</string>
+			<string>{0, 4114}</string>
 			<key>OriginalContent</key>
 			<string>
 </string>
