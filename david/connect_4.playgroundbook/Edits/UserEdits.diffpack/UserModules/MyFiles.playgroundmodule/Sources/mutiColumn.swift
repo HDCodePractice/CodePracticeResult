@@ -19,12 +19,12 @@ func mutiColumn(
     
     board[columnChoice] = oneColumTemp.column
     coordinate[0] = columnChoice
-    coordinate[1] = oneColumTemp.2
+    coordinate[1] = oneColumTemp.rowNum
         
 //        print(9999)
 //        print(coordinate)
-    for i in board{
-        show("\(i)\n")
+    for i in 0...board.count-1{
+        show("\(i)    \(board[i])\n")
     }
     
     return(coordinate,board,fullMark)

@@ -8,12 +8,45 @@
 			<key>ModifiedContent</key>
 			<string>let colum = 4
 let row = 5
+var countMark = 3
+
 var board = creatBoard(colum, row)
-board = playGame(board)
-//show("\(board)")
+var winRecords = false
+var chessMark = -1
+var fullMark = false
+var moveNum = 0
+
+while !winRecords{
+    var playing = playGame(board: board, chessMark: chessMark, winRecord: winRecords)
+    board = playing.board
+    var coordinate = playing.coordinate
+//    moveNum = playing.moveNum
+    
+    print(coordinate)
+    
+    winRecords = isWin(
+        coordinate: coordinate, 
+        board: board, 
+        countMark: countMark, 
+        moveNum: moveNum
+    )
+    
+    fullMark = playing.fullMark
+    
+    if fullMark{
+        moveNum += 1
+        chessMark *= -1
+        
+        //            当填满一个column时候，再填入时候，棋子颜色不会变
+    }
+    if winRecords{
+        show(("\(board[coordinate[0]][coordinate[1]])"+" "+"win"))
+    }
+//    print(moveNum)
+//    print(winRecords)
 </string>
 			<key>ModifiedRange</key>
-			<string>{266, 104}</string>
+			<string>{266, 843}</string>
 			<key>OriginalContent</key>
 			<string>// 1. mutiple playground
 
@@ -188,8 +221,22 @@ func dealCards(_ cards:[String],_ players:Int)-&gt;(cardsRemain:[String],playerC
     
     return (cardsRemain,playerCards)
     
-}
-// =========================== Testing ===========================
+</string>
+			<key>OriginalRange</key>
+			<string>{266, 4613}</string>
+		</dict>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>
+
+
+//show("\(board)")
+//print("moveNum = \(playing.moveNum)")
+</string>
+			<key>ModifiedRange</key>
+			<string>{1111, 62}</string>
+			<key>OriginalContent</key>
+			<string>// =========================== Testing ===========================
 var sets = 1
 var players = 3
 var playerScore = 0
@@ -206,7 +253,7 @@ var b = dealCards(a, players)
 
 </string>
 			<key>OriginalRange</key>
-			<string>{266, 4938}</string>
+			<string>{4881, 323}</string>
 		</dict>
 	</array>
 	<key>File</key>
