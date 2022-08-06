@@ -1,8 +1,6 @@
 
 public func getInput(
     inputPrompt:String,
-    //    startNumber:Int,
-    //    endNumber:Int,
     inputElements:[String],
     errorPrompt:String,
     defaultInput: String

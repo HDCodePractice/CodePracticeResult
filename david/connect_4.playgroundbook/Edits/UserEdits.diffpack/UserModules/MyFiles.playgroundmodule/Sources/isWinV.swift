@@ -18,18 +18,10 @@ func isWinV(
         }else{
             counts = 1
         }
-//        print(111111)
-//        print(coordinate)
-//        print(counts)
-        
         if counts == countMark  {
-//            show("\(board[coordinate[0]][j])"+" "+"win")
             return true
         }
-        
     }
     counts = 1
-    
-    
     return false
 }

@@ -4,6 +4,5 @@ public func creatBoard(
     _ row:Int
 )->[[String]]{
     let board = Array(repeating:(Array(repeating:"n",count:column)),count:row)
-//    let board = [[String]]() 
     return board
 }

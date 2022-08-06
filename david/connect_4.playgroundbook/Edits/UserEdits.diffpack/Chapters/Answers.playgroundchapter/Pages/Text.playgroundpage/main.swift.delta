@@ -6,9 +6,9 @@
 	<array>
 		<dict>
 			<key>ModifiedContent</key>
-			<string>let colum = 4
-let row = 5
-var countMark = 3
+			<string>let colum = 6
+let row = 7
+var countMark = 4
 
 var board = creatBoard(colum, row)
 var winRecords = false
@@ -20,10 +20,7 @@ while !winRecords{
     var playing = playGame(board: board, chessMark: chessMark, winRecord: winRecords)
     board = playing.board
     var coordinate = playing.coordinate
-//    moveNum = playing.moveNum
-    
-    print(coordinate)
-    
+
     winRecords = isWin(
         coordinate: coordinate, 
         board: board, 
@@ -37,16 +34,11 @@ while !winRecords{
         moveNum += 1
         chessMark *= -1
         
+        
         //            当填满一个column时候，再填入时候，棋子颜色不会变
-    }
-    if winRecords{
-        show(("\(board[coordinate[0]][coordinate[1]])"+" "+"win"))
-    }
-//    print(moveNum)
-//    print(winRecords)
 </string>
 			<key>ModifiedRange</key>
-			<string>{266, 843}</string>
+			<string>{266, 646}</string>
 			<key>OriginalContent</key>
 			<string>// 1. mutiple playground
 
@@ -72,8 +64,24 @@ func getInput(inputPrompt:String,
     }
     if ui == "no"{
         return false
-    }else{
-        show(errorPrompt)
+</string>
+			<key>OriginalRange</key>
+			<string>{266, 511}</string>
+		</dict>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>        show(#imageLiteral(resourceName: "334695_overflow_icon.png"))
+    }
+    if winRecords{
+        show(("\(board[coordinate[0]][coordinate[1]])"+" "+"win"))
+    }
+//    print(moveNum)
+//    print(winRecords)
+</string>
+			<key>ModifiedRange</key>
+			<string>{923, 213}</string>
+			<key>OriginalContent</key>
+			<string>        show(errorPrompt)
     }
     return false
     
@@ -223,7 +231,7 @@ func dealCards(_ cards:[String],_ players:Int)-&gt;(cardsRemain:[String],playerC
     
 </string>
 			<key>OriginalRange</key>
-			<string>{266, 4613}</string>
+			<string>{788, 4091}</string>
 		</dict>
 		<dict>
 			<key>ModifiedContent</key>
@@ -234,7 +242,7 @@ func dealCards(_ cards:[String],_ players:Int)-&gt;(cardsRemain:[String],playerC
 //print("moveNum = \(playing.moveNum)")
 </string>
 			<key>ModifiedRange</key>
-			<string>{1111, 62}</string>
+			<string>{1138, 62}</string>
 			<key>OriginalContent</key>
 			<string>// =========================== Testing ===========================
 var sets = 1

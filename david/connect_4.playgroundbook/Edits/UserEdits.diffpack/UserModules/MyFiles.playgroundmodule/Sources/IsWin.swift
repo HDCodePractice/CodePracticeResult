@@ -18,18 +18,6 @@ public func isWin(
             return true
         }
     }
-    //        if isWinRD_LU(coordinate: coordinate, board: board,countMark: countMark) 
-    //            || isWinLD_RU(coordinate: coordinate, board: board,countMark: countMark) 
-    //            || isWinH(coordinate: coordinate, board: board,countMark: countMark) 
-    //            || isWinV(coordinate: coordinate, board: board,countMark: countMark)
-    //        
-    //        {
-    //            show("\(board[coordinate[0]][1])"+" "+"win")
-    //            winRecord = true
-    //            return winRecord
-    //        
-    //    }
-    
     
     return false
 }

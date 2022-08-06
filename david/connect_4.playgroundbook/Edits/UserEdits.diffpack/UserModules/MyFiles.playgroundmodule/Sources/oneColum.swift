@@ -15,11 +15,9 @@ func oneColum(
         
         for i in 0...column.count-1{
             if column[i] == "n"{
-                
                 column[i] = chessman
                 fullMark = true
                 rowNum = i
-                
                 return (column,fullMark,rowNum)
             }
         }
@@ -31,8 +29,6 @@ func oneColum(
         return (column,fullMark,rowNum)
         
     }
-    
-    
     
     return (column,fullMark,rowNum)
 }
