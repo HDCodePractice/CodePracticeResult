@@ -22,8 +22,6 @@
 
 import SwiftUI
 
-
-
 struct ContentView: View {
     @State var board : [[[String]]] = [
         [["","0","0"],["","0","1"],["","0","2"]],
@@ -31,34 +29,53 @@ struct ContentView: View {
         [["","2","0"],["","2","1"],["","2","2"]]
     ]
     
+    @State var step = true
+    
+    @State var isGameOver = true
+    
     var body: some View {
-        VStack(spacing:0){
-            ForEach(board,id:\.self){ row in
-                HStack(spacing:0){
-                    ForEach(row,id:\.self){ grid in
-                        ZStack{
-                            Rectangle()
-                                .fill(.white)
-                            Rectangle()
-                                .stroke(lineWidth: 5)
-                            if grid[0]=="o"{
-                                Circle()
-                                    .fill(.mint)
-                                    .padding()
-                            }else if grid[0]=="x"{
-                                Circle()
-                                    .stroke(lineWidth: 20)
+        ZStack{
+            VStack(spacing:0){
+                ForEach(board,id:\.self){ row in
+                    HStack(spacing:0){
+                        ForEach(row,id:\.self){ grid in
+                            ZStack{
+                                Rectangle()
                                     .fill(.black)
-                                    .padding(20)
+                                Rectangle()
+                                    .stroke(lineWidth: 5)
+                                if grid[0]=="o"{
+                                    Circle()
+                                        .fill(.mint)
+                                        .padding()
+                                }else if grid[0]=="x"{
+                                    Circle()
+                                        .stroke(lineWidth: 20)
+                                        .fill(.green)
+                                        .padding(20)
+                                }
                             }
-                        }
-                        .onTapGesture {
-                            let x = Int(grid[1])!
-                            let y = Int(grid[2])!
-                            board[x][y]=["o","\(x)","\(y)"]
+                            .onTapGesture {
+                                let x = Int(grid[1])!
+                                let y = Int(grid[2])!
+                                
+                                if board[x][y][0]==""{
+                                    if step{
+                                        board[x][y][0]="o"
+                                    }else{
+                                        board[x][y][0]="x"
+                                    }
+                                    step.toggle()
+                                }
+                            }
                         }
                     }
                 }
+            }
+            if isGameOver {
+                Text("GameOver!")
+                    .font(.largeTitle)
+                    .foregroundColor(.red)
             }
         }
     }
