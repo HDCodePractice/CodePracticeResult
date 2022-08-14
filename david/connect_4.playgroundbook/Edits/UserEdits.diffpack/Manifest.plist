@@ -26,10 +26,6 @@
 			</dict>
 			<dict>
 				<key>File</key>
-				<string>UserModules/UntitledModule.playgroundmodule/Sources/UntitledModule.swift</string>
-			</dict>
-			<dict>
-				<key>File</key>
 				<string>UserModules/MyFiles.playgroundmodule/Sources/oneColum.swift</string>
 			</dict>
 			<dict>
@@ -42,10 +38,6 @@
 			</dict>
 			<dict>
 				<key>File</key>
-				<string>UserModules/MyFiles.playgroundmodule/Sources/IsWin.swift</string>
-			</dict>
-			<dict>
-				<key>File</key>
 				<string>UserModules/MyFiles.playgroundmodule/Sources/creatboard.swift</string>
 			</dict>
 			<dict>
@@ -54,7 +46,27 @@
 			</dict>
 			<dict>
 				<key>File</key>
-				<string>UserModules/MyFiles.playgroundmodule/Sources/iswin01.swift</string>
+				<string>Chapters/Answers.playgroundchapter/Pages/F277A502-757B-443B-A11E-AFC7E0922363.playgroundpage/UserManifest.plist</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/isWinV.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/IsWinH.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/isWinLD_RU.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/isWinRD_LU.swift</string>
+			</dict>
+			<dict>
+				<key>File</key>
+				<string>UserModules/MyFiles.playgroundmodule/Sources/isWin.swift</string>
 			</dict>
 		</array>
 		<key>Modified</key>
@@ -64,6 +76,12 @@
 				<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift.delta</string>
 				<key>File</key>
 				<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</string>
+			</dict>
+			<dict>
+				<key>Diff</key>
+				<string>Chapters/Answers.playgroundchapter/Pages/F277A502-757B-443B-A11E-AFC7E0922363.playgroundpage/main.swift.delta</string>
+				<key>File</key>
+				<string>Chapters/Answers.playgroundchapter/Pages/F277A502-757B-443B-A11E-AFC7E0922363.playgroundpage/main.swift</string>
 			</dict>
 		</array>
 		<key>Removed</key>

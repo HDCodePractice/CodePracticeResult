@@ -7,11 +7,11 @@ func mutiColumn(
     board:[[String]],
     fullMark:Bool
 ){
-
+    
     var board = board
     var coordinate:[Int] = Array(repeating:0, count: 2)
     
-    var chessman = (chessMark == -1 ? "♣️":"♥️")
+    var chessman = (chessMark == -1 ? "♠️":"♥️")
     
     var oneColumTemp = oneColum(board[columnChoice],chessman)
     
@@ -19,14 +19,11 @@ func mutiColumn(
     
     board[columnChoice] = oneColumTemp.column
     coordinate[0] = columnChoice
-    coordinate[1] = oneColumTemp.2
-        
-//        print(9999)
-//        print(coordinate)
-    for i in board{
-        show("\(i)\n")
-    }
+    coordinate[1] = oneColumTemp.rowNum
     
+    for i in 0...board.count-1{
+        show("\(i)    \(board[i])\n")
+    }
     return(coordinate,board,fullMark)
 }
 

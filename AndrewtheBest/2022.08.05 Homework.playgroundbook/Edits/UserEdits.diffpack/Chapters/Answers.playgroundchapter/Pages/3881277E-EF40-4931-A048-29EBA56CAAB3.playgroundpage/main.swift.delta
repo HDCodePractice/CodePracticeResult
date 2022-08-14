@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseFile</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Template.playgroundpage/main.swift</string>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>func genChessBoard()-&gt;[[String]]{
+    var board : [[String]] = []
+    for i in 0...9{
+        var row = [String]()
+        for j in 0...8{
+            row.append("--")
+        }
+        board.append(row)
+    }
+    return board
+}
+
+var chessBoard = genChessBoard()
+
+
+var chessName : [String] = ["炮","炮","俥","傌","傌","俥","车","车","马","马","相","相","象","象","仕","仕","士","士","将","帥","砲","砲"]
+var chessRow : [Int] = [7,7,9,9,9,9,0,0,0,0,9,9,0,0,9,9,0,0,0,9,2,2]
+var chessColumn : [Int] = [1,7,0,1,7,8,0,8,1,7,2,6,2,6,3,5,3,5,4,4,1,7]
+
+
+for i in stride(from: 0, to: 9, by: 2){
+    chessName.append("兵")
+    chessRow.append(6)
+    chessColumn.append(i)
+}
+for i in stride(from: 0, to: 9, by: 2){
+    chessName.append("卒")
+    chessRow.append(3)
+    chessColumn.append(i)
+}
+
+func showBoard(board:[[String]]){
+    var showString = ""
+    for row in board{
+        for i in row{
+            showString += i
+        }
+        showString += "\n"
+    }
+    show(showString)
+}
+
+
+for i in 0..&lt;chessName.count{
+    chessBoard[chessRow[i]][chessColumn[i]]=chessName[i]
+}
+
+//var data : [Int] = []
+//var availble : [[Int]] = []
+//var dream : [Int] = []
+//Availble order:  up left, up right, down left, down right,
+
+//func checkHorse(board:[[String]],positions:[[Int]])-&gt;Bool{
+//    data = positions[0]
+//    dream = positions[1]
+//    availble.append([data[0] + 2, data[1] - 1]) // right
+//    availble.append([data[0] + 2, data[1] + 1]) // right
+//    availble.append([data[0] - 2, data[1] - 1]) // left
+//    availble.append([data[0] - 2, data[1] + 1]) // left
+//    availble.append([data[0] - 1, data[1] + 2]) // down
+//    availble.append([data[0] + 1, data[1] + 2]) // down
+//    availble.append([data[0] - 1, data[1] - 2]) // up
+//    availble.append([data[0] - 1, data[1] + 2]) // up
+//    if board[3][3] != "--"{
+//        availble.remove(at: 0)
+//        availble.remove(at: 1)
+//    }
+//    if board[2][4] != "--"{
+//        availble.remove(at: 6)
+//        availble.remove(at: 7)
+//    }
+//    if board[3][5] != "--"{
+//        availble.remove(at: 2)
+//        availble.remove(at: 3)
+//    }
+//    if board[4][4] != "--"{
+//        availble.remove(at: 4)
+//        availble.remove(at: 5)
+//    }
+//    if availble.contains(dream){
+//        return true
+//    }else{
+//        return false
+//    }
+//}
+//
+//let test = checkHorse(board: chessBoard, positions: [[0,1], [5,7]])
+//print(test)
+</string>
+			<key>ModifiedRange</key>
+			<string>{242, 2373}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{242, 0}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>
