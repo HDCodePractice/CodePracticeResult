@@ -71,15 +71,9 @@ func getInput(inputPrompt:String,
 		<dict>
 			<key>ModifiedContent</key>
 			<string>        show(#imageLiteral(resourceName: "334695_overflow_icon.png"))
-    }
-    if winRecords{
-        show(("\(board[coordinate[0]][coordinate[1]])"+" "+"win"))
-    }
-//    print(moveNum)
-//    print(winRecords)
 </string>
 			<key>ModifiedRange</key>
-			<string>{923, 213}</string>
+			<string>{923, 70}</string>
 			<key>OriginalContent</key>
 			<string>        show(errorPrompt)
     }
@@ -224,14 +218,37 @@ func dealCards(_ cards:[String],_ players:Int)-&gt;(cardsRemain:[String],playerC
         }
         rounds+=1
 //        cardsRemain.shuffle()
-    }
-    
-    
-    return (cardsRemain,playerCards)
-    
 </string>
 			<key>OriginalRange</key>
-			<string>{788, 4091}</string>
+			<string>{788, 4033}</string>
+		</dict>
+		<dict>
+			<key>ModifiedContent</key>
+			<string></string>
+			<key>ModifiedRange</key>
+			<string>{999, 0}</string>
+			<key>OriginalContent</key>
+			<string>    
+    
+    return (cardsRemain,playerCards)
+</string>
+			<key>OriginalRange</key>
+			<string>{4827, 47}</string>
+		</dict>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>    if winRecords{
+        show(("\(board[coordinate[0]][coordinate[1]])"+" "+"win"))
+    }
+//    print(moveNum)
+//    print(winRecords)
+</string>
+			<key>ModifiedRange</key>
+			<string>{1004, 137}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{4879, 0}</string>
 		</dict>
 		<dict>
 			<key>ModifiedContent</key>
@@ -242,7 +259,7 @@ func dealCards(_ cards:[String],_ players:Int)-&gt;(cardsRemain:[String],playerC
 //print("moveNum = \(playing.moveNum)")
 </string>
 			<key>ModifiedRange</key>
-			<string>{1138, 62}</string>
+			<string>{1143, 62}</string>
 			<key>OriginalContent</key>
 			<string>// =========================== Testing ===========================
 var sets = 1
