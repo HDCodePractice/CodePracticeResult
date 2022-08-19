@@ -15,6 +15,7 @@ struct ContentView: View {
     let shipColors : [Color] = [.clear,.red,.gray,.blue,.cyan,.green,.mint,.yellow,.indigo,.orange,.brown]
     @State var ship : [Grid] = []
     @State var board : [[Grid]] = []
+    @State var hit = -1
     func players()->Int{
         if b == 0{
             b = 1
@@ -22,6 +23,12 @@ struct ContentView: View {
             
         }else{
             b = 0
+            return 0
+        }
+    }
+    func fire()->Int{
+        if hit == -1 || hit == 1{
+            hit = 0
             return 0
         }
     }
@@ -62,6 +69,18 @@ struct ContentView: View {
                 Text("Player two is clicking")
                     .font(.largeTitle)
             }
+            if fire() == 0{
+                Text("You Hit Nothing")
+                    .font(.largeTitle)
+                
+            }else if hit == 1{
+                Text("Hit!")
+                    .font(.largeTitle)
+            }else{
+                Text("Start Firing!")
+                    .font(.largeTitle)
+                
+            }
             ForEach(board,id:\.self){ row in
                 HStack{
                     ForEach(row){ grid in
@@ -74,11 +93,29 @@ struct ContentView: View {
                         .onTapGesture {
                             players()
                             var piece = grid
+                            piece.shipPiece = 0
+//                            print(board)
+//                            print("=============")
+//                            print(ship)
                             for i in 0...board.count-1{
-                                for j in 0...ship.count-1{
-                                    if board[i][i].x == ship[j].x && board[i][i].y == ship[j].y{
-                                        piece.shipPiece = 4
+                                for k in 0...board.count-1{
+                                    for j in 0...ship.count-1{
+                                        if board[i][k].x == ship[j].x && board[i][k].y == ship[j].y{
+                                            print(piece.shipPiece)
+                                            piece.shipPiece = 20
+                                        }
                                     }
+                                }
+                                
+                            }
+                            for i in 0...ship.count-1{
+                                print(piece.shipPiece)
+                                print(ship[i].shipPiece)
+                                if piece.shipPiece == ship[i].shipPiece{
+                                    print(piece.shipPiece)
+                                    print(ship[i].shipPiece)
+                                    piece.shipPiece = 5
+                                    hit = 1
                                 }
                             }
                             if  piece.shipPiece == shipsNumber{
@@ -96,6 +133,10 @@ struct ContentView: View {
         .onAppear { 
             startGame()
             shipMaker(shipLength: 5)
+            shipMaker(shipLength: 4)
+            shipMaker(shipLength: 3)
+            shipMaker(shipLength: 3)
+            shipMaker(shipLength: 2)
 
         }
     }
