@@ -26,11 +26,16 @@ struct ContentView: View {
             return 0
         }
     }
+
     func fire()->Int{
         if hit == -1 || hit == 1{
             hit = 0
             return 0
+        }else{
+            hit = 1
+            return 1
         }
+        
     }
     func startGame(){
         board = []
@@ -69,13 +74,14 @@ struct ContentView: View {
                 Text("Player two is clicking")
                     .font(.largeTitle)
             }
-            if fire() == 0{
+            if fire() == 1{
+                Text("Hit!")
+                    .font(.largeTitle)
+                
+            }else if fire() == 0{
                 Text("You Hit Nothing")
                     .font(.largeTitle)
                 
-            }else if hit == 1{
-                Text("Hit!")
-                    .font(.largeTitle)
             }else{
                 Text("Start Firing!")
                     .font(.largeTitle)
