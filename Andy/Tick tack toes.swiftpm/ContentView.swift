@@ -34,18 +34,14 @@ struct ContentView: View {
                         .onTapGesture {
                             let x = Int(grid[1])!
                             let y = Int(grid[2])!
-                            
-                            
-                            if String(board[x][y][0]) == "" && playerTurn == 0{
-                                board[x][y][0] = "o"
-                                playerTurn = 1
-                                print(playerTurn)
-                                
-                            }
-                            if String(board[x][y][0]) == "" && playerTurn == 1{
-                                board[x][y][0] = "x"
-                                playerTurn = 0
-                                print(playerTurn)
+                            let z = board[x][y][0]
+                            switch z{
+                                case "o":
+                                board[x][y]=["x","\(x)","\(y)"]
+                            case "x":
+                                board[x][y]=["","\(x)","\(y)"]
+                            default:
+                                board[x][y]=["o","\(x)","\(y)"]
                             }
                         }                   
                         
