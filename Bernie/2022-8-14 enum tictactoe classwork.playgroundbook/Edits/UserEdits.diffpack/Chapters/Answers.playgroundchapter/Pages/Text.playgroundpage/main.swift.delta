@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>// 1.定义一个Chess,它是一个enum，一种是X，一种是O，还有一种是无，你可以使用这个enmm得到title、颜色
+// 2.定义一个Grid，它是一个struct，它有column、row、chess属性
+// 3. 使用 bord : [[Grid]] 存储棋盘，你需要写一个showBord帮你随时查看棋盘
+// 4. putChess(bord:[[Grid]],chess:Chess,column,row) -&gt; Bool ，返回如果是false，哪就代表这个位置不能下到一个棋
+// 5. isGameOver(bord:[[Grid]]) -&gt; Bool检查有没有人赢了比赛或所有的格子都满了
+
+enum Chess{
+    case chessX
+    case chessO
+    case chessN
+    
+    func getColor()-&gt;String{
+        switch self{
+        case .chessX:
+            return "red"
+        case .chessO:
+            return "yellow"
+        default:
+            return "clear"
+        }
+    }
+    
+    func getChessTitle()-&gt;String{
+        switch self{
+        case .chessX:
+            return "X"
+        case .chessO:
+            return "O"
+        default:
+            return " "
+        }
+    }
+    
+    func getShowString()-&gt;String{
+        return "\(getChessTitle())/\(getColor())"
+    }
+}
+
+struct Grid{
+    var chess: Chess
+    var row: Int
+    var col: Int
+    
+}
+
+func genBoard(_ high: Int, _ width: Int)-&gt;[[Grid]]{
+    var board = [[Grid]]()
+    for j in 0...width-1{
+        var col = [Grid]()
+        for i in 0...high-1{
+            col += [Grid(chess: chessN, row: i, col: j)]
+        }
+        board.append(col)
+    }
+    return board
+}
+
+func check3(_ array:[Grid])-&gt;Bool{
+    var count = 0
+    var first = array.first!.chess.getChessTitle()
+    // print("\(first)")
+    for i in array{
+        if i.chess.getChessTitle() == first{
+            count += 1
+            if count == 3 &amp;&amp; first != " "{
+                return true
+            }
+        }else{
+            first = i.chess.getChessTitle()
+            count = 1
+        }
+    }
+    return false
+}
+
+// var chessN : Chess = .chessN
+// var chessX : Chess = .chessX
+// var chessO : Chess = .chessO
+// var array=[Grid]()
+// for i in 0...2{
+//   array.append(Grid(chess: chessO, row: i, col: 0))
+// }
+// print(check3(array))
+
+
+
+func check3Two(_ array:[Grid])-&gt;Bool{
+    var count = 0
+    let first = array.first!.chess.getChessTitle()
+    for i in array{
+        if i.chess.getChessTitle() == first{
+            count += 1
+            if count == 3 &amp;&amp; first != " "{
+                return true
+            }
+        }
+    }
+    return false
+}
+
+func showBoard(_ board:[[Grid]])-&gt;String{
+    let columNumber = board.count
+    let rowNumber = board[0].count
+    var b = "  0"
+    for i in 1..&lt;columNumber{
+        b += " \(i)"
+    }  
+    b += "\n"
+    for i in 0..&lt;rowNumber{
+        b += "\(i)"
+        for j in 0..&lt;columNumber{
+            b += " \(board[j][i].chess.getChessTitle())"
+        }
+        b += "\n"
+    }
+    return b
+}
+
+func putChess(_ board:[[Grid]], _ row: Int, _ col:Int)-&gt;Bool{
+    if row &gt; 0 &amp;&amp; row &lt; 4 &amp;&amp; col &gt; 0 &amp;&amp; col &lt; 4{
+        if board[col-1][row-1].chess.getChessTitle() == " "{
+            return true
+        }
+    }
+    return false
+}
+
+
+func check3Vertical(_ board:[[Grid]])-&gt;Bool{
+    for i in board{
+        if check3(i){
+            return true
+        }
+    }  
+    // var col = [Grid]()
+    // col = board[y]
+    // // print(col)
+    // if check3(col){
+    //   return true
+    // }
+    return false
+}
+
+func check3Horizontal(_ board:[[Grid]])-&gt;Bool{
+    for i in 0..&lt;board.count{
+        var row = [Grid]() 
+        for j in board{
+            row.append(j[i])
+        }
+        if check3(row){
+            return true
+        }
+    }
+    // var row = [Grid]()
+    // for i in board{
+    //   row.append(i[x])
+    // }
+    // // print(row)
+    // if check3(row){
+    //   return true
+    // }
+    return false
+}
+
+func check3Diagonal(_ board:[[Grid]])-&gt;Bool{
+    
+    var diagonalULLR = [Grid]()
+    for i in 0..&lt;board.count{
+        diagonalULLR.append(board[i][i])          
+    }
+    if check3(diagonalULLR){
+        return true
+    }
+    
+    
+    var diagonalLLUR = [Grid]()
+    for i in 0..&lt;board.count{
+        diagonalLLUR.append(board[i][2-i])
+    }
+    if check3(diagonalLLUR){
+        return true
+    }
+    
+    return false
+}
+
+func isEmpty(_ grid: Grid)-&gt;Bool{
+    if grid.chess.getChessTitle() == " "{
+        return true
+    }
+    return false
+}
+
+func isHavingEmptyGrid(_ board: [[Grid]])-&gt;Bool{
+    for i in board{
+        for j in i{
+            if isEmpty(j) {
+                return true 
+            }
+        }
+    }
+    return false
+}
+
+func dropChess(_ board: [[Grid]], _ chess: Chess, _ x: Int, _ y: Int )-&gt;[[Grid]]{
+    let grid = board[y-1][x-1]
+    var newBoard = board
+    if isEmpty(grid) {
+        newBoard[y-1][x-1] = Grid(chess: chess, row: x, col: y)
+    }
+    return newBoard
+}
+
+func isGameOver(_ board: [[Grid]])-&gt;Bool{
+    if check3Vertical(board){
+        // print(1)
+        return true
+    }
+    if check3Horizontal(board){
+        // print(2)
+        return true
+    }
+    if check3Diagonal(board){
+        // print(3)
+        return true
+    }
+    if isHavingEmptyGrid(board) == false{
+        // print(4)
+        return true
+    }
+    return false
+}
+
+var chessN : Chess = .chessN
+var chessX : Chess = .chessX
+var chessO : Chess = .chessO
+var board = genBoard(3, 3)
+board = dropChess(board, chessO, 1, 1)
+board = dropChess(board, chessO, 2, 1)
+board = dropChess(board, chessO, 3, 3)
+board = dropChess(board, chessX, 2, 2)
+board = dropChess(board, chessX, 1, 3)
+board = dropChess(board, chessX, 3, 1)
+print(showBoard(board))
+print(isGameOver(board))
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 5281}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 252}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</string>
+</dict>
+</plist>
