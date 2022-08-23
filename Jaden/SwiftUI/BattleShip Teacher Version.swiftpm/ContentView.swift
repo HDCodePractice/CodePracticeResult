@@ -103,11 +103,11 @@ struct ContentView: View {
     func checkTap(grid: Grid)->Int{
         for i in 0..<ships.count{
             if ships[i].contains([grid.x,grid.y]){
-                if players() == 1{
-                    p1score += 1
-                }else{
-                    p2score += 1
-                }
+                //                if players() == 1{
+                //                    p1score += 1
+                //                }else{
+                //                    p2score += 1
+                //                }
                 return i+1
             }
         }
@@ -124,13 +124,12 @@ struct ContentView: View {
                 Text("Player two is clicking")
                     .font(.largeTitle)
             }
-            HStack{
-                Text("Player One Score: \(p1score) ")
-                    .font(.largeTitle)
-                
-                Text("Player Two Score: \(p2score)")
-                    .font(.largeTitle)
-            }
+//            Text("Player One Score: \(p1score) ")
+//                .font(.largeTitle)
+//            
+//            Text("Player Two Score: \(p2score)")
+//                .font(.largeTitle)
+//            
             ForEach(board,id:\.self){ row in
                 HStack{
                     ForEach(row){ grid in
@@ -156,4 +155,5 @@ struct ContentView: View {
         }
     }
 }
+
 
