@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import SwiftUI
+
+
+    func genChessBoard()-&gt;[[String]]{
+        var board : [[String]] = []
+        for i in 0...9{
+            var row = [String]()
+            for j in 0...8{
+                row.append("--")
+            }
+            board.append(row)
+        }
+        return board
+    }
+    
+    var chessBoard = genChessBoard()
+    var chessName : [String] = ["炮","炮","俥","傌","傌","俥","车","车","马","马"]
+    var chessRow : [Int] = [7,7,9,9,9,9,0,0,0,0]
+    var chessColumn : [Int] = [1,7,0,1,7,8,0,8,1,7]
+    
+    for i in 0...4{
+    
+    chessName.append("兵")
+    chessRow.append(6)
+    chessColumn.append(i*2)
+    }
+    for i in 0 ... 4{
+    chessName.append("卒")
+    chessRow.append(3)
+    chessColumn.append(i*2)
+    }
+    
+    for i in 0..&lt;chessName.count{
+    //    show("\(i) \(chessName[i]) \(chessRow[i]) \(chessColumn[i])")
+    chessBoard[chessRow[i]][chessColumn[i]]=chessName[i]
+    }
+    
+    var data : String  = ""
+    for subarray in chessBoard{
+    data += "\n"
+    for i in subarray{
+    data += i
+    }
+    }
+    show(data)
+func moveHorse(from: [Int], To: [Int]) -&gt; Bool{
+    var answer : Bool = false
+    for i in 0 ... 9{ 
+        
+        if chessName[i] == "马" || chessName[i] == "傌"{
+            print("0")
+            if chessRow[i] == from[0] &amp;&amp; chessColumn[i] == from[1]{
+                print("1")
+                var posFrom = (from[0]*10)+from[1]
+                var posTo = (To[0]*10)+To[1]
+                if posTo &lt; 91{
+                    if posFrom &gt; posTo{
+                        if posFrom - posTo == 12 || posFrom - posTo == 21 || posFrom - posTo == 19 || posFrom - posTo == 8{
+                            return true
+                            print("hi")
+                            
+                        }
+                    }
+                    if posFrom &lt; posTo{
+                        if posTo - posFrom == 12 || posTo - posFrom == 21 || posTo - posFrom == 19 || posTo - posFrom == 8 {
+                            return true
+                            print("hi")
+                            
+                        }
+                    }
+                }
+        }
+    }
+}
+    return false
+}
+
+print(moveHorse(from: [0,2], To: [2,3]))
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 2194}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 253}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</string>
+</dict>
+</plist>

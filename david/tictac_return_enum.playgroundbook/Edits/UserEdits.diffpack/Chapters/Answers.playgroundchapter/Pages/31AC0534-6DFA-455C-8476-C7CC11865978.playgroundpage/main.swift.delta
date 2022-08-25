@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseFile</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Template.playgroundpage/main.swift</string>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>
+enum Student {
+    case Name(String)
+    case Mark(Int,Int,Int)
+}
+
+var studDetails = Student.Name("Swift 4")
+var studMarks = Student.Mark(98,97,95)
+
+switch studMarks {
+case .Name(let studName):
+    print("Student name is: \(studName).")
+case .Mark(let Mark1, let Mark2, let Mark3):
+    print("Student Marks are: \(Mark1),\(Mark2),\(Mark3).")
+}
+
+switch studDetails {
+case .Name(let studName):
+    print("Student name is: \(studName).")
+case .Mark(let Mark1, let Mark2, let Mark3):
+    print("Student Marks are: \(Mark1),\(Mark2),\(Mark3).")
+}
+
+enum Chess{
+    case X
+    case O
+    case noChess
+    
+    func getColor()-&gt;String{
+        switch self{
+        case.O:
+            return "red"
+        case.X:
+            return  "green"
+        default:
+            return "clear"
+        }
+    }
+    
+    func getChessTitle()-&gt;String{
+        switch self{
+        case.X:
+            return "X"
+        case.O:
+            return "O"
+        default:
+            return "n"
+        }
+    }
+    
+    func getShowString()-&gt;String{
+        return "\(getChessTitle())/\(getColor())"
+    }
+    
+    func next()-&gt;Chess{
+        switch self{
+        case .O:
+            return .X
+        case .X:
+            return .noChess
+        default:
+            return .O
+        }
+    }
+    
+}
+
+enum GameResults:Int{
+    case F = 1
+    case T
+    case Deuce
+    
+    func getResults()-&gt;String{
+        switch self{
+        case.F:
+            return "False"
+        case.T:
+            return "True"
+        default:
+            return "Deuce"
+        }
+    }
+}
+</string>
+			<key>ModifiedRange</key>
+			<string>{242, 1548}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{242, 0}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

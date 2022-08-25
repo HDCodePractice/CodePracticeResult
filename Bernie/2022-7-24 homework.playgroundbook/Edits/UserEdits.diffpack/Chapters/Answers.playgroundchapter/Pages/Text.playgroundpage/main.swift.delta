@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>func step(_ col: [String], _ check: String)-&gt;[String]{
+    if !(col.contains("n")){
+        print("这里没有空位啦~")
+        return col
+    }
+    var result = col
+    for i in 0...col.count-1{
+        if result[col.count-1-i] == "n"{
+            result[col.count-1-i] = check
+            break
+        }
+    }
+    return result
+}
+
+// let col = ["n","n","n","y","r"]
+// let checker = "y"
+// print("\(step(col, checker))")
+
+// func genBoard(_ high: Int, _ width: Int)-&gt;[[String]]{
+//   let col = Array(repeating: "n", count: high)
+//   let board = Array(repeating: col, count: width)
+//   return board
+// }
+
+func genBoard(_ high: Int, _ width: Int)-&gt;[[String]]{
+    var col = [String]()
+    var board = [[String]]()
+    for _ in 1...high{
+        col += ["n"]// col.append("n")
+    }
+    for _ in 1...width{
+        board.append(col)
+    }
+    return board
+}
+
+// let high = 3
+// let width = 2
+// print("\(genBoard(high, width))").
+
+func dropChecker(_ board: [[String]],_ check: String ,_ colNum: Int)-&gt;[[String]]{
+    var col = board[colNum-1]
+    var newBoard = board
+    col = step(col, check)
+    newBoard[colNum-1]=col
+    return newBoard
+}
+
+let board = genBoard(3, 3)
+let check = "y"
+let colNum = 2
+print("\(dropChecker(board, check, colNum))")
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 1241}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 253}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</string>
+</dict>
+</plist>
