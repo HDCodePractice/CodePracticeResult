@@ -1,24 +1,26 @@
 import SwiftUI
 import MapKit
 
+
+// Now using LineView.swift
 struct ShowAnnotationItem: View {
     @State var vm = showAnnotationViewItemsViewModel()
+    var annotations : [AnnotationItem]
     
     var body: some View {
-        Map(coordinateRegion: $vm.region, annotationItems: vm.annotationItems) { item in
+        Map(coordinateRegion: $vm.region, annotationItems: annotations) { item in
             //MapMarker(coordinate: item.coordinate,tint:item.color)
             MapAnnotation(coordinate: item.coordinate) { 
                 Image(systemName: "bicycle.circle.fill")
                     .foregroundColor(item.color)
             }
         }
-        let _ = print(vm.annotationItems)
     }
 }
 
 struct ShowAnnotationItem_Previews: PreviewProvider {
     static var previews: some View {
-        ShowAnnotationItem()
+        ShowAnnotationItem(annotations: [AnnotationItem(coordinate: CLLocationCoordinate2D(latitude: 43.91402248496052, longitude: -79.44344087901682), color: .blue)])
     }
 }
 
