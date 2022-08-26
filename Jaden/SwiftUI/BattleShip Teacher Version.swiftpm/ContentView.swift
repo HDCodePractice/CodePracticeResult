@@ -48,7 +48,7 @@ struct ContentView: View {
         
         for _ in 1...shipsNumber{
             // H
-            if [0,1].randomElement()==0{
+            if Int.random(in: 0...1)==0{
                 var startX : Int = Int.random(in: 0...width-shipCount)
                 var startY : Int = Int.random(in: 0...height-1)
                 var ship : [[Int]] = [[startX,startY]]
@@ -72,7 +72,10 @@ struct ContentView: View {
                 for _ in 1...shipCount{
                     startX += 1
                     ship.append([startX,startY])
+                    print(ship)
                     collision.append([startX,startY])
+                    print("====")
+                    print("====\(collision)")
                 }
                 ships.append(ship)
             }else{ // V
@@ -99,7 +102,10 @@ struct ContentView: View {
                 for _ in 1...shipCount{
                     startY += 1
                     ship.append([startX,startY])
+                    print(ship)
                     collision.append([startX,startY])
+                    print("====")
+                    print("====\(collision)")
                 }
                 ships.append(ship)
             }
@@ -111,11 +117,12 @@ struct ContentView: View {
     func checkTap(grid: Grid)->Int{
         for i in 0..<ships.count{
             if ships[i].contains([grid.x,grid.y]){
-                                if players() == 1{
-                                    p1score += 1
-                                }else{
-                                    p2score += 1
-                                }
+                players()
+                if players() == 1{
+                    p1score += 1
+                }else{
+                    p2score += 1
+                }
                 return i+1
             }
         }
@@ -148,7 +155,7 @@ struct ContentView: View {
                         }
                         .onTapGesture {
                             var piece = grid
-                            
+                            players()
                             piece.shipPiece = checkTap(grid: grid)
                             board[grid.x][grid.y]=piece
                         }
