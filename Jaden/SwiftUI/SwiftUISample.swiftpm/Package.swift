@@ -8,13 +8,13 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "My App",
+    name: "SwiftUI Sample",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "My App",
+            name: "SwiftUI Sample",
             targets: ["AppModule"],
             displayVersion: "1.0",
             bundleVersion: "1",
