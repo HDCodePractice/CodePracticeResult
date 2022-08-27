@@ -11,7 +11,7 @@ struct ContentView: View {
                     TextDateStyleSample()
                 }
                 NavigationLink("TextFontSample"){
-                    TextDateStyleSample()
+                    TextFontSample()
                 }
                 NavigationLink("VStackSample"){
                     VStackSampleView()
