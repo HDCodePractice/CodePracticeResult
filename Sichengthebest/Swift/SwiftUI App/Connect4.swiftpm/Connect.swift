@@ -3,6 +3,8 @@ import SwiftUI
 struct GridItem: Identifiable,Hashable {
     var id = UUID()
     var connect: Connect
+    var column : Int
+    var row : Int
 }
 
 enum Connect {
