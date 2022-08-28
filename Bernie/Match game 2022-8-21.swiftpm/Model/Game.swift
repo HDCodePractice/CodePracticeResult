@@ -42,8 +42,8 @@ struct Game{
     
     mutating func flip(grid:Grid)->[[Grid]]{
         if lastGrid == nil{
-            lastGrid = board[grid.x][grid.y]
             board[grid.x][grid.y].symbol.isFlipped = true
+            lastGrid = board[grid.x][grid.y]
             return board
         }else{
             if board[grid.x][grid.y].canFlip(){
