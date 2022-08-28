@@ -41,20 +41,26 @@ struct Game{
     
     
     mutating func flip(grid:Grid)->[[Grid]]{
-        if board[grid.x][grid.y].canFlip(){
+        if lastGrid == nil{
+            lastGrid = board[grid.x][grid.y]
             board[grid.x][grid.y].symbol.isFlipped = true
-            if board[grid.x][grid.y].symbol.name == lastGrid!.symbol.name && lastGrid!.symbol.isFlipped {
-                return board
-            }
-            if board[grid.x][grid.y].symbol.name != lastGrid!.symbol.name && lastGrid!.symbol.isFlipped{
-                lastGrid!.symbol.isFlipped = false
-                board[grid.x][grid.y].symbol.isFlipped = false
-                lastGrid = board[grid.x][grid.y]
-                return board
-            }
-            if lastGrid!.symbol.isFlipped == false{
-                lastGrid = board[grid.x][grid.y]
-                return board
+            return board
+        }else{
+            if board[grid.x][grid.y].canFlip(){
+                board[grid.x][grid.y].symbol.isFlipped = true
+                if board[grid.x][grid.y].symbol.name == lastGrid!.symbol.name && lastGrid!.symbol.isFlipped {
+                    return board
+                }
+                if board[grid.x][grid.y].symbol.name != lastGrid!.symbol.name && lastGrid!.symbol.isFlipped{
+                    lastGrid!.symbol.isFlipped = false
+                    board[grid.x][grid.y].symbol.isFlipped = false
+                    lastGrid = board[grid.x][grid.y]
+                    return board
+                }
+                if lastGrid!.symbol.isFlipped == false{
+                    lastGrid = board[grid.x][grid.y]
+                    return board
+                }
             }
         }
         return board

@@ -19,11 +19,8 @@ struct ContentView: View {
                                     .foregroundColor(.yellow) 
                                     .padding()
                             }
-                            .onTapGesture {
-                                game.board = game.flip(grid: grid)
-                            }
+                            .onTapGesture {game.board = game.flip(grid: grid)}
                         }
-                        
                     }
                 }
             }
