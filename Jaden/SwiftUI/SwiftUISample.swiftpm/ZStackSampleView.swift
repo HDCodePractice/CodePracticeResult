@@ -1,55 +1,81 @@
 import SwiftUI
 
 struct ZStackSampleView: View {
-    @State var alignment : HorizontalAlignment = .center
+    @State var alignment : Alignment = .center
+    @State var diceNumber = 1
     var body: some View {
         VStack{
-            ZStack{
+            ZStack(alignment: .topLeading){
                 RoundedRectangle(cornerRadius: 20)
                     .fill(.red)
                     .frame(width: 100, height: 100)
                 RoundedRectangle(cornerRadius: 20)
-                    .fill(.orange)
-                    .frame(width: 70, height: 70)
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(.yellow)
+                    .fill(.white)
                     .frame(width: 35, height: 35)
+                    .padding()
+                ZStack(alignment: .bottomTrailing){
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(.clear)
+                        .frame(width: 100, height: 100)
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(.white)
+                        .frame(width: 35, height: 35)
+                        .padding()
+                }
+                
             }
-            VStack{
-                HStack{
-                    Button("Top Leading"){
-
-                    }.buttonStyle(.borderedProminent)
-                    Button("Top Center"){
-
-                    }.buttonStyle(.borderedProminent)
-                    Button("Top Trailing"){
-
-                    }.buttonStyle(.borderedProminent)
-                }
-                HStack{
-                    Button("Leading"){
+            HStack{
+                Button("1"){
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(.red)
+                        .frame(width: 100, height: 100)
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(.white)
+                        .frame(width: 35, height: 35)
+                }.buttonStyle(.borderedProminent)
+                Button("2"){
+                    withAnimation{
+                        ZStack(alignment: .topLeading){
+                        }
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(.red)
+                            .frame(width: 100, height: 100)
+                        RoundedRectangle(cornerRadius: 20)
+                            .fill(.white)
+                            .frame(width: 35, height: 35)
+                            .padding()
+                        ZStack(alignment: .bottomTrailing){
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(.clear)
+                                .frame(width: 100, height: 100)
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(.white)
+                                .frame(width: 35, height: 35)
+                                .padding()
+                        }
                         
-                    }.buttonStyle(.borderedProminent)
-                    Button("Center"){
-
-                    }.buttonStyle(.borderedProminent)
-                    Button("Trailing"){
-
-                    }.buttonStyle(.borderedProminent)
-                }
-                HStack{
-                    Button("Bottom Leading"){
-
-                    }.buttonStyle(.borderedProminent)
-                    Button("Bottom Center"){
-
-                    }.buttonStyle(.borderedProminent)
-                    Button("BottomTrailing"){
-
-                    }.buttonStyle(.borderedProminent)
-                }
-
+                    }
+                }.buttonStyle(.borderedProminent)
+                Button("3"){
+                    withAnimation{
+                        alignment  = .topTrailing
+                    }
+                }.buttonStyle(.borderedProminent)
+                Button("4"){
+                    withAnimation{
+                        alignment  = .topTrailing
+                    }
+                }.buttonStyle(.borderedProminent)
+                Button("5"){
+                    withAnimation{
+                        alignment  = .topTrailing
+                    }
+                }.buttonStyle(.borderedProminent)
+                Button("6"){
+                    withAnimation{
+                        alignment  = .topTrailing
+                    }
+                }.buttonStyle(.borderedProminent)
             }
         }
     }
