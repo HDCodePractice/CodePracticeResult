@@ -48,16 +48,20 @@ struct ContentView: View {
         
         for _ in 1...shipsNumber{
             // H
-            if [0,1].randomElement()==0{
+            if Int.random(in: 0...1)==0{
                 var startX : Int = Int.random(in: 0...width-shipCount)
                 var startY : Int = Int.random(in: 0...height-1)
                 var ship : [[Int]] = [[startX,startY]]
                 a = 0
                 while a == 0{
+                    if collision.isEmpty == true{
+                        a = 1
+                    }
                     for i in 0..<collision.count{
                         if startX == collision[i][0] && startY == collision[i][1]{
                             startX = Int.random(in: 0...width-shipCount)
                             startY = Int.random(in: 0...height-1)
+                            ship = [[startX,startY]]
                         }else{
                             a = 1
                         }
@@ -68,7 +72,10 @@ struct ContentView: View {
                 for _ in 1...shipCount{
                     startX += 1
                     ship.append([startX,startY])
+                    print(ship)
                     collision.append([startX,startY])
+                    print("====")
+                    print("====\(collision)")
                 }
                 ships.append(ship)
             }else{ // V
@@ -77,10 +84,14 @@ struct ContentView: View {
                 var ship : [[Int]] = [[startX,startY]]
                 a = 0
                 while a == 0{
+                    if collision.isEmpty == true{
+                        a = 1
+                    }
                     for i in 0..<collision.count{
                         if startX == collision[i][0] && startY == collision[i][1]{
                             startX = Int.random(in: 0...width-1)
                             startY = Int.random(in: 0...height-shipCount)
+                            ship = [[startX,startY]]
                         }else{
                             a = 1
                         }
@@ -91,7 +102,10 @@ struct ContentView: View {
                 for _ in 1...shipCount{
                     startY += 1
                     ship.append([startX,startY])
+                    print(ship)
                     collision.append([startX,startY])
+                    print("====")
+                    print("====\(collision)")
                 }
                 ships.append(ship)
             }
@@ -103,6 +117,7 @@ struct ContentView: View {
     func checkTap(grid: Grid)->Int{
         for i in 0..<ships.count{
             if ships[i].contains([grid.x,grid.y]){
+                players()
                 if players() == 1{
                     p1score += 1
                 }else{
@@ -124,13 +139,11 @@ struct ContentView: View {
                 Text("Player two is clicking")
                     .font(.largeTitle)
             }
-            HStack{
-                Text("Player One Score: \(p1score) ")
-                    .font(.largeTitle)
-                
-                Text("Player Two Score: \(p2score)")
-                    .font(.largeTitle)
-            }
+            Text("Player One Score: \(p1score) ")
+                .font(.largeTitle)
+            
+            Text("Player Two Score: \(p2score)")
+                .font(.largeTitle)
             ForEach(board,id:\.self){ row in
                 HStack{
                     ForEach(row){ grid in
@@ -142,7 +155,7 @@ struct ContentView: View {
                         }
                         .onTapGesture {
                             var piece = grid
-                            
+                            players()
                             piece.shipPiece = checkTap(grid: grid)
                             board[grid.x][grid.y]=piece
                         }
@@ -156,4 +169,5 @@ struct ContentView: View {
         }
     }
 }
+
 

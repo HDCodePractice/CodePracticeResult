@@ -8,17 +8,17 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "Battle Ship",
+    name: "SwiftUI Sample",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "Battle Ship",
+            name: "SwiftUI Sample",
             targets: ["AppModule"],
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .boat),
+            appIcon: .placeholder(icon: .smiley),
             accentColor: .presetColor(.mint),
             supportedDeviceFamilies: [
                 .pad,
