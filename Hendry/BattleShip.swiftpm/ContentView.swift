@@ -10,6 +10,7 @@ struct Grid : Identifiable,Hashable{
 struct ContentView: View {
     let width = 10
     let height = 10
+    @State var playernumber = 0
     @State var shipsNumber = 5
     let shipColors : [Color] = [.clear,.red,.gray,.blue,.cyan,.green,.mint,.yellow,.indigo,.orange,.brown]
     @State var ships : [[[Int]]] = [[[0,0],[0,1]],[[1,1],[2,1],[3,1]],[[5,0],[5,1],[5,2],[5,3],[5,4],[5,5]]]
@@ -68,6 +69,11 @@ struct ContentView: View {
     }
     var body: some View {
         VStack{
+            if playernumber%2==0{
+                Text("Player A's move")
+            }else{
+                Text("Player B's move")
+            }
             ForEach(board,id:\.self){ row in
                 HStack{
                     ForEach(row){ grid in
@@ -81,6 +87,7 @@ struct ContentView: View {
                             var piece = grid
                             piece.shipPiece = checkTap(grid: grid)
                             board[grid.x][grid.y]=piece
+                            playernumber+=1
                         }
                     }
                 }
