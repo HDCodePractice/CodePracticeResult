@@ -8,7 +8,7 @@ struct Grid : Identifiable,Hashable{
 }
 
 struct ContentView: View {
-    let width = 10
+    let width = 10 
     let height = 10
     let shipsNumber = 10  
     @State var b = 0
