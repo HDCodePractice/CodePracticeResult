@@ -12,7 +12,7 @@ class LocationManager: NSObject,ObservableObject{
         }
         return location.coordinate
     }
-    var placeList: [AnnotationItem] = []
+    var placeList: [AnnotationItem] = [AnnotationItem(coordinate: CLLocationCoordinate2D(latitude: 43.9139270513879,longitude: -79.4366317), color: .blue),AnnotationItem(coordinate: CLLocationCoordinate2D(latitude: 43.9239270513879,longitude: -79.4466317), color: .blue),AnnotationItem(coordinate: CLLocationCoordinate2D(latitude: 43.939284,longitude: -79.4366317), color: .blue),AnnotationItem(coordinate: CLLocationCoordinate2D(latitude: -43.939284,longitude: -179.4366317), color: .blue)]
     var totalDistance: Double = 0
     var currentSpeed: Double = 0
     
