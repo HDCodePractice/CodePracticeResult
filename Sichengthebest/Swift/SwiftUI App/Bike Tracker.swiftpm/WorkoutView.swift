@@ -4,6 +4,7 @@ import MapKit
 struct WorkoutView: View {
     @State var vm = showAnnotationViewItemsViewModel()
     @State var isRunning = false
+    @State var isStarted = false
     @State var progressTime = 0
     // Initializes timer
     let myTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -25,12 +26,15 @@ struct WorkoutView: View {
                 center: LocationManager.currentLocation, span: MKCoordinateSpan(
                     latitudeDelta: 0.05, longitudeDelta: 0.05
                 )
-            ))
+            ), ended: isStarted)
             HStack {
                 // Resume/Pause button
                 Button(action: {
                     isRunning.toggle()
+                    isStarted = true
                     LocationManager.shared.placeList.append(AnnotationItem(coordinate: LocationManager.currentLocation, color: .green))
+                    
+                    let _ = print(LocationManager.shared.placeList)
                 }) {
                     ButtonView(text: isRunning ? "Pause" : "Resume",color: isRunning ? .yellow : .green)
                 }
@@ -39,6 +43,7 @@ struct WorkoutView: View {
                     LocationManager.shared.placeList = []
                     progressTime = 0
                     isRunning = false
+                    isStarted = false
                 }) {
                     ButtonView(text: "End",color: .red)
                 }
