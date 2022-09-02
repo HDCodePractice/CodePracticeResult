@@ -5,6 +5,7 @@ enum GameState{
     case Countinue
     
     func getTitle()->String{
+        print("hello world two!")
         switch self{
         case .Won:
             return "赢了"
