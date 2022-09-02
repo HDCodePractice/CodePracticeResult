@@ -4,6 +4,7 @@ import MapKit
 struct MapView: UIViewRepresentable {
     let lineAnnotations: [AnnotationItem]
     let region: MKCoordinateRegion
+    let ended: Bool
     var lineCoordinates: [CLLocationCoordinate2D] {
         var tempCoords: [CLLocationCoordinate2D] = []
         for annotation in lineAnnotations {
@@ -18,13 +19,27 @@ struct MapView: UIViewRepresentable {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
         mapView.setRegion(region, animated: true)
+        mapView.showsUserLocation = true
         let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
         mapView.addOverlay(polyline)
         return mapView
     }
     
-    // We don't need to worry about this as the view will never be updated.
-    func updateUIView(_ view: MKMapView, context: Context) {}
+    // We DO need to worry about this as the view WILL be updated.
+    func updateUIView(_ view: MKMapView, context: Context) {
+        view.region = region
+        let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
+        view.addOverlay(polyline)
+        if !ended {
+            let overlays = view.overlays 
+            for overlay in overlays {
+                // remove all MKPolyline-Overlays
+                if overlay is MKPolyline {
+                    view.removeOverlay(overlay)
+                }
+            }
+        }
+    }
     
     // Link it to the coordinator which is defined below.
     func makeCoordinator() -> Coordinator {
