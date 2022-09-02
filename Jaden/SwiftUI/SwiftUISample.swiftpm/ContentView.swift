@@ -16,6 +16,15 @@ struct ContentView: View {
                 NavigationLink("VStackSample"){
                     VStackSampleView()
                 }
+                NavigationLink("ZStackSample"){
+                    ZStackSampleView()
+                }
+                NavigationLink("DiceSample"){
+                    DiceSampleView()
+                }
+                NavigationLink("WithAnimationSample"){
+                    WithAnimationView()
+                }
             }
         }
     }
