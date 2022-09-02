@@ -8,18 +8,18 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "SwiftUI sample",
+    name: "我的 App",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "SwiftUI sample",
+            name: "我的 App",
             targets: ["AppModule"],
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .location),
-            accentColor: .presetColor(.indigo),
+            appIcon: .placeholder(icon: .map),
+            accentColor: .presetColor(.blue),
             supportedDeviceFamilies: [
                 .pad,
                 .phone
