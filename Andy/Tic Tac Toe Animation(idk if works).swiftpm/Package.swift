@@ -8,18 +8,18 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "Zwivt UY Zampol",
+    name: "Tic Tac better Toe",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "Zwivt UY Zampol",
+            name: "Tic Tac better Toe",
             targets: ["AppModule"],
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .beachball),
-            accentColor: .presetColor(.orange),
+            appIcon: .placeholder(icon: .bird),
+            accentColor: .presetColor(.blue),
             supportedDeviceFamilies: [
                 .pad,
                 .phone
