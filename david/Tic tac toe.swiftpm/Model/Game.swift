@@ -31,6 +31,7 @@ struct Game{
             grid = board[grid.x][grid.y]
             currentPlayer = currentPlayer.nextPlayer()
             
+            
             if isGameOver(grid: board[grid.x][grid.y]){
                 gameState = .Win
                 

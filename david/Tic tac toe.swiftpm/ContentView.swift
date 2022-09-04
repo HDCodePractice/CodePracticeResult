@@ -19,30 +19,24 @@ struct ContentView: View {
                             
                             ZStack{
                                 Rectangle()
-                                //                                .fill(.gray)
+//                                                                .fill(.gray)
                                 Image(systemName: grid.chess.getImage())
                                     .resizable()
                                     .scaledToFit()
                                 //                            .frame(width:30)
                                     .foregroundColor(grid.chess.getColor())
-                                
                             }
                             .onTapGesture {
                                 if game.gameState.getTitle() != "win"{
                                     game.putChess(grid: grid) 
                                 }
-                                
                             }
-                            
                         }
                     }
-                    
                 }
-                
-                
             }
-            Button
-            {game.startGame()
+            Button{
+                game.startGame()
                 
             }label:{
                 Text("Restart")

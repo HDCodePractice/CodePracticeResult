@@ -1,20 +1,47 @@
 import SwiftUI
+import Foundation
 
 struct ContentView: View {
     @State var game = Game()
+    @State var disMark = true
     
     var body: some View {
-        VStack {
-            ForEach((0...game.width),id:\.self){row in 
-                Rectangle()
-            }
+        VStack(spacing:1) {
+            
             HStack{
-                ForEach((0...game.hight),id:\.self){grid in 
-                    Rectangle()
+                Text("Current Player:")
+                //                Image(systemName: game.currentPlayer.getImage())
+                //                    .foregroundColor(game.currentPlayer.getColor())
+                Text("Game State:")
+            }
+            ForEach(game.board,id:\.self){row in 
+                HStack(spacing:1){
+                    
+                    ForEach(row,id:\.self){ grid in
+                        ZStack{
+                            Rectangle()
+                                .fill(.yellow)
+                            Image(systemName: game.showBoard[grid.x][grid.y].pics)
+                                .resizable()
+                                .scaledToFit()
+                        }
+                        .onTapGesture {
+                            game.showPics(grid: grid)
+                        }   
+                    }
                 }
             }
-            
         }
+        Button{
+            
+            game.startGame()
+        }label:{
+            Text("Restart")
+                .font(.largeTitle)
+        }
+        .buttonStyle(.borderedProminent)
+        .padding()
     }
+    
 }
 

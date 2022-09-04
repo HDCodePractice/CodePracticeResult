@@ -11,33 +11,34 @@ struct ContentView: View {
             
             HStack{
                 Rectangle()
+//                    .fill(.red)
             }
             
-//            ForEach(game.board,id:\.self){ row in
-//                HStack(spacing:1){
-//                    ForEach(row){ grid in
-//                        ZStack{
-//                            Rectangle()
-//                                .fill(.gray)
-//                            Image(systemName: grid.pics)
-//                                .resizable()
-//                                .scaledToFit()
-//                                .foregroundColor(.blue)
-//                        }
-//                        
-//                    }
-//                }
-//            }
-//            Button{
-//                game.startGame()
-//                
-//            }label:{
-//                Text("Restart").font(.largeTitle)
-//            }
+            ForEach(game.board,id:\.self){ row in
+                HStack(spacing:1){
+                    ForEach(row){ grid in
+                        ZStack{
+                            Rectangle()
+                                .fill(.gray)
+                            Image(systemName: grid.pics)
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundColor(.blue)
+                        }
+                        
+                    }
+                }
+            }
+            Button{
+                game.startGame()
+                
+            }label:{
+                Text("Restart").font(.largeTitle)
+            }
             
-//            buttonStyle(.borderedProminent)
+            buttonStyle(.borderedProminent)
         }
-//        .padding()
+        .padding()
         
     }
     

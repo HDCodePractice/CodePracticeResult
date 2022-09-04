@@ -5,4 +5,5 @@ struct Grid: Hashable,Identifiable{
     var pics:String
     var x:Int
     var y:Int
+    
 }
