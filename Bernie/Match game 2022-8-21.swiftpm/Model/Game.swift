@@ -6,7 +6,7 @@ struct Game{
     var lastGrid : Grid?
     let width = 5
     let hight = 4
-    let nameArray = ["0.circle","1.circle","2.circle","3.circle","4.circle","5.circle","6.circle","7.circle","8","9.circle"]
+    let nameArray = ["0.circle","1.circle","2.circle","3.circle","4.circle","5.circle","6.circle","7.circle","8.circle","9.circle"]
     
     func genArray(_ nameArray:[String])->[Symbol]{
         var array = [Symbol]()
@@ -65,6 +65,16 @@ struct Game{
         }
         return board
     }
+    
+    func isShowGridSymbol(grid: Grid)->String{
+        if grid.symbol.isFlipped{
+            return grid.symbol.name
+        }
+        return ""
+    }
+    
+    
+    
     
     
     func isGameOver()->Bool{
