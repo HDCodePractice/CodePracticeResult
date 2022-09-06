@@ -62,12 +62,10 @@ struct ContentView: View {
         }
         .padding()
     }
-    func ifWin(check:[[Int]])->Bool{
-        ForEach(0..<check.count,id:\.self){row in
-            ForEach(0..<check.count,id:\.self){column in
-                if check[row][column]{
-                    
-                }
+    func ifWin(check:[[Int]])->Int{
+        for i in 0...check.count-1{
+            if (check[0][i]==check[1][i]&&check[2][i]==check[1][i])||(check[i][0]==check[i][1]&&check[i][1]==check[i][[2]])||(check[0][0]==check[1][1]&&check[2][2]==check[1][1])||(check[2][0]==check[1][1]&&check[0][2]==check[1][1]){
+                return 
             }
         }
     }
