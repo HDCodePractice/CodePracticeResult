@@ -1,12 +1,9 @@
 import SwiftUI
 
-struct ContentView: View {
+
+struct UmView: View {
     @State var board = [[0,0,0],[0,0,0],[0,0,0]]
     @State var isFirst = true
-    @State var playerWin = 0
-    
-    
-    
     var body: some View {
         VStack{
             HStack{
@@ -55,23 +52,6 @@ struct ContentView: View {
                         }
                     }
                 }
-                if playerWin == 0{
-                    withAnimation(.linear(duration: 2)){
-                        HStack{
-                            Text("Player")
-                            Image(systemName: "circle")
-                            Text("WON")
-                        }
-                    }
-                } else if playerWin == 1{
-                    withAnimation(.linear(duration: 2)){
-                        HStack{
-                            Text("Player")
-                            Image(systemName: "pencil.slash")
-                            Text("WON")
-                        }
-                    }
-                }
             }
             Button("Restart Game"){
                 withAnimation(.linear(duration: 2)) { 
@@ -81,5 +61,10 @@ struct ContentView: View {
             }
         }
         .padding()
+    }
+}
+struct UmView_Previews: PreviewProvider {
+    static var previews: some View {
+        UmView()
     }
 }
