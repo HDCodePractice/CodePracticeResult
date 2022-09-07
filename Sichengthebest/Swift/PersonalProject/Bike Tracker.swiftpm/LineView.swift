@@ -27,7 +27,6 @@ struct MapView: UIViewRepresentable {
     
     // We DO need to worry about this as the view WILL be updated.
     func updateUIView(_ view: MKMapView, context: Context) {
-        view.region = region
         let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
         view.addOverlay(polyline)
         if !ended {

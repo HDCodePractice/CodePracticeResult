@@ -18,7 +18,7 @@ let package = Package(
             targets: ["AppModule"],
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .bicycle),
+            appIcon: .asset("AppIcon"),
             accentColor: .presetColor(.red),
             supportedDeviceFamilies: [
                 .pad,

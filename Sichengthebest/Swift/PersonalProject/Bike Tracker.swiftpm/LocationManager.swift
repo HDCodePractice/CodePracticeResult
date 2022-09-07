@@ -33,10 +33,9 @@ extension LocationManager: CLLocationManagerDelegate{
             if placeList.count > 0 {
                 if let placeListLast = placeList.last {
                     currentSpeed = location.speed
-                    let twodLocation: CLLocationCoordinate2D = location.coordinate
                     if checkCloseCoord(coord1: location.coordinate, coord2: placeListLast.coordinate) {
                         placeList.append(AnnotationItem(coordinate: location.coordinate, color: .blue))
-                        totalDistance += calculateDistance(alat: placeListLast.coordinate.latitude, along: placeListLast.coordinate.longitude, blat: twodLocation.latitude, blong: twodLocation.longitude)
+                        totalDistance += calculateDistance(alat: placeListLast.coordinate.latitude, along: placeListLast.coordinate.longitude, blat: location.coordinate.latitude, blong: location.coordinate.longitude)
                         print(placeListLast,placeList.last as Any)
                     }
                 }

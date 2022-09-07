@@ -19,7 +19,7 @@ struct WorkoutView: View {
                         progressTime += 1
                     }
                 }
-            Label("Average speed: \(String(format: "%.1f",LocationManager.shared.totalDistance / 1000 / 3600 * Double(progressTime))) kph\nCurrent speed: \(String(format: "%.1f",LocationManager.shared.currentSpeed)) kph", systemImage: "speedometer")
+            Label("Average speed: \(String(format: "%.1f",LocationManager.shared.totalDistance / 1000 * 3600 / Double(progressTime))) kph\nCurrent speed: \(String(format: "%.1f",LocationManager.shared.currentSpeed)) kph", systemImage: "speedometer")
                 .font(.system(size: 25))
             Text("Annotations: \(LocationManager.shared.placeList.count)")
             MapView(lineAnnotations: LocationManager.shared.placeList, region: MKCoordinateRegion(
@@ -33,8 +33,6 @@ struct WorkoutView: View {
                     isRunning.toggle()
                     isStarted = true
                     LocationManager.shared.placeList.append(AnnotationItem(coordinate: LocationManager.currentLocation, color: .green))
-                    
-                    let _ = print(LocationManager.shared.placeList)
                 }) {
                     ButtonView(text: isRunning ? "Pause" : "Resume",color: isRunning ? .yellow : .green)
                 }
