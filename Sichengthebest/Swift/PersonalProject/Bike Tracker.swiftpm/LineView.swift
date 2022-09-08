@@ -2,17 +2,9 @@ import SwiftUI
 import MapKit
 
 struct MapView: UIViewRepresentable {
-    let lineAnnotations: [AnnotationItem]
+    let lineCoordinates: [CLLocationCoordinate2D]
     let region: MKCoordinateRegion
     let ended: Bool
-    var lineCoordinates: [CLLocationCoordinate2D] {
-        var tempCoords: [CLLocationCoordinate2D] = []
-        for annotation in lineAnnotations {
-            tempCoords.append(annotation.coordinate)
-        }
-        return tempCoords
-    }
-    
     
     // Create the MKMapView using UIKit.
     func makeUIView(context: Context) -> MKMapView {

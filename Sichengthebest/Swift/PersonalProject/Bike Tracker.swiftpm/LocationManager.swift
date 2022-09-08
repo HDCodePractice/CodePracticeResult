@@ -12,7 +12,7 @@ class LocationManager: NSObject,ObservableObject{
         }
         return location.coordinate
     }
-    var placeList: [AnnotationItem] = []
+    var placeList: [CLLocationCoordinate2D] = []
     var totalDistance: Double = 0
     var currentSpeed: Double = 0
     
@@ -33,14 +33,14 @@ extension LocationManager: CLLocationManagerDelegate{
             if placeList.count > 0 {
                 if let placeListLast = placeList.last {
                     currentSpeed = location.speed
-                    if checkCloseCoord(coord1: location.coordinate, coord2: placeListLast.coordinate) {
-                        placeList.append(AnnotationItem(coordinate: location.coordinate, color: .blue))
-                        totalDistance += calculateDistance(alat: placeListLast.coordinate.latitude, along: placeListLast.coordinate.longitude, blat: location.coordinate.latitude, blong: location.coordinate.longitude)
+                    if checkCloseCoord(coord1: location.coordinate, coord2: placeListLast) {
+                        placeList.append(location.coordinate)
+                        totalDistance += calculateDistance(alat: placeListLast.latitude, along: placeListLast.longitude, blat: location.coordinate.latitude, blong: location.coordinate.longitude)
                         print(placeListLast,placeList.last as Any)
                     }
                 }
             } else {
-                placeList.append(AnnotationItem(coordinate: location.coordinate, color: .green))
+                placeList.append(location.coordinate)
             }
         }
     }

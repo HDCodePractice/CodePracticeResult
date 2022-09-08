@@ -2,7 +2,6 @@ import SwiftUI
 import MapKit
 
 struct WorkoutView: View {
-    @State var vm = showAnnotationViewItemsViewModel()
     @State var isRunning = false
     @State var isStarted = false
     @State var progressTime = 0
@@ -22,7 +21,7 @@ struct WorkoutView: View {
             Label("Average speed: \(String(format: "%.1f",LocationManager.shared.totalDistance / 1000 * 3600 / Double(progressTime))) kph\nCurrent speed: \(String(format: "%.1f",LocationManager.shared.currentSpeed)) kph", systemImage: "speedometer")
                 .font(.system(size: 25))
             Text("Annotations: \(LocationManager.shared.placeList.count)")
-            MapView(lineAnnotations: LocationManager.shared.placeList, region: MKCoordinateRegion(
+            MapView(lineCoordinates: LocationManager.shared.placeList, region: MKCoordinateRegion(
                 center: LocationManager.currentLocation, span: MKCoordinateSpan(
                     latitudeDelta: 0.05, longitudeDelta: 0.05
                 )
@@ -32,7 +31,7 @@ struct WorkoutView: View {
                 Button(action: {
                     isRunning.toggle()
                     isStarted = true
-                    LocationManager.shared.placeList.append(AnnotationItem(coordinate: LocationManager.currentLocation, color: .green))
+                    LocationManager.shared.placeList.append(LocationManager.currentLocation)
                 }) {
                     ButtonView(text: isRunning ? "Pause" : "Resume",color: isRunning ? .yellow : .green)
                 }
