@@ -16,6 +16,8 @@ let package = Package(
         .iOSApplication(
             name: "Biking Tracker",
             targets: ["AppModule"],
+            bundleIdentifier: "one.hdcola.biketracker",
+            teamIdentifier: "T4W3MN6QHA",
             displayVersion: "1.0",
             bundleVersion: "1",
             appIcon: .asset("AppIcon"),
@@ -31,8 +33,9 @@ let package = Package(
                 .portraitUpsideDown(.when(deviceFamilies: [.pad]))
             ],
             capabilities: [
-                .locationWhenInUse(purposeString: "jjjj")
-            ]
+                .locationWhenInUse(purposeString: "Tracks your location to show map and calculate the path you’re taking.")
+            ],
+            appCategory: .healthcareFitness
         )
     ],
     targets: [
