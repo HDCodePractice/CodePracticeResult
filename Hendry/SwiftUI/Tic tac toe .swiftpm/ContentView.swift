@@ -4,6 +4,32 @@ import SwiftUI
 struct ContentView: View {
     @State var board = [[0,0,0],[0,0,0],[0,0,0]]
     @State var isFirst = true
+    func checkTie()->Bool{
+        for row in board{
+            if row.contains(0){
+                return false
+            }
+        }
+        return true
+    }
+    func checkWin(player:Int)->Bool{
+        let checkList = [
+            [[0,0],[0,1],[0,2]],
+            [[1,0],[1,1],[2,2]],
+            [[2,0],[2,1],[2,1]],
+            [[0,0],[1,0],[2,0]],
+            [[0,1],[1,1],[2,1]],
+            [[0,2],[1,2],[2,2]],
+            [[0,0],[1,1],[2,2]],
+            [[0,2],[1,1],[2,0]]
+        ]
+        for checks in checkList{
+            if board[checks[0][0]][checks[0][1]]==player && board[checks[1][0]][checks[1][1]]==player && board[checks[2][0]]checks[2][1]]==player {
+                return true
+            }
+        }
+        return false
+    }
     var body: some View {
         VStack{
             HStack{
@@ -61,12 +87,5 @@ struct ContentView: View {
             }
         }
         .padding()
-    }
-    func ifWin(check:[[Int]])->Int{
-        for i in 0...check.count-1{
-            if (check[0][i]==check[1][i]&&check[2][i]==check[1][i])||(check[i][0]==check[i][1]&&check[i][1]==check[i][[2]])||(check[0][0]==check[1][1]&&check[2][2]==check[1][1])||(check[2][0]==check[1][1]&&check[0][2]==check[1][1]){
-                return 
-            }
-        }
     }
 }
