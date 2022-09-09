@@ -2,53 +2,33 @@ import SwiftUI
 
 struct ContentView: View {
     @State var board = [[0,0,0],[0,0,0],[0,0,0]]
-    @State var ending = ""
     @State var isFirst = true
-    func checkWin(){
-        for i in 1...2{
-            if board.contains([i,i,i]){
-                if i == 1{
-                    ending = "Player O Wins!"
-                }else{
-                    ending = "Player X Wins!"
-                }
-            }else if board[0][0] == i && board[1][0] == i && board[2][0] == i{
-                if i == 1{
-                    ending = "Player O Wins!"
-                }else{
-                    ending = "Player X Wins!"
-                }
-            }else if board[0][1] == i && board[1][1] == i && board[2][1] == i{
-                if i == 1{
-                    ending = "Player O Wins!"
-                }else{
-                    ending = "Player X Wins!"
-                }
-            }else if board[0][2] == i && board[1][2] == i && board[2][2] == i{
-                if i == 1{
-                    ending = "Player O Wins!"
-                }else{
-                    ending = "Player X Wins!"
-                }
-            }else if board[0][0] == i && board[1][1] == i && board[2][2] == i{
-                if i == 1{
-                    ending = "Player O Wins!"
-                }else{
-                    ending = "Player X Wins!"
-                }
-            }else if board[0][2] == i && board[1][1] == i && board[2][0] == i{
-                if i == 1{
-                    ending = "Player O Wins!"
-                }else{
-                    ending = "Player X Wins!"
-                }
-            }else if !board[0].contains(0) && !board[1].contains(0) && !board[2].contains(0) {
-                if ending == ""{
-                    ending = "It's a tie"
-                }
+    @State var outcome = ""
+    func checkTie()->Bool{
+        for row in board{
+            if row.contains(0){
+                return false
             }
         }
-        
+        return true
+    }
+    func checkWin(player: Int)->Bool{
+        let checkList = [
+            [[0,0],[0,1],[0,2]],
+            [[1,0],[1,1],[1,2]],
+            [[2,0],[2,1],[2,2]],
+            [[0,0],[1,0],[2,0]],
+            [[0,1],[1,1],[2,1]],
+            [[0,2],[1,2],[2,2]],
+            [[0,0],[1,1],[2,2]],
+            [[0,2],[1,1],[2,0]]
+        ]
+        for checks in checkList{
+            if board[checks[0][0]][checks[0][1]] == player && board[checks[1][0]][checks[1][1]] == player && board[checks[2][0]][checks[2][1]] == player{
+                return true
+            }
+        }
+        return false
     }
     var body: some View {
         VStack{
@@ -56,8 +36,8 @@ struct ContentView: View {
                 Text("Player:")
                 Image(systemName: isFirst ? "circle" : "pencil.slash")
                     .foregroundColor(.accentColor)
+                Text(outcome)
                 
-                Text("\(ending)")
             }
             .font(.largeTitle)
             ZStack{
@@ -85,9 +65,10 @@ struct ContentView: View {
                                         .scaleEffect(board[row][column]==2 ? 1 : 0)
                                 }
                                 .onTapGesture {
-                                    withAnimation() {
-                                        if ending == ""{
+                                    withAnimation(.linear(duration: 0.5)) { 
+                                        if outcome == ""{
                                             if board[row][column]==0{
+                                                
                                                 if isFirst{
                                                     board[row][column]=1
                                                 }else{
@@ -96,9 +77,19 @@ struct ContentView: View {
                                                 isFirst.toggle()
                                             }
                                         }
-                                        
+                                        if checkWin(player: board[row][column]) == true{
+                                            if board[row][column] == 1{
+                                                outcome = "Player O Wins!"
+                                            }else{
+                                                outcome = "Player X Wins!"
+                                            }
+                                            
+                                        }else if checkTie() == true{
+                                            if outcome == ""{
+                                                outcome = "It's A Tie"
+                                            }
+                                        }
                                     }
-                                    checkWin()
                                 }
                             }
                         }
@@ -106,10 +97,10 @@ struct ContentView: View {
                 }
             }
             Button("Restart Game"){
-                withAnimation(.easeInOut(duration: 2)) { 
+                withAnimation(.linear(duration: 0.5)) { 
                     board = [[0,0,0],[0,0,0],[0,0,0]]
                     isFirst = true
-                    ending = ""
+                    outcome = ""
                 }
             }
         }
