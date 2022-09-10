@@ -43,7 +43,9 @@ struct ContentView: View {
                     ending = "Player X Wins!"
                 }
             }else if !board[0].contains(0) && !board[1].contains(0) && !board[2].contains(0) {
-                ending = "It's a tie"
+                if ending == ""{
+                    ending = "It's a tie"
+                }
             }
         }
         

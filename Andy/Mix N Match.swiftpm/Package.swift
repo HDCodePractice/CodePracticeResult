@@ -8,17 +8,17 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "TTT",
+    name: "My App",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "TTT",
+            name: "My App",
             targets: ["AppModule"],
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .rocket),
+            appIcon: .placeholder(icon: .palette),
             accentColor: .presetColor(.mint),
             supportedDeviceFamilies: [
                 .pad,
