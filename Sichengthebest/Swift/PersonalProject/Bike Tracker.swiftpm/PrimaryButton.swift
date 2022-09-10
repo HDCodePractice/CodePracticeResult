@@ -9,12 +9,13 @@ struct ButtonView: View {
                 .foregroundColor(color)
             Text(text)
                 .foregroundColor(.black)
+                .padding()
         }
     }
 }
 
 struct ButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        ButtonView(text: "lalala",color: .blue)
+        ButtonView(text: "lalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalala",color: .blue)
     }
 }
