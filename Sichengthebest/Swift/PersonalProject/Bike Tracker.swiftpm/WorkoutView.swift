@@ -5,11 +5,11 @@ struct WorkoutView: View {
     @State var isRunning = false
     @State var isStarted = false
     @State var progressTime = 0
+    @AppStorage("workouts") var workouts: [Workout] = []
     // Initializes timer
     let myTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var body: some View {
         VStack {
-            Spacer()
             Label("\(Stopwatch(progressTime: progressTime))  |  \(String(format: "%.2f",LocationManager.shared.totalDistance / 1000)) km", systemImage: "bicycle.circle")
                 .font(.system(size: 25))
                 .onReceive(myTimer) { _ in
@@ -37,15 +37,25 @@ struct WorkoutView: View {
                 }
                 // End button
                 Button(action: {
+                    if isStarted == true {
+                        workouts.append(Workout(
+                            time: progressTime, 
+                            date: Date.now,
+                            speed: LocationManager.shared.totalDistance / 1000 * 3600 / Double(progressTime), 
+                            distance: LocationManager.shared.totalDistance / 1000))
+                        for annotation in LocationManager.shared.placeList {
+                            workouts[workouts.count-1].addCoordToArray(coord: annotation)
+                        }
+                    }
                     LocationManager.shared.placeList = []
                     progressTime = 0
                     isRunning = false
                     isStarted = false
+                    print(workouts)
                 }) {
                     ButtonView(text: "End",color: .red)
                 }
             }.frame(height:90)
-            Spacer()
         }
         .padding()
     }
