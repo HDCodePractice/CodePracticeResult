@@ -1,34 +1,27 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var words = ["Burger","Fries","Drink","Hotdog","Sauce"]
-    @State var randomX = Double.random(in: 1...1300.0)
-    @State var randomY = Double.random(in: 1...80.0)
+    @State var words = ["call","way","do","hold","good"]
+    @State var offsets : [Double] = [0,50,100,150,200]
+    
+    func genPosition(){
+//        for _ in 0...words.count-1{
+//            offsets.append(Double.random(in: -150..<150))
+//        }
+    }
+    init(){
+        genPosition()
+    }
+    
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            Color.clear
-            ForEach(0..<words.count,id:\.self){ i in
-//                randomX = Double.random(in: 1...1300.0)
-//                randomY = Double.random(in: 1...80.0)
-                if randomX >= 1000{
-                    Text(words[i])
-                        .offset(x: randomX-Double(200*i), y: randomY)
-                }else if randomX <= 300{
-                    Text(words[i])
-                        .offset(x: randomX+Double(200*i), y: randomY)
-                }else{
-                    Text(words[i])
-                        .offset(x: randomX-Double(150*i), y: randomY)
-                }
-                
+        VStack{
+            ForEach(0..<words.count,id:\.self){ word in
+                Text(words[word])
+                    .offset(x:offsets[word])
             }
-            while randomY >= 1575{
-                withAnimation{
-                    randomY += 10.0
-                }
+            Button("Start Game"){
+                genPosition()
             }
-            
-            
         }
     }
 }
