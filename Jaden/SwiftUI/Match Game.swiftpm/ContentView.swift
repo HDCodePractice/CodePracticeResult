@@ -2,25 +2,29 @@ import SwiftUI
 
 struct ContentView: View {
     let height = 4
-    let width = 4
-    let symbols = ["globe.americas.fill","sun.min","sun.and.horizon","sun.haze","sparkles","moon.stars","cloud.drizzle","cloud.bolt.rain","wind","snowflake","bolt","hare","tortoise"]
-    @State var image = "trash"
+    let width = 6
+    let symbols = ["globe.americas.fill","sun.min","person.circle","sun.haze","sparkles","moon.stars","cloud.drizzle","cloud.bolt.rain","wind","snowflake","bolt","hare","tortoise"]
     @State var board : [[String]] = []
+    @State var boardOpacity : [[Double]] = []
+    @State var lastTap : [Int] = []
     
     func startGame(){
         let symbolAmount = height*width/2
         let prePutSymbols = Array(symbols.shuffled().prefix(symbolAmount))
         let putSymbols = (prePutSymbols + prePutSymbols).shuffled()
-        
-        var symbolIndex = 0
+        var symbolsIndex = 0
         board = []
+        boardOpacity = []
         for _ in 0..<height{
             var rowArray : [String] = []
+            var boardOpacityRow : [Double] = []
             for _ in 0..<width{
-                rowArray.append(putSymbols[symbolIndex])
-                symbolIndex += 1
+                rowArray.append(putSymbols[symbolsIndex])
+                boardOpacityRow.append(0)
+                symbolsIndex += 1
             }
             board.append(rowArray)
+            boardOpacity.append(boardOpacityRow)
         }
     }
     
@@ -34,19 +38,46 @@ struct ContentView: View {
                         ZStack{
                             Rectangle()
                                 .fill(.red)
-                            Image(systemName: image)
+                                
+                            Image(systemName: board[row][column])
                                 .resizable()
                                 .scaledToFit()
-                                .foregroundColor(.white)
+                                .foregroundColor(.yellow)
+                                .opacity(boardOpacity[row][column])
                                 .padding()
-                        }.onTapGesture {
-                            image = board[row][column]
+                        }
+                        .onTapGesture {
+                            if lastTap.isEmpty{
+                                lastTap = [row,column]
+                                withAnimation(.easeIn(duration: 0.2)){
+                                    boardOpacity[row][column] = 1
+                                }
+                            }else{
+                                let lastTapRow = lastTap[0]
+                                let lastTapColumn = lastTap[1]
+                                if board[lastTapRow][lastTapColumn] == board[row][column]{
+                                    withAnimation(.easeIn(duration: 0.2)){
+                                        boardOpacity[row][column] = 1
+                                    }
+                                }else{
+                                    withAnimation(.easeIn(duration: 0.2)){
+                                        boardOpacity[row][column] = 1
+                                    }
+                                    withAnimation(.easeIn(duration: 0.2).delay(0.2)){
+                                        boardOpacity[row][column] = 0
+                                        boardOpacity[lastTapRow][lastTapColumn] = 0
+                                    }
+                                }
+                                lastTap = []
+                            }
                         }
                     }
                 }
             }
             Button("Restart Game"){
-                startGame()
+                withAnimation{
+                    startGame()
+                }
             }
         }
         .onAppear { 
