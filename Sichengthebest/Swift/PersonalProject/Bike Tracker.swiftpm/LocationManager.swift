@@ -56,7 +56,7 @@ extension LocationManager: CLLocationManagerDelegate{
 func checkCloseCoord(coord1:CLLocationCoordinate2D, coord2:CLLocationCoordinate2D) -> Bool {
     let longDif = abs(coord1.longitude-coord2.longitude)
     let latDif = abs(coord1.latitude-coord2.latitude)
-    if longDif < 0.001 || latDif < 0.001 {
+    if longDif < 0.0001 || latDif < 0.0001 {
         return false
     } else {
         return true
