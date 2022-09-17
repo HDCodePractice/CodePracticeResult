@@ -2,8 +2,10 @@ import SwiftUI
 import MapKit
 
 struct WorkoutView: View {
+    @Environment(\.scenePhase) var scenePhase
     @State var isRunning = false
     @State var isStarted = false
+    @State var isAlreadyPaused = true
     @State var progressTime = 0
     @AppStorage("workouts") var workouts: [Workout] = []
     // Initializes timer
@@ -30,6 +32,7 @@ struct WorkoutView: View {
                 // Resume/Pause button
                 Button(action: {
                     isRunning.toggle()
+                    isAlreadyPaused.toggle()
                     isStarted = true
                     LocationManager.shared.placeList.append(LocationManager.currentLocation)
                 }) {
@@ -58,6 +61,26 @@ struct WorkoutView: View {
             }.frame(height:90)
         }
         .padding()
+        .onChange(of: scenePhase) { scenePhase in
+            switch scenePhase{
+            case .active:
+                if isStarted {
+                    if isAlreadyPaused == true {
+                        isRunning = true
+                        LocationManager.shared.placeList.append(LocationManager.currentLocation)
+                    }
+                }
+            case .background:
+                if isStarted {
+                    isRunning = false
+                    LocationManager.shared.placeList.append(LocationManager.currentLocation)
+                }
+            case .inactive:
+                print("app inactive")
+            default:
+                print("wa")
+            }
+        }
     }
 }
 
