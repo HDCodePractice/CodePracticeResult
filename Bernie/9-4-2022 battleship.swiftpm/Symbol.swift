@@ -15,6 +15,10 @@ enum Symbol{
             return "square.fill"
         }
     }
+    
+    
 }
+
+
 
 

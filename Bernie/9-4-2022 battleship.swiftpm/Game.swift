@@ -15,10 +15,11 @@ struct Game{
     }
     
     mutating func genBoard(){
+        board = []
         for i in 0..<height{
             var row : [Grid] = []
             for j in 0..<width{
-                row.append(Grid(symbol: Symbol.square , x: i, y: j,gridColor: .mint))
+                row.append(Grid(symbol: Symbol.square , x: i, y: j, gridColor: .mint))
             }
             board.append(row)
         }
@@ -60,22 +61,68 @@ struct Game{
             for j in allBoatsCoordinates[i]{
                 let x = j[1]
                 let y = j[0]
-                board[x][y].symbol = Symbol.boat
-                board[x][y].gridColor = boatColor[i]
+                board[y][x].gridColor = boatColor[i]
+                board[y][x].symbol = .boat
+                print(board[y][x].symbol.name)
+                print(board[y][x].symbol)
+//                print(Symbol.boat.name)
+                
             }
         }
     }
     
     mutating func tapGrid(grid: Grid){
+        let x = grid.y
+        let y = grid.x
+//        let currentGrid = board[y][x]
+        
+        if grid.status ==  .unclicked && grid.symbol == Symbol.square{
+            board[y][x].status = .clicked 
+        }
+        if grid.status ==  .unclicked && grid.symbol == Symbol.boat{
+            board[y][x].status = .clickedOnTarget
+            board[y][x].symbol = .fire
+            showBoat()
+        }
         
     }
     
+    func isAllFire(boat: [[Int]])->Bool{
+        for i in boat{
+            let x = i[0]
+            let y = i[1]
+            let grid = board[y][x]
+            if grid.status != .clickedOnTarget{
+                return false
+            }
+        }
+        return true
+    }
+    
+    mutating func showBoat(){
+        for i in allBoatsCoordinates{
+            if isAllFire(boat: i){
+                for j in i{
+                    let x = j[0]
+                    let y = j[1]
+                    
+                    board[y][x].status = .clickedOnTarget
+                    board[y][x].symbol = Symbol.boat
+                }
+                
+            }
+        }
+    }
+    
+    
     mutating func startGame(){
+        print("test")
+        allBoatsCoordinates = []
         genBoard()
         for i in 0..<boatLength.count{
             while allBoatsCoordinates.count == i{
                 genBoat(boatLength: boatLength[i])
-                if isOverlapping(allBoatsCoordinates: allBoatsCoordinates, boat:boatCoordinates){
+                if !isOverlapping(allBoatsCoordinates: allBoatsCoordinates, boat:boatCoordinates){
                     allBoatsCoordinates.append(boatCoordinates)
                     
                 }
