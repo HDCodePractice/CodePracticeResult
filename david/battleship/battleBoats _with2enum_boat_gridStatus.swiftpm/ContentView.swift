@@ -2,7 +2,6 @@ import SwiftUI
 
 struct ContentView: View {
     @State var game = Game()
-    @State var counts = 0
     
     
     var body: some View {
@@ -10,11 +9,6 @@ struct ContentView: View {
             Text("Battle Boats")
                 .foregroundColor(.accentColor)
                 .font(.largeTitle)
-            if game.isOver(){
-                Text("Game State: win")
-            }else{
-                Text("Continue")
-            }
             HStack{
                 
             }
@@ -25,19 +19,13 @@ struct ContentView: View {
                             ZStack{
                                 Rectangle()
                                     .fill(.blue)
-                                Image(systemName: game.board[grid.h][grid.w].gridStatus.getImage())
+                                Image(systemName: game.board[grid.h][grid.w].gridState.getImage(boat: game.board[grid.h][grid.w].boat))
                                     .resizable()
                                     .scaledToFit()
                             }
-                            .onTapGesture {
-                                if !game.isOver(){
-                                    
-                                    game.tapGrid(grid: grid)
-                                    
-                                }
-                                
-                                
-                            }
+//                            .onTapGesture {
+//                                <#code#>
+//                            }
                             
                         }
                     }

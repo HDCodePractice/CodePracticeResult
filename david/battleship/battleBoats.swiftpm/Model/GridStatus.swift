@@ -1,20 +1,20 @@
 import SwiftUI
 
-enum GridState{
+enum GridStatus{
     case empty
-    case hideBoat
-    case destroyBoat
-    case afterAttac
+    case hideShip
+    case destroiedShip
+    case attactted
     
-    func getImage(boat:Boat)->String{
+    func getImage()->String{
         switch self{
         case .empty:
             return ""
-        case .hideBoat:
-            return boat.getImage()
-        case .destroyBoat:
+        case .hideShip:
+            return "a"
+        case .destroiedShip:
             return "burst"
-        case .afterAttac:
+        case .attactted:
             return "x.circle"
         }
     }
@@ -24,13 +24,12 @@ enum GridState{
         switch self{
         case .empty:
             return "empty"
-        case .hideBoat:
-            return "hideBoat"
-        case .destroyBoat:
-            return "destroied"
-        case .afterAttac:
-            return "afterAttac"
+        case .hideShip:
+            return "hideShip"
+        case .destroiedShip:
+            return "destroiedShip"
+        case .attactted:
+            return "attactted"
         }
     }
-    
 }

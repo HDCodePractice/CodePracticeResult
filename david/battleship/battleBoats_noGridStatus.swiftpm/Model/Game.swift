@@ -1,28 +1,30 @@
 import SwiftUI
 struct Game{ 
     var board:[[Grid]] = []
-    var gridStatus = GridStatus.empty
+    var gridStatus = 0
     let width = 10
     let hight = 10
-    var counts = 0 
     let ships = [Ship.A,Ship.B,Ship.C,Ship.C,Ship.D]
-    
+    var ship = Ship.Z
+    let bullet = Bullet.Small
+    var counts = 0    
     init(){
         startGame()
     }
     
     mutating func startGame(){
         board = []
+        counts = 0
         for i in 0..<hight{
             var row:[Grid] = []
             for j in 0..<width{
-                row.append(Grid( gridStatus: gridStatus, h: i, w: j))
+                row.append(Grid( ship: ship, h: i, w: j))
             }
             board.append(row)
         }
         inputBoats()
+        
     }
-    
     
     mutating func inputBoats(){
         
@@ -37,7 +39,7 @@ struct Game{
                     
                     if isEmpty(grid: board[hY][wX], directions: directions, ship:i){
                         for w in wX..<wX+i.shipNumber(){
-                            board[hY][w] = Grid(gridStatus: GridStatus.hideShip, ship: i, h: hY, w: w)
+                            board[hY][w] = Grid(ship: i, h: hY, w: w)
                         }
 
                         flag = false
@@ -49,7 +51,7 @@ struct Game{
                     if isEmpty(grid: board[hY][wX], directions: directions, ship: i){
                         for h in hY..<hY+i.shipNumber(){
                             
-                            board[h][wX] = Grid(gridStatus: GridStatus.hideShip, ship: i, h: h, w: wX)
+                            board[h][wX] = Grid(ship: i, h: h, w: wX)
                         }
 //                        gridStatus = 1
                         flag = false
@@ -69,37 +71,37 @@ struct Game{
         
         if directions == 0{
             for w1 in w..<w+ship.shipNumber(){
-                if board[h][w1].gridStatus.getFile() != "empty"{
+                if board[h][w1].ship.shipStatus() != "empty"{
                     return false
                 }
             }
         }else{
             for h1 in h..<h+ship.shipNumber(){
                 
-                if board[h1][w].gridStatus.getFile() != "empty"{
+                if board[h1][w].ship.shipStatus() != "empty"{
                     return false
                 }
             }
         }
         return true
     }
+    
     mutating func tapGrid(grid:Grid){
-        let h = grid.h
         let w = grid.w
+        let h = grid.h
         
-        if grid.gridStatus.getFile() != "empty" {
-            board[h][w] = Grid(gridStatus: GridStatus.destroiedShip, ship: grid.ship, h: h, w: w)
+        if grid.ship.shipStatus() != "empty"{
             counts += 1
-            
+            board[h][w] = Grid(ship: Ship.H, h:h, w:w)
         }else{
-            board[h][w] = Grid(gridStatus: GridStatus.attactted, ship: grid.ship, h: grid.h, w: w)
+            board[h][w] = Grid(ship: Ship.Hitted, h: h, w: w)
         }
         
     }
     
     mutating func isOver()->Bool{ 
         if counts >= 17{
-            counts = 0
+            
             return true
         }
         return false
