@@ -40,7 +40,7 @@ struct ContentView: View {
                                 offsetY[i] += 50
                             }
                         }
-//                        offsetY[i] += 50
+                        //                        offsetY[i] += 50
                     }
                 }
                 withAnimation(.easeInOut(duration: 2.0).delay(2.0)){
@@ -55,3 +55,4 @@ struct ContentView: View {
         
     }
 }
+
