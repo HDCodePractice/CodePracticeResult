@@ -1,52 +1,43 @@
 import SwiftUI
 func genBoard() -> [[Int]]{
-    let length = 6
-    let height = 6
-    var x = 0
-    
-    var y = 0
-    var board : [[Int]] = []
-    var color : [[Color]] = []
-    for i in 0...height-1{
-        board.append([])
-        color.append([])
-        for _ in 0...length-1{
-            board[i].append(0)
-            color[i].append(.clear)
-        }
+    let length = 5
+    let height = 4
+    var symbol : [Int] = []
+    for i in 1...length*height/2{
+        symbol.append(i)
+        symbol.append(i)
     }
-    for a in 1...length*height/2{
-        x = Int.random(in:0...length-1)
-        y = Int.random(in:0...height-1)
-        while true{
-            if board[y][x] == 0{
-                board[y][x] = a
-                break
-            }else{
-                x = Int.random(in:0...length-1)
-                y = Int.random(in:0...height-1)
-            }
+    var board : [[Int]] = []
+    symbol = symbol.shuffled()
+    for a in 0..<height{
+        var rowArray : [Int] = []
+        for b in 0..<length{
+            rowArray.append(symbol[a*length+b])
         }
-        while true{
-            if board[y][x] == 0{
-                board[y][x] = a
-                break
-            }else{
-                x = Int.random(in:0...length-1)
-                y = Int.random(in:0...height-1)
-            }
-        }
+        board.append(rowArray)
     }
     return board
 }
 func makeColor()->[[Color]]{
-    let length = 6
-    let height = 6
+    let length = 20
+    let height = 20
     var color : [[Color]] = []
     for i in 0...height-1{
         color.append([])
         for _ in 0...length-1{
             color[i].append(.clear)
+        }
+    }
+    return color
+}
+func makeOpacity()->[[Double]]{
+    let length = 20
+    let height = 20
+    var color : [[Double]] = []
+    for i in 0...height-1{
+        color.append([])
+        for _ in 0...length-1{
+            color[i].append(1)
         }
     }
     return color
@@ -58,10 +49,17 @@ struct ContentView: View {
     @State var lol = true
     @State var xx = 0
     @State var yy = 0
+    @State var one = 0
+    @State var two = 0
+    @State var turn = false
     @State var aa = 0
     @State var clerr = false
+    @State var opacity : [[Double]] = makeOpacity()
     var body: some View {
         VStack{
+            Text("Match Game")
+                .font(.title)
+                
             ZStack{
                 Color.black
                 VStack(spacing:3) {
@@ -70,6 +68,8 @@ struct ContentView: View {
                             ForEach(0..<board[row].count,id:\.self){column in
                                 ZStack{
                                     Rectangle()
+                                        .foregroundColor(.red)
+                                        .opacity(opacity[row][column])
                                     if board[row][column] < 51{
                                         Image(systemName: "\(board[row][column])\(".circle.fill")")
                                             .resizable()
@@ -103,27 +103,44 @@ struct ContentView: View {
                                                 xx = row
                                                 yy = column
                                                 aa = board[row][column]
-                                                colorr[row][column] = .blue
+                                                colorr[row][column] = .yellow
+                                                opacity[row][column] = 0.66
                                             }else{
-                                                colorr[row][column] = .blue
+                                                colorr[row][column] = .yellow
+                                                opacity[row][column] = 0.66
+                                                
                                                 if aa == board[row][column]{
-                                                    colorr[xx][yy] = .accentColor
-                                                    colorr[row][column] = .accentColor
+                                                    colorr[xx][yy] = .cyan
+                                                    opacity[row][column] = 0.33
+                                                    colorr[row][column] = .cyan
+                                                    opacity[xx][yy] = 0.33
+                                                    if turn{
+                                                        one+=1
+                                                        turn.toggle()
+                                                    }else{
+                                                        two+=1
+                                                        turn.toggle()
+                                                    }
                                                 }else{
                                                     clerr = true
                                                 }
+                                                turn.toggle()
                                             }
                                             lol.toggle()
                                         }
                                     }
+                                    
                                     withAnimation(.linear(duration: 1.5)){
                                         if clerr{
-                                            colorr[xx][yy] = .blue;colorr[row][column] = .blue
+                                            colorr[xx][yy] = .yellow;colorr[row][column] = .yellow
+                                            opacity[row][column] = 0.66;opacity[xx][yy] = 0.66
                                         }
                                     }
-                                    withAnimation(.linear(duration: 1.5)){
+                                    withAnimation(.linear(duration: 1.5).delay(1.5)){
+                                        
                                         if clerr{
                                             colorr[xx][yy] = .clear;colorr[row][column] = .clear
+                                            opacity[row][column] = 1;opacity[xx][yy] = 1
                                             clerr = false
                                         }
                                     }
@@ -133,6 +150,7 @@ struct ContentView: View {
                     }
                 }
             }
+            Text("\("Player One: ")\(one)\(", player two: ")\(two)")
             Button("Restart Board"){
                 board = genBoard()
                 colorr = makeColor()
