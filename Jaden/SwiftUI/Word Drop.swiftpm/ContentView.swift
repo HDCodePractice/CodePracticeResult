@@ -1,34 +1,58 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var words = ["Burger","Fries","Drink","Hotdog","Sauce"]
-    @State var randomX = Double.random(in: 1...1300.0)
-    @State var randomY = Double.random(in: 1...80.0)
+    @State var words = ["call","way","do","hold","good"]
+    @State var offsetX : [Double] = [0,10,20,30,40]
+    @State var offsetY : [Double] = [0,10,20,30,40]
+    
+    func genPosition(){
+        for _ in 0..<words.count{
+            offsetX.remove(at: 0)
+            offsetX.append(Double.random(in: 0..<1300))
+            offsetY.remove(at: 0)
+            offsetY.append(Double.random(in: 0..<80))
+        }
+    }
+    init(){
+        genPosition()
+    }
+    
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            Color.clear
-            ForEach(0..<words.count,id:\.self){ i in
-//                randomX = Double.random(in: 1...1300.0)
-//                randomY = Double.random(in: 1...80.0)
-                if randomX >= 1000{
-                    Text(words[i])
-                        .offset(x: randomX-Double(200*i), y: randomY)
-                }else if randomX <= 300{
-                    Text(words[i])
-                        .offset(x: randomX+Double(200*i), y: randomY)
-                }else{
-                    Text(words[i])
-                        .offset(x: randomX-Double(150*i), y: randomY)
+        VStack{
+            ZStack(alignment: .topLeading){
+                Color.clear
+                ForEach(0..<words.count,id:\.self){ word in
+                    Text(words[word])
+                        .offset(x:offsetX[word], y:offsetY[word])
+                    
                 }
                 
             }
-            while randomY >= 1575{
+            .onAppear{
+                genPosition()
+            }
+            Button("Start Game"){
+                
                 withAnimation{
-                    randomY += 10.0
+                    for i in 0..<offsetY.count{
+                        for j in 1...32{
+                            withAnimation(.easeInOut(duration: 2.0)){
+                                offsetY[i] += 50
+                            }
+                        }
+                        //                        offsetY[i] += 50
+                    }
                 }
+                withAnimation(.easeInOut(duration: 2.0).delay(2.0)){
+                    genPosition()
+                }
+                
+                
+                
             }
             
-            
         }
+        
     }
 }
+
