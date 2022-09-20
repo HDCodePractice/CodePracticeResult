@@ -2,12 +2,16 @@ import SwiftUI
 
 struct ContentView: View {
     @State var words = ["call","way","do","hold","good"]
-    @State var offsets : [Double] = [0,50,100,150,200]
+    @State var offsetX : [Double] = [0,10,20,30,40]
+    @State var offsetY : [Double] = [0,10,20,30,40]
     
     func genPosition(){
-//        for _ in 0...words.count-1{
-//            offsets.append(Double.random(in: -150..<150))
-//        }
+        for _ in 0..<words.count{
+            offsetX.remove(at: 0)
+            offsetX.append(Double.random(in: 0..<1300))
+            offsetY.remove(at: 0)
+            offsetY.append(Double.random(in: 0..<80))
+        }
     }
     init(){
         genPosition()
@@ -15,13 +19,39 @@ struct ContentView: View {
     
     var body: some View {
         VStack{
-            ForEach(0..<words.count,id:\.self){ word in
-                Text(words[word])
-                    .offset(x:offsets[word])
+            ZStack(alignment: .topLeading){
+                Color.clear
+                ForEach(0..<words.count,id:\.self){ word in
+                    Text(words[word])
+                        .offset(x:offsetX[word], y:offsetY[word])
+                    
+                }
+                
             }
-            Button("Start Game"){
+            .onAppear{
                 genPosition()
             }
+            Button("Start Game"){
+                
+                withAnimation{
+                    for i in 0..<offsetY.count{
+                        for j in 1...32{
+                            withAnimation(.easeInOut(duration: 2.0)){
+                                offsetY[i] += 50
+                            }
+                        }
+//                        offsetY[i] += 50
+                    }
+                }
+                withAnimation(.easeInOut(duration: 2.0).delay(2.0)){
+                    genPosition()
+                }
+                
+                
+                
+            }
+            
         }
+        
     }
 }
