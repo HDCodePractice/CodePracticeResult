@@ -12,14 +12,24 @@ struct MapView: UIViewRepresentable {
         mapView.delegate = context.coordinator
         mapView.setRegion(region, animated: true)
         mapView.showsUserLocation = true
-        let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
+        var tempCoords: [CLLocationCoordinate2D] = []
+        for coord in lineCoordinates {
+            tempCoords.append(coord)
+        }
+        tempCoords.append(LocationManager.currentLocation)
+        let polyline = MKPolyline(coordinates: tempCoords, count: lineCoordinates.count)
         mapView.addOverlay(polyline)
         return mapView
     }
     
     // We DO need to worry about this as the view WILL be updated.
     func updateUIView(_ view: MKMapView, context: Context) {
-        let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
+        var tempCoords: [CLLocationCoordinate2D] = []
+        for coord in lineCoordinates {
+            tempCoords.append(coord)
+        }
+        tempCoords.append(LocationManager.currentLocation)
+        let polyline = MKPolyline(coordinates: tempCoords, count: lineCoordinates.count)
         view.addOverlay(polyline)
         if !ended {
             let overlays = view.overlays 
