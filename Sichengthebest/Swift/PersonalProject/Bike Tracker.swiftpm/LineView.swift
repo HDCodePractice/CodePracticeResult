@@ -6,20 +6,30 @@ struct MapView: UIViewRepresentable {
     let region: MKCoordinateRegion
     let ended: Bool
     
-    // Create the MKMapView using UIKit.
+    // Create the MKMapView using UIKit
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
         mapView.setRegion(region, animated: true)
         mapView.showsUserLocation = true
-        let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
+        var tempCoords: [CLLocationCoordinate2D] = []
+        for coord in lineCoordinates {
+            tempCoords.append(coord)
+        }
+        tempCoords.append(LocationManager.currentLocation)
+        let polyline = MKPolyline(coordinates: tempCoords, count: lineCoordinates.count)
         mapView.addOverlay(polyline)
         return mapView
     }
     
-    // We DO need to worry about this as the view WILL be updated.
+    // Updates the view every time a new coordinate is added in placeList
     func updateUIView(_ view: MKMapView, context: Context) {
-        let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
+        var tempCoords: [CLLocationCoordinate2D] = []
+        for coord in lineCoordinates {
+            tempCoords.append(coord)
+        }
+        tempCoords.append(LocationManager.currentLocation)
+        let polyline = MKPolyline(coordinates: tempCoords, count: lineCoordinates.count)
         view.addOverlay(polyline)
         if !ended {
             let overlays = view.overlays 
