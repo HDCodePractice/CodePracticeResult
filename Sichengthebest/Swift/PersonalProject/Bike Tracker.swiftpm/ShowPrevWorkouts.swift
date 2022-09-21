@@ -8,6 +8,7 @@ struct PreviousWorkoutsView: View {
             Text("Your previous workouts:")
                 .font(.system(size:30))
             ForEach(0..<workouts.count,id:\.self) { index in
+                // Display each workout as a separate window
                 NavigationLink {
                     VStack {
                         Text("\(workouts[index].date,style: .date)")
@@ -32,6 +33,7 @@ struct PreviousWorkoutsView: View {
                             .padding()
                     }
                 } label: {
+                    // Rectangular text displaying each workout
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .frame(height: 40)

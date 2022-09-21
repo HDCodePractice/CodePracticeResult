@@ -22,7 +22,7 @@ struct WorkoutView: View {
                 }
             Label("Average speed: \(String(format: "%.1f",LocationManager.shared.totalDistance / 1000 * 3600 / Double(progressTime))) kph\nCurrent speed: \(String(format: "%.1f",LocationManager.shared.currentSpeed)) kph", systemImage: "speedometer")
                 .font(.system(size: 25))
-            Label(isStarted ? isRunning ? "Workout recording":"Workout paused": "Start workout?", systemImage: isStarted ? isRunning ? "bicycle.circle" : "pause.circle" : "restart")
+            Label(isStarted ? isRunning ? "Workout recording...":"Workout paused": "Start workout?", systemImage: isStarted ? isRunning ? "bicycle.circle" : "pause.circle" : "restart")
                 .font(.system(size: 20))
                 .foregroundColor(isStarted ? isRunning ? .green:.yellow:.blue)
             Text("Annotations: \(LocationManager.shared.placeList.count)")
@@ -39,7 +39,7 @@ struct WorkoutView: View {
                     isStarted = true
                     LocationManager.shared.placeList.append(LocationManager.currentLocation)
                 }) {
-                    ButtonView(text: isRunning ? "Pause" : "Resume",color: isRunning ? .yellow : .green)
+                    ButtonView(text: isStarted ? isRunning ? "Pause" : "Resume" : "Start",color: isRunning ? .yellow : .green)
                 }
                 // End button
                 Button(action: {

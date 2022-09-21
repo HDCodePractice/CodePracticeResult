@@ -6,7 +6,7 @@ struct MapView: UIViewRepresentable {
     let region: MKCoordinateRegion
     let ended: Bool
     
-    // Create the MKMapView using UIKit.
+    // Create the MKMapView using UIKit
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
@@ -22,7 +22,7 @@ struct MapView: UIViewRepresentable {
         return mapView
     }
     
-    // We DO need to worry about this as the view WILL be updated.
+    // Updates the view every time a new coordinate is added in placeList
     func updateUIView(_ view: MKMapView, context: Context) {
         var tempCoords: [CLLocationCoordinate2D] = []
         for coord in lineCoordinates {

@@ -1,7 +1,9 @@
 import SwiftUI
 import MapKit
 
+// Makes it possible to store arrays using @AppStorage
 extension Array: RawRepresentable where Element: Codable {
+    // reads string
     public init?(rawValue: String) {
         guard let data = rawValue.data(using: .utf8),
               let result = try? JSONDecoder().decode([Element].self, from: data)
@@ -10,6 +12,7 @@ extension Array: RawRepresentable where Element: Codable {
         }
         self = result
     }
+    // encodes arrays into string
     public var rawValue: String {
         guard let data = try? JSONEncoder().encode(self),
               let result = String(data:data,encoding: .utf8)

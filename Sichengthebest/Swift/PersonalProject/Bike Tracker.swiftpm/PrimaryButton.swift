@@ -1,5 +1,6 @@
 import SwiftUI
 
+// Making the simple button views
 struct ButtonView: View {
     var text: String
     var color: Color
