@@ -7,24 +7,29 @@ struct PreviousWorkoutsView: View {
         VStack {
             Text("Your previous workouts:")
                 .font(.system(size:30))
-            ForEach(workouts) { workout in
+            ForEach(0..<workouts.count,id:\.self) { index in
                 NavigationLink {
                     VStack {
-                        Text("\(workout.date,style: .date)")
+                        Text("\(workouts[index].date,style: .date)")
                             .foregroundColor(.yellow)
                             .font(.system(size: 25))
-                        Text("Time: \(Stopwatch(progressTime: workout.time))")
+                        Text("Time: \(Stopwatch(progressTime: workouts[index].time))")
                             .font(.system(size: 20))
-                        Text("Speed: \(String(format:"%.1f", workout.speed)) kph")
+                        Text("Speed: \(String(format:"%.1f", workouts[index].speed)) kph")
                             .font(.system(size: 20))
-                        Text("Distance: \(String(format: "%.2f",workout.distance)) km")
+                        Text("Distance: \(String(format: "%.2f",workouts[index].distance)) km")
                             .font(.system(size: 20))
-                        MapView(lineCoordinates: workout.coordinates, region: MKCoordinateRegion(
-                            center: workout.coordinates[0], span: MKCoordinateSpan(
+                        MapView(lineCoordinates: workouts[index].coordinates, region: MKCoordinateRegion(
+                            center: workouts[index].coordinates[0], span: MKCoordinateSpan(
                                 latitudeDelta: 0.05, longitudeDelta: 0.05
                             )
                         ), ended: true)
-                        .padding()
+                        RectButtonView(text:"Delete this workout",color:.red)
+                            .frame(height:20)
+                            .onTapGesture {
+                                workouts.remove(at: index)
+                            }
+                            .padding()
                     }
                 } label: {
                     ZStack {
@@ -32,10 +37,10 @@ struct PreviousWorkoutsView: View {
                             .frame(height: 40)
                             .foregroundColor(.blue)
                         HStack {
-                            Text("\(workout.date,style: .date)")
+                            Text("\(workouts[index].date,style: .date)")
                                 .foregroundColor(.black)
                                 .font(.system(size: 20))
-                            Text("\(String(format: "%.2f",workout.distance)) km")
+                            Text("\(String(format: "%.2f",workouts[index].distance)) km")
                                 .foregroundColor(.black)
                                 .font(.system(size: 18))
                         }
