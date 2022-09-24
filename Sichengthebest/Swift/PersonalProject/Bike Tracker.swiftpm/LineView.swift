@@ -19,6 +19,12 @@ struct MapView: UIViewRepresentable {
         tempCoords.append(LocationManager.currentLocation)
         let polyline = MKPolyline(coordinates: tempCoords, count: lineCoordinates.count)
         mapView.addOverlay(polyline)
+        if ended {
+            let start = LandmarkAnnotation(coordinate:lineCoordinates[0],imageName: "start")
+            let end = LandmarkAnnotation(coordinate:lineCoordinates[lineCoordinates.count-1],imageName: "end")
+            mapView.addAnnotation(start)
+            mapView.addAnnotation(end)
+        }
         return mapView
     }
     
@@ -63,5 +69,14 @@ class Coordinator: NSObject, MKMapViewDelegate {
             return renderer
         }
         return MKOverlayRenderer()
+    }
+}
+
+class LandmarkAnnotation: NSObject, MKAnnotation {
+    let coordinate: CLLocationCoordinate2D
+    let imageName: String
+    init(coordinate: CLLocationCoordinate2D, imageName:String) {
+        self.coordinate = coordinate
+        self.imageName = imageName
     }
 }
