@@ -32,7 +32,7 @@ struct ContentView: View {
                 genPosition()
             }
             Button("Start Game"){
-                
+                genPosition()
                 withAnimation{
                     for i in 0..<offsetY.count{
                         for j in 1...32{
@@ -44,7 +44,7 @@ struct ContentView: View {
                     }
                 }
                 withAnimation(.easeInOut(duration: 2.0).delay(2.0)){
-                    genPosition()
+                    
                 }
                 
                 
