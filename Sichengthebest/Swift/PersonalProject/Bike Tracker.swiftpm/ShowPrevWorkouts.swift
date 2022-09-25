@@ -20,7 +20,7 @@ struct PreviousWorkoutsView: View {
                             .font(.system(size: 20))
                         Text("Distance: \(String(format: "%.2f",workouts[index].distance)) km")
                             .font(.system(size: 20))
-                        MapView(lineCoordinates: workouts[index].coordinates, region: MKCoordinateRegion(
+                        MapView(lineCoordinates: workouts[index].coordinates,beforePauses: workouts[index].beforePauses, region: MKCoordinateRegion(
                             center: workouts[index].coordinates[0], span: MKCoordinateSpan(
                                 latitudeDelta: 0.05, longitudeDelta: 0.05
                             )

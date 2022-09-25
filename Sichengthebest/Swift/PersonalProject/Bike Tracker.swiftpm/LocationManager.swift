@@ -12,7 +12,7 @@ class LocationManager: NSObject,ObservableObject{
         }
         return location.coordinate
     }
-    var placeList: [CLLocationCoordinate2D] = []
+    var placeList: [Annotation] = []
     var totalDistance: Double = 0
     var currentSpeed: Double = 0
     
@@ -35,15 +35,14 @@ extension LocationManager: CLLocationManagerDelegate{
                 if let placeListLast = placeList.last {
                     // creates placeListLast to circumvent bugs
                     currentSpeed = location.speed
-                    if checkCloseCoord(coord1: location.coordinate, coord2: placeListLast) {
-                        placeList.append(location.coordinate)
-                        totalDistance += calculateDistance(alat: placeListLast.latitude, along: placeListLast.longitude, blat: location.coordinate.latitude, blong: location.coordinate.longitude)
-                        print(placeListLast,placeList.last as Any)
+                    if checkCloseCoord(coord1: location.coordinate, coord2: placeListLast.coordinate) {
+                        placeList.append(Annotation(coordinate:location.coordinate,beforePause:false))
+                        totalDistance += calculateDistance(alat: placeListLast.coordinate.latitude, along: placeListLast.coordinate.longitude, blat: location.coordinate.latitude, blong: location.coordinate.longitude)
                     }
                 }
             } else {
                 // if placeList is empty, appends current location by default
-                placeList.append(location.coordinate)
+                placeList.append(Annotation(coordinate:location.coordinate,beforePause:false))
             }
         }
     }
