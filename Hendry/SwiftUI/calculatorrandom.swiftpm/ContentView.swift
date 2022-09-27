@@ -13,7 +13,6 @@ struct ContentView: View {
     @State var randomNumber = 0
     var body: some View {
         VStack{
-            
             Text("\(randomNumber)")
                 .padding()
             
@@ -25,11 +24,14 @@ struct ContentView: View {
             HStack{
                 Button("Random"){
                     if scores != []{
-                    randomNumber = scores.randomElement()
+                        ForEach(0..<scores.count,id:\.self){random in
+                    randomNumber = scores.randomElement() ?? 0
+                        }
                     }
                 }.buttonStyle(.bordered)
                 Button("Reset"){
                     scores = []
+                    randomNumber = 0
                 }.buttonStyle(.bordered)
             }
             Divider()
