@@ -11,21 +11,39 @@ struct ContentView: View {
     @State var number : Int = 0
     @State var scores : [Int] = []
     @State var winner  : Int = 0
+    @State var turn : Bool = false
     var body: some View {
         VStack{
-            HStack{
+            ZStack{
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(.red)
                 Text("Winner: \(winner)")
-            }
-
+            }.rotationEffect(Angle(degrees: turn ? 0 : 360))
+                .frame(width: 100, height: 100)
+                .padding()
+            
             HStack{
+                Text("Results: ")
                 ForEach(0..<scores.count,id:\.self){ index in
                     Text("\(scores[index])")
                 }
             }
             HStack{
                 Button("Random"){
-                    if scores != []{
-                        winner = scores.randomElement()!
+                    withAnimation(.easeInOut(duration: 0.5)){
+                        winner = scores.randomElement() ?? 0
+                        turn.toggle()
+                        
+                    }
+                    withAnimation(.easeInOut(duration: 0.5).delay(0.7)){
+                        winner = scores.randomElement() ?? 0
+                        turn.toggle()
+                        
+                    }
+                    withAnimation(.easeInOut(duration: 0.5).delay(1.4)){
+                        winner = scores.randomElement() ?? 0
+                        turn.toggle()
+                        
                     }
                 }.buttonStyle(.bordered)
                 Button("Reset"){
