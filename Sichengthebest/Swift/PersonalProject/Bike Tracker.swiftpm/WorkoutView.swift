@@ -51,7 +51,7 @@ struct WorkoutView: View {
                     isRunning.toggle()
                     isAlreadyPaused.toggle()
                     isStarted = true
-                    LocationManager.shared.placeList.append(Annotation(coordinate:LocationManager.currentLocation,beforePause: !isRunning))
+                    LocationManager.shared.placeList.append(Annotation(coordinate: LocationManager.currentLocation,beforePause: !isRunning))
                 }) {
                     ButtonView(text: isStarted ? isRunning ? "Pause" : "Resume" : "Start",color: isRunning ? .yellow : .green)
                 }
