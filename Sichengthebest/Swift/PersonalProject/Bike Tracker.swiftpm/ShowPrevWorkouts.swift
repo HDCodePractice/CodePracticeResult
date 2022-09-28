@@ -30,7 +30,9 @@ struct PreviousWorkoutsView: View {
                             RectButtonView(text:"Delete this workout",color:.red)
                                 .frame(height:20)
                                 .onTapGesture {
-                                    workouts.remove(at: index)
+                                    if workouts.count != 0 {
+                                        workouts.remove(at: index)
+                                    }
                                 }
                                 .padding()
                         }
