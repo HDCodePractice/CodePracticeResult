@@ -37,6 +37,7 @@ struct MapView: UIViewRepresentable {
             for coord in lineCoordinates {
                 if status == true {
                     tempCoords[count].append(coord)
+                    tempCoords.append([])
                     count+=1
                 }
                 tempCoords[count].append(coord)
