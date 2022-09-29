@@ -95,7 +95,7 @@ struct WorkoutView: View {
             case .inactive:
                 print("app inactive")
             default:
-                print("wa")
+                print("error")
             }
         }
     }
@@ -132,7 +132,5 @@ func Stopwatch(progressTime:Int) -> String {
             return "\(progressTime % 60)"
         }
     }
-    
-    /// Increase progressTime each second
     return "\(hours):\(minutes):\(seconds)"
 }
