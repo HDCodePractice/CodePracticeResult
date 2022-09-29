@@ -12,28 +12,7 @@ struct PreviousWorkoutsView: View {
                 ForEach(0..<workouts.count,id:\.self) { index in
                     // Display each workout as a separate window
                     NavigationLink {
-                        VStack {
-                            Text("\(workouts[index].date,style: .date)")
-                                .foregroundColor(.yellow)
-                                .font(.system(size: 25))
-                            Text("Time: \(Stopwatch(progressTime: workouts[index].time))")
-                                .font(.system(size: 20))
-                            Text("Speed: \(String(format:"%.1f", workouts[index].speed)) kph")
-                                .font(.system(size: 20))
-                            Text("Distance: \(String(format: "%.2f",workouts[index].distance)) km")
-                                .font(.system(size: 20))
-                            MapView(lineCoordinates: workouts[index].coordinates,beforePauses: workouts[index].beforePauses, region: MKCoordinateRegion(
-                                center: workouts[index].coordinates[0], span: MKCoordinateSpan(
-                                    latitudeDelta: 0.05, longitudeDelta: 0.05
-                                )
-                            ), ended: true)
-                            RectButtonView(text:"Delete this workout",color:.red)
-                                .frame(height:20)
-                                .onTapGesture {
-                                    workouts.remove(at: index)
-                                }
-                                .padding()
-                        }
+                        SingleWorkoutView(index: index)
                     } label: {
                         // Rectangular text displaying each workout
                         ZStack {
@@ -57,6 +36,45 @@ struct PreviousWorkoutsView: View {
             }
         }
     }
+}
+
+struct SingleWorkoutView: View {
+    @AppStorage("workouts") var workouts: [Workout] = []
+    @Environment(\.presentationMode) var presentationMode
+    var index: Int
+    var body: some View {
+        VStack {
+            if workouts.count >= 1 {
+                Text("\(workouts[index].date,style: .date)")
+                    .foregroundColor(.yellow)
+                    .font(.system(size: 25))
+                Text("Time: \(Stopwatch(progressTime: workouts[index].time))")
+                    .font(.system(size: 20))
+                Text("Speed: \(String(format:"%.1f", workouts[index].speed)) kph")
+                    .font(.system(size: 20))
+                Text("Distance: \(String(format: "%.2f",workouts[index].distance)) km")
+                    .font(.system(size: 20))
+                MapView(lineCoordinates: workouts[index].coordinates,beforePauses: workouts[index].beforePauses, region: MKCoordinateRegion(
+                    center: workouts[index].coordinates[0], span: MKCoordinateSpan(
+                        latitudeDelta: 0.05, longitudeDelta: 0.05
+                    )
+                ), ended: true)
+                RectButtonView(text:"Delete this workout",color:.red)
+                    .frame(height:20)
+                    .onTapGesture {
+                        if workouts.count != 0 {
+                            workouts.remove(at: index)
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                    }
+                    .padding()
+            }
+        }
+    }
+}
+
+struct WorkoutsViewModel {
+    
 }
 
 struct PreviousWorkoutsView_Previews: PreviewProvider {
