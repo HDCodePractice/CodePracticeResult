@@ -71,7 +71,6 @@ struct WorkoutView: View {
                     progressTime = 0
                     isRunning = false
                     isStarted = false
-                    print(workouts)
                 }) {
                     ButtonView(text: "End",color: .red)
                 }
