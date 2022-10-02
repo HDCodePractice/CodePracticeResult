@@ -18,6 +18,7 @@ struct ContentView: View {
                                 ZStack{
                                     Rectangle()
                                         .fill(grid.gridColor)//.fill(grid.status == .showingboat ? grid.gridColor : .mint)
+                                    
                                     Image(systemName: grid.status == .unclicked ? Symbol.square.name : grid.symbol.name)
                                         .opacity(grid.status == .unclicked ? 0.2 : 1)
                                     
