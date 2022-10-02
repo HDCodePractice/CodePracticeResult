@@ -57,6 +57,7 @@ struct ContentView: View {
                 }
                 Button { 
                     numList = []
+                    result = 0
                 } label: { 
                     ZStack{
                         RoundedRectangle(cornerRadius: 5)
