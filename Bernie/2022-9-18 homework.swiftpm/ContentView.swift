@@ -45,9 +45,20 @@ struct ContentView: View {
                 withAnimation(.easeInOut(duration: 0.5)
                     .speed(1.00)
                     .delay(0.00)) { 
-                        isReset = false
-                        isReset = true
-                        isReset = false
+//                        1.
+//                        isReset = false
+//                        isReset = true
+//                        isReset = false
+//                        2.
+//                        if isReset{
+//                            isReset = false
+//                        }else{
+//                            isReset = true
+//                        }
+//                        3.
+//                        isReset = isReset ? false : true
+//                        4.
+                        isReset.toggle()
                     }
             }.buttonStyle(.borderedProminent)
             Button("Reset") {

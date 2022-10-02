@@ -8,7 +8,7 @@ enum Symbol{
     var name : String{
         switch self{
         case .boat:
-            return "sailboat.fill"
+            return "sun.max"
         case .fire:
             return "flame.fill"
         case .square:

@@ -85,6 +85,7 @@ struct Game{
             showBoat()
         }
         
+        
     }
     
     func isAllFire(boat: [[Int]])->Bool{
@@ -106,7 +107,7 @@ struct Game{
                     let x = j[0]
                     let y = j[1]
                     
-                    board[y][x].status = .clickedOnTarget
+                    board[y][x].status = .showingBoat
                     board[y][x].symbol = Symbol.boat
                 }
                 
