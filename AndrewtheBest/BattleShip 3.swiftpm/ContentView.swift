@@ -47,11 +47,11 @@ struct ContentView: View {
                         }
                         .onTapGesture {
                             var piece = grid
-//                            if  piece.shipPiece == shipsNumber{
-//                                piece.shipPiece = 0
-//                            }else{
-//                                piece.shipPiece += 1
-//                            }
+                            if  piece.shipPiece == shipsNumber{
+                                piece.shipPiece = 0
+                            }else{
+                                piece.shipPiece += 1
+                            }
                             board[grid.x][grid.y]=piece
                         }
                     }

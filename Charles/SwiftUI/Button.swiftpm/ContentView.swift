@@ -10,57 +10,32 @@ struct ContentView: View {
     ]
     @State var number : Int = 0
     @State var scores : [Int] = []
-    @State var winner  : Int = 0
-    @State var turn : Bool = false
     var body: some View {
         VStack{
-            ZStack{
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(.red)
-                Text("Winner: \(winner)")
-            }.rotationEffect(Angle(degrees: turn ? 0 : 360))
-                .frame(width: 100, height: 100)
+            Text("000")
                 .padding()
-            
             HStack{
-                Text("Results: ")
                 ForEach(0..<scores.count,id:\.self){ index in
                     Text("\(scores[index])")
                 }
             }
             HStack{
                 Button("Random"){
-                    withAnimation(.easeInOut(duration: 0.5)){
-                        winner = scores.randomElement() ?? 0
-                        turn.toggle()
-                        
-                    }
-                    withAnimation(.easeInOut(duration: 0.5).delay(0.7)){
-                        winner = scores.randomElement() ?? 0
-                        turn.toggle()
-                        
-                    }
-                    withAnimation(.easeInOut(duration: 0.5).delay(1.4)){
-                        winner = scores.randomElement() ?? 0
-                        turn.toggle()
-                        
-                    }
+                    scores.shuffle()
                 }.buttonStyle(.bordered)
                 Button("Reset"){
                     scores = []
-                    winner = 0
                 }.buttonStyle(.bordered)
             }
             Divider()
-            
-            Text("Number: \(number)")
+            Text("Number:\(number)")
                 .font(.title2)
             ForEach(0..<labels.count, id:\.self){ row in
                 HStack{
                     ForEach(0..<labels[row].count, id:\.self){ column in
                         Button(labels[row][column]){
                             if let input = Int(labels[row][column]){
-                                if number < 999 && number > -999{
+                                if number < 999999999 && number > -99999999{
                                     number = number*10+input
                                 }
                             }else{
@@ -71,6 +46,7 @@ struct ContentView: View {
                                 }else if labels[row][column] == "Add"{
                                     scores.append(number)
                                     number = 0
+                                    let a = Int.random(in: 0..<scores.count)
                                 }
                             }
                         }.buttonStyle(.bordered)
