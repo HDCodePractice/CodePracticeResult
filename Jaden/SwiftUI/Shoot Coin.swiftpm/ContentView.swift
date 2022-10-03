@@ -70,7 +70,7 @@ struct ContentView: View {
                         check = true
                         shots += 1
                         bulletX = carX
-                        withAnimation(.easeInOut(duration: 1.0)){
+                        withAnimation(.easeInOut(duration: 0.5)){
                             bulletY = -670
                             
                         }
