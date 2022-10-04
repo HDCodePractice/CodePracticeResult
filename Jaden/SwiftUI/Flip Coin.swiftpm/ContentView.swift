@@ -9,6 +9,7 @@ struct ContentView: View {
     @State var diceNumber : [String] = ["0"]
     @State var diceNumber1 : [String] = ["0"]
     @State var diceNumber2 : [String] = ["0"]
+    @State var sum = 0
     var body: some View {
         VStack {
             VStack{
@@ -38,13 +39,13 @@ struct ContentView: View {
                 Text("Still Spinning")
                     .font(.title)
             }else{
-                Text("\(coin)")
+                Text("\(sum)")
                     .font(.title)
                 Text("Numbers Rolled: \(diceNumber[0]) \(diceNumber1[0]) \(diceNumber2[0])")
             }
             Button("Start"){
                 diceNumber = []
-                
+                sum = 0
                 degress = 0
                 isRunning = true
                 withAnimation(.easeIn(duration: 2.0)) { 
@@ -85,6 +86,9 @@ struct ContentView: View {
                     print(diceNumber2[0])
                     isRunning = false
                 }
+                sum = Int(diceNumber[0]) ?? 0
+                sum += Int(diceNumber1[0]) ?? 0
+                sum +=  Int(diceNumber2[0]) ?? 0
             }.buttonStyle(.borderedProminent)
         }
         .padding()
