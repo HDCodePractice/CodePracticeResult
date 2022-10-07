@@ -18,14 +18,14 @@ struct ContentView: View {
                     .foregroundColor(tru ? .white : .clear)
             }
             HStack{
-                Button{
+                Button(""){
                     
                 }label: {
                     Image(systemName: "arrowshape.turn.up.backward")
                         .foregroundColor(.primary)
                 }.buttonStyle(.bordered)
                 
-                Button("Start"){
+                Button("Attack"){
                     fallY = -700
                     tru = true
                     withAnimation(.linear(duration: 1)){
@@ -36,7 +36,7 @@ struct ContentView: View {
                     }
                 }
                 
-                Button("drop"){
+                Button(){
                     
                 }label: {
                     Image(systemName: "arrowshape.turn.up.right")
