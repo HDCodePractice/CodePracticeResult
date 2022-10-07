@@ -8,17 +8,17 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "Random Generator",
+    name: "Sudoku",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "Random Generator",
+            name: "Sudoku",
             targets: ["AppModule"],
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .bunny),
+            appIcon: .placeholder(icon: .butterfly),
             accentColor: .presetColor(.mint),
             supportedDeviceFamilies: [
                 .pad,
