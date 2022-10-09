@@ -16,7 +16,7 @@ struct ContentView: View {
                 RoundedRectangle(cornerRadius: 60)
                     .fill(.pink)
                     .frame(width:200,height:200)
-                    .rotationEffect(90.00)
+//                    .rotationEffect(90.00)
                     
                 
                 Text("\(result)")
