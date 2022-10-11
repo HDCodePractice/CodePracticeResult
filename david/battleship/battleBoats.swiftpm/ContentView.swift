@@ -15,9 +15,9 @@ struct ContentView: View {
             }else{
                 Text("Continue")
             }
-            HStack{
-                
-            }
+//            HStack{
+//                
+//            }
             VStack(spacing:1){
                 ForEach(game.board,id:\.self){row in 
                     HStack(spacing:1){
