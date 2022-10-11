@@ -30,33 +30,35 @@ struct ContentView: View {
             HStack{
                 ForEach(numList, id:\.self){element in 
                     Text("\(element) ")
-                    
                 }
             }
             .font(.title2)
             HStack{
                 Button { 
-                    withAnimation(.easeInOut(duration: 1.00)
-                        .speed(5.00)
-                        .delay(0.00)) { 
-                            
-                        
-                        toggle.toggle()
-                        
+                    if let r = numList.randomElement(){
+                        withAnimation(.easeInOut(duration: 1.00)
+                            .speed(5.00)
+                            .delay(0.00)
+                            .repeatCount(3)) { 
+                                
+                                toggle.toggle()
+                                result = r
+                            }
                     }
                     
-                        result = numList.randomElement() ?? 0
+                    
                     
                     
                 } label: { 
                     ZStack{
-                    RoundedRectangle(cornerRadius: 5)
-                    Text("Random")
-                        .foregroundColor(.primary)
-                }
+                        RoundedRectangle(cornerRadius: 5)
+                        Text("Random")
+                            .foregroundColor(.primary)
+                    }
                 }
                 Button { 
                     numList = []
+                    result = 0
                 } label: { 
                     ZStack{
                         RoundedRectangle(cornerRadius: 5)
@@ -90,8 +92,6 @@ struct ContentView: View {
                                     inputNum = inputNum*10 + intKey
                                     
                                 }
-                                
-                                
                             }label: {
                                 ZStack{
                                     RoundedRectangle(cornerRadius: 5)
@@ -99,7 +99,6 @@ struct ContentView: View {
                                         .foregroundColor(.primary)
                                 }
                             }
-                            
                         }
                     }
                 }
