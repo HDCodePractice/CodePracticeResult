@@ -92,6 +92,48 @@ struct ContentView: View {
                                         }
                                         .onTapGesture {
                                             error = false
+//                                            var y = 0
+//                                            var z = 0
+//                                            var row = 0
+//                                            var column = 0
+//                                            var a = 10
+//                                            for i in 0...8{
+//                                                for j in 0...8{
+//                                                    if color[i][j] == .mint || color[i][j] == .red{
+//                                                        if board[i][j] != 0{
+//                                                            a = board[i][j]
+//                                                            
+//                                                        }
+//                                                    }
+//                                                }
+//                                            }
+//                                            for i in 0...8{
+//                                                if y >= 0 && y <= 2{
+//                                                    row = 0
+//                                                }else if y >= 3 && y <= 5{
+//                                                    row = 1
+//                                                }else{
+//                                                    row = 2
+//                                                }
+//                                                for j in 0...8{
+//                                                    if z >= 0 && z <= 2{
+//                                                        column = 0
+//                                                    }else if z >= 3 && z <= 5{
+//                                                        column = 1
+//                                                    }else{
+//                                                        column = 2
+//                                                    }
+//                                                    if color[i][j] == .cyan{
+//                                                        print(board[i][j],color[i][j])
+//                                                        if board[i][j] == a{
+//                                                            print("error",a,board[i][j])
+//                                                            error = true
+//                                                        }else{
+//                                                            error = false
+//                                                        }
+//                                                    }
+//                                                }
+//                                            }
                                             tapItem(row: r, column: c)
                                             checkSquare(row: row1*3, column: column1*3)
                                             clicked(row: r, column: c)
@@ -109,9 +151,10 @@ struct ContentView: View {
                         if h != 0{
                             Button(String(h)){
                                 var x = 10
-                                error = false
                                 var row = 0
                                 var column = 0
+                                var y = 0
+                                var z = 0
                                 for i in 0...8{
                                     if i >= 0 && i <= 2{
                                         row = 0
@@ -131,7 +174,9 @@ struct ContentView: View {
                                         if color[i][j] == .mint || color[i][j] == .red{
                                             board[i][j] = h
                                             x = board[i][j]
-                                            print(color[i][j])
+                                            y = i 
+                                            z = j
+                                            print(color[i][j], y , z)
                                             print(board[i][j])
                                             print(x)
                                             error = false
@@ -144,17 +189,17 @@ struct ContentView: View {
                                     }
                                 }
                                 for i in 0...8{
-                                    if i >= 0 && i <= 2{
+                                    if y >= 0 && y <= 2{
                                         row = 0
-                                    }else if i >= 3 && i <= 5{
+                                    }else if y >= 3 && y <= 5{
                                         row = 1
                                     }else{
                                         row = 2
                                     }
                                     for j in 0...8{
-                                        if j >= 0 && j <= 2{
+                                        if z >= 0 && z <= 2{
                                             column = 0
-                                        }else if j >= 3 && j <= 5{
+                                        }else if z >= 3 && z <= 5{
                                             column = 1
                                         }else{
                                             column = 2
@@ -164,18 +209,13 @@ struct ContentView: View {
                                             if board[i][j] == x{
                                                 print("error",x,board[i][j])
                                                 error = true
-                                                tapItem(row: i, column: j)
+                                                tapItem(row: y, column: z)
                                                 checkSquare(row: row*3, column: column*3)
-                                                clicked(row: i, column: j)
+                                                clicked(row: y, column: z)
                                                 
                                                 
                                             }
                                         }
-                                    }
-                                }
-                                for i in 0...8{
-                                    for j in 0...8{
-                                        
                                     }
                                 }
                             }.buttonStyle(.borderedProminent) 
