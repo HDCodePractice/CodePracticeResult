@@ -13,16 +13,11 @@ struct MapView: UIViewRepresentable {
         mapView.delegate = context.coordinator
         mapView.setRegion(region, animated: true)
         mapView.showsUserLocation = true
-        var tempCoords: [CLLocationCoordinate2D] = []
-        for coord in lineCoordinates {
-            tempCoords.append(coord)
-        }
-        tempCoords.append(LocationManager.currentLocation)
-        let polyline = MKPolyline(coordinates: tempCoords, count: lineCoordinates.count)
+        let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
         mapView.addOverlay(polyline)
         if ended {
-            let start = LandmarkAnnotation(coordinate:lineCoordinates[0],imageName: "start")
-            let end = LandmarkAnnotation(coordinate:lineCoordinates[lineCoordinates.count-1],imageName: "end")
+            let start = LandmarkAnnotation(coordinate:lineCoordinates[0])
+            let end = LandmarkAnnotation(coordinate:lineCoordinates[lineCoordinates.count-1])
             mapView.addAnnotation(start)
             mapView.addAnnotation(end)
         }
@@ -31,29 +26,6 @@ struct MapView: UIViewRepresentable {
     
     // Updates the view every time a new coordinate is added in placeList
     func updateUIView(_ view: MKMapView, context: Context) {
-        var tempCoords: [[CLLocationCoordinate2D]] = [[]]
-        var count = 0
-        for status in beforePauses {
-            for coord in lineCoordinates {
-                if status == true {
-                    tempCoords[count].append(coord)
-                    tempCoords.append([])
-                    count+=1
-                }
-                tempCoords[count].append(coord)
-            }
-        }
-        var count2 = 0
-        for i in tempCoords {
-            if i.count == 1 {
-                tempCoords.remove(at: count2)
-            }
-            count2 += 1
-        }
-        // something
-        for i in tempCoords {
-            view.addOverlay(MKPolyline(coordinates: i, count: i.count))
-        }
         if !ended {
             let overlays = view.overlays 
             for overlay in overlays {
@@ -91,9 +63,7 @@ class Coordinator: NSObject, MKMapViewDelegate {
 
 class LandmarkAnnotation: NSObject, MKAnnotation {
     let coordinate: CLLocationCoordinate2D
-    let imageName: String
-    init(coordinate: CLLocationCoordinate2D, imageName:String) {
+    init(coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate
-        self.imageName = imageName
     }
 }
