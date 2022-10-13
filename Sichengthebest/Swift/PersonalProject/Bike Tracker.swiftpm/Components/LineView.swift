@@ -13,8 +13,6 @@ struct MapView: UIViewRepresentable {
         mapView.delegate = context.coordinator
         mapView.setRegion(region, animated: true)
         mapView.showsUserLocation = true
-        let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
-        mapView.addOverlay(polyline)
         if ended {
             let start = LandmarkAnnotation(coordinate:lineCoordinates[0])
             let end = LandmarkAnnotation(coordinate:lineCoordinates[lineCoordinates.count-1])
@@ -27,13 +25,9 @@ struct MapView: UIViewRepresentable {
     // Updates the view every time a new coordinate is added in placeList
     func updateUIView(_ view: MKMapView, context: Context) {
         if !ended {
-            let overlays = view.overlays 
-            for overlay in overlays {
-                // remove all MKPolyline-Overlays
-                if overlay is MKPolyline {
-                    view.removeOverlay(overlay)
-                }
-            }
+            let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
+            view.removeOverlays(view.overlays)
+            view.addOverlay(polyline)
         }
     }
     

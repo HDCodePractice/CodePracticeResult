@@ -8,7 +8,6 @@ class LocationManager: NSObject,ObservableObject{
     static var currentLocation: CLLocationCoordinate2D {
         guard let location = shared.manager.location else {
             return DefaultLocation
-            
         }
         return location.coordinate
     }
