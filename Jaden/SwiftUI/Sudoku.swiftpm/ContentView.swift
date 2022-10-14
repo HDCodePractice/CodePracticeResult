@@ -22,6 +22,7 @@ struct ContentView: View {
     func startGame(){
         random = [1,2,3,4,5,6,7,8,9]
         board = Array(repeating: Array(repeating: 0, count: 9), count: 9)
+        inputBoard = Array(repeating: Array(repeating: 0, count: 9), count: 9)
         for i in 0...2{
             for j in 0...2{
                 random.shuffle()
