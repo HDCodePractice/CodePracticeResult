@@ -172,7 +172,7 @@ struct ContentView: View {
                                         }
                                         if color[i][j] == .cyan{
                                             print(inputBoard[i][j],color[i][j])
-                                            if inputBoard[i][j] == x{
+                                            if board[i][j] == x{
                                                 print("error",x,board[i][j])
                                                 error = true
                                                 tapItem(row: y, column: z)
