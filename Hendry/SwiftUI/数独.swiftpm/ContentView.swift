@@ -1,17 +1,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var board = [
-        [1,2,3,4,5,6,7,8,9],
-        [2,2,3,4,5,6,7,8,9],
-        [3,2,3,4,5,6,7,8,9],
-        [4,2,3,4,5,6,7,8,9],
-        [5,2,3,4,5,6,7,8,9],
-        [6,2,3,4,5,6,7,8,9],
-        [7,2,3,4,5,6,7,8,9],
-        [8,2,3,4,5,6,7,8,9],
-        [9,2,3,4,5,6,7,8,9]
-    ]
+    @State var board = Array(
+        repeating: Array(repeating: 0, count: 9), 
+        count: 9)
+    @State var inputBoard = Array(
+        repeating: Array(repeating: 0, count: 9), 
+        count: 9)
     
     @State var colors : [[Color]] = Array(
         repeating: Array(repeating: .primary, count: 9), 
@@ -22,6 +17,7 @@ struct ContentView: View {
     
     func startGame(){
         board = Array(repeating: Array(repeating: 0, count: 9), count: 9)
+        inputBoard = Array(repeating: Array(repeating: 0, count: 9), count: 9)
         var random = [1,2,3,4,5,6,7,8,9]
         let grids = [0,3,6]
         for g in grids{
@@ -43,6 +39,8 @@ struct ContentView: View {
             colors[i][colum] = .secondary
         }
         colors[row][colum] = .mint
+        x = row
+        y = colum
     }
     
     var body: some View {
@@ -60,13 +58,33 @@ struct ContentView: View {
                                             ZStack{
                                                 Rectangle()
                                                     .fill(colors[r][c])
-                                                Text("\(board[r][c])")
-                                                    .foregroundColor(.accentColor)
+                                                if board[r][c]==0 {
+                                                    var isr = false
+                                                    ForEach(0..<9, id:\.self){i in
+                                                        if board[r][i] == inputBoard[r][c]{
+                                                            isr == true
+                                                        }
+                                                    }
+                                                    ForEach(0..<9, id:\.self){i in
+                                                        if board[i][c] == inputBoard[r][c]{
+                                                            isr == true
+                                                        }
+                                                    }
+                                                    if isr == true{
+                                                        Text(inputBoard[r][c]==0 ? "" : String(inputBoard[r][c]))
+                                                            .foregroundColor(.red)
+                                                        colors[r][c] = Color.pink
+                                                    }else{
+                                                    Text(inputBoard[r][c]==0 ? "" : String(inputBoard[r][c]))
+                                                        .foregroundColor(.blue)
+                                                    }
+                                                }else{
+                                                    Text("\(board[r][c])")
+                                                        .foregroundColor(.accentColor)
+                                                }
                                             }
                                             .onTapGesture {
                                                 tapItem(row: r, colum: c)
-                                                x = r
-                                                y = c
                                             }
                                         }
                                     }
@@ -76,19 +94,27 @@ struct ContentView: View {
                     }
                 }
             }
+            .onAppear{
+                startGame()
+            }
             HStack{
                 ForEach(1...9,id:\.self){num in
                     ZStack{
                         RoundedRectangle(cornerRadius: 5)
                             .frame(height: 50)
                         Button("\(num)"){
-                            board[x][y] = num
+                            inputBoard[x][y] = num
                         }
                     }
                 }
             }
-            Button("Restart"){
-                startGame()
+            HStack{
+                Button("Erase"){
+                    inputBoard[x][y] = 0
+                }
+                Button("Restart"){
+                    startGame()
+                }
             }
         }
         .padding()
