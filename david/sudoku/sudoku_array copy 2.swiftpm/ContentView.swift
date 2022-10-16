@@ -191,12 +191,15 @@ struct ContentView: View {
                                         textColor[rGet][cGet] = .blue
                                     }
                                     showDuplic(r: rGet, c: cGet)
+                                    
                                 }
                                 .buttonStyle(.bordered)
                                 .font(.largeTitle)
                             }
                         }
+                        
                     }
+                    
                 }
                 
                 VStack{
@@ -216,9 +219,14 @@ struct ContentView: View {
                     }
                     .buttonStyle(.bordered)
                     .font(.largeTitle)
+                    
                 }
+                
             }
+            
         }
+        
+        
     }
 }
 
