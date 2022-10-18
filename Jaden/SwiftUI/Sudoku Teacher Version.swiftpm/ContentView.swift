@@ -44,33 +44,34 @@ struct ContentView: View {
     func checkConflict(row:Int,colum:Int){
         let inputNum = inputBoard[row][colum]
         for i in 0...8{
-            
+            if inputBoard[row][i]==inputNum && inputBoard[row][i] != 0{
+                print("hhhh")
+                print(conflicts[row][i],i,row,conflict[row][i])
+                conflicts[row][i] = true
+                conflict[row][i] = inputNum
+            }
             if board[row][i] == inputNum && board[row][i] != 0{
                 print("ddddd")
                 print(conflicts[row][i],i,row,conflict[row][i])
                 conflicts[row][i] = true
                 conflict[row][i] = inputNum
-                if inputBoard[row][i]==inputNum && inputBoard[row][i] != 0{
-                    print("hhhh")
-                    print(conflicts[row][i],i,row,conflict[row][i])
-                    conflicts[row][i] = true
-                    conflict[row][i] = inputNum
-                }
+                
             }
         }
         
         for i in 0...8{
+            if inputBoard[i][colum]==inputNum && inputBoard[i][colum] != 0{
+                print(conflicts[i][colum],i,colum,conflict[i][colum])
+                print("kkkk")
+                conflicts[i][colum] = true
+                conflict[i][colum] = inputNum
+            }
             if board[i][colum] == inputNum && board[i][colum] != 0{
                 print(conflicts[i][colum],i,colum,conflict[i][colum])
                 print("llllll")
                 conflicts[i][colum] = true
                 conflict[i][colum] = inputNum
-                if inputBoard[i][colum]==inputNum && inputBoard[i][colum] != 0{
-                    print(conflicts[i][colum],i,colum,conflict[i][colum])
-                    print("kkkk")
-                    conflicts[i][colum] = true
-                    conflict[i][colum] = inputNum
-                }
+                
             }
         }
         
