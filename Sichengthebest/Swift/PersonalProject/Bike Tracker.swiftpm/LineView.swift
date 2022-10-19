@@ -2,19 +2,20 @@ import SwiftUI
 import MapKit
 
 struct MapView: UIViewRepresentable {
-    let lineCoordinates: [CLLocationCoordinate2D]
+    var lineCoordinates: [CLLocationCoordinate2D]
     let beforePauses: [Bool]
-    let region: MKCoordinateRegion
+    @Binding var region: MKCoordinateRegion
     let ended: Bool
     
     // Create the MKMapView using UIKit
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
+        let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
         mapView.delegate = context.coordinator
         mapView.setRegion(region, animated: true)
         mapView.showsUserLocation = true
-        let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
-        mapView.addOverlay(polyline)
+//        mapView.removeOverlays(mapView.overlays)
+//        mapView.addOverlay(polyline)
         if ended {
             let start = LandmarkAnnotation(coordinate:lineCoordinates[0])
             let end = LandmarkAnnotation(coordinate:lineCoordinates[lineCoordinates.count-1])
@@ -27,19 +28,16 @@ struct MapView: UIViewRepresentable {
     // Updates the view every time a new coordinate is added in placeList
     func updateUIView(_ view: MKMapView, context: Context) {
         if !ended {
-            let overlays = view.overlays 
-            for overlay in overlays {
-                // remove all MKPolyline-Overlays
-                if overlay is MKPolyline {
-                    view.removeOverlay(overlay)
-                }
-            }
+            view.region = region
         }
+        let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
+        view.removeOverlays(view.overlays)
+        view.addOverlay(polyline)
     }
     
     // Link it to the coordinator which is defined below.
     func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+        Coordinator(parent:self)
     }
     
 }
@@ -47,17 +45,17 @@ struct MapView: UIViewRepresentable {
 class Coordinator: NSObject, MKMapViewDelegate {
     var parent: MapView
     
-    init(_ parent: MapView) {
+    init(parent: MapView) {
         self.parent = parent
     }
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        if let routePolyline = overlay as? MKPolyline {
-            let renderer = MKPolylineRenderer(polyline: routePolyline)
-            renderer.strokeColor = UIColor.systemBlue
-            renderer.lineWidth = 5
-            return renderer
-        }
-        return MKOverlayRenderer()
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = .blue
+        renderer.lineWidth = 5
+        return renderer
+    }
+    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        parent.region = mapView.region
     }
 }
 

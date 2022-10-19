@@ -7,26 +7,31 @@ struct WorkoutView: View {
     @State var isStarted = false
     @State var isAlreadyPaused = true
     @State var progressTime = 0
+    @StateObject var lm = LocationManager.shared
     var tempCoords: [CLLocationCoordinate2D] {
         var tempTempCoords: [CLLocationCoordinate2D] = []
-        for annotation in LocationManager.shared.placeList {
+        for annotation in lm.placeList {
             tempTempCoords.append(annotation.coordinate)
         }
         return tempTempCoords
     }
     var tempBools: [Bool] {
         var tempTempBools: [Bool] = []
-        for annotation in LocationManager.shared.placeList {
+        for annotation in lm.placeList {
             tempTempBools.append(annotation.beforePause)
         }
         return tempTempBools
     }
+    @State var currentRegion = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 37.33441712785779, longitude: -122.00967002358799), span: MKCoordinateSpan(
+            latitudeDelta: 0.05, longitudeDelta: 0.05
+        ))
     @AppStorage("workouts") var workouts: [Workout] = []
     // Initializes timer
     let myTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var body: some View {
         VStack {
-            Label("\(Stopwatch(progressTime: progressTime))  |  \(String(format: "%.2f",LocationManager.shared.totalDistance / 1000)) km", systemImage: "bicycle.circle")
+            Label("\(Stopwatch(progressTime: progressTime))  |  \(String(format: "%.2f",lm.totalDistance / 1000)) km", systemImage: "bicycle.circle")
                 .font(.system(size: 25))
                 .onReceive(myTimer) { _ in
                     // Adds to the timer every second
@@ -34,24 +39,22 @@ struct WorkoutView: View {
                         progressTime += 1
                     }
                 }
-            Label("Average speed: \(String(format: "%.1f",LocationManager.shared.totalDistance / 1000 * 3600 / Double(progressTime))) kph\nCurrent speed: \(String(format: "%.1f",LocationManager.shared.currentSpeed)) kph", systemImage: "speedometer")
+            Label("Average speed: \(String(format: "%.1f",lm.totalDistance / 1000 * 3600 / Double(progressTime))) kph\nCurrent speed: \(String(format: "%.1f",lm.currentSpeed)) kph", systemImage: "speedometer")
                 .font(.system(size: 25))
             Label(isStarted ? isRunning ? "Workout recording...":"Workout paused": "Start workout?", systemImage: isStarted ? isRunning ? "bicycle.circle" : "pause.circle" : "restart")
                 .font(.system(size: 20))
                 .foregroundColor(isStarted ? isRunning ? .green:.yellow:.blue)
-            Text("Annotations: \(LocationManager.shared.placeList.count)")
-            MapView(lineCoordinates: tempCoords, beforePauses: tempBools, region: MKCoordinateRegion(
-                center: LocationManager.currentLocation, span: MKCoordinateSpan(
-                    latitudeDelta: 0.05, longitudeDelta: 0.05
-                )
-            ), ended: isStarted)
+            Text("Annotations: \(lm.placeList.count)")
+            MapView(lineCoordinates: tempCoords, beforePauses: tempBools, region: $currentRegion, ended: isStarted)
+            let _ = print(tempCoords)
+            let _ = print(lm.placeList)
             HStack {
                 // Resume/Pause button
                 Button(action: {
                     isRunning.toggle()
                     isAlreadyPaused.toggle()
                     isStarted = true
-                    LocationManager.shared.placeList.append(Annotation(coordinate: LocationManager.currentLocation,beforePause: !isRunning))
+                    lm.placeList.append(Annotation(coordinate: lm.currentLocation,beforePause: !isRunning))
                 }) {
                     ButtonView(text: isStarted ? isRunning ? "Pause" : "Resume" : "Start",color: isRunning ? .yellow : .green)
                 }
@@ -61,13 +64,14 @@ struct WorkoutView: View {
                         workouts.append(Workout(
                             time: progressTime, 
                             date: Date.now,
-                            speed: LocationManager.shared.totalDistance / 1000 * 3600 / Double(progressTime), 
-                            distance: LocationManager.shared.totalDistance / 1000, beforePauses: tempBools))
-                        for annotation in LocationManager.shared.placeList {
+                            speed: lm.totalDistance / 1000 * 3600 / Double(progressTime),
+                            distance: lm.totalDistance / 1000, beforePauses: tempBools))
+                        for annotation in lm.placeList {
                             workouts[workouts.count-1].addCoordToArray(coord: annotation.coordinate)
                         }
                     }
-                    LocationManager.shared.placeList = []
+                    lm.placeList = []
+                    lm.totalDistance = 0
                     progressTime = 0
                     isRunning = false
                     isStarted = false
@@ -83,13 +87,13 @@ struct WorkoutView: View {
                 if isStarted {
                     if isAlreadyPaused == true {
                         isRunning = true
-                        LocationManager.shared.placeList.append(Annotation(coordinate:LocationManager.currentLocation,beforePause: false))
+                        lm.placeList.append(Annotation(coordinate:lm.currentLocation,beforePause: false))
                     }
                 }
             case .background:
                 if isStarted {
                     isRunning = false
-                    LocationManager.shared.placeList.append(Annotation(coordinate:LocationManager.currentLocation,beforePause: true))
+                    lm.placeList.append(Annotation(coordinate:lm.currentLocation,beforePause: true))
                 }
             case .inactive:
                 print("app inactive")

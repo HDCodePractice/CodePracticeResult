@@ -5,14 +5,8 @@ import MapKit
 class LocationManager: NSObject,ObservableObject{
     static let shared = LocationManager()
     static let DefaultLocation = CLLocationCoordinate2D(latitude: 43.919284,longitude: -79.4366317)
-    static var currentLocation: CLLocationCoordinate2D {
-        guard let location = shared.manager.location else {
-            return DefaultLocation
-            
-        }
-        return location.coordinate
-    }
-    var placeList: [Annotation] = []
+    @Published var currentLocation: CLLocationCoordinate2D = DefaultLocation
+    @Published var placeList: [Annotation] = []
     var totalDistance: Double = 0
     var currentSpeed: Double = 0
     
@@ -30,6 +24,7 @@ class LocationManager: NSObject,ObservableObject{
 extension LocationManager: CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
+            currentLocation = location.coordinate
             if placeList.count > 0 {
                 // checks whether placeList is empty
                 if let placeListLast = placeList.last {
