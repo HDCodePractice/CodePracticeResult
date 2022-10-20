@@ -27,7 +27,7 @@ struct SingleWorkoutView: View {
                     Text("Distance: \(String(format: "%.2f",workouts[index].distance)) km")
                         .font(.system(size: 20))
                     // Map
-                    MapView(lineCoordinates: workouts[index].coordinates,beforePauses: workouts[index].beforePauses, region: $region, ended: true)
+                    MapView(lineCoordinates: workouts[index].coordinates,beforePauses: workouts[index].beforePauses, region: region, ended: true)
                         .onAppear() {
                             region.center = workouts[index].coordinates[0]
                         }
