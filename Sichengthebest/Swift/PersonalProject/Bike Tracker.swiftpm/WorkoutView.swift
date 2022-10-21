@@ -3,8 +3,6 @@ import MapKit
 
 struct WorkoutView: View {
     @Environment(\.scenePhase) var scenePhase
-    @State var isRunning = false
-    @State var isStarted = false
     @State var isAlreadyPaused = true
     @State var progressTime = 0
     @StateObject var lm = LocationManager.shared
@@ -22,10 +20,6 @@ struct WorkoutView: View {
         }
         return tempTempBools
     }
-    @State var currentRegion = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 37.33441712785779, longitude: -122.00967002358799), span: MKCoordinateSpan(
-            latitudeDelta: 0.05, longitudeDelta: 0.05
-        ))
     @AppStorage("workouts") var workouts: [Workout] = []
     // Initializes timer
     let myTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -35,32 +29,30 @@ struct WorkoutView: View {
                 .font(.system(size: 25))
                 .onReceive(myTimer) { _ in
                     // Adds to the timer every second
-                    if isRunning {
+                    if lm.isRunning {
                         progressTime += 1
                     }
                 }
             Label("Average speed: \(String(format: "%.1f",lm.totalDistance / 1000 * 3600 / Double(progressTime))) kph\nCurrent speed: \(String(format: "%.1f",lm.currentSpeed)) kph", systemImage: "speedometer")
                 .font(.system(size: 25))
-            Label(isStarted ? isRunning ? "Workout recording...":"Workout paused": "Start workout?", systemImage: isStarted ? isRunning ? "bicycle.circle" : "pause.circle" : "restart")
+            Label(lm.isStarted ? lm.isRunning ? "Workout recording...":"Workout paused": "Start workout?", systemImage: lm.isStarted ? lm.isRunning ? "bicycle.circle" : "pause.circle" : "restart")
                 .font(.system(size: 20))
-                .foregroundColor(isStarted ? isRunning ? .green:.yellow:.blue)
+                .foregroundColor(lm.isStarted ? lm.isRunning ? .green:.yellow:.blue)
             Text("Annotations: \(lm.placeList.count)")
-            MapView(lineCoordinates: tempCoords, beforePauses: tempBools, region: $currentRegion, ended: isStarted)
-            let _ = print(tempCoords)
-            let _ = print(lm.placeList)
+            MapView(lineCoordinates: tempCoords, beforePauses: tempBools, region: lm.currentRegion, ended: lm.isStarted)
             HStack {
                 // Resume/Pause button
                 Button(action: {
-                    isRunning.toggle()
+                    lm.isRunning.toggle()
                     isAlreadyPaused.toggle()
-                    isStarted = true
-                    lm.placeList.append(Annotation(coordinate: lm.currentLocation,beforePause: !isRunning))
+                   lm.isStarted = true
+                    lm.placeList.append(Annotation(coordinate: lm.currentLocation,beforePause: !lm.isRunning))
                 }) {
-                    ButtonView(text: isStarted ? isRunning ? "Pause" : "Resume" : "Start",color: isRunning ? .yellow : .green)
+                    ButtonView(text: lm.isStarted ? lm.isRunning ? "Pause" : "Resume" : "Start",color: lm.isRunning ? .yellow : .green)
                 }
                 // End button
                 Button(action: {
-                    if isStarted == true {
+                    if lm.isStarted == true {
                         workouts.append(Workout(
                             time: progressTime, 
                             date: Date.now,
@@ -73,8 +65,8 @@ struct WorkoutView: View {
                     lm.placeList = []
                     lm.totalDistance = 0
                     progressTime = 0
-                    isRunning = false
-                    isStarted = false
+                    lm.isRunning = false
+                   lm.isStarted = false
                 }) {
                     ButtonView(text: "End",color: .red)
                 }
@@ -84,15 +76,15 @@ struct WorkoutView: View {
         .onChange(of: scenePhase) { scenePhase in
             switch scenePhase{
             case .active:
-                if isStarted {
+                if lm.isStarted {
                     if isAlreadyPaused == true {
-                        isRunning = true
+                        lm.isRunning = true
                         lm.placeList.append(Annotation(coordinate:lm.currentLocation,beforePause: false))
                     }
                 }
             case .background:
-                if isStarted {
-                    isRunning = false
+                if lm.isStarted {
+                    lm.isRunning = false
                     lm.placeList.append(Annotation(coordinate:lm.currentLocation,beforePause: true))
                 }
             case .inactive:
