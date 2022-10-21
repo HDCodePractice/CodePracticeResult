@@ -29,15 +29,32 @@ struct ContentView: View {
             }
         }
     }
-    
+    func checkConflict(row:Int,colum:Int){
+        let inputNum = inputBoard[row][colum]
+        for i in 0...8{
+            if board[row][i]==inputNum && board[row][i] != 0{
+                if i != colum{
+                    colors[row][i] = .pink
+                }
+            }
+        }
+    }
     func tapItem(row:Int,colum:Int){
         colors = Array(
             repeating: Array(repeating: .primary, count: 9), 
             count: 9)
+        let chunkRow = row/3
+        let chunkcolumn = colum/3
+        for x in chunkRow*3..<chunkRow*3+3{
+            for y in chunkcolumn*3..<chunkcolumn*3+3{
+                colors[x][y] = .secondary
+            }
+        }
         for i in 0...8{
             colors[row][i] = .secondary
             colors[i][colum] = .secondary
         }
+        checkConflict(row: row,colum: colum)
         colors[row][colum] = .mint
         x = row
         y = colum
@@ -59,25 +76,8 @@ struct ContentView: View {
                                                 Rectangle()
                                                     .fill(colors[r][c])
                                                 if board[r][c]==0 {
-                                                    var isr = false
-                                                    ForEach(0..<9, id:\.self){i in
-                                                        if board[r][i] == inputBoard[r][c]{
-                                                            isr == true
-                                                        }
-                                                    }
-                                                    ForEach(0..<9, id:\.self){i in
-                                                        if board[i][c] == inputBoard[r][c]{
-                                                            isr == true
-                                                        }
-                                                    }
-                                                    if isr == true{
-                                                        Text(inputBoard[r][c]==0 ? "" : String(inputBoard[r][c]))
-                                                            .foregroundColor(.red)
-                                                        colors[r][c] = Color.pink
-                                                    }else{
                                                     Text(inputBoard[r][c]==0 ? "" : String(inputBoard[r][c]))
                                                         .foregroundColor(.blue)
-                                                    }
                                                 }else{
                                                     Text("\(board[r][c])")
                                                         .foregroundColor(.accentColor)
@@ -104,6 +104,7 @@ struct ContentView: View {
                             .frame(height: 50)
                         Button("\(num)"){
                             inputBoard[x][y] = num
+                            tapItem(row:x,colum:y)
                         }
                     }
                 }
