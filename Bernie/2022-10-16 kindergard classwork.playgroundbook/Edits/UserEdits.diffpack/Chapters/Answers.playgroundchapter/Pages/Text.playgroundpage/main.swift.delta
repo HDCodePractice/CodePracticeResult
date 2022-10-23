@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>let styles = ["♦️","♣️","♥️","♠️"]
+
+let num = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"]
+
+var cards : [String] = []
+for i in num{
+    for j in styles{
+        cards.append(i+j)
+    }
+}
+
+show("\(cards)")
+
+let cards4 = cards.shuffled()[0...3]
+show("\(cards4)")
+
+let card1 = cards.randomElement()!
+show("\(card1)")
+
+var indeies : [Int] = []
+for i in cards4{
+    indeies.append(cards.firstIndex(of: i)!)
+}
+show("\(indeies)")
+
+let f = cards.firstIndex(of: card1)!
+show("\(f)")
+
+indeies.sort(by: &lt;)
+show("\(indeies)")
+
+if f &lt; indeies.first!{
+    show("smaller")
+}else if f &gt; indeies.last!{
+    show("bigger")
+}else {
+    show("middle")
+}
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 644}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 252}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</string>
+</dict>
+</plist>
