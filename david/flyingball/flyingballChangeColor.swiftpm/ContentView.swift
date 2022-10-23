@@ -16,6 +16,8 @@ struct ContentView: View {
                 Color.clear
                 Rectangle()
                     .foregroundColor(game.board[0].backColor.color)
+                
+                    
                 ForEach(0..<game.board.count,id:\.self){z in
                     Image(systemName: game.board[z].globe)
                     
@@ -24,6 +26,7 @@ struct ContentView: View {
                     
                         .foregroundColor(game.board[z].globeColor.color)
                         .offset(x:game.board[z].x,y:game.board[z].y)
+                        
                 }
             }
             

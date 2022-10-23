@@ -5,16 +5,16 @@ import MapKit
 class LocationManager: NSObject,ObservableObject{
     static let shared = LocationManager()
     static let DefaultLocation = CLLocationCoordinate2D(latitude: 43.919284,longitude: -79.4366317)
-    static var currentLocation: CLLocationCoordinate2D {
-        guard let location = shared.manager.location else {
-            return DefaultLocation
-            
-        }
-        return location.coordinate
-    }
-    var placeList: [Annotation] = []
+    @Published var currentLocation: CLLocationCoordinate2D = DefaultLocation
+    @Published var currentRegion = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 37.33441712785779, longitude: -122.00967002358799), span: MKCoordinateSpan(
+            latitudeDelta: 0.05, longitudeDelta: 0.05
+        ))
+    @Published var placeList: [Annotation] = []
     var totalDistance: Double = 0
     var currentSpeed: Double = 0
+    @Published var isRunning = false
+    @Published var isStarted = false
     
     private let manager = CLLocationManager()
     
@@ -30,19 +30,25 @@ class LocationManager: NSObject,ObservableObject{
 extension LocationManager: CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
+            currentLocation = location.coordinate
             if placeList.count > 0 {
                 // checks whether placeList is empty
                 if let placeListLast = placeList.last {
                     // creates placeListLast to circumvent bugs
                     currentSpeed = location.speed
+                    currentRegion.center = location.coordinate
                     if checkCloseCoord(coord1: location.coordinate, coord2: placeListLast.coordinate) {
-                        placeList.append(Annotation(coordinate:location.coordinate,beforePause:false))
-                        totalDistance += calculateDistance(alat: placeListLast.coordinate.latitude, along: placeListLast.coordinate.longitude, blat: location.coordinate.latitude, blong: location.coordinate.longitude)
+                        if isRunning {
+                            placeList.append(Annotation(coordinate:location.coordinate,beforePause:false))
+                            totalDistance += calculateDistance(alat: placeListLast.coordinate.latitude, along: placeListLast.coordinate.longitude, blat: location.coordinate.latitude, blong: location.coordinate.longitude)
+                        }
                     }
                 }
             } else {
                 // if placeList is empty, appends current location by default
-                placeList.append(Annotation(coordinate:location.coordinate,beforePause:false))
+                if isStarted {
+                    placeList.append(Annotation(coordinate:location.coordinate,beforePause:false))
+                }
             }
         }
     }
@@ -60,7 +66,7 @@ extension LocationManager: CLLocationManagerDelegate{
 func checkCloseCoord(coord1:CLLocationCoordinate2D, coord2:CLLocationCoordinate2D) -> Bool {
     let longDif = abs(coord1.longitude-coord2.longitude)
     let latDif = abs(coord1.latitude-coord2.latitude)
-    if longDif < 0.0001 || latDif < 0.0001 {
+    if longDif + latDif < 0.0003 {
         return false
     } else {
         return true
