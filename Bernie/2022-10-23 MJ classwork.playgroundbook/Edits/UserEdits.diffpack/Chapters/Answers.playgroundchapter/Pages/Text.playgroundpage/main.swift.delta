@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>let majiang = ["🀇","🀈","🀉","🀊","🀋","🀌","🀍","🀎","🀏","🀐","🀑","🀒","🀓","🀔","🀕","🀖","🀗","🀘","🀙","🀚","🀛","🀜","🀝","🀞","🀟","🀠","🀡","🀀","🀁","🀂","🀃","🀄","🀅","🀆"]
+
+// 34种牌，每种牌有四张，共136张牌
+// 三个相同的 或 三个连牌 （一组牌）
+// 一对儿（两个相同的）
+// 四组加一对儿 即 胡牌 总共14张牌
+
+func hu(pai: [Int])-&gt;Bool{
+    return true
+}
+
+func showPai(pai: [Int])-&gt;String{
+    var ps = ""
+    for i in pai{
+        ps = "\(ps) \(majiang[i])"
+    }
+    return ps
+}
+// 胡 🀇 🀇 🀇 🀈 🀈 🀈 🀉 🀉 🀉 🀊 🀊 🀊 🀋 🀋
+// let tian = [0,1,1,1,2,2,2,3,3,3,4,4,0,0]
+// 胡 🀇 🀇 🀇 🀈 🀉 🀊 🀊 🀊 🀋 🀋 🀋 🀌 🀌 🀌
+// let tian = [0,0,4,4,4,5,5,5,0,1,2,3,3,3]
+// 不胡 🀇 🀈 🀉 🀊 🀋 🀌 🀍 🀎 🀏 🀐 🀐 🀑 🀒 🀒
+// let tian = [0,1,2,3,4,5,6,7,8,8,9,10,11,11]
+// 胡 🀇 🀈 🀉 🀈 🀉 🀊 🀊 🀋 🀌 🀋 🀌 🀍 🀋 🀋
+// let tian = [0,1,2,1,2,3,3,4,5,4,5,6,4,4]
+let tian = [0,1,1,2,2,3,3,4,4,4,5,5,6,6]
+
+print(showPai(pai: [0,1,1,1,2,2,2,3,3,3,4,4,0,0]))
+print(hu(pai: [0,1,1,1,2,2,2,3,3,3,4,4,0,0]))
+
+print(showPai(pai: [0,0,4,4,4,5,5,5,0,1,2,3,3,3]))
+print(hu(pai: [0,0,4,4,4,5,5,5,0,1,2,3,3,3]))
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 1044}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 253}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</string>
+</dict>
+</plist>
