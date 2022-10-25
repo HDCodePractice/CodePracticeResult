@@ -11,7 +11,7 @@ struct Card_LoL: View {
             ZStack(alignment: .topLeading){
                 RoundedRectangle(cornerRadius: 40)
                     .fill(.clear)
-                HStack{
+                VStack{
                     Text(suit)
                         .font(.system(size: 40))
                         .foregroundColor(.accentColor)
@@ -25,7 +25,7 @@ struct Card_LoL: View {
             ZStack(alignment: .topLeading){
                 RoundedRectangle(cornerRadius: 40)
                     .fill(.clear)
-                HStack{
+                VStack{
                     Text(suit)
                         .font(.system(size: 40))
                         .foregroundColor(.accentColor)
