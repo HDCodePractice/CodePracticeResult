@@ -38,41 +38,15 @@ struct ContentView: View {
             }
             Button("Random"){
                 players = []
-                var player11 = Int.random(in: 0...51)
-                var player12 = Int.random(in: 0...51)
-                var player13 = Int.random(in: 0...51)
-                var player14 = Int.random(in: 0...51)
-                if player11 == player12{
-                    player12 += 1
-                    if player12>51{
-                        player12 -= 2
-                    }
-                }else if player11 == player13{
-                    player13 += 1
-                    if player13>51{
-                        player13 -= 2
-                    }
-                }else if player11 == player14{
-                    player14 += 1
-                    if player14>51{
-                        player14 -= 2
-                    }
-                }else if player12 == player13{
-                    player13 += 1
-                    if player13>51{
-                        player13 -= 2
-                    }
-                }else if player12 == player14{
-                    player14 += 1
-                    if player14>51{
-                        player14 -= 2
-                    }
-                }else if player13 == player14{
-                    player14 += 1
-                    if player14>51{
-                        player14 -= 2
-                    }
+                var numbers : [Int] = []
+                for i in 0...51{
+                    numbers.append(i)
                 }
+                numbers.shuffle()
+                let player11 = numbers[0]
+                let player12 = numbers[1]
+                let player13 = numbers[2]
+                let player14 = numbers[3]
                 var player111 = 0
                 var player112 = 0
                 var player1 = 0
@@ -98,43 +72,10 @@ struct ContentView: View {
                     player1 = player112
                 }
                 
-                let player21 = Int.random(in: 0...51)
-                var player22 = Int.random(in: 0...51)
-                var player23 = Int.random(in: 0...51)
-                var player24 = Int.random(in: 0...51)
-                
-                if player21 == player22{
-                    player22 += 1
-                    if player22>51{
-                        player22 -= 2
-                    }
-                }else if player21 == player23{
-                    player23 += 1
-                    if player23>51{
-                        player23 -= 2
-                    }
-                }else if player21 == player24{
-                    player24 += 1
-                    if player24>51{
-                        player24 -= 2
-                    }
-                }else if player22 == player23{
-                    player23 += 1
-                    if player23>51{
-                        player23 -= 2
-                    }
-                }else if player22 == player24{
-                    player24 += 1
-                    if player24>51{
-                        player24 -= 2
-                    }
-                }else if player23 == player24{
-                    player24 += 1
-                    if player24>51{
-                        player24 -= 2
-                    }
-                }
-                
+                let player21 = numbers[4]
+                let player22 = numbers[5]
+                let player23 = numbers[6]
+                let player24 = numbers[7]
                 var player211 = 0
                 var player212 = 0
                 var player2 = 0
