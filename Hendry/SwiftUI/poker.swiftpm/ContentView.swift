@@ -1,47 +1,38 @@
 import SwiftUI
 
 struct ContentView: View {
-    var cards : [[String]] = []
-    @State var players : [Int] = [0,0]
-    @State var state : String = "tie"
-    
-    init(){
-        for i in ["2","3","4","5","6","7","8","9","10","J","Q","K","A"]{
-            for j in ["♦️","♣️","♥️","♠️"]{
-                cards.append([j,i])
-            }
-        }
-    }
-    
+    @State var number = "A"
+    @State var suit = "♠️"
+    @State var number2 = "A"
+    @State var suit2 = "♠️"
+    @State var suitArray = ["♦️","♣️","♥️","♠️"]
+    @State var numberArray = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"]
     var body: some View {
-        VStack {
-            Text("State: \(state)")
-                .font(.largeTitle)
+        VStack{
             HStack{
-                Spacer()
-                Text("Player1")
-                Spacer()
-                Text("Player2")
-                Spacer()
+                Text("Player1:")
+                Card(number:number, suit:suit)
             }
             HStack{
-                ForEach(0..<2, id:\.self){ item in
-                    Card(number: cards[ players[item] ][1], suit: cards[players[item]][0])
-                }
-                
+                Text("Player2:")
+                Card(number:number2, suit:suit2)
             }
-            Button("Random"){
-                var cs : [Int] = []
-                for i in 0...51{
-                    cs.append(i)
-                }
-                let shuffledCs = cs.shuffled()
-                let max = shuffledCs[0...7].max()
-                let player1 : [Int] = shuffledCs[0,1,2,3]
-                let player2 : [Int] = shuffledCs[4,5,6,7]
-                players = [player1,player2]
-                
-                
+            Button("random"){
+                suit = suitArray.randomElement()!
+                number = numberArray.randomElement()!
+                suit2 = suitArray.randomElement()!
+                number2 = numberArray.randomElement()!
+//                if numberArray.firstIndex(of: number) ??0 > numberArray.firstIndex(of: number2) ??0 {
+//                    Text("Player1 wins")
+//                }else if numberArray.firstIndex(of: number) ??0 < numberArray.firstIndex(of: number2) ??0{
+//                    Text("player2 wins")
+//                }else if suitArray.firstIndex(of: suit) ??0 > suitArray.firstIndex(of: suit2) ??0 {
+//                    Text("player1 wins")
+//                }else if suitArray.firstIndex(of: suit) ??0 < suitArray.firstIndex(of: suit2) ??0 {
+//                    Text("player2 wins")
+//                }else {
+//                    Text("Tie")
+//                }
             }
         }
         .padding()

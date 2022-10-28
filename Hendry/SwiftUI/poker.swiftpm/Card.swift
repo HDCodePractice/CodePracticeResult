@@ -1,9 +1,8 @@
 import SwiftUI
 
 struct Card: View {
-    let number : String
-    let suit: String
-    
+    var number = "5"
+    var suit = "♠️"
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 20)
@@ -39,7 +38,6 @@ struct Card: View {
 
 struct Card_Previews: PreviewProvider {
     static var previews: some View {
-        Card(number: "10", suit: "♣️")
-        Card(number: "A", suit: "♥️")
+        Card()
     }
 }
