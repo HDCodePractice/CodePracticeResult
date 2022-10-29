@@ -7,7 +7,7 @@ class LocationManager: NSObject,ObservableObject{
     static let DefaultLocation = CLLocationCoordinate2D(latitude: 43.919284,longitude: -79.4366317)
     @Published var currentLocation: CLLocationCoordinate2D = DefaultLocation
     @Published var currentRegion = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 37.33441712785779, longitude: -122.00967002358799), span: MKCoordinateSpan(
+        center: DefaultLocation, span: MKCoordinateSpan(
             latitudeDelta: 0.05, longitudeDelta: 0.05
         ))
     @Published var placeList: [Annotation] = []
