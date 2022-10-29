@@ -6,6 +6,7 @@ struct MapView: UIViewRepresentable {
     let beforePauses: [Bool]
     var region: MKCoordinateRegion
     let ended: Bool
+    let followLocation: Bool
     
     class Coordinator: NSObject, MKMapViewDelegate {
         var parent: MapView
@@ -49,7 +50,9 @@ struct MapView: UIViewRepresentable {
     // Updates the view every time a new coordinate is added in placeList
     func updateUIView(_ view: MKMapView, context: Context) {
         if ended {
-            view.region.center = region.center
+            if followLocation {
+                view.region.center = region.center
+            }
         }
         let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
         view.removeOverlays(view.overlays)
