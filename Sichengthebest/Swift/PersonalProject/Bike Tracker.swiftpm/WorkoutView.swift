@@ -5,6 +5,7 @@ struct WorkoutView: View {
     @Environment(\.scenePhase) var scenePhase
     @State var isAlreadyPaused = true
     @State var progressTime = 0
+    @State var followLocation = true
     @StateObject var lm = LocationManager.shared
     var tempCoords: [CLLocationCoordinate2D] {
         var tempTempCoords: [CLLocationCoordinate2D] = []
@@ -39,13 +40,26 @@ struct WorkoutView: View {
                 .font(.system(size: 20))
                 .foregroundColor(lm.isStarted ? lm.isRunning ? .green:.yellow:.blue)
             Text("Annotations: \(lm.placeList.count)")
-            MapView(lineCoordinates: tempCoords, beforePauses: tempBools, region: lm.currentRegion, ended: lm.isStarted)
+            ZStack(alignment: .bottomTrailing) {
+                MapView(lineCoordinates: tempCoords, beforePauses: tempBools, region: lm.currentRegion, ended: lm.isStarted, followLocation: followLocation)
+                ZStack {
+                    Circle()
+                        .foregroundColor(.white)
+                    Image(systemName: followLocation ? "location.fill": "location")
+                        .foregroundColor(.blue)
+                }
+                .onTapGesture {
+                    followLocation.toggle()
+                }
+                .frame(width: 50, height: 50)
+                    .padding()
+            }
             HStack {
                 // Resume/Pause button
                 Button(action: {
                     lm.isRunning.toggle()
                     isAlreadyPaused.toggle()
-                   lm.isStarted = true
+                    lm.isStarted = true
                     lm.placeList.append(Annotation(coordinate: lm.currentLocation,beforePause: !lm.isRunning))
                 }) {
                     ButtonView(text: lm.isStarted ? lm.isRunning ? "Pause" : "Resume" : "Start",color: lm.isRunning ? .yellow : .green)

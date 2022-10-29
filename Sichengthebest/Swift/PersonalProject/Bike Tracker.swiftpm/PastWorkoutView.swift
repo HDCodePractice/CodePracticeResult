@@ -5,12 +5,8 @@ struct SingleWorkoutView: View {
     @AppStorage("workouts") var workouts: [Workout] = []
     @Environment(\.presentationMode) var presentationMode
     var index: Int
-    @State var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 37.33441712785779, longitude: -122.00967002358799), span: MKCoordinateSpan(
-            latitudeDelta: 0.05, longitudeDelta: 0.05
-        )
-    )
-    var body: some View {        VStack {
+    var body: some View {        
+        VStack {
             if workouts.count >= 1 {
                 if index < workouts.count {
                     // Date of workout
@@ -27,10 +23,8 @@ struct SingleWorkoutView: View {
                     Text("Distance: \(String(format: "%.2f",workouts[index].distance)) km")
                         .font(.system(size: 20))
                     // Map
-                    MapView(lineCoordinates: workouts[index].coordinates,beforePauses: workouts[index].beforePauses, region: region, ended: true)
-                        .onAppear() {
-                            region.center = workouts[index].coordinates[0]
-                        }
+                    NotMovingMapView(lineCoordinates: workouts[index].coordinates,beforePauses: workouts[index].beforePauses, region: MKCoordinateRegion(center: workouts[index].coordinates[0], span: MKCoordinateSpan(
+                        latitudeDelta: 0.04, longitudeDelta: 0.04)), ended: true)
                     RectButtonView(text:"Delete this workout",color:.red)
                         .frame(height:20)
                         .onTapGesture {
