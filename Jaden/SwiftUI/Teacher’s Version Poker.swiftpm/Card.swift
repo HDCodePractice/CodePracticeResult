@@ -1,51 +1,49 @@
 import SwiftUI
 
 struct Card: View {
-    let testNumber : String
-    let testSuit : String
+    let number : String
+    let suit: String
+    
     var body: some View {
-        VStack{
+        ZStack{
+            RoundedRectangle(cornerRadius: 20)
+                .fill(.white)
+            Text(suit)
+                .font(.system(size: 50))
             ZStack(alignment: .topLeading){
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(.white)
-                    .border(.black)
+                Color.clear
                 VStack{
-                    Text(testNumber)
-                        .frame(width: 100, height: 100)
-                        .font(.system(size: 100))
-                    Text(testSuit)
-                        .frame(width: 100, height: 100)
-                        .font(.system(size: 100))
+                    Text(number)
+                        .foregroundColor(.black)
+                    Text(suit)
                 }
-                .padding()
-                ZStack(alignment: .center){
-                    Color.clear
-                    Text(testSuit)
-                        .font(.system(size: 200))
-                }
-                ZStack(alignment: .bottomTrailing){
-                    Color.clear
-                    VStack{
-                        Text(testSuit)
-                            .frame(width: 100, height: 100)
-                            .font(.system(size: 100))
-                            .rotationEffect(.degrees(180))
-                        Text(testNumber)
-                            .frame(width: 100, height: 100)
-                            .font(.system(size: 100))
-                            .rotationEffect(.degrees(180))
-                    }
-                    .padding()
-                }
-                
             }
+            .font(.system(size: 20))
+            .padding()
+            ZStack(alignment: .bottomTrailing){
+                Color.clear
+                VStack{
+                    Text(suit)
+                        .rotationEffect(.degrees(180))
+                    Text(number)
+                        .foregroundColor(.black)
+                        .rotationEffect(.degrees(180))
+                }
+            }
+            .font(.system(size: 20))
+            .padding()
         }
+        .overlay(
+            RoundedRectangle(cornerRadius: 20)
+                .stroke()
+        )
+        .padding()
     }
 }
 
 struct Card_Previews: PreviewProvider {
     static var previews: some View {
-        Card(testNumber: "10", testSuit: "♣️")
+        Card(number: "10", suit: "♣️")
+        Card(number: "A", suit: "♥️")
     }
 }
-
