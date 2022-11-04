@@ -6,28 +6,109 @@
 	<array>
 		<dict>
 			<key>ModifiedContent</key>
-			<string>func checkOnePair(cards:[[[String]]])-&gt;String{
-    for l in 0...1{
-        for i in 0...cards[l].count-1{
-            for j in 0..&lt;i{
-                print(i,j,cards[l][i][1],cards[l][j][1])
-                if cards[l][i][1] == cards[l][j][1]{
-                    return String(l)
+			<string>func checkCard(cards:[Int])-&gt;Int{
+    var lol : [Int] = []
+    for i in 0..&lt;cards.count{
+        for j in i..&lt;cards.count{
+            if cards[i]==cards[j] &amp;&amp; i != j{
+                lol.append(cards[i])
+            }
+        }
+    }
+    return lol.max()!
+}
+func checkOnePair(Player1:[[String]], Player2:[[String]])-&gt;String{
+    let splitIndex = 5
+    var player1Cards : [Int] = []
+    var player2Cards : [Int] = []
+    let cards = Player1+Player2
+    let cardnum = ["","","2","3","4","5","6","7","8","9","10","J","Q","K","A"]
+    for i in 0..&lt;cards.count {
+        let number = cardnum.firstIndex(of: cards[i][1]) ?? 0
+        if i &lt; splitIndex{
+            player1Cards.append(number)
+        }else{
+            player2Cards.append(number)
+        }
+    }
+    player1Cards.append(0)
+    player1Cards.append(0)
+    player2Cards.append(0)
+    player2Cards.append(0)
+    if checkCard(cards: player1Cards) &gt; checkCard(cards: player2Cards){
+        return "W"
+    }else if checkCard(cards: player1Cards) &lt; checkCard(cards: player2Cards){
+        return "L"
+        
+    }else{
+        let lol = checkCard(cards: player1Cards)
+        if lol != 0{
+            player1Cards.remove(at: player1Cards.firstIndex(of: lol)!)
+            player1Cards.remove(at: player1Cards.firstIndex(of: lol)!)
+        }
+        let lol2 = checkCard(cards: player2Cards)
+        if lol2 != 0{
+            player2Cards.remove(at: player2Cards.firstIndex(of: lol)!)
+            player2Cards.remove(at: player2Cards.firstIndex(of: lol)!)
+        }
+        if checkCard(cards: player1Cards) == 0 &amp;&amp; checkCard(cards: player2Cards) == 0 {
+            if player1Cards.max()! &gt; player2Cards.max()!{
+                return "W"
+            }else if player1Cards.max()! &lt; player2Cards.max()!{
+                return "L"
+            }else{
+                return "T"
+            }
+        }else{
+            if checkCard(cards: player1Cards) &gt; checkCard(cards: player2Cards){
+                return "W"
+            }else if checkCard(cards: player1Cards) &lt; checkCard(cards: player2Cards){
+                return "L"
+            }else{
+                let lol = checkCard(cards: player1Cards)
+                if lol != 0{
+                    player1Cards.remove(at: player1Cards.firstIndex(of: lol)!)
+                    player1Cards.remove(at: player1Cards.firstIndex(of: lol)!)
+                }
+                let lol2 = checkCard(cards: player2Cards)
+                if lol2 != 0{
+                    player2Cards.remove(at: player2Cards.firstIndex(of: lol)!)
+                    player2Cards.remove(at: player2Cards.firstIndex(of: lol)!)
+                }
+                print(player1Cards.max()!)
+                print(player2Cards.max()!)
+                
+                if player1Cards.max()! &gt; player2Cards.max()!{
+                    return "W"
+                }else if player1Cards.max()! &lt; player2Cards.max()!{
+                    return "L"
+                }else{
+                    return "T"
                 }
             }
         }
     }
-    return "Tie"
+    
 }
-
-print( 
-    checkOnePair(cards:
-                    [[["♦️","A"],["♦️","J"],["♦️","Q"],["♥️","3"],["♥️","4"]],[["♦️","8"],["♦️","J"],["♦️","5"],["♥️","5"],["♥️","4"]]]
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 3029}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{0, 0}</string>
+		</dict>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>print( 
+    checkOnePair(Player1:
+                    [["♦️","Q"],["♥️","Q"],["♦️","5"],["♥️","5"],["♥️","4"]],
+                 Player2:[["♣️","Q"],["♠️","Q"],["♠️","5"],["♠️","5"],["♠️","A"]]
     ) 
 )
 </string>
 			<key>ModifiedRange</key>
-			<string>{1, 526}</string>
+			<string>{3030, 203}</string>
 			<key>OriginalContent</key>
 			<string></string>
 			<key>OriginalRange</key>
