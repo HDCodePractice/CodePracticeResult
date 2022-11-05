@@ -41,7 +41,7 @@ struct WorkoutView: View {
                 .foregroundColor(lm.isStarted ? lm.isRunning ? .green:.yellow:.blue)
             Text("Annotations: \(lm.placeList.count)")
             ZStack(alignment: .bottomTrailing) {
-                MapView(lineCoordinates: tempCoords, beforePauses: tempBools, region: lm.currentRegion, ended: lm.isStarted, followLocation: followLocation)
+                MapView(lineCoordinates: tempCoords, beforePauses: tempBools, started: lm.isStarted, followLocation: followLocation)
                 ZStack {
                     Circle()
                         .foregroundColor(.white)
