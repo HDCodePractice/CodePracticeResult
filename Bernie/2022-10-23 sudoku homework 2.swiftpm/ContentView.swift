@@ -145,11 +145,13 @@ struct ContentView: View {
                 }
             } 
         }else if inputGrid[row][column] != 0 && grid[row][column] == 0{
-            for i in inputGrid[row][column]+1...9{
-                print(i)
-                if answerCheck(row: row, column: column, num: i){
-                    inputGrid[row][column] = i
-                    break
+            if inputGrid[row][column] < 9{
+                for i in inputGrid[row][column]+1...9{
+                    print(i)
+                    if answerCheck(row: row, column: column, num: i){
+                        inputGrid[row][column] = i
+                        break
+                    }
                 }
             }
         }
