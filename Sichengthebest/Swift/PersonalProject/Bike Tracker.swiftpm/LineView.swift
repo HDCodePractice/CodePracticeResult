@@ -4,8 +4,10 @@ import MapKit
 struct MapView: UIViewRepresentable {
     var lineCoordinates: [CLLocationCoordinate2D]
     let beforePauses: [Bool]
-    var region: MKCoordinateRegion
-    let ended: Bool
+    var region2 = MKCoordinateRegion(center: LocationManager.shared.currentLocation, span: MKCoordinateSpan(
+        latitudeDelta: 0.05, longitudeDelta: 0.05
+    ))
+    let started: Bool
     let followLocation: Bool
     
     class Coordinator: NSObject, MKMapViewDelegate {
@@ -21,7 +23,7 @@ struct MapView: UIViewRepresentable {
             return renderer
         }
         func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-            parent.region = mapView.region
+            parent.region2 = mapView.region
         }
     }
 
@@ -37,22 +39,14 @@ struct MapView: UIViewRepresentable {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
         mapView.showsUserLocation = true
-        mapView.setRegion(region, animated: true)
-        if ended {
-            let start = LandmarkAnnotation(coordinate:lineCoordinates[0])
-            let end = LandmarkAnnotation(coordinate:lineCoordinates[lineCoordinates.count-1])
-            mapView.addAnnotation(start)
-            mapView.addAnnotation(end)
-        }
+        mapView.setRegion(region2, animated: true)
         return mapView
     }
     
     // Updates the view every time a new coordinate is added in placeList
     func updateUIView(_ view: MKMapView, context: Context) {
-        if ended {
-            if followLocation {
-                view.region.center = region.center
-            }
+        if followLocation {
+            view.region = region2
         }
         let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
         view.removeOverlays(view.overlays)
