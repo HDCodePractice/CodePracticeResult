@@ -9,7 +9,7 @@ struct Card: View {
             RoundedRectangle(cornerRadius: 20)
                 .fill(.white)
             Text(suit)
-                .font(.system(size: 200))
+                .font(.system(size: 50))
             ZStack(alignment: .topLeading){
                 Color.clear
                 VStack{
@@ -18,7 +18,7 @@ struct Card: View {
                     Text(suit)
                 }
             }
-            .font(.system(size: 50))
+            .font(.system(size: 20))
             .padding()
             ZStack(alignment: .bottomTrailing){
                 Color.clear
@@ -30,9 +30,13 @@ struct Card: View {
                         .rotationEffect(.degrees(180))
                 }
             }
-            .font(.system(size: 50))
+            .font(.system(size: 20)
+            )
             .padding()
         }
+        .overlay(RoundedRectangle(cornerRadius: 20)
+            .stroke())
+        
         .padding()
     }
 }

@@ -1,5 +1,5 @@
 
-func checkTwoPair(cards:[Int])->[Int]{
+public func checkTwoPair(cards:[Int])->[Int]{
     let first = checkOnePair(cards: cards)
     if first != 0{
         var nextCards = cards
@@ -12,7 +12,7 @@ func checkTwoPair(cards:[Int])->[Int]{
     }
     return []
 }
-func checkTwoPairWon(player1:[Int],player2:[Int])->Int{
+public func checkTwoPairWon(player1:[Int],player2:[Int])->Int{
     var player1Pair = checkTwoPair(cards: player1)
     var player2Pair = checkTwoPair(cards: player2)
     // max

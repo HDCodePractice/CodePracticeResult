@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     var cards : [[String]] = []
-    @State var players : [Int] = [0,0]
+    @State var players : [Int] = [0,0,0,0,0,0,0,0,0,0]
     @State var state : String = "tie"
     
     init(){
@@ -24,24 +24,37 @@ struct ContentView: View {
                 Text("Player2")
                 Spacer()
             }
+            VStack{
             HStack{
-                ForEach(0..<2, id:\.self){ item in
+                ForEach(0..<5, id:\.self){ item in
                     Card(number: cards[ players[item] ][1], suit: cards[players[item]][0])
                 }
-                
+            }
+                HStack{
+                ForEach(5..<10, id:\.self){ item in
+                    Card(number: cards[ players[item] ][1], suit: cards[players[item]][0])
+                }
+                }
             }
             Button("Random"){
                 var cs : [Int] = []
                 for i in 0...51{
                     cs.append(i)
                 }
+                
                 let shuffledCs = cs.shuffled()
-                let max = shuffledCs[0...7].max()
-                let player1 : [Int] = shuffledCs[0,1,2,3]
-                let player2 : [Int] = shuffledCs[4,5,6,7]
-                players = [player1,player2]
+                players = Array(shuffledCs.prefix(10))
                 
+                let player1 = shuffledCs[0...4].max()!
+                let player2 = shuffledCs[5...9].max()!
                 
+                if player1>player2{
+                    state = "Player 1 Won"
+                }else if player1==player2 {
+                    state = "Tie"
+                }else{
+                    state = "Player 2 Won"
+                }
             }
         }
         .padding()
