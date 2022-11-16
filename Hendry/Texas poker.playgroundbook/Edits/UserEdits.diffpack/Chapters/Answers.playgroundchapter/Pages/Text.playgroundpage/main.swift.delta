@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>////func checkOnePair(cards:[[String]])-&gt;Bool{
+////    var test : [String] = []
+////    for i in 0 ... cards.count-1{
+////        if test.contains(cards[i][1]){
+////            return true
+////        }else{
+////            test.append(cards[i][1])
+////        }
+////    }
+////    return false
+////}
+//func checkOnePairPlay1Won(cards:[String])-&gt;String{
+//    var test : [String] = []
+//    var players : [String] = ["0","0"]
+//    var cardnum : [String] = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"]
+//    var sum1 = 0
+//    var sum2 = 0
+//    for i in 0 ... 4{
+//        if test.contains(cards[i]){
+//            players[0] = cards[i]
+//        }
+//        sum1 += cardnum.firstIndex(of: cards[i]) ?? 0
+//            test.append(cards[i])
+//    }
+//    test = []
+//    for i in 5 ... 9{
+//        if test.contains(cards[i]){
+//            players[1] = cards[i]
+//        }
+//        sum2 += cardnum.firstIndex(of: cards[i]) ?? 0
+//        test.append(cards[i])
+//    }
+//    var p1sum = cardnum.firstIndex(of: players[0]) ?? 0 
+//    var p2sum = cardnum.firstIndex(of: players[1]) ?? 0
+//    if p1sum &gt; p2sum{
+//        return "W"
+//    }else if p1sum &lt; p2sum{
+//        return "L"
+//    }else if sum1 &gt; sum2{
+//        return "W"
+//    }else if sum1 &lt; sum2{
+//        return "L"
+//    }
+//    return "T"
+//}
+//func checkTwoPairWon(player1:[[String]],player2:[[String]])-&gt;Int{
+//    var test1 : [String] = []
+//    var test2 : [String] = []
+//    var sum1 = 0
+//    var sum2 = 0
+//    var players : [[String]] = [[],[]]
+//    var cardnum : [String] = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"]
+//    var biggest1 = 0
+//    var biggest2 = 0
+//    for i in 0 ... 4{
+//        if test1.contains(player1[i][1]){
+//            players[0].append(player1[i][1])
+//            if biggest1 &lt; cardnum.firstIndex(of: player1[i][1]) ?? 0{
+//                biggest1 = cardnum.firstIndex(of: player1[i][1]) ?? 0
+//            }
+//        }
+//        if test2.contains(player2[i][1]){
+//            players[1].append(player2[i][1])
+//            if biggest2 &lt; cardnum.firstIndex(of: player2[i][1]) ?? 0{
+//                biggest2 = cardnum.firstIndex(of: player2[i][1]) ?? 0
+//            }
+//        }
+//        sum1 += cardnum.firstIndex(of: player1[i][1]) ?? 0
+//        sum2 += cardnum.firstIndex(of: player2[i][1]) ?? 0
+//        test1.append(player1[i][1])
+//        test2.append(player2[i][1])    
+//    }
+//    var p1sum = cardnum.firstIndex(of: players[0][0]) ?? 0 + (cardnum.firstIndex(of: players[0][1]) ?? 0)
+//    var p2sum = cardnum.firstIndex(of: players[1][0]) ?? 0 + (cardnum.firstIndex(of: players[1][1]) ?? 0)
+//    if biggest1 &gt; biggest2{
+//        return 1
+//    }else if biggest2 &gt; biggest1{
+//        return 2
+//    }else if p1sum &gt; p2sum{
+//        return 1
+//    }else if p1sum &lt; p2sum{
+//        return 2
+//    }else if sum1 &gt; sum2{
+//        return 1
+//    }else if sum1 &lt; sum2{
+//        return 2
+//    }
+//    return 0
+//}
+////
+////print(checkTwoPairWon(
+////        player1:[["♦️","Q"],["♥️","Q"],["♦️","5"],["♥️","5"],["♥️","4"]],
+////        player2:[["♣️","Q"],["♠️","Q"],["♠️","3"],["♠️","3"],["♠️","4"]])
+////)
+////
+////print(checkTwoPairWon(
+////        player1:[["♦️","Q"],["♥️","Q"],["♦️","5"],["♥️","5"],["♥️","4"]],
+////        player2:[["♣️","Q"],["♠️","Q"],["♠️","5"],["♠️","5"],["♠️","A"]])
+////)
+////
+////print(checkTwoPairWon(
+////        player1:[["♦️","Q"],["♥️","Q"],["♦️","5"],["♥️","5"],["♥️","4"]],
+////        player2:[["♣️","Q"],["♠️","Q"],["♠️","5"],["♠️","5"],["♠️","4"]])
+////)
+////print(checkTwoPairWon(
+////        player1:[["♦️","J"],["♥️","J"],["♦️","10"],["♥️","10"],["♥️","A"]],
+////        player2:[["♣️","K"],["♠️","K"],["♠️","2"],["♠️","2"],["♠️","3"]])
+////)
+////print(checkTwoPairWon(
+////        player1:[["♦️","J"],["♥️","J"],["♦️","10"],["♥️","10"],["♥️","A"]],
+////        player2:[["♣️","K"],["♠️","3"],["♠️","2"],["♠️","2"],["♠️","K"]])
+////)
+//func checkTwoPair(cards:[Int])-&gt;[Int]{
+//    var two : [Int] = []
+//    var ans : [Int] = []
+//    for i in 0 ... cards.count-1{
+//        if two.contains(cards[i]){
+//            ans.append(cards[i])
+//        }
+//        two.append(cards[i])
+//    }
+//    if ans.count &gt;= 2{
+//        return ans
+//    }
+//    return []
+//}
+// Check [Int] have a Pair, If have a pair retrun number, If haven't return 0
+func checkOnePair(cards:[Int])-&gt;Int{
+    for i in 0..&lt;cards.count{
+        for j in i..&lt;cards.count{
+            if cards[i] == cards[j] &amp;&amp; i != j{
+                return cards[i]
+            }
+        }
+    }
+    return 0
+}
+
+// []
+//print(checkOnePair(cards: [1,1,2,3,4,5]))
+// [1,2] or [2,1]
+//print(checkOnePair(cards: [1,2,3,2,1]))
+// []
+//print(checkOnePair(cards: [1,2,3,4,5]))
+
+// Check [Int] have two pair, if have two pair return [pair1,pair2],if have't return []
+func checkTwoPair(cards:[Int])-&gt;[Int]{
+    let first = checkOnePair(cards: cards)
+    if first != 0{
+        var nextCards = cards
+        nextCards.remove(at: cards.firstIndex(of: first)! )
+        nextCards.remove(at: cards.firstIndex(of: first)! )
+        let second = checkOnePair(cards: nextCards)
+        if second != 0{
+            return [first,second]
+        }
+    }
+    return []
+}
+
+// []
+//print(checkTwoPair(cards: [1,1,2,3,4,5]))
+// [1,2] or [2,1]
+//print(checkTwoPair(cards: [1,2,3,2,1]))
+// []
+//print(checkTwoPair(cards: [1,2,3,4,5]))
+
+
+// who is max of player1[Int] max and player2[Int] max 
+// 0: Tie 1: Player1 2: Player2
+func checkWon(player1: [Int], player2: [Int])-&gt;Int{
+    let player1Max = player1.max() ?? 0
+    let player2Max = player2.max() ?? 0
+    if player1Max &gt; player2Max{
+        return 1
+    }else if player2Max &gt; player1Max{
+        return 2
+    }
+    return 0
+}
+
+
+func checkOnePairWon(player1:[Int], player2:[Int])-&gt;Int{
+    var player1Cards = player1
+    var player2Cards = player2
+    let player1Pair = checkOnePair(cards: player1Cards)
+    let player2Pair = checkOnePair(cards: player2Cards)
+    let pairWon = checkWon(player1: [player1Pair], player2: [player2Pair])
+    if pairWon &gt; 0{
+        return  pairWon
+    }
+    
+    player1Cards.remove(at: player1Cards.firstIndex(of: player1Pair)!)
+    player1Cards.remove(at: player1Cards.firstIndex(of: player1Pair)!)
+    player2Cards.remove(at: player2Cards.firstIndex(of: player2Pair)!)
+    player2Cards.remove(at: player2Cards.firstIndex(of: player2Pair)!)
+    return checkWon(player1: player1Cards, player2: player2Cards)
+}
+
+func checkTwoPairWon(player1:[Int],player2:[Int])-&gt;Int{
+    var player1Pair = checkTwoPair(cards: player1)
+    var player2Pair = checkTwoPair(cards: player2)
+    
+    print(player1,player2)
+    
+    // max
+    let pairMaxResult = checkWon(player1: player1Pair, player2: player2Pair)
+    
+    if pairMaxResult != 0{
+        return pairMaxResult
+    }
+    
+    // second max
+    let max = player1Pair.max()!
+    player1Pair.remove(at: player1Pair.firstIndex(of: max)! )
+    player2Pair.remove(at: player2Pair.firstIndex(of: max)! )
+    
+    let pairSecondResult = checkWon(player1: player1Pair, player2: player2Pair)
+    if pairSecondResult != 0{
+        return pairSecondResult
+    }
+    
+    // last single number
+    var player1Cards = player1
+    var player2Cards = player2
+    for i in checkTwoPair(cards: player1){
+        player1Cards.remove(at: player1Cards.firstIndex(of: i)!)
+        player1Cards.remove(at: player1Cards.firstIndex(of: i)!)
+        player2Cards.remove(at: player2Cards.firstIndex(of: i)!)
+        player2Cards.remove(at: player2Cards.firstIndex(of: i)!)
+    }
+    
+    return  checkWon(player1: player1Cards, player2: player2Cards)
+}
+func checkTwoPairWon(player1:[[String]],player2:[[String]])-&gt;Int{
+    var player1Cards : [Int] = []
+    var player2Cards : [Int] = []
+    let cardnum : [String] = ["","","2","3","4","5","6","7","8","9","10","J","Q","K","A"]
+    
+    for i in 0..&lt;player1.count{
+        let number1 = cardnum.firstIndex(of: player1[i][1]) ?? 0
+        let number2 = cardnum.firstIndex(of: player2[i][1]) ?? 0
+        player1Cards.append(number1)
+        player2Cards.append(number2)
+    }
+    
+    return checkTwoPairWon(player1: player1Cards, player2: player2Cards)
+}
+
+// if have a three of a kind return the card, if haven't return 0
+func checkThreeOfAKind(cards:[Int])-&gt;Int{
+    var cardssort = cards
+    cardssort.sort()
+    var a = 1
+    for i in 1...cardssort.count-1{
+        if cardssort[i] == cardssort[i-1]{
+            a+=1
+        }else{
+            a=1
+        }
+        if a == 3{
+            return cardssort[i]
+        }
+    }
+    return 0
+}
+
+func checkStraight(cards:[Int])-&gt;Int{
+    var c = cards.sorted()
+    for i in 1 ... c.count-1{
+        if c[i] != c[i-1]+1{
+            return 0
+        }
+    }
+    return c[4]
+}
+func checkFlush(cards:[[Int]])-&gt;Int{
+    var suit = cards[0][0]
+    var c : [Int] = []
+    for i in 0 ... cards.count-1{
+        if cards[i][0] != suit{
+            return 0
+        }
+        c.append(cards[i][1])
+    }
+    c.sort()
+    return c[cards.count-1]
+}
+
+func checkResult(player1:[Int],player2:[Int])-&gt;Int{
+    if checkStraight(cards: player1) &gt; checkStraight(cards: player2){
+        return 1
+    }else if checkStraight(cards: player1) &lt; checkStraight(cards: player2){
+        return 2
+} else if checkThreeOfAKind(cards: player1) &lt; checkThreeOfAKind(cards: player2){
+        return 1
+    }else if checkThreeOfAKind(cards: player1) &lt; checkThreeOfAKind(cards: player2){
+        return 2
+    }else if checkTwoPair(cards: player1).count &lt; 0 &amp;&amp; checkTwoPair(cards: player2).count &gt; 0{
+        return 2
+    } else if checkTwoPair(cards: player1).count &gt; 0 &amp;&amp; checkTwoPair(cards: player2).count &lt; 0{
+        return 1
+    }else if checkTwoPairWon(player1: player1, player2: player2) == 1{
+        return 1
+    }else if checkTwoPairWon(player1: player1, player2: player2) == 2{
+        return 2
+    }else if checkOnePair(cards: player1) != 0 &amp;&amp; checkOnePair(cards: player2) == 0{
+        return 1
+    } else if checkOnePair(cards: player1) == 0 &amp;&amp; checkOnePair(cards: player2) != 0{
+        return 2
+    }else if checkOnePairWon(player1: player1, player2: player2) == 1{
+        return 1
+    }else if checkOnePairWon(player1: player1, player2: player2) == 2{
+        return 2
+    }else if checkWon(player1: player1, player2: player2) == 1{
+        return 1
+    }else if checkWon(player1: player1, player2: player2) == 2{
+        return 2
+    }
+    return 0
+}
+
+// 2
+print(checkResult(
+    player1: [14,14,14,3,2], 
+    player2: [3,6,7,5,4]
+))
+
+// 2
+print(checkResult(
+    player1: [2,5,6,3,4], 
+    player2: [3,6,7,5,4]
+))
+
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 10524}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 252}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</string>
+</dict>
+</plist>
