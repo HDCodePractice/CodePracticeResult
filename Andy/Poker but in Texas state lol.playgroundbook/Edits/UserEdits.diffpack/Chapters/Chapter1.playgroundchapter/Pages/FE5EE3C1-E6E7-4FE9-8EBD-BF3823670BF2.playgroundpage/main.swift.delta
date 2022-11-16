@@ -8,11 +8,10 @@
 	<array>
 		<dict>
 			<key>ModifiedContent</key>
-			<string>
-checkOnePairWon(player1: [4,3,7,7,5], player2: [9,4,6,6,8])
+			<string>checkThreeOfAKindWon(player1: [1,12,3,12,12], player2: [14,14,9,9,9])
 </string>
 			<key>ModifiedRange</key>
-			<string>{1, 61}</string>
+			<string>{1, 70}</string>
 			<key>OriginalContent</key>
 			<string></string>
 			<key>OriginalRange</key>
