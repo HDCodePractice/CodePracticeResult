@@ -33,7 +33,8 @@ let package = Package(
                 .portraitUpsideDown(.when(deviceFamilies: [.pad]))
             ],
             capabilities: [
-                .locationWhenInUse(purposeString: "Tracks your location to show map and calculate the path you’re taking.")
+                .locationWhenInUse(purposeString: "Tracks your location to show map and calculate the path you’re taking."),
+                .locationAlwaysAndWhenInUse(purposeString: "Tracks your location to show map and calculate the path you’re taking.")
             ],
             appCategory: .healthcareFitness
         )
