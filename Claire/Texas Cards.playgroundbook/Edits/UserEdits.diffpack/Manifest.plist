@@ -24,6 +24,8 @@
 		<string>Modified</string>
 		<key>Chapters/Chapter1.playgroundchapter/Pages/697FF2BD-0761-41B8-8698-478E3F006914.playgroundpage/UserManifest.plist</key>
 		<string>Added</string>
+		<key>Chapters/Chapter1.playgroundchapter/Pages/6C793B2D-1A6D-4AFB-B74A-1B514FB18A82.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
 		<key>Chapters/Chapter1.playgroundchapter/Pages/90DC4ED6-C567-4B69-B4A2-C95CE8607F23.playgroundpage/UserManifest.plist</key>
 		<string>Added</string>
 		<key>Chapters/Chapter1.playgroundchapter/Pages/90DC4ED6-C567-4B69-B4A2-C95CE8607F23.playgroundpage/main.swift</key>
@@ -43,6 +45,8 @@
 		<key>UserModules/UserModule.playgroundmodule/Sources/CheckWon.swift</key>
 		<string>Added</string>
 		<key>UserModules/UserModule.playgroundmodule/Sources/Flush.swift</key>
+		<string>Added</string>
+		<key>UserModules/UserModule.playgroundmodule/Sources/FullHouse.swift</key>
 		<string>Added</string>
 		<key>UserModules/UserModule.playgroundmodule/Sources/OnePair.swift</key>
 		<string>Added</string>
