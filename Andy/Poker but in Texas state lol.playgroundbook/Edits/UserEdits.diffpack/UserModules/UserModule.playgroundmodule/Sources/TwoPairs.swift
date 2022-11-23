@@ -13,33 +13,33 @@ public func checkTwoPair(cards:[Int])->[Int]{
     return []
 }
 public func checkTwoPairWon(player1:[Int],player2:[Int])->Int{
-    var player1Pair = checkTwoPair(cards: player1)
-    var player2Pair = checkTwoPair(cards: player2)
-    // max
-    let pairMaxResult = checkWon(player1: player1Pair, player2: player2Pair)
-    if pairMaxResult != 0{
-        return pairMaxResult
+    var pairs1 = checkTwoPair(cards: player1)
+    var pairs2 = checkTwoPair(cards: player2)
+    if pairs1.count == 0{
+        return 2
+    }else if pairs2.count == 0{
+        return 1
+    }else{
+        if pairs1.max()! > pairs2.max()!{
+            return 1
+        }else if pairs1.max()! < pairs2.max()!{
+            return 2
+        }else{
+            if pairs1.min()! > pairs2.min()!{
+                return 1
+            }else if pairs1.min()! < pairs2.min()!{
+                return 2
+            }else{
+                var player1cards = player1
+                var player2cards = player2
+                for i in 1...2{
+                    player1cards.remove(at: player1cards.firstIndex(of: pairs1.max()!)!)
+                    player1cards.remove(at: player1cards.firstIndex(of: pairs1.min()!)!)
+                    player2cards.remove(at: player2cards.firstIndex(of: pairs2.max()!)!)
+                    player2cards.remove(at: player2cards.firstIndex(of: pairs2.min()!)!)
+                }
+                return checkWon(player1: player1cards, player2: player2cards)
+            }
+        }
     }
-    
-    // second max
-    let max = player1Pair.max()!
-    player1Pair.remove(at: player1Pair.firstIndex(of: max)! )
-    player2Pair.remove(at: player2Pair.firstIndex(of: max)! )
-    
-    let pairSecondResult = checkWon(player1: player1Pair, player2: player2Pair)
-    if pairSecondResult != 0{
-        return pairSecondResult
-    }
-    
-    // last single number
-    var player1Cards = player1
-    var player2Cards = player2
-    for i in checkTwoPair(cards: player1){
-        player1Cards.remove(at: player1Cards.firstIndex(of: i)!)
-        player1Cards.remove(at: player1Cards.firstIndex(of: i)!)
-        player2Cards.remove(at: player2Cards.firstIndex(of: i)!)
-        player2Cards.remove(at: player2Cards.firstIndex(of: i)!)
-    }
-    
-    return  checkWon(player1: player1Cards, player2: player2Cards)
 }
