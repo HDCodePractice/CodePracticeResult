@@ -8,7 +8,7 @@ struct ContentView: View {
         ["","1","2","3","4","5","6","7","8","9",""]
     ]
     @State var landscolor : [Color] = [.red,.blue,.cyan,.brown,.gray]
-    @State var corners : [String] = ["got to jail", "just visiting","parking",""]
+    @State var corners : [String] = ["got to jail", "just visiting","parking","go"]
     var body: some View {
         VStack(spacing: 0) {
             ForEach(0..<11){ y in
