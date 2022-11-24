@@ -39,15 +39,15 @@ extension LocationManager: CLLocationManagerDelegate{
                     currentRegion.center = location.coordinate
                     if checkCloseCoord(coord1: location.coordinate, coord2: placeListLast.coordinate) {
                         if isRunning {
-                            placeList.append(Annotation(coordinate:location.coordinate,beforePause:false))
                             totalDistance += calculateDistance(alat: placeListLast.coordinate.latitude, along: placeListLast.coordinate.longitude, blat: location.coordinate.latitude, blong: location.coordinate.longitude)
+                            placeList.append(Annotation(coordinate:location.coordinate,distanceAt: totalDistance,time: Date.now))
                         }
                     }
                 }
             } else {
                 // if placeList is empty, appends current location by default
                 if isStarted {
-                    placeList.append(Annotation(coordinate:location.coordinate,beforePause:false))
+                    placeList.append(Annotation(coordinate:location.coordinate,distanceAt: totalDistance,time: Date.now))
                 }
             }
         }

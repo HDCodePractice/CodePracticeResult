@@ -4,7 +4,9 @@ import MapKit
 struct SingleWorkoutView: View {
     @AppStorage("workouts") var workouts: [Workout] = []
     @Environment(\.presentationMode) var presentationMode
+    @State var open: Bool = false
     var index: Int
+    var splits: [CLLocationCoordinate2D] = []
     var body: some View {        
         VStack {
             if workouts.count >= 1 {
@@ -20,10 +22,22 @@ struct SingleWorkoutView: View {
                     Text("Speed: \(String(format:"%.1f", workouts[index].speed)) kph")
                         .font(.system(size: 20))
                     // Distance of bike ride
-                    Text("Distance: \(String(format: "%.2f",workouts[index].distance)) km")
+                    HStack {
+                        Text("Distance: \(String(format: "%.2f",workouts[index].distance)) km")
+                        Image(systemName: open ? "arrowtriangle.down.circle.fill" : "arrowtriangle.forward.circle.fill")
+                            .onTapGesture {
+                                open.toggle()
+                            }
+                    }
                         .font(.system(size: 20))
+                    if open {
+                        ForEach(0..<workouts[index].coordinates2.count,id:\.self) { km in
+                            Text("\(km) km:")
+                            Text("\(workouts[index].times[km][0])")
+                        }
+                    }
                     // Map
-                    NotMovingMapView(lineCoordinates: workouts[index].coordinates,beforePauses: workouts[index].beforePauses, region: MKCoordinateRegion(center: workouts[index].coordinates[0], span: MKCoordinateSpan(
+                    NotMovingMapView(lineCoordinates: workouts[index].coordinates, region: MKCoordinateRegion(center: workouts[index].coordinates[0], span: MKCoordinateSpan(
                         latitudeDelta: 0.04, longitudeDelta: 0.04)), ended: true)
                     RectButtonView(text:"Delete this workout",color:.red)
                         .frame(height:20)

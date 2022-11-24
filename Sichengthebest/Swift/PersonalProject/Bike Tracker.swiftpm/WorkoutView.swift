@@ -14,13 +14,6 @@ struct WorkoutView: View {
         }
         return tempTempCoords
     }
-    var tempBools: [Bool] {
-        var tempTempBools: [Bool] = []
-        for annotation in lm.placeList {
-            tempTempBools.append(annotation.beforePause)
-        }
-        return tempTempBools
-    }
     @State var beforeInactiveTime = Date.now
     @AppStorage("workouts") var workouts: [Workout] = []
     // Initializes timer
@@ -42,7 +35,7 @@ struct WorkoutView: View {
                 .foregroundColor(lm.isStarted ? lm.isRunning ? .green:.yellow:.blue)
             Text("Annotations: \(lm.placeList.count)")
             ZStack(alignment: .bottomTrailing) {
-                MapView(lineCoordinates: tempCoords, beforePauses: tempBools, started: lm.isStarted, followLocation: followLocation)
+                MapView(lineCoordinates: tempCoords, started: lm.isStarted, followLocation: followLocation)
                 ZStack {
                     Circle()
                         .foregroundColor(.white)
@@ -61,7 +54,7 @@ struct WorkoutView: View {
                     lm.isRunning.toggle()
                     isAlreadyPaused.toggle()
                     lm.isStarted = true
-                    lm.placeList.append(Annotation(coordinate: lm.currentLocation,beforePause: !lm.isRunning))
+                    lm.placeList.append(Annotation(coordinate: lm.currentLocation, distanceAt:lm.totalDistance,time: Date.now))
                 }) {
                     ButtonView(text: lm.isStarted ? lm.isRunning ? "Pause" : "Resume" : "Start",color: lm.isRunning ? .yellow : .green)
                 }
@@ -72,9 +65,10 @@ struct WorkoutView: View {
                             time: progressTime, 
                             date: Date.now,
                             speed: lm.totalDistance / 1000 * 3600 / Double(progressTime),
-                            distance: lm.totalDistance / 1000, beforePauses: tempBools))
+                            distance: lm.totalDistance / 1000))
                         for annotation in lm.placeList {
-                            workouts[workouts.count-1].addCoordToArray(coord: annotation.coordinate)
+                            workouts[workouts.count-1].addCoordToArray(coord: annotation.coordinate,distance:annotation.distanceAt)
+                            workouts[workouts.count-1].addTimeToArray(time: annotation.time)
                         }
                     }
                     lm.placeList = []
