@@ -8,17 +8,17 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "Montreal Poly",
+    name: "Monopoly",
     platforms: [
         .iOS("16.0")
     ],
     products: [
         .iOSApplication(
-            name: "Montreal Poly",
+            name: "Monopoly",
             targets: ["AppModule"],
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .box),
+            appIcon: .placeholder(icon: .cat),
             accentColor: .presetColor(.mint),
             supportedDeviceFamilies: [
                 .pad,
