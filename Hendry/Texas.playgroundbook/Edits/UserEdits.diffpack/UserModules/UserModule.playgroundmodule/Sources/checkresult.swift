@@ -9,7 +9,15 @@ public func checkResult(player1:[[Int]],player2:[[Int]])->Int{
     return 0
 }
 public func checkResult(player1:[Int],player2:[Int])->Int{
-    if checkStraight(cards: player1) > checkStraight(cards: player2){
+    if checkFullHouse(cards: player1)[0] > checkFullHouse(cards: player2)[0]{
+        return 1
+    }else if checkFullHouse(cards: player1)[0] < checkFullHouse(cards: player2)[0]{
+        return 2
+    }else if checkFullHouse(cards: player1)[1] > checkFullHouse(cards: player2)[1]{
+        return 1
+    }else if checkFullHouse(cards: player1)[1] < checkFullHouse(cards: player2)[1]{
+        return 2
+    } else if checkStraight(cards: player1) > checkStraight(cards: player2){
         return 1
     }else if checkStraight(cards: player1) < checkStraight(cards: player2){
         return 2
