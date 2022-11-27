@@ -12,7 +12,7 @@ struct SingleWorkoutView: View {
             if workouts.count >= 1 {
                 if index < workouts.count {
                     // Date of workout
-                    Text("\(workouts[index].date,style: .date)")
+                    Text("\(workouts[index].endDate,style: .date)")
                         .foregroundColor(.yellow)
                         .font(.system(size: 25))
                     // Time the workout has taken
@@ -32,8 +32,7 @@ struct SingleWorkoutView: View {
                         .font(.system(size: 20))
                     if open {
                         ForEach(0..<workouts[index].coordinates2.count,id:\.self) { km in
-                            Text("\(km) km:")
-                            Text("\(workouts[index].times[km][0])")
+                            Text("KM \(km): \(getAllTimes(workout:workouts[index],km:km))")
                         }
                     }
                     // Map
@@ -58,5 +57,17 @@ struct PastWorkoutsView_Previews: PreviewProvider {
     static var previews: some View {
         SingleWorkoutView(index: 0)
     }
+}
+
+func getAllTimes(workout:Workout,km:Int) -> String {
+    var difference: Int = 0
+    if km == 0 {
+        difference = Int(workout.times[km].last!.timeIntervalSinceReferenceDate - workout.startDate.timeIntervalSinceReferenceDate)
+    } else if km == workout.coordinates2.count-1 {
+        difference = Int(workout.endDate.timeIntervalSinceReferenceDate - workout.times[km].last!.timeIntervalSinceReferenceDate)
+    } else {
+        difference = Int(workout.times[km+1].last!.timeIntervalSinceReferenceDate - workout.times[km].last!.timeIntervalSinceReferenceDate)
+    }
+    return Stopwatch(progressTime: difference)
 }
 

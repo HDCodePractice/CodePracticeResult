@@ -37,12 +37,15 @@ extension CLLocationCoordinate2D: Hashable,Equatable {
 struct Workout: Codable,Identifiable {
     var id = UUID()
     var time: Int
-    var date: Date
+    var endDate: Date
     var speed: Double
     var distance: Double
     var coordArray: [[Double]] = []
     var distances: [Double] {
         return coordArray.map({x in x[2]})
+    }
+    var startDate: Date {
+        return Calendar.current.date(byAdding: .second, value: -(time), to: endDate)!
     }
     var coordinates: [CLLocationCoordinate2D] {
         return coordArray.map({x in CLLocationCoordinate2D(latitude: x[0], longitude: x[1])})
@@ -51,7 +54,6 @@ struct Workout: Codable,Identifiable {
         var count = 0
         var distanceCount = 0
         var betterArray: [[CLLocationCoordinate2D]] = []
-        print(distances)
         for distance in distances {
             if Int(distance/1000) == distanceCount {
                 if betterArray.count <= distanceCount {
