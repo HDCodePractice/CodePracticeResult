@@ -21,7 +21,7 @@ struct PreviousWorkoutsView: View {
                                     .frame(height: 40)
                                     .foregroundColor(.blue)
                                 HStack {
-                                    Text("\(workouts[index].date,style: .date)")
+                                    Text("\(workouts[index].endDate,style: .date)")
                                         .foregroundColor(.black)
                                         .font(.system(size: 17))
                                     Text("\(String(format: "%.2f",workouts[index].distance)) km")

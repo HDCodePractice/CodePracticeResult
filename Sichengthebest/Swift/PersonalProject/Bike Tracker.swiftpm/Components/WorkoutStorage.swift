@@ -37,21 +37,70 @@ extension CLLocationCoordinate2D: Hashable,Equatable {
 struct Workout: Codable,Identifiable {
     var id = UUID()
     var time: Int
-    var date: Date
+    var endDate: Date
     var speed: Double
     var distance: Double
-    var beforePauses: [Bool]
     var coordArray: [[Double]] = []
+    var distances: [Double] {
+        return coordArray.map({x in x[2]})
+    }
+    var startDate: Date {
+        return Calendar.current.date(byAdding: .second, value: -(time), to: endDate)!
+    }
     var coordinates: [CLLocationCoordinate2D] {
         return coordArray.map({x in CLLocationCoordinate2D(latitude: x[0], longitude: x[1])})
     }
-    mutating func addCoordToArray(coord:CLLocationCoordinate2D) {
-        coordArray.append([coord.latitude,coord.longitude])
+    var coordinates2: [[CLLocationCoordinate2D]] {
+        var count = 0
+        var distanceCount = 0
+        var betterArray: [[CLLocationCoordinate2D]] = []
+        for distance in distances {
+            if Int(distance/1000) == distanceCount {
+                if betterArray.count <= distanceCount {
+                    betterArray.append([])
+                }
+                betterArray[distanceCount].append(coordinates[count])
+            } else {
+                distanceCount += 1
+            }
+            if count < coordinates.count-1 {
+                count += 1
+            }
+        }
+        return betterArray
+    }
+    var dates: [Date] = []
+    var times: [[Date]] {
+        var count2 = 0
+        var distanceCount2 = 0
+        var betterArray2: [[Date]] = []
+        for distance in distances {
+            if Int(distance/1000) == distanceCount2 {
+                if betterArray2.count <= distanceCount2 {
+                    betterArray2.append([])
+                }
+                betterArray2[distanceCount2].append(dates[count2])
+            } else {
+                distanceCount2 += 1
+            }
+            if count2 < dates.count-1 {
+                count2 += 1
+            }
+        }
+        return betterArray2
+    }
+    mutating func addCoordToArray(coord:CLLocationCoordinate2D,distance:Double) {
+        coordArray.append([coord.latitude,coord.longitude,distance])
+    }
+    
+    mutating func addTimeToArray(time:Date) {
+        dates.append(time)
     }
 }
 
 struct Annotation: Identifiable,Hashable {
     var id = UUID()
     var coordinate: CLLocationCoordinate2D
-    var beforePause: Bool
+    var distanceAt: Double
+    var time: Date
 }
