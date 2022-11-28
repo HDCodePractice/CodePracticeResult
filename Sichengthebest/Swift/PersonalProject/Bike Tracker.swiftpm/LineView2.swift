@@ -5,7 +5,6 @@ import MapKit
 
 struct NotMovingMapView: UIViewRepresentable {
     var lineCoordinates: [CLLocationCoordinate2D]
-    let beforePauses: [Bool]
     var region: MKCoordinateRegion
     let ended: Bool
     
@@ -48,7 +47,7 @@ struct NotMovingMapView: UIViewRepresentable {
         let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
         view.removeOverlays(view.overlays)
         view.addOverlay(polyline)
-        view.setVisibleMapRect(polyline.boundingMapRect, animated: true)
+        view.setVisibleMapRect(polyline.boundingMapRect, edgePadding: UIEdgeInsets(top:50,left:50,bottom: 50,right:50), animated: true)
     }
     
     // Link it to the coordinator which is defined below.

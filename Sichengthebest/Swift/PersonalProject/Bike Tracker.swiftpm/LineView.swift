@@ -3,7 +3,6 @@ import MapKit
 
 struct MapView: UIViewRepresentable {
     var lineCoordinates: [CLLocationCoordinate2D]
-    let beforePauses: [Bool]
     var region2 = MKCoordinateRegion(center: LocationManager.shared.currentLocation, span: MKCoordinateSpan(
         latitudeDelta: 0.05, longitudeDelta: 0.05
     ))
@@ -46,7 +45,7 @@ struct MapView: UIViewRepresentable {
     // Updates the view every time a new coordinate is added in placeList
     func updateUIView(_ view: MKMapView, context: Context) {
         if followLocation {
-            view.region = region2
+            view.region.center = region2.center
         }
         let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
         view.removeOverlays(view.overlays)
