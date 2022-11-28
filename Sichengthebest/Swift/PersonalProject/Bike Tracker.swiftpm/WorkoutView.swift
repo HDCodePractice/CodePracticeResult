@@ -22,7 +22,12 @@ struct WorkoutView: View {
     let myTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var body: some View {
         VStack(alignment: .leading) {
-            Button("< Back"){
+            HStack {
+                Image(systemName: "chevron.left")
+                    .foregroundColor(.red)
+                Text("Back")
+                    .foregroundColor(.red)
+            }.onTapGesture {
                 if lm.isStarted == true {
                     backAlert = true
                 } else {
@@ -118,8 +123,10 @@ struct WorkoutView: View {
         .onChange(of: scenePhase) { scenePhase in
             switch scenePhase{
             case .active:
-                var interval = Int(Date().timeIntervalSinceReferenceDate - beforeInactiveTime.timeIntervalSinceReferenceDate)
-                progressTime += interval
+                if lm.isRunning {
+                    let interval = Int(Date().timeIntervalSinceReferenceDate - beforeInactiveTime.timeIntervalSinceReferenceDate)
+                    progressTime += interval
+                }
             case .background:
                 beforeInactiveTime = Date.now
                 print("background")
