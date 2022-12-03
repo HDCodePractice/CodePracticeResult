@@ -17,6 +17,7 @@ struct WorkoutView: View {
         return tempTempCoords
     }
     @State var beforeInactiveTime = Date.now
+    @State var useInactiveTime = false
     @AppStorage("workouts") var workouts: [Workout] = []
     // Initializes timer
     let myTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -124,11 +125,15 @@ struct WorkoutView: View {
             switch scenePhase{
             case .active:
                 if lm.isRunning {
-                    let interval = Int(Date().timeIntervalSinceReferenceDate - beforeInactiveTime.timeIntervalSinceReferenceDate)
-                    progressTime += interval
+                    if useInactiveTime {
+                        let interval = Int(Date().timeIntervalSinceReferenceDate - beforeInactiveTime.timeIntervalSinceReferenceDate)
+                        progressTime += interval
+                        useInactiveTime = false
+                    }
                 }
             case .background:
                 beforeInactiveTime = Date.now
+                useInactiveTime = true
                 print("background")
             case .inactive:
                 print("app inactive")
