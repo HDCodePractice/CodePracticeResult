@@ -1,6 +1,4 @@
 import SwiftUI
-
-import SwiftUI
 import MapKit
 
 struct NotMovingMapView: UIViewRepresentable {
@@ -14,7 +12,7 @@ struct NotMovingMapView: UIViewRepresentable {
         init(parent: NotMovingMapView) {
             self.parent = parent
         }
-        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        func NotMovingMapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             let renderer = MKPolylineRenderer(overlay: overlay)
             renderer.strokeColor = .blue
             renderer.lineWidth = 5
@@ -31,15 +29,15 @@ struct NotMovingMapView: UIViewRepresentable {
     
     // Create the MKMapView using UIKit
     func makeUIView(context: Context) -> MKMapView {
-        let mapView = MKMapView()
-        mapView.delegate = context.coordinator
-        mapView.showsUserLocation = true
-        mapView.setRegion(region, animated: true)
+        let mapView2 = MKMapView()
+        mapView2.delegate = context.coordinator
+        mapView2.showsUserLocation = true
+        mapView2.setRegion(region, animated: true)
         let start = LandmarkAnnotation(coordinate:lineCoordinates[0])
         let end = LandmarkAnnotation(coordinate:lineCoordinates[lineCoordinates.count-1])
-        mapView.addAnnotation(start)
-        mapView.addAnnotation(end)
-        return mapView
+        mapView2.addAnnotation(start)
+        mapView2.addAnnotation(end)
+        return mapView2
     }
     
     // Updates the view every time a new coordinate is added in placeList

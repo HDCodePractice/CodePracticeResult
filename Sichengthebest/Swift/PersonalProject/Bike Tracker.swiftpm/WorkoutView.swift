@@ -17,12 +17,18 @@ struct WorkoutView: View {
         return tempTempCoords
     }
     @State var beforeInactiveTime = Date.now
+    @State var useInactiveTime = false
     @AppStorage("workouts") var workouts: [Workout] = []
     // Initializes timer
     let myTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var body: some View {
         VStack(alignment: .leading) {
-            Button("< Back"){
+            HStack {
+                Image(systemName: "chevron.left")
+                    .foregroundColor(.red)
+                Text("Back")
+                    .foregroundColor(.red)
+            }.onTapGesture {
                 if lm.isStarted == true {
                     backAlert = true
                 } else {
@@ -118,10 +124,16 @@ struct WorkoutView: View {
         .onChange(of: scenePhase) { scenePhase in
             switch scenePhase{
             case .active:
-                var interval = Int(Date().timeIntervalSinceReferenceDate - beforeInactiveTime.timeIntervalSinceReferenceDate)
-                progressTime += interval
+                if lm.isRunning {
+                    if useInactiveTime {
+                        let interval = Int(Date().timeIntervalSinceReferenceDate - beforeInactiveTime.timeIntervalSinceReferenceDate)
+                        progressTime += interval
+                        useInactiveTime = false
+                    }
+                }
             case .background:
                 beforeInactiveTime = Date.now
+                useInactiveTime = true
                 print("background")
             case .inactive:
                 print("app inactive")
