@@ -37,7 +37,7 @@ struct SingleWorkoutView: View {
                     }
                     // Map
                     NotMovingMapView(lineCoordinates: workouts[index].coordinates, region: MKCoordinateRegion(center: workouts[index].coordinates[0], span: MKCoordinateSpan(
-                        latitudeDelta: 0.04, longitudeDelta: 0.04)), ended: true)
+                        latitudeDelta: 0.04, longitudeDelta: 0.04)))
                     RectButtonView(text:"Delete this workout",color:.red)
                         .frame(height:20)
                         .onTapGesture {
