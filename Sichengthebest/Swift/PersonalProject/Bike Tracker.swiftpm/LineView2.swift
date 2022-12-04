@@ -1,12 +1,9 @@
 import SwiftUI
-
-import SwiftUI
 import MapKit
 
 struct NotMovingMapView: UIViewRepresentable {
     var lineCoordinates: [CLLocationCoordinate2D]
     var region: MKCoordinateRegion
-    let ended: Bool
     
     class Coordinator: NSObject, MKMapViewDelegate {
         var parent: NotMovingMapView
@@ -31,23 +28,23 @@ struct NotMovingMapView: UIViewRepresentable {
     
     // Create the MKMapView using UIKit
     func makeUIView(context: Context) -> MKMapView {
-        let mapView = MKMapView()
-        mapView.delegate = context.coordinator
-        mapView.showsUserLocation = true
-        mapView.setRegion(region, animated: true)
+        let mapView2 = MKMapView()
+        mapView2.delegate = context.coordinator
+        mapView2.showsUserLocation = true
+        mapView2.setRegion(region, animated: true)
+        print(lineCoordinates)
         let start = LandmarkAnnotation(coordinate:lineCoordinates[0])
         let end = LandmarkAnnotation(coordinate:lineCoordinates[lineCoordinates.count-1])
-        mapView.addAnnotation(start)
-        mapView.addAnnotation(end)
-        return mapView
+        mapView2.addAnnotation(start)
+        mapView2.addAnnotation(end)
+        let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
+        mapView2.addOverlay(polyline)
+        mapView2.setVisibleMapRect(polyline.boundingMapRect, edgePadding: UIEdgeInsets(top:50,left:50,bottom: 50,right:50), animated: true)
+        return mapView2
     }
     
-    // Updates the view every time a new coordinate is added in placeList
     func updateUIView(_ view: MKMapView, context: Context) {
-        let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)
-        view.removeOverlays(view.overlays)
-        view.addOverlay(polyline)
-        view.setVisibleMapRect(polyline.boundingMapRect, edgePadding: UIEdgeInsets(top:50,left:50,bottom: 50,right:50), animated: true)
+        
     }
     
     // Link it to the coordinator which is defined below.
