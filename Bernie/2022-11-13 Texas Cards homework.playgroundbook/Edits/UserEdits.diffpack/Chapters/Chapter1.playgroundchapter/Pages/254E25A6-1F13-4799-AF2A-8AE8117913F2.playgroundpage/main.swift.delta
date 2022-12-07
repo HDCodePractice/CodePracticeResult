@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseFile</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/Template.playgroundpage/main.swift</string>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>// [8,3,9]
+print(isTwoPairs(cards: [3,9,8,8,3]))
+// [14,9,8]
+print(isTwoPairs(cards: [8,9,8,9,14]))
+// []
+print(isTwoPairs(cards: [3,9,8,9,14]))
+
+
+// 0
+print(checkTwoPairs(player1: [3,9,8,8,3], player2: [3,8,8,3,9]))
+// 2
+print(checkTwoPairs(player1: [3,9,8,8,3], player2: [8,9,8,9,14]))
+// 1
+print(checkTwoPairs(player1: [13,9,8,8,13], player2: [3,14,9,9,3]))
+</string>
+			<key>ModifiedRange</key>
+			<string>{1, 361}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>
