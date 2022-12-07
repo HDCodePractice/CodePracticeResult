@@ -2,12 +2,13 @@ import SwiftUI
 struct Dice: View {
     let diceAlignments: [[Alignment]] = [
         [.center,.center,.center,.center,.center,.center],
-        [.topLeading,.topLeading,.topLeading,.bottomTrailing,.bottomTrailing,.bottomTrailing],
-        [.topLeading,.topLeading,.center,.center,.bottomTrailing,.bottomTrailing],
-        [.topLeading,.topLeading,.bottomLeading,.topTrailing,.bottomTrailing,.bottomTrailing],
+        [.topLeading,.topLeading,.topLeading,.topLeading,.bottomTrailing,.bottomTrailing],
+        [.topLeading,.topLeading,.topLeading,.center,.center,.bottomTrailing],
+        [.topLeading,.topLeading,.bottomLeading,.topTrailing,.topTrailing,.bottomTrailing],
         [.topLeading,.center,.bottomLeading,.topTrailing,.center,.bottomTrailing],
         [.topLeading,.leading,.bottomLeading,.topTrailing,.trailing,.bottomTrailing]
     ]
+        
     
     @Binding var dice : Int
     @Binding var turn : Bool
