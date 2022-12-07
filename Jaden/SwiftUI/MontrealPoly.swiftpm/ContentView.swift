@@ -11,14 +11,13 @@ struct ContentView: View {
     ]
     
     @State var lands = [
-        ["","Jaden","Jaden","Jaden","4","Claire","6","Claire","8","Claire",""],
-        ["","1","2","3","4","5","6","7","8","9",""],
-        ["","1","2","3","4","5","6","7","8","9",""],
-        ["","1","2","3","4","5","6","7","8","9",""]
+        ["","Kentucky Avenue","Chance","Indiana Avenue","Illinois Avenue","B. & O. Railroad","Atlantic Avenue","Ventor Avenue","Water Works","Marvin Gardens",""],
+        ["","New York","Tennesse Avenue","Community Chest","St.James Place","Pennsylvania Road","Virginia Avenue","States Avenue","Electric Company","St. Charles Place",""],
+        ["","Pacific Avenue","North Carolina Avenue","Community Chest","Pennsylvania Avenue","Short Line","Chance","Park Place","Luxury","Tax",""],
+        ["","Conneticut Avenue","Vermont Avenue","Chance","Oriental Avenue","Reading Railroad","Income Tax","Baltic Avenue","Community Chest","Mediterranean Avenue",""]
     ]
     
-    @State var players : [[Int]] = [[10,10],[10,10],[10,10],[10,10]]
-    @State var playerColors : [Color] = [.red, .blue, .green, .yellow]
+    @State var player : Player = Player()
     
     @State var a = 0
     @State var b = 0
@@ -27,6 +26,7 @@ struct ContentView: View {
     @State var turn : Bool = false
     
     var body: some View {
+        
         ZStack{
             VStack(spacing: 0) {
                 ForEach(0..<11){ y in
@@ -43,26 +43,24 @@ struct ContentView: View {
                                     }
                                 VStack{
                                     Text(getText(x: x, y: y))
-                                    Text("\(x),\(y)")
-                                        .foregroundColor(.black)
                                 }
                                 VStack{
                                     HStack{
                                         Circle()
-                                            .fill(getPlayerColor(x: x, y: y, player: 0))
+                                            .fill(player.getPlayerColor(x: x, y: y, player: 0))
                                             .frame(width: 20)
                                         Circle()
-                                            .fill(getPlayerColor(x: x, y: y, player: 1))
+                                            .fill(player.getPlayerColor(x: x, y: y, player: 1))
                                             .frame(width: 20)
                                         
                                     }
                                     HStack{
                                         Circle()
-                                            .fill(getPlayerColor(x: x, y: y, player: 2))
+                                            .fill(player.getPlayerColor(x: x, y: y, player: 2))
                                             .frame(width: 20)
                                         
                                         Circle()
-                                            .fill(getPlayerColor(x: x, y: y, player: 3))
+                                            .fill(player.getPlayerColor(x: x, y: y, player: 3))
                                             .frame(width: 20)
                                     }
                                 }
@@ -77,7 +75,7 @@ struct ContentView: View {
                                         Rectangle()
                                             .fill(.clear)
                                         Rectangle()
-                                            .fill(.clear)
+                                            .fill(buyColor(x: x, y: y))
                                     }
                                 }
                             }
@@ -91,70 +89,82 @@ struct ContentView: View {
                         withAnimation(.easeInOut(duration: 0.5)){
                             dice = Int.random(in: 1...6)
                             turn.toggle()
-//                            print(players[0][0])
-                        
-                            if players[0][0] > 0 && a == 0{
-                                b = 0
-                                @State var extra = Int(players[0][0] - dice)
-                                if extra < 0{
-                                    players[0][0] = 0
-                                    players[0][1] += extra
-                                    
-                                }else{
-                                    players[0][0] -= dice
-                                }
-                                
-                            }else if players[0][1] > 0 && b == 0{
-                               a = 1
-                                @State var extra = Int(players[0][1] - dice)
-                  
-                                if extra < 0{
-                                    players[0][1] = 0
-                                    players[0][0] -= extra
-                                    
-                                }else{
-                                    players[0][1] -= dice
-                                }
-                            }else if players[0][0] == 0 && players[0][1] == 0{
-                       
-                                players[0][0] += dice
-                            }else if players[0][0] > 0 && players[0][0] < 10 && a == 1{
-                                b = 1
-                                @State var extra = Int(players[0][0] + dice)
-                                if extra > 10{
-                                    players[0][0] = 10
-                                    var turning = extra - 10
-                      
-                                    players[0][1] += turning
-                                    
                             
-                                }else{
-                                    players[0][0] += dice
-                                }
-                            }else if players[0][0] == 10 && players[0][1] == 0{
-                                players[0][1] += dice
-                            }else if players[0][1] > 0 && players[0][1] < 10 && b == 1{
-                    
-                                
-                                @State var extra = Int(players[0][1] + dice)
-              
-                                if extra > 10{
-               
-                                    players[0][1] = 10
-                                    var turning = extra - 10
-                           
-                                    players[0][0] -= turning
-                                    a = 0
-                                    
-                                }else{
-                                    players[0][1] += dice
-                                }
-                            }else if players[0][0] == 10 && players[0][1] == 10{
-                                players[0][0] -= dice
-                            }
-                     
+                            player.movePlayer(step: dice)
+                          
+                            if b == 0{
+                                if player.getLandColor(x: player.players[b][0], y: player.players[b][1])  != .clear{
+                                    print(player.getLandColor(x: player.players[b][0], y: player.players[b][1]),"hiii")
+                                    if player.getLandColor(x: player.players[b][0], y: player.players[b][1]) == .gray{
+                                        print("bref")
+                                        print(player.landColors[0][player.players[b][0]],player.playerColors[b])
+                                        player.landColors[0][player.players[b][0]] = player.playerColors[b]
+                                        print(player.landColors[0][player.players[b][0]],player.playerColors[b])
+                                    }else if player.getLandColor(x: player.players[b][0], y: player.players[b][1])  == .blue{
+                                        player.landColors[1][player.players[b][1]] = player.playerColors[b]
 
-//                            print(players[0][0])
+                                    }else if player.getLandColor(x: player.players[b][0], y: player.players[b][1])  == .red{
+                                        player.landColors[2][player.players[b][0]] = player.playerColors[b]
+
+                                    }else if player.getLandColor(x: player.players[b][0], y: player.players[b][1])  == .yellow{
+                                        player.landColors[3][player.players[b][1]] = player.playerColors[b]
+
+                                    }
+                                }
+                                
+                                b = 1
+                            }else if b == 1{
+                                print(player.getLandColor(x: player.players[b][0], y: player.players[b][1]),"hiii")
+                                if player.getLandColor(x: player.players[b][0], y: player.players[b][1])  != .clear{
+                                    if player.getLandColor(x: player.players[b][0], y: player.players[b][1])  == .gray{
+                                        player.landColors[0][player.players[b][0]] = player.playerColors[b]
+                                    }else if player.getLandColor(x: player.players[b][0], y: player.players[b][1])  == .blue{
+                                        player.landColors[1][player.players[b][1]] = player.playerColors[b]
+                                        
+                                    }else if player.getLandColor(x: player.players[b][0], y: player.players[b][1])  == .red{
+                                        player.landColors[2][player.players[b][0]] = player.playerColors[b]
+                                        
+                                    }else if player.getLandColor(x: player.players[b][0], y: player.players[b][1])  == .yellow{
+                                        player.landColors[3][player.players[b][1]] = player.playerColors[b]
+                                        
+                                    }                                }
+                                b = 2
+                            }else if b == 2{
+                                print(player.getLandColor(x: player.players[b][0], y: player.players[b][1]),"hiii")
+                                if player.getLandColor(x: player.players[b][0], y: player.players[b][1]) != .clear{
+                                    if player.getLandColor(x: player.players[b][0], y: player.players[b][1])  == .gray{
+                                        player.landColors[0][player.players[b][0]] = player.playerColors[b]
+                                    }else if player.getLandColor(x: player.players[b][0], y: player.players[b][1])  == .blue{
+                                        player.landColors[1][player.players[b][1]] = player.playerColors[b]
+                                        
+                                    }else if player.getLandColor(x: player.players[b][0], y: player.players[b][1])  == .red{
+                                        player.landColors[2][player.players[b][0]] = player.playerColors[b]
+                                        
+                                    }else if player.getLandColor(x: player.players[b][0], y: player.players[b][1])  == .yellow{
+                                        player.landColors[3][player.players[b][1]] = player.playerColors[b]
+                                        
+                                    }
+                                }
+                                b = 3
+                            }else if b == 3{
+                                print(player.getLandColor(x: player.players[b][0], y: player.players[b][1]),"hiii")
+                                if player.getLandColor(x: player.players[b][0], y: player.players[b][1])  != .clear{
+                                    if player.getLandColor(x: player.players[b][0], y: player.players[b][1])  == .gray{
+                                        player.landColors[0][player.players[b][0]] = player.playerColors[b]
+                                    }else if player.getLandColor(x: player.players[b][0], y: player.players[b][1])  == .blue{
+                                        player.landColors[1][player.players[b][1]] = player.playerColors[b]
+                                        
+                                    }else if player.getLandColor(x: player.players[b][0], y: player.players[b][1])  == .red{
+                                        player.landColors[2][player.players[b][0]] = player.playerColors[b]
+                                        
+                                    }else if player.getLandColor(x: player.players[b][0], y: player.players[b][1])  == .yellow{
+                                        player.landColors[3][player.players[b][1]] = player.playerColors[b]
+                                        
+                                    }
+                                }
+                                b = 0
+                            }
+                            
                         }
                     }
                 Text("\(dice)")
@@ -164,13 +174,22 @@ struct ContentView: View {
         .padding()
     }
     
-    func getPlayerColor(x:Int,y:Int,player:Int)->Color{
-        if players[player][0]==x && players[player][1]==y{
-            return playerColors[player]
+    
+    func buyColor(x: Int,y:Int)->Color{
+        if y==0{
+            return player.landColors[0][x]
+        }
+        if x==0 {
+            return player.landColors[1][y]
+        }
+        if x==10{
+            return player.landColors[2][y]
+        }
+        if y==10{
+            return player.landColors[3][x]
         }
         return .clear
     }
-    
     func getColor(x: Int,y:Int)->Color{
         if y==0{
             return colors[0][x]
@@ -222,3 +241,4 @@ struct ContentView: View {
         return true
     }
 }
+
