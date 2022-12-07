@@ -3,22 +3,25 @@ import SwiftUI
 struct ContentView: View {
     @State var corner : [String] = ["Free Parking","Go  To Jail","Visit Jail","Go"]
     @State var lands : [[String]] = [
-        ["","Jaden","Jaden","Jaden","4","Claire","6","Claire","8","Claire",""],
-        ["","1","2","3","He","5","6","7","AAAA","9",""],
-        ["","1","2","3","4","5lol","appol","7","8","9",""],
-        ["","1","2","He","he","he","haw","7","8","y",""]
+        ["","a","a","a","4","a","6","a","8","a",""],
+        ["","1","2","3","He","5","6","7","a","9",""],
+        ["","1","2","3","4","a","a","7","8","9",""],
+        ["","1","2","a","a","a","a","7","8","y",""]
     ]
+    @State var Player : player = player()
     @State var dice : Int = 1
     @State var turn : Bool = false
-    @State var color : [[Color]] = [
+    @State var color : [[[Color]]] = [[
         [.clear,.red,.blue,.clear,.blue,.green,.clear,.red,.clear,.clear,.clear],
         [.red,.red,.blue,.clear,.blue,.green,.yellow,.red,.clear,.clear,.yellow],
         [.red,.red,.blue,.clear,.yellow,.green,.blue,.red,.clear,.clear,.yellow],
         [.red,.red,.blue,.blue,.blue,.yellow,.blue,.clear,.red,.clear,.yellow]
-    ]
-    @State var players : [[Int]] = [[10,10],[10,10],[10,10],[10,10]]
-    @State var playerColors : [Color] = [.red,.blue,.green,.yellow]
-    @State var playerTurn = 0
+    ],[
+        [.cyan, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .cyan],
+        [.cyan, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .cyan],
+        [.cyan, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .cyan],
+        [.cyan, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .clear, .cyan]
+      ]]
     func getIndex(x: Int,y:Int)->[Int]{
         if y==0{
             return [0,x]
@@ -40,46 +43,6 @@ struct ContentView: View {
         }
         return true
     }
-    func circleColor(x:Int,y:Int)->[Color]{
-        var players1 : [Color] = []
-        for i in 0...3{
-            if players[i][0]==x && players[i][1]==y{
-                players1.append(playerColors[i])
-            }else{
-                players1.append(.clear)
-            }
-        }
-        return players1
-    }
-    func movePlayer(position:[Int],amount:Int)->[Int]{
-        var pos = position
-        for i in 1...amount{
-            if pos[0]==0 && pos[1]>0{
-                pos[1]-=1
-            }else if pos[0]==10 && pos[1]<10{
-                pos[1]+=1
-            }else if pos[1]==0 && pos[0] < 10{
-                pos[0]+=1
-            }else if pos[1]==10 && pos[0]>0{
-                pos[0]-=1
-            }else{
-                if pos[0]==pos[1]{
-                    if pos[0]==0{
-                        pos[0]+=1
-                    }else{
-                        pos[0]-=1
-                    }
-                }else{
-                    if pos[0]==0{
-                        pos[1]-=1
-                    }else{
-                        pos[1]+=1
-                    }
-                }
-            }
-        }
-        return pos
-    }
     var body: some View {
         ZStack{
             VStack(spacing: 0) {
@@ -87,7 +50,7 @@ struct ContentView: View {
                     HStack(spacing: 0) {
                         ForEach(0..<11){ x in
                             ZStack{
-                                var value = getIndex(x: x, y: y)
+                                var value : [Int] = getIndex(x: x, y: y)
                                 Rectangle()
                                     .fill(isClear(x: x, y: y) ? .white : .cyan)
                                     .overlay{
@@ -114,13 +77,15 @@ struct ContentView: View {
                                     }
                                     VStack{
                                         Rectangle()
-                                            .fill(color[value[0]][value[1]])
+                                            .fill(color[0][value[0]][value[1]])
                                         Rectangle()
                                             .fill(.clear)
                                         Rectangle()
                                             .fill(.clear)
+                                        Rectangle()
+                                            .fill(color[1][value[0]][value[1]])
                                     }
-                                    var colorz = circleColor(x: x, y: y)
+                                    var colorz : [Color] = Player.circleColor(x: x, y: y)
                                     VStack{
                                         HStack{
                                             Circle()
@@ -148,20 +113,25 @@ struct ContentView: View {
             VStack{
                 Dice(dice: $dice, turn: $turn)
                     .onTapGesture {
-                        withAnimation(.easeInOut(duration: 1)){
+                        withAnimation(.easeInOut(duration: 0.5)){
                             dice = Int.random(in: 1...6)
                             turn.toggle()
+                            Player.movePlayer(amount: dice)
+                            for i in 0...3{
+                                var value : [Int] = getIndex(x:Player.players[i][0],y:Player.players[i][1])
+                                if color[1][value[0]][value[1]] == .clear{
+                                    color[1][value[0]][value[1]] = Player.playerColors[i]
+                                }
+                            }
                         }
-                        playerTurn += 1
-                        if playerTurn == 4{
-                            playerTurn = 0
-                        }
-                        print(playerTurn)
-                        players[playerTurn]=movePlayer(position: players[playerTurn], amount: dice)
                     }
                 Text("\(dice)")
                     .foregroundColor(.black)
             }
+        }
+        .onAppear{
+            print(color)
+            
         }
         .padding()
     }
