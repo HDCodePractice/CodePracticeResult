@@ -1,36 +1,27 @@
 import SwiftUI
-
 struct ContentView: View {
-    @State var a = 0
     var body: some View {
-        VStack{
-            ForEach(0..<7){ y in
-                HStack(spacing: 0){
-                    ForEach(0..<7){ x in
-                        if a == 0{
+        VStack(spacing:0) {
+            ForEach(0..<8,id:\.self){ a in
+                HStack(spacing:0) {
+                    ForEach(0..<8,id:\.self){ b in
+                        ZStack{
                             Rectangle()
-                                .foregroundColor(.white)
-                                .overlay{
-                                    Rectangle()
-                                        .stroke(.black,lineWidth: 2)
-                                } 
-                            a = 1
-                        }else if a == 1{
-                            Rectangle()
-                                .foregroundColor(.black)
-                                .overlay{
-                                    Rectangle()
-                                        .stroke(.black,lineWidth: 2)
-                                }
-                            a = 0
+                                .fill((a+b)%2==1 ? .black : .white)
+                            if (a+b)%2==1 && a<3{
+                                Circle()
+                                    .fill(.gray)
+                                    .padding()
+                            }else if (a+b)%2==1 && a>4{
+                                Circle()
+                                    .fill(.white)
+                                    .padding()
+                            }
                         }
-                        
-                            
-                    
-                    } 
+                    }
                 }
-                
             }
         }
+        .padding()
     }
 }
