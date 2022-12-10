@@ -7,9 +7,25 @@ struct ContentView: View {
             ForEach(0..<7){ y in
                 HStack(spacing: 0){
                     ForEach(0..<7){ x in
-                        Rectangle()
-                            .foregroundColor(.white)
-                            .stroke(.black,lineWidth: 2)
+                        if a == 0{
+                            Rectangle()
+                                .foregroundColor(.white)
+                                .overlay{
+                                    Rectangle()
+                                        .stroke(.black,lineWidth: 2)
+                                } 
+                            a = 1
+                        }else if a == 1{
+                            Rectangle()
+                                .foregroundColor(.black)
+                                .overlay{
+                                    Rectangle()
+                                        .stroke(.black,lineWidth: 2)
+                                }
+                            a = 0
+                        }
+                        
+                            
                     
                     } 
                 }
