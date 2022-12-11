@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>let styles : [String] = ["♦️","♣️","♥️","♠️"]
+let cardNumbers : [String] = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"]
+
+
+var cards : [String] = []
+for i in cardNumbers{
+    for j in styles{
+        cards.append(i+j)
+    }
+}
+show("\(cards)")
+
+
+var nums : [Int] = []
+for i in 0...51{
+    nums.append(i)
+}
+show("\(nums)")
+
+
+var a : [Int] = []
+var b : [Int] = []
+
+nums.shuffle()
+a += nums[0...3]
+show("a:\(a)")
+b += nums[4...7]
+show("b:\(b)")
+
+
+if a.max()! &gt; b.max()!{
+    show("a拿到最大的牌 最大值：\(a.max()!)")
+}else if a.max()! &lt; b.max()!{
+    show("b拿到最大的牌 最大值：\(b.max()!)")
+}else{
+    show("a、b最大的牌一样 a最大值：\(a.max()!) b最大值：\(b.max()!)")
+}
+
+
+if a.min()! &gt; b.min()!{
+    show("b拿到最小的牌 最小值：\(b.min()!)")
+}else if a.max()! &lt; b.max()!{
+    show("a拿到最小的牌 最小值：\(a.min()!)")
+}else{
+    show("a、b最小的牌一样 a最小值：\(a.min()!) b最小值：\(b.min()!)")
+}
+
+show("a最大的牌是\(cards[a.max()!])")
+show("b最大的牌是\(cards[b.max()!])")
+show("a最小的牌是\(cards[a.min()!])")
+show("b最小的牌是\(cards[b.min()!])")
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 969}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 253}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</string>
+</dict>
+</plist>

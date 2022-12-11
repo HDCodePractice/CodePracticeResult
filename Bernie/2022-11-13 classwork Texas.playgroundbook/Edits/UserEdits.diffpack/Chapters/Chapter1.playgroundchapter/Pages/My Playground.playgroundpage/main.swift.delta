@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>// isHighCard test case
+// [10,9,7,4,3]
+print(isHighCard(cards: [4,3,7,9,10]))
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 79}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{0, 0}</string>
+		</dict>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>// checkHighCard test case
+// 0
+print(checkHighCard(player1: [4,3,7,9,10], player2: [7,9,10,4,3]))
+// 2
+print(checkHighCard(player1: [4,3,7,9,10], player2: [7,9,10,4,13]))
+</string>
+			<key>ModifiedRange</key>
+			<string>{80, 172}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>
