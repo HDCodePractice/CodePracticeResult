@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>struct Food{
+    var name: String
+    var duration:Int
+    var count: Int = 0
+    
+    func getTimeString()-&gt;String{
+        let time = duration
+        let minutes = time / 60
+        let secondsInt = time % 60
+        let seconds = secondsInt&lt;10 ? "0\(secondsInt)" : "\(secondsInt)"
+        return "\(minutes):\(seconds)"
+    }
+}
+
+var foods:[Food]=[
+    Food(name: "Chicken", duration: 60),
+    Food(name: "Pork", duration: 60),
+    Food(name: "Snake", duration: 60),
+    Food(name: "Shark", duration: 60),
+    Food(name: "Megalodon", duration: 120),
+    Food(name: "Fish", duration: 40, count:100),
+    
+]
+//show("\(foods)")
+
+//for food in foods{
+//    show("\(food.name):\(food.duration) \(food.count)  \(food.getTimeString())")
+//}
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 737}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 253}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</string>
+</dict>
+</plist>

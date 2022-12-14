@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>let players = 3
+let sets = 3
+//let a = plBets(990)
+//print(a)
+//let aaa = getInput(inputPrompt: "how much", inputElements: ["3","5"], errorPrompt: "56789", defaultInput: "111")
+//let b=Int(aaa)!
+let c = plCapital(plRemain: 0)
+let cards = genCardIndexes(sets)
+
+let p = plBets(c.reduce(0,{x,y in x+y}))
+
+//print(c)
+print(p)
+
+
+    
+
+
+
+
+
+
+
+
+//let b = first2Rounds(players, sets)
+//let a = cardCal(b.playerCardsIndex)
+//print(a)
+//
+//print(b.playerCardsIndex)
+//print(score)
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 470}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 253}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</string>
+</dict>
+</plist>

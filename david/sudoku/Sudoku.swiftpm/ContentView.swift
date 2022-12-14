@@ -37,12 +37,9 @@ struct ContentView: View {
                                         getNum = 0
                                     }
                                     color = .white
-                                    
                                 }
-                                
                             }
                         }
-                        
                     }
                     
                     
