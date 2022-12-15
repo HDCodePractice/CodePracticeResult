@@ -66,7 +66,6 @@ func getAllTimes(workout:Workout,km:Int) -> String {
     var difference: Int = 0
     if km == 0 {
         difference = Int(workout.times[km].last!.timeIntervalSinceReferenceDate - workout.startDate.timeIntervalSinceReferenceDate)
-        print("hello i exist")
     } else if km == workout.coordinates2.count-1 {
         difference = Int(workout.endDate.timeIntervalSinceReferenceDate - workout.times[km-1].last!.timeIntervalSinceReferenceDate)
     } else {
