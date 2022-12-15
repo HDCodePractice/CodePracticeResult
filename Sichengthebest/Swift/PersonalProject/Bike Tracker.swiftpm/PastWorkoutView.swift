@@ -31,6 +31,7 @@ struct SingleWorkoutView: View {
                     }
                         .font(.system(size: 20))
                     if open {
+                        let _ = print(workouts[index].coordinates2.count)
                         ForEach(0..<workouts[index].coordinates2.count,id:\.self) { km in
                             Text("KM \(km): \(getAllTimes(workout:workouts[index],km:km))")
                         }

@@ -8,6 +8,7 @@ struct MapView: UIViewRepresentable {
     ))
     let started: Bool
     let followLocation: Bool
+    var isFirst: Bool
     
     class Coordinator: NSObject, MKMapViewDelegate {
         var parent: MapView
@@ -44,6 +45,9 @@ struct MapView: UIViewRepresentable {
     // Updates the view every time a new coordinate is added in placeList
     func updateUIView(_ view: MKMapView, context: Context) {
         if followLocation {
+            if isFirst {
+                view.region = region2
+            }
             view.region.center = region2.center
         }
         let polyline = MKPolyline(coordinates: lineCoordinates, count: lineCoordinates.count)

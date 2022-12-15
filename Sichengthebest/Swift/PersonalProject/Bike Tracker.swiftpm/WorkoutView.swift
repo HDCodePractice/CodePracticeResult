@@ -8,6 +8,7 @@ struct WorkoutView: View {
     @State var progressTime = 0
     @State var followLocation = true
     @State var backAlert = false
+    @State var isFirst = true
     @StateObject var lm = LocationManager.shared
     var tempCoords: [CLLocationCoordinate2D] {
         var tempTempCoords: [CLLocationCoordinate2D] = []
@@ -71,7 +72,12 @@ struct WorkoutView: View {
                     .foregroundColor(lm.isStarted ? lm.isRunning ? .green:.yellow:.blue)
                 Text("Annotations: \(lm.placeList.count)")
                 ZStack(alignment: .bottomTrailing) {
-                    MapView(lineCoordinates: tempCoords, started: lm.isStarted, followLocation: followLocation)
+                    MapView(lineCoordinates: tempCoords, started: lm.isStarted, followLocation: followLocation,isFirst: isFirst)
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                isFirst = false
+                            }
+                        }
                     ZStack {
                         Circle()
                             .foregroundColor(.white)
