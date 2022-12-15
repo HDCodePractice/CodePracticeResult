@@ -11,10 +11,11 @@ enum GridStatus{
         case .empty:
             return ""
         case .hideShip:
-            return "a"
+            return "Pork"
         case .destroiedShip:
             return "burst"
         case .attactted:
+//            return "pork"
             return "x.circle"
         }
     }

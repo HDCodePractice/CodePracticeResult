@@ -44,7 +44,7 @@ enum Ship{
             if shipNumber()==0{
                 return ""
             }
-            return "a"
+            return "a.circle"
         case .B:
             return "b.circle"
         case .C:

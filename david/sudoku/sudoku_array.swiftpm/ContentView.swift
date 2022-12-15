@@ -4,41 +4,45 @@ struct ContentView: View {
     @State var gridArr:[[Int]] = Array(repeating: Array(repeating: 0, count: 9), count: 9)
     @State var backColors:[[Color]] = Array(repeating: Array(repeating: .white, count: 9), count: 9)
     @State var backColorTemp:[[Color]] = []
-    @State var textColor:[[Color]] = Array(repeating: Array(repeating: .black, count: 9), count: 9)
+    @State var textColor:[[Color]] = Array(repeating: Array(repeating: .white, count: 9), count: 9)
     
     @State var rGet = 0
     @State var cGet = 0
     
     
+    // IT can be changed here 
     
-    func autoInput(r:Int,c:Int){
-        var numbers:[Int] = [1,2,3,4,5,6,7,8,9]
-        numbers.shuffle()
-        
-        for i in 0..<3{
-            for j in 0..<3{
-                gridArr[r/3*3+i][c/3*3+j] = numbers[0]
-                numbers.removeFirst()
-            }
-        }
-    }
-    
+    // creat a array to store the digits of sudoku.
     func gridInit(){
         gridArr = Array(repeating: Array(repeating: 0, count: 9),count: 9)
         for i in 0...8{
             for j in 0...8{
-                if (i/3==0 && j/3==0) || (i/3==1 && j/3==1) || (i/3==2 && j/3==2){
-                    autoInput(r: i, c: j)
+                autoInput(r: i, c: j)
+            }
+        }
+    }
+    // auto-creat 3 groups by machine to fill parts of grid
+    func autoInput(r:Int,c:Int){ 
+        var numbers:[Int] = [1,2,3,4,5,6,7,8,9]
+        let starts:[Int] = [0,3,6]
+        
+        for start in starts{
+            numbers.shuffle()
+            for i in 0..<3{
+                for j in 0..<3{
+                    gridArr[start+i][start+j] = numbers[i*3+j]
+                    textColor[start+i][start+j] = .black
                 }
             }
         }
     }
     
+    // Creat a array to store background colors for ever grid
     func backColorInit(){
-        
         backColors = Array(repeating: Array(repeating: .white, count: 9), count: 9)
     }
     
+    // change the backgound color of the grids near the grid which you choose,including vertiacl and horizonal grids.
     func backColor(rGet:Int,cGet:Int){
         
         for i in 0..<9{
@@ -55,11 +59,13 @@ struct ContentView: View {
         }
     }
     
+    // changing the background color of the grid which you choose.
     func choosedColor(){
         backColors[rGet][cGet] = .white 
-            .opacity(0.6)
+            .opacity(0.5)
     }
     
+    //running the game
     func startGame(){
         rGet = 1
         cGet = 4
@@ -69,49 +75,119 @@ struct ContentView: View {
         choosedColor()
     }
     
-    func isDuplic(r:Int,c:Int)->Bool{
+    //checking whether there are some clashes in the grid and then changing the color of choosing grid
+    func isDuplic(rGet:Int,cGet:Int)->Bool{
+        var isduplic = false
         
-        for i in 0..<9{
-            for j in 0..<9{
-                if gridArr[i][j] == gridArr[r][c]{
-                    if !(i == r && j == c){
-                        if r/3==i/3 && c/3==j/3{
-                            return true
-                        }else if r==i || c==j{
-                            return true
-                        }
-                        
+        if gridArr[rGet][cGet] != 0{
+            for i in 0..<9{
+                if i != rGet{
+                    if gridArr[rGet][cGet] == gridArr[i][cGet]{
+                        backColors[rGet][cGet] = .red.opacity(0.6)
+                        backColors[i][cGet] = .red.opacity(0.6)
+                        isduplic = true
+                    }                
+                }
+                
+                if i != cGet{
+                    if gridArr[rGet][cGet] == gridArr[rGet][i]{
+                        backColors[rGet][cGet] = .red.opacity(0.6)
+                        backColors[rGet][i] = .red.opacity(0.6)
+                        isduplic = true
                     }
                 }
             }
-        }
-        return false
-    }
-    
-    func showDuplic(r:Int,c:Int){
-        
-        for i in 0..<9{
-            for j in 0..<9{
-                if backColors[i][j] != .red.opacity(0.85){
-                    if !(i == r && j == c){
-                        
-                        if gridArr[i][j] == gridArr[r][c]{
-                            if (r/3==i/3 && c/3==j/3) || (r==i || c==j){
-                                backColors[i][j] = .red
-                                    .opacity(0.85)
-                            }else{
-                                backColors[i][j] = .white 
-                                    .opacity(0.6)
-                            }
+            
+            for i in 0..<3{
+                for j in 0..<3{
+                    if !(rGet == rGet/3*3+i && cGet == cGet/3*3+j){
+                        if gridArr[rGet][cGet] == gridArr[rGet/3*3+i][cGet/3*3+j]{
+                            backColors[rGet][cGet] = .red.opacity(0.6)
+                            backColors[rGet/3*3+i][cGet/3*3+j] = .red.opacity(0.6)
+                            isduplic = true
                         }
                     }
                 }
             }
+            
         }
         backColorTemp = backColors
-        if isDuplic(r: r, c: c){
-            backColorTemp[r][c] = .red.opacity(0.85)
-            
+        return isduplic
+    }
+    //?? checking clashes for whole grids
+    func checkDuplic(){
+        for i in 0..<9{
+            for j in 0..<9{
+                if gridArr[i][j] != 0{
+                    isDuplic(rGet: i, cGet: j)
+                }
+            }
+        }
+    }
+    
+    // fill a grid
+    func 
+    
+    
+    //giving a answer to the sudoku
+    func answers(){
+        let numbers:[Int] = [1,2,3,4,5,6,7,8,9]
+        let starts:[Int] = [0,3,6]
+        var index = 0 
+        var duplicMarker = false
+        var row:Int = 0
+        var col = 0
+        
+        for r in starts{
+            for c in starts{
+                var nums = numbers
+                for i in 0..<3{
+                    for j in 0..<3{
+                        if textColor[r+i][c+j] != .black{
+                            
+                            while gridArr[r+i][c+j]==0{
+                                nums.shuffle()
+                                if !nums.isEmpty{
+                                    for k in 0..<nums.count{
+                                        
+                                        gridArr[r+i][c+j] = nums[k]
+                                        if !isDuplic(rGet: r+i, cGet: c+j){
+                                            nums.remove(at: k)
+                                            row = r+i
+                                            col = c+j
+                                            index = k
+                                            duplicMarker = false
+                                            print(nums)
+                                            break
+                                        }
+                                        duplicMarker = true
+                                        gridArr[r+i][c+j] = 0
+                                        
+                                    }
+                                    if duplicMarker{
+                                        for i in 0..<9{
+                                            for j in 0..<9{
+                                                if textColor[i][j] != .black{
+                                                    gridArr[i][j] = 0
+                                                
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                            }
+                            
+                            textColor[r+i][c+j] = .blue
+                            checkDuplic()
+                        }
+                        
+                        
+                        
+                    }
+                }
+                
+            }
         }
     }
     
@@ -147,16 +223,9 @@ struct ContentView: View {
                                                 cGet = c
                                                 backColorInit()
                                                 backColor(rGet: rGet, cGet: cGet)
+                                                checkDuplic()
                                                 choosedColor()
                                                 
-                                                for i in 0..<backColorTemp.count{
-                                                    for j in 0..<backColorTemp[i].count{
-                                                        if backColorTemp[i][j] == .red.opacity(0.85){
-                                                            backColors[i][j] = .red
-                                                                .opacity(0.85)
-                                                        }
-                                                    }
-                                                }
                                             }
                                         }
                                     }
@@ -186,11 +255,11 @@ struct ContentView: View {
                             ForEach(1...3,id:\.self){j in
                                 Button("\(i*3+j)"){
                                     
-                                    if gridArr[rGet][cGet] == 0{
-                                        gridArr[rGet][cGet] = i*3+j
-                                        textColor[rGet][cGet] = .blue
-                                    }
-                                    showDuplic(r: rGet, c: cGet)
+                                    //                                    if gridArr[rGet][cGet] == 0{
+                                    gridArr[rGet][cGet] = i*3+j
+                                    textColor[rGet][cGet] = .blue
+                                    //                                    }
+                                    checkDuplic()                                    
                                 }
                                 .buttonStyle(.bordered)
                                 .font(.largeTitle)
@@ -202,7 +271,7 @@ struct ContentView: View {
                 VStack{
                     Button("New Game"){
                         startGame()
-                        backColorTemp = []
+                        backColorTemp = backColors
                     }
                     .buttonStyle(.bordered)
                     .font(.largeTitle)
@@ -211,8 +280,37 @@ struct ContentView: View {
                         if textColor[rGet][cGet] != .black{
                             gridArr[rGet][cGet] = 0
                             backColor(rGet: rGet, cGet: cGet)
-                            backColorTemp = backColors
+                            checkDuplic()                            
+                            
                         }
+                    }
+                    .buttonStyle(.bordered)
+                    .font(.largeTitle)
+                    
+                    Button("Answer"){
+                        answers()
+                        
+                        backColorTemp = backColors
+                    }
+                    .buttonStyle(.bordered)
+                    .font(.largeTitle)
+                    
+                    Button("Clear"){
+                        
+                        for i in 0..<9{
+                            for j in 0..<9{
+                                if textColor[i][j] != .black{
+                                    gridArr[i][j] = 0
+                                }
+                                
+                            }                  
+                        }
+                        backColorInit()
+                        backColor(rGet: 1, cGet: 4)
+                        choosedColor()
+                        
+                        
+                        
                     }
                     .buttonStyle(.bordered)
                     .font(.largeTitle)
