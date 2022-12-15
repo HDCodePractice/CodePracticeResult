@@ -16,7 +16,9 @@ struct SingleWorkoutView: View {
                         .foregroundColor(.yellow)
                         .font(.system(size: 25))
                     // Time the workout has taken
-                    Text("Time: \(Stopwatch(progressTime: workouts[index].time))")
+                    Text("Workout time: \(Stopwatch(progressTime: workouts[index].time))")
+                        .font(.system(size: 20))
+                    Text("Elapsed time: \(Stopwatch(progressTime: Int(workouts[index].endDate.timeIntervalSinceReferenceDate - workouts[index].startDate.timeIntervalSinceReferenceDate)))")
                         .font(.system(size: 20))
                     // Average speed of bike ride
                     Text("Speed: \(String(format:"%.1f", workouts[index].speed)) kph")
@@ -31,9 +33,9 @@ struct SingleWorkoutView: View {
                     }
                         .font(.system(size: 20))
                     if open {
-                        let _ = print(workouts[index].coordinates2.count)
+                        Text("Splits:")
                         ForEach(0..<workouts[index].coordinates2.count,id:\.self) { km in
-                            Text("KM \(km): \(getAllTimes(workout:workouts[index],km:km))")
+                            Text("\(km+1): \(getAllTimes(workout:workouts[index],km:km))")
                         }
                     }
                     // Map
@@ -64,10 +66,11 @@ func getAllTimes(workout:Workout,km:Int) -> String {
     var difference: Int = 0
     if km == 0 {
         difference = Int(workout.times[km].last!.timeIntervalSinceReferenceDate - workout.startDate.timeIntervalSinceReferenceDate)
+        print("hello i exist")
     } else if km == workout.coordinates2.count-1 {
-        difference = Int(workout.endDate.timeIntervalSinceReferenceDate - workout.times[km].last!.timeIntervalSinceReferenceDate)
+        difference = Int(workout.endDate.timeIntervalSinceReferenceDate - workout.times[km-1].last!.timeIntervalSinceReferenceDate)
     } else {
-        difference = Int(workout.times[km+1].last!.timeIntervalSinceReferenceDate - workout.times[km].last!.timeIntervalSinceReferenceDate)
+        difference = Int(workout.times[km].last!.timeIntervalSinceReferenceDate - workout.times[km-1].last!.timeIntervalSinceReferenceDate)
     }
     return Stopwatch(progressTime: difference)
 }
