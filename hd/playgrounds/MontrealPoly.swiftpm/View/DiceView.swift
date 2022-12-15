@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct Dice: View {
+struct DiceView: View {
     let diceAlignments: [[Alignment]] = [
         [.center,.center,.center,.center,.center,.center],
         [.topLeading,.topLeading,.topLeading,.bottomTrailing,.bottomTrailing,.bottomTrailing],
@@ -11,7 +11,7 @@ struct Dice: View {
     ]
     
     @Binding var dice : Int
-    @Binding var turn : Bool
+    @State var turn : Bool = true
     
     var body: some View {
         VStack{
@@ -32,7 +32,55 @@ struct Dice: View {
                 }
             }
             .rotationEffect(Angle(degrees: turn ? 0 : 180))
+            .onTapGesture {
+                withAnimation(.easeInOut(duration: 0.5)){
+                    dice = Int.random(in: 1...6)
+                    turn.toggle()
+                }
+            }
         }
     }
 }
 
+private struct DiceDemoView:View{
+    @State var diceInt = 1 
+    @State var sum = 1
+    
+    var dice: Binding<Int>{
+        Binding{
+            diceInt
+        }set:{ newValue in
+            diceInt = newValue
+            sum += diceInt
+        }
+    }
+    
+    var body: some View{
+        VStack{
+            DiceView(dice: dice)
+            Text("\(diceInt)")
+            Text("\(sum)")
+        }
+    }
+}
+
+private struct DiceDemoView1:View{
+    @State var diceInt = 1 
+    
+    var body: some View{
+        VStack{
+            DiceView(dice: $diceInt)
+            Text("\(diceInt)")
+        }
+    }
+}
+
+
+struct DiceView_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack{
+            DiceDemoView()
+            DiceDemoView1()
+        }
+    }
+}
