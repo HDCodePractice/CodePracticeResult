@@ -3,10 +3,11 @@ import SwiftUI
 struct Board{
     var width : Int = 8
     var height : Int = 8
-    var grids : [[Grid]]
+    var grids : [[Grid]] = []
     var selected : Grid? = nil
+    var move : Color = .clear
+    var tile : [Int] = []
     init(){
-        self.grids = []
         generate()
     }
     mutating func generate(){
@@ -33,14 +34,58 @@ struct Board{
                 )
             }
             self.grids.append(line)
-       
+            
         }
     }
     mutating func selectGrid(grid: Grid){
         self.selected = grid
-        generate()
-        if selected!.token != .clear{
-            grids[selected!.y][selected!.x].token = .red
+        if move == .clear{
+            if selected!.token != .clear{
+                move = grids[selected!.y][selected!.x].token
+                grids[selected!.y][selected!.x].token = .red
+                tile = [selected!.y,selected!.x]
+            }
+        }else{
+            print([selected!.y,tile[0]])
+            if move == .gray{
+                if tile[0]>0{
+                    if selected!.y == grids[0][tile[0]-1].x{
+                        if selected!.x - grids[tile[1]][0].y == 1 || selected!.x - grids[tile[1]][0].y == -1{
+                            grids[tile[0]][tile[1]].token = .clear
+                            grids[selected!.y][selected!.x].token = move
+                            move = .clear
+                        }else{
+                            grids[tile[0]][tile[1]].token = move
+                            move = .clear
+                        }
+                    }else{
+                        grids[tile[0]][tile[1]].token = move
+                        move = .clear
+                    }
+                }else{
+                    grids[tile[0]][tile[1]].token = move
+                    move = .clear
+                }
+            }else if move == .white{
+                if tile[0]<7{
+                    if selected!.y == grids[0][tile[0]+1].x{
+                        if selected!.x - grids[tile[1]][0].y == 1 || selected!.x - grids[tile[1]][0].y == -1{
+                            grids[tile[0]][tile[1]].token = .clear
+                            grids[selected!.y][selected!.x].token = move
+                            move = .clear
+                        }else{
+                            grids[tile[0]][tile[1]].token = move
+                            move = .clear
+                        }
+                    }else{
+                        grids[tile[0]][tile[1]].token = move
+                        move = .clear
+                    }
+                }else{
+                    grids[tile[0]][tile[1]].token = move
+                    move = .clear
+                }
+            }
         }
     }
 }
