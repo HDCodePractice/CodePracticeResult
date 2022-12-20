@@ -32,7 +32,6 @@ struct NotMovingMapView: UIViewRepresentable {
         mapView2.delegate = context.coordinator
         mapView2.showsUserLocation = true
         mapView2.setRegion(region, animated: true)
-        print(lineCoordinates)
         let start = LandmarkAnnotation(coordinate:lineCoordinates[0])
         let end = LandmarkAnnotation(coordinate:lineCoordinates[lineCoordinates.count-1])
         mapView2.addAnnotation(start)
