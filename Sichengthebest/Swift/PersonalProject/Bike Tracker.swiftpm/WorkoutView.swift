@@ -8,6 +8,7 @@ struct WorkoutView: View {
     @State var progressTime = 0
     @State var followLocation = true
     @State var backAlert = false
+    @State var isFirst = true
     @StateObject var lm = LocationManager.shared
     var tempCoords: [CLLocationCoordinate2D] {
         var tempTempCoords: [CLLocationCoordinate2D] = []
@@ -66,12 +67,19 @@ struct WorkoutView: View {
                     }
                 Label("Average speed: \(String(format: "%.1f",lm.totalDistance / 1000 * 3600 / Double(progressTime))) kph\nCurrent speed: \(String(format: "%.1f",lm.currentSpeed*3)) kph", systemImage: "speedometer")
                     .font(.system(size: 25))
+                Label("Elevation gain: \(Int(lm.prevElevation))m", systemImage: "arrow.up.right.circle")
+                    .font(.system(size: 25))
                 Label(lm.isStarted ? lm.isRunning ? "Workout recording...":"Workout paused": "Start workout?", systemImage: lm.isStarted ? lm.isRunning ? "bicycle.circle" : "pause.circle" : "restart")
                     .font(.system(size: 20))
                     .foregroundColor(lm.isStarted ? lm.isRunning ? .green:.yellow:.blue)
                 Text("Annotations: \(lm.placeList.count)")
                 ZStack(alignment: .bottomTrailing) {
-                    MapView(lineCoordinates: tempCoords, started: lm.isStarted, followLocation: followLocation)
+                    MapView(lineCoordinates: tempCoords, started: lm.isStarted, followLocation: followLocation,isFirst: isFirst)
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                isFirst = false
+                            }
+                        }
                     ZStack {
                         Circle()
                             .foregroundColor(.white)

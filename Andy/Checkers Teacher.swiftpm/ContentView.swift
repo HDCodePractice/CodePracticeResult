@@ -10,13 +10,17 @@ struct ContentView: View {
                         ZStack{
                             Rectangle()
                                 .fill(board.grids[x][y].color)
-                            Circle()
-                                .fill(board.grids[x][y].token)
-                                .padding(3)
-                                .onTapGesture {
-                                    board.selectGrid(grid: board.grids[x][y])
-                                }
-
+                            ZStack{
+                                Circle()
+                                    .stroke(lineWidth: 15)
+                                    .fill(board.grids[x][y].token == .clear ? .clear : .black)
+                                Circle()
+                                    .fill(board.grids[x][y].token)
+                            }
+                            .padding(10)
+                        }
+                        .onTapGesture {
+                            board.selectGrid(grid: board.grids[x][y])
                         }
                     }
                 }
