@@ -4,7 +4,7 @@ struct ViewModel{
     var board : [[Grid]] = []
     
     init(){
-        let lastChess = ["Rook", "Bishop", "Knight", "Queen", "King", "Knight", "Bishop", "Rook"]
+        let lastChess = ["Rook", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Rook"]
         var lineChess : [Grid] = []
         board = []
         for index in 0..<lastChess.count{
