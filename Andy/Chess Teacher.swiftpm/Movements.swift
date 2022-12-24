@@ -3,36 +3,46 @@ import SwiftUI
 struct movements{
    var vm = ViewModel()
     mutating func movePawn(begin:[Int],end:[Int],color:Color)->Bool{
+        print([begin,end])
         var verif = false
         if begin[1] == end[1]{
                 if color == .white{
-                    print("White?")
                     if begin[0] == 6{
+                        print("1")
                         if begin[0]==end[0]+1{
-                            verif = true
+                            print("2")
+                            if vm.board[end[0]][end[1]].token.color == .clear{
+                                print("3")
+                                verif = true
+                            }
                         }else if begin[0]==end[0]+2{
-                            if vm.board[end[0]+1][end[1]].token.name == ""{
+                            if vm.board[end[0]+1][end[1]].token.name == "" && vm.board[end[0]][end[1]].token.name == ""{
                                 verif = true
                             }
                         }
                     }else{
                       if begin[0]==end[0]+1{
-                          verif = true
+                          if vm.board[end[0]][end[1]].token.name == ""{
+                              verif = true
+                          }
                       } 
                     }
                 }else{
-                    print("Black?")
                     if begin[0] == 1{
                         if begin[0]==end[0]-1{
-                            verif = true
+                            if vm.board[end[0]][end[1]].token.color == .clear{
+                                verif = true
+                            }
                         }else if begin[0]==end[0]-2{
-                            if vm.board[end[0]-1][end[1]].token.name == ""{
+                            if vm.board[end[0]-1][end[1]].token.name == "" && vm.board[end[0]][end[1]].token.name == ""{
                                 verif = true
                             }
                         }
                     }else{
                         if begin[0]==end[0]-1{
-                            verif = true
+                            if vm.board[end[0]][end[1]].token.name == ""{
+                                verif = true
+                            }
                         } 
                     }
                 }
