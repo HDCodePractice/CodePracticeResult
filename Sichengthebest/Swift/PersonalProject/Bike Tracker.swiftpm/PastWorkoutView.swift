@@ -23,6 +23,8 @@ struct SingleWorkoutView: View {
                     // Average speed of bike ride
                     Text("Speed: \(String(format:"%.1f", workouts[index].speed)) kph")
                         .font(.system(size: 20))
+                    Text("Elevation gain: \(Int(workouts[index].elevationGain))m")
+                        .font(.system(size: 20))
                     // Distance of bike ride
                     HStack {
                         Text("Distance: \(String(format: "%.2f",workouts[index].distance)) km")
