@@ -7,15 +7,47 @@ struct Grid{
     var token : Token
     
     func isCanMove( board:[[Grid]], end: Grid) -> Bool{
-        if token.name == "Pawn"{
+         if token.name == "Pawn"{
             return movePawn(board: board, end: end)
         }else if token.name == "Knight"{
             return moveKnight(board: board, end: end)
         }else if token.name == "Rook"{
             return moveRook(board: board, end: end)
+        }else if token.name == "Bishop"{
+            return moveBishop(board: board, end: end)
         }
         return true
     }
+    
+    func moveBishop(board:[[Grid]], end: Grid) -> Bool{
+        var path : [Grid] = []
+        var starty = y
+        var endy = end.y
+        if y > end.y {
+            starty = end.y
+            endy = y
+        }
+        var startx = x
+        var endx = end.x
+        if x > end.x {
+            startx = end.x
+            endx = x
+        }
+        
+        for i in startx+1..<endx{
+            for j in starty+1..<endy{
+                if i == j{
+                    path.append(board[i][j])
+                }
+                
+            }
+            
+        }
+        return checkPath(path: path)
+        
+        return false
+    }
+    
     
     func moveRook(board:[[Grid]], end: Grid) -> Bool{
         var path : [Grid] = []
@@ -44,22 +76,12 @@ struct Grid{
         }
         return false
     }
-    func moveBishop(board:[[Grid]], end: Grid) -> Bool{
-        var path : [Grid] = []
-        if abs(end.x-x) == abs(end.y-y){
-            var j = 0
-            if 
-            for i in x ... end.x{
-                
-            }
-        }
-        return false
-    }
+    
     
     func moveKnight(board:[[Grid]], end: Grid) -> Bool{
         var path : [Grid] = []
         
-        if x != end.x && y != end.y && abs(end.x-x)+abs(end.y-y) == 3{
+        if abs(end.x-x)+abs(end.y-y) == 3{
             if token.color == end.token.color || end.token.color == .clear{
                 path.append(end)
             }
@@ -93,20 +115,22 @@ struct Grid{
                     path.append(board[end.x+1][end.y])
                 }
             }                
-        } 
+        }
         
         if path.count > 0{
             return checkPath(path: path)
         }
         return false
+        
     }
     
-    // check path
     func checkPath(path: [Grid])->Bool{
+        print(path)
         for item in path{
             if item.token.color != .clear{
                 return false
-            }
+            }  
+            
         }
         return true
     }

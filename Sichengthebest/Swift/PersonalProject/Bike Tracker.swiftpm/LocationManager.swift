@@ -15,6 +15,7 @@ class LocationManager: NSObject,ObservableObject{
     var totalDistance: Double = 0
     var currentSpeed: Double = 0
     var elevationGain: Double = 0
+    var isFirst: Bool = true
     @Published var isRunning = false
     @Published var isStarted = false
     
@@ -42,6 +43,10 @@ extension LocationManager: CLLocationManagerDelegate{
                     if checkCloseCoord(coord1: location.coordinate, coord2: placeListLast.coordinate) {
                         if isRunning {
                             totalDistance += calculateDistance(alat: placeListLast.coordinate.latitude, along: placeListLast.coordinate.longitude, blat: location.coordinate.latitude, blong: location.coordinate.longitude)
+                            if isFirst {
+                                prevElevation = location.altitude
+                                isFirst = false
+                            }
                             if prevElevation <= location.altitude {
                                 elevationGain += location.altitude - prevElevation
                             }
@@ -53,7 +58,6 @@ extension LocationManager: CLLocationManagerDelegate{
             } else {
                 // if placeList is empty, appends current location by default
                 if isStarted {
-                    prevElevation = location.altitude
                     placeList.append(Annotation(coordinate:location.coordinate,distanceAt: totalDistance,time: Date.now))
                 }
             }

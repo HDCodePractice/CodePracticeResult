@@ -40,6 +40,7 @@ struct Workout: Codable,Identifiable {
     var endDate: Date
     var speed: Double
     var distance: Double
+    var elevationGain: Double
     var coordArray: [[Double]] = []
     var distances: [Double] {
         return coordArray.map({x in x[2]})

@@ -42,7 +42,7 @@ struct WorkoutView: View {
                         time: progressTime,
                         endDate: Date.now,
                         speed: lm.totalDistance / 1000 * 3600 / Double(progressTime),
-                        distance: lm.totalDistance / 1000))
+                        distance: lm.totalDistance / 1000, elevationGain: lm.elevationGain))
                     for annotation in lm.placeList {
                         workouts[workouts.count-1].addCoordToArray(coord: annotation.coordinate,distance:annotation.distanceAt)
                         workouts[workouts.count-1].addTimeToArray(time: annotation.time)
@@ -109,7 +109,7 @@ struct WorkoutView: View {
                                 time: progressTime,
                                 endDate: Date.now,
                                 speed: lm.totalDistance / 1000 * 3600 / Double(progressTime),
-                                distance: lm.totalDistance / 1000))
+                                distance: lm.totalDistance / 1000, elevationGain: lm.elevationGain))
                             for annotation in lm.placeList {
                                 workouts[workouts.count-1].addCoordToArray(coord: annotation.coordinate,distance:annotation.distanceAt)
                                 workouts[workouts.count-1].addTimeToArray(time: annotation.time)
