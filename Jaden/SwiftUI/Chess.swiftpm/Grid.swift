@@ -16,34 +16,35 @@ struct Grid{
         }else if token.name == "Bishop"{
             return moveBishop(board: board, end: end)
         }
-        return true
+        return false
     }
     
     func moveBishop(board:[[Grid]], end: Grid) -> Bool{
         var path : [Grid] = []
-        var starty = y
-        var endy = end.y
-        if y > end.y {
-            starty = end.y
-            endy = y
-        }
-        var startx = x
-        var endx = end.x
-        if x > end.x {
-            startx = end.x
-            endx = x
-        }
-        
-        for i in startx+1..<endx{
-            for j in starty+1..<endy{
-                if i == j{
-                    path.append(board[i][j])
+        print("hi")
+        if abs(end.x-x) == abs(end.y - y){
+            var starty = y
+            var endy = end.y
+            var startx = x
+            var endx = end.x
+           print(starty,startx,endy,endx,"0000")
+            if endx < startx && endy > starty{
+                 print(starty,startx,endy,endx,"1111")
+                while startx != endx && starty != endy{
+                    startx += 1
+                    starty -= 1
+                    path.append(board[startx][starty])
                 }
                 
+                if startx != endx && starty != endy{
+                    return checkPath(path: path)
+                }else{
+                    return true
+                }
             }
             
+            return checkPath(path: path)
         }
-        return checkPath(path: path)
         
         return false
     }
