@@ -13,6 +13,8 @@ struct Grid{
             return moveKnight(board: board, end: end)
         }else if token.name == "Rook"{
             return moveRook(board: board, end: end)
+        }else if token.name == "Bishop"{
+            return moveBishop(board: board, end: end)
         }
         return true
     }
@@ -47,14 +49,31 @@ struct Grid{
     func moveBishop(board:[[Grid]], end: Grid) -> Bool{
         var path : [Grid] = []
         if abs(end.x-x) == abs(end.y-y){
-            var j = 0
-            if 
-            for i in x ... end.x{
-                
+            var j = y
+            if end.x>x{
+                for i in x ... end.x-1{
+                    if end.y>y{
+                        j+=1
+                    }else{
+                        j-=1
+                    }
+                    path.append(board[i][j])
+                }
+            }else if end.x<x{
+                for i in end.x ... x-1{
+                    if end.y>y{
+                        j+=1
+                    }else{
+                        j-=1
+                    }
+                    path.append(board[i][j])
+                }
             }
+            return checkPath(path:path)
         }
         return false
     }
+
     
     func moveKnight(board:[[Grid]], end: Grid) -> Bool{
         var path : [Grid] = []
