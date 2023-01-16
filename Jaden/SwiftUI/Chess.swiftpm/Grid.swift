@@ -15,37 +15,136 @@ struct Grid{
             return moveRook(board: board, end: end)
         }else if token.name == "Bishop"{
             return moveBishop(board: board, end: end)
+        }else if token.name == "Queen"{
+            return moveQueen(board: board, end: end)
         }
+        return false
+    }
+    
+    func moveQueen(board:[[Grid]], end: Grid)->Bool{
+        var path : [Grid] = []
+        if x == end.x{
+            var starty = y
+            var endy = end.y
+            if y > end.y {
+                starty = end.y
+                endy = y
+            }
+            for i in starty+1..<endy{
+                path.append(board[x][i])
+            }
+            return checkPath(path: path)
+        }else if y == end.y{
+            var startx = x
+            var endx = end.x
+            if x > end.x {
+                startx = end.x
+                endx = x
+            }
+            for i in startx+1..<endx{
+                path.append(board[i][y])
+            }
+            return checkPath(path: path)
+        }
+        if abs(end.x-x)==abs(end.y-y) && end.token.color != token.color{
+
+            var startx = x
+            var starty = y
+            var endx = end.x
+            var stepy = 1
+            
+            if end.x>x{
+                if end.y>y{
+                    // startx ... endx y+1
+                    startx = x+1
+                    endx = end.x
+                    stepy = 1
+                    starty = y+1
+                }else{
+                    // startx ... endx y-1
+                    startx = x+1
+                    endx = end.x
+                    stepy = -1
+                    starty = y-1
+                }
+            }else{
+                if end.y>y{
+                    // end.x ... x y+1 
+                    startx = end.x
+                    endx = x-1
+                    stepy = -1
+                    starty = end.y
+                }else{
+                    // end.x ... x y+1
+                    startx = end.x
+                    endx = x-1
+                    stepy = 1
+                    starty = end.y
+                }
+            }
+            
+            var j = starty
+            for i in startx...endx{
+                if token.color == end.token.color || end.token.color == .clear{
+                    path.append(board[i][j])
+                }
+                j += stepy
+            }
+
+            return checkPath(path: path)
+        }
+        
+        
         return false
     }
     
     func moveBishop(board:[[Grid]], end: Grid) -> Bool{
         var path : [Grid] = []
-        print("hi")
-        if abs(end.x-x) == abs(end.y - y){
-            var starty = y
-            var endy = end.y
+        if abs(end.x-x)==abs(end.y-y) && end.token.color != token.color{
             var startx = x
+            var starty = y
             var endx = end.x
-           print(starty,startx,endy,endx,"0000")
-            if endx < startx && endy > starty{
-                 print(starty,startx,endy,endx,"1111")
-                while startx != endx && starty != endy{
-                    startx += 1
-                    starty -= 1
-                    path.append(board[startx][starty])
-                }
-                
-                if startx != endx && starty != endy{
-                    return checkPath(path: path)
+            var stepy = 1
+            
+            if end.x>x{
+                if end.y>y{
+                    // startx ... endx y+1
+                    startx = x+1
+                    endx = end.x
+                    stepy = 1
+                    starty = y+1
                 }else{
-                    return true
+                    // startx ... endx y-1
+                    startx = x+1
+                    endx = end.x
+                    stepy = -1
+                    starty = y-1
+                }
+            }else{
+                if end.y>y{
+                    // end.x ... x y+1 
+                    startx = end.x
+                    endx = x-1
+                    stepy = -1
+                    starty = end.y
+                }else{
+                    // end.x ... x y+1
+                    startx = end.x
+                    endx = x-1
+                    stepy = 1
+                    starty = end.y
                 }
             }
             
+            var j = starty
+            for i in startx...endx{
+                if token.color == end.token.color || end.token.color == .clear{
+                    path.append(board[i][j])
+                }
+                j += stepy
+            }
             return checkPath(path: path)
         }
-        
         return false
     }
     
