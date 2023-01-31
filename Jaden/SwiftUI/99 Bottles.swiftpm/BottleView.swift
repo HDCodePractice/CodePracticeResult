@@ -37,9 +37,9 @@ struct BottleView: View {
 struct BottleView_Previews: PreviewProvider {
     static var previews: some View {
         HStack{
-            BottleView(height: 1,liquid: 8, cap: 3)
-            BottleView(height: 2, liquid: 12, cap: 1)
-            BottleView(height: 3, liquid: 4, cap: 2)
+            BottleView(height: 1,liquid: 4, cap: 3)
+            BottleView(height: 2, liquid: 6, cap: 1)
+            BottleView(height: 3, liquid: 2, cap: 2)
         }
         
     }
