@@ -3,7 +3,7 @@ import SwiftUI
 struct ViewModel {
     var bottles : [Bottle]  = []
     var target : [Int] = []
-    
+    var score = 0 
     var typeString: String{
         if target.count > 1{
             if target[1] == 0{
@@ -75,17 +75,35 @@ struct ViewModel {
         return count
     }
     
-    func tapBottle(bottles: [Bottle], target:[Int], bottleIndex: Int) -> Bool{
+    mutating func tapBottle(bottles: [Bottle], target:[Int], bottleIndex: Int) -> Bool{
         let bottleResults = getBottlesByType(bottles: bottles, type: target[1])
         let tapedCount = getTapedCount(bottles: bottles)
         var targetInt = 0
         if target[0] == 1{
             // 1 2 3
-            targetInt = 1 + 1 * tapedCount       
+            targetInt = 1 + 1 * tapedCount 
         }else if target[0] == -1{
             // 3 2 1
             targetInt = 3 - 1 * tapedCount
         }
+        
         return bottleResults[bottleIndex] == targetInt
     }
+    mutating func tapBottleByIndex(index: Int){
+        
+        if tapBottle(bottles: self.bottles, target: self.target, bottleIndex: index){
+            score = score + 1
+            bottles[index]=Bottle(cap: 0, height: 0, liquid: 0)
+            
+            
+        }else{
+            score -= 1
+        }
+        if getBottlesByType(bottles: self.bottles, type: 0).max()==0{
+            
+            print(score,"ewewwehewuh")
+            newGame()
+        }
+    }
+    
 }
