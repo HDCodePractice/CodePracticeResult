@@ -7,7 +7,7 @@ struct Grid{
     var token : Token
     
     func isCanMove( board:[[Grid]], end: Grid) -> Bool{
-        if token.name == "Pawn"{
+        if token.name == "e"{
             return movePawn(board: board, end: end)
         }else if token.name == "Knight"{
             return moveKnight(board: board, end: end)
@@ -23,46 +23,20 @@ struct Grid{
     func moveBishop(board:[[Grid]], end: Grid) -> Bool{
         var path : [Grid] = []
         if abs(end.x-x)==abs(end.y-y) && end.token.color != token.color{
-            var startx = x
-            var starty = y
-            var endx = end.x
-            var stepy = 1
-            
-            if end.x>x{
-                if end.y>y{
-                    // startx ... endx y+1
-                    startx = x+1
-                    endx = end.x
-                    stepy = 1
-                    starty = y+1
-                }else{
-                    // startx ... endx y-1
-                    startx = x+1
-                    endx = end.x
-                    stepy = -1
-                    starty = y-1
-                }
-            }else{
-                if end.y>y{
-                    // end.x ... x y+1 
-                    startx = end.x
-                    endx = x-1
-                    stepy = -1
-                    starty = end.y
-                }else{
-                    // end.x ... x y+1
-                    startx = end.x
-                    endx = x-1
-                    stepy = 1
-                    starty = end.y
-                }
+            var xValue = 1
+            var yValue = 1
+            if end.x > x{
+                xValue = 1
+            }else if end.x < x{
+                xValue = -1
             }
-            
-            var j = starty
-            path.append(board[x][y])
-            for i in startx...endx{
-                path.append(board[i][j])
-                j += stepy
+            if end.y > y{
+                yValue = 1
+            }else if end.y < y{
+                yValue = -1
+            }
+            for i in 0...abs(end.x-x){
+                path.append(board[x+i*xValue][y+i*yValue])
             }
             return checkPath(path: path)
         }
@@ -82,25 +56,27 @@ struct Grid{
     func moveRook(board:[[Grid]], end: Grid) -> Bool{
         var path : [Grid] = []
         if x == end.x{
-            var starty = y
-            var endy = end.y
-            if y > end.y {
-                starty = end.y
-                endy = y
-            }
-            for i in starty..<endy{
-                path.append(board[x][i])
+            if y > end.y{
+                for i in end.y...y{
+                    path.append(board[x][i])
+                }
+                path=path.reversed()
+            }else{
+                for i in y...end.y{
+                    path.append(board[x][i])
+                }
             }
             return checkPath(path: path)
         }else if y == end.y{
-            var startx = x
-            var endx = end.x
-            if x > end.x {
-                startx = end.x
-                endx = x
-            }
-            for i in startx..<endx{
-                path.append(board[i][y])
+            if x > end.x{
+                for i in end.x...x{
+                    path.append(board[i][y])
+                }
+                path=path.reversed()
+            }else{
+                for i in x...end.x{
+                    path.append(board[i][y])
+                }
             }
             return checkPath(path: path)
         }
@@ -154,15 +130,18 @@ struct Grid{
     }
     // check path
     func checkPath(path: [Grid])->Bool{
-        var path2 : [Grid] = path
-        path2.remove(at: 0)
-        for item in path2{
-            if item.token.color != .clear{
-                if item.token.color != path[0].token.color && item.x == path2[path2.count-1].x && item.y == path2[path2.count-1].y{
-                    return true
-                }
+        print(path)
+        print("===========================")
+        for i in 0...(path.count-2){
+            if path[i].token.color != .clear && i != 0{
+                 print("A")
                 return false
+               
             }
+        }
+        if path.last!.token.color == path[0].token.color{
+             print("B")
+            return false
         }
         return true
     }

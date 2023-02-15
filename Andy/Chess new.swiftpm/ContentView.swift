@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     let zimu = ["A","B","C","D","E","F","G","H"]
-    let num = ["8","7","6","5","4","3","2","1"]
+    let num = ["1","2","3","4","5","6","7","8"]
     
     @State var vm = ViewModel()
     
@@ -27,31 +27,31 @@ struct ContentView: View {
                         .fill(.clear)
                         .frame(width: 20,height: 20)
                 }
-                ForEach(0..<8,id:\.self){ x in
+                ForEach(0..<8,id:\.self){ y in
                     HStack(spacing:1){
                         ZStack{
                             Rectangle()
                                 .fill(.clear)
                                 .frame(width: 20)
-                            Text(num[x])
+                            Text(num[y])
                                 .foregroundColor(.black)
                         }
-                        ForEach(0..<8,id:\.self){ y in
+                        ForEach(0..<8,id:\.self){ x in
                             ZStack{
                                 Rectangle()
-                                    .fill(vm.board[x][y].color)
-                                Text(vm.board[x][y].token.name)
-                                    .foregroundColor(vm.board[x][y].token.color)
+                                    .fill(vm.board[y][x].color)
+                                Text(vm.board[y][x].token.name)
+                                    .foregroundColor(vm.board[y][x].token.color)
                             }
                             .onTapGesture {
-                                vm.tapGrid(grid: vm.board[x][y])
+                                vm.tapGrid(grid: vm.board[y][x])
                             }
                         }
                         ZStack{
                             Rectangle()
                                 .fill(.clear)
                                 .frame(width: 20)
-                            Text(num[x])
+                            Text(num[y])
                                 .foregroundColor(.black)
                         }
                     }
