@@ -9,7 +9,7 @@ struct Grid: View {
                     .fill(.yellow)
                 Rectangle()
                     .fill(.black)
-                    .frame(width: 20)
+                    .frame(width: 10)
                 Rectangle()
                     .fill(.yellow)
                 
@@ -17,14 +17,14 @@ struct Grid: View {
             
             Rectangle()
                 .fill(.black)
-                .frame(height:20)
+                .frame(height:10)
                 
             HStack(spacing:0){
                 Rectangle()
                     .fill(.yellow)
                 Rectangle()
                     .fill(.black)
-                    .frame(width: 20)
+                    .frame(width: 10)
                 Rectangle()
                     .fill(.yellow)
             }
