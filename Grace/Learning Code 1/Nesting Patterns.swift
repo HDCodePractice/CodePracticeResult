@@ -1,13 +1,13 @@
 func turnAround() {
-turnLeft()
-turnLeft()
+  turnLeft()
+  turnLeft()
 }
 func solveStair() {
- moveForward()
- collectGem()
- turnAround()
- moveForward()
- turnLeft() 
+  moveForward()
+    collectGem()
+    turnAround()
+    moveForward()
+    turnLeft()
 }
 solveStair()
 solveStair()

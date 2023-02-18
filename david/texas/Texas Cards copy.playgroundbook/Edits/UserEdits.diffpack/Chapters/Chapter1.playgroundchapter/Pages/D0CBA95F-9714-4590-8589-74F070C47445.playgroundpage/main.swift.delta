@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseFile</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/Template.playgroundpage/main.swift</string>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>// homework
+
+// [3,9,8,2]
+let player1 = [2,3,30,18,40]
+let player2:[Int] = [2,3,4,5,27]
+print(player1)
+//print(player2)
+var abc00 = cardsSorted(cards: player1)
+var abc11 = cardsSorted(cards: player2)
+var bbb = showPlayerCards(playerCards: abc00)
+var ccc = showPlayerCards(playerCards: abc11)
+
+print(abc00)
+print(bbb)
+print(ccc)
+//
+print(playGame(player1: player1, player2: player2))
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 383}</string>
+			<key>OriginalContent</key>
+			<string>
+</string>
+			<key>OriginalRange</key>
+			<string>{0, 1}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

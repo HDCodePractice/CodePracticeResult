@@ -195,7 +195,7 @@ function drawGameOver() {
     fill(255,0,0);
     textSize(int(width/10));
     text(
-        'GAME OVER',
+        'GAME OVERi',
         5,
         height/2-10
     );

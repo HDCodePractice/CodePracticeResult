@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>import Foundation
+
+struct Game{
+    let flags = ["🇨🇦","🇺🇸","🇨🇳","🇻🇨","🇬🇧","🇷🇺","🇯🇵","🇬🇸"]
+    let countries = ["Canada","United States","China","St. Vincent &amp; Grenadines","United Kingdom","Russia","Japan","South Georgia &amp; South Sandwich Islands"]
+    var answers : [String] = []
+    var question : String = ""
+    var gameStart : Bool = false
+    var correct : String = ""
+    var answer : String = ""
+    var score : Int = 0
+    var exams : [String] = []
+    var current : Int = 0
+    var total : Int = 10
+    
+    mutating func newGame(){
+        exams = Array(countries.shuffled().prefix(10))
+        current = 0
+        total = exams.count
+        
+        var source : [Int] = []
+        for i in 0..&lt;countries.count {
+            source.append(i)
+            
+        }
+        
+        let currentIndex = countries.firstIndex(of: exams[current]) ?? 0
+        print(currentIndex)
+        
+        source.remove(at: currentIndex)
+        source = Array(source.shuffled().prefix(3))
+        source.append(currentIndex)
+        source.shuffle()
+        
+        for i in source{
+            answers.append(flags[i])
+        }
+        question = countries[currentIndex]
+        gameStart = true
+        print(answers)
+        
+        //        let rCountries = Array(countries.shuffled().prefix(4))
+        //        if let q = rCountries.first {
+        //            question = q
+        //            if let index = countries.firstIndex(of: q) {
+        //                correct = flags[index]
+        //            }
+        //            answers = []
+        //            for c in rCountries.shuffled(){
+        //                if let index = countries.firstIndex(of: c){
+        //                    answers.append(flags[index])
+        //                }
+        //            }
+        //            gameStart = true
+        //        }
+    }
+    
+    mutating func toggleAnswer(tAnswer: String){
+        answer = tAnswer
+        score += 1
+        gameStart = false
+    }
+}
+
+var game = Game()
+game.newGame()
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 2042}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 253}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -42,8 +42,6 @@ struct Questions: View {
             }
             
         }
-        
-    }
 }
 
 struct Questions_Previews: PreviewProvider {
@@ -51,5 +49,4 @@ struct Questions_Previews: PreviewProvider {
         Questions()
     }
 }
-
 

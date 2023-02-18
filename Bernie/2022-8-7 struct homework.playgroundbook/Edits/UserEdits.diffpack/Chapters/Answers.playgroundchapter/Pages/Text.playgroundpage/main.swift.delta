@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>struct Chess{
+    var color: String
+    var type: String
+    
+    func showChessString(chess: Chess )-&gt;String{
+        let chessString = "color: \(chess.color) type: \(chess.type) " 
+        return chessString
+    }
+}
+
+struct Grid{
+    var chess: Chess
+    var row: Int
+    var col: Int
+    
+    func showGridString(grid: Grid)-&gt;String{
+        let gridString = "chess: \(grid.chess) row: \(grid.row) col:\(grid.col)"
+        return gridString
+    }
+}
+
+var none:Chess = Chess(color: "N", type: "N")
+var chessA:Chess = Chess(color: "R", type: "A")
+var chessB:Chess = Chess(color: "Y", type: "B")
+
+func genBoard(_ high: Int, _ width: Int)-&gt;[[Grid]]{
+    var board = [[Grid]]()
+    for j in 0...width-1{
+        var col = [Grid]()
+        for i in 0...high-1{
+            col += [Grid(chess: none, row: i, col: j)]
+        }
+        board.append(col)
+    }
+    return board
+}
+
+// var board: [[Grid]] = genBoard( 6,  7)
+
+
+
+func showBoard(_ board: [[Grid]])-&gt;[[String]]{
+    var msg = [[String]]()
+    for i in board{
+        var col = [String]()
+        for j in i{
+            // print("\(j.chess.color) \(j.chess.type)  \(j.row) \(j.col)" )
+            // col.append("color: \(j.chess.color) type: \(j.chess.type) row: \(j.row) col: \(j.col)")
+            col.append("\(j.chess.color) \(j.chess.type) \(j.row) \(j.col)")
+        }
+        msg.append(col)
+    }
+    return msg
+}
+
+func showBoard2(_ board: [[Grid]]){
+    for i in board{
+        var col = [String]()
+        for j in i{
+            // print("\(j.chess.color) \(j.chess.type)  \(j.row) \(j.col)" )
+            // col.append("color: \(j.chess.color) type: \(j.chess.type) row: \(j.row) col: \(j.col)")
+            col.append("\(j.chess.color) \(j.chess.type) \(j.row) \(j.col)")
+        }
+        print("\(col)")
+    }
+}
+
+// var boardString = showBoard(board)
+// for i in boardString{
+//   print("\(i)")
+// }
+
+func putChess(_ board:[[Grid]], _ chess: Chess, _ colNum: Int)-&gt;[[Grid]]{
+    var newBoard = board
+    newBoard[colNum-1].reverse()
+    // let putCol = newBoard[colNum-1]
+    // print("\(putCol)")
+    for i in 0...newBoard[colNum-1].count-1{
+        if newBoard[colNum-1][i].chess.type == "N"{
+            newBoard[colNum-1][i].chess = chess
+            newBoard[colNum-1].reverse()
+            return newBoard  
+        } 
+    }
+    return [[Grid]]() 
+}
+
+// for _ in 0...5{
+//   board = putChess(board, chessA, 3)
+// }
+
+// var boardString = showBoard(board)
+// for i in boardString{
+//   print("\(i)")
+// }
+
+func check4(_ array:[Grid])-&gt;Bool{
+    var counter = 1
+    var first: Grid = array.first!
+    for i in 1...array.count-1{
+        if array[i].chess.type == first.chess.type{
+            counter += 1
+        }else{
+            first = array[i]
+            counter = 1
+        }
+        if counter == 4 &amp;&amp; first.chess.type != none.type{
+            return true
+        }
+    }
+    return false
+}
+
+// var col = [Grid]()
+// for i in 0...2{
+//       col += [Grid(chess: chessA, row: i, col: 0)]
+//     }
+// print("\(check4(col))")
+
+func check4Vertical(_ board:[[Grid]], _ x:Int,_ y:Int)-&gt;Bool{
+    var col = [Grid]()
+    col = board[y]
+    print(col)
+    if check4(col){
+        return true
+    }
+    return false
+}
+
+// var board = [[Grid]]()
+// for j in 0...6{
+//   var col = [Grid]()
+//   if j == 0 {
+//     for i in 0...5{
+//       col += [Grid(chess: chessA, row: i, col: j)]
+//     }
+//   } else{
+//     for i in 0...5{
+//       col += [Grid(chess: none, row: i, col: j)]
+//     }
+//   }
+//   board.append(col)
+// }
+// print("\(showBoard(board))")
+// var boardString = showBoard(board)
+// for i in boardString{
+//   print("\(i)")
+// }
+// print("\(check4Vertical(board, 3,0))")
+
+func check4Horizontal(_ board:[[Grid]], _ x:Int,_ y:Int)-&gt;Bool{
+    var row = [Grid]()
+    for i in board{
+        row.append(i[x])
+    }
+    print(row)
+    if check4(row){
+        return true
+    }
+    return false
+}
+
+// var board = [[Grid]]()
+// for j in 0...6{
+//   var col = [Grid]()
+//   col += [Grid(chess: chessA, row: 0, col: j)]
+//   for i in 1...5{
+//     col += [Grid(chess: none, row: i, col: j)]
+//   }
+//   board.append(col)
+// }
+// print("\(showBoard(board))")
+// var boardString = showBoard(board)
+// for i in boardString{
+//   print("\(i)")
+// }
+// print("\(check4Horizontal(board, 0,3))")
+
+func upperLtoLowerR(_ board:[[Grid]], _ x:Int,_ y:Int)-&gt;Bool{
+    var array = [Grid]()
+    if x &gt;= y &amp;&amp; x - y &lt; board[0].count-3{
+        var xx = x-y
+        var yy = 0
+        while xx &lt; board[0].count{
+            array.append(board[yy][xx])
+            xx += 1
+            yy += 1
+        }
+        print(array)
+        if check4(array){
+            return true
+        }
+    }
+    if x &lt; y &amp;&amp; y-x &lt; board.count-3{
+        var xx = 0
+        var yy = y-x
+        while yy &lt; board.count{
+            array.append(board[yy][xx])
+            xx += 1
+            yy += 1
+        }
+        print(array)
+        if check4(array){
+            return true
+        }
+    }
+    return false
+}
+
+func upperRtoLowerL(_ board:[[Grid]], _ x:Int,_ y:Int)-&gt;Bool{
+    var array = [Grid]()
+    if x+y &gt; 2 &amp;&amp; x+y &lt; board.count-1{
+        var xx = 0
+        var yy = x+y
+        while yy &gt;= 0{
+            array.append(board[yy][xx])
+            xx += 1
+            yy -= 1
+        }
+        print(array)
+        if check4(array){
+            return true
+        }
+    }
+    if x+y &gt; board.count-2 &amp;&amp; x+y &lt; board.count+board[0].count-4{
+        var xx = x+y-board[0].count
+        var yy = board[0].count
+        while xx &lt; board[0].count{
+            array.append(board[yy][xx])
+            xx += 1
+            yy -= 1
+        }
+        print(array)
+        if check4(array){
+            return true
+        }
+    }
+    return false
+}
+
+func isGameOver(board:[[Grid]], grid:Grid)-&gt;Bool{
+    let newBoard = putChess(board, grid.chess, grid.row)
+    print("\(showBoard2(newBoard))")
+    if check4Vertical(newBoard,grid.col,grid.row){
+        return true
+    }
+    if check4Horizontal(newBoard,grid.col,grid.row){
+        return true
+    }
+    if upperLtoLowerR(newBoard,grid.col,grid.row){
+        return true
+    }
+    if upperRtoLowerL(newBoard,grid.col,grid.row){
+        return true
+    }
+    return false
+}
+
+var stringBoard = [[["N","N","0","0"],["N","N","1","0"],["N","N","2","0"],["N","N","3","0"],["N","N","4","0"],["N","N","5","0"]],
+                   [["N","N","0","1"],["N","N","1","1"],["N","N","2","1"],["N","N","3","1"],["N","N","4","1"],["N","N","5","1"]],
+                   [["N","N","0","2"],["N","N","1","2"],["N","N","2","2"],["N","N","3","2"],["N","N","4","2"],["N","N","5","2"]],
+                   [["N","N","0","3"],["N","N","1","3"],["N","N","2","3"],["R","A","3","3"],["Y","B","4","3"],["Y","B","5","3"]],
+                   [["N","N","0","4"],["N","N","1","4"],["N","N","2","4"],["R","A","3","4"],["N","N","4","4"],["R","A","5","4"]],
+                   [["N","N","0","5"],["N","N","1","5"],["N","N","2","5"],["N","N","3","5"],["R","A","4","5"],["R","A","5","5"]],
+                   [["N","N","0","6"],["N","N","1","6"],["N","N","2","6"],["N","N","3","6"],["N","N","4","6"],["R","A","5","6"]]
+]
+
+func stringToGrid(gridString:[String])-&gt;Grid{
+    let chess = Chess(color: gridString.first!, type: gridString[1])
+    let grid = Grid(chess: chess, row: Int(gridString[2])!, col: Int(gridString.last!)!)
+    return grid
+}
+
+// print("\(stringToGrid(gridString: ["N","N","5","6"]))")
+
+func createBoard(_ stringBoard: [[[String]]])-&gt;[[Grid]]{
+    var board = [[Grid]]()
+    for i in stringBoard{
+        var col = [Grid]()
+        for j in i{
+            col.append(stringToGrid(gridString: j))
+        }
+        board.append(col)
+    }
+    return board
+}
+
+print("\(showBoard2(createBoard(stringBoard)))")
+print("\(isGameOver(board: createBoard(stringBoard), grid: Grid(chess: chessA, row: 4, col: 3)))")
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 7773}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 252}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</string>
+</dict>
+</plist>

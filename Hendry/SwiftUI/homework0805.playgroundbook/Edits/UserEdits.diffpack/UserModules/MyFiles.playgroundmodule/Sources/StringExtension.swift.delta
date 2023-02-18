@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string></string>
+			<key>ModifiedRange</key>
+			<string>{53, 0}</string>
+			<key>OriginalContent</key>
+			<string>/*#-localizable-zone(stringExtension1)*/</string>
+			<key>OriginalRange</key>
+			<string>{53, 40}</string>
+		</dict>
+		<dict>
+			<key>ModifiedContent</key>
+			<string></string>
+			<key>ModifiedRange</key>
+			<string>{91, 0}</string>
+			<key>OriginalContent</key>
+			<string>can be used to generate an image based on an emoji string/*#-end-lo</string>
+			<key>OriginalRange</key>
+			<string>{131, 67}</string>
+		</dict>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>n be used to generate an image based on an emoji string</string>
+			<key>ModifiedRange</key>
+			<string>{93, 55}</string>
+			<key>OriginalContent</key>
+			<string>lizable-zone*/</string>
+			<key>OriginalRange</key>
+			<string>{200, 14}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>func genChessBoard()-&gt;[[String]]{
+    var board : [[String]] = []
+    for i in 0...9{
+        var row = [String]()
+        for j in 0...8{
+            row.append("_")
+        }
+        board.append(row)
+    }
+    return board
+}
+
+var chessBoard = genChessBoard()
+for i in stride(from: 0, to: 9, by: 2){
+    chessBoard[6][i]="兵"
+}
+chessBoard[7][1]="炮"
+chessBoard[7][7]="炮"
+chessBoard[9][0]="俥"
+chessBoard[9][1]="傌"
+chessBoard[9][2]="相"
+chessBoard[9][3]="仕"
+chessBoard[9][4]="帥"
+chessBoard[9][5]="仕"
+chessBoard[9][6]="相"
+chessBoard[9][7]="傌"
+chessBoard[9][8]="俥"
+chessBoard[0][0]="俥"
+chessBoard[0][1]="馬"
+chessBoard[0][2]="象"
+chessBoard[0][3]="士"
+chessBoard[0][4]="將"
+chessBoard[0][5]="士"
+chessBoard[0][6]="象"
+chessBoard[0][7]="馬"
+chessBoard[0][8]="車"
+chessBoard[2][1]="砲"
+chessBoard[2][7]="砲"
+for i in stride(from: 0, to: 9, by: 2){
+    chessBoard[3][i]="卒"
+}
+var data : String  = ""
+for subarray in chessBoard{
+    data += "\n"
+    for i in subarray{
+        data += i
+    }
+}
+
+
+show(data)
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 989}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 252}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

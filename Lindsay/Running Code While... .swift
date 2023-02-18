@@ -1,0 +1,6 @@
+while isOnClosedSwitch {
+toggleSwitch()
+moveForward()
+    }
+    
+

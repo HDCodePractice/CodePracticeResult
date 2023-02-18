@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>func isPrimeNum(_ num: Int)-&gt;Bool{
+    if num &gt; 1 {
+        if num == 2{
+            return true
+        }
+        if  num == 3{
+            return true
+        }
+        if num &gt; 3{
+            for i in 2..&lt;num{
+                if num%i == 0{
+                    return false
+                }
+            }
+            return true
+        }
+    }
+    return false
+}
+
+// print(isPrimeNum(-1))
+
+func prime(_ a:[Int])-&gt;[Int]{
+    var primeArray = [Int]()
+    for i in a{
+        if isPrimeNum(i) == true{
+            primeArray.append(i) 
+        }
+    }
+    return primeArray
+}
+
+// print(prime([-1, 2, 5,4,3,5,6]))
+
+func separate(_ result: [Bool])-&gt;[[Bool]]{
+    var same = [Bool]()
+    same.append(result.first!)
+    var separated = [[Bool]]()  
+    for i in 1..&lt;result.count{
+        if result[i] == result[i-1]{
+            same.append(result[i])
+        }else{
+            separated.append(same)
+            same = []
+            same.append(result[i])
+        }
+    }
+    separated.append(same)
+    return separated
+}
+
+// print(separate( [true,false,true,false,false,false,false]))
+
+import Foundation
+func calcu(_ array: [Bool])-&gt;Int{
+    let ex = array.count
+    let sum = pow(2, ex-1)
+    var result = Decimal()
+    if array.first == true{
+        result = sum*10
+    }else{
+        result = -sum*10
+    }
+    return NSDecimalNumber(decimal: result).intValue
+}
+
+// print(calcu([true]))
+
+func total(_ array: [Bool])-&gt;Int{
+    let sorted = separate(array)
+    var finalSum = 0
+    for i in sorted{
+        let eachGameSum = calcu(i)
+        finalSum += eachGameSum
+    }
+    return finalSum
+}
+
+// print(total( [true,false,true,false,false,false,false]))
+
+func checkN(_ array: [String])-&gt;Bool{
+    if array.contains("n"){
+        return true
+    }
+    return false
+}
+
+// print(checkN( ["r","r","y","y","n","n"]))
+
+func replace(_ array: [String], _ input: String)-&gt;[String]{
+    var result = array
+    for i in 0..&lt;array.count{
+        if array[i] == "n"{
+            result[i] = input
+            break
+        }
+    }
+    return result
+}
+
+// print(replace( ["r","r","y","y","n","n"],"r"))
+
+func check4(_ array: [String])-&gt;Bool{
+    let origin = array
+    let  noN = origin.filter { $0 != "n" }
+    if noN.count &lt; 4{
+        return false
+    }else{
+        for i in 0..&lt;noN.count-3{
+            var four = [String]()
+            for j in i...i+3{
+                four.append(noN[j])
+            }
+            if Set(four).count==1{
+                return true
+            }
+        }  
+    }
+    return false
+}
+
+// print(check4( ["r","r","r","r","y","y","y","n","n"]))
+
+func run(_ array: [String], _ input: String)-&gt;Bool{
+    if checkN(array){
+        let afterArray = replace(array, input)
+        if check4(afterArray){
+            return true
+        }
+    }
+    return false
+}
+
+// print(run(["r","r","r","y","y","y","n","n"],"r"))
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 2839}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 252}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</string>
+</dict>
+</plist>
