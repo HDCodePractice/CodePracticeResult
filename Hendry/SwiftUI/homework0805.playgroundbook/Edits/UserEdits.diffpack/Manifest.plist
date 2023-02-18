@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseContentIdentifier</key>
+	<string>com.apple.playgrounds.Answers</string>
+	<key>BaseContentVersion</key>
+	<string>5.0.0</string>
+	<key>ContentType</key>
+	<string>PlaygroundBookUserEdit</string>
+	<key>Diffs</key>
+	<dict>
+		<key>Chapters/Answers.playgroundchapter/Pages/2A581B9D-FB0A-41FB-AB3D-D511997CEFB2.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Answers.playgroundchapter/Pages/2A581B9D-FB0A-41FB-AB3D-D511997CEFB2.playgroundpage/main.swift</key>
+		<string>Modified</string>
+		<key>Chapters/Answers.playgroundchapter/Pages/811F3E44-DB0E-400A-80F8-FAC57D774570.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Answers.playgroundchapter/Pages/811F3E44-DB0E-400A-80F8-FAC57D774570.playgroundpage/main.swift</key>
+		<string>Modified</string>
+		<key>Chapters/Answers.playgroundchapter/Pages/913312BC-24D7-40B7-A388-F3AEB65B2EF9.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Answers.playgroundchapter/Pages/913312BC-24D7-40B7-A388-F3AEB65B2EF9.playgroundpage/main.swift</key>
+		<string>Modified</string>
+		<key>Chapters/Answers.playgroundchapter/Pages/D30B8F44-6C2B-4D55-8A8A-716D01D49037.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Answers.playgroundchapter/Pages/D30B8F44-6C2B-4D55-8A8A-716D01D49037.playgroundpage/main.swift</key>
+		<string>Modified</string>
+		<key>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</key>
+		<string>Modified</string>
+		<key>Chapters/Answers.playgroundchapter/UserManifest.plist</key>
+		<string>Added</string>
+		<key>UserModules/MyFiles.playgroundmodule/Sources/Adventure.swift</key>
+		<string>Modified</string>
+		<key>UserModules/MyFiles.playgroundmodule/Sources/Connect4.swift</key>
+		<string>Added</string>
+		<key>UserModules/MyFiles.playgroundmodule/Sources/Quiz.swift</key>
+		<string>Modified</string>
+		<key>UserModules/MyFiles.playgroundmodule/Sources/SharedCode.swift</key>
+		<string>Modified</string>
+		<key>UserModules/MyFiles.playgroundmodule/Sources/StringExtension.swift</key>
+		<string>Modified</string>
+	</dict>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+	<key>UpdatedContentVersion</key>
+	<string>5.0.0</string>
+</dict>
+</plist>

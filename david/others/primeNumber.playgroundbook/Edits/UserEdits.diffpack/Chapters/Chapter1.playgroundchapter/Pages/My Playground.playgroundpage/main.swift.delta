@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>
+var y = [Int]()
+let x = 100000
+//for i in 2...x{
+//    y.append(i)
+//}
+
+//print(searchPrime(y))
+
+for i in 2...x{
+    if isPrime(i){
+        y.append(i)
+//        print(i)
+    }
+}
+print(y)
+</string>
+			<key>ModifiedRange</key>
+			<string>{1, 189}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{1, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>

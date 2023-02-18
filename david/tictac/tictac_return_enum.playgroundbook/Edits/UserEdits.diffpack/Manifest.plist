@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseContentIdentifier</key>
+	<string>com.apple.playgrounds.Answers</string>
+	<key>BaseContentVersion</key>
+	<string>5.0.1</string>
+	<key>ContentType</key>
+	<string>PlaygroundBookUserEdit</string>
+	<key>Diffs</key>
+	<dict>
+		<key>Chapters/Answers.playgroundchapter/Pages/31AC0534-6DFA-455C-8476-C7CC11865978.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Answers.playgroundchapter/Pages/31AC0534-6DFA-455C-8476-C7CC11865978.playgroundpage/main.swift</key>
+		<string>Modified</string>
+		<key>Chapters/Answers.playgroundchapter/Pages/8D72AC3D-455E-4CC0-B616-BD905EED27D6.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/UserManifest.plist</key>
+		<string>Added</string>
+		<key>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</key>
+		<string>Modified</string>
+		<key>Chapters/Answers.playgroundchapter/UserManifest.plist</key>
+		<string>Added</string>
+		<key>UserModules/MyFiles.playgroundmodule/Sources/Adventure.swift</key>
+		<string>Removed</string>
+		<key>UserModules/MyFiles.playgroundmodule/Sources/Chess.swift</key>
+		<string>Added</string>
+		<key>UserModules/MyFiles.playgroundmodule/Sources/Copy.swift</key>
+		<string>Added</string>
+		<key>UserModules/MyFiles.playgroundmodule/Sources/Quiz.swift</key>
+		<string>Removed</string>
+		<key>UserModules/MyFiles.playgroundmodule/Sources/SharedCode.swift</key>
+		<string>Removed</string>
+		<key>UserModules/MyFiles.playgroundmodule/Sources/StringExtension.swift</key>
+		<string>Removed</string>
+		<key>UserModules/MyFiles.playgroundmodule/Sources/Untitled.swift</key>
+		<string>Added</string>
+		<key>UserModules/MyFiles.playgroundmodule/Sources/honmwork.swift</key>
+		<string>Added</string>
+	</dict>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+	<key>UpdatedContentVersion</key>
+	<string>5.0.1</string>
+</dict>
+</plist>

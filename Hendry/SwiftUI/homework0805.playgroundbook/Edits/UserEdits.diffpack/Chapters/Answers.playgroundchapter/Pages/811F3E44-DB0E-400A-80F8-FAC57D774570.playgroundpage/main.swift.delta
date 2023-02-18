@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseFile</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Template.playgroundpage/main.swift</string>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>func genCards() -&gt; [String]{
+    let suits : [String] = ["♦️","♣️","♥️","♠️"]
+    let numbers : [String] = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"]
+    var cards : [String] = []
+    
+    for i in numbers{
+        for j in suits{
+            cards.append("\(j)\(i)")
+        }
+    }
+    return cards
+}
+
+let cards = genCards()
+var cnt = 0
+func fapai(players:Int,ncards:Int)-&gt;[[Int]]{
+    let shuffledCards = cards.shuffled()
+    var ns : [[Int]] = Array(repeating:[],count:players)
+    cnt=players
+    for l in 0...ncards-1{
+        for i in 0...players-1{
+            let card = shuffledCards[l+i*ncards]
+            ns[i].append(cards.firstIndex(of: card) ?? -1 )
+        }
+    }
+    return ns
+}
+
+func zuida()-&gt;[Int]{
+    var cnt = 0
+    var ans = 0
+    for i in 0...n.count-1{
+        if (n[i].max()!)&gt;cnt{
+            cnt = n[i].max()!
+            ans = i
+        }
+    }
+    return [ans+1,n[ans].max()!]
+}
+show("How many players")
+let people = askForNumber()
+show("How many cards")
+let amountofcards = askForNumber()
+show("Who do you think will win")
+var winchoice : [String] = []
+for i in 1 ... people{
+    winchoice.append("\(i)")
+}
+let n = fapai(players: people, ncards: amountofcards)
+let winner = askForChoice(strings: winchoice)
+let b = zuida()
+var thecardsyouget : [[String]] = Array(repeating:[],count:people)
+print(n)
+for i in 0...people-1{
+    for j in 0 ... amountofcards-1{
+        thecardsyouget[i].append(cards[n[i][j]])
+    }
+}
+for i in 1 ... people{
+    show("Player\(i) got \(thecardsyouget[i-1])")
+}
+show("Player\(zuida()[0]) win")
+show("The biggest card is \(cards[zuida()[1]])")
+if Int(winner) == zuida()[0]{
+    show("You win, Yeah!!!")
+}else{
+    show("You lost, how sad...")
+}
+</string>
+			<key>ModifiedRange</key>
+			<string>{242, 1717}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{242, 0}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

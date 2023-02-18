@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BaseFile</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Template.playgroundpage/main.swift</string>
+	<key>Diffs</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>//startGame(playerNumber: 40, suitsNumber: 1)
+//
+//print(players)
+//
+//for player in players{
+//    show(showCardsString(cardIndexes: player))
+//}
+//
+
+//let cards=[50,48,49,27]
+//show(showCardsString(cardIndexes: cards))
+//show(CalcuResult(cards: cards))
+
+
+//let players=[[50,48,49,27,51],[40,50,48,49,27],[40,41,50,48,49,27]]
+//for cards in players{
+//    show(showCardsString(cardIndexes: cards))
+//}
+//show("\(CalcuResults(players: players))")
+
+//print(GetMoreCard())
+
+//var myinput = getInput(
+//    inputPrompt: "请输入有几个玩家，人数要大于1",
+//    startNumber: 2, 
+//    errorPrompt:"你输入的不是一个大于1的数字，请重新输入",
+//    defaultInput: 2)
+//show(myinput)
+//print(type(of: myinput))
+
+//print(getPlayerName())
+</string>
+			<key>ModifiedRange</key>
+			<string>{242, 693}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{242, 0}</string>
+		</dict>
+	</array>
+	<key>FormatVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>
+//------struct------
+struct Chess{
+    var color:String = "red"
+    var style:String = "N"
+    
+    mutating func showString() -&gt;String{
+        let color = color
+        let style = style
+        //        
+        return("color: \(color) \n style: \(style) ")
+        
+    } 
+}
+struct Grid {
+    var chess:Chess
+    var columnNum:Int
+    var rowNum:Int
+    
+    mutating func showString()-&gt;String{
+        
+        var showGridString = chess.showString()+"\n"+"rowNum: "+String(rowNum)+"\n"+"columnNum: "+String(columnNum)
+        
+        return (showGridString)
+    }
+}
+
+//========Function========
+//-----creatBoard------
+func genBoard(
+    column:Int, 
+    row:Int
+)-&gt;[[Grid]]{
+    let chess = Chess(color: "", style:"N")
+    var grid:Grid
+    var colTemp:[Grid]=[]
+    var board:[[Grid]]=[]
+    for x in 0..&lt;column{
+        for y in 0..&lt;row{
+            grid = Grid(chess: chess, columnNum: x, rowNum: y)
+            colTemp.append(grid)
+        }
+        board.append(colTemp)
+        colTemp = []
+        
+    }
+    return board
+}
+
+//-----putChess------
+func putChess(
+    board:[[Grid]],
+    chess: Chess,
+    columnNumber:Int
+)-&gt;(
+    [[Grid]]
+    //    playingBoard:[[Grid]],
+    //    grid:Grid
+){
+    
+    var playingBoard = board
+    var chess = chess
+    var row = playingBoard[columnNumber].count
+    var grid = Grid(chess: chess, columnNum: columnNumber, rowNum: 0)
+    
+    for i in 0...row-1{
+        
+        let lastStyle = playingBoard[columnNumber][row-1].chess.style
+        
+        if lastStyle == "N"{
+            if playingBoard[columnNumber][i].chess.style=="N"{
+                playingBoard[columnNumber][i]=Grid(chess: chess, columnNum: columnNumber, rowNum:i)
+                //                grid = playingBoard[columnNumber][i]
+                return (playingBoard)
+            }
+            
+        }else{
+            playingBoard = [[Grid]]()
+            //            grid = Grid(chess: chess, columnNum: columnNumber, rowNum: 0)
+            return playingBoard
+        }
+    }
+    return (playingBoard)
+}
+
+//------isGameOver------
+func isGameOver(
+    playingBoard:[[Grid]],
+    grid:Grid
+)-&gt;Bool{
+    
+    let winMark = 4
+    var calArrays = calArray(playingBoard: playingBoard, grid: grid)
+    
+    for i in calArrays{
+        
+        var scores = getScore(calArraySub: i)
+        if scores&gt;=winMark{
+            show ("win")
+            return true
+        }
+    }
+    
+    return false
+}
+
+//------收集要比较元素进入一个新数组------
+func calArray(
+    playingBoard:[[Grid]],
+    grid:Grid
+)-&gt;[[Grid]]{
+    var x = grid.columnNum
+    var y = grid.rowNum
+    var z:[Grid]=[]
+    var newArrays:[[Grid]] = Array(repeating: z, count: 4)
+    
+    //垂直方向
+    
+    var colChoice = playingBoard[x]
+    newArrays[0]=colChoice
+    
+    //水平方向
+    
+    var rowChoice:[Grid] = []
+    for i in 0..&lt;board.count{
+        
+        rowChoice.append(playingBoard[i][y])
+        
+    }
+    newArrays[1]=(rowChoice)
+    //    print("-----水平方向-----")
+    //    print("newarrays[1]=\(newArrays[1])")
+    //    print("newarrays=\(newArrays)")
+    //    print("rowN = \(rowNum)")
+    
+    //右下到左上方向
+    
+    
+    var ld_ruChoice = [Grid]()
+    for i in 0..&lt;board.count{
+        
+        if y-x+i&gt;=0 &amp;&amp; y-x+i&lt;board[x].count{
+            
+            ld_ruChoice.append(playingBoard[i][y-x+i])
+        }
+    }
+    newArrays[2]=(ld_ruChoice)
+    
+    //右上到左下方向
+    
+    var lu_rdChoice = [Grid]()
+    for i in 0..&lt;board.count{
+        if (x+y-i&gt;=0) &amp;&amp; (x+y-i)&lt;(board[x].count){
+            lu_rdChoice.append(playingBoard[i][x+y-i])
+        }
+        
+    }
+    newArrays[3]=(lu_rdChoice)
+    
+    return newArrays
+}
+
+//-------getScore------
+func getScore(calArraySub:[Grid])-&gt;Int{
+    var score = 1
+    
+    for i in 1...calArraySub.count-1{
+        
+        print("caarraysub[\(i)]=\(calArraySub[i])\n")
+        print("caarraysubcount=\(calArraySub)\n\n")
+        
+        if calArraySub.count&gt;3{
+            if !(calArraySub[i].chess.style=="N") &amp;&amp; calArraySub[i-1].chess.style==calArraySub[i].chess.style{
+                score += 1
+            }else{
+                score = 1
+            }
+            print("score=\(score)")
+        }
+        print("score=\(score)")
+    }
+    
+    print("score=\(score)")
+    return score
+}
+
+
+
+//------showboard([[Grid]])-----
+func showBoard(board:[[Grid]]){
+    var boardShow = String()
+    var firstLine = String()
+    
+    
+    if board.count != 0{
+        for x in 0..&lt;board[0].count{
+            
+            
+            firstLine += "     "+"\(x)"+"           "
+        }
+    }
+    
+    show(firstLine) 
+    
+    for i in 0..&lt;board.count{
+        boardShow += "  \(i)    "
+        for j in 0..&lt;board[i].count{
+            boardShow += board[i][j].chess.style + "           "
+        }
+        boardShow += "\n"
+    }
+    show("\(boardShow)")
+    
+    //    for i in 0..&lt;board.count{
+    //        
+    //        print("\(i)   ",terminator: "  ")
+    //        for j in 0..&lt;board[i].count{
+    //            print("\(board[i][j].chess.style)   ",terminator: " ")
+    //            
+    //        }
+    //        print("  \(i+1)","\n")
+    //    }
+}
+
+//-----GETROWNUM-----
+func getRowNum(
+    board:[[Grid]],
+    columNum:Int
+)-&gt;Int{
+    var rowNum = 0
+    for i in 1..&lt;board[columNum].count{
+        if board[columNum][i].chess.style=="N"{
+            rowNum = i-1
+            break
+            
+        }
+        
+    }
+    return rowNum
+}
+
+
+
+//------GETCHESS------
+func getChess()-&gt;Chess{
+    var colorMenu = ["Red","Orange","yellow","Green","Blue","Purple"]
+    //    var styleMenu = ["N","A","B"]
+    var styleMenu = ["N","♠️","♥️"]
+    var chess = Chess()
+    
+    var colorChoice = getInput(
+        inputPrompt: "Please input your choice!", 
+        inputElements: colorMenu, 
+        errorPrompt: "Again", 
+        defaultInput: "Red"
+    )
+    var styleChoice = getInput(
+        inputPrompt: "Please input your choice!", 
+        inputElements: styleMenu, 
+        errorPrompt: "Again", 
+        defaultInput: "N"
+    )
+    chess = Chess(color: colorChoice, style: styleChoice)
+    return chess
+}
+
+func playGame(
+    board:[[Grid]]
+)-&gt;[[Grid]]{
+    var playingBoard = board
+    var boardTemp = playingBoard
+    var chess1 = getChess()
+    var chess2 = getChess()
+    var columnNum = Int()
+    var rowNum = Int()
+    var winMark = false
+    var fullMark = false
+    var steps = 0
+    var shift = -1
+    
+    while !winMark{
+        
+        while !fullMark{
+            var chess = (shift == -1 ? chess1:chess2)
+            shift *= -1
+            columnNum = getColumnNum(column: board.count)
+            boardTemp = playingBoard
+            
+            playingBoard = putChess(board: playingBoard, chess: chess, columnNumber: columnNum)
+            
+            if (playingBoard.count==0){
+                print("The column is full, please selec another column!")
+                playingBoard = boardTemp
+                shift *= -1
+                break
+            }
+            
+            rowNum = getRowNum(board: playingBoard, columNum: columnNum)
+            
+            showBoard(board: playingBoard)
+            if rowNum == -1{
+                rowNum = Int()
+                //                fullMark = true
+                break
+            }
+            var grid = playingBoard[columnNum][rowNum]
+            
+            
+            steps += 1
+            if steps&gt;4{
+                winMark=isGameOver(playingBoard: playingBoard, grid: grid)
+            }
+            
+            
+        }
+        
+        
+    }
+    
+    return playingBoard
+}
+
+//========= main =========
+
+var column = 4
+var row = 5
+
+var board = genBoard(column: column, row: row)
+
+let ccc=playGame(board: board)
+
+
+showBoard(board: ccc)
+
+
+
+
+
+
+
+//-----------test-----------------
+//var chess:(Chess)=Chess(color: "yellow", style: "B")
+//var grids:(Grid)=Grid(chess: chess)
+//var x:[Chess]=[Chess()]
+//var y:[String]=[Grid().showString()]
+//
+//var a = chess.showString()
+//var b = grids.showString()
+//
+//show("\(chess)")
+//
+//show("\(grids)")
+//show(a)
+//show(b)
+//show("\(x[0])")
+//show("\(y[0])")
+</string>
+			<key>ModifiedRange</key>
+			<string>{265, 8048}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 253}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</string>
+</dict>
+</plist>

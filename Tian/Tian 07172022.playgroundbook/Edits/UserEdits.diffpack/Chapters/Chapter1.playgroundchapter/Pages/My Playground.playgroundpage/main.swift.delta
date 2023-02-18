@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string>//2. Bernie哥和Tian哥玩21点，用一个数组记录着输赢,True表示赢，False表示输，所类似这样： [t,f,t,f,f,f,f]，如果赢了挣10块，输了少10块，但是如果连续输或赢会x2，比如连输三次，就会少 10,20,40 共70块。 写一个函数，通过这个数组知道最后应该付/拿多少钱。
+
+// 问题： 如果将 （t,f,t,f) 转化成 1/0， 不会
+
+//func getresults(numbers:[Int])-&gt;[Int]{
+//    
+//    var winmult = 2
+//    var resultarr:[Int]=[]
+//    var count = 1
+//    
+//    if numbers[0] == 1 {
+//        resultarr.append(1)
+//    }else{
+//        resultarr.append(-1)
+//    }
+//    
+//    for index in 0..&lt;numbers.count-1{
+//        if numbers[index+1] == numbers[index] {
+//            resultarr.append(resultarr[index] * winmult)
+//        }else {
+//            count = (-1)*count
+//            resultarr.append(resultarr[0] * count)}
+//    }
+//    return resultarr
+//    
+//}
+//
+//let bet = 10
+//let numbers = [1,0,1,1,1,0]
+//let resultarr = getresults(numbers:numbers)
+//
+//print ("The win (1)/lose(0) is \(numbers)")
+//print ("The bet result is \(resultarr.map {$0 * bet})")
+//print ("The final payment is \(resultarr.reduce (0,+) * bet)")
+
+
+
+
+//4.有一个数组里面包括了所有的孩子们考试的成绩，请写一个函数，帮我计算并返回所有孩子们的平均分，超过60分的人数，不及格的人数
+
+//
+//func getNumbers(numbers:[Int])-&gt;[Int]{
+//    
+//    var Below60:[Int]=[]
+//    var Above60:[Int]=[]
+//    var sum = numbers.reduce (0,+) 
+//    var acct = numbers.count
+//    var avg = sum/acct
+//    print ("The average is \(avg)")
+//    
+//    for number in numbers {
+//        if number &lt; 60 {
+//            Below60.append (number)
+//        }
+//        }
+//    return Below60
+//    
+//    }
+//    
+//
+//let numbers = [59,60,45,67,89,45,67]
+//let Below60 = getNumbers(numbers:numbers)
+//
+//print ("less than 60 \(Below60)")
+//print ("The number pepople less than 60 is \(Below60.count)")
+
+
+//Bernie哥、Tian哥和David 哥三家人一起到Quebec City旅游，有三个数组，第一个存储了每家的人数例如：[3,3,4]，第二个数组存储了所有的消费记录（为了方便都由一家人付钱）例如[170,230,190,420]，请书写一个函数，帮忙计算出回来后每家分摊的金额（返回一个数组，长度和每家人数的数组长度一样）。记得家庭人数数组和消费记录都会变化长度。
+
+    //问题：如果将2个数列里相同的数除去，建立第三数列，不会
+
+//func calexp(numbers1: [Int], numbers2: [Int])-&gt;[Int]{
+//    var familynum = numbers1
+//    var familyexp = numbers2
+//    var sumnum = familynum.reduce (0,+) 
+//    var sumexp = familyexp.reduce (0,+) 
+//    var avg = sumexp/sumnum
+//    let splitpayment = familynum.map {$0 * avg}
+//    return splitpayment
+//}
+//
+//let familynum = [5,3,2,4]
+//let familyexp = [56,89,53,1340,1405,343]
+//let splitpayment = calexp(numbers1:familynum, numbers2: familyexp)
+//print(splitpayment)
+</string>
+			<key>ModifiedRange</key>
+			<string>{0, 2364}</string>
+			<key>OriginalContent</key>
+			<string></string>
+			<key>OriginalRange</key>
+			<string>{0, 0}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Chapter1.playgroundchapter/Pages/My Playground.playgroundpage/main.swift</string>
+</dict>
+</plist>
