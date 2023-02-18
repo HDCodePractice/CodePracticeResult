@@ -48,28 +48,48 @@ struct Grid{
     }
     func moveBishop(board:[[Grid]], end: Grid) -> Bool{
         var path : [Grid] = []
-        if abs(end.x-x) == abs(end.y-y){
-            var j = y
+        if abs(end.x-x)==abs(end.y-y) && end.token.color != token.color{
+            var startx = x
+            var starty = y
+            var endx = end.x
+            var stepy = 1
+            
             if end.x>x{
-                for i in x ... end.x-1{
-                    if end.y>y{
-                        j+=1
-                    }else{
-                        j-=1
-                    }
-                    path.append(board[i][j])
+                if end.y>y{
+                    // startx ... endx y+1
+                    startx = x+1
+                    endx = end.x
+                    stepy = 1
+                    starty = y+1
+                }else{
+                    // startx ... endx y-1
+                    startx = x+1
+                    endx = end.x
+                    stepy = -1
+                    starty = y-1
                 }
-            }else if end.x<x{
-                for i in end.x ... x-1{
-                    if end.y>y{
-                        j+=1
-                    }else{
-                        j-=1
-                    }
-                    path.append(board[i][j])
+            }else{
+                if end.y>y{
+                    // end.x ... x y+1 
+                    startx = end.x
+                    endx = x-1
+                    stepy = -1
+                    starty = end.y
+                }else{
+                    // end.x ... x y+1
+                    startx = end.x
+                    endx = x-1
+                    stepy = 1
+                    starty = end.y
                 }
             }
-            return checkPath(path:path)
+            
+            var j = starty
+            for i in startx...endx{
+                path.append(board[i][j])
+                j += stepy
+            }
+            return checkPath(path: path)
         }
         return false
     }
