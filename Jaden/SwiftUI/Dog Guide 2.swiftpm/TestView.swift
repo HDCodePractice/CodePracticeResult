@@ -6,6 +6,26 @@ struct Questions: View {
     @State var responses : [String] = []
     @State var dog = ""
     @State var a = 0
+    @State var dogPossibility = ["Labrador Retriever",
+                                 "German Shepherd",
+                                 "Golden Retriever",
+                                 "Bulldog",
+                                 "Beagle",
+                                 "Poodle",
+                                 "Labradoodle",
+                                 "Siberian Husky",
+                                 "Dachshund",
+                                 "Corgi",
+                                 "Shih Tzu",
+                                 "Great Dane",
+                                 "Border Collie",
+                                 "Chihuahua",
+                                 "Yorkshire Terrier",
+                                 "Rottweilers",
+                                 "Shiba Inu",
+                                 "Goldendoodle",
+                                 "Maltese",
+                                 "Australian Shepherd"]
     var body: some View {
         VStack{
             if a <= 8{
