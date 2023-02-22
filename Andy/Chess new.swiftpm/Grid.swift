@@ -7,7 +7,7 @@ struct Grid{
     var token : Token
     
     func isCanMove( board:[[Grid]], end: Grid) -> Bool{
-        if token.name == "e"{
+        if token.name == "Pawn"{
             return movePawn(board: board, end: end)
         }else if token.name == "Knight"{
             return moveKnight(board: board, end: end)
@@ -86,6 +86,7 @@ struct Grid{
         var path : [Grid] = []
         
         if x != end.x && y != end.y && abs(end.x-x)+abs(end.y-y) == 3{
+            path.append(board[x][y])
                 path.append(end)
             return checkPath(path: path)
         }
@@ -93,34 +94,65 @@ struct Grid{
     }
     func movePawn(board:[[Grid]], end: Grid) -> Bool{
         var path : [Grid] = []
-        if end.y == y{
             if abs(end.x-x) == 2{
-                if token.color == .black{
-                    if x == 1 && end.x > x{
-                        path.append(board[x][y])
-                        path.append(board[x+1][y]) 
-                        path.append(end)
-                    }
-                }else{
-                    if x == 6 && end.x < x{ 
-                        path.append(board[x][y])
-                        path.append(board[x-1][y]) 
-                        path.append(end)
+                if abs(end.y-y)==0{
+                    if token.color == .black{
+                        if x == 1 && end.x > x{
+                            path.append(board[x][y])
+                            path.append(board[x+1][y]) 
+                            path.append(end)
+                            path.append(end)
+                        }
+                    }else{
+                        if x == 6 && end.x < x{ 
+                            path.append(board[x][y])
+                            path.append(board[x-1][y]) 
+                            path.append(end)
+                            path.append(end)
+                        }
                     }
                 }
             }
             if abs(end.x-x) == 1{
                 if token.color == .black{
                     if end.x > x{
-                        path.append(board[x][y])
-                        path.append(end)
+                        if abs(end.y-y) == 1{
+                            if end.token.color != .clear && end.token.color != board[x][y].token.color{
+                                path.append(board[x][y])
+                                path.append(end)
+                            }
+                        }else{
+                            path.append(board[x][y])
+                            path.append(end)
+                            path.append(end)
+                        }
                     }
                 }else{
                     if end.x < x{
-                        path.append(board[x][y])
-                        path.append(end)
+                        if abs(end.y-y) == 1{
+                            if end.token.color != .clear && end.token.color != board[x][y].token.color{
+                                path.append(board[x][y])
+                                path.append(end)
+                            }
+                        }else{
+                            path.append(board[x][y])
+                            path.append(end)
+                            path.append(end)
+                        }
                     }
                 }
+            }
+        if path.count > 0{
+            return checkPath(path: path)
+        }
+        return false
+    }
+    func moveKing(board:[[Grid]], end: Grid) -> Bool{
+        var path : [Grid] = []
+        if abs(end.x-x) == 1{
+            if abs(end.y-y) == 1{
+                path.append(board[x][y])
+                path.append(end)
             }
         }
         if path.count > 0{
