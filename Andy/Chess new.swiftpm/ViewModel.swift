@@ -9,20 +9,19 @@ struct ViewModel{
         let pawns = ["Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn"]
         let nothing = ["", "", "", "", "", "", "", ""]
         board = []
-        
-        board.append( genLineFromArray(x: 0, array: lastChess, tokenColor: .black))
-        board.append( genLineFromArray(x: 1, array: pawns, tokenColor: .black))
+        board.append(genLineFromArray(x: 0, array: lastChess, tokenColor: .black))
+        board.append(genLineFromArray(x: 1, array: pawns, tokenColor: .black))
         for i in 2...5{
-            board.append( genLineFromArray(x: i, array: nothing, tokenColor: .clear))
+            board.append(genLineFromArray(x: i, array: nothing, tokenColor: .clear))
         }
-        board.append( genLineFromArray(x: 6, array: pawns, tokenColor: .white))
-        board.append( genLineFromArray(x: 7, array: lastChess, tokenColor: .white))
+        board.append(genLineFromArray(x: 6, array: pawns, tokenColor: .white))
+        board.append(genLineFromArray(x: 7, array: lastChess, tokenColor: .white))
     }
     
     func genLineFromArray(x: Int, array : [String], tokenColor: Color)->[Grid]{
         var lineChess : [Grid] = []
         for index in 0..<array.count{
-            lineChess.append( Grid(x: x, y: index, color: (index+x)%2==0 ? .white : .black , token: Token(name: array[index], color: tokenColor)))
+            lineChess.append( Grid(x: x, y: index, color: (index+x)%2==0 ? .init(hue: 1, saturation: 0, brightness: 0.7, opacity: 1) : .gray , token: Token(name: array[index], color: tokenColor)))
         }
         return  lineChess
     }

@@ -1,3 +1,4 @@
+
 import SwiftUI
 
 struct Grid{
@@ -17,6 +18,29 @@ struct Grid{
             return moveBishop(board: board, end: end)
         }
         return true
+    }
+    
+    func moveBishop(board:[[Grid]], end: Grid) -> Bool{
+        if abs(end.x-x)==abs(end.y-y){
+            var point = [[-1,-1],[1,-1],[1,1],[-1,1]]
+            var go = -1
+            if end.x < x && end.y < y{
+                go = 0
+            }else if end.x>x && end.y<y{
+                go = 1
+            }else if end.x<x && end.y<y{
+                go = 2
+            }else{
+                go = 3
+            }
+            for i in 1...abs(end.x-x){
+                if board[x+(i*point[go][0])][y+(i*point[go][1])].token.color != .clear{
+                    return false
+                }
+            }
+            return true
+        }
+        return false
     }
     
     func moveRook(board:[[Grid]], end: Grid) -> Bool{
@@ -46,54 +70,6 @@ struct Grid{
         }
         return false
     }
-    func moveBishop(board:[[Grid]], end: Grid) -> Bool{
-        var path : [Grid] = []
-        if abs(end.x-x)==abs(end.y-y) && end.token.color != token.color{
-            var startx = x
-            var starty = y
-            var endx = end.x
-            var stepy = 1
-            
-            if end.x>x{
-                if end.y>y{
-                    // startx ... endx y+1
-                    startx = x+1
-                    endx = end.x
-                    stepy = 1
-                    starty = y+1
-                }else{
-                    // startx ... endx y-1
-                    startx = x+1
-                    endx = end.x
-                    stepy = -1
-                    starty = y-1
-                }
-            }else{
-                if end.y>y{
-                    // end.x ... x y+1 
-                    startx = end.x
-                    endx = x-1
-                    stepy = -1
-                    starty = end.y
-                }else{
-                    // end.x ... x y+1
-                    startx = end.x
-                    endx = x-1
-                    stepy = 1
-                    starty = end.y
-                }
-            }
-            
-            var j = starty
-            for i in startx...endx{
-                path.append(board[i][j])
-                j += stepy
-            }
-            return checkPath(path: path)
-        }
-        return false
-    }
-
     
     func moveKnight(board:[[Grid]], end: Grid) -> Bool{
         var path : [Grid] = []
@@ -131,8 +107,8 @@ struct Grid{
                     path.append(end)
                     path.append(board[end.x+1][end.y])
                 }
-            }                
-        } 
+            }
+        }
         
         if path.count > 0{
             return checkPath(path: path)

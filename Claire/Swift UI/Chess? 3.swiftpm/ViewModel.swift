@@ -28,7 +28,10 @@ struct ViewModel{
     }
     
     mutating func tapGrid(grid: Grid){
-        if let last, last.token.color != .clear && grid.token.color != last.token.color{
+        print("=================================")
+        print(last)
+        print(grid)
+        if let last, grid.token.color != last.token.color{
             if last.isCanMove(board: board, end: grid){
                 self.last = nil
                 board[grid.x][grid.y].token = last.token

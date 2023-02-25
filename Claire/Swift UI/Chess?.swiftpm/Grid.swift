@@ -1,3 +1,4 @@
+
 import SwiftUI
 
 struct Grid{
@@ -13,8 +14,6 @@ struct Grid{
             return moveKnight(board: board, end: end)
         }else if token.name == "Rook"{
             return moveRook(board: board, end: end)
-        }else if token.name == "Bishop"{
-            return moveBishop(board: board, end: end)
         }
         return true
     }
@@ -46,54 +45,6 @@ struct Grid{
         }
         return false
     }
-    func moveBishop(board:[[Grid]], end: Grid) -> Bool{
-        var path : [Grid] = []
-        if abs(end.x-x)==abs(end.y-y) && end.token.color != token.color{
-            var startx = x
-            var starty = y
-            var endx = end.x
-            var stepy = 1
-            
-            if end.x>x{
-                if end.y>y{
-                    // startx ... endx y+1
-                    startx = x+1
-                    endx = end.x
-                    stepy = 1
-                    starty = y+1
-                }else{
-                    // startx ... endx y-1
-                    startx = x+1
-                    endx = end.x
-                    stepy = -1
-                    starty = y-1
-                }
-            }else{
-                if end.y>y{
-                    // end.x ... x y+1 
-                    startx = end.x
-                    endx = x-1
-                    stepy = -1
-                    starty = end.y
-                }else{
-                    // end.x ... x y+1
-                    startx = end.x
-                    endx = x-1
-                    stepy = 1
-                    starty = end.y
-                }
-            }
-            
-            var j = starty
-            for i in startx...endx{
-                path.append(board[i][j])
-                j += stepy
-            }
-            return checkPath(path: path)
-        }
-        return false
-    }
-
     
     func moveKnight(board:[[Grid]], end: Grid) -> Bool{
         var path : [Grid] = []
@@ -137,6 +88,17 @@ struct Grid{
         if path.count > 0{
             return checkPath(path: path)
         }
+        return false
+    }
+    
+    func moveBishop(start:[Int],end:[Int])->Bool{
+        var check = true
+        if end[0] < start[0]-1 && end[1] < start[1]-1 || end[0] > start[0]+1{
+            return true
+        } else if end[0] > start[0]-1{
+            return true
+        }
+        
         return false
     }
     
