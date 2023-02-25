@@ -4,7 +4,7 @@ struct ContentView: View {
     let num1 = ["1","2","3","4","5","6","7","8","9"]
     let num2 = ["9","8","7","6","5","4","3","2","1"]
     
-    @State var grid = Grid()
+    @State var crossgrid = CrossGrid()
     var body: some View {
         ZStack{
             Color.red
@@ -16,7 +16,7 @@ struct ContentView: View {
                         Text(num1[row])
                             .font(.title)
                         ForEach(0..<10){column in
-                            grid
+                            
                             if column == 4{
                                 
                             }
