@@ -1,29 +1,19 @@
 
 import SwiftUI
 
-struct horiGrid: View {
+struct topGrid: View {
     var body: some View {
         VStack(spacing:0){
-            HStack(spacing:0){
-                Rectangle()
-                    .fill(.yellow)
-                
-                Rectangle()
-                    .fill(.yellow)
-                
-            }
+            Rectangle()
+                .fill(.clear)
             
             Rectangle()
                 .fill(.black)
                 .frame(height:10)
                 
-            HStack(spacing:0){
+            
                 Rectangle()
                     .fill(.yellow)
-                
-                Rectangle()
-                    .fill(.yellow)
-            }
         }
     }
 }
@@ -57,12 +47,13 @@ struct CrossGrid: View {
         }
     }
 }
-struct vertiGrid: View {
+struct leftGrid: View {
     var body: some View {
         VStack(spacing:0){
             HStack(spacing:0){
-                Rectangle()
-                    .fill(.yellow)
+                Spacer()
+                    .padding()
+                    
                 Rectangle()
                     .fill(.black)
                     .frame(width: 10)
@@ -71,15 +62,7 @@ struct vertiGrid: View {
                 
             }
             
-            HStack(spacing:0){
-                Rectangle()
-                    .fill(.yellow)
-                Rectangle()
-                    .fill(.black)
-                    .frame(width: 10)
-                Rectangle()
-                    .fill(.yellow)
-            }
+            
         }
     }
 }
@@ -87,12 +70,18 @@ struct topLeftGrid: View {
     var body: some View {
         VStack(spacing:0){
             
-            Rectangle()
-                .fill(.black)
-                .frame(height:10)
-            
+            Spacer()
+                .padding()
+            HStack(spacing:-10){
+                Spacer()
+                    .padding(0)
+                Rectangle()
+                    .fill(.black)
+                    .frame(height:10)
+            }
             HStack(spacing:0){
-               
+               Spacer()
+                    .padding()
                 Rectangle()
                     .fill(.black)
                     .frame(width: 10)
@@ -105,18 +94,23 @@ struct topLeftGrid: View {
 struct topRightGrid: View {
     var body: some View {
         VStack(spacing:0){
-            
-            Rectangle()
-                .fill(.black)
-                .frame(height:10)
-            
+            Spacer()
+                .padding()
+            HStack(spacing:-10){
+                Rectangle()
+                    .fill(.black)
+                    .frame(height:10)
+                Spacer()
+                    .padding(0)
+            }
             HStack(spacing:0){
                 Rectangle()
                     .fill(.yellow)
                 Rectangle()
                     .fill(.black)
                     .frame(width: 10)
-                
+                Spacer()
+                    .padding()
             }
         }
     }
@@ -125,9 +119,9 @@ struct botLeftGrid: View {
     var body: some View {
         VStack(spacing:0){
             
-            
-            
             HStack(spacing:0){
+                Rectangle()
+                    .fill(.clear)
                 Rectangle()
                     .fill(.black)
                     .frame(width: 10)
@@ -136,10 +130,12 @@ struct botLeftGrid: View {
                 
                 
             }
+            
             Rectangle()
                 .fill(.black)
                 .frame(height:10)
         }
+        
     }
 }
 struct botRightGrid: View {
@@ -165,8 +161,8 @@ struct botRightGrid: View {
 struct Grid_Previews: PreviewProvider {
     static var previews: some View {
         CrossGrid()
-        horiGrid()
-        vertiGrid()
+        topGrid()
+        leftGrid()
         topLeftGrid()
         topRightGrid()
         botLeftGrid()
