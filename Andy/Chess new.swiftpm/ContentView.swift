@@ -1,4 +1,5 @@
 import SwiftUI
+// down at bottom read grid
 
 struct ContentView: View {
     let zimu = ["A","B","C","D","E","F","G","H"]
