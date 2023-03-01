@@ -1,11 +1,10 @@
 import SwiftUI
-
+// down at bottom read
 struct Grid{
     var x : Int
     var y : Int
     var color : Color
     var token : Token
-    
     func isCanMove( board:[[Grid]], end: Grid) -> Bool{
         if token.name == "Pawn"{
             return movePawn(board: board, end: end)
@@ -17,6 +16,8 @@ struct Grid{
             return moveBishop(board: board, end: end)
         }else if token.name == "Queen"{
             return moveQueen(board: board, end: end)
+        }else if token.name == "King"{
+            return moveKing(board: board, end: end)
         }
         return true
     }
@@ -121,7 +122,7 @@ struct Grid{
                                 path.append(board[x][y])
                                 path.append(end)
                             }
-                        }else{
+                        }else if abs(end.y-y)==0{
                             path.append(board[x][y])
                             path.append(end)
                             path.append(end)
@@ -134,7 +135,7 @@ struct Grid{
                                 path.append(board[x][y])
                                 path.append(end)
                             }
-                        }else{
+                        }else if abs(end.y-y)==0{
                             path.append(board[x][y])
                             path.append(end)
                             path.append(end)
@@ -149,8 +150,10 @@ struct Grid{
     }
     func moveKing(board:[[Grid]], end: Grid) -> Bool{
         var path : [Grid] = []
-        if abs(end.x-x) == 1{
-            if abs(end.y-y) == 1{
+        if abs(end.x-x) < 2 && abs(end.y-y) < 2{
+            if abs(end.x-x)==0 && abs(end.y-y)==0{
+                
+            }else{
                 path.append(board[x][y])
                 path.append(end)
             }
@@ -160,21 +163,45 @@ struct Grid{
         }
         return false
     }
-    // check path
-    func checkPath(path: [Grid])->Bool{
-        print(path)
-        print("===========================")
-        for i in 0...(path.count-2){
-            if path[i].token.color != .clear && i != 0{
-                 print("A")
-                return false
-               
+    func findCheck(board:[[Grid]],color:Color)->Bool{
+        var location : [Int] = []
+        for i in 0...7{
+            for j in 0...7{
+                if board[i][j].token.name == "King" && board[i][j].token.color ==  color{
+                    location = [i,j]
+                }
             }
         }
-        if path.last!.token.color == path[0].token.color{
-             print("B")
-            return false
+        for i in 0...7{
+            for j in 0...7{
+                if board[i][j].isCanMove(board: board, end: board[location[0]][location[1]]){
+                    return true
+                }
+            }
         }
         return true
     }
+    // check path
+    func checkPath(board:[[Grid]],path: [Grid])->Bool{
+        if findCheck(board: , color: path[0].token.color){
+            return false
+        }else{
+            print(path)
+            print("===========================")
+            for i in 0...(path.count-2){
+                if path[i].token.color != .clear && i != 0{
+                    print("A")
+                    return false
+                    
+                }
+            }
+            if path.last!.token.color == path[0].token.color{
+                print("B")
+                return false
+            }
+            return true
+        }
+    }
 }
+//note: finis adding append board to all commands cuz path change kk
+

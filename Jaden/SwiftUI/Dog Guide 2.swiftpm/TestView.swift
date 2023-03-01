@@ -26,6 +26,14 @@ struct Questions: View {
                                  "Goldendoodle",
                                  "Maltese",
                                  "Australian Shepherd"]
+    func checkForDog(questionNumber: Int, questionChoice: Int, dogChoices: [String]){->[String]
+        if questionNumber == 1 && questionChoice == 1{
+            // dogChoices.remove(at: <#T##Int#>)
+            
+        }
+        return dogChoices
+        // maybe this works??
+    }
     var body: some View {
         VStack{
             if a <= 8{
@@ -69,6 +77,16 @@ struct Questions: View {
                         withAnimation{
                             responses.append(questionChoices[a][i])
                             print(responses)
+                            if a == 0 && i == 0{
+                                dogPossibility.remove(at: 3)
+                                dogPossibility.remove(at: 9)
+                                dogPossibility.remove(at: 9)
+                                dogPossibility.remove(at: 10)
+                                dogPossibility.remove(at: 15)
+                                print(dogPossibility)
+                                // need to find way to remove at right position
+                                // maybe func, don't know how tho
+                            }
                             if a < 8{
                                 a += 1
                             }else{

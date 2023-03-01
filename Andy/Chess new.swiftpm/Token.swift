@@ -5,3 +5,4 @@ struct Token{
     var color : Color
 }
 
+// down at bottom read grid
