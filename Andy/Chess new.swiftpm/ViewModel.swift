@@ -28,13 +28,26 @@ struct ViewModel{
     
     mutating func tapGrid(grid: Grid){
         if let last, last.token.color != .clear && grid.token.color != last.token.color{
-            if last.isCanMove(board: board, end: grid){
+            if last.isCanMove(board: board, end: grid,checks:true){
                 self.last = nil
                 board[grid.x][grid.y].token = last.token
                 board[last.x][last.y].token = Token(name: "", color: .clear)
             }
         }else{
             self.last = grid
+        }
+    }
+    func checkGrid(board: [[Grid]],move: Grid, to: Grid)->Bool{
+        print("1")
+        if move.token.color != .clear && to.token.color != move.token.color{
+             print("2")
+            if move.isCanMove(board: board, end: to,checks:false){
+                print("3")
+                return true
+            }
+            return false
+        }else{
+        return false
         }
     }
 }
