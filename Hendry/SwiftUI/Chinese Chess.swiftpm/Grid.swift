@@ -105,7 +105,7 @@ struct topLeftGrid: View {
             
            Rectangle()
                 .fill(.clear)
-            HStack(spacing:0){
+            HStack(spacing:-10){
                 Rectangle()
                     .fill(.clear)
                     .frame(height:10)
@@ -131,7 +131,7 @@ struct topRightGrid: View {
             
            Rectangle()
                 .fill(.clear)
-            HStack(spacing:0){
+            HStack(spacing:-10){
                 Rectangle()
                     .fill(.black)
                     .frame(height:10)
@@ -155,9 +155,6 @@ struct topRightGrid: View {
 struct botLeftGrid: View {
     var body: some View {
         VStack(spacing:0){
-            
-           Rectangle()
-                .fill(.clear)
            
             HStack(spacing:0){
                 Rectangle()
@@ -168,7 +165,7 @@ struct botLeftGrid: View {
                 Rectangle()
                     .fill(.yellow)
             }
-            HStack(spacing:0){
+            HStack(spacing:-10){
                 Rectangle()
                     .fill(.clear)
                     .frame(height:10)
@@ -176,6 +173,10 @@ struct botLeftGrid: View {
                     .fill(.black)
                     .frame(height:10)
             }
+            
+           Rectangle()
+                .fill(.clear)
+           
         }
         
     }
@@ -184,9 +185,7 @@ struct botRightGrid: View {
     var body: some View {
         VStack(spacing:0){
             
-           Rectangle()
-                .fill(.clear)
-            
+           
             HStack(spacing:0){
                 Rectangle()
                     .fill(.yellow)
@@ -196,7 +195,7 @@ struct botRightGrid: View {
                 Rectangle()
                     .fill(.clear)
             }
-            HStack(spacing:0){
+            HStack(spacing:-10){
                 Rectangle()
                     .fill(.black)
                     .frame(height:10)
@@ -205,6 +204,9 @@ struct botRightGrid: View {
                     .frame(height:10)
                 
             }
+            Rectangle()
+                 .fill(.clear)
+             
         }
     }
 }
