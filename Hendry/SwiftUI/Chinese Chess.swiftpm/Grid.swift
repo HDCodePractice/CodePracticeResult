@@ -70,18 +70,19 @@ struct topLeftGrid: View {
     var body: some View {
         VStack(spacing:0){
             
-            Spacer()
-                .padding()
-            HStack(spacing:-10){
-                Spacer()
-                    .padding(0)
+           Rectangle()
+                .fill(.clear)
+            HStack(spacing:0){
+                Rectangle()
+                    .fill(.clear)
+                    .frame(height:10)
                 Rectangle()
                     .fill(.black)
                     .frame(height:10)
             }
             HStack(spacing:0){
-               Spacer()
-                    .padding()
+                Rectangle()
+                    .fill(.clear)
                 Rectangle()
                     .fill(.black)
                     .frame(width: 10)
@@ -94,15 +95,12 @@ struct topLeftGrid: View {
 struct topRightGrid: View {
     var body: some View {
         VStack(spacing:0){
-            Spacer()
-                .padding()
-            HStack(spacing:-10){
+            Rectangle()
+                .fill(.clear)
                 Rectangle()
                     .fill(.black)
                     .frame(height:10)
-                Spacer()
-                    .padding(0)
-            }
+                
             HStack(spacing:0){
                 Rectangle()
                     .fill(.yellow)
