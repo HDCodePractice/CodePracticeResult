@@ -1,26 +1,26 @@
 import SwiftUI
 
 struct Dogs{
-    var names = ["labrador retriever",
-                 "german shepherd",
-                 "golden retriever",
-                 "bulldog",
-                 "beagle",
-                 "poodle",
-                 "labradoodle",
-                 "siberian husky",
-                 "dachshund",
-                 "corgi",
-                 "shihtzu",
-                 "great dane",
-                 "border collie",
-                 "chihuahua",
-                 "yorkshire terrier",
-                 "rottweilers",
-                 "shiba inu",
-                 "goldendoodle",
-                 "maltese",
-                 "australianshepherd"]
+    var names = ["Labrador Retriever",
+                 "German Shepherd",
+                 "Golden Retriever",
+                 "Bulldog",
+                 "Beagle",
+                 "Poodle",
+                 "Labradoodle",
+                 "Siberian Husky",
+                 "Dachshund",
+                 "Corgi",
+                 "Shih Tzu",
+                 "Great Dane",
+                 "Border Collie",
+                 "Chihuahua",
+                 "Yorkshire Terrier",
+                 "Rottweilers",
+                 "Shiba Inu",
+                 "Golden Doodle",
+                 "Maltese",
+                 "Australian Shepherd"]
     var scores : [Int] = []
     
     init(){
