@@ -7,26 +7,24 @@ struct ContentView: View {
     @State var crossgrid = CrossGrid()
     var body: some View {
         ZStack{
-            Color.red
             
-            HStack(spacing:0){
-                
-                ForEach(0..<9){row in
-                    VStack(spacing:0){
-                        Text(num1[row])
-                            .font(.title)
-                        ForEach(0..<10){column in
-                            
-                            if column == 4{
-                                
+            VStack(spacing:0){
+                ForEach(0..<8){row in
+                    HStack(spacing:0){
+                        ForEach(0..<8){column in
+                            if row == 0{
+                                topGrid()
+                            }else{
+                                CrossGrid()
                             }
+                            
+                            
                         }
-                        Text(num2[row])
-                            .font(.title)
                     }
-                    
                 }
+                
             }
+            
             chuhe()
         }
         .padding(10)
