@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct Dog: View {
+struct DogView: View {
     var body: some View {
         VStack{
             Button() {
@@ -70,6 +70,6 @@ struct Dog: View {
 
 struct Dog_Previews: PreviewProvider {
     static var previews: some View {
-        Dog()
+        DogView()
     }
 }

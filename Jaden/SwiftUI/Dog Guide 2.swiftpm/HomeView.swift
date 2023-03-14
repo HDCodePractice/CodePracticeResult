@@ -1,10 +1,11 @@
 import SwiftUI
 
-struct Home: View {
+struct HomeView: View {
+    @State private var showingTest = false
     var body: some View {
         VStack{
             Button() {
-                
+                showingTest = true
             } label: {
                 ZStack {
                     Color(red: 0, green: 0.8, blue: 0.6)
@@ -40,7 +41,7 @@ struct Home: View {
 
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
-        Home()
+        HomeView()
     }
 }
 
