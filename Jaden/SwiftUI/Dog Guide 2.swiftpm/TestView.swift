@@ -32,7 +32,7 @@ struct Dogs{
 
 
 
-struct Questions: View {
+struct TestView: View {
     let questions = ["What is your lifestyle like?","What size dog are you looking for?","Do you have any previous experience with dog ownership?","Do you have any other pets or children in the household?","Do you prefer a high energy or low energy dog?","How much room do you have for a dog?","Are you willing to train a dog, or do you prefer a dog that is easy to train?","What is your budget for pet care?","Do you have any specific breed preferences or requirements?"]
     let questionChoices = [["Active","Outdoor","Indoor","Lazy"],["Small","Medium","Large"],["Yes","No"],["Children","Pets","None"],["High Energy","Low Energy"],["Lots of room","Small Room", "Some room"],["I can train a dog","I want one easy to train"],["$10,000","$15,000","$20,000","$40,000"],["Hypoallergenic","Quiet","Protective","Low-Shedding"]]
     var dogscore = [[[4, 3, 4, 2, 3, 3, 3, 4, 3, 2, 2, 1, 4, 2, 1, 1, 2, 1, 1, 4],[4,4,4,2,3,2,1,4,3,3,1,1,3,2,2,2,3,1,1,4],[2, 2, 2, 4, 2, 4, 3, 2, 3, 3, 4, 1, 1, 4, 3, 1, 1, 3, 4, 1],[1,2,1,3,2,2,2,1,2,3,3,4,1,3,4,4,3,4,4,1]],[[2, 2, 2, 3, 3, 3, 3, 1, 4, 3, 4, 1, 1, 4, 4, 2, 1, 1, 4, 2], [4,4,4,3,3,3,3,3,2,2,2,1,4,1,1,2,1,2,1,4], [3,3,3,2,2,2,2,4,1,2,1,4,4,1,1,3,4,4,1,3,]], [[4,4,4,3,3,4,2,3,2,3,2,2,4,1,1,2,1,1,1,3],[1,1,1,2,2,1,3,2,3,2,3,3,1,4,4,3,4,4,4,2]],[[4, 4, 3, 3, 4, 3, 2, 2, 2, 3, 4, 4, 2, 1, 2, 3, 1, 1, 1, 1], [4,2,4,4,4,4,1,2,3,3,3,2,3,1,2,2,1,1,1,3], [4,4,4,3,1,3,1,3,3,3,2,1,4,1,2,3,2,1,2,4]], [[3,3,4,4,3,3,4,4,2,2,1,2,4,1,1,2,2,1,1,4], [3,1,3,3,2,3,2,1,4,4,4,2,2,4,3,1,1,1,1,4,2]], [[4,4,4,3,2,2,3,4,1,2,1,4,3,1,1,3,2,2,1,3],[1,1,1,3,3,3,2,1,4,3,4,1,2,4,4,2,3,2,3,2],[4,4,4,3,2,2,3,4,1,2,1,4,3,1,1,3,2,2,1,3]],[[4,4,4,2,2,4,3,2,3,3,2,2,4,1,1,3,2,3,2,4],[4,4,4,3,3,4,3,3,3,3,3,2,4,2,2,3,3,3,2,4]],[[4,4,4,3,3,3,3,3,2,2,2,2,4,1,1,1,1,1,1,1,4],[4,4,4,3,3,3,3,3,2,2,2,2,4,2,1,1,1,1,1,1,4],[4,4,4,3,3,3,3,3,2,2,2,2,4,2,1,1,1,1,1,1,4],[3,3,4,4,2,2,4,4,2,2,3,4,1,2,3,1,1,1,1,3,1]],[[2,3,3,1,2,4,4,3,2,2,4,1,2,1,4,1,1,3,3,4,3],[4,3,2,3,4,3,1,1,2,2,3,4,4,2,1,2,1,1,4,3],[4,3,4,3,4,3,2,1,2,3,2,4,2,1,2,4,1,1,3,1],[1,1,1,3,3,4,4,2,2,2,4,2,4,4,4,2,3,4,4,2]]]
@@ -47,7 +47,7 @@ struct Questions: View {
         for i in 0..<dogs.names.count {
             dogs.scores[i] += dogscore[questionNumber][choiceNumber][i]
         }
-        print(dogs.scores)
+
     }
 
     var body: some View {
@@ -146,7 +146,7 @@ struct Questions: View {
 
 struct Questions_Previews: PreviewProvider {
     static var previews: some View {
-        Questions()
+        TestView()
     }
 }
 
