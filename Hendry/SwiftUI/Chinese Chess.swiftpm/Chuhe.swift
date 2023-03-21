@@ -8,6 +8,13 @@ struct chuhe: View {
             VStack{
                 Spacer()
                 HStack{
+                    Rectangle()
+                        .fill(.clear)
+                        .frame(width:8,height:65)
+                    Rectangle()
+                        .fill(.black)
+                        .frame(width:10,height:65)
+                        
                     Spacer()
                     Text("楚河")
                         .font(.largeTitle)
@@ -15,6 +22,11 @@ struct chuhe: View {
                     Text("汉界")
                         .font(.largeTitle)
                     Spacer()
+                    Rectangle()
+                        .frame(width:10,height:65)
+                    Rectangle()
+                        .fill(.clear)
+                        .frame(width:8,height:65)
                 }
                 Spacer()
             }

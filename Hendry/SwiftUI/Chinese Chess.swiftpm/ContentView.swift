@@ -17,12 +17,9 @@ struct ContentView: View {
                         }
                     }
                 }
-
             }
-
             chuhe()
         }
         .padding(10)
     }
-
 }
