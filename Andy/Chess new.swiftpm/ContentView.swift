@@ -6,7 +6,8 @@ struct ContentView: View {
     let num = ["1","2","3","4","5","6","7","8"]
     
     @State var vm = ViewModel()
-    
+    @State var turn = true
+    @State var prev : [[Grid]] = []
     var body: some View {
         ZStack{
             Color.white
@@ -45,7 +46,26 @@ struct ContentView: View {
                                     .foregroundColor(vm.board[y][x].token.color)
                             }
                             .onTapGesture {
-                                vm.tapGrid(grid: vm.board[y][x])
+                                print(vm.last as Any)
+                                if vm.last == nil{
+                                    print("1")
+                                    if turn == true{
+                                        print("1.5")
+                                        if vm.board[y][x].token.color == .white{
+                                            vm.tapGrid(grid:vm.board[y][x])
+                                            turn.toggle()
+                                        }
+                                    }else{
+                                        print("2")
+                                        if vm.board[y][x].token.color == .black{
+                                            vm.tapGrid(grid:vm.board[y][x])
+                                            turn.toggle()
+                                        }
+                                    }
+                                }else{
+                                    print("3")
+                                    vm.tapGrid(grid:vm.board[y][x])
+                                }
                             }
                         }
                         ZStack{
@@ -78,6 +98,8 @@ struct ContentView: View {
             .padding()
             .border(.black, width: 2)
             .padding()
+            Rectangle()
+                .fill(vm.mate)
         }
     }
 }

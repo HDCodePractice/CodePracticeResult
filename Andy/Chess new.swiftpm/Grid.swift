@@ -1,27 +1,41 @@
 import SwiftUI
 // down at bottom read
   var vm = ViewModel()
+  var canCastle = [[1,1],[1,1]]
 struct Grid{
     var x : Int
     var y : Int
     var color : Color
     var token : Token
-    func isCanMove(board:[[Grid]], end: Grid, checks:Bool) -> Bool{
-        print([x,y])
+    func isCanMove(board:[[Grid]], end: Grid, checks:Bool) -> [Bool]{
+        var ans = false
         if token.name == "Pawn"{
-            return movePawn(board: board, end: end,checks:checks)
+            ans = movePawn(board: board, end: end,checks:checks)
         }else if token.name == "Knight"{
-            return moveKnight(board: board, end: end,checks:checks)
+            ans = moveKnight(board: board, end: end,checks:checks)
         }else if token.name == "Rook"{
-            return moveRook(board: board, end: end,checks:checks)
+            ans = moveRook(board: board, end: end,checks:checks)
         }else if token.name == "Bishop"{
-            return moveBishop(board: board, end: end,checks:checks)
+            ans = moveBishop(board: board, end: end,checks:checks)
         }else if token.name == "Queen"{
-            return moveQueen(board: board, end: end,checks:checks)
+            ans = moveQueen(board: board, end: end,checks:checks)
         }else if token.name == "King"{
-            return moveKing(board: board, end: end,checks:checks)
+            ans = moveKing(board: board, end: end,checks:checks)
+        }else{
+            ans = true
         }
-        return true
+        if ans == true{
+            var board2 = board
+            board2[x][y].token = Token(name: "", color: .clear, move: false)
+            board2[end.x][end.y].token = board[x][y].token
+            if findCheckMate(board: board, color: board[x][y].token.color){
+                return [true,true]
+            }else{
+                return [true,false]
+            }
+        }else{
+            return [false,false]
+        }
     }
     func moveBishop(board:[[Grid]], end: Grid, checks:Bool) -> Bool{
         var path : [Grid] = []
@@ -198,10 +212,8 @@ struct Grid{
                 }
             }
         }
-        print(location)
         for i in 0...7{
             for j in 0...7{
-                print(board[i][j])
                 if vm.checkGrid(board: board,move: board[i][j], to: board[location[0]][location[1]]){
                         return true
                     }
@@ -211,44 +223,53 @@ struct Grid{
     }
     // check path
     func checkPath(board:[[Grid]],path: [Grid])->Bool{
-         print("===========================")
-            print(path)
+        if path.count < 1{
+            return false
+        }
             for i in 0...(path.count-2){
                 if path[i].token.color != .clear && i != 0{
-                    print("b")
                     return false
                     
                 }
             }
             if path.last!.token.color == path[0].token.color{
-                print("c")
                 return false
             }
         var board2 = board
-        board2[path[0].x][path[0].y].token = Token(name: "", color: .clear)
+        board2[path[0].x][path[0].y].token = Token(name: "", color: .clear, move: false)
         board2[path.last!.x][path.last!.y].token = path[0].token
-        print(board2)
         if findCheck(board:board2,color: path[0].token.color){
-            print("a")
             return false
         }
         return true
     }
-    func checkPathNoChecks(board:[[Grid]],path: [Grid])->Bool{
-        print("===========================")
-            print(path)
+     func checkPathNoChecks(board:[[Grid]],path: [Grid])->Bool{
             for i in 0...(path.count-2){
                 if path[i].token.color != .clear && i != 0{
-                    print("b")
                     return false
                     
                 }
             }
             if path.last!.token.color == path[0].token.color{
-                print("c")
                 return false
             }
             return true
+    }
+    func findCheckMate(board:[[Grid]],color: Color)->Bool{
+        for i in 0...7{
+            for j in 0...7{
+                if board[i][j].token.color != color && board[i][j].token.color != .clear{
+                    for h in 0...7{
+                        for g in 0...7{
+                            if vm.checkGrid(board: board, move: board[i][j], to: board[h][g]){
+                                return false
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true
     }
 }
 //note: finis adding append board to all commands cuz path change kk
