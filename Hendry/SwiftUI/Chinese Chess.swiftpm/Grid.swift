@@ -29,8 +29,18 @@ struct BoardGrid{
         grids[4][8] = "br"
     }
 }
-
-struct Grid: View {
+struct Grid{
+    var x : Int
+    var y : Int
+    var color : Color
+    var token : Token
+    func isCanMove( board:[[Grid]], end: Grid) -> Bool{
+        
+        return true
+    }
+    
+}
+struct Board: View {
     var grid : String
     var body: some View {
         if grid == "cross"{
@@ -63,7 +73,7 @@ struct TopGrid: View {
             Rectangle()
                 .fill(.black)
                 .frame(height:10)
-                
+            
             HStack(spacing:0){
                 Rectangle()
                     .fill(.yellow)
@@ -89,10 +99,10 @@ struct BotGrid: View {
             Rectangle()
                 .fill(.black)
                 .frame(height:10)
-                
             
-                Rectangle()
-                    .fill(.clear)
+            
+            Rectangle()
+                .fill(.clear)
         }
     }
 }
@@ -175,7 +185,7 @@ struct TopLeftGrid: View {
     var body: some View {
         VStack(spacing:0){
             
-           Rectangle()
+            Rectangle()
                 .fill(.clear)
             HStack(spacing:-10){
                 Rectangle()
@@ -201,7 +211,7 @@ struct TopRightGrid: View {
     var body: some View {
         VStack(spacing:0){
             
-           Rectangle()
+            Rectangle()
                 .fill(.clear)
             HStack(spacing:-10){
                 Rectangle()
@@ -227,7 +237,7 @@ struct TopRightGrid: View {
 struct BotLeftGrid: View {
     var body: some View {
         VStack(spacing:0){
-           
+            
             HStack(spacing:0){
                 Rectangle()
                     .fill(.clear)
@@ -246,9 +256,9 @@ struct BotLeftGrid: View {
                     .frame(height:10)
             }
             
-           Rectangle()
+            Rectangle()
                 .fill(.clear)
-           
+            
         }
         
     }
@@ -257,7 +267,7 @@ struct BotRightGrid: View {
     var body: some View {
         VStack(spacing:0){
             
-           
+            
             HStack(spacing:0){
                 Rectangle()
                     .fill(.yellow)
@@ -277,8 +287,8 @@ struct BotRightGrid: View {
                 
             }
             Rectangle()
-                 .fill(.clear)
-             
+                .fill(.clear)
+            
         }
     }
 }
