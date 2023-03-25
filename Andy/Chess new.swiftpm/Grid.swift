@@ -25,14 +25,7 @@ struct Grid{
             ans = true
         }
         if ans == true{
-            var board2 = board
-            board2[x][y].token = Token(name: "", color: .clear, move: false)
-            board2[end.x][end.y].token = board[x][y].token
-            if findCheckMate(board: board, color: board[x][y].token.color){
-                return [true,true]
-            }else{
                 return [true,false]
-            }
         }else{
             return [false,false]
         }
@@ -256,21 +249,7 @@ struct Grid{
             return true
     }
     func findCheckMate(board:[[Grid]],color: Color)->Bool{
-        for i in 0...7{
-            for j in 0...7{
-                if board[i][j].token.color != color && board[i][j].token.color != .clear{
-                    for h in 0...7{
-                        for g in 0...7{
-                            if vm.checkGrid(board: board, move: board[i][j], to: board[h][g]){
-                                return false
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        
         return true
     }
 }
-//note: finis adding append board to all commands cuz path change kk
-
