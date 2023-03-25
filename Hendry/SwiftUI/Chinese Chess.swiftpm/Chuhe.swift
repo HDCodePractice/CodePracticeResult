@@ -14,7 +14,7 @@ struct chuhe: View {
                     Rectangle()
                         .fill(.black)
                         .frame(width:10,height:65)
-                        
+                    
                     Spacer()
                     Text("楚河")
                         .font(.largeTitle)
