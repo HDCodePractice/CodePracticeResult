@@ -42,6 +42,7 @@ struct TestView: View {
     @State var dogs = Dogs()
     @State var largest = 0
     @State var dogSpot = 0
+    @State private var showingTest = false
     func addScore(questionNumber: Int, choiceNumber : Int){
         
         for i in 0..<dogs.names.count {
@@ -51,94 +52,99 @@ struct TestView: View {
     }
 
     var body: some View {
-        VStack{
-            if a <= 8{
-                ZStack{
-                    Color(red: 0, green: 0.8, blue: 0.6)
-                    Text("\(questions[a])")
-                        .font(.system(size: 40, design: .rounded))
-                        .bold()
-                        .font(.largeTitle)
-                        .foregroundColor(.black) 
-                }
-                .frame(width: 500, height: 200)
-                .cornerRadius(20)
-            }else{
-                ZStack{
-                    Color(red: 0, green: 0.8, blue: 0.6)
-                  
-                    
-                    Text("The dog best fit for you is \(dog)")
-                        .font(.system(size: 40, design: .rounded))
-                        .bold()
-                        .font(.largeTitle)
-                        .foregroundColor(.black) 
-                }
-                .frame(width: 370, height: 200)
-                .cornerRadius(20)
-            }
-            if a <= 8{
-                ForEach(0...questionChoices[a].count-1,id:\.self){ i in
-                    
+        if showingTest == false{
+            VStack{
+                if a <= 8{
                     ZStack{
                         Color(red: 0, green: 0.8, blue: 0.6)
-                        Text("\(questionChoices[a][i])")
+                        Text("\(questions[a])")
                             .font(.system(size: 40, design: .rounded))
                             .bold()
                             .font(.largeTitle)
-                            .foregroundColor(.black)
-                        
+                            .foregroundColor(.black) 
                     }
-                    .frame(width: 300, height: 150)
+                    .frame(width: 500, height: 200)
                     .cornerRadius(20)
-                    .onTapGesture {
-                        withAnimation{
-                            
-                            responses.append(questionChoices[a][i])
-                            addScore(questionNumber: a, choiceNumber: i)
-                            
-                            if a < 8{
-                                a += 1
-                            }else{
-                                a = 9
-                                for i in dogs.scores{
-                                    if i > largest{
-                                        largest = i
-                                    }
-                                }
-                                for i in 0..<dogs.scores.count{
-                                    if dogs.scores[i] == largest{
-                                        dogSpot = i
-                                    }
-                                }
-                                dog = dogs.names[dogSpot]
-                            }
-                           
-                        }
-                        
-                        
-                    }
-                    
-                }
-            }else{
-                Button() {
-                    
-                } label: {
-                    ZStack {
+                }else{
+                    ZStack{
                         Color(red: 0, green: 0.8, blue: 0.6)
-                        Text("Home")
+                        
+                        
+                        Text("The dog best fit for you is \(dog)")
                             .font(.system(size: 40, design: .rounded))
                             .bold()
-                            .foregroundColor(.black)
-                            .font(.title)
+                            .font(.largeTitle)
+                            .foregroundColor(.black) 
                     }
-                    .frame(width: 300, height: 100)
+                    .frame(width: 370, height: 200)
                     .cornerRadius(20)
-                    
                 }
-            }
+                if a <= 8{
+                    ForEach(0...questionChoices[a].count-1,id:\.self){ i in
+                        
+                        ZStack{
+                            Color(red: 0, green: 0.8, blue: 0.6)
+                            Text("\(questionChoices[a][i])")
+                                .font(.system(size: 40, design: .rounded))
+                                .bold()
+                                .font(.largeTitle)
+                                .foregroundColor(.black)
+                            
+                        }
+                        .frame(width: 300, height: 150)
+                        .cornerRadius(20)
+                        .onTapGesture {
+                            withAnimation{
+                                
+                                responses.append(questionChoices[a][i])
+                                addScore(questionNumber: a, choiceNumber: i)
+                                
+                                if a < 8{
+                                    a += 1
+                                }else{
+                                    a = 9
+                                    for i in dogs.scores{
+                                        if i > largest{
+                                            largest = i
+                                        }
+                                    }
+                                    for i in 0..<dogs.scores.count{
+                                        if dogs.scores[i] == largest{
+                                            dogSpot = i
+                                        }
+                                    }
+                                    dog = dogs.names[dogSpot]
+                                }
+                                
+                            }
+                            
+                            
+                        }
+                        
+                    }
+                }else{
+                    Button() {
+                        showingTest = true
+                    } label: {
+                        ZStack {
+                            Color(red: 0, green: 0.8, blue: 0.6)
+                            Text("Home")
+                                .font(.system(size: 40, design: .rounded))
+                                .bold()
+                                .foregroundColor(.black)
+                                .font(.title)
+                        }
+                        .frame(width: 300, height: 100)
+                        .cornerRadius(20)
+                        
+                    }
+                }
+        }
+
 
             
+        }else{
+            HomeView()
         }
         
     }
