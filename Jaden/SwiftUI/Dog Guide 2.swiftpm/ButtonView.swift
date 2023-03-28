@@ -16,7 +16,7 @@ struct ButtonView: View {
                 Text(pros[a])
                     .font(.system(size: 40, design: .rounded))
                     .bold()
-                    .foregroundColor(.white)
+                    .foregroundColor(.black)
                     .font(.title)
             }
             .frame(width: 400, height: 200)
