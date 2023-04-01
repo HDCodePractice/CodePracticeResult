@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct DogView: View {
-        @State private var showingA = false
-        @State private var showingB = false
-        @State private var showingC = false
-        @State private var showingD = false
+    @State private var showingA = false
+    @State private var showingB = false
+    @State private var showingC = false
+    @State private var showingD = false
     
     var body: some View {
         if showingA == false && showingB == false && showingC == false && showingD == false{
@@ -20,8 +20,8 @@ struct DogView: View {
                             .foregroundColor(.black)
                             .font(.title)
                     }
-                    .frame(width: 400, height: 200)
                     .cornerRadius(20)
+                    .padding()
                     
                 }
                 Button() {
@@ -35,10 +35,11 @@ struct DogView: View {
                             .foregroundColor(.black)
                             .font(.title)
                     }
-                    .frame(width: 400, height: 200)
                     .cornerRadius(20)
+                    .padding()
                     
                 }
+                Image("3")
                 Button() {
                     showingC = true
                 } label: {
@@ -50,8 +51,8 @@ struct DogView: View {
                             .foregroundColor(.black)
                             .font(.title)
                     }
-                    .frame(width: 400, height: 200)
                     .cornerRadius(20)
+                    .padding()
                     
                 }
                 Button() {
@@ -65,8 +66,8 @@ struct DogView: View {
                             .foregroundColor(.black)
                             .font(.title)
                     }
-                    .frame(width: 400, height: 200)
                     .cornerRadius(20)
+                    .padding()
                     
                 }
             }
