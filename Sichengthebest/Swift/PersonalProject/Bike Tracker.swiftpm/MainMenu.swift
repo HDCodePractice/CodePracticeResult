@@ -1,27 +1,45 @@
 import SwiftUI
+import MapKit
 
 struct MainView: View {
     @State var startDate = Date()
+    @State private var region2 = MKCoordinateRegion(center: LocationManager.shared.currentLocation, span: MKCoordinateSpan(
+        latitudeDelta: 0.05, longitudeDelta: 0.05
+    ))
     var body: some View {
         NavigationView {
             VStack {
-                Text("Welcome to Sichengthebest's bike tracker!")
+                Text("Welcome to Sichengthebest's workout tracker!")
                     .font(.system(size:30))
                     .multilineTextAlignment(.center)
                 // Workout view button
                 NavigationLink {
                     WorkoutView()
                 } label: {
-                    ButtonView(text: "Start a workout", color: .green)
+                    VStack {
+                        RectButtonView(text: "Start a workout",image:"bicycle.circle", color: .green)
+                            .frame(height:30)
+                        Map(coordinateRegion: $region2, showsUserLocation: true, userTrackingMode: .constant(.follow))
+                            .frame(height:300)
+                    }
+                    
                 }
+                .padding()
                 // Previous workouts button
-                Spacer(minLength: 25)
                 NavigationLink {
                     PreviousWorkoutsView()
                 } label: {
-                    ButtonView(text: "View your previous\nworkouts", color: .blue)
+                    RectButtonView(text: "View your previous workouts",image:"clock.arrow.circlepath", color: .blue)
+                        .frame(height:30)
                 }
-                Spacer(minLength: 40)
+                .padding()
+                NavigationLink {
+                    Settings()
+                } label: {
+                    RectButtonView(text: "Personal Settings",image:"gear", color: .gray)
+                        .frame(height:30)
+                }
+                .padding()
             }
         }
         .padding()

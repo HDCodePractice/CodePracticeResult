@@ -20,6 +20,10 @@ struct WorkoutView: View {
     @State var beforeInactiveTime = Date.now
     @State var useInactiveTime = false
     @AppStorage("workouts") var workouts: [Workout] = []
+    @AppStorage("sex") var sex = ""
+    @AppStorage("weight") var weight = 0
+    @AppStorage("age") var age = 0
+    
     // Initializes timer
     let myTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     var body: some View {
@@ -65,9 +69,11 @@ struct WorkoutView: View {
                             progressTime += 1
                         }
                     }
-                Label("Average speed: \(String(format: "%.1f",lm.totalDistance / 1000 * 3600 / Double(progressTime))) kph\nCurrent speed: \(String(format: "%.1f",lm.currentSpeed*3)) kph", systemImage: "speedometer")
+                Label("Average speed: \(String(format: "%.1f",lm.totalDistance / 1000 * 3600 / Double(progressTime))) kph\nCurrent speed: \(String(format: "%.1f",lm.currentSpeed*3.5)) kph", systemImage: "speedometer")
                     .font(.system(size: 20))
                 Label("Elevation gain: \(Int(lm.elevationGain))m", systemImage: "arrow.up.right.circle")
+                    .font(.system(size: 20))
+                Label("Calories: \(calcCals(sex:sex,weight:weight,age:age,time:progressTime,speed:lm.totalDistance / 1000 * 3600 / Double(progressTime) )) cal", systemImage: "flame")
                     .font(.system(size: 20))
                 Label(lm.isStarted ? lm.isRunning ? "Workout recording...":"Workout paused": "Start workout?", systemImage: lm.isStarted ? lm.isRunning ? "bicycle.circle" : "pause.circle" : "restart")
                     .font(.system(size: 17))

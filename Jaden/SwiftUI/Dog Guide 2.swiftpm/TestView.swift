@@ -48,24 +48,27 @@ struct TestView: View {
         for i in 0..<dogs.names.count {
             dogs.scores[i] += dogscore[questionNumber][choiceNumber][i]
         }
-
+        
     }
-
+    
     var body: some View {
         if showingTest == false{
             VStack{
                 if a <= 8{
+                    Image("aussiepuppy")
                     ZStack{
                         Color(red: 0, green: 0.8, blue: 0.6)
                         Text("\(questions[a])")
-                            .font(.system(size: 40, design: .rounded))
+                            .font(.system(size: 30, design: .rounded))
                             .bold()
                             .font(.largeTitle)
-                            .foregroundColor(.black) 
+                            .foregroundColor(.black)
                     }
-                    .frame(width: 500, height: 200)
                     .cornerRadius(20)
+                    .padding()
+
                 }else{
+                    Image("2")
                     ZStack{
                         Color(red: 0, green: 0.8, blue: 0.6)
                         
@@ -74,7 +77,8 @@ struct TestView: View {
                             .font(.system(size: 40, design: .rounded))
                             .bold()
                             .font(.largeTitle)
-                            .foregroundColor(.black) 
+                            .foregroundColor(.black)
+                        
                     }
                     .frame(width: 370, height: 200)
                     .cornerRadius(20)
@@ -85,14 +89,15 @@ struct TestView: View {
                         ZStack{
                             Color(red: 0, green: 0.8, blue: 0.6)
                             Text("\(questionChoices[a][i])")
-                                .font(.system(size: 40, design: .rounded))
+                                .font(.system(size: 20, design: .rounded))
                                 .bold()
                                 .font(.largeTitle)
                                 .foregroundColor(.black)
+                                .padding()
                             
                         }
-                        .frame(width: 300, height: 150)
                         .cornerRadius(20)
+                        .padding()
                         .onTapGesture {
                             withAnimation{
                                 
@@ -139,9 +144,9 @@ struct TestView: View {
                         
                     }
                 }
-        }
-
-
+            }
+            
+            
             
         }else{
             HomeView()
