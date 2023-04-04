@@ -1,11 +1,16 @@
 import SwiftUI
 
 struct DogInfoView: View {
+    @State var b = 0
     @State var a = 0
     @State var dog = 0
     var dogs : String
     @State var dogg = 0
-      @State private var showingDog = false
+    @State private var showingDog = false
+    @State private var showingPros = false
+    @State private var showingCons = false
+    @State private var showingInfo = false
+    @State private var showingEssay = false
     let pros = ["Pros","Australian Shepherds, also known as Aussies, are a highly versatile and intelligent breed of dog. One of the most significant advantages of owning an Australian Shepherd is their ability to perform a wide range of tasks, from herding livestock to serving as therapy dogs. They are highly trainable and eager to please, making them an excellent choice for owners who are willing to put in the time and effort to teach them new skills. Additionally, Australian Shepherds are known for their high energy levels, which makes them great companions for active families who enjoy spending time outdoors. They also have a strong protective instinct, which can make them excellent watchdogs. Furthermore, Australian Shepherds are generally healthy and long-lived, with a lifespan of 12-15 years, which means they can provide many years of love and companionship to their owners. Overall, Australian Shepherds are a loyal and intelligent breed that can make great pets for the right owners.","Golden retrievers are a popular breed of dog for many reasons, and there are several benefits to owning one. For starters, they are known for their friendly and affectionate nature, which makes them excellent family pets. They are gentle and patient with children, and they tend to get along well with other dogs and even cats. Golden retrievers are also highly intelligent, making them easy to train and a great choice for first-time dog owners. They are known for their loyalty and devotion to their owners, and they thrive on being a part of a family unit. Additionally, golden retrievers are active dogs that enjoy regular exercise, which can help keep their owners active and healthy as well. Overall, owning a golden retriever can bring a lot of joy and companionship to a household.","German Shepherds are a popular and well-loved breed of dog with many pros to consider. One of the most notable pros is their intelligence and trainability, which makes them a great choice for those seeking a working dog. They are quick learners, obedient, and excel at activities such as agility and tracking. German Shepherds are also fiercely loyal and protective of their owners, making them great guard dogs. They are highly athletic and require plenty of exercise and mental stimulation to stay healthy and happy, which can be a benefit for those with an active lifestyle. Additionally, German Shepherds are a versatile breed that can be trained to do many different tasks, making them suitable for roles such as police or military dogs, therapy dogs, or family pets. With proper care and attention, German Shepherds are generally healthy dogs that can live long, happy lives, forming strong bonds with their owners along the way.","Labradoodles are a popular hybrid dog breed that combines the best traits of two purebred breeds: Labrador Retrievers and Poodles. One of the biggest advantages of owning a Labradoodle is their hypoallergenic coat, which is great for individuals with allergies. Labradoodles are also highly intelligent, making them easy to train and ideal for various activities such as agility, obedience, and therapy work. They are also known for their friendly and affectionate nature, making them excellent family pets. Additionally, Labradoodles are known to be relatively low maintenance when it comes to grooming, with their coats requiring only minimal brushing and grooming to keep them looking great. Overall, the Labradoodle's unique combination of traits make them a great choice for many individuals and families looking for a friendly, intelligent, and hypoallergenic dog."]
     
     let cons = ["Cons","While Australian Shepherds are a beloved breed for many, there are some potential downsides to consider before bringing one into your home. One of the most significant challenges with owning an Australian Shepherd is their high energy level, which can make them difficult to manage if they don't receive enough exercise and mental stimulation. They can become bored and destructive if left alone for long periods or not given enough opportunities to play and work. Additionally, Australian Shepherds have a strong herding instinct, which can lead them to nip at and chase small children or other animals. This can make them unsuitable for families with young children or pets. Australian Shepherds also require regular grooming to maintain their thick coats, which can be time-consuming and expensive. Finally, like many breeds, Australian Shepherds are prone to certain health issues, such as hip dysplasia and epilepsy, which can require ongoing veterinary care. Overall, while Australian Shepherds can be excellent pets for the right owner, it's important to weigh these potential cons against the many positive qualities of the breed before making a decision.","While there are many benefits to owning a golden retriever, there are also some potential drawbacks that prospective owners should consider. One of the biggest challenges with this breed is their high energy level, which can make them difficult to manage if they don't receive enough exercise and stimulation. They can become bored and destructive if left alone for long periods of time, and they may develop behavioral issues if they don't receive proper training and socialization. Golden retrievers are also known for shedding a lot, which means that they require regular grooming to keep their coats looking their best. They are prone to certain health issues, such as hip dysplasia and certain types of cancer, which can be expensive to treat. Additionally, because golden retrievers are such popular dogs, they can be prone to overbreeding and health problems associated with poor breeding practices. Overall, while golden retrievers make wonderful pets for the right families, it's important to be aware of the potential challenges before bringing one into your home.","While German Shepherds are a popular breed with many positive qualities, there are also some cons to consider. One potential downside is their high exercise needs, which can be a challenge for owners who are not able to provide enough physical activity and mental stimulation. Additionally, German Shepherds are prone to certain health issues, which can be costly and time-consuming to manage. Their protective nature can be a double-edged sword as well, as they may exhibit aggression towards strangers or other dogs without proper training and socialization. Shedding is another con to consider, as German Shepherds have a thick coat that requires regular grooming and may be problematic for those with allergies or who prefer a cleaner home. Finally, while they are intelligent and trainable, German Shepherds require consistent and patient training, which can be a challenge for some owners.","While labradoodles are often praised for their hypoallergenic coats and friendly personalities, there are also some potential downsides to consider when deciding whether to bring one into your home. One of the most significant drawbacks of labradoodles is their high energy level, which can make them difficult to manage if they don't receive enough exercise and mental stimulation. They are also prone to separation anxiety, which can lead to destructive behavior if left alone for long periods. Additionally, labradoodles require regular grooming to maintain their coats, which can be time-consuming and expensive. Finally, because labradoodles are a relatively new breed, there is still some variability in their temperament and health, which can make it difficult to predict their long-term behavior and well-being. Overall, while labradoodles can make great pets for the right owner, it's important to weigh these potential cons against the many positive qualities of the breed before making a decision."]
@@ -30,10 +35,12 @@ struct DogInfoView: View {
                         } else if dogs == "Labradoodle"{
                             dogg = 3
                             dog = 4
-                        } 
+                        }
                         a = 1
                     } label: {
+                        Image("4")
                         ZStack {
+                            
                             Color(red: 0, green: 0.8, blue: 0.6)
                             Text("Start")
                                 .font(.system(size: 40, design: .rounded))
@@ -41,34 +48,154 @@ struct DogInfoView: View {
                                 .foregroundColor(.black)
                                 .font(.title)
                         }
-                        .frame(width: 400, height: 200)
                         .cornerRadius(20)
+                        .padding()
                         
                     }
                 }else if a == 1{
                     VStack{
-                        HelpWithDogView(a: dogg, dog: dog, dogg: dogg, choice: pros)
-                        HelpWithDogView(a: dogg, dog: dog, dogg: dogg, choice: cons)
-                        HelpWithDogView(a: dogg, dog: dog, dogg: dogg, choice: otherInfo)
-                        HelpWithDogView(a: dogg, dog: dog, dogg: dogg, choice: persuasiveEssay) 
+                        if showingPros == false && showingEssay == false && showingCons == false && showingInfo == false{
+                            ZStack{
+                                Color(red: 0, green: 0.8, blue: 0.6)
+                                Text(pros[0])
+                                    .font(.system(size: 20, design: .rounded))
+                                    .bold()
+                                    .foregroundColor(.black)
+                                    .padding()
+                                
+                            }
+                            .cornerRadius(20)
+                            .padding()
+                            .onTapGesture {
+                                showingPros = true
+                            }
+                            ZStack{
+                                Color(red: 0, green: 0.8, blue: 0.6)
+                                Text(cons[0])
+                                    .font(.system(size: 20, design: .rounded))
+                                    .bold()
+                                    .foregroundColor(.black)
+                                    .padding()
+                                
+                            }
+                            .cornerRadius(20)
+                            .padding()
+                            .onTapGesture {
+                                showingCons = true
+                            }
+                            Image("Aussie")
+                            ZStack{
+                                Color(red: 0, green: 0.8, blue: 0.6)
+                                Text(otherInfo[0])
+                                    .font(.system(size: 20, design: .rounded))
+                                    .bold()
+                                    .foregroundColor(.black)
+                                    .padding()
+                                
+                            }
+                            .cornerRadius(20)
+                            .padding()
+                            .onTapGesture {
+                                showingInfo = true
+                            }
+                            ZStack{
+                                Color(red: 0, green: 0.8, blue: 0.6)
+                                Text(persuasiveEssay[0])
+                                    .font(.system(size: 20, design: .rounded))
+                                    .bold()
+                                    .foregroundColor(.black)
+                                    .padding()
+                                
+                                
+                            }
+                            .cornerRadius(20)
+                            .padding()
+                            .onTapGesture {
+                                showingEssay = true
+                            }
+                            
+                            Button() {
+                                showingDog = true
+                            } label: {
+                                ZStack {
+                                    Color(red: 0, green: 0.8, blue: 0.6)
+                                    Text("Home")
+                                        .font(.system(size: 40, design: .rounded))
+                                        .bold()
+                                        .foregroundColor(.black)
+                                        .font(.title)
+                                }
+                                .cornerRadius(20)
+                                .padding()
+                                
+                            }
+                            
+                        }
+                        if showingPros == true{
+                            ZStack{
+                                Color(red: 0, green: 0.8, blue: 0.6)
+                                Text(pros[dog])
+                                
+                                    .foregroundColor(.black)
+                                    .padding()
+                                
+                            }
+                            .cornerRadius(20)
+                            .padding()
+                            .onTapGesture{
+                                showingPros = false
+                            }
+                            
+                        }else if showingCons == true{
+                            ZStack{
+                                Color(red: 0, green: 0.8, blue: 0.6)
+                                Text(cons[dog])
+                                    .foregroundColor(.black)
+                                    .padding()
+                                
+                            }
+                            .cornerRadius(20)
+                            .padding()
+                            .onTapGesture{
+                                showingCons = false
+                            }
+                            
+                        }else if showingInfo == true{
+                            ZStack{
+                                Color(red: 0, green: 0.8, blue: 0.6)
+                                Text(otherInfo[dog])
+                                    .foregroundColor(.black)
+                                    .padding()
+                                
+                            }
+                            .cornerRadius(20)
+                            .padding()
+                            .onTapGesture{
+                                showingInfo = false
+                            }
+                            
+                        }
+                        else if showingEssay == true{
+                            ZStack{
+                                Color(red: 0, green: 0.8, blue: 0.6)
+                                Text(persuasiveEssay[dog])
+                                    .font(.system(size: 13, design: .rounded))
+                                    .foregroundColor(.black)
+                                    .padding()
+                                
+                            }
+                            .cornerRadius(20)
+                            .padding()
+                            .onTapGesture{
+                                showingEssay = false
+                            }
+                            
+                        }
+                        
                     }
                     
                 }
-                Button() {
-                    showingDog = true
-                } label: {
-                    ZStack {
-                        Color(red: 0, green: 0.8, blue: 0.6)
-                        Text("Home")
-                            .font(.system(size: 40, design: .rounded))
-                            .bold()
-                            .foregroundColor(.black)
-                            .font(.title)
-                    }
-                    .frame(width: 300, height: 100)
-                    .cornerRadius(20)
-                    
-                }
+                
             }
         }
         if showingDog == true{

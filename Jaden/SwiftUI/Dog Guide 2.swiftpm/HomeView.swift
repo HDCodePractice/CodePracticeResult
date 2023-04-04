@@ -18,10 +18,11 @@ struct HomeView: View {
                             .foregroundColor(.black)
                             .font(.title)
                     }
-                    .frame(width: 300, height: 100)
                     .cornerRadius(20)
+                    .padding()
                     
                 }
+                Image("1")
                 Button() {
                     showingGuide = true
                 } label: {
@@ -33,18 +34,18 @@ struct HomeView: View {
                             .foregroundColor(.black)
                             .font(.title)
                     }
-                    .frame(width: 300, height: 100)
                     .cornerRadius(20)
+                    .padding()
                     
-                } 
+                }
             }
             if showingTest == true{
-               TestView() 
+                TestView()
             }
             if showingGuide == true{
                 DogView()
             }
-
+            
             
         }
         
