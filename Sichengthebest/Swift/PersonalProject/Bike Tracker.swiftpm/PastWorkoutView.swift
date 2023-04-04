@@ -3,6 +3,9 @@ import MapKit
 
 struct SingleWorkoutView: View {
     @AppStorage("workouts") var workouts: [Workout] = []
+    @AppStorage("sex") var sex = ""
+    @AppStorage("weight") var weight = 0
+    @AppStorage("age") var age = 0
     @Environment(\.presentationMode) var presentationMode
     @State var open: Bool = false
     var index: Int
@@ -25,6 +28,9 @@ struct SingleWorkoutView: View {
                         .font(.system(size: 20))
                     Text("Elevation gain: \(Int(workouts[index].elevationGain))m")
                         .font(.system(size: 20))
+                    // Calories
+                    Text("Calories: \(calcCals(sex: sex, weight: weight, age: age, time: workouts[index].time, speed: workouts[index].speed)) cal")
+                        .font(.system(size: 20))
                     // Distance of bike ride
                     HStack {
                         Text("Distance: \(String(format: "%.2f",workouts[index].distance)) km")
@@ -43,7 +49,7 @@ struct SingleWorkoutView: View {
                     // Map
                     NotMovingMapView(lineCoordinates: workouts[index].coordinates, region: MKCoordinateRegion(center: workouts[index].coordinates[0], span: MKCoordinateSpan(
                         latitudeDelta: 0.04, longitudeDelta: 0.04)))
-                    RectButtonView(text:"Delete this workout",color:.red)
+                    RectButtonView(text:"Delete this workout",image: "trash",color:.red)
                         .frame(height:20)
                         .onTapGesture {
                             if workouts.count != 0 {

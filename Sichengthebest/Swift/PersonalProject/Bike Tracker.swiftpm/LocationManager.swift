@@ -58,6 +58,7 @@ extension LocationManager: CLLocationManagerDelegate{
             } else {
                 // if placeList is empty, appends current location by default
                 if isStarted {
+                    prevElevation = location.altitude
                     placeList.append(Annotation(coordinate:location.coordinate,distanceAt: totalDistance,time: Date.now))
                 }
             }
