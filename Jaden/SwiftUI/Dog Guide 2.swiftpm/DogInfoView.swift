@@ -132,6 +132,7 @@ struct DogInfoView: View {
                             
                         }
                         if showingPros == true{
+                            Image("JPEG image 3")
                             ZStack{
                                 Color(red: 0, green: 0.8, blue: 0.6)
                                 Text(pros[dog])
@@ -147,6 +148,7 @@ struct DogInfoView: View {
                             }
                             
                         }else if showingCons == true{
+                            Image("JPEG image 2")
                             ZStack{
                                 Color(red: 0, green: 0.8, blue: 0.6)
                                 Text(cons[dog])
@@ -161,6 +163,7 @@ struct DogInfoView: View {
                             }
                             
                         }else if showingInfo == true{
+                            Image("JPEG image 1")
                             ZStack{
                                 Color(red: 0, green: 0.8, blue: 0.6)
                                 Text(otherInfo[dog])
@@ -176,6 +179,7 @@ struct DogInfoView: View {
                             
                         }
                         else if showingEssay == true{
+                            Image("JPEG image")
                             ZStack{
                                 Color(red: 0, green: 0.8, blue: 0.6)
                                 Text(persuasiveEssay[dog])
