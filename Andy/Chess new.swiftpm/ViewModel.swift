@@ -4,6 +4,7 @@ struct ViewModel{
     var board : [[Grid]] = []
     var last : Grid? = nil
     var mate : Color = .clear
+    var promote : String = "Pawn"
     init(){
         let lastChess = ["Rook", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Rook"]
         let pawns = ["Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn", "Pawn"]
@@ -76,7 +77,6 @@ struct ViewModel{
                     }
                 }
             }else{
-                print("hi")
                 let a = (last.isCanMove(board: board, end: grid,checks:true))
                 if a[0]{
                     if a[1] == true{
@@ -85,7 +85,10 @@ struct ViewModel{
                     self.last = nil
                     board[grid.x][grid.y].token = last.token
                     board[grid.x][grid.y].token.move = true
-                    board[last.x][last.y].token = Token(name: "", color: .clear, move: false)
+                    board[last.x][last.y].token = Token(name: "", color: .clear,  move: false)
+                    if board[grid.x][grid.y].token.name == "Pawn"{
+                        board[grid.x][grid.y].token.name = promote
+                    }
                 }
             }
         }else{
@@ -93,11 +96,8 @@ struct ViewModel{
         }
     }
     func checkGrid(board: [[Grid]],move: Grid, to: Grid)->Bool{
-        print("1")
         if move.token.color != .clear && to.token.color != move.token.color{
-            print("2")
             if move.isCanMove(board: board, end: to,checks:false)[0]{
-                print("3")
                 return true
             }
             return false
