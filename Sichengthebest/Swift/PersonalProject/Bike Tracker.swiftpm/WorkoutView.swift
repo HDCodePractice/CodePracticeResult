@@ -61,24 +61,68 @@ struct WorkoutView: View {
                 Button("Cancel"){}
             }
             VStack {
-                Label("\(Stopwatch(progressTime: progressTime))  |  \(String(format: "%.2f",lm.totalDistance / 1000)) km", systemImage: "bicycle.circle")
-                    .font(.system(size: 20))
-                    .onReceive(myTimer) { _ in
-                        // Adds to the timer every second
-                        if lm.isRunning {
-                            progressTime += 1
+                HStack {
+                    Label("\(Stopwatch(progressTime: progressTime))", systemImage: "stopwatch")
+                        .font(.system(size: 23))
+                        .onReceive(myTimer) { _ in
+                            // Adds to the timer every second
+                            if lm.isRunning {
+                                progressTime += 1
+                            }
+                        }
+                        .padding()
+                    Label("\(String(format: "%.2f",lm.totalDistance / 1000)) km", systemImage: "bicycle.circle")
+                        .font(.system(size: 23))
+                        .padding()
+                }
+                HStack {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 5)
+                            .foregroundColor(Color.blue)
+                            .frame(height: 55)
+                        VStack {
+                            Text("Average speed:")
+                                .font(.system(size: 15))
+                            if lm.totalDistance.isNaN {
+                                Label("0.0 kph", systemImage: "speedometer")
+                                    .font(.system(size: 20))
+                            } else {
+                                Label("\(String(format: "%.1f",lm.totalDistance / 1000 * 3600 / Double(progressTime))) kph", systemImage: "speedometer")
+                                    .font(.system(size: 20))
+                            }
                         }
                     }
-                Label("Average speed: \(String(format: "%.1f",lm.totalDistance / 1000 * 3600 / Double(progressTime))) kph\nCurrent speed: \(String(format: "%.1f",lm.currentSpeed*3.5)) kph", systemImage: "speedometer")
-                    .font(.system(size: 20))
-                Label("Elevation gain: \(Int(lm.elevationGain))m", systemImage: "arrow.up.right.circle")
-                    .font(.system(size: 20))
-                Label("Calories: \(calcCals(sex:sex,weight:weight,age:age,time:progressTime,speed:lm.totalDistance / 1000 * 3600 / Double(progressTime) )) cal", systemImage: "flame")
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 5)
+                            .foregroundColor(Color.blue)
+                            .frame(height: 55)
+                        VStack {
+                            Text("Current speed:")
+                                .font(.system(size: 15))
+                            Label("\(String(format: "%.1f",lm.currentSpeed*4)) kph", systemImage: "speedometer")
+                                .font(.system(size: 20))
+                        }
+                    }
+                }
+                HStack {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 5)
+                            .foregroundColor(Color.green)
+                            .frame(height: 40)
+                        Label("\(Int(lm.elevationGain))m", systemImage: "arrow.up.right.circle")
+                            .font(.system(size: 20))
+                    }
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 5)
+                            .foregroundColor(Color.green)
+                            .frame(height: 40)
+                        Label(" \(calcCals(sex:sex,weight:weight,age:age,time:progressTime,speed:lm.totalDistance / 1000 * 3600 / Double(progressTime) )) cal", systemImage: "flame")
+                    }
+                }
                     .font(.system(size: 20))
                 Label(lm.isStarted ? lm.isRunning ? "Workout recording...":"Workout paused": "Start workout?", systemImage: lm.isStarted ? lm.isRunning ? "bicycle.circle" : "pause.circle" : "restart")
                     .font(.system(size: 17))
                     .foregroundColor(lm.isStarted ? lm.isRunning ? .green:.yellow:.blue)
-                Text("Annotations: \(lm.placeList.count)")
                 ZStack(alignment: .bottomTrailing) {
                     MapView(lineCoordinates: tempCoords, started: lm.isStarted, followLocation: followLocation,isFirst: isFirst)
                         .onAppear {
@@ -96,7 +140,6 @@ struct WorkoutView: View {
                         followLocation.toggle()
                     }
                     .frame(width: 50, height: 50)
-                    .padding()
                 }
                 HStack {
                     // Resume/Pause button
