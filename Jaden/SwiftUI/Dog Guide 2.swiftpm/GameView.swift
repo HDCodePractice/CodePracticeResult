@@ -62,6 +62,7 @@ struct GameView: View {
                     timeCheck = true
                     withAnimation(.easeInOut){
                         dogX -= 10
+                        boneX -= 10
                     }
                     
                 }label: {
@@ -114,6 +115,7 @@ struct GameView: View {
                     timeCheck = true
                     withAnimation(.easeInOut){
                         dogX += 10
+                        boneX += 10
                     }
                 }label: {
                     Image(systemName: "arrowshape.turn.up.right")
