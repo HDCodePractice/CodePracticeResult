@@ -29,17 +29,7 @@ struct BoardGrid{
         grids[4][8] = "br"
     }
 }
-struct Grid{
-    var x : Int
-    var y : Int
-    var color : Color
-    var token : Token
-    func isCanMove( board:[[Grid]], end: Grid) -> Bool{
-        
-        return true
-    }
-    
-}
+
 struct Board: View {
     var grid : String
     var body: some View {
