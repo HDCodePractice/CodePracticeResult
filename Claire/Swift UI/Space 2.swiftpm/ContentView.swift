@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    let planets = ["Mars","Jupiter", "Mercury", "Moon", "Neptune", "Pluto", "Saturn", "Sun", "Uranus", "Venus"]
+    let planets = ["MarsView","JupiterView", "MercuryView", "MoonView", "NeptuneView", "PlutoView", "SaturnView", "SunView", "UranusView", "VenusView"]
     @State var number = 1
     var body: some View {
         VStack{
@@ -20,50 +20,54 @@ struct ContentView: View {
                 .background(.blue)
                 .clipShape(Capsule())
                 Button("Mars") {
-                    number = 2
+                    number = 0
                 }
                 .padding()
                 .background(.blue)
                 .clipShape(Capsule())
                 Button("Mercury") {
-                    number = 3
+                    number = 2
                 }
                 .padding()
                 .background(.blue)
                 .clipShape(Capsule())
                 Button("Neptune") {
-                    destination = "Moon"
+                    number = 6
                 }
                 .padding()
                 .background(.blue)
                 .clipShape(Capsule())
                 Button("Pluto") {
-                    destination = "Pluto"
+                    number = 7
                 }
                 .padding()
                 .background(.blue)
                 .clipShape(Capsule())
                 Button("Saturn") {
-                    destination = "Moon"
+                    number = 8
                 }
                 .padding()
                 .background(.blue)
                 .clipShape(Capsule())
                 Button("Sun") {
-                    destination = "Sun"
+                    number = 9
                 }
                 .padding()
                 .background(.blue)
                 .clipShape(Capsule())
                 Button("Uranus") {
-                    destination = "Uranus"
+                    number = 10
+                }
+                .padding()
+                .background(.blue)
+                .clipShape(Capsule())
+                Button("Venus") {
+                    number = 11
                 }
                 .padding()
                 .background(.blue)
                 .clipShape(Capsule())
             }
-            }
         }
     }
-
 }
