@@ -2,9 +2,9 @@ import SwiftUI
 
 struct Mars: View {
     var body: some View {
-        Text("Mercury is the smallest planet in our solar system. It has a diameter of only about 3,031 miles (4,880 kilometers), which is about one-third the size of Earth. Despite its small size, Mercury is the second densest planet after Earth, which means that it has a relatively large core compared to its size.")
+        Text("Mars is home to the largest volcano in the solar system. Olympus Mons is a shield volcano located on the Martian surface, and it stands at a height of nearly 22 km (14 miles), making it almost three times the height of Mount Everest, the tallest mountain on Earth.")
         
-        Text("Mercury has a very long day and a very short year. It takes just 88 Earth days for Mercury to orbit the sun, but because it rotates very slowly on its axis, it takes 59 Earth days for one day to pass on Mercury. This means that one day on Mercury (the time it takes for the planet to complete one rotation) is almost two Mercury years (the time it takes for the planet to orbit the sun once).")
+        Text("Mars has a very thin atmosphere that is mostly made up of carbon dioxide. The thin atmosphere means that Mars has a weaker greenhouse effect than Earth, which makes it a much colder planet. However, despite the cold temperatures, it's possible for water to exist on the planet in the form of ice or in underground reservoirs.")
     }
 }
 
