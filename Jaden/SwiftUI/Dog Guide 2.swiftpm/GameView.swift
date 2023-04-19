@@ -12,6 +12,7 @@ struct GameView: View {
     @State var shots = 0
     @State var score = 0
     @State var time = 10
+    @State var bomb = "squirrel"
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State var timeCheck = false
     func genPosition(){
@@ -47,7 +48,7 @@ struct GameView: View {
                         .offset(x: dogX)
                     ZStack(alignment: .top){
                         Color.clear
-                        Image("squirrel")
+                        Image(bomb)
                             .resizable()
                             .frame(width: 70, height: 70)
                             .offset(x: squirrelX, y: squirrelY)
@@ -94,7 +95,12 @@ struct GameView: View {
                                     check = false
                                     boneY = -30
                                     if hit == false{
+                                        withAnimation(.easeInOut(duration: 1.0)){
+                                            bomb = "bomb"
+                                        }
+                                        bomb = "squirrel"
                                         genPosition()
+                                        
                                     }
                                     hit = true
                                 }
