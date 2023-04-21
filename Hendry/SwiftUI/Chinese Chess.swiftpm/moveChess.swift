@@ -54,6 +54,16 @@ struct Grid{
         var path : [Grid] = []
         if token.color == .black{
             if abs(end.x-x + end.y-y) == 4{
+                if token.color == .white{
+                    if end.x <= 5{
+                        path.append(end)
+                        if end.x-x > 0 && end.y-y > 0{
+                            path.append(board[end.x-1][end.y-1])
+                        }else if end.x-x > 0 && end.y-y < 0{
+                            path.append(board[end.x+1][end.y-1])
+                        }
+                    }
+                }
                 path.append(end)
                 return checkPath(path: path)
             }
@@ -89,21 +99,21 @@ struct Grid{
     func movePawn(board:[[Grid]], end: Grid) -> Bool{
         var path : [Grid] = []
         if token.color == .black{
-            if y < 5{
+            if x < 5{
                 if (end.x - x == -1 && end.y-y == 0) || (end.x-x == 0 && abs(end.y-y) == 1){
                     path.append(end)
                 }
-            }else if y >= 5{
-                if end.x - x == -1{
+            }else if x >= 5{
+                if end.y - y == -1{
                     path.append(end)
                 }
             }
         }else{
-            if y >= 5{
+            if x >= 5{
                 if (end.x - x == -1 && end.y-y == 0) || (end.x-x == 0 && abs(end.y-y) == 1){
                     path.append(end)
                 }
-            }else if y < 5{
+            }else if x < 5{
                 if end.x - x == -1{
                     path.append(end)
                 }
