@@ -105,3 +105,4 @@ struct Annotation: Identifiable,Hashable {
     var distanceAt: Double
     var time: Date
 }
+
