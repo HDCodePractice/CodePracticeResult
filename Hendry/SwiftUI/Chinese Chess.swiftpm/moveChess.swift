@@ -52,49 +52,23 @@ struct Grid{
     }
     func moveBishop(board:[[Grid]], end: Grid) -> Bool{
         var path : [Grid] = []
-        if abs(end.x-x)==abs(end.y-y) && end.token.color != token.color{
-            var startx = x
-            var starty = y
-            var endx = end.x
-            var stepy = 1
-            
-            if end.x>x{
-                if end.y>y{
-                    // startx ... endx y+1
-                    startx = x+1
-                    endx = end.x
-                    stepy = 1
-                    starty = y+1
-                }else{
-                    // startx ... endx y-1
-                    startx = x+1
-                    endx = end.x
-                    stepy = -1
-                    starty = y-1
+        if token.color == .black{
+            if abs(end.x-x + end.y-y) == 4{
+                if token.color == .white{
+                    if end.x <= 5{
+                        path.append(end)
+                        if end.x-x > 0 && end.y-y > 0{
+                            path.append(board[end.x-1][end.y-1])
+                        }else if end.x-x > 0 && end.y-y < 0{
+                            path.append(board[end.x+1][end.y-1])
+                        }
+                    }
                 }
-            }else{
-                if end.y>y{
-                    // end.x ... x y+1
-                    startx = end.x
-                    endx = x-1
-                    stepy = -1
-                    starty = end.y
-                }else{
-                    // end.x ... x y+1
-                    startx = end.x
-                    endx = x-1
-                    stepy = 1
-                    starty = end.y
-                }
+                path.append(end)
+                return checkPath(path: path)
             }
-            
-            var j = starty
-            for i in startx...endx{
-                path.append(board[i][j])
-                j += stepy
-            }
-            return checkPath(path: path)
         }
+        
         return false
     }
 
@@ -105,9 +79,17 @@ struct Grid{
         var endy = end.y
         if x != endx && y != endy && abs(endx-x)+abs(endy-y) == 3{
             if endy - y == 2{
-                if token.color != end.token.color || end.token.color == .clear{
-                    path.append(end)
-                }
+                path.append(end)
+                path.append(board[x][y+1])
+            }else if endy - y == -2{
+                path.append(end)
+                path.append(board[x][y-1])
+            }else if endx-x == 2 {
+                path.append(end)
+                path.append(board[x+1][y])
+            }else if endx - x == -2{
+                path.append(end)
+                path.append(board[x-1][y])
             }
             return checkPath(path: path)
         }
@@ -117,21 +99,21 @@ struct Grid{
     func movePawn(board:[[Grid]], end: Grid) -> Bool{
         var path : [Grid] = []
         if token.color == .black{
-            if y < 5{
+            if x < 5{
                 if (end.x - x == -1 && end.y-y == 0) || (end.x-x == 0 && abs(end.y-y) == 1){
                     path.append(end)
                 }
-            }else if y >= 5{
-                if end.x - x == -1{
+            }else if x >= 5{
+                if end.y - y == -1{
                     path.append(end)
                 }
             }
         }else{
-            if y >= 5{
+            if x >= 5{
                 if (end.x - x == -1 && end.y-y == 0) || (end.x-x == 0 && abs(end.y-y) == 1){
                     path.append(end)
                 }
-            }else if y < 5{
+            }else if x < 5{
                 if end.x - x == -1{
                     path.append(end)
                 }

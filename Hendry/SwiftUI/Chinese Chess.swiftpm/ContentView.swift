@@ -21,7 +21,9 @@ struct ContentView: View {
                                 Image(vm.board[row][column].token.name)
                                     .resizable()
                                     .scaledToFit()
-                                
+                            }
+                            .onTapGesture {
+                                vm.tapGrid(grid: vm.board[row][column])
                             }
                         }
                     }
