@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Diff</key>
+	<array>
+		<dict>
+			<key>ModifiedContent</key>
+			<string></string>
+			<key>ModifiedRange</key>
+			<string>{265, 0}</string>
+			<key>OriginalContent</key>
+			<string>show("/*#-localizable-zone(whatIsYourNameText)*/What’s your name?/*#-end-localizable-zone*/")
+
+let name = ask("/*#-localizable-zone(nameText)*/Name/*#-end-localizable-zone*/")
+
+show("/*#-localizable-zone(hiText)*/Hi /*#-end-localizable-zone*/" + name)
+</string>
+			<key>OriginalRange</key>
+			<string>{265, 252}</string>
+		</dict>
+	</array>
+	<key>File</key>
+	<string>Chapters/Answers.playgroundchapter/Pages/Text.playgroundpage/main.swift</string>
+</dict>
+</plist>
