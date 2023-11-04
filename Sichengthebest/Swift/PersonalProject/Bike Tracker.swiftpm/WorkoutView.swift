@@ -99,7 +99,7 @@ struct WorkoutView: View {
                         VStack {
                             Text("Current speed:")
                                 .font(.system(size: 15))
-                            Label("\(String(format: "%.1f",lm.currentSpeed*4)) kph", systemImage: "speedometer")
+                            Label("\(String(format: "%.1f",lm.currentSpeed*3.6)) kph", systemImage: "speedometer")
                                 .font(.system(size: 20))
                         }
                     }
