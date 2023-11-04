@@ -13,9 +13,9 @@ struct ContentView: View {
                             Circle()
                                 .fill(board.grids[x][y].token)
                                 .padding(3)
-                                .onTapGesture {
-                                    board.select(grid: board.grids[x][y])
-                                }
+                        }
+                        .onTapGesture {
+                            board.select(grid: board.grids[x][y])
                         }
                     }
                 }

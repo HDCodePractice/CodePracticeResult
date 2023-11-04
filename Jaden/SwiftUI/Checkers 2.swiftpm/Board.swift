@@ -5,42 +5,68 @@ struct Board{
     var height : Int = 8
     var grids : [[Grid]]
     var selected : Grid? = nil
+    var select = false 
     
     init(){
         self.grids = []
-        for x in 0..<height {
+        for x in 0..<height{
             var line = [Grid]()
-            for y in 0..<width {
+            for y in 0..<width{
                 var token : Color = .clear
-                if y<3 && (x+y)%2 != 0 {
+                if x<3 && (x+y)%2 != 0{
                     token = .white
                 }
-                if y>4 && (x+y)%2 != 0 {
+                if x>4 && (x+y)%2 != 0{
                     token = .gray
                 }
-                line.append(Grid(color: (x+y)%2==0 ? .white : .black, token: token, x: x, y: y))
+                line.append(
+                    Grid(
+                        x: x, 
+                        y: y, 
+                        color: (x+y)%2==0 ? .white : .black, 
+                        token: token
+                    )
+                )
             }
             self.grids.append(line)
         }
-        
     }
-    var gridX = 0
-    var gridY = 0
-    mutating func select(grid: Grid){
-        if gridX != 0 && gridY != 0{
-            if gridY<3 && (gridX+gridY)%2 != 0 {
-                self.grids[gridX][gridY].token = .white
+    
+    mutating func newGame(){
+        self.grids = []
+        for x in 0..<height{
+            var line = [Grid]()
+            for y in 0..<width{
+                var token : Color = .clear
+                if x<3 && (x+y)%2 != 0{
+                    token = .white
+                }
+                if x>4 && (x+y)%2 != 0{
+                    token = .gray
+                }
+                line.append(
+                    Grid(
+                        x: x, 
+                        y: y, 
+                        color: (x+y)%2==0 ? .white : .black, 
+                        token: token
+                    )
+                )
             }
-            if gridY>4 && (gridX+gridY)%2 != 0 {
-                self.grids[gridX][gridY].token = .gray
-            }
-            
+            self.grids.append(line)
         }
-        
-        self.selected = grid
-        self.grids[grid.x][grid.y].token = .red
-        gridX = grid.x
-        gridY = grid.y
+    }
+    
+    mutating func select(grid: Grid){
+        if let selected{
+            grids[grid.x][grid.y].token = selected.token
+            grids[selected.x][selected.y].token = .clear
+            self.selected = nil
+        }else{
+            if grid.token != .clear{
+                grids[grid.x][grid.y].token = .red
+                self.selected = grid
+            }
+        }
     }
 }
-
