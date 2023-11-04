@@ -30,7 +30,7 @@ class LocationManager: NSObject,ObservableObject{
     }
 }
 
-extension LocationManager: CLLocationManagerDelegate{
+extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             currentLocation = location.coordinate
