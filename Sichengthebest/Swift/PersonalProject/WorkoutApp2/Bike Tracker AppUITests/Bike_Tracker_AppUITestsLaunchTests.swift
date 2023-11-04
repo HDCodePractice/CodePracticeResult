@@ -1,13 +1,13 @@
 //
-//  PythonAppUITestsLaunchTests.swift
-//  PythonAppUITests
+//  Bike_Tracker_AppUITestsLaunchTests.swift
+//  Bike Tracker AppUITests
 //
-//  Created by Sicheng Jiang on 2023-10-28.
+//  Created by Sicheng Jiang on 2023-09-09.
 //
 
 import XCTest
 
-final class PythonAppUITestsLaunchTests: XCTestCase {
+final class Bike_Tracker_AppUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

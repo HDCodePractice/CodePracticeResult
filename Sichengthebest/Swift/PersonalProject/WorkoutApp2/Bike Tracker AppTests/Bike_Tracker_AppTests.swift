@@ -1,14 +1,14 @@
 //
-//  PythonAppTests.swift
-//  PythonAppTests
+//  Bike_Tracker_AppTests.swift
+//  Bike Tracker AppTests
 //
-//  Created by Sicheng Jiang on 2023-10-28.
+//  Created by Sicheng Jiang on 2023-09-09.
 //
 
 import XCTest
-@testable import PythonApp
+@testable import Bike_Tracker_App
 
-final class PythonAppTests: XCTestCase {
+final class Bike_Tracker_AppTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
